@@ -57,7 +57,7 @@
         function Rest()
         {
             Player.CurrentHP = Player.MaxHP;
-            Day += 1;
+            Day
         }
         function UseItem()
         {
