@@ -11,7 +11,8 @@
             Armor: 0,
             Dead: false,
             Magic: false,
-            Fame: 0
+            Fame: 0,
+            HomeOwner: false,
         }
         // Need to figure out how to fill this for each enemy or make it a template
         var Enemy = 
@@ -67,6 +68,11 @@
         function Rest()
         {
             Player.CurrentHP = Player.MaxHP;
+            Day =+ 1;
+        }
+        function Bad_Rest()
+        {
+            Player.CurrentHP = Player.MaxHP*.5;
             Day =+ 1;
         }
         function UseItem()

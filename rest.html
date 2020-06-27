@@ -1,0 +1,69 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding RPG</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="Scripts.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Coding RPG</h1>
+    </header>
+    <nav>
+        <ul>
+                <li><a href="index.html">Home (H)</a></li>
+                <li>Arena (A)</li>
+                <li><a href="character.html">Character (C)</a></li>
+                <li>Downtime (D)</li>
+                <li>Inventory (I)</li>
+                <li>Journal (J)</li>
+                <li><a href="Quest.html">Quest (Q)</a></li>
+                <li><a href="rest.html">Rest (R)</a></li>
+                <li>Shop (S)</li>
+                <li>Train (T)</li>
+        </ul>
+    </nav>
+    <section class ="options">
+        <h2>Rent a Bed at the Inn?</h2>
+        <button onclick="Inn()">Accept</button>
+        <h2>Rest at Home?</h2>
+        <button onclick="Home()">Accept</button>
+        <h2>Sleep on the Street?</h2>
+        <button onclick="Street()">Accept</button>
+    </section>
+    <script>
+        function Inn()
+        {
+            if (Player.Gold < 10)
+            {
+                alert ("You cannot afford to stay at the inn.")
+            }
+            else
+            {
+                Rest()
+                RemoveGold(10)
+                console.log(Player.Gold)
+            }
+        }
+        function Home()
+        {
+            if (Player.HomeOwner != true)
+            {
+                alert("You don't have a house.")
+            }
+            else
+            {
+                Rest()
+            }
+        }
+        function Street()
+        {
+            alert ("You sleep on the street but it isn't very restful.")
+            Bad_Rest()
+
+        }
+    </script>
+</body>
+</html>

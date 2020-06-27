@@ -16,10 +16,11 @@
                 <li><a href="index.html">Home (H)</a></li>
                 <li>Arena (A)</li>
                 <li><a href="character.html">Character (C)</a></li>
+                <li>Downtime (D)</li>
                 <li>Inventory (I)</li>
                 <li>Journal (J)</li>
                 <li><a href="Quest.html">Quest (Q)</a></li>
-                <li>Rest (R)</li>
+                <li><a href="rest.html">Rest (R)</a></li>
                 <li>Shop (S)</li>
                 <li>Train (T)</li>
         </ul>
@@ -30,7 +31,7 @@
         <h2> Fame</h2>
         <p id="Fame"></p>
     </section>
-    <section id ="jobs">
+    <section class ="options">
         <h2>Killing Rats in the Tavern Cellar (1-5 rats)</h2>
         <button onclick="Rat_Quest()">Accept</button>
     </section>
@@ -45,15 +46,36 @@
                 alert ("You can't go questing in your condition")
             } 
             else
-            { 
+            {   
+                Enemy = 
+                    {
+                        Name: "Rat",
+                        CurrentHP: 2,
+                        MaxHP: 2,
+                        Atk: 1,
+                        Armor: 0,
+                        Dead: false,
+                    }
                 var rats = Math.floor(Math.random() * 5+1);
                 alert ("Time to kill some rats")
                 alert ("You must kill " + rats + " rats")
                 for (var rats_killed = 0; rats_killed < rats && Player.CurrentHP > 0;)
                 {
-                    alert ("You kill a rat")
-                    rats_killed += 1;
-                    Player.CurrentHP -= 1;
+                    DMGPlayer()
+                    DMGEnemy()
+                    alert ("You strike with your weapon but are bitten in the process")
+                    if (Enemy.CurrentHP <= 0)
+                    {
+                        rats_killed += 1;
+                        alert ("You managed to kill one of the rats.")
+                    }
+                    else 
+                    {
+                        alert ("You damage a rat")
+                        //so nothing happens if rat alive
+                    }
+                    alert (Player.CurrentHP + " HP")
+                    alert (rats_killed + " Rats Killed")
                 }
                 if (Player.CurrentHP > 0)
                 {

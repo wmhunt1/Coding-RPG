@@ -14,7 +14,7 @@ nav ul
 }
 nav ul li 
 {
-    width: 100px;
+    width: fit-content;
     height: 25px;
     border: 1px solid black;
     display: inline-block;
@@ -23,7 +23,6 @@ nav ul li
 }
 section
 {
-    width: 1000px;
     height: 1000x;
     border: 1px solid black
 }
@@ -35,8 +34,13 @@ section
 {
     padding-left: 10px;
 }
-#jobs
+.options
 {
     padding-left: 10px;
     padding-bottom: 10px;
+}
+.options h2
+{
+    padding-left: 10px;
+  
 }
