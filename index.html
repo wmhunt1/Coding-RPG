@@ -42,9 +42,9 @@
         var Enemy = 
         {
             Name: "N",
-            CurrentHP: 0,
-            MaxHP: 0,
-            Atk: 0,
+            CurrentHP: 5,
+            MaxHP: 5,
+            Atk: 2,
             Armor: 0,
             Dead: false,
         }
@@ -54,19 +54,19 @@
             //Should reduce damage by armor amount
             Player.CurrentHP = Player.CurrentHP - (Enemy.Atk - Player.Armor);
             //should kill player when HP is reduced to 0
-            When (Player.CurrentHP <= 0)
+            /*When (Player.CurrentHP <= 0)
             {
                 Player.Dead = true;
-            }
+            }*/
         }
         function DMGEnemy()
         {
             //should reduce damage by armor amount
             Enemy.CurrentHP = Enemy.CurrentHP - (Player.Atk - Enemy.Armor);
-            When (Enemy.CurrentHP <= 0)
+           /* When (Enemy.CurrentHP <= 0)
             {
                 Enemy.Dead = true;
-            }
+            }*/
         }
         function LevelUp()
         {
@@ -89,6 +89,10 @@
         {
             //Need to make items
         }
+        DMGEnemy()
+        console.log(Enemy.CurrentHP)
+        DMGPlayer()
+        console.log(Player.CurrentHP)
     </script>
 </body>
 </html>
