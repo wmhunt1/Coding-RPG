@@ -1,6 +1,16 @@
 header
 {
     text-align: center;
+    width: 1000px;
+}
+nav
+{
+    border: 1px solid black;
+    width: 1000px;
+}
+nav ul
+{
+    text-align: center;
 }
 nav ul li 
 {
@@ -9,4 +19,11 @@ nav ul li
     border: 1px solid black;
     display: inline-block;
     text-align: center;
+    
+}
+section
+{
+    width: 1000px;
+    height: 500px;
+    border: 1px solid black
 }
