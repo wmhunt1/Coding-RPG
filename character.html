@@ -29,6 +29,8 @@
         <p id="Name"></p>
         <h2> Level</h2>
         <p id="Level"></p>
+        <h2> Current XP</h2>
+        <p id="XP"></p>
         <h2> Current HP</h2>
         <p id="CHP"></p>
         <h2> Max HP</h2>
@@ -42,8 +44,9 @@
     </section>
     <script>
         //posts stats to sheet
-           document.getElementById("Name").innerHTML = Player.Name;
+           document.getElementById("Name").HTML = Player.Name;
            document.getElementById("Level").innerHTML = Player.Level;
+           document.getElementById("XP").innerHTML = Player.XP;
            document.getElementById("CHP").innerHTML = Player.CurrentHP;
            document.getElementById("MHP").innerHTML = Player.MaxHP;
            document.getElementById("Gold").innerHTML = Player.Gold;

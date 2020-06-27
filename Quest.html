@@ -24,12 +24,55 @@
                 <li>Train (T)</li>
         </ul>
     </nav>
-    <section id="date">
+    <section id="stats">
         <h2> Day</h2>
         <p id="Day"></p>
+        <h2> Fame</h2>
+        <p id="Fame"></p>
+    </section>
+    <section id ="jobs">
+        <h2>Killing Rats in the Tavern Cellar (1-5 rats)</h2>
+        <button onclick="Rat_Quest()">Accept</button>
     </section>
     <script>
-        document.getElementById("Day").innerHTML = Day;
+        document.getElementById("Day").innerHTML = (Day);
+        document.getElementById("Fame").innerHTML = (Player.Fame);
+        //quest functions
+        function Rat_Quest()
+        {
+            if (Player.CurrentHP <= 0)  
+            {
+                alert ("You can't go questing in your condition")
+            } 
+            else
+            { 
+                var rats = Math.floor(Math.random() * 5+1);
+                alert ("Time to kill some rats")
+                alert ("You must kill " + rats + " rats")
+                for (var rats_killed = 0; rats_killed < rats && Player.CurrentHP > 0;)
+                {
+                    alert ("You kill a rat")
+                    rats_killed += 1;
+                    Player.CurrentHP -= 1;
+                }
+                if (Player.CurrentHP > 0)
+                {
+                    AddXP(rats*10)
+                    AddGold(rats*10)
+                    AddFame(rats)
+                    alert ("You gain: " + rats*10 + " XP")
+                    alert ("You gain: " + rats*10 + " Gold")
+                    alert ("You gain: " + rats + " Fame")
+                }
+                else
+                {
+                    alert ("you fall unconscious.")
+                }
+            }
+
+
+        }
+
     </script>
 </body>
 </html>

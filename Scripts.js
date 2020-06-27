@@ -1,15 +1,17 @@
-        var Day = 0;
+        var Day = 1;
         var Player = 
         {
             Name: "Character",
             Level: 1,
+            XP: 0,
             CurrentHP: 10,
             MaxHP: 10,
             Gold: 0,
-            Atk: 2,
-            Armor: 1,
+            Atk: 1,
+            Armor: 0,
             Dead: false,
             Magic: false,
+            Fame: 0
         }
         // Need to figure out how to fill this for each enemy or make it a template
         var Enemy = 
@@ -46,6 +48,10 @@
             Player.Level += 1;
             MaxHP += 10;
         }
+        function AddXP(x)
+        {
+            Player.XP += x;
+        }
         function AddGold(x)
         {
             Player.Gold += x;
@@ -54,13 +60,16 @@
         {
             Player.Gold -= x;
         }
+        function AddFame(x)
+        {
+            Player.Fame += x;
+        }
         function Rest()
         {
             Player.CurrentHP = Player.MaxHP;
-            Day
+            Day =+ 1;
         }
         function UseItem()
         {
             //Need to make items
         }
-    
