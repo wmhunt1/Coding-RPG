@@ -12,8 +12,13 @@
     </header>
     <nav>
         <ul>
-                <li>Character</li>
-                <li>Quest</li>
+                <li>Character (C)</li>
+                <li>Inventory (I)</li>
+                <li>Journal (J)</li>
+                <li>Quest (Q)</li>
+                <li>Rest (R)</li>
+                <li>Shop (S)</li>
+                <li>Train (T)</li>
         </ul>
     </nav>
     <script type="text/javascript">
@@ -21,9 +26,9 @@
         var Player = 
         {
             Name = "Character",
+            Level = 1,
             CurrentHP = 10,
             MaxHP = 10,
-            Level = 1,
             Gold = 0,
             Atk = 2,
             Armor = 1,
@@ -31,11 +36,11 @@
         }
         var Enemy = 
         {
-            Name = "Enemy"
-            CurrentHP = 10,
-            MaxHP = 10,
-            Atk = 1,
-            Armor = 0,
+            Name = N,
+            CurrentHP = HP,
+            MaxHP = MHP,
+            Atk = D,
+            Armor = A,
             Dead = false,
         }
     // functions
@@ -46,6 +51,11 @@
         function DMGEnemy(x)
         {
             Enemy.CurrentHP = Enemy.CurrentHP - (Player.Atk - Enemy.Armor);
+        }
+        function LevelUp()
+        {
+            Player.Level += 1;
+            MaxHP += 10;
         }
     </script>
 </body>
