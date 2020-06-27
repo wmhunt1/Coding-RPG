@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Character Sheet</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="myscripts.js"></script>
+    <script src="scripts.js"></script>
 </head>
 <body>
     <header>
@@ -23,8 +23,30 @@
                 <li>Train (T)</li>
         </ul>
     </nav>
-    <section>
-        <h2>Game</h2>
+    <section id="stats">
+        <h2> Name</h2>
+        <p id="Name"></p>
+        <h2> Level</h2>
+        <p id="Level"></p>
+        <h2> Current HP</h2>
+        <p id="CHP"></p>
+        <h2> Max HP</h2>
+        <p id="MHP"></p>
+        <h2> Gold</h2>
+        <p id="Gold"></p>
+        <h2> Attack</h2>
+        <p id="ATK"></p>
+        <h2> Armor</h2>
+        <p id="DEF"></p>
     </section>
+    <script>
+           document.getElementById("Name").innerHTML = Player.Name;
+           document.getElementById("Level").innerHTML = Player.Level;
+           document.getElementById("CHP").innerHTML = Player.CurrentHP;
+           document.getElementById("MHP").innerHTML = Player.MaxHP;
+           document.getElementById("Gold").innerHTML = Player.Gold;
+           document.getElementById("ATK").innerHTML = Player.Atk;
+           document.getElementById("DEF").innerHTML = Player.Armor;
+    </script>
 </body>
 </html>

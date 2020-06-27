@@ -61,7 +61,4 @@ var Player =
         {
             //Need to make items
         }
-        DMGEnemy()
-        console.log(Enemy.CurrentHP)
-        DMGPlayer()
-        console.log(Player.CurrentHP)
+    
