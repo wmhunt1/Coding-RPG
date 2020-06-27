@@ -27,3 +27,11 @@ section
     height: 1000x;
     border: 1px solid black
 }
+#stats
+{
+    padding-left: 10px;
+}
+#date
+{
+    padding-left: 10px;
+}

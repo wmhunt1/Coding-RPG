@@ -1,4 +1,5 @@
-var Player = 
+        var Day = 0;
+        var Player = 
         {
             Name: "Character",
             Level: 1,
@@ -56,6 +57,7 @@ var Player =
         function Rest()
         {
             Player.CurrentHP = Player.MaxHP;
+            Day += 1;
         }
         function UseItem()
         {
