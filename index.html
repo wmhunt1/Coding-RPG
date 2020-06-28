@@ -13,21 +13,68 @@
     </header>
     <nav>
         <ul>
-                <li><a href="index.html">Home (H)</a></li>
+                <li><a href="">Home (H)</a></li>
                 <li>Arena (A)</li>
-                <li><a href="character.html">Character (C)</a></li>
+                <li><a href="">Character (C)</a></li>
                 <li>Downtime (D)</li>
                 <li>Inventory (I)</li>
                 <li>Journal (J)</li>
-                <li><a href="Quest.html">Quest (Q)</a></li>
-                <li><a href="rest.html">Rest (R)</a></li>
+                <li><a href="">Quest (Q)</a></li>
+                <li><a href="">Rest (R)</a></li>
                 <li>Shop (S)</li>
                 <li>Train (T)</li>
         </ul>
     </nav>
     <section id = "Intro">
+        <h1>Intro</h1> 
         <h2>Welcome to the world of Placeholder</h2>
         <p>Here you will go on quests and level up until you are a true hero.</p>
     </section>
+    <section id = "Stats">
+        <h1>Character Sheet</h1>
+        <h2> Level Up</h2>
+        <button onclick="Ready_for_level()">Ready for Level Up</button>
+        <h2> Name</h2>
+        <p id="Name"></p>
+        <h2> Level</h2>
+        <p id="Level"></p>
+        <h2> Current XP</h2>
+        <p id="XP"></p>
+        <h2> Current HP</h2>
+        <p id="CHP"></p>
+        <h2> Max HP</h2>
+        <p id="MHP"></p>
+        <h2> Gold</h2>
+        <p id="Gold"></p>
+        <h2> Attack</h2>
+        <p id="ATK"></p>
+        <h2> Defense</h2>
+        <p id="DEF"></p>
+        <h2> Day</h2>
+        <p id="Day"></p>
+        <h2> Fame</h2>
+        <p id="Fame"></p>
+    </section>
+    <section id = "Quests" class ="Options">
+        <h1>Quests</h1>
+        <h2>Killing Rats in the Tavern Cellar (1-5 rats)</h2>
+        <h3>Details</h3>
+        <p>The local tavern has an infestation of rats in its cellar. </p>
+        <button onclick="Rat_Quest()">Accept</button>
+        <h2>Goblin Slaying</h2>
+        <H3>Details</H3>
+        <p>A group of goblins is terrorizing a local village. Travel to their cave and wipe them out to protect the village. </p>
+        <button onclick="Goblin_Quest()">Accept</button>
+    </section>
+    <section id = "Inns" class ="options">
+        <h2>Rent a Bed at the Inn?</h2>
+        <button onclick="Inn()">Accept</button>
+        <h2>Rest at Home?</h2>
+        <button onclick="Home()">Accept</button>
+        <h2>Sleep on the Street?</h2>
+        <button onclick="Street()">Accept</button>
+    </section>
+    <script>
+    </script>
 </body>
 </html>

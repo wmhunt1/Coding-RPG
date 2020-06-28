@@ -1,12 +1,13 @@
 header
 {
     text-align: center;
-    width: 1000px;
+    width: 100%;
+    border: 1px solid black;
 }
 nav
 {
     border: 1px solid black;
-    width: 1000px;
+    width: 100%;
 }
 nav ul
 {
@@ -23,12 +24,19 @@ nav ul li
 }
 section
 {
+    margin-bottom: 10px;
     height: 1000x;
+    width: 100%;
     border: 1px solid black
 }
-#stats
+section h1
+{
+    border: 1px solid black
+}
+#Stats
 {
     padding-left: 10px;
+    text-align: left;
 }
 #date
 {
