@@ -5,6 +5,7 @@
             Name: "Character",
             Level: 1,
             XP: 100,
+            Next_Level: 100,
             CurrentHP: 1000,
             MaxHP: 1000,
             Gold: 0,
@@ -16,7 +17,6 @@
             Fame: 0,
             HomeOwner: false
         }
-        var XP_to_next_level = 100*Player.Level;
         // Need to figure out how to fill this for each enemy or make it a template
         var Enemy = 
         {
@@ -64,13 +64,14 @@
                 {
                 Player.Level += 1;
                 Player.MaxHP += 10;
+                Player.Next_Level = 100*Level;
                 alert ("You Level up to Level " + Player.Level + " and gain 10 additional health")
                 document.getElementById("Level").innerHTML = Player.Level;
                 document.getElementById("MHP").innerHTML = Player.MaxHP;
                 }
         function Ready_for_level()
         {
-            if (Player.XP >= XP_to_next_level)
+            if (Player.XP >= Player.Next_Level)
             {
                 LevelUp()
             }
