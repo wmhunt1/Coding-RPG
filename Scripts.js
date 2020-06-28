@@ -1,3 +1,4 @@
+        //Need to save changes to variables
         var Day = 1;
         var Player = 
         {
@@ -12,8 +13,9 @@
             Dead: false,
             Magic: false,
             Fame: 0,
-            HomeOwner: false,
+            HomeOwner: false
         }
+        var XP_to_next_level = Math.pow(10, Player.Level);
         // Need to figure out how to fill this for each enemy or make it a template
         var Enemy = 
         {
@@ -45,10 +47,23 @@
             }*/
         }
         function LevelUp()
+                {
+                Player.Level += 1;
+                Player.MaxHP += 10;
+                }
+        function Ready_for_level()
         {
-            Player.Level += 1;
-            MaxHP += 10;
+            if (Player.XP >= XP_to_next_level)
+            {
+                LevelUp()
+            }
+            else
+            {
+                alert("Not enough XP for level UP")
+            }
         }
+
+        
         function AddXP(x)
         {
             Player.XP += x;
@@ -79,3 +94,13 @@
         {
             //Need to make items
         }
+        function current_stats()
+        {
+            alert("Level: " + Player.Level)
+            alert("XP: " + Player.XP)
+            alert("HP is " + Player.CurrentHP + " out of " + (Player.MaxHP))
+            alert("Gold: " + Player.Gold)
+            alert("Attack: " + Player.Atk)
+            alert("Armor: " + Player.Armor)
+        }
+        

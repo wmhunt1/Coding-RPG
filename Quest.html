@@ -25,7 +25,10 @@
                 <li>Train (T)</li>
         </ul>
     </nav>
+    <!-- don't update -->
     <section id="stats">
+        <button onclick="CurrentDay()">Day</button>
+        <button onclick="CurrentFame()">Fame</button>
         <h2> Day</h2>
         <p id="Day"></p>
         <h2> Fame</h2>
@@ -36,6 +39,14 @@
         <button onclick="Rat_Quest()">Accept</button>
     </section>
     <script>
+        function CurrentDay()
+        {
+            alert ("It is the " + Day + " Day")
+        }
+        function CurrentFame()
+        {
+            alert ("You have " + Player.Fame + " Fame")
+        }
         document.getElementById("Day").innerHTML = (Day);
         document.getElementById("Fame").innerHTML = (Player.Fame);
         //quest functions
@@ -63,6 +74,7 @@
                 {
                     DMGPlayer()
                     DMGEnemy()
+                    alert ("You face off against a " + Enemy.Name)
                     alert ("You strike with your weapon but are bitten in the process")
                     if (Enemy.CurrentHP <= 0)
                     {

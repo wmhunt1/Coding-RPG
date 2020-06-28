@@ -25,6 +25,9 @@
                 <li>Train (T)</li>
         </ul>
     </nav>
+    <!-- don't update -->
+    <button onclick="current_stats()">Current Stats</button>
+    <button onclick="Ready_for_level()">Level Up</button>
     <section id="stats">
         <h2> Name</h2>
         <p id="Name"></p>
@@ -45,14 +48,14 @@
     </section>
     <script>
         //posts stats to sheet
-           document.getElementById("Name").HTML = Player.Name;
+          /* document.getElementById("Name").innerHTML = Player.Name;
            document.getElementById("Level").innerHTML = Player.Level;
            document.getElementById("XP").innerHTML = Player.XP;
            document.getElementById("CHP").innerHTML = Player.CurrentHP;
            document.getElementById("MHP").innerHTML = Player.MaxHP;
            document.getElementById("Gold").innerHTML = Player.Gold;
            document.getElementById("ATK").innerHTML = Player.Atk;
-           document.getElementById("DEF").innerHTML = Player.Armor;
+           document.getElementById("DEF").innerHTML = Player.Armor;*/
     </script>
 </body>
 </html>
