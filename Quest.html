@@ -41,7 +41,7 @@
     <script>
         function CurrentDay()
         {
-            alert ("It is the " + Day + " Day")
+            alert ("It is the Day " + Day)
         }
         function CurrentFame()
         {
@@ -50,6 +50,16 @@
         document.getElementById("Day").innerHTML = (Day);
         document.getElementById("Fame").innerHTML = (Player.Fame);
         //quest functions
+        function QuestComplete(x)
+        {
+            AddXP(x*10)
+            AddGold(x*10)
+            AddFame(x)
+            alert ("You gain: " + x*10 + " XP")
+            alert ("You gain: " + x*10 + " Gold")
+            alert ("You gain: " + x + " Fame")
+        }
+        // Rat Quest
         function Rat_Quest()
         {
             if (Player.CurrentHP <= 0)  
@@ -64,6 +74,7 @@
                         CurrentHP: 2,
                         MaxHP: 2,
                         Atk: 1,
+                        Wep: "Bite",
                         Armor: 0,
                         Dead: false,
                     }
@@ -72,10 +83,7 @@
                 alert ("You must kill " + rats + " rats")
                 for (var rats_killed = 0; rats_killed < rats && Player.CurrentHP > 0;)
                 {
-                    DMGPlayer()
-                    DMGEnemy()
-                    alert ("You face off against a " + Enemy.Name)
-                    alert ("You strike with your weapon but are bitten in the process")
+                    Combat()
                     if (Enemy.CurrentHP <= 0)
                     {
                         rats_killed += 1;
@@ -91,12 +99,7 @@
                 }
                 if (Player.CurrentHP > 0)
                 {
-                    AddXP(rats*10)
-                    AddGold(rats*10)
-                    AddFame(rats)
-                    alert ("You gain: " + rats*10 + " XP")
-                    alert ("You gain: " + rats*10 + " Gold")
-                    alert ("You gain: " + rats + " Fame")
+                    QuestComplete(rats)
                 }
                 else
                 {

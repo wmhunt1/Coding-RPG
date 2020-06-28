@@ -9,6 +9,7 @@
             MaxHP: 10,
             Gold: 0,
             Atk: 1,
+            Wep: "Stick",
             Armor: 0,
             Dead: false,
             Magic: false,
@@ -23,28 +24,39 @@
             CurrentHP: 5,
             MaxHP: 5,
             Atk: 2,
+            Wep: "W",
             Armor: 0,
             Dead: false,
         }
     // functions
+    // combat functions
         function DMGPlayer()
         {
             //Should reduce damage by armor amount
             Player.CurrentHP = Player.CurrentHP - (Enemy.Atk - Player.Armor);
-            //should kill player when HP is reduced to 0
-            /*When (Player.CurrentHP <= 0)
-            {
-                Player.Dead = true;
-            }*/
+            alert ("The " + Enemy.Name + " attacks you with its " + Enemy.Wep)
         }
         function DMGEnemy()
         {
             //should reduce damage by armor amount
             Enemy.CurrentHP = Enemy.CurrentHP - (Player.Atk - Enemy.Armor);
-           /* When (Enemy.CurrentHP <= 0)
+            alert("You attack the " + Enemy.Name + " with your " + Player.Wep)
+        }
+        function Combat()
+        {
+            alert ("You face off against a " + Enemy.Name)
+            var action = prompt("Attack (A)?")
+            if (action === "A")
             {
-                Enemy.Dead = true;
-            }*/
+                DMGEnemy()
+
+            }
+            else
+            {
+                alert ("you hesitated and lost your action.")
+               
+            }   
+            DMGPlayer()
         }
         function LevelUp()
                 {
@@ -102,5 +114,15 @@
             alert("Gold: " + Player.Gold)
             alert("Attack: " + Player.Atk)
             alert("Armor: " + Player.Armor)
+        }
+        //figure it out
+        function new_game()
+        {
+
+        }
+        //figure it out
+        function save_game()
+        {
+
         }
         
