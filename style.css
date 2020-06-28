@@ -33,7 +33,7 @@ section h1
 {
     border: 1px solid black
 }
-#Stats
+.Stats
 {
     padding-left: 10px;
     text-align: left;

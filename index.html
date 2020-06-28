@@ -8,19 +8,19 @@
     <script src="Scripts.js"></script>
 </head>
 <body>
-    <header>
+    <header id = "Title">
         <h1>Coding RPG</h1>
     </header>
     <nav>
         <ul>
-                <li><a href="">Home (H)</a></li>
+                <li><a href="#Intro">Home (H)</a></li>
                 <li>Arena (A)</li>
-                <li><a href="">Character (C)</a></li>
+                <li><a href="#Character">Character (C)</a></li>
                 <li>Downtime (D)</li>
                 <li>Inventory (I)</li>
                 <li>Journal (J)</li>
-                <li><a href="">Quest (Q)</a></li>
-                <li><a href="">Rest (R)</a></li>
+                <li><a href="#Quests">Quest (Q)</a></li>
+                <li><a href="#Inns">Rest (R)</a></li>
                 <li>Shop (S)</li>
                 <li>Train (T)</li>
         </ul>
@@ -30,7 +30,7 @@
         <h2>Welcome to the world of Placeholder</h2>
         <p>Here you will go on quests and level up until you are a true hero.</p>
     </section>
-    <section id = "Stats">
+    <section id = "Character" class = "Stats">
         <h1>Character Sheet</h1>
         <h2> Level Up</h2>
         <button onclick="Ready_for_level()">Ready for Level Up</button>
@@ -54,6 +54,7 @@
         <p id="Day"></p>
         <h2> Fame</h2>
         <p id="Fame"></p>
+        <a href="#Title">Back to Top</a>
     </section>
     <section id = "Quests" class ="Options">
         <h1>Quests</h1>
@@ -65,6 +66,7 @@
         <H3>Details</H3>
         <p>A group of goblins is terrorizing a local village. Travel to their cave and wipe them out to protect the village. </p>
         <button onclick="Goblin_Quest()">Accept</button>
+        <a href="#Title">Back to Top</a>
     </section>
     <section id = "Inns" class ="options">
         <h2>Rent a Bed at the Inn?</h2>
@@ -73,6 +75,7 @@
         <button onclick="Home()">Accept</button>
         <h2>Sleep on the Street?</h2>
         <button onclick="Street()">Accept</button>
+        <a href="#Title">Back to Top</a>
     </section>
     <script>
         document.getElementById("Name").innerHTML = Player.Name;
