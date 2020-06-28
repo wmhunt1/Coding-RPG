@@ -4,7 +4,7 @@
         {
             Name: "Character",
             Level: 1,
-            XP: 0,
+            XP: 100,
             CurrentHP: 1000,
             MaxHP: 1000,
             Gold: 0,
@@ -16,7 +16,7 @@
             Fame: 0,
             HomeOwner: false
         }
-        var XP_to_next_level = Math.pow(100, Player.Level);
+        var XP_to_next_level = 100*Player.Level;
         // Need to figure out how to fill this for each enemy or make it a template
         var Enemy = 
         {
@@ -35,6 +35,7 @@
             //Should reduce damage by armor amount
             Player.CurrentHP = Player.CurrentHP - (Enemy.Atk - Player.Def);
             alert ("The " + Enemy.Name + " attacks you with its " + Enemy.Wep)
+            document.getElementById("CHP").innerHTML = Player.CurrentHP;
         }
         function DMGEnemy()
         {
@@ -63,6 +64,7 @@
                 {
                 Player.Level += 1;
                 Player.MaxHP += 10;
+                alert ("You Level up to Level " + Player.Level + " and gain 10 additional health")
                 document.getElementById("Level").innerHTML = Player.Level;
                 document.getElementById("MHP").innerHTML = Player.MaxHP;
                 }
@@ -78,20 +80,10 @@
             }
         }
         // stat functions
-        document.getElementById("Name").innerHTML = Player.Name;
-        document.getElementById("Level").innerHTML = Player.Level;
-        document.getElementById("XP").innerHTML = Player.XP;
-        document.getElementById("CHP").innerHTML = Player.CurrentHP;
-        document.getElementById("MHP").innerHTML = Player.MaxHP;
-        document.getElementById("Gold").innerHTML = Player.Gold;
-        document.getElementById("ATK").innerHTML = Player.Atk;
-        document.getElementById("DEF").innerHTML = Player.Armor;
-        document.getElementById("Day").innerHTML = (Day);
-        document.getElementById("Fame").innerHTML = (Player.Fame);
         // update functions        
-        function AddXP(x)
+        function AddXP(x,y)
         {
-            Player.XP += x;
+            Player.XP += x*y;
             document.getElementById("XP").innerHTML = Player.XP;
         }
         function AddGold(x)
@@ -112,8 +104,8 @@
         // quest functions
         function QuestComplete(x,y)
         {
-            AddXP(x*y)
-            AddGold(x*y)
+            AddXP(x,y)
+            AddGold(x,y)
             AddFame(y)
             alert ("You gain: " + x*y + " XP")
             alert ("You gain: " + x*y + " Gold")
@@ -179,8 +171,8 @@
                 Enemy = 
                     {
                         Name: "Goblin",
-                        CurrentHP: 5,
-                        MaxHP: 5,
+                        CurrentHP: 4,
+                        MaxHP: 4,
                         Atk: 2,
                         Wep: "Club",
                         Def: 0,
@@ -205,7 +197,7 @@
                     }
                     else 
                     {
-                        alert ("You damage a goblin")
+                        //
                     }
                         alert (Player.CurrentHP + " HP")
                         alert (goblins_killed + " goblins Killed")
@@ -235,7 +227,7 @@
                         }
                         else 
                         {
-                            alert ("You damage the Goblin Boss")
+                            //
                         }
                             alert (Player.CurrentHP + " HP")
                     }
@@ -281,6 +273,7 @@
                 Rest()
                 RemoveGold(10)
                 console.log(Player.Gold)
+                alert ("You spend the night at the Inn.")
             }
         }
         function Home()
@@ -292,6 +285,7 @@
             else
             {
                 Rest()
+                alert ("You sleep in your own bed.")
             }
         }
         function Street()
@@ -307,7 +301,7 @@
         }
         function RemoveItem()
         {
-            
+
         }
         function UseItem()
         {
