@@ -5,41 +5,41 @@
             Name: "Character",
             Level: 1,
             XP: 0,
-            CurrentHP: 10,
-            MaxHP: 10,
+            CurrentHP: 1000,
+            MaxHP: 1000,
             Gold: 0,
-            Atk: 1,
+            Atk: 5,
             Wep: "Stick",
-            Armor: 0,
-            Dead: false,
+            Def: 0,
+            Armor: "None",
             Magic: false,
             Fame: 0,
             HomeOwner: false
         }
-        var XP_to_next_level = Math.pow(10, Player.Level);
+        var XP_to_next_level = Math.pow(100, Player.Level);
         // Need to figure out how to fill this for each enemy or make it a template
         var Enemy = 
         {
             Name: "N",
-            CurrentHP: 5,
-            MaxHP: 5,
-            Atk: 2,
+            CurrentHP: 0,
+            MaxHP: 0,
+            Atk: 0,
             Wep: "W",
-            Armor: 0,
-            Dead: false,
+            Def: 0,
+            Armor: "N",
         }
     // functions
     // combat functions
         function DMGPlayer()
         {
             //Should reduce damage by armor amount
-            Player.CurrentHP = Player.CurrentHP - (Enemy.Atk - Player.Armor);
+            Player.CurrentHP = Player.CurrentHP - (Enemy.Atk - Player.Def);
             alert ("The " + Enemy.Name + " attacks you with its " + Enemy.Wep)
         }
         function DMGEnemy()
         {
             //should reduce damage by armor amount
-            Enemy.CurrentHP = Enemy.CurrentHP - (Player.Atk - Enemy.Armor);
+            Enemy.CurrentHP = Enemy.CurrentHP - (Player.Atk - Enemy.Def);
             alert("You attack the " + Enemy.Name + " with your " + Player.Wep)
         }
         function Combat()
