@@ -7,7 +7,7 @@
             XP: 0,
             Next_Level: 100,
             CurrentHP: 10,
-            MaxHP: 100,
+            MaxHP: 10,
             Gold: 0,
             Atk: 1,
             Wep: "Stick",
@@ -19,6 +19,10 @@
         }
         //Character Creation
         function Character_Creation()
+        {
+           ChooseName()
+        }
+        function ChooseName()
         {
             var ChooseName = prompt("What is your Name?")
             Player.Name = ChooseName;

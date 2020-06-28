@@ -14,15 +14,15 @@
     <nav>
         <ul>
                 <li><a href="#Intro">Home (H)</a></li>
-                <li>Arena (A)</li>
+                <li><a href="#Arena">Arena (C)</a></li>
                 <li><a href="#Character">Character (C)</a></li>
-                <li>Downtime (D)</li>
-                <li>Inventory (I)</li>
-                <li>Journal (J)</li>
-                <li><a href="#Quests">Quest (Q)</a></li>
-                <li><a href="#Inns">Rest (R)</a></li>
-                <li>Shop (S)</li>
-                <li>Train (T)</li>
+                <li><a href="#Downtime">Downtime (D)</a></li>
+                <li><a href="#Inventory">Inventory (C)</a></li>
+                <li><a href="#Journal">Journal (Q)</li>
+                <li><a href="#Quest">Quest (Q)</a></li>
+                <li><a href="#Rest">Rest (R)</a></li>
+                <li><a href="#Shop">Shop (S)</a></li>
+                <li><a href="#Train">Train (T)</a></li>
         </ul>
     </nav>
     <section id = "Intro">
@@ -51,33 +51,68 @@
         <p id="ATK"></p>
         <h2> Defense</h2>
         <p id="DEF"></p>
+    </section>
+    <a href="#Title">Back to Top</a>
+    <section id = "Arena" class ="options">
+        <h1>Arena</h1>
+    </section>
+    <a href="#Downtime">Back to Top</a>
+    <section id = "Downtime" class ="options">
+        <h1>Downtime</h1>
+    </section>
+    <a href="#Title">Back to Top</a>
+    <section id = "Inventory" class ="options">
+        <h1>Inventory</h1>
+    </section>
+    <a href="#Title">Back to Top</a>
+    <section id = "Journal" class ="options">
+        <h1>Journal</h1>
+    </section>
+    <a href="#Title">Back to Top</a>
+    <section id = "Quest" class ="options">
+        <h1>Quests</h1>
         <h2> Day</h2>
         <p id="Day"></p>
         <h2> Fame</h2>
         <p id="Fame"></p>
-        <a href="#Title">Back to Top</a>
+        <article>
+            <h2>Killing Rats in the Tavern Cellar (1-5 rats)</h2>
+            <h3>Details</h3>
+            <p>The local tavern has an infestation of rats in its cellar. </p>
+            <button onclick="Rat_Quest()">Accept</button>
+        </article>
+        <article>
+            <h2>Goblin Slaying</h2>
+            <H3>Details</H3>
+            <p>A group of goblins is terrorizing a local village. Travel to their cave and wipe them out to protect the village. </p>
+            <button onclick="Goblin_Quest()">Accept</button>
+        </article>
     </section>
-    <section id = "Quests" class ="Options">
-        <h1>Quests</h1>
-        <h2>Killing Rats in the Tavern Cellar (1-5 rats)</h2>
-        <h3>Details</h3>
-        <p>The local tavern has an infestation of rats in its cellar. </p>
-        <button onclick="Rat_Quest()">Accept</button>
-        <h2>Goblin Slaying</h2>
-        <H3>Details</H3>
-        <p>A group of goblins is terrorizing a local village. Travel to their cave and wipe them out to protect the village. </p>
-        <button onclick="Goblin_Quest()">Accept</button>
-        <a href="#Title">Back to Top</a>
+    <a href="#Title">Back to Top</a>
+    <section id = "Rest" class ="options">
+        <h1>Rest</h1>
+        <article>
+            <h2>Rent a Bed at the Inn?</h2>
+            <button onclick="Inn()">Accept</button>
+        </article>
+        <article>
+            <h2>Rest at Home?</h2>
+            <button onclick="Home()">Accept</button>
+        </article>
+        <article>
+            <h2>Sleep on the Street?</h2>
+            <button onclick="Street()">Accept</button> 
+        </article>  
     </section>
-    <section id = "Inns" class ="options">
-        <h2>Rent a Bed at the Inn?</h2>
-        <button onclick="Inn()">Accept</button>
-        <h2>Rest at Home?</h2>
-        <button onclick="Home()">Accept</button>
-        <h2>Sleep on the Street?</h2>
-        <button onclick="Street()">Accept</button>
-        <a href="#Title">Back to Top</a>
+    <a href="#Title">Back to Top</a>
+    <section id = "Shop" class ="options">
+        <h1>Shop</h1>
     </section>
+    <a href="#Title">Back to Top</a>
+    <section id = "Train" class ="options">
+        <h1>Train</h1>
+    </section>
+    <a href="#Title">Back to Top</a>
     <script>
         document.getElementById("Name").innerHTML = Player.Name;
         document.getElementById("Level").innerHTML = Player.Level;

@@ -1,3 +1,12 @@
+html
+{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+button
+{
+    margin: 10px;
+}
 header
 {
     text-align: center;
@@ -22,6 +31,18 @@ nav ul li
     text-align: center;
     
 }
+#Intro
+{
+    text-align: center;
+}
+#Intro h2
+{
+    padding-left: 10px;
+}
+#Intro p
+{
+    padding-left: 10px;
+}
 section
 {
     margin-bottom: 10px;
@@ -31,20 +52,27 @@ section
 }
 section h1
 {
+    text-align: center;
+    border: 1px solid black
+}
+article
+{
     border: 1px solid black
 }
 .Stats
 {
-    padding-left: 10px;
     text-align: left;
 }
-#date
+.Stats h2
+{
+    padding-left: 10px;
+}
+.Stats p
 {
     padding-left: 10px;
 }
 .options
 {
-    padding-left: 10px;
     padding-bottom: 10px;
 }
 .options h2
@@ -52,24 +80,11 @@ section h1
     padding-left: 10px;
   
 }
-.option h3
+.options h3
 {
     padding-left: 10px;
 }
-.option p
-{
-    padding-left: 10px;
-}
-#Intro
-{
-    padding-left: 10px;
-    text-align: center;
-}
-#Intro h2
-{
-    padding-left: 10px;
-}
-#Intro p
+.options p
 {
     padding-left: 10px;
 }
