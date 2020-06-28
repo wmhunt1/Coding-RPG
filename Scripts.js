@@ -4,18 +4,25 @@
         {
             Name: "Character",
             Level: 1,
-            XP: 100,
+            XP: 0,
             Next_Level: 100,
-            CurrentHP: 1000,
-            MaxHP: 1000,
+            CurrentHP: 10,
+            MaxHP: 100,
             Gold: 0,
-            Atk: 5,
+            Atk: 1,
             Wep: "Stick",
             Def: 0,
-            Armor: "None",
+            Armor: "Naked",
             Magic: false,
             Fame: 0,
             HomeOwner: false
+        }
+        //Character Creation
+        function Character_Creation()
+        {
+            var ChooseName = prompt("What is your Name?")
+            Player.Name = ChooseName;
+            document.getElementById("Name").innerHTML = Player.Name;
         }
         // Need to figure out how to fill this for each enemy or make it a template
         var Enemy = 
