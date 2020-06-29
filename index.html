@@ -56,8 +56,14 @@
     <section id = "Arena" class ="options">
         <h1>Arena</h1>
     </section>
-    <a href="#Downtime">Back to Top</a>
+    <a href="#Title">Back to Top</a>
     <section id = "Downtime" class ="options">
+        <h1>Downtime</h1>
+        <article>
+            <h2>Drink at the Bar</h2>
+            <p>Have a few drinks, listen to gossip, and maybe get in a barfight.</p>
+            <button onclick="Bar()">Go Drink</button>
+        </article>
     </section>
     <a href="#Title">Back to Top</a>
     <section id = "Inventory" class ="options">
@@ -66,6 +72,8 @@
     <a href="#Title">Back to Top</a>
     <section id = "Journal" class ="options">
         <h1>Journal</h1>
+        <h2>Quests Completed</h2>
+        <p id="QC"></p>
     </section>
     <a href="#Title">Back to Top</a>
     <section id = "Quest" class ="options">
@@ -78,13 +86,13 @@
             <h2>Rat Exterminator</h2>
             <h3>Details</h3>
             <p>The local tavern has an infestation of rats in its cellar. </p>
-            <button onclick="Rat_Quest()">Accept</button>
+            <button onclick="Rat_Quest()">Accept Quest</button>
         </article>
         <article>
             <h2>Goblin Slayer</h2>
             <H3>Details</H3>
             <p>A group of goblins is terrorizing a local village. Travel to their cave and wipe them out to protect the village. </p>
-            <button onclick="Goblin_Quest()">Accept</button>
+            <button onclick="Goblin_Quest()">Accept Quest</button>
         </article>
     </section>
     <a href="#Title">Back to Top</a>
@@ -92,15 +100,18 @@
         <h1>Rest</h1>
         <article>
             <h2>Rent a Bed at the Inn?</h2>
-            <button onclick="Inn()">Accept</button>
+            <p>Costs: 10 Gold</p>
+            <button onclick="Inn()">Rest</button>
         </article>
         <article>
             <h2>Rest at Home?</h2>
-            <button onclick="Home()">Accept</button>
+            <p>Costs: Free</p>
+            <button onclick="Home()">Rest</button>
         </article>
         <article>
             <h2>Sleep on the Street?</h2>
-            <button onclick="Street()">Accept</button> 
+            <p>Costs: Your Pride</p>
+            <button onclick="Street()">Rest</button> 
         </article>  
     </section>
     <a href="#Title">Back to Top</a>
@@ -121,8 +132,9 @@
         document.getElementById("Gold").innerHTML = Player.Gold;
         document.getElementById("ATK").innerHTML = Player.Atk;
         document.getElementById("DEF").innerHTML = Player.Def;
-        document.getElementById("Day").innerHTML = (Day);
-        document.getElementById("Fame").innerHTML = (Player.Fame);
+        document.getElementById("Day").innerHTML = Day;
+        document.getElementById("Fame").innerHTML = Player.Fame;
+        document.getElementById("QC").innerHTML = Player.Quests_Completed;
     </script>
 </body>
 </html>

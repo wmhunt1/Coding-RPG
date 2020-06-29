@@ -1,4 +1,4 @@
-        //Need to save changes to variables
+        // Character Stats
         var Day = 1;
         var Player = 
         {
@@ -8,14 +8,15 @@
             Next_Level: 100,
             CurrentHP: 10,
             MaxHP: 10,
-            Gold: 0,
+            Gold: 100,
             Atk: 1,
             Wep: "Stick",
             Def: 0,
             Armor: "Naked",
             Magic: false,
             Fame: 0,
-            HomeOwner: false
+            HomeOwner: false,
+            Quests_Completed: 0,
         }
         //Character Creation
         function Character_Creation()
@@ -28,7 +29,7 @@
             Player.Name = ChooseName;
             document.getElementById("Name").innerHTML = Player.Name;
         }
-        // Need to figure out how to fill this for each enemy or make it a template
+        // Enemy Template
         var Enemy = 
         {
             Name: "N",
@@ -39,16 +40,15 @@
             Def: 0,
             Armor: "N",
         }
-    // functions
     // combat functions
-        function DMGPlayer()
+        function ATKPlayer()
         {
             //Should reduce damage by armor amount
             Player.CurrentHP = Player.CurrentHP - (Enemy.Atk - Player.Def);
             alert ("The " + Enemy.Name + " attacks you with its " + Enemy.Wep)
             document.getElementById("CHP").innerHTML = Player.CurrentHP;
         }
-        function DMGEnemy()
+        function ATKEnemy()
         {
             //should reduce damage by armor amount
             Enemy.CurrentHP = Enemy.CurrentHP - (Player.Atk - Enemy.Def);
@@ -60,7 +60,7 @@
             var action = prompt("Attack (A)?")
             if (action === "A")
             {
-                DMGEnemy()
+                ATKEnemy()
 
             }
             else
@@ -68,7 +68,7 @@
                 alert ("you hesitated and lost your action.")
                
             }   
-            DMGPlayer()
+            ATKPlayer()
         }
         // Level Up Functions
         function LevelUp()
@@ -91,8 +91,7 @@
                 alert("Not enough XP for level UP")
             }
         }
-        // stat functions
-        // update functions        
+        // update functions       
         function AddXP(x,y)
         {
             Player.XP += x*y;
@@ -113,64 +112,114 @@
             Player.Fame += x;
             document.getElementById("Fame").innerHTML = Player.Fame;
         }
+        function HealPlayer(x)
+        {
+            Player.CurrentHP += x;
+            document.getElementById("CHP").innerHTML = Player.CurrentHP;
+        }
+        function DMGPlayer(x)
+        {
+            Player.CurrentHP -= x;
+            document.getElementById("CHP").innerHTML = Player.CurrentHP;
+        }
+        // downtime functions
+        function Bar()
+        {
+                var gossipArray = ["I once took an arrow to the knee.", "I saw a mudcrab the other day.", "I heard the brothel is run by succubi.", "The cake is a lie."]
+                var drinking = true;
+                while (drinking != false && Player.CurrentHP > 0)
+                {
+                    var bChoice = prompt("Buy a (D)rink, listen to (G)ossip?, get in a bar (F)ight, or (L)eave")
+                    if (bChoice === "D")
+                    {
+                        if (Player.Gold < 1)
+                        {
+                            alert ("You cannot afford a drink.")
+                        }
+                        else
+                        {
+                            RemoveGold(1)
+                            alert ("You buy a drink.")
+                            DMGPlayer(1)
+                            alert ("You get drunk(er)")
+                        }
+                    }
+                    else if (bChoice === "G")
+                    {
+                        var gossip = Math.floor((Math.random() * gossipArray.length))
+                        alert (gossipArray[gossip])
+                    }
+                    else if (bChoice === "F")
+                    {
+                        alert ("You break a bottle and start a bar fight.")
+                        Enemy = 
+                        {
+                            Name: "Patron",
+                            CurrentHP: 2,
+                            MaxHP: 2,
+                            Atk: 1,
+                            Wep: "Broken Bottle",
+                            Def: 0,
+                            Armor: "None",
+                        }
+                        var patrons = Math.floor(Math.random() * 20+20);
+                        for (var patrons_beaten = 0; patrons_beaten < patrons && Player.CurrentHP > 0;)
+                        {
+                            Combat()
+                            if (Enemy.CurrentHP <= 0)
+                            {
+                                patrons_beaten += 1;
+                                alert ("You managed to beat up on of the patrons")
+                            }
+                            else 
+                            {
+                            //
+                            }
+                            alert (Player.CurrentHP + " HP")
+                            alert (patrons_beaten + " patrons beaten up.")
+                        }
+                        if (patrons_beaten == patrons)
+                        {
+                            alert("You are the champion.")
+                            AddFame(patrons)
+                        }
+                        else
+                        {
+                            alert("You lose.")
+                        }
+
+                    }
+                    else if (bChoice === "L")
+                    {
+                        alert("You decide to leave the bar.")
+                        drinking = false;
+                    }
+                    else
+                    {
+                    }
+                }
+                if (Player.HP > 0)
+                {
+                    //
+                }
+                else
+                {
+                    alert ("You are thrown unconcious out of the bar.")
+                    Bad_Rest()
+                }
+        }
+        
         // quest functions
         function QuestComplete(x,y)
         {
             AddXP(x,y)
             AddGold(x,y)
             AddFame(y)
+            Player.Quests_Completed += 1;
+            document.getElementById("QC").innerHTML = Player.Quests_Completed;
             alert ("You gain: " + x*y + " XP")
             alert ("You gain: " + x*y + " Gold")
             alert ("You gain: " + y + " Fame")
-        }
-        function Rat_Quest()
-        {
-            if (Player.CurrentHP <= 0)  
-            {
-                alert ("You can't go questing in your condition")
-            } 
-            else
-            {   
-                Enemy = 
-                    {
-                        Name: "Rat",
-                        CurrentHP: 2,
-                        MaxHP: 2,
-                        Atk: 1,
-                        Wep: "Bite",
-                        Def: 0,
-                        Armor: "Fur",
-                    }
-                var rats = Math.floor(Math.random() * 5+1);
-                alert ("You go down the tavern stairs into the cellar. Time to kill some rats")
-                alert ("You must kill " + rats + " rats")
-                for (var rats_killed = 0; rats_killed < rats && Player.CurrentHP > 0;)
-                {
-                    Combat()
-                    if (Enemy.CurrentHP <= 0)
-                    {
-                        rats_killed += 1;
-                        alert ("You managed to kill one of the rats.")
-                    }
-                    else 
-                    {
-                        alert ("You damage a rat")
-                        //so nothing happens if rat alive
-                    }
-                    alert (Player.CurrentHP + " HP")
-                    alert (rats_killed + " Rats Killed")
-                }
-                if (Player.CurrentHP > 0)
-                {
-                    QuestComplete(rats,5)
-                }
-                else
-                {
-                    alert ("you fall unconscious.")
-                }
-            }
-
-
         }
         function Goblin_Quest()
         {
@@ -250,7 +299,7 @@
                     }
                     else
                     {
-                        alert ("you fall unconscious.")
+                        alert ("you fall unconscious and are dragged back to town.")
                     }
                 }
                 else
@@ -258,6 +307,55 @@
                     alert ("You turn around and go back to town.")             
                 }
             }
+        }
+        function Rat_Quest()
+        {
+            if (Player.CurrentHP <= 0)  
+            {
+                alert ("You can't go questing in your condition")
+            } 
+            else
+            {   
+                Enemy = 
+                    {
+                        Name: "Rat",
+                        CurrentHP: 2,
+                        MaxHP: 2,
+                        Atk: 1,
+                        Wep: "Bite",
+                        Def: 0,
+                        Armor: "Fur",
+                    }
+                var rats = Math.floor(Math.random() * 5+1);
+                alert ("You go down the tavern stairs into the cellar. Time to kill some rats")
+                alert ("You must kill " + rats + " rats")
+                for (var rats_killed = 0; rats_killed < rats && Player.CurrentHP > 0;)
+                {
+                    Combat()
+                    if (Enemy.CurrentHP <= 0)
+                    {
+                        rats_killed += 1;
+                        alert ("You managed to kill one of the rats.")
+                    }
+                    else 
+                    {
+                        alert ("You damage a rat")
+                        //so nothing happens if rat alive
+                    }
+                    alert (Player.CurrentHP + " HP")
+                    alert (rats_killed + " Rats Killed")
+                }
+                if (Player.CurrentHP > 0)
+                {
+                    QuestComplete(rats,5)
+                }
+                else
+                {
+                    alert ("you fall unconscious and are dragged back upstairs.")
+                }
+            }
+
+
         }
         // rest functions
         function Rest()
@@ -284,7 +382,6 @@
             {
                 Rest()
                 RemoveGold(10)
-                console.log(Player.Gold)
                 alert ("You spend the night at the Inn.")
             }
         }
