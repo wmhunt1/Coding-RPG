@@ -18,6 +18,10 @@
             HomeOwner: false,
             Quests_Completed: 0,
         }
+        var Inventory =
+        {
+            potions: 1,
+        }
         //Character Creation
         function Character_Creation()
         {
@@ -57,11 +61,15 @@
         function Combat()
         {
             alert ("You face off against a " + Enemy.Name)
-            var action = prompt("Attack (A)?")
+            var action = prompt("Attack (A), use a (Potion)?")
             if (action === "A")
             {
                 ATKEnemy()
 
+            }
+            if (action === "P")
+            {
+                DrinkPotion()
             }
             else
             {
@@ -327,6 +335,43 @@
                 }
         }
         
+         // item functions
+         function AddItem()
+         {
+
+         }
+         //
+         function AddPotion(x)
+         {
+             Inventory.potions += x;
+             document.getElementById("POT").innerHTML = Inventory.potions;
+         }
+         function RemovePotion(x)
+         {
+            Inventory.potions -= x;
+            document.getElementById("POT").innerHTML = Inventory.potions;
+         }
+         function DrinkPotion()
+         {
+            if (Inventory.potions < 1)
+            {
+                alert ("You don't have any potions.")
+            }
+            else
+            {
+                RemovePotion(1)
+                alert ("You drink a potion.")
+                HealPlayer(5)
+            }
+         }
+         function RemoveItem()
+         {
+ 
+         }
+         function UseItem()
+         {
+             //Need to make items
+         }
         // quest functions
         function QuestComplete(x,y)
         {
@@ -457,7 +502,6 @@
                     }
                     else 
                     {
-                        alert ("You damage a rat")
                         //so nothing happens if rat alive
                     }
                     alert (Player.CurrentHP + " HP")
@@ -520,19 +564,6 @@
             alert ("You sleep on the street but it isn't very restful.")
             Bad_Rest()
 
-        }
-        // item functions
-        function AddItem()
-        {
-
-        }
-        function RemoveItem()
-        {
-
-        }
-        function UseItem()
-        {
-            //Need to make items
         }
         function current_stats()
         {

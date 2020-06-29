@@ -34,22 +34,16 @@
     <a href="#Title">Back to Top</a>
     <section id = "Character" class = "Stats">
         <h1>Character Sheet</h1>    
-        <h2> Name</h2>
+        <h2>Name</h2>
         <p id="Name"></p>
-        <h2> Level</h2>
+        <h2>Level</h2>
         <p id="Level"></p>
-        <h2> Current XP</h2>
+        <h2>Current XP</h2>
         <p id="XP"></p>
-        <h2> Current HP</h2>
+        <h2>Current HP</h2>
         <p id="CHP"></p>
-        <h2> Max HP</h2>
+        <h2>Max HP</h2>
         <p id="MHP"></p>
-        <h2> Gold</h2>
-        <p id="Gold"></p>
-        <h2> Attack</h2>
-        <p id="ATK"></p>
-        <h2> Defense</h2>
-        <p id="DEF"></p>
         <button onclick="Ready_for_level()">Ready for Level Up?</button>
     </section>
     <a href="#Title">Back to Top</a>
@@ -76,6 +70,18 @@
     <a href="#Title">Back to Top</a>
     <section id = "Inventory" class ="options">
         <h1>Inventory</h1>
+        <h2>Gold</h2>
+        <p id="Gold"></p>
+        <h2>Attack</h2>
+        <p id="ATK"></p>
+        <h2>Weapon</h2>
+        <p id="WEP"></p>
+        <h2>Defense</h2>
+        <p id="DEF"></p>
+        <h2>Armor</h2>
+        <p id="Armor"></p>
+        <h2>Potions Owned:</h2>
+        <p id="POT"></p>
     </section>
     <a href="#Title">Back to Top</a>
     <section id = "Journal" class ="options">
@@ -86,9 +92,9 @@
     <a href="#Title">Back to Top</a>
     <section id = "Quest" class ="options">
         <h1>Quests</h1>
-        <h2> Day</h2>
+        <h2>Day</h2>
         <p id="Day"></p>
-        <h2> Fame</h2>
+        <h2>Fame</h2>
         <p id="Fame"></p>
         <article>
             <h2>Rat Exterminator</h2>
@@ -143,6 +149,9 @@
         document.getElementById("Day").innerHTML = Day;
         document.getElementById("Fame").innerHTML = Player.Fame;
         document.getElementById("QC").innerHTML = Player.Quests_Completed;
+        document.getElementById("WEP").innerHTML = Player.Wep;
+        document.getElementById("Armor").innerHTML = Player.Armor;
+        document.getElementById("POT").innerHTML = Inventory.potions;
     </script>
 </body>
 </html>
