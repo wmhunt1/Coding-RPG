@@ -336,11 +336,6 @@
         }
         
          // item functions
-         function AddItem()
-         {
-
-         }
-         //
          function AddPotion(x)
          {
              Inventory.potions += x;
@@ -363,14 +358,6 @@
                 alert ("You drink a potion.")
                 HealPlayer(5)
             }
-         }
-         function RemoveItem()
-         {
- 
-         }
-         function UseItem()
-         {
-             //Need to make items
          }
         // quest functions
         function QuestComplete(x,y)
@@ -574,14 +561,33 @@
             alert("Attack: " + Player.Atk)
             alert("Armor: " + Player.Armor)
         }
-        //figure it out
-        function new_game()
-        {
-
-        }
-        //figure it out
-        function save_game()
-        {
-
-        }
-        
+       //shop functions
+       function Anvil()
+       {
+           var forge = prompt("Upgrade (W)eapon or (A)rmor?")
+           if (forge === "W")
+           {
+                ImpWep(1)
+           }
+           else if (forge === "A")
+           {
+                ImpArmor(1)
+           }
+           else
+           {
+                alert ("You choose not to do anything.")
+           }
+       }
+       function ImpWep(x)
+       {
+            Player.Atk += x;
+            alert ("Your weapon improves by " + x)
+            console.log (Player.Atk)
+            document.getElementById("ATK").innerHTML = Player.Atk;
+       }
+       function ImpArmor(x)
+       {
+            Player.Def += x;
+            alert ("Your armor improves by " + x)
+            document.getElementById("DEF").innerHTML = Player.Def;
+       }
