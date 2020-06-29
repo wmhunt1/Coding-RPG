@@ -8,7 +8,7 @@
             Next_Level: 100,
             CurrentHP: 10,
             MaxHP: 10,
-            Gold: 100,
+            Gold: 0,
             Atk: 1,
             Wep: "Stick",
             Def: 0,
@@ -130,16 +130,23 @@
             {
                 var bet = prompt("How much do you bet?")
                 var bet_amount = parseInt(bet)
-                var chance = Math.random()
-                if (chance > .5)
+                if (bet_amount > Player.Gold)
                 {
-                    alert ("Your fighter wins and you double your bet.")
-                    AddGold(bet_amount*2)
+                    alert ("You don't have that much gold.")
                 }
                 else
                 {
-                    alert ("Your fighter loses and you lose your bet.")
-                    RemoveGold(bet_amount)
+                    var chance = Math.random()
+                    if (chance > .5)
+                    {
+                        alert ("Your fighter wins and you double your bet.")
+                        AddGold(bet_amount*2)
+                    }
+                    else
+                    {
+                        alert ("Your fighter loses and you lose your bet.")
+                        RemoveGold(bet_amount)
+                    }
                 }
             }
             else
@@ -149,7 +156,88 @@
         }
         function FightArena()
         {
-
+            var aChoice = prompt("Who do you fight? (R)ookie or (C)hampion?")
+            if (aChoice === "R")
+            {
+                var combatant = 1;
+                Enemy = 
+                {
+                    Name: "Rookie",
+                    CurrentHP: 5,
+                    MaxHP: 5,
+                    Atk: 2,
+                    Wep: "Sword",
+                    Def: 1,
+                    Armor: "Shield",
+                }
+                for (var combatant_defeated = 0; combatant_defeated < combatant && Player.CurrentHP > 0;)
+                {
+                    Combat()
+                    if (Enemy.CurrentHP <= 0)
+                    {
+                        combatant_defeated += 1;
+                        alert ("you defeat the rookie and the crowd cheers. You win 10 Gold.")
+                        AddXP(1,10)
+                        AddGold(10)
+                        AddFame(10)
+                    }
+                    else 
+                    {
+                        //
+                    }
+                        alert (Player.CurrentHP + " HP")
+                }
+                if (Player.CurrentHP > 0)
+                {
+                    //
+                }
+                else
+                {
+                alert ("You are defeated in the arena.")
+                }
+            }
+            else if (aChoice = "C")
+            {
+                Enemy = 
+                {
+                    Name: "Champion",
+                    CurrentHP: 100,
+                    MaxHP: 100,
+                    Atk: 10,
+                    Wep: "Gladius",
+                    Def: 10,
+                    Armor: "Bronze Plate",
+                }
+                for (var combatant_defeated = 0; combatant_defeated < combatant && Player.CurrentHP > 0;)
+                {
+                    Combat()
+                    if (Enemy.CurrentHP <= 0)
+                    {
+                        combatant_defeated += 1;
+                        alert ("You defeat the champion stunning everyone. You are the new champion of the arena.")
+                        AddXP(1,1000)
+                        AddGold(1000)
+                        AddFame(1000)
+                    }
+                    else 
+                    {
+                        //
+                    }
+                        alert (Player.CurrentHP + " HP")
+                }
+                if (Player.CurrentHP > 0)
+                {
+                    //
+                }
+                else
+                {
+                alert ("You are defeated in the arena.")
+                }
+            }
+            else
+            {
+                alert ("You chicken out.")
+            }
         }
         // downtime functions
         function Bar()
