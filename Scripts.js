@@ -40,7 +40,7 @@
             Def: 0,
             Armor: "N",
         }
-    // combat functions
+        // combat functions
         function ATKPlayer()
         {
             //Should reduce damage by armor amount
@@ -122,6 +122,35 @@
             Player.CurrentHP -= x;
             document.getElementById("CHP").innerHTML = Player.CurrentHP;
         }
+        //arena functions
+        function BetArena()
+        {
+            var aChoice = prompt("Bet on a fight? (Y/N)")
+            if (aChoice === "Y")
+            {
+                var bet = prompt("How much do you bet?")
+                var bet_amount = parseInt(bet)
+                var chance = Math.random()
+                if (chance > .5)
+                {
+                    alert ("Your fighter wins and you double your bet.")
+                    AddGold(bet_amount*2)
+                }
+                else
+                {
+                    alert ("Your fighter loses and you lose your bet.")
+                    RemoveGold(bet_amount)
+                }
+            }
+            else
+            {
+                alert ("You instead just watch the bout.")
+            }
+        }
+        function FightArena()
+        {
+
+        }
         // downtime functions
         function Bar()
         {
@@ -152,6 +181,7 @@
                     else if (bChoice === "F")
                     {
                         alert ("You break a bottle and start a bar fight.")
+                        Player.Wep = "Broken Bottle";
                         Enemy = 
                         {
                             Name: "Patron",
@@ -162,7 +192,7 @@
                             Def: 0,
                             Armor: "None",
                         }
-                        var patrons = Math.floor(Math.random() * 20+20);
+                        var patrons = Math.floor(Math.random() * 10+1);
                         for (var patrons_beaten = 0; patrons_beaten < patrons && Player.CurrentHP > 0;)
                         {
                             Combat()
