@@ -491,6 +491,13 @@
         }
     }
 // quest functions
+    //random locations for quests
+    var BarArray = ["Moes' Bar", "Rats in The Cellar Bar and Grill", "Drunken Lout"]
+    var TownArray = ["Towning Town", "Other Town"]
+    var VillageArray = ["Dale", "Vil"]
+    var bar = Math.floor((Math.random() * BarArray.length))
+    var town = Math.floor((Math.random() * TownArray.length))
+    var village = Math.floor((Math.random() * VillageArray.length))
     //quest template
     function Template()
     {
@@ -532,7 +539,7 @@
         {
             Bandit()
             var bandits = Math.floor(Math.random() *5+1);
-            alert ("You arrive at the village and meet with the mayor. In the morning, When the bandits come to get their protection fee, you will ambush them.")
+            alert ("You arrive at " + VillageArray[village] + " Village and meet with the mayor. In the morning, When the bandits come to get their protection fee, you will ambush them.")
             Rest()
             alert ("The bandits arrive.")
             Reg_Battle(bandits)
@@ -589,7 +596,7 @@
         else
         { 
             Goblin()
-            alert ("You travel to the village and are pointed in the right direction.")
+            alert ("You travel to " + VillageArray[village] + " village and are pointed in the right direction.")
             alert ("You find the cave that the goblins have claimed as their lair.")
             var gChoice = prompt ("Do you enter the cave? (Y/N)")
             if (gChoice === "Y")
@@ -629,7 +636,7 @@
         {   
             Rat()
             var rats = Math.floor(Math.random() * 5+1);
-            alert ("You go down the tavern stairs into the cellar. Time to kill some rats")
+            alert ("You go to " + BarArray[bar] + " and head down the stairs into the cellar.")
             alert ("You must kill " + rats + " rats")
             Reg_Battle(rats)
             if (Player.CurrentHP > 0)
