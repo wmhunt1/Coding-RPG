@@ -10,11 +10,13 @@
         Next_Level: 100,
         CurrentHP: 10,
         MaxHP: 10,
-        Gold: 200,
+        CurrentAP: 2,
+        MaxAP: 2,
+        Gold: 0,
         Atk: 1,
         Wep: "Stick",
         Def: 0,
-        Armor: "None",
+        Armor: "Naked",
         Fame: 0,
         Quests_Completed: 0,
     }
@@ -257,10 +259,12 @@
             {
             Player.Level += 1;
             Player.MaxHP += 10;
+            Player.MaxAP += 2;
             Player.Next_Level = 100*Level;
             alert ("You Level up to Level " + Player.Level + " and gain 10 additional health")
             document.getElementById("Level").innerHTML = Player.Level;
             document.getElementById("MHP").innerHTML = Player.MaxHP;
+            document.getElementById("MAP").innerHTML = Player.MaxAP;
             }
     function Ready_for_level()
     {
@@ -328,10 +332,17 @@
             //
         }
     }
-    /*function Add_Skill(x)
+    function AddAP(x)
     {
-        x += 1;
-    }*/
+        Player.CurrentAP += x;
+        document.getElementById("Fame").innerHTML = Current.Fame;
+    }
+    function RemoveAP(x)
+    {
+        Player.CurrentAP -= x;
+        document.getElementById("Fame").innerHTML = Current.Fame;
+    }
+
 //arena functions
     function BetArena()
     {
@@ -667,9 +678,11 @@
     function Rest()
     {
         Player.CurrentHP = Player.MaxHP;
+        Player.CurrentAP = Player.MaxAP;
         Day =+ 1;
         document.getElementById("Day").innerHTML = Day;
         document.getElementById("CHP").innerHTML = Player.CurrentHP;
+        document.getElementById("CAP").innerHTML = Player.CurrentAP;
     }
     function Bad_Rest()
     {
@@ -710,8 +723,6 @@
 
     }
 //shop functions
-    //var WeaponArray = ["Stick", "Club"]
-    //var ArmorArray = ["Naked", "Clothing"]
     //Apothecary function
     function Pharm()
     {
@@ -751,6 +762,8 @@
     var WepCost = 100;
     var ArmorCost = 100;
     //blacksmith functions
+    var WeaponArray = ["Stick", "Improved Stick","Club"]
+    var ArmorArray = ["Naked", "Tightey Whities", "Peasant Garb"]
     function Anvil()
     {
     var forge = prompt("Upgrade (W)eapon or (A)rmor?")
@@ -791,15 +804,18 @@
     {
         Player.Atk += x;
         alert ("Your weapon improves by " + x)
-        //alert ("You now weild a " + Player.Wep)
+        Player.Wep = WeaponArray[Player.Atk-1]
+        alert ("Your weapon has been updgraded to a " + Player.Wep)
         document.getElementById("ATK").innerHTML = Player.Atk;
+        document.getElementById("ATK").innerHTML = Player.Wep;
 
     }
     function ImpArmor(x)
     {
         Player.Def += x;
         alert ("Your armor improves by " + x)
-    // alert("You now weild a " + Player.Armor)
+        Player.Armor = ArmorArray[Player.Def]
+        alert("You armor has now been upgraded to " + Player.Armor)
         document.getElementById("DEF").innerHTML = Player.Def;
     }
     //realtor function

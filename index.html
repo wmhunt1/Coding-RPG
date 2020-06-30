@@ -47,6 +47,10 @@
         <p id="CHP"></p>
         <h2>Max HP</h2>
         <p id="MHP"></p>
+        <h2>Current AP</h2>
+        <p id="CAP"></p>
+        <h2>Max AP</h2>
+        <p id="MAP"></p>
         <h2>Attack</h2>
         <p id="ATK"></p>
         <h2>Defense</h2>
@@ -111,7 +115,7 @@
         <article>
             <h2>Goblin Slayer</h2>
             <H3>Details</H3>
-            <p>A tribe of goblins is terrorizing a local farm. Travel to their cave and wipe them out to save the village. </p>
+            <p>A tribe of goblins is terrorizing a local village. Travel to their cave and wipe them out to save the village. </p>
             <button onclick="Goblin_Quest()">Accept Quest</button>
         </article>
         <article>
@@ -159,19 +163,21 @@
             <p>Buy a house so you always have somewhere to sleep.</p>
             <button onclick="Buy_House()">Buy House</button> 
         </article> 
+        <!-- wizard shop to learn spells if you know magic -->
     </section>
     <a href="#Title">Back to Top</a>
     <section id = "Train" class ="options">
         <h1>Train</h1>
         <article>
             <h2>Hunting</h2>
-            <p>Survive in the wilds and follow tracks and trails</p>
+            <p>Survive in the wilds and follow tracks and trails.</p>
             <button onclick="Learn_Hunting()">Train</button>
         </article>
         <article>
             <h2>Magic</h2>
             <p>Learn the magic arts and alter the fabric of reality</p>
             <button onclick="Learn_Magic()">Train</button>
+            <!-- should come with 1 free spell/skill -->
         </article>
         <article>
             <h2>Thievery</h2>
@@ -196,6 +202,8 @@
         document.getElementById("Armor").innerHTML = Player.Armor;
         document.getElementById("POT").innerHTML = Inventory.potions;
         document.getElementById("Life").innerHTML = lifes;
+        document.getElementById("CAP").innerHTML = Player.CurrentAP;
+        document.getElementById("MAP").innerHTML = Player.MaxAP;
     </script>
 </body>
 </html>
