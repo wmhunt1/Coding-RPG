@@ -1,6 +1,6 @@
     
 // Character Stats
-    var lifes = 1;
+    var lifes = 3;
     var Day = 1;
     var Player = 
     {
@@ -308,11 +308,13 @@
     {
         lifes += 1;
         document.getElementById("Life").innerHTML = lifes;
+        alert ("You gain a Life")
     }
     function LoseLife()
     {
         lifes -= 1;
         document.getElementById("Life").innerHTML = lifes;
+        alert ("You lose a life.")
     }
     function Death()
     {
@@ -692,8 +694,8 @@
     //Apothecary function
     function Pharm()
     {
-        var dChoice = prompt("Buy potion(s) (Y/N)")
-        if (dChoice === "Y")
+        var dChoice = prompt("Buy (P)otion(s) or an (E)lixer of Life?")
+        if (dChoice === "P")
         {
             if (Player.Gold < 50)
             {
@@ -704,6 +706,20 @@
                 AddPotion(1)
                 RemoveGold(50)
                 alert ("You buy a potion")
+            }
+            
+        }
+        else if (dChoice === "E")
+        {
+            if (Player.Gold < 1000)
+            {
+                alert ("You can't afford an Elixer of Life")
+            }
+            else
+            {
+                RemoveGold(1000)
+                alert ("You buy and drink an Elixer of Life.")
+                GainLife()
             }
         }
         else
