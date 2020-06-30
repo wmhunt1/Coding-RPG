@@ -204,13 +204,13 @@
     {
         Enemy = 
         {
-            Name: "Spider",
-            CurrentHP: 2,
-            MaxHP: 2,
+            Name: "Skeleton",
+            CurrentHP: 5,
+            MaxHP: 5,
             Atk: 2,
-            Wep: "Bite",
+            Wep: "Rusty Sword",
             Def: 0,
-            Armor: "Carapace",
+            Armor: "Armor Scraps",
         }
     }
 
@@ -218,13 +218,13 @@
     {
         Enemy = 
         {
-            Name: "Skelton",
-            CurrentHP: 5,
-            MaxHP: 5,
-            Atk: 1,
+            Name: "Spider",
+            CurrentHP: 2,
+            MaxHP: 2,
+            Atk: 2,
             Wep: "Bite",
-            Def: 1,
-            Armor: "Armor Scraps",
+            Def: 0,
+            Armor: "Carapace",
         }
     }
 // combat functions
