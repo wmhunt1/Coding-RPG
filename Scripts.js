@@ -1,4 +1,4 @@
-        // Character Stats
+    // Character Stats
         var Day = 1;
         var Player = 
         {
@@ -8,24 +8,38 @@
             Next_Level: 100,
             CurrentHP: 10,
             MaxHP: 10,
-            Gold: 0,
+            Gold: 200,
             Atk: 1,
             Wep: "Stick",
             Def: 0,
-            Armor: "Naked",
-            Magic: false,
+            Armor: "None",
             Fame: 0,
-            HomeOwner: false,
             Quests_Completed: 0,
         }
         var Inventory =
         {
-            potions: 1,
+            Home: false,
+            potions: 0,
         }
-        //Character Creation
+        var Skills = 
+        {
+            Hunting: false,
+            Magic: false,
+            Thievery: false,
+        }
+    //Character Creation
+        var Char_created = false;
         function Character_Creation()
         {
-           ChooseName()
+           if (Char_created != true)
+           {
+            ChooseName()
+            Char_created = true;
+           }
+           else
+           {
+               alert ("You have already created your character.")
+           }
         }
         function ChooseName()
         {
@@ -33,7 +47,7 @@
             Player.Name = ChooseName;
             document.getElementById("Name").innerHTML = Player.Name;
         }
-        // Enemy Template
+    // Enemy Template
         var Enemy = 
         {
             Name: "N",
@@ -44,7 +58,7 @@
             Def: 0,
             Armor: "N",
         }
-        // combat functions
+    // combat functions
         function ATKPlayer()
         {
             //Should reduce damage by armor amount
@@ -61,13 +75,18 @@
         function Combat()
         {
             alert ("You face off against a " + Enemy.Name)
-            var action = prompt("Attack (A), use a (Potion)?")
+            var action = prompt("Attack (A), use a (S)kill or use a (P)otion?")
             if (action === "A")
             {
                 ATKEnemy()
 
             }
-            if (action === "P")
+            else if (action === "S")
+            {
+                alert ("You don't know any skills yet so you attack normally.")
+                ATKEnemy()
+            }
+            else if (action === "P")
             {
                 DrinkPotion()
             }
@@ -78,7 +97,48 @@
             }   
             ATKPlayer()
         }
-        // Level Up Functions
+    // mob function for multiple generic enemies
+        var enemy_defeated = 0;
+        function Reg_Battle(x)
+        {
+            for (enemy_defeated = 0; enemy_defeated < x && Player.CurrentHP > 0;)
+                {
+                    Combat()
+                    if (Enemy.CurrentHP <= 0)
+                    {
+                        enemy_defeated += 1;
+                        alert ("You managed to defeat one " + Enemy.Name)
+                    }
+                    else 
+                    {
+                        //so nothing happens if rat alive
+                    }
+                    alert (Player.CurrentHP + " HP")
+                    alert (enemy_defeated + " " + Enemy.Name + "(s) defeated.")
+                }
+        }
+    // boss function for bosses or single enemies
+        function Boss_Battle(x)
+        {
+            var boss = 1;
+            for (var boss_defeated = 0; boss_defeated < boss && Player.CurrentHP > 0;)
+            {
+                Combat()
+                if (Enemy.CurrentHP <= 0)
+                {
+                    boss_defeated += 1;
+                    alert ("You defeated the " + Enemy.Name + "You gain an additional " + x + "XP and " + x + " gold.")
+                    AddXP(x)
+                    AddGold(x)
+                }
+                else 
+                {
+                    //
+                }
+                    alert (Player.CurrentHP + "HP")
+            }
+        }
+    // Level Up Functions
         function LevelUp()
                 {
                 Player.Level += 1;
@@ -99,7 +159,7 @@
                 alert("Not enough XP for level UP")
             }
         }
-        // update functions       
+    // update functions       
         function AddXP(x,y)
         {
             Player.XP += x*y;
@@ -130,7 +190,7 @@
             Player.CurrentHP -= x;
             document.getElementById("CHP").innerHTML = Player.CurrentHP;
         }
-        //arena functions
+    //arena functions
         function BetArena()
         {
             var aChoice = prompt("Bet on a fight? (Y/N)")
@@ -178,23 +238,7 @@
                     Def: 1,
                     Armor: "Shield",
                 }
-                for (var combatant_defeated = 0; combatant_defeated < combatant && Player.CurrentHP > 0;)
-                {
-                    Combat()
-                    if (Enemy.CurrentHP <= 0)
-                    {
-                        combatant_defeated += 1;
-                        alert ("you defeat the rookie and the crowd cheers. You win 10 Gold.")
-                        AddXP(1,10)
-                        AddGold(10)
-                        AddFame(10)
-                    }
-                    else 
-                    {
-                        //
-                    }
-                        alert (Player.CurrentHP + " HP")
-                }
+                Boss_Battle(10)
                 if (Player.CurrentHP > 0)
                 {
                     //
@@ -216,23 +260,7 @@
                     Def: 10,
                     Armor: "Bronze Plate",
                 }
-                for (var combatant_defeated = 0; combatant_defeated < combatant && Player.CurrentHP > 0;)
-                {
-                    Combat()
-                    if (Enemy.CurrentHP <= 0)
-                    {
-                        combatant_defeated += 1;
-                        alert ("You defeat the champion stunning everyone. You are the new champion of the arena.")
-                        AddXP(1,1000)
-                        AddGold(1000)
-                        AddFame(1000)
-                    }
-                    else 
-                    {
-                        //
-                    }
-                        alert (Player.CurrentHP + " HP")
-                }
+                Boss_Battle(1000)
                 if (Player.CurrentHP > 0)
                 {
                     //
@@ -247,7 +275,7 @@
                 alert ("You chicken out.")
             }
         }
-        // downtime functions
+    // downtime functions
         function Bar()
         {
                 var gossipArray = ["I once took an arrow to the knee.", "I saw a mudcrab the other day.", "I heard the brothel is run by succubi.", "The cake is a lie."]
@@ -289,22 +317,8 @@
                             Armor: "None",
                         }
                         var patrons = Math.floor(Math.random() * 10+1);
-                        for (var patrons_beaten = 0; patrons_beaten < patrons && Player.CurrentHP > 0;)
-                        {
-                            Combat()
-                            if (Enemy.CurrentHP <= 0)
-                            {
-                                patrons_beaten += 1;
-                                alert ("You managed to beat up on of the patrons")
-                            }
-                            else 
-                            {
-                            //
-                            }
-                            alert (Player.CurrentHP + " HP")
-                            alert (patrons_beaten + " patrons beaten up.")
-                        }
-                        if (patrons_beaten == patrons)
+                        Reg_Battle(patrons)
+                        if (enemy_defeated == patrons)
                         {
                             alert("You are the champion.")
                             AddFame(patrons)
@@ -324,18 +338,18 @@
                     {
                     }
                 }
-                if (Player.HP > 0)
-                {
-                    //
-                }
-                else
+                if (Player.HP == 0)
                 {
                     alert ("You are thrown unconcious out of the bar.")
                     Bad_Rest()
                 }
+                else
+                {
+                    //
+                }
         }
         
-         // item functions
+    // item functions
          function AddPotion(x)
          {
              Inventory.potions += x;
@@ -359,7 +373,7 @@
                 HealPlayer(5)
             }
          }
-        // quest functions
+    // quest functions
         function QuestComplete(x,y)
         {
             AddXP(x,y)
@@ -371,6 +385,91 @@
             alert ("You gain: " + x*y + " Gold")
             alert ("You gain: " + y + " Fame")
         }
+        function Bandit_Quest()
+        {
+            if (Player.CurrentHP <= 0)  
+            {
+                alert ("You can't go questing in your condition")
+            } 
+            else
+            {
+                Enemy = 
+                    {
+                        Name: "Bandit",
+                        CurrentHP: 4,
+                        MaxHP: 4,
+                        Atk: 2,
+                        Wep: "Dagger",
+                        Def: 1,
+                        Armor: "Leather",
+                    }
+                var bandits = Math.floor(Math.random() *5+1);
+                alert ("You arrive at the village and meet with the mayor. In the morning, When the bandits come to get their protection fee, you will ambush them.")
+                Rest()
+                alert ("The bandits arrive.")
+                Reg_Battle(bandits)
+                if (Player.CurrentHP > 0)
+                    {
+                        QuestComplete(bandits,5)
+                        alert ("You manage to drive off the bandits. However that wasn't all of them. They may return in greater numbers.")
+                        var bChoice = prompt("Will you pursue the bandits (Y/N)?")
+                        if (bChoice === "Y")
+                        {
+                            if (Skills.Hunting != true)
+                            {
+                                alert ("You fail to find the bandits hideout.")
+                            }
+                            else 
+                            {
+                                Enemy = 
+                                {
+                                    Name: "Bandit",
+                                    CurrentHP: 4,
+                                    MaxHP: 4,
+                                    Atk: 2,
+                                    Wep: "Dagger",
+                                    Def: 1,
+                                    Armor: "Leather",
+                                }
+                                alert ("You discover the bandits hiding out in an abandoned mine.")
+                                var bandits = Math.floor(Math.random() *10+1);
+                                Reg_Battle(bandits)
+                                alert ("After defeating the bandits you find their leader.")
+                                Enemy = 
+                                {
+                                    Name: "Bandit Leader",
+                                    CurrentHP: 10,
+                                    MaxHP: 10,
+                                    Atk: 2,
+                                    Wep: "Shortsword",
+                                    Def: 1,
+                                    Armor: "Studded Leather",
+                                }
+                                Boss_Battle(25)
+                                if (Player.CurrentHP > 0)
+                                {
+                                    alert ("You have wiped out the bandits and freed the village from their influence.")
+                                    alert ("You return to the villagers and are rewarded for the remaining bandits you killed.")
+                                    QuestComplete(bandits,5)
+                                }
+                                else
+                                {
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            alert ("You decide to end your involvement.")
+                        }
+                    }
+                    else
+                    {
+                        alert ("you fall unconscious and are dragged back to town.")
+                    }
+            }
+        }
+    //goblin slayer quest
         function Goblin_Quest()
         {
             if (Player.CurrentHP <= 0)  
@@ -382,12 +481,12 @@
                 Enemy = 
                     {
                         Name: "Goblin",
-                        CurrentHP: 4,
-                        MaxHP: 4,
-                        Atk: 2,
+                        CurrentHP: 2,
+                        MaxHP: 2,
+                        Atk: 1,
                         Wep: "Club",
-                        Def: 0,
-                        Armor: "None",
+                        Def: 1,
+                        Armor: "Dirty Hide",
                     }
                 alert ("You travel to the village and are pointed in the right direction.")
                 alert ("You find the cave that the goblins have claimed as their lair.")
@@ -397,55 +496,24 @@
                     alert ("You enter the cave.")
                     var goblins = Math.floor(Math.random() * 10+1);
                     alert ("You must kill " + goblins + " goblins")
-                    for (var goblins_killed = 0; goblins_killed < goblins && Player.CurrentHP > 0;)
-                    {
-                        
-                    Combat()
-                    if (Enemy.CurrentHP <= 0)
-                    {
-                        goblins_killed += 1;
-                        alert ("You managed to kill one of the goblins.")
-                    }
-                    else 
-                    {
-                        //
-                    }
-                        alert (Player.CurrentHP + " HP")
-                        alert (goblins_killed + " goblins Killed")
-                    }
+                    Reg_Battle(goblins)
+                    // bossfight
                     alert ("You discover the leader of the goblins.")
-                    var goblin_boss = 1;
                     Enemy = 
                     {
                         Name: "Goblin Boss",
-                        CurrentHP: 10,
-                        MaxHP: 10,
-                        Atk: 5,
+                        CurrentHP: 5,
+                        MaxHP: 5,
+                        Atk: 2,
                         Wep: "Axe",
                         Def: 1,
                         Armor: "Pot",
                     }
-                    for (var goblin_boss_killed = 0; goblin_boss_killed < goblin_boss && Player.CurrentHP > 0;)
-                    {
-                        Combat()
-                        if (Enemy.CurrentHP <= 0)
-                        {
-                            goblin_boss_killed += 1;
-                            alert ("You slay the Goblin Boss and gain 50 XP in the process.")
-                            AddXP(1,50)
-                            alert ("You loot the Goblin Boss and find 50 Gold")
-                            AddGold(50)
-                        }
-                        else 
-                        {
-                            //
-                        }
-                            alert (Player.CurrentHP + " HP")
-                    }
+                    Boss_Battle(10)
                     if (Player.CurrentHP > 0)
                     {
                         alert ("You sucessfully kill all the goblins and the villagers are grateful.")
-                        QuestComplete(goblins,10)
+                        QuestComplete(goblins,5)
                     }
                     else
                     {
@@ -458,6 +526,7 @@
                 }
             }
         }
+    //rat extermination quest
         function Rat_Quest()
         {
             if (Player.CurrentHP <= 0)  
@@ -469,8 +538,8 @@
                 Enemy = 
                     {
                         Name: "Rat",
-                        CurrentHP: 2,
-                        MaxHP: 2,
+                        CurrentHP: 1,
+                        MaxHP: 1,
                         Atk: 1,
                         Wep: "Bite",
                         Def: 0,
@@ -479,24 +548,10 @@
                 var rats = Math.floor(Math.random() * 5+1);
                 alert ("You go down the tavern stairs into the cellar. Time to kill some rats")
                 alert ("You must kill " + rats + " rats")
-                for (var rats_killed = 0; rats_killed < rats && Player.CurrentHP > 0;)
-                {
-                    Combat()
-                    if (Enemy.CurrentHP <= 0)
-                    {
-                        rats_killed += 1;
-                        alert ("You managed to kill one of the rats.")
-                    }
-                    else 
-                    {
-                        //so nothing happens if rat alive
-                    }
-                    alert (Player.CurrentHP + " HP")
-                    alert (rats_killed + " Rats Killed")
-                }
+                Reg_Battle(rats)
                 if (Player.CurrentHP > 0)
                 {
-                    QuestComplete(rats,5)
+                    QuestComplete(rats,2)
                 }
                 else
                 {
@@ -506,7 +561,7 @@
 
 
         }
-        // rest functions
+    // rest functions
         function Rest()
         {
             Player.CurrentHP = Player.MaxHP;
@@ -536,7 +591,7 @@
         }
         function Home()
         {
-            if (Player.HomeOwner != true)
+            if (Inventory.Home != true)
             {
                 alert("You don't have a house.")
             }
@@ -552,26 +607,64 @@
             Bad_Rest()
 
         }
-        function current_stats()
-        {
-            alert("Level: " + Player.Level)
-            alert("XP: " + Player.XP)
-            alert("HP is " + Player.CurrentHP + " out of " + (Player.MaxHP))
-            alert("Gold: " + Player.Gold)
-            alert("Attack: " + Player.Atk)
-            alert("Armor: " + Player.Armor)
-        }
-       //shop functions
+    //shop functions
+       //var WeaponArray = ["Stick", "Club"]
+       //var ArmorArray = ["Naked", "Clothing"]
+    //Apothecary function
+       function Pharm()
+       {
+            var dChoice = prompt("Buy potion(s) (Y/N)")
+            if (dChoice === "Y")
+            {
+                if (Player.Gold < 50)
+                {
+                    alert ("You can't afford a potion")
+                }
+                else
+                {
+                    AddPotion(1)
+                    RemoveGold(50)
+                    alert ("You buy a potion")
+                }
+            }
+            else
+            {
+                alert ("You decide not to buy any potions. ")
+            }
+       }
+       var WepCost = 100;
+       var ArmorCost = 100;
+    //blacksmith functions
        function Anvil()
        {
            var forge = prompt("Upgrade (W)eapon or (A)rmor?")
            if (forge === "W")
            {
-                ImpWep(1)
+                alert ("Cost of forging is " + WepCost + " Gold")
+                if (Player.Gold < WepCost)
+                {
+                    alert("You cannot afford to upgrade your weaapon.")
+                }
+                else
+                {
+                    ImpWep(1)
+                    RemoveGold(WepCost)
+                    WepCost *= 2;
+                }
            }
            else if (forge === "A")
            {
-                ImpArmor(1)
+                alert ("Cost of forging is " + ArmorCost + " Gold")
+                if (Player.Gold < ArmorCost)
+                {
+                    alert("You cannot afford to upgrade your armor.")
+                }
+                else
+                {
+                    ImpArmor(1)
+                    RemoveGold(WepCost)
+                    ArmorCost *= 2;
+                }
            }
            else
            {
@@ -582,12 +675,69 @@
        {
             Player.Atk += x;
             alert ("Your weapon improves by " + x)
-            console.log (Player.Atk)
+            //alert ("You now weild a " + Player.Wep)
             document.getElementById("ATK").innerHTML = Player.Atk;
+
        }
        function ImpArmor(x)
        {
             Player.Def += x;
             alert ("Your armor improves by " + x)
+           // alert("You now weild a " + Player.Armor)
             document.getElementById("DEF").innerHTML = Player.Def;
        }
+    //realtor function
+       function Buy_House()
+       {
+           if (Inventory.Home != false)
+           {
+               alert ("You already have a house.")
+           }
+           else
+           {
+               var hChoice = prompt ("Buy a house? (Y/N)")
+               if (hChoice === "Y")
+               {
+                    if (Player.Gold < 1000)
+                    {
+                        alert ("You can't afford a house.")
+                    }
+                    else
+                    {
+                        RemoveGold(1000)
+                        Inventory.Home = true;
+                        alert ("You are now a proud homeowner.")
+                    }
+               }
+               else
+               {
+                   alert("You decide not to buy a house.")
+               }
+           }
+       }
+    //training functions
+    function Add_Skill(x)
+    {
+        alert ("You learn a new skill")
+        x = true;
+        console.log(x)
+    }
+    function Learn_Skill(x)
+    {
+        if (x != false)
+        {
+            alert ("You already know this skill.")
+        }
+        else
+        {
+            if (Player.Gold < 100)
+            {
+                alert ("You cannot afford this training.")
+            }
+            else
+            {
+                Add_Skill(x)
+                RemoveGold(100)
+            }
+        }
+    }

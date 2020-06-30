@@ -30,6 +30,7 @@
         <h2>Welcome to the world of Placeholder</h2>
         <p>Here you will go on quests and level up until you are a true hero.</p>
         <button onclick="Character_Creation()">Character Creation</button>
+        <!-- Plot events could go here with triggers dependant on level or fame -->
     </section>
     <a href="#Title">Back to Top</a>
     <section id = "Character" class = "Stats">
@@ -44,6 +45,10 @@
         <p id="CHP"></p>
         <h2>Max HP</h2>
         <p id="MHP"></p>
+        <h2>Attack</h2>
+        <p id="ATK"></p>
+        <h2>Defense</h2>
+        <p id="DEF"></p>
         <button onclick="Ready_for_level()">Ready for Level Up?</button>
     </section>
     <a href="#Title">Back to Top</a>
@@ -53,6 +58,8 @@
             <h2>Bet on a fight</h2>
             <p>Try you luck and bet on a fight.</p>
             <button onclick="BetArena()">Bet</button>
+        </article>
+        <article>
             <h2>Fight</h2>
             <p>Test you mettle and fight in the arena for glory.</p>
             <button onclick="FightArena()">Fight</button>
@@ -64,20 +71,17 @@
         <article>
             <h2>Drink at the Bar</h2>
             <p>Have a few drinks, listen to gossip, and maybe get in a barfight.</p>
-            <button onclick="Bar()">Go Drink</button>
+            <button onclick="Bar()">Go Drinking</button>
         </article>
+        <!-- Other Downtime options: Hunting, Praying, Studying. -->
     </section>
     <a href="#Title">Back to Top</a>
     <section id = "Inventory" class ="options">
         <h1>Inventory</h1>
         <h2>Gold</h2>
         <p id="Gold"></p>
-        <h2>Attack</h2>
-        <p id="ATK"></p>
         <h2>Weapon</h2>
         <p id="WEP"></p>
-        <h2>Defense</h2>
-        <p id="DEF"></p>
         <h2>Armor</h2>
         <p id="Armor"></p>
         <h2>Potions Owned:</h2>
@@ -105,9 +109,16 @@
         <article>
             <h2>Goblin Slayer</h2>
             <H3>Details</H3>
-            <p>A group of goblins is terrorizing a local village. Travel to their cave and wipe them out to protect the village. </p>
+            <p>A tribe of goblins is terrorizing a local farm. Travel to their cave and wipe them out to save the village. </p>
             <button onclick="Goblin_Quest()">Accept Quest</button>
         </article>
+        <article>
+            <h2>Bandit Problem</h2>
+            <H3>Details</H3>
+            <p>A gang of bandits is extorting a village. Go to the village and drive off the bandits. </p>
+            <button onclick="Bandit_Quest()">Accept Quest</button>
+        </article>
+        <!-- More quest ideas: Dungeon, Treasure Hunt -->
     </section>
     <a href="#Title">Back to Top</a>
     <section id = "Rest" class ="options">
@@ -132,14 +143,39 @@
     <section id = "Shop" class ="options">
         <h1>Shop</h1>
         <article>
+            <h2>Apothecary</h2>
+            <p>Buy Potions for 50 Gold.</p>
+            <button onclick="Pharm()">Buy Potion</button> 
+        </article>
+        <article>
             <h2>Blacksmith</h2>
             <p>Upgrade your weapon or armor.</p>
             <button onclick="Anvil()">Forge</button> 
+        </article> 
+        <article>
+            <h2>Realtor</h2>
+            <p>Buy House so you always have somewhere to sleep.</p>
+            <button onclick="Buy_House()">Buy House</button> 
         </article> 
     </section>
     <a href="#Title">Back to Top</a>
     <section id = "Train" class ="options">
         <h1>Train</h1>
+        <article>
+            <h2>Hunting</h2>
+            <p>Survive in the wilds and follow tracks and trails</p>
+            <button onclick="Learn_Skill(Skills.Hunting)">Train</button>
+        </article>
+        <article>
+            <h2>Magic</h2>
+            <p>Learn the magic arts and alter the fabric of reality</p>
+            <button onclick="Learn_Skill(Skills.Magic)">Train</button>
+        </article>
+        <article>
+            <h2>Thievery</h2>
+            <p>Want to be unseen, pick locks or pockets, and disarm traps?</p>
+            <button onclick="Learn_Skill(Skills.Thievery)">Train</button> 
+        </article>  
     </section>
     <a href="#Title">Back to Top</a>
     <script>
