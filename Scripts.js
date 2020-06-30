@@ -489,6 +489,26 @@
         }
     }
 // quest functions
+    //quest template
+    function Template()
+    {
+        if (Player.CurrentHP <= 0)  
+        {
+            alert ("You can't go questing in your condition")
+        } 
+        else
+        {   
+            // quest content
+            if (Player.CurrentHP > 0)
+            {
+                //quest completion
+            }
+            else
+            {
+                Death()
+            }
+        }
+    }
     function QuestComplete(x,y)
     {
         AddXP(x,y)
@@ -521,7 +541,7 @@
                     var bChoice = prompt("Will you pursue the bandits (Y/N)?")
                     if (bChoice === "Y")
                     {
-                        if (Skills.Hunting != 1)
+                        if (Skills.Hunting != true)
                         {
                             alert ("You fail to find the bandits hideout.")
                         }
@@ -619,8 +639,6 @@
                 Death()
             }
         }
-
-
     }
 // rest functions
     function Rest()
