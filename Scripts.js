@@ -180,6 +180,14 @@
         //Should reduce damage by armor amount
         Player.CurrentHP = Player.CurrentHP - (Enemy.Atk - Player.Def);
         alert ("The " + Enemy.Name + " attacks you with its " + Enemy.Wep)
+        if (Player.Def >= Enemy.Atk)
+        {
+            alert ("The attack bounces harmlessly off your " + Player.Armor)
+        }
+        else
+        {
+
+        }
         document.getElementById("CHP").innerHTML = Player.CurrentHP;
     }
     function ATKEnemy()
@@ -187,6 +195,14 @@
         //should reduce damage by armor amount
         Enemy.CurrentHP = Enemy.CurrentHP - (Player.Atk - Enemy.Def);
         alert("You attack the " + Enemy.Name + " with your " + Player.Wep)
+        if (Enemy.Def >= Player.Atk)
+        {
+            alert ("The attack bounces harmlessly off their " + Enemy.Armor)
+        }
+        else
+        {
+
+        }
     }
     function Combat()
     {
@@ -762,8 +778,8 @@
     var WepCost = 100;
     var ArmorCost = 100;
     //blacksmith functions
-    var WeaponArray = ["Stick", "Improved Stick","Club"]
-    var ArmorArray = ["Naked", "Tightey Whities", "Peasant Garb"]
+    var WeaponArray = ["Stick","Club", "Dagger", "Shortsword", "Longsword", "Magic Sword", "Hero Sword"]
+    var ArmorArray = ["Naked", "Tightey Whities", "Peasant Garb", "Leather", "Studded Leather", "Chain Mail", "Plate" ]
     function Anvil()
     {
     var forge = prompt("Upgrade (W)eapon or (A)rmor?")
