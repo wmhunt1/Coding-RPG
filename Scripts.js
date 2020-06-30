@@ -326,6 +326,10 @@
             //
         }
     }
+    /*function Add_Skill(x)
+    {
+        x += 1;
+    }*/
 //arena functions
     function BetArena()
     {
@@ -517,7 +521,7 @@
                     var bChoice = prompt("Will you pursue the bandits (Y/N)?")
                     if (bChoice === "Y")
                     {
-                        if (Skills.Hunting != true)
+                        if (Skills.Hunting != 1)
                         {
                             alert ("You fail to find the bandits hideout.")
                         }
@@ -773,28 +777,64 @@
     }
     }
 //training functions
-    function Add_Skill(x)
+    //had to split into seperate functions
+    function Learn_Hunting()
     {
-    alert ("You learn a new skill")
-    x = true;
-    console.log(x)
-    }
-    function Learn_Skill(x)
-    {
-    if (x != false)
-    {
-        alert ("You already know this skill.")
-    }
-    else
-    {
-        if (Player.Gold < 100)
+        if (Skills.Hunting != true)
         {
-            alert ("You cannot afford this training.")
+            if (Player.Gold < 100)
+            {
+                alert ("You cannot afford this training.")
+            }
+            else
+            {
+                Skills.Hunting = true;
+                alert ("You gain a new skill.")
+                RemoveGold(100)
+            }
         }
         else
         {
-            Add_Skill(x)
-            RemoveGold(100)
+            alert ("You already know this skill.")
         }
     }
+    function Learn_Magic()
+    {
+        if (Skills.Magic != true)
+        {
+            if (Player.Gold < 100)
+            {
+                alert ("You cannot afford this training.")
+            }
+            else
+            {
+                Skills.Magic = true;
+                alert ("You gain a new skill.")
+                RemoveGold(100)
+            }
+        }
+        else
+        {
+            alert ("You already know this skill.")
+        }
+    }
+    function Learn_Thievery()
+    {
+        if (Skills.Thievery != true)
+        {
+            if (Player.Gold < 100)
+            {
+                alert ("You cannot afford this training.")
+            }
+            else
+            {
+                Skills.Thievery = true;
+                alert ("You gain a new skill.")
+                RemoveGold(100)
+            }
+        }
+        else
+        {
+            alert ("You already know this skill.")
+        }
     }
