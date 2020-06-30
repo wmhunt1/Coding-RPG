@@ -492,12 +492,25 @@
     }
 // quest functions
     //random locations for quests
+    //bars
     var BarArray = ["Moes' Bar", "Rats in The Cellar Bar and Grill", "Drunken Lout"]
-    var TownArray = ["Towning Town", "Other Town"]
-    var VillageArray = ["Dale", "Vil"]
     var bar = Math.floor((Math.random() * BarArray.length))
+    //dungeons
+    var DungeonArray = ["Abandoned Mine", "Cave"]
+    var dungeon = Math.floor((Math.random() * DungeonArray.length))
+    //towns
+    var TownArray = ["Towning Town", "Other Town"]
     var town = Math.floor((Math.random() * TownArray.length))
+    //villages
+    var VillageArray = ["Dale", "Vil"]
     var village = Math.floor((Math.random() * VillageArray.length))
+    //random objectives for quests
+    //item retreival
+    var FetchArray = ["Missing Item"]
+    var fetch = rescue = Math.floor((Math.random() * FetchArray.length))
+    //rescue
+    var RescueArray = ["Boy","Girl","Noble"]
+    var rescue = Math.floor((Math.random() * RescueArray.length))
     //quest template
     function Template()
     {
@@ -529,6 +542,7 @@
         alert ("You gain: " + x*y + " Gold")
         alert ("You gain: " + y + " Fame")
     }
+    //bandit quest
     function Bandit_Quest()
     {
         if (Player.CurrentHP <= 0)  
@@ -557,7 +571,7 @@
                         else 
                         {
                             Bandit()
-                            alert ("You discover the bandits hiding out in an abandoned mine.")
+                            alert ("You discover the bandits hiding out in a "  + DungeonArray[dungeon] + ".")
                             var bandits = Math.floor(Math.random() *10+1);
                             Reg_Battle(bandits)
                             alert ("After defeating the bandits you find their leader.")
@@ -586,7 +600,7 @@
                 }
         }
     }
-//goblin slayer quest
+    //goblin slayer quest
     function Goblin_Quest()
     {
         if (Player.CurrentHP <= 0)  
@@ -597,7 +611,7 @@
         { 
             Goblin()
             alert ("You travel to " + VillageArray[village] + " village and are pointed in the right direction.")
-            alert ("You find the cave that the goblins have claimed as their lair.")
+            alert ("You find the " + DungeonArray[dungeon] +  " that the goblins have claimed as their lair.")
             var gChoice = prompt ("Do you enter the cave? (Y/N)")
             if (gChoice === "Y")
             {
@@ -625,7 +639,7 @@
             }
         }
     }
-//rat extermination quest
+    //rat extermination quest
     function Rat_Quest()
     {
         if (Player.CurrentHP <= 0)  
