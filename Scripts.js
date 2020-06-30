@@ -174,6 +174,19 @@
             Armor: "Shield",
         }
     }
+    function Spider()
+    {
+        Enemy = 
+        {
+            Name: "Spider",
+            CurrentHP: 2,
+            MaxHP: 2,
+            Atk: 1,
+            Wep: "Bite",
+            Def: 1,
+            Armor: "Carapace",
+        }
+    }
 // combat functions
     function ATKPlayer()
     {
@@ -525,6 +538,9 @@
     //dungeons
     var DungeonArray = ["Abandoned Mine", "Cave"]
     var dungeon = Math.floor((Math.random() * DungeonArray.length))
+    //inns
+    var InnArray = ["Dreaming Worker", "A Place to Rest your Bread", "Motel Styx"]
+    var inn = Math.floor((Math.random() * InnArray.length))
     //towns
     var TownArray = ["Towning Town", "Other Town"]
     var town = Math.floor((Math.random() * TownArray.length))
@@ -687,6 +703,37 @@
             else
             {
                 Death()
+            }
+        }
+    }
+    function Spider_Quest()
+    {
+        if (Player.CurrentHP <= 0)  
+        {
+            alert ("You can't go questing in your condition")
+        } 
+        else
+        {   
+            alert("You enter the attic of " + InnArray[inn] + " and see many spiders crawling around.")
+            var sChoice = prompt("Are you afraid of spiders? (Y/N)")
+            if (sChoice === "N")
+            {
+                Spider()
+                var spiders = Math.floor(Math.random() * 10+1);
+                Reg_Battle(spiders)
+                if (Player.CurrentHP > 0)
+                {
+                    //quest completion
+                    QuestComplete(spiders,3)
+                }
+                else
+                {
+                    Death()
+                }
+            }
+            else
+            {
+                alert("You turn around and leave.")
             }
         }
     }
