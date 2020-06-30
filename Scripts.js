@@ -1,4 +1,5 @@
     // Character Stats
+        var lifes = 3;
         var Day = 1;
         var Player = 
         {
@@ -6,8 +7,8 @@
             Level: 1,
             XP: 0,
             Next_Level: 100,
-            CurrentHP: 10,
-            MaxHP: 10,
+            CurrentHP: 1,
+            MaxHP: 1,
             Gold: 200,
             Atk: 1,
             Wep: "Stick",
@@ -58,6 +59,9 @@
             Def: 0,
             Armor: "N",
         }
+    // game over function
+    if (lifes > 0)
+    {
     // combat functions
         function ATKPlayer()
         {
@@ -190,6 +194,28 @@
             Player.CurrentHP -= x;
             document.getElementById("CHP").innerHTML = Player.CurrentHP;
         }
+        function GainLife()
+        {
+            lifes += 1;
+            document.getElementById("Life").innerHTML = lifes;
+        }
+        function LoseLife()
+        {
+            lifes -= 1;
+            document.getElementById("Life").innerHTML = lifes;
+        }
+        function Death()
+        {
+            LoseLife()
+            if (lifes > 0)
+            {
+            alert ("A voice tells you that it is not your time yet.")
+            }
+            else 
+            {
+                alert ("Game over.")
+            }
+        }
     //arena functions
         function BetArena()
         {
@@ -246,6 +272,7 @@
                 else
                 {
                 alert ("You are defeated in the arena.")
+                Death()
                 }
             }
             else if (aChoice = "C")
@@ -268,6 +295,7 @@
                 else
                 {
                 alert ("You are defeated in the arena.")
+                Death()
                 }
             }
             else
@@ -454,7 +482,7 @@
                                 }
                                 else
                                 {
-
+                                    Death()
                                 }
                             }
                         }
@@ -517,7 +545,7 @@
                     }
                     else
                     {
-                        alert ("you fall unconscious and are dragged back to town.")
+                        Death()
                     }
                 }
                 else
@@ -555,7 +583,7 @@
                 }
                 else
                 {
-                    alert ("you fall unconscious and are dragged back upstairs.")
+                    Death()
                 }
             }
 
@@ -740,4 +768,9 @@
                 RemoveGold(100)
             }
         }
+    }
+    }
+    else
+    {
+        alert ("Game over, start a new game.")
     }
