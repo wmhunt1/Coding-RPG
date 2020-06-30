@@ -444,7 +444,7 @@
 // downtime functions
     function Bar()
     {
-            var gossipArray = ["I once took an arrow to the knee.", "I saw a mudcrab the other day.", "I heard the brothel is run by succubi.", "The cake is a lie."]
+            var gossipArray = ["I once took an arrow to the knee.", "I saw a mudcrab the other day.", "I heard the brothel is run by succubi.", "The cake is a lie.", "Your waifu is shit.", "Snape kills Dumbledour", "Bruce Willis was dead at the end of Sixth Sense.", "My butthole itches."]
             var drinking = true;
             while (drinking != false && Player.CurrentHP > 0)
             {
@@ -554,6 +554,38 @@
     //rescue
     var RescueArray = ["Boy","Girl","Noble"]
     var rescue = Math.floor((Math.random() * RescueArray.length))
+    //random treasure for dungeons etc.
+    var TreasureArray = ["An old coin", "a goblet", "a statuette", "some porn mags", "an ancient scroll"]
+    var treasure = Math.floor((Math.random() * TreasureArray.length))
+
+    //quest event functions
+    //maze function
+    function Maze(x)
+    {
+        for (var i = 0; i < x; i++)
+        {
+            var paths = Math.floor((Math.random()*4+1))
+            var mChoice = prompt("There are " + paths + " paths to choose from. Which path do you chose?")
+            var result = Math.random()
+            //results: treasure, random encounter, trap, puzzle, point of interest, etc.
+            if (1 >= result && result > 0.75)
+            {
+                alert ("Option 1")
+            }
+            else if (.75 >= result && result > 0.5)
+            {
+                alert ("Option 2")
+            }
+            else if (.5 >= result && result > 0.25)
+            {
+                alert ("Option 3")
+            }
+            else
+            {
+                alert ("Option 4")
+            }
+        }
+    }
     //quest template
     function Template()
     {
@@ -641,6 +673,40 @@
                 {
                     alert ("you fall unconscious and are dragged back to town.")
                 }
+        }
+    }
+    //dungeon test quest
+    function DG_Test_Quest()
+    {
+        if (Player.CurrentHP <= 0)  
+        {
+            alert ("You can't go questing in your condition")
+        } 
+        else
+        {   
+            alert ("You meet the wizard at the " + InnArray[inn] + "and they show you the magic portal that leads into the dungeon.")
+            // quest content
+            var dChoice = prompt("Do you enter the portal?(Y/N)")
+            if (dChoice === "Y")
+            {
+                alert ("You arrive in an extradimmensional space. The dungeon is a laybrinth with opaque white walls surrounded by black void.")
+                var passages = Math.floor(Math.random() *5+5)
+                Maze(passages)
+                // or x time for minibosses with keys.
+                //boss battle
+                if (Player.CurrentHP > 0)
+                {
+                    //quest completion
+                }
+                else
+                {
+                    Death()
+                }
+            }
+            else
+            {
+                alert ("You decide you don't trust this wizard and leave.")
+            }
         }
     }
     //goblin slayer quest
