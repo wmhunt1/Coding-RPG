@@ -8,12 +8,12 @@
         Level: 1,
         XP: 0,
         Next_Level: 100,
-        CurrentHP: 10,
-        MaxHP: 10,
+        CurrentHP: 1000,
+        MaxHP: 1000,
         CurrentAP: 2,
         MaxAP: 2,
         Gold: 0,
-        Atk: 1,
+        Atk: 10,
         Wep: "Stick",
         Def: 0,
         Armor: "Naked",
@@ -133,6 +133,32 @@
         }
     }
     //bar patron function
+    function Mimic()
+    {
+        Enemy = 
+        {
+            Name: "Mimic",
+            CurrentHP: 5,
+            MaxHP: 5,
+            Atk: 2,
+            Wep: "Teeth",
+            Def: 4,
+            Armor: "Wood",
+        }
+    }
+    function Minotaur()
+    {
+        Enemy = 
+        {
+            Name: "Mintaur",
+            CurrentHP: 20,
+            MaxHP: 20,
+            Atk: 8,
+            Wep: "Great axe",
+            Def: 4,
+            Armor: "Thick Skin",
+        }
+    }
     function Patron()
     {
         Enemy = 
@@ -174,17 +200,31 @@
             Armor: "Shield",
         }
     }
-    function Spider()
+    function Skeleton()
     {
         Enemy = 
         {
             Name: "Spider",
             CurrentHP: 2,
             MaxHP: 2,
+            Atk: 2,
+            Wep: "Bite",
+            Def: 0,
+            Armor: "Carapace",
+        }
+    }
+
+    function Spider()
+    {
+        Enemy = 
+        {
+            Name: "Skelton",
+            CurrentHP: 5,
+            MaxHP: 5,
             Atk: 1,
             Wep: "Bite",
             Def: 1,
-            Armor: "Carapace",
+            Armor: "Armor Scraps",
         }
     }
 // combat functions
@@ -330,11 +370,13 @@
     function HealPlayer(x)
     {
         Player.CurrentHP += x;
+        alert ("You heal by " + x)
         document.getElementById("CHP").innerHTML = Player.CurrentHP;
     }
     function DMGPlayer(x)
     {
         Player.CurrentHP -= x;
+        alert ("You take " + x + " damage.")
         document.getElementById("CHP").innerHTML = Player.CurrentHP;
     }
     function GainLife()
@@ -557,12 +599,17 @@
     //random treasure for dungeons etc.
     var TreasureArray = ["An old coin", "a goblet", "a statuette", "some porn mags", "an ancient scroll"]
     var treasure = Math.floor((Math.random() * TreasureArray.length))
+    var treasure_value = Math.floor((Math.random() *10+10))
+    //traps
+    var TrapArray = ["Pressure plate", "Dart", "Spike"]
+    var trap = Math.floor((Math.random() * TrapArray.length))
+    var trap_damage = Math.floor((Math.random() *10+1))
 
     //quest event functions
     //maze function
     function Maze(x)
     {
-        for (var i = 0; i < x; i++)
+        for (var i = 0; i < x; i++ && Player.CurrentHP > 0)
         {
             var paths = Math.floor((Math.random()*4+1))
             var mChoice = prompt("There are " + paths + " paths to choose from. Which path do you chose?")
@@ -570,19 +617,65 @@
             //results: treasure, random encounter, trap, puzzle, point of interest, etc.
             if (1 >= result && result > 0.75)
             {
-                alert ("Option 1")
+                var oChoice = prompt ("You find a chest. Do you open it? (Y/N)")
+                if (oChoice === "Y")
+                {
+                    var mimic_chance = Math.random()
+                    if (mimic_chance > .9)
+                    {
+                        Mimic()
+                        Boss_Battle(10)
+                    }
+                    else
+                    {
+                        AddGold(treasure_value)
+                        alert ("you find a " + TreasureArray[treasure] + " worth " + treasure_value + " gold")
+                    }
+                }
+                else
+                {
+                    alert ("You decide not to risk it.")
+                }
             }
             else if (.75 >= result && result > 0.5)
             {
-                alert ("Option 2")
+                if (Skills.Thievery != false)
+                {
+                    alert ("You avoid a " + TrapArray[trap] + " trap")
+                }
+                else
+                {
+                    alert ("You trigger a " + TrapArray[trap] + " trap")
+                    DMGPlayer(trap_damage)
+
+                }
             }
             else if (.5 >= result && result > 0.25)
             {
-                alert ("Option 3")
+                var random_encounter = Math.random()
+                if (1 >= random_encounter && random_encounter > .75)
+                {
+                    Skeleton()
+                }
+                else if (.75 >= random_encounter && random_encounter > .5)
+                {
+                    Goblin()
+                }
+                else if (.5 >= random_encounter && random_encounter > .25)
+                {
+                    Spider()
+                }
+                else
+                {
+                    Rat()
+                }
+                var random_encounter_amount =  Math.floor((Math.random()*3+2))
+                alert ("You run into a group of " + Enemy.Name + "s")
+                Reg_Battle(random_encounter_amount)
             }
             else
             {
-                alert ("Option 4")
+                alert ("You continue without issue.")
             }
         }
     }
@@ -693,9 +786,12 @@
                 var passages = Math.floor(Math.random() *5+5)
                 Maze(passages)
                 // or x time for minibosses with keys.
-                //boss battle
+                Minotaur()
+                Boss_Battle(50)
                 if (Player.CurrentHP > 0)
                 {
+                    QuestComplete(10,10)
+                    alert ("You sucessfully traverse the dungeon and the wizard thanks you.")
                     //quest completion
                 }
                 else
