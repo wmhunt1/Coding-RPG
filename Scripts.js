@@ -323,7 +323,7 @@
         }
         else
         {
-            
+
         }
     }
     // mob function for multiple generic enemies
@@ -590,6 +590,29 @@
             {
                 //
             }
+    }
+    //temple fuction
+    var stormon_worship = 0;
+    var sunshin_worship = 0;
+    //maybe abilities etc can be gained based off of praying
+    function Temple()
+    {
+        var wChoice = prompt("Which god do you worship? (Storm)on, (Sun)shin, or leave?")
+        if (wChoice === "Storm")
+        {
+            alert ("You pray to Stormon the god of storms and battle and read from his holy book, 'The Book of Stormon'.")
+            stormon_worship += 1;
+        }
+        else if (wChoice === "Sun")
+        {
+            alert ("You pray Sto Sunshine the god of light.")
+            sunshin_worship += 1;
+        }
+        else
+        {
+            alert ("You decide not to pray like the edgy little athiest you are.")
+        }
+        alert("You leave the temple.")
     }
 
 // item functions
