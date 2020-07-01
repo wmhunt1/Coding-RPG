@@ -440,7 +440,8 @@
         LoseLife()
         if (lifes > 0)
         {
-        alert ("A voice tells you that it is not your time yet.")
+            alert ("A voice tells you that it is not your time yet.")
+            HealPlayer(1)
         }
         else 
         {
