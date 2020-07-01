@@ -12,8 +12,8 @@
         MaxHP: 1000,
         CurrentAP: 2,
         MaxAP: 2,
-        Gold: 0,
-        Atk: 10,
+        Gold: 100,
+        Atk: 1,
         Wep: "Stick",
         Def: 0,
         Armor: "Naked",
@@ -27,6 +27,7 @@
     }
     var Skills = 
     {
+        Combat: false,
         Hunting: false,
         Magic: false,
         Thievery: false,
@@ -268,8 +269,26 @@
         }
         else if (action === "S")
         {
-            alert ("You don't know any skills yet so you attack normally.")
-            ATKEnemy()
+            if (Skills.Combat != true)
+            {
+                alert ("You don't know any skills yet so you attack normally.")
+                ATKEnemy()
+            }
+            else
+            {
+                if (Player.CurrentAP > 0)
+                {
+                    alert ("You use your combat training and attack twice.")
+                    RemoveAP(1)
+                    ATKEnemy()
+                    ATKEnemy()
+                }
+                else
+                {
+                    alert ("You are out of AP and instead attack normally.")
+                    ATKEnemy()
+                }
+            }
         }
         else if (action === "P")
         {
@@ -406,12 +425,12 @@
     function AddAP(x)
     {
         Player.CurrentAP += x;
-        document.getElementById("Fame").innerHTML = Current.Fame;
+        document.getElementById("Fame").innerHTML = Player.CurrentAP;
     }
     function RemoveAP(x)
     {
         Player.CurrentAP -= x;
-        document.getElementById("Fame").innerHTML = Current.Fame;
+        document.getElementById("Fame").innerHTML = Player.CurrentAP;
     }
 
 //arena functions
@@ -1074,6 +1093,26 @@
     }
 //training functions
     //had to split into seperate functions
+    function Learn_Combat()
+    {
+        if (Skills.Combat != true)
+        {
+            if (Player.Gold < 100)
+            {
+                alert ("You cannot afford this training.")
+            }
+            else
+            {
+                Skills.Combat = true;
+                alert ("You gain a new skill.")
+                RemoveGold(100)
+            }
+        }
+        else
+        {
+            alert ("You already know this skill.")
+        }
+    }
     function Learn_Hunting()
     {
         if (Skills.Hunting != true)
