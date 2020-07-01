@@ -27,9 +27,9 @@
     }
     var Skills = 
     {
-        Combat: false,
+        Combat: true,
         Hunting: false,
-        Magic: false,
+        Magic: true,
         Thievery: false,
     }
 //Character Creation
@@ -255,13 +255,17 @@
         }
         else
         {
-
+            
         }
+    }
+    function MagicATK()
+    {
+        Enemy.CurrentHP = Enemy.CurrentHP - Player.Atk;
     }
     function Combat()
     {
         alert ("You face off against a " + Enemy.Name)
-        var action = prompt("Attack (A), use a (S)kill or use a (P)otion?")
+        var action = prompt("Attack (A), use a (S)kill or drink a (P)otion?")
         if (action === "A")
         {
             ATKEnemy()
@@ -269,7 +273,7 @@
         }
         else if (action === "S")
         {
-            if (Skills.Combat != true)
+            if (Skills.Combat != true && Skills.Magic != true) 
             {
                 alert ("You don't know any skills yet so you attack normally.")
                 ATKEnemy()
@@ -278,10 +282,24 @@
             {
                 if (Player.CurrentAP > 0)
                 {
-                    alert ("You use your combat training and attack twice.")
-                    RemoveAP(1)
-                    ATKEnemy()
-                    ATKEnemy()
+                    var sChoice = prompt("Choose an ability.")
+                    if (sChoice === "D" && Skills.Combat != false)
+                    {
+                        alert ("You use your combat training and attack twice.")
+                        RemoveAP(1)
+                        ATKEnemy()
+                        ATKEnemy()
+                    }
+                    else if (sChoice === "M" && Skills.Magic != false)
+                    {
+                        alert ("You attack the enemy with a magic blast, ingnoring armor.")
+                        RemoveAP(1)
+                        MagicATK()
+                    }
+                    else
+                    {
+                        ATKEnemy()
+                    }
                 }
                 else
                 {
@@ -298,8 +316,15 @@
         {
             alert ("you hesitated and lost your action.")
         
-        }   
+        }
+        if (Enemy.CurrentHP > 0)
+        {
         ATKPlayer()
+        }
+        else
+        {
+            
+        }
     }
     // mob function for multiple generic enemies
     var enemy_defeated = 0;
