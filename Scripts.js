@@ -5,6 +5,7 @@
     var Player = 
     {
         Name: "Character",
+        Class: "Class",
         Level: 1,
         XP: 0,
         Next_Level: 100,
@@ -27,10 +28,10 @@
     }
     var Skills = 
     {
-        Combat: true,
-        Healing: true,
+        Combat: false,
+        Healing: false,
         Hunting: false,
-        Magic: true,
+        Magic: false,
         Thievery: false,
     }
 //Character Creation
@@ -40,6 +41,8 @@
     if (Char_created != true)
     {
         ChooseName()
+        alert (Player.Name + " your village was destroyed by bandits. You swore to get revenge against these bandits.")
+        ChooseClass()
         Char_created = true;
     }
     else
@@ -52,6 +55,45 @@
         var ChooseName = prompt("What is your Name?")
         Player.Name = ChooseName;
         document.getElementById("Name").innerHTML = Player.Name;
+    }
+    function ChooseClass()
+    {
+        var Class_Choice = prompt ("You sought a mentor to train you. Who did you select as a mentor? (Cleric), (Fighter), (Mage), (Ranger), (Rogue). ")
+        if (Class_Choice === "Cleric")
+        {
+            Skills.Healing = true;
+            alert ("Description of training")
+            Player.Class = "Cleric";
+        }
+        else if (Class_Choice === "Fighter")
+        {
+            Skills.Combat = true;
+            alert ("Description of training")
+            Player.Class = "Fighter";
+        }
+        else if (Class_Choice === "Mage")
+        {
+            Skills.Magic = true;
+            alert ("Description of training")
+            Player.Class = "Mage";
+        }
+        else if (Class_Choice === "Rogue")
+        {
+            Skills.Thievery = true;
+            alert ("Description of training")
+            Player.Class = "Rogue";
+        }
+        else if (Class_Choice === "Rogue")
+        {
+            Skills.Hunting = true;
+            alert ("Description of training")
+            Player.Class = "Ranger";
+        }
+        else 
+        {
+            alert ("You didn't choose a mentor.")
+            Player.Class = "Freelancer"
+        }
     }
 // Enemy functions
     var Enemy = 
