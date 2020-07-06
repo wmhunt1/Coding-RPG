@@ -17,11 +17,13 @@
                 <li><a href="#Arena">Arena (C)</a></li>
                 <li><a href="#Character">Character (C)</a></li>
                 <li><a href="#Downtime">Downtime (D)</a></li>
-                <li><a href="#Inventory">Inventory (C)</a></li>
+                <li><a href="#Factions">Factions (F)</a></li>
+                <li><a href="#Inventory">Inventory (I)</a></li>
                 <li><a href="#Journal">Journal (Q)</li>
                 <li><a href="#Quest">Quest (Q)</a></li>
                 <li><a href="#Rest">Rest (R)</a></li>
-                <li><a href="#Shop">Shop (S)</a></li>
+                <li><a href="#Shop">Shop (B)</a></li>
+                <li><a href="#Skills">Skills (S)</a></li>
                 <li><a href="#Train">Train (T)</a></li>
         </ul>
     </nav>
@@ -85,6 +87,10 @@
             <button onclick="Temple()">Go Pray</button>
         </article>
         <!-- Other Downtime options: Hunting, Praying (Could be a way to gain more lives), Studying. Racing. Monster fighting? Maybe in Arena -->
+    </section>
+    <a href="#Title">Back to Top</a>
+    <section id = "Factions" class ="options">
+        <h1>Factions</h1>
     </section>
     <a href="#Title">Back to Top</a>
     <section id = "Inventory" class ="options">
@@ -183,12 +189,21 @@
         <!-- wizard shop to learn spells if you know magic -->
     </section>
     <a href="#Title">Back to Top</a>
+    <section id = "Skills" class ="options">
+        <h1>Skills</h1>
+    </section>
+    <a href="#Title">Back to Top</a>
     <section id = "Train" class ="options">
         <h1>Train</h1>
         <article>
             <h2>Combat</h2>
             <p>Become at fighting by learning combat skills.</p>
             <button onclick="Learn_Combat()">Train</button>
+        </article>
+        <article>
+            <h2>Healing</h2>
+            <p>Learn to heal yourself.</p>
+            <button onclick="Learn_Healing()">Train</button>
         </article>
         <article>
             <h2>Hunting</h2>

@@ -28,6 +28,7 @@
     var Skills = 
     {
         Combat: true,
+        Healing: true,
         Hunting: false,
         Magic: true,
         Thievery: false,
@@ -289,6 +290,12 @@
                         RemoveAP(1)
                         ATKEnemy()
                         ATKEnemy()
+                    }
+                    else if (sChoice === "H" && Skills.Healing != false)
+                    {
+                        alert ("You say a prayer and heal yourself.")
+                        RemoveAP(1)
+                        HealPlayer(5)
                     }
                     else if (sChoice === "M" && Skills.Magic != false)
                     {
@@ -1153,6 +1160,26 @@
             else
             {
                 Skills.Combat = true;
+                alert ("You gain a new skill.")
+                RemoveGold(100)
+            }
+        }
+        else
+        {
+            alert ("You already know this skill.")
+        }
+    }
+    function Learn_Healing()
+    {
+        if (Skills.Healing != true)
+        {
+            if (Player.Gold < 100)
+            {
+                alert ("You cannot afford this training.")
+            }
+            else
+            {
+                Skills.Healing = true;
                 alert ("You gain a new skill.")
                 RemoveGold(100)
             }
