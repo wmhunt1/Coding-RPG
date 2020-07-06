@@ -44,6 +44,7 @@
         alert (Player.Name + " your village was destroyed by bandits. You swore to get revenge against these bandits.")
         ChooseClass()
         Char_created = true;
+        //var J1 = "After your village was destroyed by bandits you trained as a " + Player.Class + " and will now gain experience as an adventurer to prepare.";
     }
     else
     {
