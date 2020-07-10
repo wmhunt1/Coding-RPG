@@ -1,0 +1,61 @@
+pseudo code for Coding RPG
+
+intro
+
+popup things for quests anvil etc. add new buttons when stuff is done.
+Factions(move arena to factions)(adventurers' guild, thieves guild, 
+Array for faction title
+
+the popup things for combat, character sheets etc.
+combat array that cycles through turn
+function attack()(seperate for melee, magic, and ranged) (checks distance based on weapon)
+	speed decides who goes first. 
+{
+	hit_chance = .5 + .1(atk+pbuff-(def+ebuff))
+	hit_roll = math.random()
+	if (hit_roll > hit_chance)
+	{
+		current_hp = current_hp - (dmg+pbuff-(armor+ebuff)
+		if (armor > dmg)
+		{
+			bounces off armor
+		}
+		else
+		{
+			damage done
+		}
+	}
+	else
+	{
+		miss
+	}
+	
+}
+	
+function combat()(used AP and SP)(skills/spells use AP to)(in that popup with functions that use AP have turn while you have AP)
+{
+	attack
+	skill/spell
+	item
+	run (chance)
+	enemy img in center and hp under it.
+	icon for attacking and maybe multiple enemies
+	distance or way to choose target
+	decide who goes first
+}
+
+var enemy = (maybe enemy intelligence)
+{
+	name
+	img
+	chp
+	mhp
+	wep
+	sec_wep
+	atk
+	armor
+	def
+	wep
+	maybe range
+	speed	
+}
