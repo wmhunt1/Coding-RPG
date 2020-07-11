@@ -1,7 +1,7 @@
 //player stats
-var hero = 
+var hero =
 {
-    basics: 
+    basics:
     {
         current_hp: 10,
         max_HP: 10,
@@ -72,7 +72,7 @@ var hero =
         prayer: "untrained",
         speech: "untrained",
         survival: "untrained",
-        thievery: "untrained",     
+        thievery: "untrained",
     },
     spells_known:
     {
@@ -83,7 +83,7 @@ var hero =
 //couldn't get to work while in object
 var total_armor = (hero.equipment.head_armor + hero.equipment.torso_armor + hero.equipment.leg_armor + hero.equipment.hand_armor + hero.equipment.feet_armor);
 //enemy stats
-var enemy = 
+var enemy =
     {
         number: 0,
         name: "N",
@@ -102,7 +102,7 @@ var enemy =
     }
 function rat(x)
 {
-    enemy = 
+    enemy =
     {
         number: x,
         name: "rat",
@@ -112,7 +112,7 @@ function rat(x)
         max_ap:1,
         atk: 0,
         weapon: "bite",
-        weapon_dmg: 5,
+        weapon_dmg: 1,
         def: 0,
         armor: "fur",
         armor_value: 0,
@@ -121,6 +121,7 @@ function rat(x)
     }
 }
 //combat functions
+var enemies_killed = 0;
 function playerATK()
 {
     console.log("player attacks")
@@ -132,22 +133,23 @@ function playerATK()
         {
             console.log("no damage")
         }
-        else 
+        else
         {
             enemy.current_hp = enemy.current_hp - (hero.equipment.melee_wep_dmg - enemy.armor_value);
-            console.log("hit")
+            console.log("player hits enemy")
         }
     }
     else
     {
-        console.log("miss")
+        console.log("player missed enemy")
     }
     console.log(player_hit_roll)
     console.log(player_hit_chance)
-    console.log(enemy.current_hp)
+    console.log(enemy.current_hp + " enemy hp")
 }
 function playerTurn()
 {
+    hero.stats.current_ap = hero.stats.max_ap
     while (hero.stats.current_ap > 0)
     {
         playerATK()
@@ -165,19 +167,19 @@ function enemyATK()
         {
             console.log("no damage")
         }
-        else 
+        else
         {
             hero.stats.current_hp = hero.stats.current_hp - (enemy.weapon_dmg - total_armor);
-            console.log("hit")
+            console.log("enemy hits player")
         }
     }
     else
     {
-        console.log("miss")
+        console.log("enemy missed player")
     }
     console.log(enemy_hit_roll)
     console.log(enemy_hit_chance)
-    console.log(hero.stats.current_hp)
+    console.log(hero.stats.current_hp + " player hp")
 }
 function enemyTurn()
 {
@@ -187,36 +189,47 @@ function enemyTurn()
         enemyATK()
     }
 }
+function checkifdead()
+{
+    if (enemy.current_hp <= 0)
+    {
+        enemy.number -= 1;
+        enemies_killed += 1;
+        enemy.current_hp = enemy.max_hp;
+        console.log("a " + enemy.name + " dies")
+        console.log(enemy.current_hp + " enemy hp")
+    }
+    else
+    {
+        //so nothing happens
+    }
+}
+//general combat function
 function combat()
 {
-    rat(5)
-    var enemies_killed = 0;
-    while (hero.stats.current_hp > 0 && enemy.number > 0)
+    rat(1)
+    while(hero.stats.current_hp > 0 && enemy.number != 0)
     {
-        if (hero.stats.speed > enemy.speed || hero.stats.speed == enemy.speed)
+        while (enemies_killed < enemy.number && hero.stats.current_hp > 0)
         {
-            playerTurn()
-            enemyTurn()
-        
+            console.log (enemy.number + " " + enemy.name + "(s) left")
+            if (hero.stats.speed > enemy.speed || hero.stats.speed == enemy.speed)
+            {
+                playerTurn()
+                checkifdead()
+                enemyTurn()
+
+            }
+            else
+            {
+                enemyTurn()
+                playerTurn()
+                checkifdead
+            }
+            console.log(enemies_killed + " " + enemy.name +  "(s) killed")
         }
-        else
-        {
-            enemyTurn()
-            playerTurn()
-        
-        }
-        //subtracts dead enemy
-        if (enemy.current_hp == 0) 
-        {
-            enemy.number -= 1;
-            enemies_killed += 1;
-        }
-        else
-        {
-            //so nothing happens
-        }
-        console.log(enemies_killed + " " + enemy.name +  "(s) killed")
     }
+    console.log(enemies_killed + " " + enemy.name +  "(s) killed")
     if (hero.stats.current_hp > 0)
     {
         console.log("victory")
