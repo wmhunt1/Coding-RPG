@@ -85,6 +85,7 @@ var total_armor = (hero.equipment.head_armor + hero.equipment.torso_armor + hero
 //enemy stats
 var enemy = 
     {
+        number: 0,
         name: "N",
         current_hp: 0,
         max_hp: 0,
@@ -99,18 +100,19 @@ var enemy =
         speed: 0,
         enemy_buff: 0,
     }
-function rat()
+function rat(x)
 {
     enemy = 
     {
+        number: x,
         name: "rat",
         current_hp: 1,
         max_hp: 1,
         current_ap: 1,
         max_ap:1,
-        atk: 1,
+        atk: 0,
         weapon: "bite",
-        weapon_dmg: 1,
+        weapon_dmg: 5,
         def: 0,
         armor: "fur",
         armor_value: 0,
@@ -126,7 +128,7 @@ function playerATK()
     var player_hit_roll = Math.random() + .1*(hero.stats.player_atk + hero.stats.player_buff)
     if (player_hit_roll > player_hit_chance)
     {
-        if (enemy.armor_value > hero.equipment.melee_wep_dmg)
+        if (enemy.armor_value >= hero.equipment.melee_wep_dmg)
         {
             console.log("no damage")
         }
@@ -159,7 +161,7 @@ function enemyATK()
     var enemy_hit_roll = Math.random() + .1*(enemy.atk + enemy.enemy_buff)
     if (enemy_hit_roll > enemy_hit_chance)
     {
-        if (total_armor > enemy.weapon_dmg)
+        if (total_armor >= enemy.weapon_dmg)
         {
             console.log("no damage")
         }
@@ -179,21 +181,48 @@ function enemyATK()
 }
 function enemyTurn()
 {
-    enemyATK()
+    //attack for every enemy
+    for (var i = 0; i < enemy.number; i++)
+    {
+        enemyATK()
+    }
 }
 function combat()
 {
-    rat()
-    if (hero.stats.speed > enemy.speed || hero.stats.speed == enemy.speed)
+    rat(5)
+    var enemies_killed = 0;
+    while (hero.stats.current_hp > 0 && enemy.number > 0)
     {
-        playerTurn()
-        enemyTurn()
-       
+        if (hero.stats.speed > enemy.speed || hero.stats.speed == enemy.speed)
+        {
+            playerTurn()
+            enemyTurn()
+        
+        }
+        else
+        {
+            enemyTurn()
+            playerTurn()
+        
+        }
+        //subtracts dead enemy
+        if (enemy.current_hp == 0) 
+        {
+            enemy.number -= 1;
+            enemies_killed += 1;
+        }
+        else
+        {
+            //so nothing happens
+        }
+        console.log(enemies_killed + " " + enemy.name +  "(s) killed")
+    }
+    if (hero.stats.current_hp > 0)
+    {
+        console.log("victory")
     }
     else
     {
-        enemyTurn()
-        playerTurn()
-      
+        console.log("death")
     }
 }
