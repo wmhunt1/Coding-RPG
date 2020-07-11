@@ -21,11 +21,11 @@ var hero =
         max_hp: 10,
         current_ap: 1,
         max_ap: 1,
-        current_ap: 2,
+        current_ap: 1,
         max_sp: 2,
         player_atk: 1,
         player_def: 1,
-        speed: 0,
+        speed: 1,
         xp: 0,
         xp_to_next_level: 100,
         player_buff: 0,
@@ -80,6 +80,7 @@ var hero =
         spell_effect_array: []
     }
 }
+//couldn't get to work while in object
 var total_armor = (hero.equipment.head_armor + hero.equipment.torso_armor + hero.equipment.leg_armor + hero.equipment.hand_armor + hero.equipment.feet_armor);
 //enemy stats
 var enemy = 
@@ -113,36 +114,39 @@ function rat()
         def: 0,
         armor: "fur",
         armor_value: 0,
-        speed: 0,
+        speed: 5,
         enemy_buff: 0,
     }
 }
 //combat functions
 function playerATK()
 {
-    var player_hit_chance = .5 - .1*(enemy.def + enemy.buff);
+    console.log("player attacks")
+    var player_hit_chance = .5 - .1*(enemy.def + enemy.enemy_buff);
     var player_hit_roll = Math.random() + .1*(hero.stats.player_atk + hero.stats.player_buff)
     if (player_hit_roll > player_hit_chance)
     {
         if (enemy.armor_value > hero.equipment.melee_wep_dmg)
         {
-            alert ("no damage")
+            console.log("no damage")
         }
         else 
         {
             enemy.current_hp = enemy.current_hp - (hero.equipment.melee_wep_dmg - enemy.armor_value);
+            console.log("hit")
         }
     }
     else
     {
-        alert("miss")
+        console.log("miss")
     }
     console.log(player_hit_roll)
+    console.log(player_hit_chance)
     console.log(enemy.current_hp)
 }
 function playerTurn()
 {
-    while (hero.stats.current_ap != 0)
+    while (hero.stats.current_ap > 0)
     {
         playerATK()
         hero.stats.current_ap -= 1;
@@ -150,24 +154,27 @@ function playerTurn()
 }
 function enemyATK()
 {
+    console.log("enemy attacks")
     var enemy_hit_chance = .5 - .1*(hero.stats.player_def + hero.stats.player_buff);
     var enemy_hit_roll = Math.random() + .1*(enemy.atk + enemy.enemy_buff)
     if (enemy_hit_roll > enemy_hit_chance)
     {
         if (total_armor > enemy.weapon_dmg)
         {
-            alert ("no damage")
+            console.log("no damage")
         }
         else 
         {
             hero.stats.current_hp = hero.stats.current_hp - (enemy.weapon_dmg - total_armor);
+            console.log("hit")
         }
     }
     else
     {
-        alert("miss")
+        console.log("miss")
     }
     console.log(enemy_hit_roll)
+    console.log(enemy_hit_chance)
     console.log(hero.stats.current_hp)
 }
 function enemyTurn()
@@ -179,17 +186,13 @@ function combat()
     rat()
     if (hero.stats.speed > enemy.speed || hero.stats.speed == enemy.speed)
     {
-        alert ("player attacks")
         playerTurn()
-        alert ("enemy attacks")
         enemyTurn()
        
     }
     else
     {
-        alert ("enemy attacks")
         enemyTurn()
-        alert ("player attacks")
         playerTurn()
       
     }
