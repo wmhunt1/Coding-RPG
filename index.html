@@ -205,6 +205,24 @@
     <a href="#Title">Back to Top</a>
     <section id = "Skills" class ="options">
         <h1>Skills</h1>
+        <h2>Crafting</h2>
+        <p id="crafting"></p>
+        <h2>Gathering</h2>
+        <p id="gathering"></p>
+        <h2>Magic</h2>
+        <p id="magic"></p>
+        <h2>Marksman</h2>
+        <p id="marksman"></p>
+        <h2>Melee</h2>
+        <p id="melee"></p>
+        <h2>Prayer</h2>
+        <p id="prayer"></p>
+        <h2>Speech</h2>
+        <p id="speech"></p>
+        <h2>Survival</h2>
+        <p id="survival"></p>
+        <h2>Thievery</h2>
+        <p id="thievery"></p>
     </section>
     <a href="#Title">Back to Top</a>
     <section id = "Train" class ="options">
@@ -237,6 +255,15 @@
         document.getElementById("Hands").innerHTML = hero.equipment.hand_slot;
         document.getElementById("Feet").innerHTML = hero.equipment.feet_slot;
         document.getElementById("Totarm").innerHTML = total_armor;
+        document.getElementById("crafting").innerHTML = hero.skills.crafting;
+        document.getElementById("gathering").innerHTML = hero.skills.gathering;
+        document.getElementById("magic").innerHTML = hero.skills.magic;
+        document.getElementById("marksman").innerHTML = hero.skills.marksman;
+        document.getElementById("melee").innerHTML = hero.skills.melee;
+        document.getElementById("prayer").innerHTML = hero.skills.prayer;
+        document.getElementById("speech").innerHTML = hero.skills.speech;
+        document.getElementById("survival").innerHTML = hero.skills.survival;
+        document.getElementById("thievery").innerHTML = hero.skills.thievery;
     </script>
 </body>
 </html>
