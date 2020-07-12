@@ -42,8 +42,6 @@ var hero =
         hand_armor: 0,
         feet_slot: "boots",
         feet_armor: 0,
-        //total_armor: (hero.equipment.head_armor + hero.equipment.torso_armor + hero.equipment.leg_armor + hero.equipment.hand_armor + hero.equipment.feet_armor),
-        //total_armor: (head_armor + torso_armor + leg_armor + hand_armor + feet_armor),
         melee_wep: "stick",
         melee_wep_dmg: 1,
         ranged_wep: "rock",
