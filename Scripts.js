@@ -1,39 +1,39 @@
     
 // Character Stats
-    var lifes = 3;
-    var Day = 1;
-    var Player = 
-    {
-        Name: "Character",
-        Class: "Class",
-        Level: 1,
-        XP: 0,
-        Next_Level: 100,
-        CurrentHP: 1000,
-        MaxHP: 1000,
-        CurrentAP: 2,
-        MaxAP: 2,
-        Gold: 100,
-        Atk: 1,
-        Wep: "Stick",
-        Def: 0,
-        Armor: "Naked",
-        Fame: 0,
-        Quests_Completed: 0,
-    }
-    var Inventory =
-    {
-        Home: false,
-        potions: 0,
-    }
-    var Skills = 
-    {
-        Combat: false,
-        Healing: false,
-        Hunting: false,
-        Magic: false,
-        Thievery: false,
-    }
+    // var lifes = 3;
+    // var Day = 1;
+    // var Player = 
+    // {
+    //     Name: "Character",
+    //     Class: "Class",
+    //     Level: 1,
+    //     XP: 0,
+    //     Next_Level: 100,
+    //     CurrentHP: 1000,
+    //     MaxHP: 1000,
+    //     CurrentAP: 2,
+    //     MaxAP: 2,
+    //     Gold: 100,
+    //     Atk: 1,
+    //     Wep: "Stick",
+    //     Def: 0,
+    //     Armor: "Naked",
+    //     Fame: 0,
+    //     Quests_Completed: 0,
+    // }
+    // var Inventory =
+    // {
+    //     Home: false,
+    //     potions: 0,
+    // }
+    // var Skills = 
+    // {
+    //     Combat: false,
+    //     Healing: false,
+    //     Hunting: false,
+    //     Magic: false,
+    //     Thievery: false,
+    // }
 //Character Creation
     var Char_created = false;
     function Character_Creation()
@@ -97,16 +97,16 @@
         }
     }
 // Enemy functions
-    var Enemy = 
-    {
-        Name: "N",
-        CurrentHP: 0,
-        MaxHP: 0,
-        Atk: 0,
-        Wep: "W",
-        Def: 0,
-        Armor: "N",
-    }
+    // var Enemy = 
+    // {
+    //     Name: "N",
+    //     CurrentHP: 0,
+    //     MaxHP: 0,
+    //     Atk: 0,
+    //     Wep: "W",
+    //     Def: 0,
+    //     Armor: "N",
+    // }
     //bandit function
     function Bandit()
     {
@@ -218,18 +218,18 @@
         }
     }
     //rat function
-    function Rat()
-    {
-        Enemy = 
-        {
-            Name: "Rat",
-            CurrentHP: 1,
-            MaxHP: 1,
-            Atk: 1,
-            Wep: "Bite",
-            Def: 0,
-            Armor: "Fur",
-        }
+    // function Rat()
+    // {
+    //     Enemy = 
+    //     {
+    //         Name: "Rat",
+    //         CurrentHP: 1,
+    //         MaxHP: 1,
+    //         Atk: 1,
+    //         Wep: "Bite",
+    //         Def: 0,
+    //         Armor: "Fur",
+    //     }
     }
     //arena Rookie function
     function Rookie()
@@ -376,138 +376,138 @@
 
         }
     }
-    // mob function for multiple generic enemies
-    var enemy_defeated = 0;
-    function Reg_Battle(x)
-    {
-        for (enemy_defeated = 0; enemy_defeated < x && Player.CurrentHP > 0;)
-            {
-                Combat()
-                if (Enemy.CurrentHP <= 0)
-                {
-                    enemy_defeated += 1;
-                    alert ("You managed to defeat one " + Enemy.Name)
-                }
-                else 
-                {
-                    //so nothing happens if rat alive
-                }
-                alert (Player.CurrentHP + " HP")
-                alert (enemy_defeated + " " + Enemy.Name + "(s) defeated.")
-            }
-    }
+    // // mob function for multiple generic enemies
+    // var enemy_defeated = 0;
+    // function Reg_Battle(x)
+    // {
+    //     for (enemy_defeated = 0; enemy_defeated < x && Player.CurrentHP > 0;)
+    //         {
+    //             Combat()
+    //             if (Enemy.CurrentHP <= 0)
+    //             {
+    //                 enemy_defeated += 1;
+    //                 alert ("You managed to defeat one " + Enemy.Name)
+    //             }
+    //             else 
+    //             {
+    //                 //so nothing happens if rat alive
+    //             }
+    //             alert (Player.CurrentHP + " HP")
+    //             alert (enemy_defeated + " " + Enemy.Name + "(s) defeated.")
+    //         }
+    // }
     // boss function for bosses or single enemies
-    function Boss_Battle(x)
-    {
-        var boss = 1;
-        for (var boss_defeated = 0; boss_defeated < boss && Player.CurrentHP > 0;)
-        {
-            Combat()
-            if (Enemy.CurrentHP <= 0)
-            {
-                boss_defeated += 1;
-                alert ("You defeated the " + Enemy.Name + "You gain an additional " + x + "XP and " + x + " gold.")
-                AddXP(x)
-                AddGold(x)
-            }
-            else 
-            {
-                //
-            }
-                alert (Player.CurrentHP + "HP")
-        }
-    }
+    // function Boss_Battle(x)
+    // {
+    //     var boss = 1;
+    //     for (var boss_defeated = 0; boss_defeated < boss && Player.CurrentHP > 0;)
+    //     {
+    //         Combat()
+    //         if (Enemy.CurrentHP <= 0)
+    //         {
+    //             boss_defeated += 1;
+    //             alert ("You defeated the " + Enemy.Name + "You gain an additional " + x + "XP and " + x + " gold.")
+    //             AddXP(x)
+    //             AddGold(x)
+    //         }
+    //         else 
+    //         {
+    //             //
+    //         }
+    //             alert (Player.CurrentHP + "HP")
+    //     }
+    // }
 // Level Up Functions
-    function LevelUp()
-            {
-            Player.Level += 1;
-            Player.MaxHP += 10;
-            Player.MaxAP += 2;
-            Player.Next_Level = 100*Level;
-            alert ("You Level up to Level " + Player.Level + " and gain 10 additional health")
-            document.getElementById("Level").innerHTML = Player.Level;
-            document.getElementById("MHP").innerHTML = Player.MaxHP;
-            document.getElementById("MAP").innerHTML = Player.MaxAP;
-            }
-    function Ready_for_level()
-    {
-        if (Player.XP >= Player.Next_Level)
-        {
-            LevelUp()
-        }
-        else
-        {
-            alert("Not enough XP for level UP")
-        }
-    }
+    // function LevelUp()
+    //         {
+    //         Player.Level += 1;
+    //         Player.MaxHP += 10;
+    //         Player.MaxAP += 2;
+    //         Player.Next_Level = 100*Level;
+    //         alert ("You Level up to Level " + Player.Level + " and gain 10 additional health")
+    //         document.getElementById("Level").innerHTML = Player.Level;
+    //         document.getElementById("MHP").innerHTML = Player.MaxHP;
+    //         document.getElementById("MAP").innerHTML = Player.MaxAP;
+    //         }
+    // function Ready_for_level()
+    // {
+    //     if (Player.XP >= Player.Next_Level)
+    //     {
+    //         LevelUp()
+    //     }
+    //     else
+    //     {
+    //         alert("Not enough XP for level UP")
+    //     }
+    // }
 // update functions       
-    function AddXP(x,y)
-    {
-        Player.XP += x*y;
-        document.getElementById("XP").innerHTML = Player.XP;
-    }
-    function AddGold(x)
-    {
-        Player.Gold += x;
-        document.getElementById("Gold").innerHTML = Player.Gold;
-    }
-    function RemoveGold(x)
-    {
-        Player.Gold -= x;
-        document.getElementById("Gold").innerHTML = Player.Gold;
-    }
-    function AddFame(x)
-    {
-        Player.Fame += x;
-        document.getElementById("Fame").innerHTML = Player.Fame;
-    }
-    function HealPlayer(x)
-    {
-        Player.CurrentHP += x;
-        alert ("You heal by " + x)
-        document.getElementById("CHP").innerHTML = Player.CurrentHP;
-    }
-    function DMGPlayer(x)
-    {
-        Player.CurrentHP -= x;
-        alert ("You take " + x + " damage.")
-        document.getElementById("CHP").innerHTML = Player.CurrentHP;
-    }
-    function GainLife()
-    {
-        lifes += 1;
-        document.getElementById("Life").innerHTML = lifes;
-        alert ("You gain a Life")
-    }
-    function LoseLife()
-    {
-        lifes -= 1;
-        document.getElementById("Life").innerHTML = lifes;
-        alert ("You lose a life.")
-    }
-    function Death()
-    {
-        LoseLife()
-        if (lifes > 0)
-        {
-            alert ("A voice tells you that it is not your time yet.")
-            HealPlayer(1)
-        }
-        else 
-        {
-            //
-        }
-    }
-    function AddAP(x)
-    {
-        Player.CurrentAP += x;
-        document.getElementById("Fame").innerHTML = Player.CurrentAP;
-    }
-    function RemoveAP(x)
-    {
-        Player.CurrentAP -= x;
-        document.getElementById("Fame").innerHTML = Player.CurrentAP;
-    }
+    // function AddXP(x,y)
+    // {
+    //     Player.XP += x*y;
+    //     document.getElementById("XP").innerHTML = Player.XP;
+    // }
+    // function AddGold(x)
+    // {
+    //     Player.Gold += x;
+    //     document.getElementById("Gold").innerHTML = Player.Gold;
+    // }
+    // function RemoveGold(x)
+    // {
+    //     Player.Gold -= x;
+    //     document.getElementById("Gold").innerHTML = Player.Gold;
+    // }
+    // function AddFame(x)
+    // {
+    //     Player.Fame += x;
+    //     document.getElementById("Fame").innerHTML = Player.Fame;
+    // // }
+    // function HealPlayer(x)
+    // {
+    //     Player.CurrentHP += x;
+    //     alert ("You heal by " + x)
+    //     document.getElementById("CHP").innerHTML = Player.CurrentHP;
+    // }
+    // function DMGPlayer(x)
+    // {
+    //     Player.CurrentHP -= x;
+    //     alert ("You take " + x + " damage.")
+    //     document.getElementById("CHP").innerHTML = Player.CurrentHP;
+    // }
+    // function GainLife()
+    // {
+    //     lifes += 1;
+    //     document.getElementById("Life").innerHTML = lifes;
+    //     alert ("You gain a Life")
+    // }
+    // function LoseLife()
+    // {
+    //     lifes -= 1;
+    //     document.getElementById("Life").innerHTML = lifes;
+    //     alert ("You lose a life.")
+    // }
+    // function Death()
+    // {
+    //     LoseLife()
+    //     if (lifes > 0)
+    //     {
+    //         alert ("A voice tells you that it is not your time yet.")
+    //         HealPlayer(1)
+    //     }
+    //     else 
+    //     {
+    //         //
+    //     }
+    // }
+    // function AddAP(x)
+    // {
+    //     Player.CurrentAP += x;
+    //     document.getElementById("Fame").innerHTML = Player.CurrentAP;
+    // }
+    // function RemoveAP(x)
+    // {
+    //     Player.CurrentAP -= x;
+    //     document.getElementById("Fame").innerHTML = Player.CurrentAP;
+    // }
 
 //arena functions
     function BetArena()

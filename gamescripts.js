@@ -3,17 +3,9 @@ var hero =
 {
     basics:
     {
-        current_hp: 10,
-        max_HP: 10,
-        current_ap: 1,
-        max_AP: 1,
-        current_ap: 2,
-        max_SP: 2,
-        player_atk: 1,
-        player_def: 1,
-        speed: 0,
-        xp: 0,
-        xp_to_next_level: 100,
+        name: "name",
+        class: "Freelancer",
+        lifes: 3,
     },
     stats:
     {
@@ -51,6 +43,7 @@ var hero =
     },
     inventory:
     {
+        gold: 0,
         item:
         {
             name: "",
@@ -58,6 +51,16 @@ var hero =
             effect: "",
             value: 0,
         }
+    },
+    journal:
+    {
+        day: 0,
+        quests_completed: 0,
+    },
+    reputation:
+    {
+        fame: 0,
+        infanmy: 0
     },
     skills:
     {
@@ -118,6 +121,82 @@ function rat(x)
         enemy_buff: 0,
     }
 }
+//hero update functions
+//level up functions
+function LevelUp()
+{
+    hero.basics.level += 1;
+    hero.basics.max_hp += 10;
+    hero.stats.max_sp += 2;
+    hero.stats.xp_to_next_level = 100*hero.basics.level;
+}
+function Ready_for_level()
+{
+    if (hero.stats.xp >= hero.stats.xp_to_next_level)
+    {
+        LevelUp()
+    }
+    else
+    {
+        alert("Not enough XP for level UP")
+    }
+}
+function gainLife()
+{
+    hero.basics.lifes += 1;
+}
+function loseLife()
+{
+    hero.basics.lifes -= 1;
+}
+function death()
+{
+    loseLife()
+    if (hero.basics.lifes > 0)
+    {
+        healPlayer(1)
+    }
+    else 
+    {
+        //
+    }
+}
+function healPlayer(x)
+{
+    hero.stats.current_hp += x;
+}
+function dmgPlayer(x)
+{
+    hero.stats.current_hp -= x;
+}
+function addAP(x)
+{
+    hero.stats.current_ap += x;
+}
+function removeAP(x)
+{
+    hero.stats.current_ap -= x;
+}
+function addXP(x)
+{
+    hero.stats.xp += x;
+}
+function addGold(x)
+{
+    hero.inventory.gold += x;
+}
+function removeGold(x)
+{
+    hero.inventory.gold -= x;
+}
+function addFame(x)
+{
+    hero.journal.fame += x;
+}
+function addInfamy(x)
+{
+    hero.journal.infamy += x;
+}
 //combat functions
 var enemies_killed = 0;
 function playerATK()
@@ -151,7 +230,7 @@ function playerTurn()
     while (hero.stats.current_ap > 0)
     {
         playerATK()
-        hero.stats.current_ap -= 1;
+        removeAP(1)
     }
 }
 function enemyATK()
