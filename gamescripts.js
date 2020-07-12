@@ -122,6 +122,12 @@ function rat(x)
     }
 }
 //hero update functions
+function changeName()
+{
+    var chooseName = prompt("What is your Name?")
+    hero.basics.name = chooseName;
+    document.getElementById("Name").innerHTML = hero.basics.name;
+}
 //level up functions
 function LevelUp()
 {
