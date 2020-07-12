@@ -273,35 +273,35 @@
         }
     }
 // combat functions
-    function ATKPlayer()
-    {
-        //Should reduce damage by armor amount
-        Player.CurrentHP = Player.CurrentHP - (Enemy.Atk - Player.Def);
-        alert ("The " + Enemy.Name + " attacks you with its " + Enemy.Wep)
-        if (Player.Def >= Enemy.Atk)
-        {
-            alert ("The attack bounces harmlessly off your " + Player.Armor)
-        }
-        else
-        {
+    // function ATKPlayer()
+    // {
+    //     //Should reduce damage by armor amount
+    //     Player.CurrentHP = Player.CurrentHP - (Enemy.Atk - Player.Def);
+    //     alert ("The " + Enemy.Name + " attacks you with its " + Enemy.Wep)
+    //     if (Player.Def >= Enemy.Atk)
+    //     {
+    //         alert ("The attack bounces harmlessly off your " + Player.Armor)
+    //     }
+    //     else
+    //     {
 
-        }
-        document.getElementById("CHP").innerHTML = Player.CurrentHP;
-    }
-    function ATKEnemy()
-    {
-        //should reduce damage by armor amount
-        Enemy.CurrentHP = Enemy.CurrentHP - (Player.Atk - Enemy.Def);
-        alert("You attack the " + Enemy.Name + " with your " + Player.Wep)
-        if (Enemy.Def >= Player.Atk)
-        {
-            alert ("The attack bounces harmlessly off their " + Enemy.Armor)
-        }
-        else
-        {
+    //     }
+    //     document.getElementById("CHP").innerHTML = Player.CurrentHP;
+    // }
+    // function ATKEnemy()
+    // {
+    //     //should reduce damage by armor amount
+    //     Enemy.CurrentHP = Enemy.CurrentHP - (Player.Atk - Enemy.Def);
+    //     alert("You attack the " + Enemy.Name + " with your " + Player.Wep)
+    //     if (Enemy.Def >= Player.Atk)
+    //     {
+    //         alert ("The attack bounces harmlessly off their " + Enemy.Armor)
+    //     }
+    //     else
+    //     {
             
-        }
-    }
+    //     }
+    // }
     function MagicATK()
     {
         Enemy.CurrentHP = Enemy.CurrentHP - Player.Atk;
