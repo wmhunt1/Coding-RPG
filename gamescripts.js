@@ -467,17 +467,20 @@ function playerATK()
         if (enemy.armor_value >= hero.equipment.melee_wep_dmg)
         {
             console.log("no damage")
+            alert("No damage")
         }
         else
         {
             enemy.current_hp = enemy.current_hp - (hero.equipment.melee_wep_dmg - enemy.armor_value);
             document.getElementById("CHP").innerHTML = hero.stats.current_hp;
             console.log("player hits enemy")
+            alert ("Enemy hit")
         }
     }
     else
     {
         console.log("player missed enemy")
+        alert ("miss")
     }
     console.log(player_hit_roll)
     console.log(player_hit_chance)
@@ -510,6 +513,7 @@ function playerTurn()
 function enemyATK()
 {
     console.log("enemy attacks")
+    alert("The " + enemy.name + " attacks")
     var enemy_hit_chance = .5 - .1*(hero.stats.player_def + hero.stats.player_buff);
     var enemy_hit_roll = Math.random() + .1*(enemy.atk + enemy.enemy_buff)
     if (enemy_hit_roll > enemy_hit_chance)
@@ -517,16 +521,19 @@ function enemyATK()
         if (total_armor >= enemy.weapon_dmg)
         {
             console.log("no damage")
+            alert("No damage")
         }
         else
         {
             hero.stats.current_hp = hero.stats.current_hp - (enemy.weapon_dmg - total_armor);
             console.log("enemy hits player")
+            alert("player hit")
         }
     }
     else
     {
         console.log("enemy missed player")
+        alert ("miss")
     }
     console.log(enemy_hit_roll)
     console.log(enemy_hit_chance)
@@ -550,6 +557,7 @@ function checkifdead()
         enemy.current_hp = enemy.max_hp;
         console.log("a " + enemy.name + " dies")
         console.log("there are " + enemy.number + " " + enemy.name + "(s) left.")
+        alert ("The " + enemy.name + " dies.")
     }
     else
     {
@@ -585,10 +593,12 @@ function combat()
     if (hero.stats.current_hp > 0)
     {
         console.log("victory")
+        alert ("victory.")
     }
     else
     {
         console.log("death")
+        alert ("death.")
     }
 }
 //arena functions
@@ -852,7 +862,7 @@ function DrinkPotion()
         {   
             bandit(Math.floor(Math.random() * 10+1))
             var bandits = enemy.number;
-            alert ("You go to " + villageArray[village] + " and are pointed towards the. " + dungeonArray[dungeon] +  " that the goblins have claimed as their lair.")
+            alert ("You go to " + villageArray[village] + " and are pointed towards the. " + dungeonArray[dungeon] +  " that the bandits have claimed as their base.")
             alert ("You must kill " + enemy.number + " bandits")
             combat()
             alert ("you find the bandit leader.")
