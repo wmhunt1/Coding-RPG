@@ -149,36 +149,6 @@
             Armor: "Carapace",
         }
     }
-// combat functions
-    // function ATKPlayer()
-    // {
-    //     //Should reduce damage by armor amount
-    //     Player.CurrentHP = Player.CurrentHP - (Enemy.Atk - Player.Def);
-    //     alert ("The " + Enemy.Name + " attacks you with its " + Enemy.Wep)
-    //     if (Player.Def >= Enemy.Atk)
-    //     {
-    //         alert ("The attack bounces harmlessly off your " + Player.Armor)
-    //     }
-    //     else
-    //     {
-
-    //     }
-    //     document.getElementById("CHP").innerHTML = Player.CurrentHP;
-    // }
-    // function ATKEnemy()
-    // {
-    //     //should reduce damage by armor amount
-    //     Enemy.CurrentHP = Enemy.CurrentHP - (Player.Atk - Enemy.Def);
-    //     alert("You attack the " + Enemy.Name + " with your " + Player.Wep)
-    //     if (Enemy.Def >= Player.Atk)
-    //     {
-    //         alert ("The attack bounces harmlessly off their " + Enemy.Armor)
-    //     }
-    //     else
-    //     {
-            
-    //     }
-    // }
     function MagicATK()
     {
         Enemy.CurrentHP = Enemy.CurrentHP - Player.Atk;
@@ -385,54 +355,6 @@
             {
                 //
             }
-    }
-    //temple fuction
-    var stormon_worship = 0;
-    var sunshin_worship = 0;
-    //maybe abilities etc can be gained based off of praying
-    function Temple()
-    {
-        var wChoice = prompt("Which god do you worship? (Storm)on, (Sun)shin, or leave?")
-        if (wChoice === "Storm")
-        {
-            alert ("You pray to Stormon the god of storms and battle and read from his holy book, 'The Book of Stormon'.")
-            stormon_worship += 1;
-        }
-        else if (wChoice === "Sun")
-        {
-            alert ("You pray Sto Sunshine the god of light.")
-            sunshin_worship += 1;
-        }
-        else
-        {
-            alert ("You decide not to pray like the edgy little athiest you are.")
-        }
-        alert("You leave the temple.")
-    }
-
-// item functions
-    function AddPotion(x)
-    {
-        Inventory.potions += x;
-        document.getElementById("POT").innerHTML = Inventory.potions;
-    }
-    function RemovePotion(x)
-    {
-        Inventory.potions -= x;
-        document.getElementById("POT").innerHTML = Inventory.potions;
-    }
-    function DrinkPotion()
-    {
-        if (Inventory.potions < 1)
-        {
-            alert ("You don't have any potions.")
-        }
-        else
-        {
-            RemovePotion(1)
-            alert ("You drink a potion.")
-            HealPlayer(5)
-        }
     }
 // quest functions
     //quest event functions
@@ -645,7 +567,7 @@
         }
     }
     //rat extermination quest
-    function Spider_Quest()
+    function spiderQuest()
     {
         if (Player.CurrentHP <= 0)  
         {
@@ -676,91 +598,8 @@
             }
         }
     }
-// rest functions
-    function Rest()
-    {
-        Player.CurrentHP = Player.MaxHP;
-        Player.CurrentAP = Player.MaxAP;
-        Day =+ 1;
-        document.getElementById("Day").innerHTML = Day;
-        document.getElementById("CHP").innerHTML = Player.CurrentHP;
-        document.getElementById("CAP").innerHTML = Player.CurrentAP;
-    }
-    function Bad_Rest()
-    {
-        Player.CurrentHP = Player.MaxHP*.5;
-        Day =+ 1;
-        document.getElementById("Day").innerHTML = Day;
-        document.getElementById("CHP").innerHTML = Player.CurrentHP;
-    }
-    function Inn()
-    {
-        if (Player.Gold < 10)
-        {
-            alert ("You cannot afford to stay at the inn.")
-        }
-        else
-        {
-            Rest()
-            RemoveGold(10)
-            alert ("You spend the night at the Inn.")
-        }
-    }
-    function Home()
-    {
-        if (Inventory.Home != true)
-        {
-            alert("You don't have a house.")
-        }
-        else
-        {
-            Rest()
-            alert ("You sleep in your own bed.")
-        }
-    }
-    function Street()
-    {
-        alert ("You sleep on the street but it isn't very restful.")
-        Bad_Rest()
-
-    }
 //shop functions
     //Apothecary function
-    function Pharm()
-    {
-        var dChoice = prompt("Buy (P)otion(s) or an (E)lixer of Life?")
-        if (dChoice === "P")
-        {
-            if (Player.Gold < 50)
-            {
-                alert ("You can't afford a potion")
-            }
-            else
-            {
-                AddPotion(1)
-                RemoveGold(50)
-                alert ("You buy a potion")
-            }
-            
-        }
-        else if (dChoice === "E")
-        {
-            if (Player.Gold < 1000)
-            {
-                alert ("You can't afford an Elixer of Life")
-            }
-            else
-            {
-                RemoveGold(1000)
-                alert ("You buy and drink an Elixer of Life.")
-                GainLife()
-            }
-        }
-        else
-        {
-            alert ("You decide not to buy any potions. ")
-        }
-    }
     var WepCost = 100;
     var ArmorCost = 100;
     //blacksmith functions
@@ -819,36 +658,7 @@
         Player.Armor = ArmorArray[Player.Def]
         alert("You armor has now been upgraded to " + Player.Armor)
         document.getElementById("DEF").innerHTML = Player.Def;
-    }
-    //realtor function
-    function Buy_House()
-    {
-    if (Inventory.Home != false)
-    {
-        alert ("You already have a house.")
-    }
-    else
-    {
-        var hChoice = prompt ("Buy a house? (Y/N)")
-        if (hChoice === "Y")
-        {
-                if (Player.Gold < 1000)
-                {
-                    alert ("You can't afford a house.")
-                }
-                else
-                {
-                    RemoveGold(1000)
-                    Inventory.Home = true;
-                    alert ("You are now a proud homeowner.")
-                }
-        }
-        else
-        {
-            alert("You decide not to buy a house.")
-        }
-    }
-    }
+    } 
 //training functions
     //had to split into seperate functions
     function Learn_Combat()

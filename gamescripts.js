@@ -43,7 +43,9 @@ var hero =
     },
     inventory:
     {
-        gold: 0,
+        gold: 100,
+        homeowner: false,
+        potion: 0,
         item:
         {
             name: "",
@@ -203,7 +205,7 @@ function addGold(x)
 function removeGold(x)
 {
     hero.inventory.gold -= x;
-    document.getElementById("Gold").innerHTML = hero.iventory.gold;
+    document.getElementById("Gold").innerHTML = hero.inventory.gold;
 }
 function addFame(x)
 {
@@ -305,7 +307,6 @@ function checkifdead()
 //general combat function
 function combat()
 {
-    rat(3)
     console.log ("you face "+ enemy.number + " " + enemy.name + "(s)")
     var turn = 0;
     while(hero.stats.current_hp > 0 && enemy.number > 0)
@@ -337,8 +338,53 @@ function combat()
         console.log("death")
     }
 }
+//downtime functions
+//temple fuction
+var stormon_worship = 0;
+var sunshin_worship = 0;
+//maybe abilities etc can be gained based off of praying
+function temple()
+{
+    var wChoice = prompt("Which god do you worship? (Storm)on, (Sun)shin, or leave?")
+    if (wChoice === "Storm")
+    {
+        alert ("You pray to Stormon the god of storms and battle and read from his holy book, 'The Book of Stormon'.")
+        stormon_worship += 1;
+    }
+    else if (wChoice === "Sun")
+    {
+        alert ("You pray Sto Sunshine the god of light.")
+        sunshin_worship += 1;
+    }
+    else
+    {
+        alert ("You decide not to pray like the edgy little athiest you are.")
+    }
+    alert("You leave the temple.")
+}
+//inventory functions
+function addPotion(x)
+    {
+        hero.inventory.potion += x;
+    }
+function removePotion(x)
+{
+    hero.inventory.potion -= x;
+}
+function DrinkPotion()
+{
+    if ( hero.inventory.potion < 1)
+    {
+        alert ("You don't have any potions.")
+    }
+    else
+    {
+        removePotion(1)
+        alert ("You drink a potion.")
+        healPlayer(5)
+    }
+}
 //quest functions
-
 //random locations for quests
     //bars
     var BarArray = ["Moes' Bar", "Rats in The Cellar Bar and Grill", "Drunken Lout"]
@@ -401,7 +447,7 @@ function combat()
             }
         }
     }
-    function rat_Quest()
+    function ratQuest()
     {
         if (hero.stats.current_hp <= 0)  
         {
@@ -424,3 +470,117 @@ function combat()
             }
         }
     }
+// rest functions
+function rest()
+{
+    hero.stats.current_hp = hero.stats.max_hp;
+    hero.stats.current_sp = hero.stats.max_sp;
+    hero.journal.day =+ 1;
+    document.getElementById("Day").innerHTML = hero.journal.day;
+    document.getElementById("CHP").innerHTML = hero.stats.current_hp;
+    document.getElementById("CSP").innerHTML = hero.stats.current_sp;
+}
+function bad_rest()
+{
+    hero.stats.current_hp = hero.stats.max_hp;
+    hero.stats.current_sp = hero.stats.max_sp;
+    hero.journal.day =+ 1;
+    document.getElementById("Day").innerHTML = hero.journal.day;
+    document.getElementById("CHP").innerHTML = hero.stats.current_hp;
+}
+function inn_rest()
+{
+    if (hero.inventory.gold < 10)
+    {
+        alert ("You cannot afford to stay at the inn.")
+    }
+    else
+    {
+        rest()
+        removeGold(10)
+        alert ("You spend the night at the Inn.")
+    }
+}
+function home_rest()
+{
+    if (hero.inventory.homeowner != true)
+    {
+        alert("You don't have a house.")
+    }
+    else
+    {
+        rest()
+        alert ("You sleep in your own bed.")
+    }
+}
+function street_rest()
+{
+    alert ("You sleep on the street but it isn't very restful.")
+    bad_rest()
+
+}
+//shopping functions
+function pharmacy()
+{
+    var dChoice = prompt("Buy (P)otion(s) or an (E)lixer of Life?")
+    if (dChoice === "P")
+    {
+        if (hero.inventory.gold < 50)
+        {
+            alert ("You can't afford a potion")
+        }
+        else
+        {
+            addPotion(1)
+            removeGold(50)
+            alert ("You buy a potion")
+        }
+        
+    }
+    else if (dChoice === "E")
+    {
+        if (hero.inventory.gold < 1000)
+        {
+            alert ("You can't afford an Elixer of Life")
+        }
+        else
+        {
+            removeGold(1000)
+            alert ("You buy and drink an Elixer of Life.")
+            gainLife()
+        }
+    }
+    else
+    {
+        alert ("You decide not to buy any potions. ")
+    }
+}
+ //realtor function
+ function buy_House()
+ {
+    if (hero.inventory.homeowner != false)
+    {
+        alert ("You already have a house.")
+    }
+    else
+    {
+        var hChoice = prompt ("Buy a house? (Y/N)")
+        if (hChoice === "Y")
+        {
+                if (hero.inventory.gold < 1000)
+                {
+                    alert ("You can't afford a house.")
+                }
+                else
+                {
+                    removeGold(1000)
+                    hero.inventory.homeowner = true;
+                    alert ("You are now a proud homeowner.")
+                }
+        }
+        else
+        {
+            alert("You decide not to buy a house.")
+        }
+    }
+ }
