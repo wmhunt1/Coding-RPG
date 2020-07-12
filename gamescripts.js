@@ -116,7 +116,7 @@ function rat(x)
         def: 0,
         armor: "fur",
         armor_value: 0,
-        speed: 5,
+        speed: 0,
         enemy_buff: 0,
     }
 }
@@ -197,6 +197,7 @@ function checkifdead()
         enemies_killed += 1;
         enemy.current_hp = enemy.max_hp;
         console.log("a " + enemy.name + " dies")
+        console.log("there are " + enemy.number + " " + enemy.name + "(s) left.")
         console.log(enemy.current_hp + " enemy hp")
     }
     else
@@ -207,29 +208,27 @@ function checkifdead()
 //general combat function
 function combat()
 {
-    rat(1)
-    while(hero.stats.current_hp > 0 && enemy.number != 0)
+    rat(2)
+    while(hero.stats.current_hp > 0 && enemy.number > 0)
     {
         while (enemies_killed < enemy.number && hero.stats.current_hp > 0)
         {
-            console.log (enemy.number + " " + enemy.name + "(s) left")
+            console.log ("you face "+ enemy.number + " " + enemy.name + "(s)")
             if (hero.stats.speed > enemy.speed || hero.stats.speed == enemy.speed)
             {
                 playerTurn()
                 checkifdead()
                 enemyTurn()
-
             }
             else
             {
                 enemyTurn()
                 playerTurn()
-                checkifdead
+                checkifdead()
             }
             console.log(enemies_killed + " " + enemy.name +  "(s) killed")
         }
     }
-    console.log(enemies_killed + " " + enemy.name +  "(s) killed")
     if (hero.stats.current_hp > 0)
     {
         console.log("victory")
