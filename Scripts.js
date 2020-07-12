@@ -435,38 +435,6 @@
         }
     }
 // quest functions
-    //random locations for quests
-    //bars
-    var BarArray = ["Moes' Bar", "Rats in The Cellar Bar and Grill", "Drunken Lout"]
-    var bar = Math.floor((Math.random() * BarArray.length))
-    //dungeons
-    var DungeonArray = ["Abandoned Mine", "Cave"]
-    var dungeon = Math.floor((Math.random() * DungeonArray.length))
-    //inns
-    var InnArray = ["Dreaming Worker", "A Place to Rest your Bread", "Motel Styx"]
-    var inn = Math.floor((Math.random() * InnArray.length))
-    //towns
-    var TownArray = ["Towning Town", "Other Town"]
-    var town = Math.floor((Math.random() * TownArray.length))
-    //villages
-    var VillageArray = ["Dale", "Vil"]
-    var village = Math.floor((Math.random() * VillageArray.length))
-    //random objectives for quests
-    //item retreival
-    var FetchArray = ["Missing Item"]
-    var fetch = rescue = Math.floor((Math.random() * FetchArray.length))
-    //rescue
-    var RescueArray = ["Boy","Girl","Noble"]
-    var rescue = Math.floor((Math.random() * RescueArray.length))
-    //random treasure for dungeons etc.
-    var TreasureArray = ["An old coin", "a goblet", "a statuette", "some porn mags", "an ancient scroll"]
-    var treasure = Math.floor((Math.random() * TreasureArray.length))
-    var treasure_value = Math.floor((Math.random() *10+10))
-    //traps
-    var TrapArray = ["Pressure plate", "Dart", "Spike"]
-    var trap = Math.floor((Math.random() * TrapArray.length))
-    var trap_damage = Math.floor((Math.random() *10+1))
-
     //quest event functions
     //maze function
     function Maze(x)
@@ -542,36 +510,6 @@
         }
     }
     //quest template
-    function Template()
-    {
-        if (Player.CurrentHP <= 0)  
-        {
-            alert ("You can't go questing in your condition")
-        } 
-        else
-        {   
-            // quest content
-            if (Player.CurrentHP > 0)
-            {
-                //quest completion
-            }
-            else
-            {
-                Death()
-            }
-        }
-    }
-    function QuestComplete(x,y)
-    {
-        AddXP(x,y)
-        AddGold(x,y)
-        AddFame(y)
-        Player.Quests_Completed += 1;
-        document.getElementById("QC").innerHTML = Player.Quests_Completed;
-        alert ("You gain: " + x*y + " XP")
-        alert ("You gain: " + x*y + " Gold")
-        alert ("You gain: " + y + " Fame")
-    }
     //bandit quest
     function Bandit_Quest()
     {
@@ -707,29 +645,6 @@
         }
     }
     //rat extermination quest
-    function Rat_Quest()
-    {
-        if (Player.CurrentHP <= 0)  
-        {
-            alert ("You can't go questing in your condition")
-        } 
-        else
-        {   
-            Rat()
-            var rats = Math.floor(Math.random() * 5+1);
-            alert ("You go to " + BarArray[bar] + " and head down the stairs into the cellar.")
-            alert ("You must kill " + rats + " rats")
-            Reg_Battle(rats)
-            if (Player.CurrentHP > 0)
-            {
-                QuestComplete(rats,2)
-            }
-            else
-            {
-                Death()
-            }
-        }
-    }
     function Spider_Quest()
     {
         if (Player.CurrentHP <= 0)  

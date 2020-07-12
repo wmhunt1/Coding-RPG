@@ -198,7 +198,7 @@ function addXP(x)
 function addGold(x)
 {
     hero.inventory.gold += x;
-    document.getElementById("Gold").innerHTML = hero.iventory.gold;
+    document.getElementById("Gold").innerHTML = hero.inventory.gold;
 }
 function removeGold(x)
 {
@@ -337,3 +337,90 @@ function combat()
         console.log("death")
     }
 }
+//quest functions
+
+//random locations for quests
+    //bars
+    var BarArray = ["Moes' Bar", "Rats in The Cellar Bar and Grill", "Drunken Lout"]
+    var bar = Math.floor((Math.random() * BarArray.length))
+    //dungeons
+    var DungeonArray = ["Abandoned Mine", "Cave"]
+    var dungeon = Math.floor((Math.random() * DungeonArray.length))
+    //inns
+    var InnArray = ["Dreaming Worker", "A Place to Rest your Bread", "Motel Styx"]
+    var inn = Math.floor((Math.random() * InnArray.length))
+    //towns
+    var TownArray = ["Towning Town", "Other Town"]
+    var town = Math.floor((Math.random() * TownArray.length))
+    //villages
+    var VillageArray = ["Dale", "Vil"]
+    var village = Math.floor((Math.random() * VillageArray.length))
+    //random objectives for quests
+    //item retreival
+    var FetchArray = ["Missing Item"]
+    var fetch = rescue = Math.floor((Math.random() * FetchArray.length))
+    //rescue
+    var RescueArray = ["Boy","Girl","Noble"]
+    var rescue = Math.floor((Math.random() * RescueArray.length))
+    //random treasure for dungeons etc.
+    var TreasureArray = ["An old coin", "a goblet", "a statuette", "some porn mags", "an ancient scroll"]
+    var treasure = Math.floor((Math.random() * TreasureArray.length))
+    var treasure_value = Math.floor((Math.random() *10+10))
+    //traps
+    var TrapArray = ["Pressure plate", "Dart", "Spike"]
+    var trap = Math.floor((Math.random() * TrapArray.length))
+    var trap_damage = Math.floor((Math.random() *10+1))
+
+    function questComplete(x,y)
+    {
+        addXP(x,y)
+        addGold(x,y)
+        addFame(y)
+        hero.journal.quests_completed += 1;
+        document.getElementById("QC").innerHTML = hero.journal.quests_completed;
+        alert ("You gain: " + x*y + " XP")
+        alert ("You gain: " + x*y + " Gold")
+        alert ("You gain: " + y + " Fame")
+    }
+    function Template()
+    {
+        if (hero.stats.current_hp <= 0)  
+        {
+            alert ("You can't go questing in your condition")
+        } 
+        else
+        {   
+            // quest content
+            if (hero.stats.current_hp > 0)
+            {
+                //quest completion
+            }
+            else
+            {
+                Death()
+            }
+        }
+    }
+    function rat_Quest()
+    {
+        if (hero.stats.current_hp <= 0)  
+        {
+            alert ("You can't go questing in your condition")
+        } 
+        else
+        {   
+            rat(Math.floor(Math.random() * 5+1))
+            rats = enemy.number;
+            alert ("You go to " + BarArray[bar] + " and head down the stairs into the cellar.")
+            alert ("You must kill " + enemy.number + " rats")
+            combat()
+            if (hero.stats.current_hp > 0)
+            {
+                questComplete(rats,2)
+            }
+            else
+            {
+                Death()
+            }
+        }
+    }
