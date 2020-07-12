@@ -609,12 +609,12 @@ function betArena()
             if (chance > .5)
             {
                 alert ("Your fighter wins and you double your bet.")
-                AddGold(bet_amount*2)
+                addGold(bet_amount*2)
             }
             else
             {
                 alert ("Your fighter loses and you lose your bet.")
-                RemoveGold(bet_amount)
+                removeGold(bet_amount)
             }
         }
     }
