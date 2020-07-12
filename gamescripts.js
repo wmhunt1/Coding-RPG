@@ -193,27 +193,31 @@ function checkifdead()
 {
     if (enemy.current_hp <= 0)
     {
+        console.log("checking if dead.")
         enemy.number -= 1;
         enemies_killed += 1;
         enemy.current_hp = enemy.max_hp;
         console.log("a " + enemy.name + " dies")
         console.log("there are " + enemy.number + " " + enemy.name + "(s) left.")
-        console.log(enemy.current_hp + " enemy hp")
     }
     else
     {
         //so nothing happens
     }
+    console.log("checked if dead")
 }
 //general combat function
 function combat()
 {
-    rat(2)
+    rat(3)
+    console.log ("you face "+ enemy.number + " " + enemy.name + "(s)")
+    var turn = 0;
     while(hero.stats.current_hp > 0 && enemy.number > 0)
     {
-        while (enemies_killed < enemy.number && hero.stats.current_hp > 0)
+        for (enemies_killed = 0; enemies_killed < enemy.number && hero.stats.current_hp > 0;)
         {
-            console.log ("you face "+ enemy.number + " " + enemy.name + "(s)")
+            turn += 1;
+            console.log ("turn " + turn)
             if (hero.stats.speed > enemy.speed || hero.stats.speed == enemy.speed)
             {
                 playerTurn()
@@ -226,7 +230,6 @@ function combat()
                 playerTurn()
                 checkifdead()
             }
-            console.log(enemies_killed + " " + enemy.name +  "(s) killed")
         }
     }
     if (hero.stats.current_hp > 0)
