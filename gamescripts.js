@@ -5,6 +5,7 @@ var hero =
     {
         name: "name",
         class: "Freelancer",
+        level: 1,
         lifes: 3,
     },
     stats:
@@ -14,6 +15,7 @@ var hero =
         current_ap: 1,
         max_ap: 1,
         current_ap: 1,
+        current_sp: 2,
         max_sp: 2,
         player_atk: 1,
         player_def: 1,
@@ -40,6 +42,8 @@ var hero =
         ranged_wep_dmg: 1,
         magic_wep: "stick",
         magic_wep_dmg: 1,
+        wepCost: 100,
+        armorCost: 100,
     },
     inventory:
     {
@@ -62,7 +66,7 @@ var hero =
     reputation:
     {
         fame: 0,
-        infanmy: 0
+        infamy: 0
     },
     skills:
     {
@@ -93,7 +97,7 @@ var enemy =
         current_hp: 0,
         max_hp: 0,
         current_ap: 0,
-        max_ap:0,
+        max_ap: 0,
         atk: 0,
         weapon: "W",
         weapon_dmg: 0,
@@ -103,21 +107,241 @@ var enemy =
         speed: 0,
         enemy_buff: 0,
     }
+function arena_champion(x)
+{   
+    enemy =
+    {
+        number: x,
+        name: "Arena Champion",
+        current_hp: 0,
+        max_hp: 0,
+        current_ap: 0,
+        max_ap: 0,
+        atk: 0,
+        weapon: "W",
+        weapon_dmg: 0,
+        def: 0,
+        armor: "A",
+        armor_value: 0,
+        speed: 0,
+        enemy_buff: 0,
+    }
+}   
+function arena_rookie(x)
+{   
+    enemy =
+    {
+        number: x,
+        name: "Rookie",
+        current_hp: 0,
+        max_hp: 0,
+        current_ap: 0,
+        max_ap: 0,
+        atk: 0,
+        weapon: "W",
+        weapon_dmg: 0,
+        def: 0,
+        armor: "A",
+        armor_value: 0,
+        speed: 0,
+        enemy_buff: 0,
+    }
+}   
+function bandit(x)
+{   
+    enemy =
+    {
+        number: x,
+        name: "Bandit",
+        current_hp: 0,
+        max_hp: 0,
+        current_ap: 0,
+        max_ap: 0,
+        atk: 0,
+        weapon: "W",
+        weapon_dmg: 0,
+        def: 0,
+        armor: "A",
+        armor_value: 0,
+        speed: 0,
+        enemy_buff: 0,
+    }
+}
+function bandit_leader(x)
+{   
+    enemy =
+    {
+        number: x,
+        name: "Bandit Leader",
+        current_hp: 0,
+        max_hp: 0,
+        current_ap: 0,
+        max_ap: 0,
+        atk: 0,
+        weapon: "W",
+        weapon_dmg: 0,
+        def: 0,
+        armor: "A",
+        armor_value: 0,
+        speed: 0,
+        enemy_buff: 0,
+    }
+}
+function bar_patron(x)
+{   
+    enemy =
+    {
+        number: x,
+        name: "Bar Patron",
+        current_hp: 0,
+        max_hp: 0,
+        current_ap: 0,
+        max_ap: 0,
+        atk: 0,
+        weapon: "W",
+        weapon_dmg: 0,
+        def: 0,
+        armor: "A",
+        armor_value: 0,
+        speed: 0,
+        enemy_buff: 0,
+    }
+}
+function goblin(x)
+{   
+    enemy =
+    {
+        number: x,
+        name: "Goblin",
+        current_hp: 0,
+        max_hp: 0,
+        current_ap: 0,
+        max_ap: 0,
+        atk: 0,
+        weapon: "W",
+        weapon_dmg: 0,
+        def: 0,
+        armor: "A",
+        armor_value: 0,
+        speed: 0,
+        enemy_buff: 0,
+    }
+}
+function goblin_boss(x)
+{   
+    enemy =
+    {
+        number: x,
+        name: "Goblin Boss",
+        current_hp: 0,
+        max_hp: 0,
+        current_ap: 0,
+        max_ap: 0,
+        atk: 0,
+        weapon: "W",
+        weapon_dmg: 0,
+        def: 0,
+        armor: "A",
+        armor_value: 0,
+        speed: 0,
+        enemy_buff: 0,
+    }
+}
+function mimic(x)
+{   
+    enemy =
+    {
+        number: x,
+        name: "Mimic",
+        current_hp: 0,
+        max_hp: 0,
+        current_ap: 0,
+        max_ap: 0,
+        atk: 0,
+        weapon: "W",
+        weapon_dmg: 0,
+        def: 0,
+        armor: "A",
+        armor_value: 0,
+        speed: 0,
+        enemy_buff: 0,
+    }
+}
+function minotaur(x)
+{   
+    enemy =
+    {
+        number: x,
+        name: "Minotaur",
+        current_hp: 0,
+        max_hp: 0,
+        current_ap: 0,
+        max_ap: 0,
+        atk: 0,
+        weapon: "W",
+        weapon_dmg: 0,
+        def: 0,
+        armor: "A",
+        armor_value: 0,
+        speed: 0,
+        enemy_buff: 0,
+    }
+}
 function rat(x)
 {
     enemy =
     {
         number: x,
-        name: "rat",
+        name: "Rat",
         current_hp: 1,
         max_hp: 1,
         current_ap: 1,
-        max_ap:1,
+        max_ap: 1,
         atk: 0,
-        weapon: "bite",
+        weapon: "Bite",
         weapon_dmg: 1,
         def: 0,
-        armor: "fur",
+        armor: "Fur",
+        armor_value: 0,
+        speed: 0,
+        enemy_buff: 0,
+    }
+}
+function skeleton(x)
+{
+    enemy =
+    {
+        number: x,
+        name: "Skeleton",
+        current_hp: 0,
+        max_hp: 0,
+        current_ap: 0,
+        max_ap: 0,
+        atk: 0,
+        weapon: "Rusty Sword",
+        weapon_dmg: 0,
+        def: 0,
+        armor: "Armor Scraps",
+        armor_value: 0,
+        speed: 0,
+        enemy_buff: 0,
+    }
+}
+function spider(x)
+{
+    enemy =
+    {
+        number: x,
+        name: "spider",
+        current_hp: 0,
+        max_hp: 0,
+        current_ap: 0,
+        max_ap: 0,
+        atk: 0,
+        weapon: "bite",
+        weapon_dmg: 0,
+        def: 0,
+        armor: "carapace",
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
@@ -250,8 +474,23 @@ function playerTurn()
     hero.stats.current_ap = hero.stats.max_ap
     while (hero.stats.current_ap > 0)
     {
-        playerATK()
-        removeAP(1)
+        
+        var action = prompt("Attack (A) or drink a (P)otion?")
+        if (action === "A")
+        {
+            playerATK()
+            removeAP(1)
+
+        }
+        else if (action === "P")
+        {
+            drinkPotion()
+            removeAP(1)
+        }
+        else
+        {
+            
+        }
     }
 }
 function enemyATK()
@@ -338,7 +577,138 @@ function combat()
         console.log("death")
     }
 }
+//arena functions
+function betArena()
+{
+    var aChoice = prompt("Bet on a fight? (Y/N)")
+    if (aChoice === "Y")
+    {
+        var bet = prompt("How much do you bet?")
+        var bet_amount = parseInt(bet)
+        if (bet_amount > hero.inventory.gold)
+        {
+            alert ("You don't have that much gold.")
+        }
+        else
+        {
+            var chance = Math.random()
+            if (chance > .5)
+            {
+                alert ("Your fighter wins and you double your bet.")
+                AddGold(bet_amount*2)
+            }
+            else
+            {
+                alert ("Your fighter loses and you lose your bet.")
+                RemoveGold(bet_amount)
+            }
+        }
+    }
+    else
+    {
+        alert ("You instead just watch the bout.")
+    }
+}
+function fightArena()
+{
+    var aChoice = prompt("Who do you fight? (R)ookie or (C)hampion?")
+    if (aChoice === "R")
+    {
+        arena_rookie(1)
+        combat()
+        if (hero.stats.current_hp > 0)
+        {
+            addXP(100)
+            addGold(100)
+        }
+        else
+        {
+            alert ("You are defeated in the arena.")
+            death()
+        }
+    }
+    else if (aChoice = "C")
+    {
+        arena_champion(1)
+        if (hero.stats.current_hp> 0)
+        {
+            addXP(1000)
+            addGold(1000)
+        }
+        else
+        {
+            alert ("You are defeated in the arena.")
+            death()
+        }
+    }
+    else
+    {
+        alert ("You chicken out.")
+    }
+}
 //downtime functions
+function bar()
+{
+        var gossipArray = ["I once took an arrow to the knee.", "I saw a mudcrab the other day.", "I heard the brothel is run by succubi.", "The cake is a lie.", "Your waifu is shit.", "Snape kills Dumbledour", "Bruce Willis was dead at the end of Sixth Sense.", "My butthole itches."]
+        var drinking = true;
+        while (drinking != false && hero.stats.current_hp > 0)
+        {
+            var bChoice = prompt("Buy a (D)rink, listen to (G)ossip?, get in a bar (F)ight, or (L)eave")
+            if (bChoice === "D")
+            {
+                if (hero.inventory.gold < 1)
+                {
+                    alert ("You cannot afford a drink.")
+                }
+                else
+                {
+                    removeGold(1)
+                    alert ("You buy a drink.")
+                    dmgPlayer(1)
+                    alert ("You get drunk(er)")
+                }
+            }
+            else if (bChoice === "G")
+            {
+                var gossip = Math.floor((Math.random() * gossipArray.length))
+                alert (gossipArray[gossip])
+            }
+            else if (bChoice === "F")
+            {
+                alert ("You break a bottle and start a bar fight.")
+                hero.equipment.melee_wep = "Broken Bottle";
+                hero.equipment.melee_wep_dmg = 0;
+                bar_patron(Math.floor(Math.random() * 10+1))
+                combat()        
+                if (enemy.number == 0)
+                {
+                    alert("You are the champion.")
+                }
+                else
+                {
+                    alert("You lose.")
+                }
+
+            }
+            else if (bChoice === "L")
+            {
+                alert("You decide to leave the bar.")
+                drinking = false;
+            }
+            else
+            {
+            }
+        }
+        if (hero.stats.current_hp == 0)
+        {
+            alert ("You are thrown unconcious out of the bar.")
+            bad_Rest()
+        }
+        else
+        {
+            //
+        }
+}
 //temple fuction
 var stormon_worship = 0;
 var sunshin_worship = 0;
@@ -520,6 +890,7 @@ function street_rest()
 
 }
 //shopping functions
+//apothecary functions
 function pharmacy()
 {
     var dChoice = prompt("Buy (P)otion(s) or an (E)lixer of Life?")
@@ -553,6 +924,61 @@ function pharmacy()
     else
     {
         alert ("You decide not to buy any potions. ")
+    }
+}
+//blacksmith functions
+function impWep(x)
+{
+    hero.equipment.melee_wep_dmg += x;
+    alert ("Your weapon improves by " + x)
+    hero.equipment.melee_wep = WeaponArray[hero.equipment.melee_wep-1]
+    alert ("Your weapon has been updgraded to a " + hero.equipment.melee_wep)
+
+}
+function impArmor(x)
+{
+    hero.equipment.torso_armor;
+    alert ("Your armor improves by " + x)
+    hero.equipment.torso_armor = armorArray[hero.equipment.torso_slot]
+    alert("You armor has now been upgraded to " + hero.equipment.torso_slot)
+} 
+//blacksmith functions
+var weaponArray = ["Stick","Club", "Dagger", "Shortsword", "Longsword", "Magic Sword", "Hero Sword"]
+var armorArray = ["Naked", "Tightey Whities", "Peasant Garb", "Leather", "Studded Leather", "Chain Mail", "Plate" ]
+function anvil()
+{
+    var forge = prompt("Upgrade (W)eapon or (A)rmor?")
+    if (forge === "W")
+    {
+            alert ("Cost of forging is " + hero.equipment.wepCost + " Gold")
+            if (hero.inventory.gold < hero.equipment.wepCost)
+            {
+                alert("You cannot afford to upgrade your weaapon.")
+            }
+            else
+            {
+                impWep(1)
+                removeGold(hero.equipment.wepCost)
+                hero.equipment.wepCost *= 2;
+            }
+    }
+    else if (forge === "A")
+    {
+            alert ("Cost of forging is " + hero.equipment.armorCost + " Gold")
+            if (hero.inventory.gold < hero.equipment.armorCost)
+            {
+                alert("You cannot afford to upgrade your armor.")
+            }
+            else
+            {
+                impArmor(1)
+                removeGold(hero.equipment.armorCost)
+                hero.equipment.armorCost *= 2;
+            }
+    }
+    else
+    {
+            alert ("You choose not to do anything.")
     }
 }
  //realtor function

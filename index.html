@@ -51,9 +51,9 @@
         <p id="CHP"></p>
         <h2>Max HP</h2>
         <p id="MHP"></p>
-        <h2>Current AP</h2>
+        <h2>Current SP</h2>
         <p id="CSP"></p>
-        <h2>Max AP</h2>
+        <h2>Max SP</h2>
         <p id="MSP"></p>
         <h2>Attack</h2>
         <p id="ATK"></p>
@@ -67,22 +67,22 @@
         <article>
             <h2>Bet</h2>
             <p>Try you luck and bet on a fight.</p>
-            <button onclick="BetArena()">Bet</button>
+            <button onclick="betArena()">Bet</button>
         </article>
         <article>
             <h2>Fight</h2>
             <p>Test you mettle and fight in the arena for glory.</p>
-            <button onclick="FightArena()">Fight</button>
+            <button onclick="fightArena()">Fight</button>
         </article>
     </section>
     <a href="#Title">Back to Top</a>
     <section id = "Downtime" class ="options">
         <h1>Downtime</h1>
-        <!-- <article>
+        <article>
             <h2>Drink at the Bar</h2>
             <p>Have a few drinks, listen to gossip, and maybe get in a barfight.</p>
-            <button onclick="Bar()">Go Drinking</button>
-        </article> -->
+            <button onclick="bar()">Go Drinking</button>
+        </article>
         <article>
             <h2>Visit a Temple</h2>
             <p>Pray to one of of the various gods.</p>
@@ -109,7 +109,6 @@
         <h1>Journal</h1>
         <h2>Quests Completed</h2>
         <p id="QC"></p>
-        <!-- <p id="J1"></p> -->
     </section>
     <a href="#Title">Back to Top</a>
     <section id = "Quest" class ="options">
@@ -187,7 +186,7 @@
         <article>
             <h2>Realtor</h2>
             <p>Buy a house so you always have somewhere to sleep.</p>
-            <button onclick="Buy_House()">Buy House</button> 
+            <button onclick="buy_House()">Buy House</button> 
         </article> 
         <!-- wizard shop to learn spells if you know magic -->
     </section>
@@ -229,7 +228,7 @@
     <script>
         document.getElementById("Name").innerHTML = hero.basics.name;
         document.getElementById("Class").innerHTML = hero.basics.class;
-        document.getElementById("Level").innerHTML = hero.stats.level;
+        document.getElementById("Level").innerHTML = hero.basics.level;
         document.getElementById("XP").innerHTML = hero.stats.xp;
         document.getElementById("CHP").innerHTML = hero.stats.current_hp;
         document.getElementById("MHP").innerHTML = hero.stats.max_hp;
@@ -244,6 +243,5 @@
         document.getElementById("MSP").innerHTML = hero.stats.max_sp;
         document.getElementById("Life").innerHTML = hero.basics.lifes;
     </script>
-    <button onclick="combat()">combat test</button>
 </body>
 </html>
