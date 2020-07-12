@@ -129,6 +129,9 @@ function LevelUp()
     hero.basics.max_hp += 10;
     hero.stats.max_sp += 2;
     hero.stats.xp_to_next_level = 100*hero.basics.level;
+    document.getElementById("Level").innerHTML = hero.stats.level;
+    document.getElementById("MHP").innerHTML = hero.stats.max_hp;
+    document.getElementById("MSP").innerHTML = hero.stats.max_sp;
 }
 function Ready_for_level()
 {
@@ -144,10 +147,12 @@ function Ready_for_level()
 function gainLife()
 {
     hero.basics.lifes += 1;
+    document.getElementById("Life").innerHTML = hero.basics.lifes;
 }
 function loseLife()
 {
     hero.basics.lifes -= 1;
+    document.getElementById("Life").innerHTML = hero.basics.lifes;
 }
 function death()
 {
@@ -164,10 +169,12 @@ function death()
 function healPlayer(x)
 {
     hero.stats.current_hp += x;
+    document.getElementById("CHP").innerHTML = hero.stats.current_hp;
 }
 function dmgPlayer(x)
 {
     hero.stats.current_hp -= x;
+    document.getElementById("CHP").innerHTML = hero.stats.current_hp;
 }
 function addAP(x)
 {
@@ -180,22 +187,27 @@ function removeAP(x)
 function addXP(x)
 {
     hero.stats.xp += x;
+    document.getElementById("XP").innerHTML = hero.stats.xp;
 }
 function addGold(x)
 {
     hero.inventory.gold += x;
+    document.getElementById("Gold").innerHTML = hero.iventory.gold;
 }
 function removeGold(x)
 {
     hero.inventory.gold -= x;
+    document.getElementById("Gold").innerHTML = hero.iventory.gold;
 }
 function addFame(x)
 {
     hero.journal.fame += x;
+    document.getElementById("Fame").innerHTML = hero.reputation.fame;
 }
 function addInfamy(x)
 {
     hero.journal.infamy += x;
+    document.getElementById("Infamy").innerHTML = hero.reputation.infamy;
 }
 //combat functions
 var enemies_killed = 0;
@@ -213,6 +225,7 @@ function playerATK()
         else
         {
             enemy.current_hp = enemy.current_hp - (hero.equipment.melee_wep_dmg - enemy.armor_value);
+            document.getElementById("CHP").innerHTML = hero.stats.current_hp;
             console.log("player hits enemy")
         }
     }

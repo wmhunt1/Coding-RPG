@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding RPG</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="Scripts.js"></script>
+    <script src="gamescripts.js"></script>
 </head>
 <body>
     <header id = "Title">
@@ -17,6 +17,7 @@
                 <li><a href="#Arena">Arena (C)</a></li>
                 <li><a href="#Character">Character (C)</a></li>
                 <li><a href="#Downtime">Downtime (D)</a></li>
+                <li><a href="#Equipment">Equipment (E)</a></li>
                 <li><a href="#Factions">Factions (F)</a></li>
                 <li><a href="#Inventory">Inventory (I)</a></li>
                 <li><a href="#Journal">Journal (Q)</li>
@@ -52,9 +53,9 @@
         <h2>Max HP</h2>
         <p id="MHP"></p>
         <h2>Current AP</h2>
-        <p id="CAP"></p>
+        <p id="CSP"></p>
         <h2>Max AP</h2>
-        <p id="MAP"></p>
+        <p id="MSP"></p>
         <h2>Attack</h2>
         <p id="ATK"></p>
         <h2>Defense</h2>
@@ -91,6 +92,10 @@
         <!-- Other Downtime options: Hunting, Praying (Could be a way to gain more lives), Studying. Racing. Monster fighting? Maybe in Arena -->
     </section>
     <a href="#Title">Back to Top</a>
+    <section id = "Equipment" class ="options">
+        <h1>Equipment</h1>
+    </section>
+    <a href="#Title">Back to Top</a>
     <section id = "Factions" class ="options">
         <h1>Factions</h1>
     </section>
@@ -99,12 +104,6 @@
         <h1>Inventory</h1>
         <h2>Gold</h2>
         <p id="Gold"></p>
-        <h2>Weapon</h2>
-        <p id="WEP"></p>
-        <h2>Armor</h2>
-        <p id="Armor"></p>
-        <h2>Potions Owned:</h2>
-        <p id="POT"></p>
     </section>
     <a href="#Title">Back to Top</a>
     <section id = "Journal" class ="options">
@@ -120,6 +119,8 @@
         <p id="Day"></p>
         <h2>Fame</h2>
         <p id="Fame"></p>
+        <h2>Infamy</h2>
+        <p id="Infamy"></p>
         <article>
             <h2>Bandit Problem</h2>
             <H3>Details</H3>
@@ -227,25 +228,23 @@
     </section>
     <a href="#Title">Back to Top</a>
     <script>
-        document.getElementById("Name").innerHTML = Player.Name;
-        document.getElementById("Class").innerHTML = Player.Class;
-        document.getElementById("Level").innerHTML = Player.Level;
-        document.getElementById("XP").innerHTML = Player.XP;
-        document.getElementById("CHP").innerHTML = Player.CurrentHP;
-        document.getElementById("MHP").innerHTML = Player.MaxHP;
-        document.getElementById("Gold").innerHTML = Player.Gold;
-        document.getElementById("ATK").innerHTML = Player.Atk;
-        document.getElementById("DEF").innerHTML = Player.Def;
-        document.getElementById("Day").innerHTML = Day;
-        document.getElementById("Fame").innerHTML = Player.Fame;
-        document.getElementById("QC").innerHTML = Player.Quests_Completed;
-        document.getElementById("WEP").innerHTML = Player.Wep;
-        document.getElementById("Armor").innerHTML = Player.Armor;
-        document.getElementById("POT").innerHTML = Inventory.potions;
-        document.getElementById("Life").innerHTML = lifes;
-        document.getElementById("CAP").innerHTML = Player.CurrentAP;
-        document.getElementById("MAP").innerHTML = Player.MaxAP;
-        //document.getElementById("J1").innerHTML = J1;
+        document.getElementById("Name").innerHTML = hero.basics.name;
+        document.getElementById("Class").innerHTML = hero.basics.class;
+        document.getElementById("Level").innerHTML = hero.stats.level;
+        document.getElementById("XP").innerHTML = hero.stats.xp;
+        document.getElementById("CHP").innerHTML = hero.stats.current_hp;
+        document.getElementById("MHP").innerHTML = hero.stats.max_hp;
+        document.getElementById("Gold").innerHTML = hero.inventory.gold;
+        document.getElementById("ATK").innerHTML = hero.stats.player_atk;
+        document.getElementById("DEF").innerHTML = hero.stats.player_def;
+        document.getElementById("Day").innerHTML = hero.journal.day;
+        document.getElementById("Fame").innerHTML = hero.reputation.fame;
+        document.getElementById("Infamy").innerHTML = hero.reputation.infamy;
+        document.getElementById("QC").innerHTML = hero.journal.quests_completed;
+        document.getElementById("CSP").innerHTML = hero.stats.current_sp;
+        document.getElementById("MSP").innerHTML = hero.stats.max_sp;
+        document.getElementById("Life").innerHTML = hero.basics.lifes;
     </script>
+    <button onclick="combat()">combat test</button>
 </body>
 </html>
