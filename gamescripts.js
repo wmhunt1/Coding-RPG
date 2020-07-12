@@ -153,18 +153,19 @@ function bandit(x)
     {
         number: x,
         name: "Bandit",
-        current_hp: 0,
-        max_hp: 0,
+        current_hp: 5,
+        max_hp: 5,
         current_ap: 0,
         max_ap: 0,
-        atk: 0,
-        weapon: "W",
-        weapon_dmg: 0,
-        def: 0,
-        armor: "A",
-        armor_value: 0,
+        atk: 1,
+        weapon: "Dagger",
+        weapon_dmg: 2,
+        def: 1,
+        armor: "Leather",
+        armor_value: 1,
         speed: 0,
         enemy_buff: 0,
+        xp_value: 0,
     }
 }
 function bandit_leader(x)
@@ -173,18 +174,19 @@ function bandit_leader(x)
     {
         number: x,
         name: "Bandit Leader",
-        current_hp: 0,
-        max_hp: 0,
+        current_hp: 20,
+        max_hp: 20,
         current_ap: 0,
         max_ap: 0,
-        atk: 0,
-        weapon: "W",
-        weapon_dmg: 0,
-        def: 0,
-        armor: "A",
-        armor_value: 0,
+        atk: 5,
+        weapon: "Sword",
+        weapon_dmg: 5,
+        def: 5,
+        armor: "Chainmail",
+        armor_value: 5,
         speed: 0,
         enemy_buff: 0,
+        xp_value: 0,
     }
 }
 function bar_patron(x)
@@ -193,18 +195,19 @@ function bar_patron(x)
     {
         number: x,
         name: "Bar Patron",
-        current_hp: 0,
-        max_hp: 0,
+        current_hp: 5,
+        max_hp: 5,
         current_ap: 0,
         max_ap: 0,
         atk: 0,
-        weapon: "W",
-        weapon_dmg: 0,
+        weapon: "Broken Bottle",
+        weapon_dmg: 1,
         def: 0,
-        armor: "A",
+        armor: "None",
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        xp_value: 0,
     }
 }
 function goblin(x)
@@ -213,18 +216,19 @@ function goblin(x)
     {
         number: x,
         name: "Goblin",
-        current_hp: 0,
-        max_hp: 0,
+        current_hp: 4,
+        max_hp: 4,
         current_ap: 0,
         max_ap: 0,
         atk: 0,
-        weapon: "W",
-        weapon_dmg: 0,
-        def: 0,
-        armor: "A",
-        armor_value: 0,
+        weapon: "Club",
+        weapon_dmg: 1,
+        def: 1,
+        armor: "None",
+        armor_value: 1,
         speed: 0,
         enemy_buff: 0,
+        xp_value: 0,
     }
 }
 function goblin_boss(x)
@@ -233,18 +237,19 @@ function goblin_boss(x)
     {
         number: x,
         name: "Goblin Boss",
-        current_hp: 0,
-        max_hp: 0,
+        current_hp: 10,
+        max_hp: 10,
         current_ap: 0,
         max_ap: 0,
-        atk: 0,
-        weapon: "W",
-        weapon_dmg: 0,
-        def: 0,
-        armor: "A",
-        armor_value: 0,
+        atk: 2,
+        weapon: "Axe",
+        weapon_dmg: 2,
+        def: 2,
+        armor: "Leather Scraps",
+        armor_value: 1,
         speed: 0,
         enemy_buff: 0,
+        xp_value: 0,
     }
 }
 function mimic(x)
@@ -265,6 +270,7 @@ function mimic(x)
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        xp_value: 0,
     }
 }
 function minotaur(x)
@@ -285,6 +291,7 @@ function minotaur(x)
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        xp_value: 0,
     }
 }
 function rat(x)
@@ -305,6 +312,7 @@ function rat(x)
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        xp_value: 2,
     }
 }
 function skeleton(x)
@@ -325,6 +333,7 @@ function skeleton(x)
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        xp_value: 0,
     }
 }
 function spider(x)
@@ -345,6 +354,7 @@ function spider(x)
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        xp_value: 0,
     }
 }
 //hero update functions
@@ -489,7 +499,7 @@ function playerTurn()
         }
         else
         {
-            
+
         }
     }
 }
@@ -757,37 +767,48 @@ function DrinkPotion()
 //quest functions
 //random locations for quests
     //bars
-    var BarArray = ["Moes' Bar", "Rats in The Cellar Bar and Grill", "Drunken Lout"]
-    var bar = Math.floor((Math.random() * BarArray.length))
+    var barArray = ["Moes' Bar", "Rats in The Cellar Bar and Grill", "Drunken Lout"]
+    var bar = Math.floor((Math.random() * barArray.length))
     //dungeons
-    var DungeonArray = ["Abandoned Mine", "Cave"]
-    var dungeon = Math.floor((Math.random() * DungeonArray.length))
+    var dungeonArray = ["Abandoned Mine", "Cave"]
+    var dungeon = Math.floor((Math.random() * dungeonArray.length))
     //inns
-    var InnArray = ["Dreaming Worker", "A Place to Rest your Bread", "Motel Styx"]
-    var inn = Math.floor((Math.random() * InnArray.length))
+    var innArray = ["Dreaming Worker", "A Place to Rest your Bread", "Motel Styx"]
+    var inn = Math.floor((Math.random() * innArray.length))
     //towns
-    var TownArray = ["Towning Town", "Other Town"]
-    var town = Math.floor((Math.random() * TownArray.length))
+    var townArray = ["Towning Town", "Other Town"]
+    var town = Math.floor((Math.random() * townArray.length))
     //villages
-    var VillageArray = ["Dale", "Vil"]
-    var village = Math.floor((Math.random() * VillageArray.length))
+    var villageArray = ["Dale", "Vil"]
+    var village = Math.floor((Math.random() * villageArray.length))
     //random objectives for quests
     //item retreival
-    var FetchArray = ["Missing Item"]
-    var fetch = rescue = Math.floor((Math.random() * FetchArray.length))
+    var fetchArray = ["Missing Item"]
+    var fetch = Math.floor((Math.random() * fetchArray.length))
     //rescue
-    var RescueArray = ["Boy","Girl","Noble"]
-    var rescue = Math.floor((Math.random() * RescueArray.length))
+    var rescueArray = ["Boy","Girl","Noble"]
+    var rescue = Math.floor((Math.random() * rescueArray.length))
     //random treasure for dungeons etc.
-    var TreasureArray = ["An old coin", "a goblet", "a statuette", "some porn mags", "an ancient scroll"]
-    var treasure = Math.floor((Math.random() * TreasureArray.length))
+    var treasureArray = ["An old coin", "a goblet", "a statuette", "some porn mags", "an ancient scroll"]
+    var treasure = Math.floor((Math.random() * treasureArray.length))
     var treasure_value = Math.floor((Math.random() *10+10))
     //traps
-    var TrapArray = ["Pressure plate", "Dart", "Spike"]
-    var trap = Math.floor((Math.random() * TrapArray.length))
+    var trapArray = ["Pressure plate", "Dart", "Spike"]
+    var trap = Math.floor((Math.random() * trapArray.length))
     var trap_damage = Math.floor((Math.random() *10+1))
 
     function questComplete(x,y)
+    {
+        addXP(x,y)
+        addGold(x,y)
+        addFame(y)
+        hero.journal.quests_completed += 1;
+        document.getElementById("QC").innerHTML = hero.journal.quests_completed;
+        alert ("You gain: " + x*y + " XP")
+        alert ("You gain: " + x*y + " Gold")
+        alert ("You gain: " + y + " Fame")
+    }
+    function bossReward(x,y)
     {
         addXP(x,y)
         addGold(x,y)
@@ -817,6 +838,60 @@ function DrinkPotion()
             }
         }
     }
+    function banditQuest()
+    {
+        if (hero.stats.current_hp <= 0)  
+        {
+            alert ("You can't go questing in your condition")
+        } 
+        else
+        {   
+            bandit(Math.floor(Math.random() * 10+1))
+            var bandits = enemy.number;
+            alert ("You go to " + villageArray[village] + " and are pointed towards the. " + dungeonArray[dungeon] +  " that the goblins have claimed as their lair.")
+            alert ("You must kill " + enemy.number + " bandits")
+            combat()
+            alert ("you find the bandit leader.")
+            bandit_leader(1)
+            combat()
+            if (hero.stats.current_hp > 0)
+            {
+                questComplete(bandits,10)
+                bossReward(10,10)
+            }
+            else
+            {
+                Death()
+            }
+        }
+    }
+    function goblinQuest()
+    {
+        if (hero.stats.current_hp <= 0)  
+        {
+            alert ("You can't go questing in your condition")
+        } 
+        else
+        {   
+            goblin(Math.floor(Math.random() * 10+1))
+            var goblins = enemy.number;
+            alert ("You go to " + villageArray[village] + " and are pointed towards the. " + dungeonArray[dungeon] +  " that the goblins have claimed as their lair.")
+            alert ("You must kill " + enemy.number + " goblins")
+            combat()
+            alert("you find the goblin boss.")
+            goblin_boss(1)
+            combat()
+            if (hero.stats.current_hp > 0)
+            {
+                questComplete(goblins,10)
+                bossReward(10,10)
+            }
+            else
+            {
+                Death()
+            }
+        }
+    }
     function ratQuest()
     {
         if (hero.stats.current_hp <= 0)  
@@ -826,13 +901,36 @@ function DrinkPotion()
         else
         {   
             rat(Math.floor(Math.random() * 5+1))
-            rats = enemy.number;
-            alert ("You go to " + BarArray[bar] + " and head down the stairs into the cellar.")
+            var rats = enemy.number;
+            alert ("You go to " + barArray[bar] + " and head down the stairs into the cellar.")
             alert ("You must kill " + enemy.number + " rats")
             combat()
             if (hero.stats.current_hp > 0)
             {
                 questComplete(rats,2)
+            }
+            else
+            {
+                Death()
+            }
+        }
+    }
+    function spiderQuest()
+    {
+        if (hero.stats.current_hp <= 0)  
+        {
+            alert ("You can't go questing in your condition")
+        } 
+        else
+        {   
+            spider(Math.floor(Math.random() * 5+1))
+            var spiders = enemy.number;
+            alert ("You go to " + innArray[inn] + " and head up the stairs into the attic.")
+            alert ("You must kill " + enemy.number + " spider")
+            combat()
+            if (hero.stats.current_hp > 0)
+            {
+                questComplete(spiders,5)
             }
             else
             {
