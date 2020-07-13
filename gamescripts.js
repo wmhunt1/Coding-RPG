@@ -192,7 +192,7 @@ function bandit(x)
         speed: 0,
         enemy_buff: 0,
         enemy_debuff: 0,
-        xp_value: 0,
+        xp_value: 5,
     }
 }
 function bandit_leader(x)
@@ -214,7 +214,7 @@ function bandit_leader(x)
         speed: 0,
         enemy_buff: 0,
         enemy_debuff: 0,
-        xp_value: 0,
+        xp_value: 20,
     }
 }
 function bar_patron(x)
@@ -236,7 +236,7 @@ function bar_patron(x)
         speed: 0,
         enemy_buff: 0,
         enemy_debuff: 0,
-        xp_value: 0,
+        xp_value: 1,
     }
 }
 function goblin(x)
@@ -258,7 +258,7 @@ function goblin(x)
         speed: 0,
         enemy_buff: 0,
         enemy_debuff: 0,
-        xp_value: 0,
+        xp_value: 5,
     }
 }
 function goblin_boss(x)
@@ -280,7 +280,7 @@ function goblin_boss(x)
         speed: 0,
         enemy_buff: 0,
         enemy_debuff: 0,
-        xp_value: 0,
+        xp_value: 20,
     }
 }
 function mimic(x)
@@ -383,14 +383,14 @@ function spider(x)
         max_ap: 0,
         atk: 0,
         weapon: "bite",
-        weapon_dmg: 0,
+        weapon_dmg: 1,
         def: 0,
         armor: "carapace",
         armor_value: 0,
-        speed: 0,
+        speed: 1,
         enemy_buff: 0,
         enemy_debuff: 0,
-        xp_value: 0,
+        xp_value: 2,
     }
 }
 //hero update functions
@@ -893,27 +893,27 @@ function DrinkPotion()
     var trap = Math.floor((Math.random() * trapArray.length))
     var trap_damage = Math.floor((Math.random() *10+1))
 
-    function questComplete(x,y)
+    function questComplete(x)
     {
-        addXP(x,y)
-        addGold(x,y)
-        addFame(y)
+        addXP(enemy.xp_value,x)
+        addGold(enemy.xp_value,x)
+        addFame(enemy.xp_value)
         hero.journal.quests_completed += 1;
         document.getElementById("QC").innerHTML = hero.journal.quests_completed;
-        alert ("You gain: " + x*y + " XP")
-        alert ("You gain: " + x*y + " Gold")
-        alert ("You gain: " + y + " Fame")
+        alert ("You gain: " + enemy.xp_value*x + " XP")
+        alert ("You gain: " + enemy.xp_value*x + " Gold")
+        alert ("You gain: " + enemy.xp_value + " Fame")
     }
     function bossReward(x,y)
     {
-        addXP(x,y)
-        addGold(x,y)
-        addFame(y)
+        addXP(enemy.xp_value)
+        addGold(x)
+        addFame(enemy.xp_value)
         hero.journal.quests_completed += 1;
         document.getElementById("QC").innerHTML = hero.journal.quests_completed;
-        alert ("You gain: " + x*y + " XP")
-        alert ("You gain: " + x*y + " Gold")
-        alert ("You gain: " + y + " Fame")
+        alert ("You gain: " + enemy.xp_value + " XP")
+        alert ("You gain: " + x + " Gold")
+        alert ("You gain: " + enemy.xp_value + " Fame")
     }
     function Template()
     {
@@ -952,8 +952,8 @@ function DrinkPotion()
             combat()
             if (hero.stats.current_hp > 0)
             {
-                questComplete(bandits,10)
-                bossReward(10,10)
+                questComplete(bandits)
+                bossReward(10)
             }
             else
             {
@@ -979,8 +979,8 @@ function DrinkPotion()
             combat()
             if (hero.stats.current_hp > 0)
             {
-                questComplete(goblins,10)
-                bossReward(10,10)
+                questComplete(goblins)
+                bossReward(10)
             }
             else
             {
@@ -1003,7 +1003,7 @@ function DrinkPotion()
             combat()
             if (hero.stats.current_hp > 0)
             {
-                questComplete(rats,2)
+                questComplete(rats)
             }
             else
             {
@@ -1026,7 +1026,7 @@ function DrinkPotion()
             combat()
             if (hero.stats.current_hp > 0)
             {
-                questComplete(spiders,5)
+                questComplete(spiders)
             }
             else
             {
