@@ -507,7 +507,7 @@ function playerATK()
 }
 function cleave()
 {
-    if (hero.stats.current_sp > 1)
+    if (hero.stats.current_sp > 1 && hero.skills.melee_value > 0)
     {
         alert ("You use the cleave ability.")
         playerATK()
@@ -536,10 +536,14 @@ function playerTurn()
         else if (action === "S")
         {
             var skill = prompt("Use which skill?")
-            if (skill === "C" && hero.skills.melee_value > 0)
+            if (skill === "C")
             {
                 cleave()
                 removeAP(1)
+            }
+            else if(skill === "")
+            {
+
             }
             else
             {
