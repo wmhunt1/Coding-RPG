@@ -507,7 +507,7 @@ function playerATK()
 {
     console.log("player attacks")
     var player_hit_chance = .5 - .1*(enemy.def + enemy.enemy_buff - enemy.enemy_debuff);
-    var player_hit_roll = Math.random() + .1*(hero.stats.player_atk + hero.stats.player_buff - hero.stats.player_debuff)
+    var player_hit_roll = Math.random() + .1*(hero.stats.player_atk + hero.stats.player_buff - hero.stats.player_debuff + hero.skills.melee_value)
     if (player_hit_roll > player_hit_chance)
     {
         if (enemy.armor_value >= hero.equipment.melee_wep_dmg)
@@ -1271,6 +1271,94 @@ function impThievery(x)
     alert ("Your Thievery skill has increased in proficiency to the " + hero.skills.thievery + " level.")
     document.getElementById("thievery").innerHTML = hero.skills.thievery;
 }
+function trainCrafting()
+{
+    alert ("The cost of training is " + hero.skills.crafting_training_cost + " Gold.")
+    var train = prompt("Train with the Crafting Trainer? (Y/N)")
+    if (train === "Y")
+    {
+        if (hero.inventory.gold < hero.skills.crafting_training_cost)
+            {
+                alert("You cannot afford to train.")
+            }
+            else
+            {
+                removeGold(hero.skills.crafting_training_cost)
+                impCrafting(1)
+                hero.skills.crafting_training_cost *= 2; 
+            }
+    }
+    else
+    {
+        alert ("Maybe later.")
+    }
+}
+function trainGathering()
+{
+    alert ("The cost of training is " + hero.skills.gathering_training_cost + " Gold.")
+    var train = prompt("Train with the Gathering Trainer? (Y/N)")
+    if (train === "Y")
+    {
+        if (hero.inventory.gold < hero.skills.gathering_training_cost)
+            {
+                alert("You cannot afford to train.")
+            }
+            else
+            {
+                removeGold(hero.skills.gathering_training_cost)
+                impGathering(1)
+                hero.skills.gathering_training_cost *= 2; 
+            }
+    }
+    else
+    {
+        alert ("Maybe later.")
+    }
+}
+function trainMagic()
+{
+    alert ("The cost of training is " + hero.skills.magic_training_cost + " Gold.")
+    var train = prompt("Train with the Magic Trainer? (Y/N)")
+    if (train === "Y")
+    {
+        if (hero.inventory.gold < hero.skills.magic_training_cost)
+            {
+                alert("You cannot afford to train.")
+            }
+            else
+            {
+                removeGold(hero.skills.magic_training_cost)
+                impMagic(1)
+                hero.skills.magic_training_cost *= 2; 
+            }
+    }
+    else
+    {
+        alert ("Maybe later.")
+    }
+}
+function trainMarksman()
+{
+    alert ("The cost of training is " + hero.skills.marksman_training_cost + " Gold.")
+    var train = prompt("Train with the Marksman Trainer? (Y/N)")
+    if (train === "Y")
+    {
+        if (hero.inventory.gold < hero.skills.marksman_training_cost)
+            {
+                alert("You cannot afford to train.")
+            }
+            else
+            {
+                removeGold(hero.skills.marksman_training_cost)
+                impMarksman(1)
+                hero.skills.marksman_training_cost *= 2; 
+            }
+    }
+    else
+    {
+        alert ("Maybe later.")
+    }
+}
 function trainMelee()
 {
     alert ("The cost of training is " + hero.skills.melee_training_cost + " Gold.")
@@ -1286,6 +1374,94 @@ function trainMelee()
                 removeGold(hero.skills.melee_training_cost)
                 impMelee(1)
                 hero.skills.melee_training_cost *= 2; 
+            }
+    }
+    else
+    {
+        alert ("Maybe later.")
+    }
+}
+function trainPrayer()
+{
+    alert ("The cost of training is " + hero.skills.prayer_training_cost + " Gold.")
+    var train = prompt("Train with the Prayer Trainer? (Y/N)")
+    if (train === "Y")
+    {
+        if (hero.inventory.gold < hero.skills.prayer_training_cost)
+            {
+                alert("You cannot afford to train.")
+            }
+            else
+            {
+                removeGold(hero.skills.prayer_training_cost)
+                impPrayer(1)
+                hero.skills.prayer_training_cost *= 2; 
+            }
+    }
+    else
+    {
+        alert ("Maybe later.")
+    }
+}
+function trainSpeech()
+{
+    alert ("The cost of training is " + hero.skills.speech_training_cost + " Gold.")
+    var train = prompt("Train with the Speech Trainer? (Y/N)")
+    if (train === "Y")
+    {
+        if (hero.inventory.gold < hero.skills.speech_training_cost)
+            {
+                alert("You cannot afford to train.")
+            }
+            else
+            {
+                removeGold(hero.skills.speech_training_cost)
+                impSpeech(1)
+                hero.skills.speech_training_cost *= 2; 
+            }
+    }
+    else
+    {
+        alert ("Maybe later.")
+    }
+}
+function trainSurvival()
+{
+    alert ("The cost of training is " + hero.skills.survival_training_cost + " Gold.")
+    var train = prompt("Train with the Survival Trainer? (Y/N)")
+    if (train === "Y")
+    {
+        if (hero.inventory.gold < hero.skills.survival_training_cost)
+            {
+                alert("You cannot afford to train.")
+            }
+            else
+            {
+                removeGold(hero.skills.survival_training_cost)
+                impSurvival(1)
+                hero.skills.survival_training_cost *= 2; 
+            }
+    }
+    else
+    {
+        alert ("Maybe later.")
+    }   
+}
+function trainThievery()
+{
+    alert ("The cost of training is " + hero.skills.thievery_training_cost + " Gold.")
+    var train = prompt("Train with the Thievery Trainer? (Y/N)")
+    if (train === "Y")
+    {
+        if (hero.inventory.gold < hero.skills.thievery_training_cost)
+            {
+                alert("You cannot afford to train.")
+            }
+            else
+            {
+                removeGold(hero.skills.thievery_training_cost)
+                impThievery(1)
+                hero.skills.thievery_training_cost *= 2; 
             }
     }
     else
