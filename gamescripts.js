@@ -86,7 +86,7 @@ var hero =
         melee: "untrained",
         melee_value: 0,
         melee_training_cost: 100,
-        meleeArray: ["Normal Attack", "Cleave"],
+        meleeArray: ["Normal (A)ttack", "(C)leave"],
         prayer: "untrained",
         payer_value: 0,
         prayer_training_cost: 100,
