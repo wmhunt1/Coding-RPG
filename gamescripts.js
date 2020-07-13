@@ -63,6 +63,7 @@ var hero =
     {
         day: 0,
         quests_completed: 0,
+        bosses_defeated: 0,
     },
     reputation:
     {
@@ -904,16 +905,16 @@ function DrinkPotion()
         alert ("You gain: " + enemy.xp_value*x + " Gold")
         alert ("You gain: " + enemy.xp_value + " Fame")
     }
-    function bossReward(x,y)
+    function bossReward(x,y,z)
     {
-        addXP(enemy.xp_value)
-        addGold(x)
-        addFame(enemy.xp_value)
-        hero.journal.quests_completed += 1;
-        document.getElementById("QC").innerHTML = hero.journal.quests_completed;
-        alert ("You gain: " + enemy.xp_value + " XP")
-        alert ("You gain: " + x + " Gold")
-        alert ("You gain: " + enemy.xp_value + " Fame")
+        addXP(x)
+        addGold(y)
+        addFame(z)
+        hero.journal.bosses_defeated += 1;
+        document.getElementById("Boss").innerHTML = hero.journal.bosses_defeated;
+        alert ("You gain: " + x + " XP")
+        alert ("You gain: " + y + " Gold")
+        alert ("You gain: " + z + " Fame")
     }
     function Template()
     {
@@ -953,7 +954,7 @@ function DrinkPotion()
             if (hero.stats.current_hp > 0)
             {
                 questComplete(bandits)
-                bossReward(10)
+                bossReward(20,20,20)
             }
             else
             {
@@ -980,7 +981,7 @@ function DrinkPotion()
             if (hero.stats.current_hp > 0)
             {
                 questComplete(goblins)
-                bossReward(10)
+                bossReward(10,10,10)
             }
             else
             {

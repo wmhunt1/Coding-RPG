@@ -127,6 +127,9 @@
         <h1>Journal</h1>
         <h2>Quests Completed</h2>
         <p id="QC"></p>
+        <h2>Bosses Defeated</h2>
+        <p id="Boss"></p>
+    </section>
     </section>
     <a href="#Title">Back to Top</a>
     <section id = "Quest" class ="options">
@@ -310,6 +313,7 @@
         document.getElementById("speech").innerHTML = hero.skills.speech;
         document.getElementById("survival").innerHTML = hero.skills.survival;
         document.getElementById("thievery").innerHTML = hero.skills.thievery;
+        document.getElementById("Boss").innerHTML = hero.journal.bosses_defeated;
     </script>
 </body>
 </html>
