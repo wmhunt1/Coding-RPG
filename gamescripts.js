@@ -1185,12 +1185,68 @@ function anvil()
     }
  }
  //training functions
+ function impCrafting(x)
+{
+    hero.skills.crafting_value += x;
+    hero.skills.crafting = hero.skills.skill_level_array[hero.skills.crafting_value]
+    alert ("Your Crafting skill has increased in proficiency to the " + hero.skills.crafting + " level.")
+    document.getElementById("crafting").innerHTML = hero.skills.crafting;
+}
+function impGathering(x)
+{
+    hero.skills.gathering_value += x;
+    hero.skills.gathering = hero.skills.skill_level_array[hero.skills.gathering_value]
+    alert ("Your Gathering skill has increased in proficiency to the " + hero.skills.gathering + " level.")
+    document.getElementById("gathering").innerHTML = hero.skills.gathering;
+}
+function impMagic(x)
+{
+    hero.skills.magic_value += x;
+    hero.skills.magic = hero.skills.skill_level_array[hero.skills.magic_value]
+    alert ("Your Magic skill has increased in proficiency to the " + hero.skills.magic + " level.")
+    document.getElementById("magic").innerHTML = hero.skills.magic;
+}
+function impMarksman(x)
+{
+    hero.skills.marksman_value += x;
+    hero.skills.marksman = hero.skills.skill_level_array[hero.skills.marksman_value]
+    alert ("Your Marksman skill has increased in proficiency to the " + hero.skills.marksman + " level.")
+    document.getElementById("marksman").innerHTML = hero.skills.marksman;
+}
  function impMelee(x)
 {
     hero.skills.melee_value += x;
     hero.skills.melee = hero.skills.skill_level_array[hero.skills.melee_value]
     alert ("Your Melee skill has increased in proficiency to the " + hero.skills.melee + " level.")
     document.getElementById("melee").innerHTML = hero.skills.melee;
+}
+function impPrayer(x)
+{
+    hero.skills.prayer_value += x;
+    hero.skills.prayer = hero.skills.skill_level_array[hero.skills.prayer_value]
+    alert ("Your Prayer skill has increased in proficiency to the " + hero.skills.prayer + " level.")
+    document.getElementById("prayer").innerHTML = hero.skills.prayer;
+}
+function impSpeech(x)
+{
+    hero.skills.speech_value += x;
+    hero.skills.speech = hero.skills.skill_level_array[hero.skills.speech_value]
+    alert ("Your Speech skill has increased in proficiency to the " + hero.skills.speech + " level.")
+    document.getElementById("speech").innerHTML = hero.skills.speech;
+}
+function impSurvival(x)
+{
+    hero.skills.survival_value += x;
+    hero.skills.survival = hero.skills.skill_level_array[hero.skills.survival_value]
+    alert ("Your Survival skill has increased in proficiency to the " + hero.skills.survival + " level.")
+    document.getElementById("survival").innerHTML = hero.skills.survival;
+}
+function impThievery(x)
+{
+    hero.skills.thievery_value += x;
+    hero.skills.thievery = hero.skills.skill_level_array[hero.skills.thievery_value]
+    alert ("Your Thievery skill has increased in proficiency to the " + hero.skills.thievery + " level.")
+    document.getElementById("thievery").innerHTML = hero.skills.thievery;
 }
 function trainMelee()
 {
