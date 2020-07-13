@@ -23,6 +23,7 @@ var hero =
         xp: 0,
         xp_to_next_level: 100,
         player_buff: 0,
+        player_debuff: 0,
     },
     equipment:
     {
@@ -125,6 +126,8 @@ var enemy =
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        enemy_debuff: 0,
+        xp_value: 0,
     }
 function arena_champion(x)
 {   
@@ -144,6 +147,8 @@ function arena_champion(x)
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        enemy_debuff: 0,
+        xp_value: 0,
     }
 }   
 function arena_rookie(x)
@@ -164,6 +169,8 @@ function arena_rookie(x)
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        enemy_debuff: 0,
+        xp_value: 0,
     }
 }   
 function bandit(x)
@@ -184,6 +191,7 @@ function bandit(x)
         armor_value: 1,
         speed: 0,
         enemy_buff: 0,
+        enemy_debuff: 0,
         xp_value: 0,
     }
 }
@@ -205,6 +213,7 @@ function bandit_leader(x)
         armor_value: 5,
         speed: 0,
         enemy_buff: 0,
+        enemy_debuff: 0,
         xp_value: 0,
     }
 }
@@ -226,6 +235,7 @@ function bar_patron(x)
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        enemy_debuff: 0,
         xp_value: 0,
     }
 }
@@ -247,6 +257,7 @@ function goblin(x)
         armor_value: 1,
         speed: 0,
         enemy_buff: 0,
+        enemy_debuff: 0,
         xp_value: 0,
     }
 }
@@ -268,6 +279,7 @@ function goblin_boss(x)
         armor_value: 1,
         speed: 0,
         enemy_buff: 0,
+        enemy_debuff: 0,
         xp_value: 0,
     }
 }
@@ -289,6 +301,7 @@ function mimic(x)
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        enemy_debuff: 0,
         xp_value: 0,
     }
 }
@@ -310,6 +323,7 @@ function minotaur(x)
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        enemy_debuff: 0,
         xp_value: 0,
     }
 }
@@ -331,6 +345,7 @@ function rat(x)
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        enemy_debuff: 0,
         xp_value: 2,
     }
 }
@@ -352,6 +367,7 @@ function skeleton(x)
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        enemy_debuff: 0,
         xp_value: 0,
     }
 }
@@ -373,6 +389,7 @@ function spider(x)
         armor_value: 0,
         speed: 0,
         enemy_buff: 0,
+        enemy_debuff: 0,
         xp_value: 0,
     }
 }
@@ -489,8 +506,8 @@ var enemies_killed = 0;
 function playerATK()
 {
     console.log("player attacks")
-    var player_hit_chance = .5 - .1*(enemy.def + enemy.enemy_buff);
-    var player_hit_roll = Math.random() + .1*(hero.stats.player_atk + hero.stats.player_buff)
+    var player_hit_chance = .5 - .1*(enemy.def + enemy.enemy_buff - enemy.enemy_debuff);
+    var player_hit_roll = Math.random() + .1*(hero.stats.player_atk + hero.stats.player_buff - hero.stats.player_debuff)
     if (player_hit_roll > player_hit_chance)
     {
         if (enemy.armor_value >= hero.equipment.melee_wep_dmg)
@@ -575,8 +592,8 @@ function enemyATK()
 {
     console.log("enemy attacks")
     alert("The " + enemy.name + " attacks")
-    var enemy_hit_chance = .5 - .1*(hero.stats.player_def + hero.stats.player_buff);
-    var enemy_hit_roll = Math.random() + .1*(enemy.atk + enemy.enemy_buff)
+    var enemy_hit_chance = .5 - .1*(hero.stats.player_def + hero.stats.player_buff - hero.stats.player_debuff);
+    var enemy_hit_roll = Math.random() + .1*(enemy.atk + enemy.enemy_buff - enemy.enemy_debuff)
     if (enemy_hit_roll > enemy_hit_chance)
     {
         if (total_armor >= enemy.weapon_dmg)
@@ -661,6 +678,10 @@ function combat()
         console.log("death")
         alert ("death.")
     }
+    hero.stats.player_buff = 0;
+    hero.stats.player_debuff = 0;
+    enemy.enemy_debuff = 0;
+    enemy.enemy_debuff = 0;
 }
 //arena functions
 function betArena()
