@@ -86,6 +86,7 @@ var hero =
         melee: "untrained",
         melee_value: 0,
         melee_training_cost: 100,
+        meleeArray: ["Normal Attack", "Cleave"],
         prayer: "untrained",
         payer_value: 0,
         prayer_training_cost: 100,
@@ -1218,6 +1219,7 @@ function impMarksman(x)
     hero.skills.melee_value += x;
     hero.skills.melee = hero.skills.skill_level_array[hero.skills.melee_value]
     alert ("Your Melee skill has increased in proficiency to the " + hero.skills.melee + " level.")
+    alert ("You learn the " + hero.skills.meleeArray[hero.skills.melee_value] + " skill")
     document.getElementById("melee").innerHTML = hero.skills.melee;
 }
 function impPrayer(x)
