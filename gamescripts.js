@@ -72,14 +72,23 @@ var hero =
     {
         skill_level_array: ["untrained", "apprentice", "journeyman", "expert", "master"],
         crafting: "untrained",
+        crafting_value: 0,
         gathering: "untrained",
+        gathering_value: 0,
         magic: "untrained",
+        magic_value: 0,
         marksman: "untrained",
+        marksman_value: 0,
         melee: "untrained",
+        melee_value: 1,
         prayer: "untrained",
+        payer_value: 0,
         speech: "untrained",
+        speech_value: 0,
         survival: "untrained",
+        survival_value: 0,
         thievery: "untrained",
+        thievery_value: 0,
     },
     spells_known:
     {
@@ -430,6 +439,16 @@ function removeAP(x)
 {
     hero.stats.current_ap -= x;
 }
+function addSP(x)
+{
+    hero.stats.current_sp += x;
+    document.getElementById("CSP").innerHTML = hero.stats.current_sp;
+}
+function removeSP(x)
+{
+    hero.stats.current_sp -= x;
+    document.getElementById("CSP").innerHTML = hero.stats.current_sp;
+}
 function addXP(x)
 {
     hero.stats.xp += x;
@@ -486,18 +505,46 @@ function playerATK()
     console.log(player_hit_chance)
     console.log(enemy.current_hp + " enemy hp")
 }
+function cleave()
+{
+    if (hero.stats.current_sp > 1)
+    {
+        alert ("You use the cleave ability.")
+        playerATK()
+        checkifdead()
+        playerATK()
+        removeSP(1)
+    }
+    else
+    {
+        alert ("You don't have enough SP.")
+    }
+}
 function playerTurn()
 {
     hero.stats.current_ap = hero.stats.max_ap
     while (hero.stats.current_ap > 0)
     {
         
-        var action = prompt("Attack (A) or drink a (P)otion?")
+        var action = prompt("Attack (A), use a (S)kill or drink a (P)otion?")
         if (action === "A")
         {
             playerATK()
             removeAP(1)
 
+        }
+        else if (action === "S")
+        {
+            var skill = prompt("Use which skill?")
+            if (skill === "C" && hero.skills.melee_value > 0)
+            {
+                cleave()
+                removeAP(1)
+            }
+            else
+            {
+
+            }
         }
         else if (action === "P")
         {
