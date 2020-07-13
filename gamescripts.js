@@ -73,22 +73,31 @@ var hero =
         skill_level_array: ["untrained", "apprentice", "journeyman", "expert", "master"],
         crafting: "untrained",
         crafting_value: 0,
+        crafting_training_cost: 100,
         gathering: "untrained",
         gathering_value: 0,
+        gathering_training_cost: 100,
         magic: "untrained",
         magic_value: 0,
+        magic_training_cost: 100,
         marksman: "untrained",
         marksman_value: 0,
+        marksman_training_cost: 100,
         melee: "untrained",
-        melee_value: 1,
+        melee_value: 0,
+        melee_training_cost: 100,
         prayer: "untrained",
         payer_value: 0,
+        prayer_training_cost: 100,
         speech: "untrained",
         speech_value: 0,
+        speech_training_cost: 100,
         survival: "untrained",
         survival_value: 0,
+        survival_training_cost: 100,
         thievery: "untrained",
         thievery_value: 0,
+        thievery_training_cost: 100,
     },
     spells_known:
     {
@@ -1097,7 +1106,6 @@ function impWep(x)
     hero.equipment.melee_wep = WeaponArray[hero.equipment.melee_wep-1]
     alert ("Your weapon has been updgraded to a " + hero.equipment.melee_wep)
     document.getElementById("Mwep").innerHTML = hero.equipment.melee_wep;
-
 }
 function impArmor(x)
 {
@@ -1156,7 +1164,7 @@ function anvil()
     }
     else
     {
-        var hChoice = prompt ("Buy a house? (Y/N)")
+        var hChoice = prompt ("Buy a house for 1000GP? (Y/N)")
         if (hChoice === "Y")
         {
                 if (hero.inventory.gold < 1000)
@@ -1176,3 +1184,33 @@ function anvil()
         }
     }
  }
+ //training functions
+ function impMelee(x)
+{
+    hero.skills.melee_value += x;
+    hero.skills.melee = hero.skills.skill_level_array[hero.skills.melee_value]
+    alert ("Your Melee skill has increased in proficiency to the " + hero.skills.melee + " level.")
+    document.getElementById("melee").innerHTML = hero.skills.melee;
+}
+function trainMelee()
+{
+    alert ("The cost of training is " + hero.skills.melee_training_cost + " Gold.")
+    var train = prompt("Train with the Melee Trainer? (Y/N)")
+    if (train === "Y")
+    {
+        if (hero.inventory.gold < hero.skills.melee_training_cost)
+            {
+                alert("You cannot afford to train.")
+            }
+            else
+            {
+                removeGold(hero.skills.melee_training_cost)
+                impMelee(1)
+                hero.skills.melee_training_cost *= 2; 
+            }
+    }
+    else
+    {
+        alert ("Maybe later.")
+    }
+}
