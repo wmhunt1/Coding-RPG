@@ -535,13 +535,14 @@ function playerATK()
 }
 function cleave()
 {
-    if (hero.stats.current_sp > 1 && hero.skills.melee_value > 0)
+    if (hero.stats.current_sp > 0 && hero.skills.melee_value > 0)
     {
         alert ("You use the cleave ability.")
         playerATK()
         checkifdead()
         playerATK()
         removeSP(1)
+        removeAP(1)
     }
     else
     {
@@ -567,7 +568,6 @@ function playerTurn()
             if (skill === "C")
             {
                 cleave()
-                removeAP(1)
             }
             else if(skill === "")
             {
@@ -893,7 +893,25 @@ function DrinkPotion()
     var trapArray = ["Pressure plate", "Dart", "Spike"]
     var trap = Math.floor((Math.random() * trapArray.length))
     var trap_damage = Math.floor((Math.random() *10+1))
-
+    var entry = 1
+    function addJournal(x,y)
+    {
+        var tag = document.createElement("p")
+        var text = document.createTextNode("Entry #" + entry + ": I took a quest to " + x + " " + y + " and was sucessful.");
+        tag.appendChild(text);
+        var element = document.getElementById("entries");
+        element.appendChild(tag);
+        entry += 1;
+    }
+    function addJournal_boss(x,y,z)
+    {
+        var tag = document.createElement("p")
+        var text = document.createTextNode("Entry #" + entry + ": I took a quest to " + x + " " + y + " and was sucessful. There I defeated a " + z + ".");
+        tag.appendChild(text);
+        var element = document.getElementById("entries");
+        element.appendChild(tag);
+        entry += 1;
+    }
     function questComplete(x)
     {
         addXP(enemy.xp_value,x)
@@ -955,6 +973,7 @@ function DrinkPotion()
             {
                 questComplete(bandits)
                 bossReward(20,20,20)
+                addJournal_boss("kill", "bandits", "Bandit Leader")
             }
             else
             {
@@ -982,6 +1001,7 @@ function DrinkPotion()
             {
                 questComplete(goblins)
                 bossReward(10,10,10)
+                addJournal_boss("kill", "goblins", "Goblin Boss")
             }
             else
             {
@@ -1005,6 +1025,7 @@ function DrinkPotion()
             if (hero.stats.current_hp > 0)
             {
                 questComplete(rats)
+                addJournal("kill","rats")
             }
             else
             {
@@ -1028,6 +1049,7 @@ function DrinkPotion()
             if (hero.stats.current_hp > 0)
             {
                 questComplete(spiders)
+                addJournal("kill","spiders")
             }
             else
             {
