@@ -47,7 +47,7 @@ var hero =
         melee_wep_dmg: 1,
         ranged_wep: "Rock",
         ranged_wep_dmg: 1,
-        magic_wep: "Book",
+        magic_wep: "Scrap of Paper",
         magic_wep_dmg: 1,
         wepCost: 100,
         armorCost: 100,
@@ -1370,7 +1370,7 @@ function blacksmith()
             alert ("You choose not to do anything.")
     }
 }
-var spellbookArray = ["Book", "Tome", "Grimoire"]
+var spellbookArray = ["Scrap of Paper", "Phamplet", "Book", "Tome", "Grimoire"]
 function impSpell(x)
 {
     hero.equipment.magic_wep_dmg += x;
