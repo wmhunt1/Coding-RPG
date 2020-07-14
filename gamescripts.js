@@ -1375,7 +1375,7 @@ function impSpell(x)
 {
     hero.equipment.magic_wep_dmg += x;
     alert ("Your spellbook improves by " + x)
-    hero.equipment.magic_wep = spellbookArray[hero.equipment.magic_wep_dmg]
+    hero.equipment.magic_wep = spellbookArray[hero.equipment.magic_wep_dmg-1]
     alert ("Your spellbook has been updgraded to a " + hero.equipment.magic_wep)
     document.getElementById("Magwep").innerHTML = hero.equipment.magic_wep;
 }
