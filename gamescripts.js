@@ -1,3 +1,8 @@
+function startGame()
+{
+    alert ("Welcome to the world of Placeholder. Your goal is to be an adventurer.")
+    changeName()
+}
 //player stats
 var hero =
 {
