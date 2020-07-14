@@ -642,6 +642,8 @@ function checkifdead()
         console.log("a " + enemy.name + " dies")
         console.log("there are " + enemy.number + " " + enemy.name + "(s) left.")
         alert ("The " + enemy.name + " dies.")
+        addXP(enemy.xp_value)
+        alert ("You gain " + enemy.xp_value + " XP")
     }
     else
     {
@@ -917,25 +919,22 @@ function DrinkPotion()
         element.appendChild(tag);
         entry += 1;
     }
-    function questComplete(x)
+    function questComplete(x,y)
     {
         addXP(enemy.xp_value,x)
-        addGold(enemy.xp_value,x)
-        addFame(enemy.xp_value)
+        addGold(x)
+        addFame(y)
         hero.journal.quests_completed += 1;
         document.getElementById("QC").innerHTML = hero.journal.quests_completed;
-        alert ("You gain: " + enemy.xp_value*x + " XP")
         alert ("You gain: " + enemy.xp_value*x + " Gold")
         alert ("You gain: " + enemy.xp_value + " Fame")
     }
-    function bossReward(x,y,z)
+    function bossReward(x,y)
     {
-        addXP(x)
-        addGold(y)
-        addFame(z)
+        addGold(x)
+        addFame(y)
         hero.journal.bosses_defeated += 1;
         document.getElementById("Boss").innerHTML = hero.journal.bosses_defeated;
-        alert ("You gain: " + x + " XP")
         alert ("You gain: " + y + " Gold")
         alert ("You gain: " + z + " Fame")
     }
@@ -954,7 +953,7 @@ function DrinkPotion()
                 //if no boss
                 addJournal(x,y)
                 // if boss
-                bossReward(x,y,z)
+                bossReward(x,y)
                 addJournal_boss(x)
             }
             else
@@ -985,8 +984,8 @@ function DrinkPotion()
             combat()
             if (hero.stats.current_hp > 0)
             {
-                questComplete(bandits)
-                bossReward(20,20,20)
+                questComplete(10*bandits,10)
+                bossReward(20,20)
                 addJournal_boss("kill", "bandits", "Bandit Leader")
             }
             else
@@ -1013,8 +1012,8 @@ function DrinkPotion()
             combat()
             if (hero.stats.current_hp > 0)
             {
-                questComplete(goblins)
-                bossReward(10,10,10)
+                questComplete(5*goblins,5)
+                bossReward(10,10)
                 addJournal_boss("kill", "goblins", "Goblin Boss")
             }
             else
@@ -1038,7 +1037,7 @@ function DrinkPotion()
             combat()
             if (hero.stats.current_hp > 0)
             {
-                questComplete(rats)
+                questComplete(2*rats,2)
                 addJournal("kill","rats")
             }
             else
@@ -1062,7 +1061,7 @@ function DrinkPotion()
             combat()
             if (hero.stats.current_hp > 0)
             {
-                questComplete(spiders)
+                questComplete(2*spiders,2)
                 addJournal("kill","spiders")
             }
             else
