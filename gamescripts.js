@@ -25,11 +25,11 @@ var hero =
         player_atk: 1,
         player_def: 1,
         speed: 1,
+        speed_boost: 0,
         xp: 0,
         xp_to_next_level: 100,
         player_buff: 0,
         player_debuff: 0,
-a        speed_boost: 0,
     },
     equipment:
     {
