@@ -754,7 +754,7 @@ function fightArena()
     }
 }
 //downtime functions
-function bar()
+function bar_drink()
 {
         var gossipArray = ["I once took an arrow to the knee.", "I saw a mudcrab the other day.", "I heard the brothel is run by succubi.", "The cake is a lie.", "Your waifu is shit.", "Snape kills Dumbledour", "Bruce Willis was dead at the end of Sixth Sense.", "My butthole itches."]
         var drinking = true;
