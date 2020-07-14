@@ -47,10 +47,11 @@ var hero =
         melee_wep_dmg: 1,
         ranged_wep: "Rock",
         ranged_wep_dmg: 1,
-        magic_wep: "Stick",
+        magic_wep: "Book",
         magic_wep_dmg: 1,
         wepCost: 100,
         armorCost: 100,
+        magicCost: 100,
     },
     inventory:
     {
@@ -1277,7 +1278,7 @@ function street_rest()
 }
 //shopping functions
 //apothecary functions
-function pharmacy()
+function apothecary()
 {
     var dChoice = prompt("Buy (P)otion(s) or an (E)lixer of Life?")
     if (dChoice === "P")
@@ -1333,7 +1334,7 @@ function impArmor(x)
 //blacksmith functions
 var weaponArray = ["Stick","Club", "Dagger", "Shortsword", "Longsword", "Magic Sword", "Hero Sword"]
 var armorArray = ["Peasant", "Leather", "Studded Leather", "Chain Mail", "Plate" ]
-function anvil()
+function blacksmith()
 {
     var forge = prompt("Upgrade (W)eapon or (A)rmor?")
     if (forge === "W")
@@ -1369,8 +1370,39 @@ function anvil()
             alert ("You choose not to do anything.")
     }
 }
+var spellbookArray = ["Book", "Tome", "Grimoire"]
+function impSpell(x)
+{
+    hero.equipment.magic_wep_dmg += x;
+    alert ("Your spellbook improves by " + x)
+    hero.equipment.magic_wep = spellbookArray[hero.equipment.magic_wep_dmg]
+    alert ("Your spellbook has been updgraded to a " + hero.equipment.magic_wep)
+    document.getElementById("Magwep").innerHTML = hero.equipment.magic_wep;
+}
+function enchanter()
+{   
+    alert ("Cost of enchanting is " + hero.equipment.magicCost + " Gold")
+    var enchant = prompt("Enchant your Spellbook? (Y/N)")
+    if (enchant === "Y")
+    {
+            if (hero.inventory.gold < hero.equipment.magicCost)
+            {
+                alert("You cannot afford to upgrade your spellbook.")
+            }
+            else
+            {
+                impSpell(1)
+                removeGold(hero.equipment.magicCost)
+                hero.equipment.magicCost *= 2;
+            }
+    }
+    else
+    {
+            alert ("You choose not to do anything.")
+    }
+}
  //realtor function
- function buy_House()
+ function realtor()
  {
     if (hero.inventory.homeowner != false)
     {
