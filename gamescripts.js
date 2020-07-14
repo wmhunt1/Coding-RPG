@@ -29,6 +29,7 @@ var hero =
         xp_to_next_level: 100,
         player_buff: 0,
         player_debuff: 0,
+a        speed_boost: 0,
     },
     equipment:
     {
@@ -108,7 +109,7 @@ var hero =
         thievery: "Untrained",
         thievery_value: 0,
         thievery_training_cost: 100,
-        thieveryArray: ["Nothing", "(St)eal: Steal and item or gold from an enemy."]
+        thieveryArray: ["Nothing", "(St)eal: Steal and item or gold from an enemy. Requires SP but doesn't use your action."]
     },
     spells_known:
     {
@@ -527,7 +528,6 @@ function playerATK()
         else
         {
             enemy.current_hp = enemy.current_hp - (hero.equipment.melee_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff - enemy.armor_value);
-            document.getElementById("CHP").innerHTML = hero.stats.current_hp;
             console.log("player hits enemy")
             alert ("Enemy hit")
         }
@@ -540,6 +540,64 @@ function playerATK()
     console.log(player_hit_roll)
     console.log(player_hit_chance)
     console.log(enemy.current_hp + " enemy hp")
+}
+function magic_blast()
+{
+    if (hero.stats.current_sp > 0 && hero.skills.magic_value > 0)
+    {
+        alert ("You fire a magic blast.")
+        removeSP(1)
+        removeAP(1)
+        console.log("player attacks")
+        var player_hit_chance = .5 - .1*(enemy.def + enemy.enemy_buff - enemy.enemy_debuff);
+        var player_hit_roll = Math.random() + .1*(hero.stats.player_atk + hero.stats.player_buff - hero.stats.player_debuff + hero.skills.magic_value)
+        if (player_hit_roll > player_hit_chance)
+        {
+            enemy.current_hp = enemy.current_hp - (hero.equipment.magic_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff - enemy.armor_value);
+            console.log("player hits enemy")
+            alert ("Enemy hit with the magic blast")
+        }
+        else
+        {
+            console.log("player missed enemy")
+            alert ("miss")
+        }
+        console.log(player_hit_roll)
+        console.log(player_hit_chance)
+        console.log(enemy.current_hp + " enemy hp")
+    }
+    else
+    {
+        alert ("You don't have enough SP.")
+    }
+}
+function haste()
+{
+    if (hero.stats.current_sp > 1 && hero.skills.magic_value > 1)
+    {
+        alert ("You cast hase on yourself.")
+        hero.stats.speed_boost += 1;
+        removeSP(2)
+        removeAP(1)
+    }
+    else
+    {
+        alert ("You don't have enough SP.")
+    }
+}
+function slow()
+{
+    if (hero.stats.current_sp > 1 && hero.skills.magic_value > 1)
+    {
+        alert ("You cast slow on your enemies.")
+        enemy.speed += 1;
+        removeSP(2)
+        removeAP(1)
+    }
+    else
+    {
+        alert ("You don't have enough SP.")
+    }
 }
 function cleave()
 {
@@ -577,7 +635,7 @@ function blessing()
     {
         alert ("You bless yourself.")
         hero.stats.player_buff = 1;
-        removeSP(1)
+        removeSP(2)
         removeAP(1)
     }
     else
@@ -591,8 +649,35 @@ function curse()
     {
         alert ("You curse your enemies.")
         enemy.enemy_debuff = 1;
-        removeSP(1)
+        removeSP(2)
         removeAP(1)
+    }
+    else
+    {
+        alert ("You don't have enough SP.")
+    }
+}
+function steal()
+{
+    if (hero.stats.current_sp > 0 && hero.skills.thievery_value > 0)
+    {
+        alert ("You attempt to steal something from the " + enemy.name)
+        var stealchance = Math.random()
+        if (1 >= stealchance && stealchance > .75)
+        {
+            alert ("You find " + enemy.xp_value*2 + " Gold")
+            addGold(enemy.xp_value*2)
+        }
+        else if (.75 >= stealchance && stealchance > .5)
+        {
+            alert ("You find a potion.")
+            hero.inventory.potion += 1;
+        }
+        else
+        {
+            alert("You don't find anything of value.")
+        }
+        removeSP(1)
     }
     else
     {
@@ -615,13 +700,25 @@ function playerTurn()
         else if (action === "Sk")
         {
             var skill = prompt("Use which skill?")
-            if (skill === "Cl")
+            if (skill === "Ma")
+            {
+                magic_blast()
+            }
+            else if (skill === "Ha")
+            {
+                haste()
+            }
+            else if (skill === "Sl")
+            {
+                slow()
+            }
+            else if (skill === "Cl")
             {
                 cleave()
             }
             else if (skill === "He")
             {
-
+                heal()
             }
             else if(skill === "Bl")
             {
@@ -630,6 +727,10 @@ function playerTurn()
             else if(skill === "Cu")
             {
                 curse()
+            }
+            else if(skill === "St")
+            {
+                steal()
             }
             else
             {
@@ -715,7 +816,7 @@ function combat()
         {
             turn += 1;
             console.log ("turn " + turn)
-            if (hero.stats.speed > enemy.speed || hero.stats.speed == enemy.speed)
+            if ((hero.stats.speed + hero.stats.speed_boost) > enemy.speed || (hero.stats.speed + hero.stats.speed_boost) == enemy.speed)
             {
                 playerTurn()
                 checkifdead()
@@ -743,6 +844,7 @@ function combat()
     hero.stats.player_debuff = 0;
     enemy.enemy_debuff = 0;
     enemy.enemy_debuff = 0;
+    hero.stats.speed_boost = 0;
 }
 //arena functions
 function betArena()
