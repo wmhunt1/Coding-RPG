@@ -87,7 +87,7 @@ var hero =
         magic: "Untrained",
         magic_value: 0,
         magic_training_cost: 100,
-        magicArray: ["Nothing", "Placeholder"],
+        magicArray: ["Nothing", "(Ma)gic Blast: Fire a blast of raw magic which ignores armor", "(Ha)ste and (Sl)ow: Increase your speed or decrease your enemy's speed."],
         marksman: "Untrained",
         marksman_value: 0,
         marksman_training_cost: 100,
@@ -108,6 +108,7 @@ var hero =
         thievery: "Untrained",
         thievery_value: 0,
         thievery_training_cost: 100,
+        thieveryArray: ["Nothing", "(St)eal: Steal and item or gold from an enemy."]
     },
     spells_known:
     {
@@ -1376,7 +1377,13 @@ function impThievery(x)
     hero.skills.thievery_value += x;
     hero.skills.thievery = hero.skills.skill_level_array[hero.skills.thievery_value]
     alert ("Your Thievery skill has increased in proficiency to the " + hero.skills.thievery + " level.")
+    alert ("You learn the " + hero.skills.thieveryArray[hero.skills.thievery_value] + " skill power(s)")
     document.getElementById("thievery").innerHTML = hero.skills.thievery;
+    var tag = document.createElement("p")
+    var text = document.createTextNode(hero.skills.thieveryArray[hero.skills.thievery_value]);
+    tag.appendChild(text);
+    var element = document.getElementById("thievery_known");
+    element.appendChild(tag);
 }
 function trainCrafting()
 {
