@@ -921,13 +921,12 @@ function DrinkPotion()
     }
     function questComplete(x,y)
     {
-        addXP(enemy.xp_value,x)
         addGold(x)
         addFame(y)
         hero.journal.quests_completed += 1;
         document.getElementById("QC").innerHTML = hero.journal.quests_completed;
-        alert ("You gain: " + enemy.xp_value*x + " Gold")
-        alert ("You gain: " + enemy.xp_value + " Fame")
+        alert ("You gain: " + x + " Gold")
+        alert ("You gain: " + y + " Fame")
     }
     function bossReward(x,y)
     {
@@ -935,8 +934,8 @@ function DrinkPotion()
         addFame(y)
         hero.journal.bosses_defeated += 1;
         document.getElementById("Boss").innerHTML = hero.journal.bosses_defeated;
-        alert ("You gain: " + y + " Gold")
-        alert ("You gain: " + z + " Fame")
+        alert ("You gain: " + x + " Gold")
+        alert ("You gain: " + y + " Fame")
     }
     function Template()
     {
@@ -984,7 +983,7 @@ function DrinkPotion()
             combat()
             if (hero.stats.current_hp > 0)
             {
-                questComplete(10*bandits,10)
+                questComplete((10*bandits),10)
                 bossReward(20,20)
                 addJournal_boss("kill", "bandits", "Bandit Leader")
             }
@@ -1012,7 +1011,7 @@ function DrinkPotion()
             combat()
             if (hero.stats.current_hp > 0)
             {
-                questComplete(5*goblins,5)
+                questComplete((5*goblins),5)
                 bossReward(10,10)
                 addJournal_boss("kill", "goblins", "Goblin Boss")
             }
@@ -1030,15 +1029,17 @@ function DrinkPotion()
         } 
         else
         {   
-            rat(Math.floor(Math.random() * 5+1))
+            //rat(Math.floor(Math.random() * 5+1))
+            rat(3)
             var rats = enemy.number;
             alert ("You go to " + barArray[bar] + " and head down the stairs into the cellar.")
             alert ("You must kill " + enemy.number + " rats")
             combat()
             if (hero.stats.current_hp > 0)
             {
-                questComplete(2*rats,2)
+                questComplete((2*rats),2)
                 addJournal("kill","rats")
+                console.log(rats)
             }
             else
             {
@@ -1061,7 +1062,7 @@ function DrinkPotion()
             combat()
             if (hero.stats.current_hp > 0)
             {
-                questComplete(2*spiders,2)
+                questComplete((2*spiders),2)
                 addJournal("kill","spiders")
             }
             else
