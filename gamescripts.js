@@ -589,7 +589,7 @@ function playerTurn()
     while (hero.stats.current_ap > 0)
     {
         
-        var action = prompt("Attack (A), use a (Sk)ill or drink a (P)otion?")
+        var action = prompt("Attack (A), use a (Sk)ill Power or drink a (P)otion?")
         if (action === "A")
         {
             playerATK()
@@ -1310,16 +1310,26 @@ function impMarksman(x)
     hero.skills.melee_value += x;
     hero.skills.melee = hero.skills.skill_level_array[hero.skills.melee_value]
     alert ("Your Melee skill has increased in proficiency to the " + hero.skills.melee + " level.")
-    alert ("You learn the " + hero.skills.meleeArray[hero.skills.melee_value] + " skill(s)")
+    alert ("You learn the " + hero.skills.meleeArray[hero.skills.melee_value] + " skill power(s)")
     document.getElementById("melee").innerHTML = hero.skills.melee;
+    var tag = document.createElement("p")
+    var text = document.createTextNode(hero.skills.meleeArray[hero.skills.melee_value]);
+    tag.appendChild(text);
+    var element = document.getElementById("melee_known");
+    element.appendChild(tag);
 }
 function impPrayer(x)
 {
     hero.skills.prayer_value += x;
     hero.skills.prayer = hero.skills.skill_level_array[hero.skills.prayer_value]
     alert ("Your Prayer skill has increased in proficiency to the " + hero.skills.prayer + " level.")
-    alert ("You learn the " + hero.skills.prayerArray[hero.skills.prayer_value] + " skill(s)")
+    alert ("You learn the " + hero.skills.prayerArray[hero.skills.prayer_value] + " skill power(s)")
     document.getElementById("prayer").innerHTML = hero.skills.prayer;
+    var tag = document.createElement("p")
+    var text = document.createTextNode(hero.skills.prayerArray[hero.skills.prayer_value]);
+    tag.appendChild(text);
+    var element = document.getElementById("prayer_known");
+    element.appendChild(tag);
 }
 function impSpeech(x)
 {
