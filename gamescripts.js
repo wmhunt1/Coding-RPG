@@ -87,6 +87,7 @@ var hero =
         magic: "Untrained",
         magic_value: 0,
         magic_training_cost: 100,
+        magicArray: ["Nothing", "Placeholder"],
         marksman: "Untrained",
         marksman_value: 0,
         marksman_training_cost: 100,
@@ -97,7 +98,7 @@ var hero =
         prayer: "Untrained",
         prayer_value: 0,
         prayer_training_cost: 100,
-        prayerArray: ["Nothing", "(Bl)essing and (Cu)rse: Buff yourself or debuff an enemy"],
+        prayerArray: ["Nothing", "(He)al: gain 5 HP", "(Bl)essing and (Cu)rse: Buff yourself or debuff an enemy"],
         speech: "Untrained",
         speech_value: 0,
         speech_training_cost: 100,
@@ -555,9 +556,23 @@ function cleave()
         alert ("You don't have enough SP.")
     }
 }
-function blessing()
+function heal()
 {
     if (hero.stats.current_sp > 0 && hero.skills.prayer_value > 0)
+    {
+        alert ("You heal yourself.")
+        healPlayer(5)
+        removeSP(1)
+        removeAP(1)
+    }
+    else
+    {
+        alert ("You don't have enough SP.")
+    }
+}
+function blessing()
+{
+    if (hero.stats.current_sp > 1 && hero.skills.prayer_value > 1)
     {
         alert ("You bless yourself.")
         hero.stats.player_buff = 1;
@@ -571,7 +586,7 @@ function blessing()
 }
 function curse()
 {
-    if (hero.stats.current_sp > 0 && hero.skills.prayer_value > 0)
+    if (hero.stats.current_sp > 1 && hero.skills.prayer_value > 1)
     {
         alert ("You curse your enemies.")
         enemy.enemy_debuff = 1;
@@ -602,6 +617,10 @@ function playerTurn()
             if (skill === "Cl")
             {
                 cleave()
+            }
+            else if (skill === "He")
+            {
+
             }
             else if(skill === "Bl")
             {
@@ -1297,6 +1316,13 @@ function impMagic(x)
     hero.skills.magic = hero.skills.skill_level_array[hero.skills.magic_value]
     alert ("Your Magic skill has increased in proficiency to the " + hero.skills.magic + " level.")
     document.getElementById("magic").innerHTML = hero.skills.magic;
+    alert ("You learn the " + hero.skills.magicArray[hero.skills.magic_value] + " skill power(s)")
+    document.getElementById("magic").innerHTML = hero.skills.magic;
+    var tag = document.createElement("p")
+    var text = document.createTextNode(hero.skills.magicArray[hero.skills.magic_value]);
+    tag.appendChild(text);
+    var element = document.getElementById("magic_known");
+    element.appendChild(tag);
 }
 function impMarksman(x)
 {
