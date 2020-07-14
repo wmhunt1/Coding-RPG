@@ -963,6 +963,10 @@ function DrinkPotion()
             }
         }
     }
+    function mainQuest()
+    {
+        
+    }
     function banditQuest()
     {
         if (hero.stats.current_hp <= 0)  
