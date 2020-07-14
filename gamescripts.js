@@ -93,10 +93,11 @@ var hero =
         melee: "Untrained",
         melee_value: 0,
         melee_training_cost: 100,
-        meleeArray: ["Normal (A)ttack", "(C)leave"],
+        meleeArray: ["Normal (A)ttack", "(Cl)eave"],
         prayer: "Untrained",
-        payer_value: 0,
+        prayer_value: 0,
         prayer_training_cost: 100,
+        prayerArray: ["Nothing", "(Bl)essing and (Cu)rse"],
         speech: "Untrained",
         speech_value: 0,
         speech_training_cost: 100,
@@ -516,14 +517,14 @@ function playerATK()
     var player_hit_roll = Math.random() + .1*(hero.stats.player_atk + hero.stats.player_buff - hero.stats.player_debuff + hero.skills.melee_value)
     if (player_hit_roll > player_hit_chance)
     {
-        if (enemy.armor_value >= hero.equipment.melee_wep_dmg)
+        if (enemy.armor_value + enemy.enemy_buff - enemy.enemy_debuff >= hero.equipment.melee_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff)
         {
             console.log("no damage")
             alert("No damage")
         }
         else
         {
-            enemy.current_hp = enemy.current_hp - (hero.equipment.melee_wep_dmg - enemy.armor_value);
+            enemy.current_hp = enemy.current_hp - (hero.equipment.melee_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff - enemy.armor_value);
             document.getElementById("CHP").innerHTML = hero.stats.current_hp;
             console.log("player hits enemy")
             alert ("Enemy hit")
@@ -554,29 +555,61 @@ function cleave()
         alert ("You don't have enough SP.")
     }
 }
+function blessing()
+{
+    if (hero.stats.current_sp > 0 && hero.skills.prayer_value > 0)
+    {
+        alert ("You bless yourself.")
+        hero.stats.player_buff = 1;
+        removeSP(1)
+        removeAP(1)
+    }
+    else
+    {
+        alert ("You don't have enough SP.")
+    }
+}
+function curse()
+{
+    if (hero.stats.current_sp > 0 && hero.skills.prayer_value > 0)
+    {
+        alert ("You curse your enemies.")
+        enemy.enemy_debuff = 1;
+        removeSP(1)
+        removeAP(1)
+    }
+    else
+    {
+        alert ("You don't have enough SP.")
+    }
+}
 function playerTurn()
 {
     hero.stats.current_ap = hero.stats.max_ap
     while (hero.stats.current_ap > 0)
     {
         
-        var action = prompt("Attack (A), use a (S)kill or drink a (P)otion?")
+        var action = prompt("Attack (A), use a (Sk)ill or drink a (P)otion?")
         if (action === "A")
         {
             playerATK()
             removeAP(1)
 
         }
-        else if (action === "S")
+        else if (action === "Sk")
         {
             var skill = prompt("Use which skill?")
-            if (skill === "C")
+            if (skill === "Cl")
             {
                 cleave()
             }
-            else if(skill === "")
+            else if(skill === "Bl")
             {
-
+                blessing()
+            }
+            else if(skill === "Cu")
+            {
+                curse()
             }
             else
             {
@@ -602,14 +635,14 @@ function enemyATK()
     var enemy_hit_roll = Math.random() + .1*(enemy.atk + enemy.enemy_buff - enemy.enemy_debuff)
     if (enemy_hit_roll > enemy_hit_chance)
     {
-        if (total_armor >= enemy.weapon_dmg)
+        if (total_armor +  hero.stats.player_buff - hero.stats.player_debuff >= enemy.weapon_dmg + enemy.enemy_buff - enemy.enemy_debuff)
         {
             console.log("no damage")
             alert("No damage")
         }
         else
         {
-            hero.stats.current_hp = hero.stats.current_hp - (enemy.weapon_dmg - total_armor);
+            hero.stats.current_hp = hero.stats.current_hp - (enemy.weapon_dmg + enemy.enemy_buff - enemy.enemy_debuff- total_armor);
             console.log("enemy hits player")
             alert("player hit")
         }
@@ -989,7 +1022,7 @@ function DrinkPotion()
             }
             else
             {
-                Death()
+                death()
             }
         }
     }
@@ -1017,7 +1050,7 @@ function DrinkPotion()
             }
             else
             {
-                Death()
+                death()
             }
         }
     }
@@ -1043,7 +1076,7 @@ function DrinkPotion()
             }
             else
             {
-                Death()
+                death()
             }
         }
     }
@@ -1067,7 +1100,7 @@ function DrinkPotion()
             }
             else
             {
-                Death()
+                death()
             }
         }
     }
@@ -1277,7 +1310,7 @@ function impMarksman(x)
     hero.skills.melee_value += x;
     hero.skills.melee = hero.skills.skill_level_array[hero.skills.melee_value]
     alert ("Your Melee skill has increased in proficiency to the " + hero.skills.melee + " level.")
-    alert ("You learn the " + hero.skills.meleeArray[hero.skills.melee_value] + " skill")
+    alert ("You learn the " + hero.skills.meleeArray[hero.skills.melee_value] + " skill(s)")
     document.getElementById("melee").innerHTML = hero.skills.melee;
 }
 function impPrayer(x)
@@ -1285,6 +1318,7 @@ function impPrayer(x)
     hero.skills.prayer_value += x;
     hero.skills.prayer = hero.skills.skill_level_array[hero.skills.prayer_value]
     alert ("Your Prayer skill has increased in proficiency to the " + hero.skills.prayer + " level.")
+    alert ("You learn the " + hero.skills.prayerArray[hero.skills.prayer_value] + " skill(s)")
     document.getElementById("prayer").innerHTML = hero.skills.prayer;
 }
 function impSpeech(x)
