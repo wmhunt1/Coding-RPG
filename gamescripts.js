@@ -27,15 +27,15 @@ var hero =
     },
     equipment:
     {
-        head_slot: "Peasant Hat",
+        head_slot: "Peasant",
         head_armor: 0,
-        torso_slot: "Peasant Shirt",
+        torso_slot: "Peasant",
         torso_armor: 0,
-        leg_slot: "Peasant Pants",
+        leg_slot: "Peasant",
         leg_armor: 0,
-        hand_slot: "Peasant Gloves",
+        hand_slot: "Peasant",
         hand_armor: 0,
-        feet_slot: "Peasant Boots",
+        feet_slot: "Peasant",
         feet_armor: 0,
         melee_wep: "Stick",
         melee_wep_dmg: 1,
@@ -1153,22 +1153,22 @@ function impWep(x)
 {
     hero.equipment.melee_wep_dmg += x;
     alert ("Your weapon improves by " + x)
-    hero.equipment.melee_wep = WeaponArray[hero.equipment.melee_wep-1]
+    hero.equipment.melee_wep = weaponArray[hero.equipment.melee_wep_dmg-1]
     alert ("Your weapon has been updgraded to a " + hero.equipment.melee_wep)
     document.getElementById("Mwep").innerHTML = hero.equipment.melee_wep;
 }
 function impArmor(x)
 {
-    hero.equipment.torso_armor;
+    hero.equipment.torso_armor += x;
     alert ("Your armor improves by " + x)
-    hero.equipment.torso_armor = armorArray[hero.equipment.torso_slot]
+    hero.equipment.torso_slot = armorArray[hero.equipment.torso_armor]
     alert("You armor has now been upgraded to " + hero.equipment.torso_slot)
     document.getElementById("Torso").innerHTML = hero.equipment.torso_slot;
     document.getElementById("Totarm").innerHTML = total_armor;
 } 
 //blacksmith functions
 var weaponArray = ["Stick","Club", "Dagger", "Shortsword", "Longsword", "Magic Sword", "Hero Sword"]
-var armorArray = ["Peasant Garb", "Leather", "Studded Leather", "Chain Mail", "Plate" ]
+var armorArray = ["Peasant", "Leather", "Studded Leather", "Chain Mail", "Plate" ]
 function anvil()
 {
     var forge = prompt("Upgrade (W)eapon or (A)rmor?")
