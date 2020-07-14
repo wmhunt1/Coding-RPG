@@ -945,7 +945,12 @@ function DrinkPotion()
             // quest content
             if (hero.stats.current_hp > 0)
             {
-                //quest completion
+                questComplete(x)
+                //if no boss
+                addJournal(x,y)
+                // if boss
+                bossReward(x,y,z)
+                addJournal_boss(x)
             }
             else
             {
