@@ -598,22 +598,82 @@ function spider(x)
 }
 //combat functions
 var enemies_killed = 0;
-function playerATK(x)
+function playerATK(x,y)
 {
     alert ("You attack the " + enemy.name + " with your " + hero.equipment.melee_wep)
     console.log("player attacks")
     var player_hit_chance = .5 - .1*(enemy.def + enemy.enemy_buff - enemy.enemy_debuff);
-    var player_hit_roll = Math.random() + .1*(hero.stats.player_atk + hero.stats.player_buff - hero.stats.player_debuff + hero.skills.melee_value)
+    var player_hit_roll = Math.random() + .1*(hero.stats.player_atk + hero.stats.player_buff - hero.stats.player_debuff + hero.skills.melee_value+x)
     if (player_hit_roll > player_hit_chance)
     {
-        if (enemy.armor_value + enemy.enemy_buff - enemy.enemy_debuff >= x*(hero.equipment.melee_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff))
+        if (enemy.armor_value + enemy.enemy_buff - enemy.enemy_debuff >= y*(hero.equipment.melee_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff))
         {
             console.log("no damage")
             alert("The attack bounces harmeless off of the " + enemy.name + "'s " + enemy.armor)
         }
         else
         {
-            dmg = x*(hero.equipment.melee_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff - enemy.armor_value);
+            dmg = y*(hero.equipment.melee_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff - enemy.armor_value);
+            enemy.current_hp -= dmg;
+            console.log("player hits enemy")
+            alert ("Enemy hit for " + dmg + " damage.")
+        }
+    }
+    else
+    {
+        console.log("player missed enemy")
+        alert ("You miss the " + enemy.name)
+    }
+    console.log(player_hit_roll)
+    console.log(player_hit_chance)
+    console.log(enemy.current_hp + " enemy hp")
+}
+function ranged_playerATK(x,y)
+{
+    alert ("You attack the " + enemy.name + " with your " + hero.equipment.ranged_wep)
+    console.log("player attacks")
+    var player_hit_chance = .5 - .1*(enemy.def + enemy.enemy_buff - enemy.enemy_debuff);
+    var player_hit_roll = Math.random() + .1*x*(hero.stats.player_atk + hero.stats.player_buff - hero.stats.player_debuff + hero.skills.range_value)
+    if (player_hit_roll > player_hit_chance)
+    {
+        if (enemy.armor_value + enemy.enemy_buff - enemy.enemy_debuff >= y*(hero.equipment.range_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff))
+        {
+            console.log("no damage")
+            alert("The attack bounces harmeless off of the " + enemy.name + "'s " + enemy.armor)
+        }
+        else
+        {
+            dmg = y*(hero.equipment.range_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff - enemy.armor_value);
+            enemy.current_hp -= dmg;
+            console.log("player hits enemy")
+            alert ("Enemy hit for " + dmg + " damage.")
+        }
+    }
+    else
+    {
+        console.log("player missed enemy")
+        alert ("You miss the " + enemy.name)
+    }
+    console.log(player_hit_roll)
+    console.log(player_hit_chance)
+    console.log(enemy.current_hp + " enemy hp")
+}
+function magicplayerATK(x)
+{
+    alert ("You attack the " + enemy.name + " with your " + hero.equipment.magic_wep)
+    console.log("player attacks")
+    var player_hit_chance = .5 - .1*(enemy.def + enemy.enemy_buff - enemy.enemy_debuff);
+    var player_hit_roll = Math.random() + .1*x*(hero.stats.player_atk + hero.stats.player_buff - hero.stats.player_debuff + hero.skills.magic_value)
+    if (player_hit_roll > player_hit_chance)
+    {
+        if (enemy.armor_value + enemy.enemy_buff - enemy.enemy_debuff >= y*(hero.equipment.magic_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff))
+        {
+            console.log("no damage")
+            alert("The attack bounces harmeless off of the " + enemy.name + "'s " + enemy.armor)
+        }
+        else
+        {
+            dmg = y*(hero.equipment.magic_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff - enemy.armor_value);
             enemy.current_hp -= dmg;
             console.log("player hits enemy")
             alert ("Enemy hit for " + dmg + " damage.")
@@ -692,7 +752,7 @@ function cleave()
     if (hero.stats.current_sp > 0 && hero.skills.melee_value > 0)
     {
         alert ("You use the cleave ability.")
-        playerATK(1)
+        playerATK(1,1)
         checkifdead()
         playerATK(1)
         removeSP(1)
@@ -719,11 +779,11 @@ function heal()
 }
 function blessing()
 {
-    if (hero.stats.current_sp > 1 && hero.skills.prayer_value > 1)
+    if (hero.stats.current_sp > 0 && hero.skills.prayer_value > 0)
     {
         alert ("You bless yourself.")
         hero.stats.player_buff = 1;
-        removeSP(2)
+        removeSP(1)
         removeAP(1)
     }
     else
@@ -733,11 +793,11 @@ function blessing()
 }
 function curse()
 {
-    if (hero.stats.current_sp > 1 && hero.skills.prayer_value > 1)
+    if (hero.stats.current_sp > 0 && hero.skills.prayer_value > 0)
     {
         alert ("You curse your enemies.")
         enemy.enemy_debuff = 1;
-        removeSP(2)
+        removeSP(1)
         removeAP(1)
     }
     else
@@ -778,12 +838,22 @@ function playerTurn()
     while (hero.stats.current_ap > 0)
     {
         
-        var action = prompt("Attack (A), use a (Sk)ill Power or drink a (P)otion?")
+        var action = prompt("Melee (A)ttack, (R)anged Attack, or (M)agic use a (Sk)ill Power or drink a (P)otion?")
         if (action === "A")
         {
-            playerATK(1)
+            playerATK(1,1)
             removeAP(1)
 
+        }
+        else if (action === "R")
+        {
+            ranged_playerATK(1,1)
+            removeAP(1)
+        }
+        else if (action === "M")
+        {
+            magicplayerATK(1,1)
+            removeAP(1)
         }
         else if (action === "Sk")
         {
