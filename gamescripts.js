@@ -142,6 +142,12 @@ function createHero()
 {
     changeName()
     quest()
+    var tag = document.createElement("p")
+    var text = document.createTextNode("Entry #" + entry + ": I am  " + hero.basics.name + " and I am on a quest to defeat the Dark Lord.");
+    tag.appendChild(text);
+    var element = document.getElementById("entries");
+    element.appendChild(tag);
+    entry += 1;
 }
 //level up functions
 function LevelUp()
