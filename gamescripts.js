@@ -1989,3 +1989,130 @@ function trainThievery()
         alert ("Maybe later.")
     }
 }
+//skill check function
+function checkCrafting(x,y)
+{
+    alert ("you are trying to do " + y)
+    if (hero.skills.crafting_value > x)
+    {
+        alert("you succeed at " + y)
+        //success events
+    }
+    else
+    {
+        alert("you fail at " + y)
+        //failure events
+    }
+}
+function checkGathering(x,y)
+{
+    alert ("you are trying to do " + y)
+    if (hero.skills.gathering_value > x)
+    {
+        alert("you succeed at " + y)
+        //success events
+    }
+    else
+    {
+        alert("you fail at " + y)
+        //failure events
+    }
+}
+function checkMagic(x,y)
+{
+    alert ("you are trying to do " + y)
+    if (hero.skills.magic_value > x)
+    {
+        alert("you succeed at " + y)
+        //success events
+    }
+    else
+    {
+        alert("you fail at " + y)
+        //failure events
+    }
+}
+function checkMarksman(x,y)
+{
+    alert ("you are trying to do " + y)
+    if (hero.skills.marksman_value > x)
+    {
+        alert("you succeed at " + y)
+        //success events
+    }
+    else
+    {
+        alert("you fail at " + y)
+        //failure events
+    }
+}
+function checkMelee(x,y)
+{
+    alert ("you are trying to do " + y)
+    if (hero.skills.melee_value > x)
+    {
+        alert("you succeed at " + y)
+        //success events
+    }
+    else
+    {
+        alert("you fail at " + y)
+        //failure events
+    }
+}
+function checkPrayer(x,y)
+{
+    alert ("you are trying to do " + y)
+    if (hero.skills.prayer_value > x)
+    {
+        alert("you succeed at " + y)
+        //success events
+    }
+    else
+    {
+        alert("you fail at " + y)
+        //failure events
+    }
+}
+function checkSpeech(x,y)
+{
+    alert ("you are trying to do " + y)
+    if (hero.skills.speech_value > x)
+    {
+        alert("you succeed at " + y)
+        //success events
+    }
+    else
+    {
+        alert("you fail at " + y)
+        //failure events
+    }
+}
+function checkSurvival(x,y)
+{
+    alert ("you are trying to do " + y)
+    if (hero.skills.survival_value > x)
+    {
+        alert("you succeed at " + y)
+        //success events
+    }
+    else
+    {
+        alert("you fail at " + y)
+        //failure events
+    }
+}
+function checkThievery(x,y)
+{
+    alert ("you are trying to do " + y)
+    if (hero.skills.thievery_value > x)
+    {
+        alert("you succeed at " + y)
+        //success events
+    }
+    else
+    {
+        alert("you fail at " + y)
+        //failure events
+    }
+}
