@@ -1,5 +1,6 @@
 function startGame()
 {
+    document.getElementById("Menu").style.display = "none";
     document.getElementById("Intro").style.display = "block";
     document.getElementById("Character").style.display = "none";
     document.getElementById("Arena").style.display = "none";
