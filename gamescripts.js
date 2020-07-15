@@ -16,6 +16,7 @@ function startGame()
     document.getElementById("Training").style.display = "none";
     document.getElementById("Death").style.display = "none";
     document.getElementById("Gameover").style.display = "none";
+    document.getElementById("Combat").style.display = "none";
 }
 //player stats
 var hero =
@@ -210,6 +211,7 @@ function death()
         document.getElementById("Training").style.display = "none";
         document.getElementById("Death").style.display = "block";
         document.getElementById("Gameover").style.display = "none";
+        document.getElementById("Combat").style.display = "none";
     }
     else 
     {
@@ -229,6 +231,7 @@ function death()
         document.getElementById("Training").style.display = "none";
         document.getElementById("Death").style.display = "none";
         document.getElementById("Gameover").style.display = "block";
+        document.getElementById("Combat").style.display = "none";
     }
 }
 function healPlayer(x)
@@ -572,6 +575,7 @@ function spider(x)
 var enemies_killed = 0;
 function playerATK(x)
 {
+    alert ("You attack the " + enemy.name + " with your " + hero.equipment.melee_wep)
     console.log("player attacks")
     var player_hit_chance = .5 - .1*(enemy.def + enemy.enemy_buff - enemy.enemy_debuff);
     var player_hit_roll = Math.random() + .1*(hero.stats.player_atk + hero.stats.player_buff - hero.stats.player_debuff + hero.skills.melee_value)
@@ -580,19 +584,20 @@ function playerATK(x)
         if (enemy.armor_value + enemy.enemy_buff - enemy.enemy_debuff >= x*(hero.equipment.melee_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff))
         {
             console.log("no damage")
-            alert("No damage")
+            alert("The attack bounces harmeless off of the " + enemy.name + "'s " + enemy.armor)
         }
         else
         {
-            enemy.current_hp = enemy.current_hp - x*(hero.equipment.melee_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff - enemy.armor_value);
+            dmg = x*(hero.equipment.melee_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff - enemy.armor_value);
+            enemy.current_hp -= dmg;
             console.log("player hits enemy")
-            alert ("Enemy hit")
+            alert ("Enemy hit for " + dmg + " damage.")
         }
     }
     else
     {
         console.log("player missed enemy")
-        alert ("miss")
+        alert ("You miss the " + enemy.name)
     }
     console.log(player_hit_roll)
     console.log(player_hit_chance)
@@ -602,17 +607,18 @@ function magic_blast()
 {
     if (hero.stats.current_sp > 0 && hero.skills.magic_value > 0)
     {
-        alert ("You fire a magic blast.")
+        alert ("You fire a magic blast at the " + enemy.name)
         removeSP(1)
         removeAP(1)
         console.log("player attacks")
         var player_hit_chance = .5 - .1*(enemy.def + enemy.enemy_buff - enemy.enemy_debuff);
         var player_hit_roll = Math.random() + .1*(hero.stats.player_atk + hero.stats.player_buff - hero.stats.player_debuff + hero.skills.magic_value)
         if (player_hit_roll > player_hit_chance)
-        {
-            enemy.current_hp = enemy.current_hp - (hero.equipment.magic_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff - enemy.armor_value);
+        {   
+            dmg = (hero.equipment.magic_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff - enemy.armor_value);
+            enemy.current -= dmg;
             console.log("player hits enemy")
-            alert ("Enemy hit with the magic blast")
+            alert ("Enemy hit with the magic blast dealing " + dmg + " damage.")
         }
         else
         {
@@ -630,11 +636,11 @@ function magic_blast()
 }
 function haste()
 {
-    if (hero.stats.current_sp > 1 && hero.skills.magic_value > 1)
+    if (hero.stats.current_sp > 2 && hero.skills.magic_value > 2)
     {
         alert ("You cast hase on yourself.")
         hero.stats.speed_boost += 1;
-        removeSP(2)
+        removeSP(4)
         removeAP(1)
     }
     else
@@ -644,11 +650,11 @@ function haste()
 }
 function slow()
 {
-    if (hero.stats.current_sp > 1 && hero.skills.magic_value > 1)
+    if (hero.stats.current_sp > 2 && hero.skills.magic_value > 2)
     {
         alert ("You cast slow on your enemies.")
         enemy.speed += 1;
-        removeSP(2)
+        removeSP(4)
         removeAP(1)
     }
     else
@@ -808,7 +814,7 @@ function playerTurn()
 function enemyATK()
 {
     console.log("enemy attacks")
-    alert("The " + enemy.name + " attacks")
+    alert("The " + enemy.name + " attacks with its " + enemy.weapon)
     var enemy_hit_chance = .5 - .1*(hero.stats.player_def + hero.stats.player_buff - hero.stats.player_debuff);
     var enemy_hit_roll = Math.random() + .1*(enemy.atk + enemy.enemy_buff - enemy.enemy_debuff)
     if (enemy_hit_roll > enemy_hit_chance)
@@ -816,19 +822,20 @@ function enemyATK()
         if (total_armor +  hero.stats.player_buff - hero.stats.player_debuff >= enemy.weapon_dmg + enemy.enemy_buff - enemy.enemy_debuff)
         {
             console.log("no damage")
-            alert("No damage")
+            alert("The " + enemy.name + "'s" + enemy.weapon + " bounces off of your armor.")
         }
         else
         {
-            hero.stats.current_hp = hero.stats.current_hp - (enemy.weapon_dmg + enemy.enemy_buff - enemy.enemy_debuff- total_armor);
+            dmg = (enemy.weapon_dmg + enemy.enemy_buff - enemy.enemy_debuff- total_armor);
+            hero.stats.current_hp -= dmg;
             console.log("enemy hits player")
-            alert("player hit")
+            alert("player hit for " + dmg + " damage.")
         }
     }
     else
     {
         console.log("enemy missed player")
-        alert ("miss")
+        alert ("The " + enemy.name + " misses you with its " + enemy.weapon)
     }
     console.log(enemy_hit_roll)
     console.log(enemy_hit_chance)
@@ -885,12 +892,14 @@ function combat()
                 playerTurn()
                 checkifdead()
             }
+            alert ("Your current HP is " + hero.stats.current_hp)
         }
     }
     if (hero.stats.current_hp > 0)
     {
         console.log("victory")
         alert ("victory.")
+        quest()
     }
     else
     {
@@ -1139,8 +1148,7 @@ function DrinkPotion()
         addFame(y)
         hero.journal.quests_completed += 1;
         document.getElementById("QC").innerHTML = hero.journal.quests_completed;
-        alert ("You gain: " + x + " Gold")
-        alert ("You gain: " + y + " Fame")
+        alert ("You gain: " + x + " Gold and " + y + " Fame for completed the quest.")
     }
     function bossReward(x,y)
     {
@@ -1148,8 +1156,7 @@ function DrinkPotion()
         addFame(y)
         hero.journal.bosses_defeated += 1;
         document.getElementById("Boss").innerHTML = hero.journal.bosses_defeated;
-        alert ("You gain: " + x + " Gold")
-        alert ("You gain: " + y + " Fame")
+        alert ("You gain: " + x + " Gold and " + y + " Fame for defeating the " + enemy.name)
     }
     function Template()
     {
@@ -1258,8 +1265,7 @@ function DrinkPotion()
         } 
         else
         {   
-            //rat(Math.floor(Math.random() * 5+1))
-            rat(3)
+            rat(Math.floor(Math.random() * 5+1))
             var rats = enemy.number;
             alert ("You go to " + barArray[bar] + " and head down the stairs into the cellar.")
             alert ("You must kill " + enemy.number + " rats")
