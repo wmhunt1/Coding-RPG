@@ -67,6 +67,7 @@ var hero =
         wepCost: 100,
         armorCost: 100,
         magicCost: 100,
+        rangedCost: 100,
     },
     inventory:
     {
@@ -1544,6 +1545,7 @@ function apothecary()
         alert ("You decide not to buy any potions. ")
     }
 }
+
 //blacksmith functions
 function impWep(x)
 {
@@ -1562,7 +1564,6 @@ function impArmor(x)
     document.getElementById("Torso").innerHTML = hero.equipment.torso_slot;
     document.getElementById("Totarm").innerHTML = total_armor;
 } 
-//blacksmith functions
 var weaponArray = ["Stick","Club", "Dagger", "Shortsword", "Longsword", "Magic Sword", "Hero Sword"]
 var armorArray = ["Peasant", "Leather", "Studded Leather", "Chain Mail", "Plate" ]
 function blacksmith()
@@ -1601,6 +1602,40 @@ function blacksmith()
             alert ("You choose not to do anything.")
     }
 }
+//bowyerfunctions
+
+function impRanged(x)
+{
+    hero.equipment.ranged_wep_dmg += x;
+    alert ("Your ranged improves by " + x)
+    hero.equipment.ranged_wep = rangedArray[hero.equipment.ranged_wep_dmg]
+    alert("You weapon has now been upgraded to " + hero.equipment.ranged_wep)
+    document.getElementById("Rwep").innerHTML = hero.equipment.ranged_wep;
+} 
+var rangedArray = ["Rock", "Sling", "Shortbow"]
+function bowyer()
+{
+    alert ("Cost of upgrading your ranged weapon " + hero.equipment.rangedCost + " Gold")
+    var fletch = prompt("Improve your ranged weapon? (Y/N)")
+    if (fletch === "Y")
+    {
+            if (hero.inventory.gold < hero.equipment.rangedCost)
+            {
+                alert("You cannot afford to upgrade your spellbook.")
+            }
+            else
+            {
+                impRanged(1)
+                removeGold(hero.equipment.rangedCost)
+                hero.equipment.rangedCost *= 2;
+            }
+    }
+    else
+    {
+            alert ("You choose not to do anything.")
+    }
+}
+//enchanter functions
 var spellbookArray = ["Scrap of Paper", "Phamplet", "Book", "Tome", "Grimoire"]
 function impSpell(x)
 {
