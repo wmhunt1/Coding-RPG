@@ -104,10 +104,11 @@ var hero =
         magic: "Untrained",
         magic_value: 0,
         magic_training_cost: 100,
-        magicArray: ["Nothing", "(Ma)gic Blast: Fire a blast of raw magic which ignores armor", "(Ha)ste and (Sl)ow: Increase your speed or decrease your enemy's speed."],
+        magicArray: ["(M)agic Bolt", "(Ma)gic Blast: Fire a blast of raw magic which ignores armor", "(Ha)ste and (Sl)ow: Increase your speed or decrease your enemy's speed."],
         marksman: "Untrained",
         marksman_value: 0,
         marksman_training_cost: 100,
+        marksmanArray: ["(R)anged Attack", "(Ai)m", "(Ra)pid Shot."],
         melee: "Untrained",
         melee_value: 0,
         melee_training_cost: 100,
@@ -658,7 +659,7 @@ function ranged_playerATK(x,y)
     console.log(player_hit_chance)
     console.log(enemy.current_hp + " enemy hp")
 }
-function magicplayerATK(x)
+function magic_playerATK(x)
 {
     alert ("You attack the " + enemy.name + " with your " + hero.equipment.magic_wep)
     console.log("player attacks")
@@ -740,6 +741,36 @@ function slow()
         alert ("You cast slow on your enemies.")
         enemy.speed += 1;
         removeSP(4)
+        removeAP(1)
+    }
+    else
+    {
+        alert ("You don't have enough SP.")
+    }
+}
+function aim()
+{
+    if (hero.stats.current_sp > 0 && hero.skills.marksman_value > 0)
+    {
+        alert ("You use the Aim ability.")
+        ranged_playerATK(2,1)
+        removeSP(2)
+        removeAP(1)
+    }
+    else
+    {
+        alert ("You don't have enough SP.")
+    }
+}
+function rapidShot()
+{
+    if (hero.stats.current_sp > 1 && hero.skills.marksman_value > 1)
+    {
+        alert ("You use the Power Attack ability.")
+        ranged_playerATK(1,1)
+        checkifdead()
+        ranged_playerATK(1,1)
+        removeSP(2)
         removeAP(1)
     }
     else
@@ -866,7 +897,7 @@ function playerTurn()
         }
         else if (action === "M")
         {
-            magicplayerATK(1,1)
+            magic_playerATK(1,1)
             removeAP(1)
         }
         else if (action === "Sk")
@@ -883,6 +914,14 @@ function playerTurn()
             else if (skill === "Sl")
             {
                 slow()
+            }
+            else if (skill === "Ai")
+            {
+                aim()
+            }
+            else if (skill === "Ra")
+            {
+                rapidShot()
             }
             else if (skill === "Po")
             {
@@ -1656,7 +1695,13 @@ function impMarksman(x)
     hero.skills.marksman_value += x;
     hero.skills.marksman = hero.skills.skill_level_array[hero.skills.marksman_value]
     alert ("Your Marksman skill has increased in proficiency to the " + hero.skills.marksman + " level.")
+    alert ("You learn the " + hero.skills.marksmanArray[hero.skills.marksman_value] + " skill power(s)")
     document.getElementById("marksman").innerHTML = hero.skills.marksman;
+    var tag = document.createElement("p")
+    var text = document.createTextNode(hero.skills.marksmanArray[hero.skills.marksman_value]);
+    tag.appendChild(text);
+    var element = document.getElementById("marksman_known");
+    element.appendChild(tag);
 }
  function impMelee(x)
 {
