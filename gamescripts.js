@@ -41,7 +41,7 @@ var hero =
         player_def: 1,
         speed: 1,
         speed_boost: 0,
-        xp: 0,
+        xp: 100,
         xp_to_next_level: 100,
         player_buff: 0,
         player_debuff: 0,
@@ -156,17 +156,42 @@ function createHero()
 //level up functions
 function LevelUp()
 {
+    var lp = 2;
     hero.basics.level += 1;
-    hero.basics.max_hp += 10;
-    hero.stats.max_sp += 2;
     hero.stats.xp_to_next_level = 100*hero.basics.level;
-    hero.stats.player_atk += 1;
-    hero.stats.player_def += 1;
-    document.getElementById("Level").innerHTML = hero.stats.level;
-    document.getElementById("MHP").innerHTML = hero.stats.max_hp;
-    document.getElementById("MSP").innerHTML = hero.stats.max_sp;
-    document.getElementById("ATK").innerHTML = hero.stats.player_atk;
-    document.getElementById("DEF").innerHTML = hero.stats.player_def;
+    document.getElementById("Level").innerHTML = hero.basics.level;
+    while (lp > 0)
+    {
+        var lChoice = prompt("You have leveled up. Choose 2 level up bonus: 10 (H)P, 2 (S)P, 1 (A)ttack, or 1 (D)efense.")
+        if (lChoice === "H")
+        {
+            hero.basics.max_hp += 10;
+            document.getElementById("MHP").innerHTML = hero.stats.max_hp;
+            lp -= 1;
+        }
+        else if (lChoice === "S")
+        {
+            hero.stats.max_sp += 2;
+            document.getElementById("MSP").innerHTML = hero.stats.max_sp;
+            lp -= 1;
+        }
+        else if (lChoice === "A")
+        {
+            hero.stats.player_atk += 1;
+            document.getElementById("ATK").innerHTML = hero.stats.player_atk;
+            lp -= 1;
+        }
+        else if (lChoice === "D")
+        {
+            hero.stats.player_def += 1;
+            document.getElementById("DEF").innerHTML = hero.stats.player_def;
+            lp -= 1;
+        }
+        else
+        {
+
+        }
+    }
 }
 function Ready_for_level()
 {
