@@ -18,6 +18,10 @@ nav
     border: 1px solid black;
     width: 100%;
 }
+nav h1
+{
+    text-align: center;
+}
 nav ul
 {
     text-align: center;

@@ -1,7 +1,18 @@
 function startGame()
 {
-    alert ("Welcome to the world of Placeholder. Your goal is to be an adventurer.")
-    changeName()
+    document.getElementById("Intro").style.display = "block";
+    document.getElementById("Character").style.display = "none";
+    document.getElementById("Arena").style.display = "none";
+    document.getElementById("Downtime").style.display = "none";
+    document.getElementById("Equipment").style.display = "none";
+    document.getElementById("Factions").style.display = "none";
+    document.getElementById("Inventory").style.display = "none";
+    document.getElementById("Journal").style.display = "none";
+    document.getElementById("Quest").style.display = "none";
+    document.getElementById("Rest").style.display = "none";
+    document.getElementById("Shopping").style.display = "none";
+    document.getElementById("Skills").style.display = "none";
+    document.getElementById("Training").style.display = "none";    
 }
 //player stats
 var hero =
@@ -120,6 +131,119 @@ var hero =
 }
 //couldn't get to work while in object
 var total_armor = (hero.equipment.head_armor + hero.equipment.torso_armor + hero.equipment.leg_armor + hero.equipment.hand_armor + hero.equipment.feet_armor);
+//hero update functions
+function changeName()
+{
+    var chooseName = prompt("What is your Name?")
+    hero.basics.name = chooseName;
+    document.getElementById("Name").innerHTML = hero.basics.name;
+}
+function createHero()
+{
+    changeName()
+    quest()
+}
+//level up functions
+function LevelUp()
+{
+    hero.basics.level += 1;
+    hero.basics.max_hp += 10;
+    hero.stats.max_sp += 2;
+    hero.stats.xp_to_next_level = 100*hero.basics.level;
+    hero.stats.player_atk += 1;
+    hero.stats.player_def += 1;
+    document.getElementById("Level").innerHTML = hero.stats.level;
+    document.getElementById("MHP").innerHTML = hero.stats.max_hp;
+    document.getElementById("MSP").innerHTML = hero.stats.max_sp;
+    document.getElementById("ATK").innerHTML = hero.stats.player_atk;
+    document.getElementById("DEF").innerHTML = hero.stats.player_def;
+}
+function Ready_for_level()
+{
+    if (hero.stats.xp >= hero.stats.xp_to_next_level)
+    {
+        LevelUp()
+    }
+    else
+    {
+        alert("Not enough XP for level UP")
+    }
+}
+function gainLife()
+{
+    hero.basics.lifes += 1;
+    document.getElementById("Life").innerHTML = hero.basics.lifes;
+}
+function loseLife()
+{
+    hero.basics.lifes -= 1;
+    document.getElementById("Life").innerHTML = hero.basics.lifes;
+}
+function death()
+{
+    loseLife()
+    if (hero.basics.lifes > 0)
+    {
+        healPlayer(1)
+    }
+    else 
+    {
+        //
+    }
+}
+function healPlayer(x)
+{
+    hero.stats.current_hp += x;
+    document.getElementById("CHP").innerHTML = hero.stats.current_hp;
+}
+function dmgPlayer(x)
+{
+    hero.stats.current_hp -= x;
+    document.getElementById("CHP").innerHTML = hero.stats.current_hp;
+}
+function addAP(x)
+{
+    hero.stats.current_ap += x;
+}
+function removeAP(x)
+{
+    hero.stats.current_ap -= x;
+}
+function addSP(x)
+{
+    hero.stats.current_sp += x;
+    document.getElementById("CSP").innerHTML = hero.stats.current_sp;
+}
+function removeSP(x)
+{
+    hero.stats.current_sp -= x;
+    document.getElementById("CSP").innerHTML = hero.stats.current_sp;
+}
+function addXP(x)
+{
+    hero.stats.xp += x;
+    document.getElementById("XP").innerHTML = hero.stats.xp;
+}
+function addGold(x)
+{
+    hero.inventory.gold += x;
+    document.getElementById("Gold").innerHTML = hero.inventory.gold;
+}
+function removeGold(x)
+{
+    hero.inventory.gold -= x;
+    document.getElementById("Gold").innerHTML = hero.inventory.gold;
+}
+function addFame(x)
+{
+    hero.journal.fame += x;
+    document.getElementById("Fame").innerHTML = hero.reputation.fame;
+}
+function addInfamy(x)
+{
+    hero.journal.infamy += x;
+    document.getElementById("Infamy").innerHTML = hero.reputation.infamy;
+}
 //enemy stats
 var enemy =
     {
@@ -404,114 +528,6 @@ function spider(x)
         xp_value: 2,
     }
 }
-//hero update functions
-function changeName()
-{
-    var chooseName = prompt("What is your Name?")
-    hero.basics.name = chooseName;
-    document.getElementById("Name").innerHTML = hero.basics.name;
-}
-//level up functions
-function LevelUp()
-{
-    hero.basics.level += 1;
-    hero.basics.max_hp += 10;
-    hero.stats.max_sp += 2;
-    hero.stats.xp_to_next_level = 100*hero.basics.level;
-    hero.stats.player_atk += 1;
-    hero.stats.player_def += 1;
-    document.getElementById("Level").innerHTML = hero.stats.level;
-    document.getElementById("MHP").innerHTML = hero.stats.max_hp;
-    document.getElementById("MSP").innerHTML = hero.stats.max_sp;
-    document.getElementById("ATK").innerHTML = hero.stats.player_atk;
-    document.getElementById("DEF").innerHTML = hero.stats.player_def;
-}
-function Ready_for_level()
-{
-    if (hero.stats.xp >= hero.stats.xp_to_next_level)
-    {
-        LevelUp()
-    }
-    else
-    {
-        alert("Not enough XP for level UP")
-    }
-}
-function gainLife()
-{
-    hero.basics.lifes += 1;
-    document.getElementById("Life").innerHTML = hero.basics.lifes;
-}
-function loseLife()
-{
-    hero.basics.lifes -= 1;
-    document.getElementById("Life").innerHTML = hero.basics.lifes;
-}
-function death()
-{
-    loseLife()
-    if (hero.basics.lifes > 0)
-    {
-        healPlayer(1)
-    }
-    else 
-    {
-        //
-    }
-}
-function healPlayer(x)
-{
-    hero.stats.current_hp += x;
-    document.getElementById("CHP").innerHTML = hero.stats.current_hp;
-}
-function dmgPlayer(x)
-{
-    hero.stats.current_hp -= x;
-    document.getElementById("CHP").innerHTML = hero.stats.current_hp;
-}
-function addAP(x)
-{
-    hero.stats.current_ap += x;
-}
-function removeAP(x)
-{
-    hero.stats.current_ap -= x;
-}
-function addSP(x)
-{
-    hero.stats.current_sp += x;
-    document.getElementById("CSP").innerHTML = hero.stats.current_sp;
-}
-function removeSP(x)
-{
-    hero.stats.current_sp -= x;
-    document.getElementById("CSP").innerHTML = hero.stats.current_sp;
-}
-function addXP(x)
-{
-    hero.stats.xp += x;
-    document.getElementById("XP").innerHTML = hero.stats.xp;
-}
-function addGold(x)
-{
-    hero.inventory.gold += x;
-    document.getElementById("Gold").innerHTML = hero.inventory.gold;
-}
-function removeGold(x)
-{
-    hero.inventory.gold -= x;
-    document.getElementById("Gold").innerHTML = hero.inventory.gold;
-}
-function addFame(x)
-{
-    hero.journal.fame += x;
-    document.getElementById("Fame").innerHTML = hero.reputation.fame;
-}
-function addInfamy(x)
-{
-    hero.journal.infamy += x;
-    document.getElementById("Infamy").innerHTML = hero.reputation.infamy;
-}
 //combat functions
 var enemies_killed = 0;
 function playerATK()
@@ -672,7 +688,7 @@ function steal()
         else if (.75 >= stealchance && stealchance > .5)
         {
             alert ("You find a potion.")
-            hero.inventory.potion += 1;
+            addPotion(1)
         }
         else
         {
@@ -1006,10 +1022,12 @@ function temple()
 function addPotion(x)
     {
         hero.inventory.potion += x;
+        document.getElementById("Potion").innerHTML = hero.inventory.potion;
     }
 function removePotion(x)
 {
     hero.inventory.potion -= x;
+    document.getElementById("Potion").innerHTML = hero.inventory.potion;
 }
 function DrinkPotion()
 {
