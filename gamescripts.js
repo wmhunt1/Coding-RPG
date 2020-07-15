@@ -111,7 +111,7 @@ var hero =
         melee: "Untrained",
         melee_value: 0,
         melee_training_cost: 100,
-        meleeArray: ["Normal (A)ttack", "(Cl)eave: Attack twice"],
+        meleeArray: ["Normal (A)ttack", "(Po)wer Attack","(Cl)eave: Attack twice"],
         prayer: "Untrained",
         prayer_value: 0,
         prayer_training_cost: 100,
@@ -747,15 +747,29 @@ function slow()
         alert ("You don't have enough SP.")
     }
 }
-function cleave()
+function powerATK()
 {
     if (hero.stats.current_sp > 0 && hero.skills.melee_value > 0)
     {
-        alert ("You use the cleave ability.")
+        alert ("You use the Power Attack ability.")
+        playerATK(1,2)
+        removeSP(2)
+        removeAP(1)
+    }
+    else
+    {
+        alert ("You don't have enough SP.")
+    }
+}
+function cleave()
+{
+    if (hero.stats.current_sp > 1 && hero.skills.melee_value > 1)
+    {
+        alert ("You use the Cleave ability.")
         playerATK(1,1)
         checkifdead()
-        playerATK(1)
-        removeSP(1)
+        playerATK(1,1)
+        removeSP(2)
         removeAP(1)
     }
     else
@@ -869,6 +883,10 @@ function playerTurn()
             else if (skill === "Sl")
             {
                 slow()
+            }
+            else if (skill === "Po")
+            {
+                powerATK()
             }
             else if (skill === "Cl")
             {
