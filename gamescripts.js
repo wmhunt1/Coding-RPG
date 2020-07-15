@@ -13,7 +13,9 @@ function startGame()
     document.getElementById("Rest").style.display = "none";
     document.getElementById("Shopping").style.display = "none";
     document.getElementById("Skills").style.display = "none";
-    document.getElementById("Training").style.display = "none";    
+    document.getElementById("Training").style.display = "none";
+    document.getElementById("Death").style.display = "none";
+    document.getElementById("Gameover").style.display = "none";
 }
 //player stats
 var hero =
@@ -192,10 +194,41 @@ function death()
     if (hero.basics.lifes > 0)
     {
         healPlayer(1)
+        document.getElementById("Menu").style.display = "block";
+        document.getElementById("Intro").style.display = "none";
+        document.getElementById("Character").style.display = "none";
+        document.getElementById("Arena").style.display = "none";
+        document.getElementById("Downtime").style.display = "none";
+        document.getElementById("Equipment").style.display = "none";
+        document.getElementById("Factions").style.display = "none";
+        document.getElementById("Inventory").style.display = "none";
+        document.getElementById("Journal").style.display = "none";
+        document.getElementById("Quest").style.display = "none";
+        document.getElementById("Rest").style.display = "none";
+        document.getElementById("Shopping").style.display = "none";
+        document.getElementById("Skills").style.display = "none";
+        document.getElementById("Training").style.display = "none";
+        document.getElementById("Death").style.display = "block";
+        document.getElementById("Gameover").style.display = "none";
     }
     else 
     {
-        //
+        document.getElementById("Menu").style.display = "none";
+        document.getElementById("Intro").style.display = "none";
+        document.getElementById("Character").style.display = "none";
+        document.getElementById("Arena").style.display = "none";
+        document.getElementById("Downtime").style.display = "none";
+        document.getElementById("Equipment").style.display = "none";
+        document.getElementById("Factions").style.display = "none";
+        document.getElementById("Inventory").style.display = "none";
+        document.getElementById("Journal").style.display = "none";
+        document.getElementById("Quest").style.display = "none";
+        document.getElementById("Rest").style.display = "none";
+        document.getElementById("Shopping").style.display = "none";
+        document.getElementById("Skills").style.display = "none";
+        document.getElementById("Training").style.display = "none";
+        document.getElementById("Death").style.display = "none";
+        document.getElementById("Gameover").style.display = "block";
     }
 }
 function healPlayer(x)
@@ -537,21 +570,21 @@ function spider(x)
 }
 //combat functions
 var enemies_killed = 0;
-function playerATK()
+function playerATK(x)
 {
     console.log("player attacks")
     var player_hit_chance = .5 - .1*(enemy.def + enemy.enemy_buff - enemy.enemy_debuff);
     var player_hit_roll = Math.random() + .1*(hero.stats.player_atk + hero.stats.player_buff - hero.stats.player_debuff + hero.skills.melee_value)
     if (player_hit_roll > player_hit_chance)
     {
-        if (enemy.armor_value + enemy.enemy_buff - enemy.enemy_debuff >= hero.equipment.melee_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff)
+        if (enemy.armor_value + enemy.enemy_buff - enemy.enemy_debuff >= x*(hero.equipment.melee_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff))
         {
             console.log("no damage")
             alert("No damage")
         }
         else
         {
-            enemy.current_hp = enemy.current_hp - (hero.equipment.melee_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff - enemy.armor_value);
+            enemy.current_hp = enemy.current_hp - x*(hero.equipment.melee_wep_dmg + hero.stats.player_buff - hero.stats.player_debuff - enemy.armor_value);
             console.log("player hits enemy")
             alert ("Enemy hit")
         }
@@ -628,9 +661,9 @@ function cleave()
     if (hero.stats.current_sp > 0 && hero.skills.melee_value > 0)
     {
         alert ("You use the cleave ability.")
-        playerATK()
+        playerATK(1)
         checkifdead()
-        playerATK()
+        playerATK(1)
         removeSP(1)
         removeAP(1)
     }
@@ -717,7 +750,7 @@ function playerTurn()
         var action = prompt("Attack (A), use a (Sk)ill Power or drink a (P)otion?")
         if (action === "A")
         {
-            playerATK()
+            playerATK(1)
             removeAP(1)
 
         }
@@ -1127,6 +1160,7 @@ function DrinkPotion()
         else
         {   
             // quest content
+            //need if hp above 0 for each stage.
             if (hero.stats.current_hp > 0)
             {
                 questComplete(x)
@@ -1159,9 +1193,16 @@ function DrinkPotion()
             alert ("You go to " + villageArray[village] + " and are pointed towards the. " + dungeonArray[dungeon] +  " that the bandits have claimed as their base.")
             alert ("You must kill " + enemy.number + " bandits")
             combat()
-            alert ("you find the bandit leader.")
-            bandit_leader(1)
-            combat()
+            if (hero.stats.current_hp > 0)
+            {
+                alert ("you find the bandit leader.")
+                bandit_leader(1)
+                combat()
+            }
+            else
+            {
+
+            }
             if (hero.stats.current_hp > 0)
             {
                 questComplete((10*bandits),10)
@@ -1187,9 +1228,16 @@ function DrinkPotion()
             alert ("You go to " + villageArray[village] + " and are pointed towards the. " + dungeonArray[dungeon] +  " that the goblins have claimed as their lair.")
             alert ("You must kill " + enemy.number + " goblins")
             combat()
-            alert("you find the goblin boss.")
-            goblin_boss(1)
-            combat()
+            if (hero.stats.current_hp > 0)
+            {
+                alert("you find the goblin boss.")
+                goblin_boss(1)
+                combat()
+            }
+            else
+            {
+
+            }
             if (hero.stats.current_hp > 0)
             {
                 questComplete((5*goblins),5)

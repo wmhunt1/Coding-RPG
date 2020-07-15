@@ -42,9 +42,7 @@
         </article>
     </section>
     <section id = "Character" class = "Stats">
-        <h1>Character Sheet</h1>
-        <h2>Lifes</h2>
-        <p id="Life"></p>    
+        <h1>Character Sheet</h1>    
         <h2>Name</h2>
         <p id="Name"></p>
         <button onclick ="changeName()" class = "margin">Change Name</button>
@@ -306,6 +304,16 @@
             <button onclick="trainThievery()" class = "margin">Train</button> 
         </article> 
     </section>
+    <section id = "Death" class ="options">
+        <h1>Death</h1>
+        <h2>Lifes</h2>
+        <p id="Life"></p>
+        <p>A voice tells you that it is not yet your time.</p>
+    </section>
+    <section id = "Gameover" class ="options">
+        <h1>Gameover</h1>
+        <p>reload to start a new game.</p>
+    </section>
     <script>
         document.getElementById("Name").innerHTML = hero.basics.name;
         document.getElementById("Class").innerHTML = hero.basics.class;
@@ -361,6 +369,8 @@
             document.getElementById("Shopping").style.display = "none";
             document.getElementById("Skills").style.display = "none";
             document.getElementById("Training").style.display = "none";
+            document.getElementById("Death").style.display = "none";
+            document.getElementById("Gameover").style.display = "none";
         }
         function arena()
         {
@@ -378,6 +388,8 @@
             document.getElementById("Shopping").style.display = "none";
             document.getElementById("Skills").style.display = "none";
             document.getElementById("Training").style.display = "none";
+            document.getElementById("Death").style.display = "none";
+            document.getElementById("Gameover").style.display = "none";
         }
         function downtime()
         {
@@ -395,6 +407,8 @@
             document.getElementById("Shopping").style.display = "none";
             document.getElementById("Skills").style.display = "none";
             document.getElementById("Training").style.display = "none";
+            document.getElementById("Death").style.display = "none";
+            document.getElementById("Gameover").style.display = "none";
         }
         function equipment()
         {
@@ -412,6 +426,8 @@
             document.getElementById("Shopping").style.display = "none";
             document.getElementById("Skills").style.display = "none";
             document.getElementById("Training").style.display = "none";
+            document.getElementById("Death").style.display = "none";
+            document.getElementById("Gameover").style.display = "none";
         }
         function factions()
         {
@@ -429,6 +445,8 @@
             document.getElementById("Shopping").style.display = "none";
             document.getElementById("Skills").style.display = "none";
             document.getElementById("Training").style.display = "none";
+            document.getElementById("Death").style.display = "none";
+            document.getElementById("Gameover").style.display = "none";
         }
         function inventory()
         {
@@ -446,6 +464,8 @@
             document.getElementById("Shopping").style.display = "none";
             document.getElementById("Skills").style.display = "none";
             document.getElementById("Training").style.display = "none";
+            document.getElementById("Death").style.display = "none";
+            document.getElementById("Gameover").style.display = "none";
         }
         function journal()
         {
@@ -463,6 +483,8 @@
             document.getElementById("Shopping").style.display = "none";
             document.getElementById("Skills").style.display = "none";
             document.getElementById("Training").style.display = "none";
+            document.getElementById("Death").style.display = "none";
+            document.getElementById("Gameover").style.display = "none";
         }
         function quest()
         {
@@ -480,6 +502,8 @@
             document.getElementById("Shopping").style.display = "none";
             document.getElementById("Skills").style.display = "none";
             document.getElementById("Training").style.display = "none";
+            document.getElementById("Death").style.display = "none";
+            document.getElementById("Gameover").style.display = "none";
         }
         function rest()
         {
@@ -497,6 +521,8 @@
             document.getElementById("Shopping").style.display = "none";
             document.getElementById("Skills").style.display = "none";
             document.getElementById("Training").style.display = "none";
+            document.getElementById("Death").style.display = "none";
+            document.getElementById("Gameover").style.display = "none";
         }
         function shopping()
         {
@@ -514,6 +540,8 @@
             document.getElementById("Shopping").style.display = "block";
             document.getElementById("Skills").style.display = "none";
             document.getElementById("Training").style.display = "none";
+            document.getElementById("Death").style.display = "none";
+            document.getElementById("Gameover").style.display = "none";
         }
         function skill()
         {
@@ -531,6 +559,8 @@
             document.getElementById("Shopping").style.display = "none";
             document.getElementById("Skills").style.display = "block";
             document.getElementById("Training").style.display = "none";
+            document.getElementById("Death").style.display = "none";
+            document.getElementById("Gameover").style.display = "none";
         }
         function training()
         {
@@ -548,6 +578,8 @@
             document.getElementById("Shopping").style.display = "none";
             document.getElementById("Skills").style.display = "none";
             document.getElementById("Training").style.display = "block";
+            document.getElementById("Death").style.display = "none";
+            document.getElementById("Gameover").style.display = "none";
         }
 
     </script>
