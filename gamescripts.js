@@ -1228,7 +1228,7 @@ function DrinkPotion()
         }
     }
 // rest functions
-function rest()
+function player_rest()
 {
     hero.stats.current_hp = hero.stats.max_hp;
     hero.stats.current_sp = hero.stats.max_sp;
@@ -1253,7 +1253,7 @@ function inn_rest()
     }
     else
     {
-        rest()
+        player_rest()
         removeGold(10)
         alert ("You spend the night at the Inn.")
     }
@@ -1266,7 +1266,7 @@ function home_rest()
     }
     else
     {
-        rest()
+        player_rest()
         alert ("You sleep in your own bed.")
     }
 }

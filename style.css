@@ -3,7 +3,7 @@ html
     margin-left: 10%;
     margin-right: 10%;
 }
-button
+.margin
 {
     margin: 10px;
 }
@@ -26,7 +26,6 @@ nav ul li
 {
     width: fit-content;
     height: 25px;
-    border: 1px solid black;
     display: inline-block;
     text-align: center;
     

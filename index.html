@@ -13,27 +13,30 @@
     </header>
     <nav>
         <ul>
-                <li><a href="#Arena">Arena (A)</a></li>
-                <li><a href="#Character">Character (C)</a></li>
-                <li><a href="#Downtime">Downtime (D)</a></li>
-                <li><a href="#Equipment">Equipment (E)</a></li>
-                <li><a href="#Factions">Factions (F)</a></li>
-                <li><a href="#Inventory">Inventory (I)</a></li>
-                <li><a href="#Journal">Journal (Q)</li>
-                <li><a href="#Quest">Quest (Q)</a></li>
-                <li><a href="#Rest">Rest (R)</a></li>
-                <li><a href="#Shop">Shop (B)</a></li>
-                <li><a href="#Skills">Skills (S)</a></li>
-                <li><a href="#Train">Training (T)</a></li>
+            <li><button onclick ="arena()">(A)rena</button></li>
+            <li><button onclick ="character()">(C)haracter</button></a></li>
+            <li><button onclick ="downtime()">(D)owntime</button></li>
+            <li><button onclick ="equipment()">(E)quipment</button></li>
+            <li><button onclick ="factions()">(F)actions</button></li>
+            <li><button onclick ="inventory()">(I)nventory</button></li>
+            <li><button onclick ="journal()">(J)ournal</button></li>
+            <li><button onclick ="quest()">(Q)uest</button></li>
+            <li><button onclick ="rest()">(R)est</button></li>
+            <li><button onclick ="shopping()">(S)hopping</button></li>
+            <li><button onclick ="skill()">Skills and (P)owers</button></li>
+            <li><button onclick ="training()">(T)raining</button></li>
         </ul>
     </nav>
+    <section id ="Intro">
+        <h1>The World of Placeholder</h1>
+    </section>
     <section id = "Character" class = "Stats">
         <h1>Character Sheet</h1>
         <h2>Lifes</h2>
         <p id="Life"></p>    
         <h2>Name</h2>
         <p id="Name"></p>
-        <button onclick ="changeName()">Change Name</button>
+        <button onclick ="changeName()" class = "margin">Change Name</button>
         <h2>Class</h2>
         <p id="Class"></p>
         <h2>Level</h2>
@@ -52,38 +55,35 @@
         <p id="ATK"></p>
         <h2>Defense</h2>
         <p id="DEF"></p>
-        <button onclick="Ready_for_level()">Ready for Level Up?</button>
+        <button onclick="Ready_for_level()" class = "margin">Ready for Level Up?</button>
     </section>
-    <a href="#Title">Back to Top</a>
     <section id = "Arena" class ="options">
         <h1>Arena</h1>
         <article>
             <h2>Bet</h2>
             <p>Try you luck and bet on a fight.</p>
-            <button onclick="betArena()">Bet</button>
+            <button onclick="betArena()"class = "margin">Bet</button>
         </article>
         <article>
             <h2>Fight</h2>
             <p>Test you mettle and fight in the arena for glory.</p>
-            <button onclick="fightArena()">Fight</button>
+            <button onclick="fightArena()" class = "margin">Fight</button>
         </article>
     </section>
-    <a href="#Title">Back to Top</a>
     <section id = "Downtime" class ="options">
         <h1>Downtime</h1>
         <article>
             <h2>Drink at the Bar</h2>
             <p>Have a few drinks, listen to gossip, and maybe get in a barfight.</p>
-            <button onclick="bar_drink()">Go Drinking</button>
+            <button onclick="bar_drink()" class = "margin">Go Drinking</button>
         </article>
         <article>
             <h2>Visit a Temple</h2>
             <p>Pray to one of of the various gods.</p>
-            <button onclick="temple()">Go Pray</button>
+            <button onclick="temple()" class = "margin">Go Pray</button>
         </article>
         <!-- Other Downtime options: Hunting, Praying (Could be a way to gain more lives), Studying. Racing. Monster fighting? Maybe in Arena -->
     </section>
-    <a href="#Title">Back to Top</a>
     <section id = "Equipment" class ="options">
         <h1>Equipment</h1>
         <h2>Melee Weapon</h2>
@@ -105,17 +105,14 @@
         <h2>Total armor</h2>
         <p id="Totarm"></p>
     </section>
-    <a href="#Title">Back to Top</a>
     <section id = "Factions" class ="options">
         <h1>Factions</h1>
     </section>
-    <a href="#Title">Back to Top</a>
     <section id = "Inventory" class ="options">
         <h1>Inventory</h1>
         <h2>Gold</h2>
         <p id="Gold"></p>
     </section>
-    <a href="#Title">Back to Top</a>
     <section id = "Journal" class ="options">
         <h1>Journal</h1>
         <h2>Quests Completed</h2>
@@ -126,7 +123,6 @@
         <p id="entries"></p>
     </section>
     </section>
-    <a href="#Title">Back to Top</a>
     <section id = "Quest" class ="options">
         <h1>Quests</h1>
         <h2>Day</h2>
@@ -139,81 +135,78 @@
             <h2>Main Quest</h2>
             <H3>Details</H3>
             <p>The main quest (WIP).</p>
-            <button onclick="mainQuest()">Accept Quest</button>
+            <button onclick="mainQuest()" class = "margin">Accept Quest</button>
         </article>
         <article>
             <h2>Bandit Problem</h2>
             <H3>Details</H3>
             <p>A gang of bandits is extorting a village. Go to the village and drive off the bandits.</p>
-            <button onclick="banditQuest()">Accept Quest</button>
+            <button onclick="banditQuest()" class = "margin">Accept Quest</button>
         </article>
         <article>
             <h2>Goblin Slayer</h2>
             <H3>Details</H3>
             <p>A tribe of goblins is terrorizing a local village. Travel to their cave and wipe them out to save the village.</p>
-            <button onclick="goblinQuest()">Accept Quest</button>
+            <button onclick="goblinQuest()" class = "margin">Accept Quest</button>
         </article>
         <article>
             <h2>Rat Exterminator</h2>
             <h3>Details</h3>
             <p>The local tavern has an infestation of rats in its cellar.</p>
-            <button onclick="ratQuest()">Accept Quest</button>
+            <button onclick="ratQuest()" class = "margin">Accept Quest</button>
         </article>
         <article>
             <h2>Spider Infestation</h2>
             <h3>Details</h3>
             <p>The local inn has an infestation of spiders in its cellar. Go squish them.</p>
-            <button onclick="spiderQuest()">Accept Quest</button>
+            <button onclick="spiderQuest()" class = "margin">Accept Quest</button>
         </article>
         <!-- More quest ideas: Dungeon, Treasure Hunt -->
     </section>
-    <a href="#Title">Back to Top</a>
     <section id = "Rest" class ="options">
         <h1>Rest</h1>
         <article>
             <h2>Rent a Bed at the Inn?</h2>
             <p>Costs: 10 Gold</p>
-            <button onclick="inn_rest()">Rest</button>
+            <button onclick="inn_rest()" class = "margin">Rest</button>
         </article>
         <article>
             <h2>Rest at Home?</h2>
             <p>Costs: Free</p>
-            <button onclick="home_rest()">Rest</button>
+            <button onclick="home_rest()" class = "margin">Rest</button>
         </article>
         <article>
             <h2>Sleep on the Street?</h2>
             <p>Costs: Your Pride</p>
-            <button onclick="street_rest()">Rest</button> 
+            <button onclick="street_rest()" class = "margin">Rest</button> 
         </article>  
     </section>
-    <a href="#Title">Back to Top</a>
-    <section id = "Shop" class ="options">
+    <section id = "Shopping" class ="options">
         <h1>Shop</h1>
         <article>
             <h2>Apothecary</h2>
             <p>Buy Potions for 50 Gold or Elixers of Life for 1000 Gold.</p>
-            <button onclick="apothecary()">Buy Potions</button> 
+            <button onclick="apothecary()" class = "margin">Buy Potions</button> 
         </article>
         <article>
             <h2>Blacksmith</h2>
             <p>Upgrade your weapon or armor.</p>
-            <button onclick="blacksmith()">Forge</button> 
+            <button onclick="blacksmith()" class = "margin">Forge</button> 
         </article> 
         <article>
             <h2>Enchanter</h2>
             <p>Upgrade your spellbook's enchantments.</p>
-            <button onclick="enchanter()">Enchant</button> 
+            <button onclick="enchanter()" class = "margin">Enchant</button> 
         </article> 
         <article>
             <h2>Realtor</h2>
             <p>Buy a house so you always have somewhere to sleep.</p>
-            <button onclick="realtor()">Buy House</button> 
+            <button onclick="realtor()" class = "margin">Buy House</button> 
         </article> 
         <!-- wizard shop to learn spells if you know magic -->
     </section>
-    <a href="#Title">Back to Top</a>
     <section id = "Skills" class ="options">
-        <h1>Skills</h1>
+        <h1>Skills and Powers</h1>
         <h2>Crafting</h2>
         <p id="crafting"></p>
         <p>Crafting Powers Known</p>
@@ -252,56 +245,54 @@
         <p id = "thievery_known"></p>
         <!-- want to put skills known -->
     </section>
-    <a href="#Title">Back to Top</a>
-    <section id = "Train" class ="options">
+    <section id = "Training" class ="options">
         <h1>Training</h1>
         <article>
             <h2>Crafting  Trainer</h2>
             <p>Improve your proficiency in crafting.</p>
-            <button onclick="trainCrafting()">Train</button> 
+            <button onclick="trainCrafting()" class = "margin">Train</button> 
         </article> 
         <article>
             <h2>Gathering  Trainer</h2>
             <p>Improve your proficiency in gathering.</p>
-            <button onclick="trainGathering()">Train</button> 
+            <button onclick="trainGathering()" class = "margin">Train</button> 
         </article>
         <article>
             <h2>Magic  Trainer</h2>
             <p>Improve your mastery over the arcane.</p>
-            <button onclick="trainMagic()">Train</button> 
+            <button onclick="trainMagic()" class = "margin">Train</button> 
         </article>
         <article>
             <h2>Marksman Trainer</h2>
             <p>Improve your proficiency with ranged weapons.</p>
-            <button onclick="trainMarksman()">Train</button> 
+            <button onclick="trainMarksman()" class = "margin">Train</button> 
         </article>
         <article>
             <h2>Melee Trainer</h2>
             <p>Improve your proficiency with melee weapons.</p>
-            <button onclick="trainMelee()">Train</button> 
+            <button onclick="trainMelee()" class = "margin">Train</button> 
         </article> 
         <article>
             <h2>Prayer Trainer</h2>
             <p>Improve your connection with higher powers.</p>
-            <button onclick="trainPrayer()">Train</button> 
+            <button onclick="trainPrayer()" class = "margin">Train</button> 
         </article> 
         <article>
             <h2>Speech Trainer</h2>
             <p>Sharpen your silver tongue.</p>
-            <button onclick="trainSpeech()">Train</button> 
+            <button onclick="trainSpeech()" class = "margin">Train</button> 
         </article> 
         <article>
             <h2>Survival Trainer</h2>
             <p>Improve your tracking and hunting abilities.</p>
-            <button onclick="trainSurvival()">Train</button> 
+            <button onclick="trainSurvival()" class = "margin">Train</button> 
         </article> 
         <article>
             <h2>Thievery Trainer</h2>
             <p>Improve your subterfuge based abilities.</p>
-            <button onclick="trainThievery()">Train</button> 
+            <button onclick="trainThievery()" class = "margin">Train</button> 
         </article> 
     </section>
-    <a href="#Title">Back to Top</a>
     <script>
         document.getElementById("Name").innerHTML = hero.basics.name;
         document.getElementById("Class").innerHTML = hero.basics.class;
@@ -338,6 +329,215 @@
         document.getElementById("survival").innerHTML = hero.skills.survival;
         document.getElementById("thievery").innerHTML = hero.skills.thievery;
         document.getElementById("Boss").innerHTML = hero.journal.bosses_defeated;
+
+        //defaults
+        document.getElementById("Intro").style.display = "block";
+        document.getElementById("Character").style.display = "none";
+        document.getElementById("Arena").style.display = "none";
+        document.getElementById("Downtime").style.display = "none";
+        document.getElementById("Equipment").style.display = "none";
+        document.getElementById("Factions").style.display = "none";
+        document.getElementById("Inventory").style.display = "none";
+        document.getElementById("Journal").style.display = "none";
+        document.getElementById("Quest").style.display = "none";
+        document.getElementById("Rest").style.display = "none";
+        document.getElementById("Shopping").style.display = "none";
+        document.getElementById("Skills").style.display = "none";
+        document.getElementById("Training").style.display = "none";
+        //open area functions
+        function character()
+        {
+            document.getElementById("Intro").style.display = "none";
+            document.getElementById("Character").style.display = "block";
+            document.getElementById("Arena").style.display = "none";
+            document.getElementById("Downtime").style.display = "none";
+            document.getElementById("Equipment").style.display = "none";
+            document.getElementById("Factions").style.display = "none";
+            document.getElementById("Inventory").style.display = "none";
+            document.getElementById("Journal").style.display = "none";
+            document.getElementById("Quest").style.display = "none";
+            document.getElementById("Rest").style.display = "none";
+            document.getElementById("Shopping").style.display = "none";
+            document.getElementById("Skills").style.display = "none";
+            document.getElementById("Training").style.display = "none";
+        }
+        function arena()
+        {
+            document.getElementById("Intro").style.display = "none";
+            document.getElementById("Character").style.display = "none";
+            document.getElementById("Arena").style.display = "block";
+            document.getElementById("Downtime").style.display = "none";
+            document.getElementById("Equipment").style.display = "none";
+            document.getElementById("Factions").style.display = "none";
+            document.getElementById("Inventory").style.display = "none";
+            document.getElementById("Journal").style.display = "none";
+            document.getElementById("Quest").style.display = "none";
+            document.getElementById("Rest").style.display = "none";
+            document.getElementById("Shopping").style.display = "none";
+            document.getElementById("Skills").style.display = "none";
+            document.getElementById("Training").style.display = "none";
+        }
+        function downtime()
+        {
+            document.getElementById("Intro").style.display = "none";
+            document.getElementById("Character").style.display = "none";
+            document.getElementById("Arena").style.display = "none";
+            document.getElementById("Downtime").style.display = "block";
+            document.getElementById("Equipment").style.display = "none";
+            document.getElementById("Factions").style.display = "none";
+            document.getElementById("Inventory").style.display = "none";
+            document.getElementById("Journal").style.display = "none";
+            document.getElementById("Quest").style.display = "none";
+            document.getElementById("Rest").style.display = "none";
+            document.getElementById("Shopping").style.display = "none";
+            document.getElementById("Skills").style.display = "none";
+            document.getElementById("Training").style.display = "none";
+        }
+        function equipment()
+        {
+            document.getElementById("Intro").style.display = "none";
+            document.getElementById("Character").style.display = "none";
+            document.getElementById("Arena").style.display = "none";
+            document.getElementById("Downtime").style.display = "none";
+            document.getElementById("Equipment").style.display = "block";
+            document.getElementById("Factions").style.display = "none";
+            document.getElementById("Inventory").style.display = "none";
+            document.getElementById("Journal").style.display = "none";
+            document.getElementById("Quest").style.display = "none";
+            document.getElementById("Rest").style.display = "none";
+            document.getElementById("Shopping").style.display = "none";
+            document.getElementById("Skills").style.display = "none";
+            document.getElementById("Training").style.display = "none";
+        }
+        function factions()
+        {
+            document.getElementById("Intro").style.display = "none";
+            document.getElementById("Character").style.display = "none";
+            document.getElementById("Arena").style.display = "none";
+            document.getElementById("Downtime").style.display = "none";
+            document.getElementById("Equipment").style.display = "none";
+            document.getElementById("Factions").style.display = "block";
+            document.getElementById("Inventory").style.display = "none";
+            document.getElementById("Journal").style.display = "none";
+            document.getElementById("Quest").style.display = "none";
+            document.getElementById("Rest").style.display = "none";
+            document.getElementById("Shopping").style.display = "none";
+            document.getElementById("Skills").style.display = "none";
+            document.getElementById("Training").style.display = "none";
+        }
+        function inventory()
+        {
+            document.getElementById("Intro").style.display = "none";
+            document.getElementById("Character").style.display = "none";
+            document.getElementById("Arena").style.display = "none";
+            document.getElementById("Downtime").style.display = "none";
+            document.getElementById("Equipment").style.display = "none";
+            document.getElementById("Factions").style.display = "none";
+            document.getElementById("Inventory").style.display = "block";
+            document.getElementById("Journal").style.display = "none";
+            document.getElementById("Quest").style.display = "none";
+            document.getElementById("Rest").style.display = "none";
+            document.getElementById("Shopping").style.display = "none";
+            document.getElementById("Skills").style.display = "none";
+            document.getElementById("Training").style.display = "none";
+        }
+        function journal()
+        {
+            document.getElementById("Intro").style.display = "none";
+            document.getElementById("Character").style.display = "none";
+            document.getElementById("Arena").style.display = "none";
+            document.getElementById("Downtime").style.display = "none";
+            document.getElementById("Equipment").style.display = "none";
+            document.getElementById("Factions").style.display = "none";
+            document.getElementById("Inventory").style.display = "none";
+            document.getElementById("Journal").style.display = "block";
+            document.getElementById("Quest").style.display = "none";
+            document.getElementById("Rest").style.display = "none";
+            document.getElementById("Shopping").style.display = "none";
+            document.getElementById("Skills").style.display = "none";
+            document.getElementById("Training").style.display = "none";
+        }
+        function quest()
+        {
+            document.getElementById("Intro").style.display = "none";
+            document.getElementById("Character").style.display = "none";
+            document.getElementById("Arena").style.display = "none";
+            document.getElementById("Downtime").style.display = "none";
+            document.getElementById("Equipment").style.display = "none";
+            document.getElementById("Factions").style.display = "none";
+            document.getElementById("Inventory").style.display = "none";
+            document.getElementById("Journal").style.display = "none";
+            document.getElementById("Quest").style.display = "block";
+            document.getElementById("Rest").style.display = "none";
+            document.getElementById("Shopping").style.display = "none";
+            document.getElementById("Skills").style.display = "none";
+            document.getElementById("Training").style.display = "none";
+        }
+        function rest()
+        {
+            document.getElementById("Intro").style.display = "none";
+            document.getElementById("Character").style.display = "none";
+            document.getElementById("Arena").style.display = "none";
+            document.getElementById("Downtime").style.display = "none";
+            document.getElementById("Equipment").style.display = "none";
+            document.getElementById("Factions").style.display = "none";
+            document.getElementById("Inventory").style.display = "none";
+            document.getElementById("Journal").style.display = "none";
+            document.getElementById("Quest").style.display = "none";
+            document.getElementById("Rest").style.display = "block";
+            document.getElementById("Shopping").style.display = "none";
+            document.getElementById("Skills").style.display = "none";
+            document.getElementById("Training").style.display = "none";
+        }
+        function shopping()
+        {
+            document.getElementById("Intro").style.display = "none";
+            document.getElementById("Character").style.display = "none";
+            document.getElementById("Arena").style.display = "none";
+            document.getElementById("Downtime").style.display = "none";
+            document.getElementById("Equipment").style.display = "none";
+            document.getElementById("Factions").style.display = "none";
+            document.getElementById("Inventory").style.display = "none";
+            document.getElementById("Journal").style.display = "none";
+            document.getElementById("Quest").style.display = "none";
+            document.getElementById("Rest").style.display = "none";
+            document.getElementById("Shopping").style.display = "block";
+            document.getElementById("Skills").style.display = "none";
+            document.getElementById("Training").style.display = "none";
+        }
+        function skill()
+        {
+            document.getElementById("Intro").style.display = "none";
+            document.getElementById("Character").style.display = "none";
+            document.getElementById("Arena").style.display = "none";
+            document.getElementById("Downtime").style.display = "none";
+            document.getElementById("Equipment").style.display = "none";
+            document.getElementById("Factions").style.display = "none";
+            document.getElementById("Inventory").style.display = "none";
+            document.getElementById("Journal").style.display = "none";
+            document.getElementById("Quest").style.display = "none";
+            document.getElementById("Rest").style.display = "none";
+            document.getElementById("Shopping").style.display = "none";
+            document.getElementById("Skills").style.display = "block";
+            document.getElementById("Training").style.display = "none";
+        }
+        function training()
+        {
+            document.getElementById("Intro").style.display = "none";
+            document.getElementById("Character").style.display = "none";
+            document.getElementById("Arena").style.display = "none";
+            document.getElementById("Downtime").style.display = "none";
+            document.getElementById("Equipment").style.display = "none";
+            document.getElementById("Factions").style.display = "none";
+            document.getElementById("Inventory").style.display = "none";
+            document.getElementById("Journal").style.display = "none";
+            document.getElementById("Quest").style.display = "none";
+            document.getElementById("Rest").style.display = "none";
+            document.getElementById("Shopping").style.display = "none";
+            document.getElementById("Skills").style.display = "none";
+            document.getElementById("Training").style.display = "block";
+        }
+
     </script>
 </body>
 </html>
