@@ -1609,11 +1609,11 @@ function impRanged(x)
 {
     hero.equipment.ranged_wep_dmg += x;
     alert ("Your ranged improves by " + x)
-    hero.equipment.ranged_wep = rangedArray[hero.equipment.ranged_wep_dmg]
+    hero.equipment.ranged_wep = rangedArray[hero.equipment.ranged_wep_dmg-1]
     alert("You weapon has now been upgraded to " + hero.equipment.ranged_wep)
     document.getElementById("Rwep").innerHTML = "Ranged Weapon: " + hero.equipment.ranged_wep;
 } 
-var rangedArray = ["Rock", "Sling", "Shortbow"]
+var rangedArray = ["Rock", "Sling", "Shortbow", "Longbow"]
 function bowyer()
 {
     alert ("Cost of upgrading your ranged weapon " + hero.equipment.rangedCost + " Gold")
