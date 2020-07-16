@@ -105,7 +105,7 @@ var hero =
         magic: "Untrained",
         magic_value: 0,
         magic_training_cost: 100,
-        magicArray: ["(M)agic Bolt", "(Ma)gic Blast: Fire a blast of raw magic which ignores armor", "(Ha)ste and (Sl)ow: Increase your speed or decrease your enemy's speed."],
+        magicArray: ["(M)agic Bolt", "Charm Person, Detect Magic, (Ma)gic Missile", "Invisibility", "(Fi)re Ball, (Ha)ste and (Sl)ow: Increase your speed or decrease your enemy's speed."],
         marksman: "Untrained",
         marksman_value: 0,
         marksman_training_cost: 100,
@@ -690,11 +690,11 @@ function magic_playerATK(x)
     console.log(player_hit_chance)
     console.log(enemy.current_hp + " enemy hp")
 }
-function magic_blast()
+function magicMissile()
 {
     if (hero.stats.current_sp > 0 && hero.skills.magic_value > 0)
     {
-        alert ("You fire a magic blast at the " + enemy.name)
+        alert ("You fire a magic missile at the " + enemy.name)
         removeSP(1)
         removeAP(1)
         console.log("player attacks")
@@ -906,7 +906,7 @@ function playerTurn()
             var skill = prompt("Use which skill?")
             if (skill === "Ma")
             {
-                magic_blast()
+                magicMissile()
             }
             else if (skill === "Ha")
             {
