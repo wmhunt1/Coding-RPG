@@ -186,6 +186,7 @@ function LevelUp()
         else if (lChoice === "D")
         {
             hero.stats.player_def += 1;
+          
             document.getElementById("DEF").innerHTML = "Defense: " + hero.stats.player_def;
             lp -= 1;
         }
