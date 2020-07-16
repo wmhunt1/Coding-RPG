@@ -43,27 +43,17 @@
     </section>
     <section id = "Character" class = "Stats">
         <h1>Character Sheet</h1>    
-        <h2>Name</h2>
-        <p id="Name"></p>
+        <h2 id="Name">Name</h2>
         <button onclick ="changeName()" class = "margin">Change Name</button>
-        <h2>Class</h2>
-        <p id="Class"></p>
-        <h2>Level</h2>
-        <p id="Level"></p>
-        <h2>Current XP</h2>
-        <p id="XP"></p>
-        <h2>Current HP</h2>
-        <p id="CHP"></p>
-        <h2>Max HP</h2>
-        <p id="MHP"></p>
-        <h2>Current SP</h2>
-        <p id="CSP"></p>
-        <h2>Max SP</h2>
-        <p id="MSP"></p>
-        <h2>Attack</h2>
-        <p id="ATK"></p>
-        <h2>Defense</h2>
-        <p id="DEF"></p>
+        <h2 id ="Class">Class</h2>
+        <h2 id="Level">Level</h2>
+        <h2 id="XP">Current XP</h2>
+        <h2 id="CHP">Current HP</h2>
+        <h2 id="MHP">Max HP</h2>
+        <h2 id="CSP">Current SP</h2>
+        <h2 id="MSP">Max SP</h2>
+        <h2 id="ATK">Attack</h2>
+        <h2 id="DEF">Defense</h2>
         <button onclick="Ready_for_level()" class = "margin">Ready for Level Up?</button>
     </section>
     <section id = "Arena" class ="options">
@@ -119,8 +109,7 @@
     </section>
     <section id = "Inventory" class ="options">
         <h1>Inventory</h1>
-        <h2>Gold</h2>
-        <p id="Gold"></p>
+        <h2 id="Gold">Gold</h2>
         <h2>Potion(s) owned:</h2>
         <p id="Potion"></p>
     </section>
@@ -136,8 +125,7 @@
     </section>
     <section id = "Quest" class ="options">
         <h1>Quests</h1>
-        <h2>Day</h2>
-        <p id="Day"></p>
+        <h2 id="Day">Day</h2>
         <h2>Fame</h2>
         <p id="Fame"></p>
         <h2>Infamy</h2>
@@ -323,16 +311,16 @@
         <p>reload to start a new game.</p>
     </section>
     <script>
-        document.getElementById("Name").innerHTML = hero.basics.name;
-        document.getElementById("Class").innerHTML = hero.basics.class;
-        document.getElementById("Level").innerHTML = hero.basics.level;
-        document.getElementById("XP").innerHTML = hero.stats.xp;
-        document.getElementById("CHP").innerHTML = hero.stats.current_hp;
-        document.getElementById("MHP").innerHTML = hero.stats.max_hp;
-        document.getElementById("Gold").innerHTML = hero.inventory.gold;
-        document.getElementById("ATK").innerHTML = hero.stats.player_atk;
-        document.getElementById("DEF").innerHTML = hero.stats.player_def;
-        document.getElementById("Day").innerHTML = hero.journal.day;
+        document.getElementById("Name").innerHTML = "Name: " + hero.basics.name;
+        document.getElementById("Class").innerHTML = "Class: " + hero.basics.class;
+        document.getElementById("Level").innerHTML = "Level: " + hero.basics.level;
+        document.getElementById("XP").innerHTML = "XP: " + hero.stats.xp;
+        document.getElementById("CHP").innerHTML = "Current HP: " + hero.stats.current_hp;
+        document.getElementById("MHP").innerHTML = "Max HP: " + hero.stats.max_hp;
+        document.getElementById("Gold").innerHTML = hero.inventory.gold + " Gold";
+        document.getElementById("ATK").innerHTML = "Attack: " + hero.stats.player_atk;
+        document.getElementById("DEF").innerHTML = "Defense: " + hero.stats.player_def;
+        document.getElementById("Day").innerHTML = "Day: " + hero.journal.day;
         document.getElementById("Fame").innerHTML = hero.reputation.fame;
         document.getElementById("Infamy").innerHTML = hero.reputation.infamy;
         document.getElementById("QC").innerHTML = hero.journal.quests_completed;

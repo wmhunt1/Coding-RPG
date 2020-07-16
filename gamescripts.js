@@ -142,7 +142,7 @@ function changeName()
 {
     var chooseName = prompt("What is your Name?")
     hero.basics.name = chooseName;
-    document.getElementById("Name").innerHTML = hero.basics.name;
+    document.getElementById("Name").innerHTML = "Name: " + hero.basics.name;
 }
 function createHero()
 {
@@ -161,14 +161,14 @@ function LevelUp()
     var lp = 2;
     hero.basics.level += 1;
     hero.stats.xp_to_next_level = 100*hero.basics.level;
-    document.getElementById("Level").innerHTML = hero.basics.level;
+    document.getElementById("Level").innerHTML = "Level: " + hero.basics.level;
     while (lp > 0)
     {
         var lChoice = prompt("You have leveled up. Choose 2 level up bonus: 10 (H)P, 2 (S)P, 1 (A)ttack, or 1 (D)efense.")
         if (lChoice === "H")
         {
             hero.basics.max_hp += 10;
-            document.getElementById("MHP").innerHTML = hero.stats.max_hp;
+            document.getElementById("MHP").innerHTML = "Max HP: " + hero.stats.max_hp;
             lp -= 1;
         }
         else if (lChoice === "S")
@@ -180,13 +180,13 @@ function LevelUp()
         else if (lChoice === "A")
         {
             hero.stats.player_atk += 1;
-            document.getElementById("ATK").innerHTML = hero.stats.player_atk;
+            document.getElementById("ATK").innerHTML = "Attack: " + hero.stats.player_atk;
             lp -= 1;
         }
         else if (lChoice === "D")
         {
             hero.stats.player_def += 1;
-            document.getElementById("DEF").innerHTML = hero.stats.player_def;
+            document.getElementById("DEF").innerHTML = "Defense: " + hero.stats.player_def;
             lp -= 1;
         }
         else
@@ -264,12 +264,12 @@ function death()
 function healPlayer(x)
 {
     hero.stats.current_hp += x;
-    document.getElementById("CHP").innerHTML = hero.stats.current_hp;
+    document.getElementById("CHP").innerHTML = "Current HP: " + hero.stats.current_hp;
 }
 function dmgPlayer(x)
 {
     hero.stats.current_hp -= x;
-    document.getElementById("CHP").innerHTML = hero.stats.current_hp;
+    document.getElementById("CHP").innerHTML = "Current HP: " + hero.stats.current_hp;
 }
 function addAP(x)
 {
@@ -292,17 +292,17 @@ function removeSP(x)
 function addXP(x)
 {
     hero.stats.xp += x;
-    document.getElementById("XP").innerHTML = hero.stats.xp;
+    document.getElementById("XP").innerHTML = "XP: " + hero.stats.xp;
 }
 function addGold(x)
 {
     hero.inventory.gold += x;
-    document.getElementById("Gold").innerHTML = hero.inventory.gold;
+    document.getElementById("Gold").innerHTML = hero.inventory.gold + " Gold";
 }
 function removeGold(x)
 {
     hero.inventory.gold -= x;
-    document.getElementById("Gold").innerHTML = hero.inventory.gold;
+    document.getElementById("Gold").innerHTML = hero.inventory.gold + " Gold";
 }
 function addFame(x)
 {
@@ -981,6 +981,7 @@ function enemyATK()
         {
             dmg = (enemy.weapon_dmg + enemy.enemy_buff - enemy.enemy_debuff- total_armor);
             hero.stats.current_hp -= dmg;
+            document.getElementById("CHP").innerHTML = "Current HP: " + hero.stats.current_hp;
             console.log("enemy hits player")
             alert("player hit for " + dmg + " damage.")
         }
@@ -1465,8 +1466,8 @@ function player_rest()
     hero.stats.current_hp = hero.stats.max_hp;
     hero.stats.current_sp = hero.stats.max_sp;
     hero.journal.day =+ 1;
-    document.getElementById("Day").innerHTML = hero.journal.day;
-    document.getElementById("CHP").innerHTML = hero.stats.current_hp;
+    document.getElementById("Day").innerHTML = "Day: " + hero.journal.day;
+    document.getElementById("CHP").innerHTML = "Current HP: " + hero.stats.current_hp;
     document.getElementById("CSP").innerHTML = hero.stats.current_sp;
 }
 function bad_rest()
@@ -1474,8 +1475,8 @@ function bad_rest()
     hero.stats.current_hp = hero.stats.max_hp;
     hero.stats.current_sp = hero.stats.max_sp;
     hero.journal.day =+ 1;
-    document.getElementById("Day").innerHTML = hero.journal.day;
-    document.getElementById("CHP").innerHTML = hero.stats.current_hp;
+    document.getElementById("Day").innerHTML = "Day: " + hero.journal.day;
+    document.getElementById("CHP").innerHTML = "Current HP: " + hero.stats.current_hp;
 }
 function inn_rest()
 {
