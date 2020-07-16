@@ -174,7 +174,7 @@ function LevelUp()
         else if (lChoice === "S")
         {
             hero.stats.max_sp += 2;
-            document.getElementById("MSP").innerHTML = hero.stats.max_sp;
+            document.getElementById("MSP").innerHTML = "Max SP: " + hero.stats.max_sp;
             lp -= 1;
         }
         else if (lChoice === "A")
@@ -209,12 +209,12 @@ function Ready_for_level()
 function gainLife()
 {
     hero.basics.lifes += 1;
-    document.getElementById("Life").innerHTML = hero.basics.lifes;
+    document.getElementById("Life").innerHTML = "Lifes: " + hero.basics.lifes;
 }
 function loseLife()
 {
     hero.basics.lifes -= 1;
-    document.getElementById("Life").innerHTML = hero.basics.lifes;
+    document.getElementById("Life").innerHTML = "Lifes: " + hero.basics.lifes;
 }
 function death()
 {
@@ -282,12 +282,12 @@ function removeAP(x)
 function addSP(x)
 {
     hero.stats.current_sp += x;
-    document.getElementById("CSP").innerHTML = hero.stats.current_sp;
+    document.getElementById("CSP").innerHTML = "Current SP: " + hero.stats.current_sp;
 }
 function removeSP(x)
 {
     hero.stats.current_sp -= x;
-    document.getElementById("CSP").innerHTML = hero.stats.current_sp;
+    document.getElementById("CSP").innerHTML = "Current SP: " + hero.stats.current_sp;
 }
 function addXP(x)
 {
@@ -307,12 +307,12 @@ function removeGold(x)
 function addFame(x)
 {
     hero.journal.fame += x;
-    document.getElementById("Fame").innerHTML = hero.reputation.fame;
+    document.getElementById("Fame").innerHTML = "Fame: " + hero.reputation.fame;
 }
 function addInfamy(x)
 {
     hero.journal.infamy += x;
-    document.getElementById("Infamy").innerHTML = hero.reputation.infamy;
+    document.getElementById("Infamy").innerHTML = "Infamy: " + hero.reputation.infamy;
 }
 //enemy stats
 var enemy =
@@ -980,8 +980,7 @@ function enemyATK()
         else
         {
             dmg = (enemy.weapon_dmg + enemy.enemy_buff - enemy.enemy_debuff- total_armor);
-            hero.stats.current_hp -= dmg;
-            document.getElementById("CHP").innerHTML = "Current HP: " + hero.stats.current_hp;
+            dmgPlayer(dmg)
             console.log("enemy hits player")
             alert("player hit for " + dmg + " damage.")
         }
@@ -1225,12 +1224,12 @@ function temple()
 function addPotion(x)
     {
         hero.inventory.potion += x;
-        document.getElementById("Potion").innerHTML = hero.inventory.potion;
+        document.getElementById("Potion").innerHTML = "Potion(s): " + hero.inventory.potion;
     }
 function removePotion(x)
 {
     hero.inventory.potion -= x;
-    document.getElementById("Potion").innerHTML = hero.inventory.potion;
+    document.getElementById("Potion").innerHTML = "Potion(s): " + hero.inventory.potion;
 }
 function DrinkPotion()
 {
@@ -1301,7 +1300,7 @@ function DrinkPotion()
         addGold(x)
         addFame(y)
         hero.journal.quests_completed += 1;
-        document.getElementById("QC").innerHTML = hero.journal.quests_completed;
+        document.getElementById("QC").innerHTML = "Quests Completed " + hero.journal.quests_completed;
         alert ("You gain: " + x + " Gold and " + y + " Fame for completed the quest.")
     }
     function bossReward(x,y)
@@ -1309,7 +1308,7 @@ function DrinkPotion()
         addGold(x)
         addFame(y)
         hero.journal.bosses_defeated += 1;
-        document.getElementById("Boss").innerHTML = hero.journal.bosses_defeated;
+        document.getElementById("Boss").innerHTML = "Bosses Defeated: " + hero.journal.bosses_defeated;
         alert ("You gain: " + x + " Gold and " + y + " Fame for defeating the " + enemy.name)
     }
     function Template()
@@ -1554,7 +1553,7 @@ function impWep(x)
     alert ("Your weapon improves by " + x)
     hero.equipment.melee_wep = weaponArray[hero.equipment.melee_wep_dmg-1]
     alert ("Your weapon has been updgraded to a " + hero.equipment.melee_wep)
-    document.getElementById("Mwep").innerHTML = hero.equipment.melee_wep;
+    document.getElementById("Mwep").innerHTML = "Melee Weapon: " + hero.equipment.melee_wep;
 }
 function impArmor(x)
 {
@@ -1562,8 +1561,8 @@ function impArmor(x)
     alert ("Your armor improves by " + x)
     hero.equipment.torso_slot = armorArray[hero.equipment.torso_armor]
     alert("You armor has now been upgraded to " + hero.equipment.torso_slot)
-    document.getElementById("Torso").innerHTML = hero.equipment.torso_slot;
-    document.getElementById("Totarm").innerHTML = total_armor;
+    document.getElementById("Torso").innerHTML = "Torso: " + hero.equipment.torso_slot;
+    document.getElementById("Totarm").innerHTML = "Total Armor: " + total_armor;
 } 
 var weaponArray = ["Stick","Club", "Dagger", "Shortsword", "Longsword", "Magic Sword", "Hero Sword"]
 var armorArray = ["Peasant", "Leather", "Studded Leather", "Chain Mail", "Plate" ]
@@ -1611,7 +1610,7 @@ function impRanged(x)
     alert ("Your ranged improves by " + x)
     hero.equipment.ranged_wep = rangedArray[hero.equipment.ranged_wep_dmg]
     alert("You weapon has now been upgraded to " + hero.equipment.ranged_wep)
-    document.getElementById("Rwep").innerHTML = hero.equipment.ranged_wep;
+    document.getElementById("Rwep").innerHTML = "Ranged Weapon: " + hero.equipment.ranged_wep;
 } 
 var rangedArray = ["Rock", "Sling", "Shortbow"]
 function bowyer()
@@ -1644,7 +1643,7 @@ function impSpell(x)
     alert ("Your spellbook improves by " + x)
     hero.equipment.magic_wep = spellbookArray[hero.equipment.magic_wep_dmg-1]
     alert ("Your spellbook has been updgraded to a " + hero.equipment.magic_wep)
-    document.getElementById("Magwep").innerHTML = hero.equipment.magic_wep;
+    document.getElementById("Magwep").innerHTML = "Magic Weapon: " + hero.equipment.magic_wep;
 }
 function enchanter()
 {   
@@ -1703,14 +1702,14 @@ function enchanter()
     hero.skills.crafting_value += x;
     hero.skills.crafting = hero.skills.skill_level_array[hero.skills.crafting_value]
     alert ("Your Crafting skill has increased in proficiency to the " + hero.skills.crafting + " level.")
-    document.getElementById("crafting").innerHTML = hero.skills.crafting;
+    document.getElementById("crafting").innerHTML = "Crafting: " + hero.skills.crafting;
 }
 function impGathering(x)
 {
     hero.skills.gathering_value += x;
     hero.skills.gathering = hero.skills.skill_level_array[hero.skills.gathering_value]
     alert ("Your Gathering skill has increased in proficiency to the " + hero.skills.gathering + " level.")
-    document.getElementById("gathering").innerHTML = hero.skills.gathering;
+    document.getElementById("gathering").innerHTML = "Gathering: " + hero.skills.gathering;
 }
 function impMagic(x)
 {
@@ -1719,7 +1718,7 @@ function impMagic(x)
     alert ("Your Magic skill has increased in proficiency to the " + hero.skills.magic + " level.")
     document.getElementById("magic").innerHTML = hero.skills.magic;
     alert ("You learn the " + hero.skills.magicArray[hero.skills.magic_value] + " skill power(s)")
-    document.getElementById("magic").innerHTML = hero.skills.magic;
+    document.getElementById("magic").innerHTML = "Magic: " + hero.skills.magic;
     var tag = document.createElement("p")
     var text = document.createTextNode(hero.skills.magicArray[hero.skills.magic_value]);
     tag.appendChild(text);
@@ -1732,7 +1731,7 @@ function impMarksman(x)
     hero.skills.marksman = hero.skills.skill_level_array[hero.skills.marksman_value]
     alert ("Your Marksman skill has increased in proficiency to the " + hero.skills.marksman + " level.")
     alert ("You learn the " + hero.skills.marksmanArray[hero.skills.marksman_value] + " skill power(s)")
-    document.getElementById("marksman").innerHTML = hero.skills.marksman;
+    document.getElementById("marksman").innerHTML = "Marksman: " + hero.skills.marksman;
     var tag = document.createElement("p")
     var text = document.createTextNode(hero.skills.marksmanArray[hero.skills.marksman_value]);
     tag.appendChild(text);
@@ -1745,7 +1744,7 @@ function impMarksman(x)
     hero.skills.melee = hero.skills.skill_level_array[hero.skills.melee_value]
     alert ("Your Melee skill has increased in proficiency to the " + hero.skills.melee + " level.")
     alert ("You learn the " + hero.skills.meleeArray[hero.skills.melee_value] + " skill power(s)")
-    document.getElementById("melee").innerHTML = hero.skills.melee;
+    document.getElementById("melee").innerHTML = "Melee: " + hero.skills.melee;
     var tag = document.createElement("p")
     var text = document.createTextNode(hero.skills.meleeArray[hero.skills.melee_value]);
     tag.appendChild(text);
@@ -1758,7 +1757,7 @@ function impPrayer(x)
     hero.skills.prayer = hero.skills.skill_level_array[hero.skills.prayer_value]
     alert ("Your Prayer skill has increased in proficiency to the " + hero.skills.prayer + " level.")
     alert ("You learn the " + hero.skills.prayerArray[hero.skills.prayer_value] + " skill power(s)")
-    document.getElementById("prayer").innerHTML = hero.skills.prayer;
+    document.getElementById("prayer").innerHTML = "Prayer: " + hero.skills.prayer;
     var tag = document.createElement("p")
     var text = document.createTextNode(hero.skills.prayerArray[hero.skills.prayer_value]);
     tag.appendChild(text);
@@ -1770,14 +1769,14 @@ function impSpeech(x)
     hero.skills.speech_value += x;
     hero.skills.speech = hero.skills.skill_level_array[hero.skills.speech_value]
     alert ("Your Speech skill has increased in proficiency to the " + hero.skills.speech + " level.")
-    document.getElementById("speech").innerHTML = hero.skills.speech;
+    document.getElementById("speech").innerHTML = "Speech: " + hero.skills.speech;
 }
 function impSurvival(x)
 {
     hero.skills.survival_value += x;
     hero.skills.survival = hero.skills.skill_level_array[hero.skills.survival_value]
     alert ("Your Survival skill has increased in proficiency to the " + hero.skills.survival + " level.")
-    document.getElementById("survival").innerHTML = hero.skills.survival;
+    document.getElementById("survival").innerHTML = "Survival: " + hero.skills.survival;
 }
 function impThievery(x)
 {
@@ -1785,7 +1784,7 @@ function impThievery(x)
     hero.skills.thievery = hero.skills.skill_level_array[hero.skills.thievery_value]
     alert ("Your Thievery skill has increased in proficiency to the " + hero.skills.thievery + " level.")
     alert ("You learn the " + hero.skills.thieveryArray[hero.skills.thievery_value] + " skill power(s)")
-    document.getElementById("thievery").innerHTML = hero.skills.thievery;
+    document.getElementById("thievery").innerHTML = "Thievery: " + hero.skills.thievery;
     var tag = document.createElement("p")
     var text = document.createTextNode(hero.skills.thieveryArray[hero.skills.thievery_value]);
     tag.appendChild(text);

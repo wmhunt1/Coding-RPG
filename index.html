@@ -85,24 +85,15 @@
     </section>
     <section id = "Equipment" class ="options">
         <h1>Equipment</h1>
-        <h2>Melee Weapon</h2>
-        <p id="Mwep"></p>
-        <h2>Ranged Weapon</h2>
-        <p id="Rwep"></p>
-        <h2>Magic Weapon</h2>
-        <p id="Magwep"></p>
-        <h2>Head</h2>
-        <p id="Head"></p>
-        <h2>Torso</h2>
-        <p id="Torso"></p>
-        <h2>Legs</h2>
-        <p id="Legs"></p>
-        <h2>Hands</h2>
-        <p id="Hands"></p>
-        <h2>Feet</h2>
-        <p id="Feet"></p>
-        <h2>Total armor</h2>
-        <p id="Totarm"></p>
+        <h2 id="Mwep">Melee Weapon</h2>
+        <h2 id="Rwep">Ranged Weapon</h2>
+        <h2 id="Magwep">Magic Weapon</h2>
+        <h2 id="Head">Head</h2>
+        <h2 id="Torso">Torso</h2>
+        <h2 id="Legs">Legs</h2>
+        <h2 id="Hands">Hands</h2>
+        <h2 id="Feet">Feet</h2>
+        <h2 id="Totarm">Total armor</h2>
     </section>
     <section id = "Factions" class ="options">
         <h1>Factions</h1>
@@ -110,15 +101,12 @@
     <section id = "Inventory" class ="options">
         <h1>Inventory</h1>
         <h2 id="Gold">Gold</h2>
-        <h2>Potion(s) owned:</h2>
-        <p id="Potion"></p>
+        <h2 id="Potion">Potion(s) owned:</h2>
     </section>
     <section id = "Journal" class ="options">
         <h1>Journal</h1>
-        <h2>Quests Completed</h2>
-        <p id="QC"></p>
-        <h2>Bosses Defeated</h2>
-        <p id="Boss"></p>
+        <h2 id="QC">Quests Completed</h2>
+        <h2 id="Boss">Bosses Defeated</h2>
         <h2>Journal Entries</h2>
         <p id="entries"></p>
     </section>
@@ -126,10 +114,8 @@
     <section id = "Quest" class ="options">
         <h1>Quests</h1>
         <h2 id="Day">Day</h2>
-        <h2>Fame</h2>
-        <p id="Fame"></p>
-        <h2>Infamy</h2>
-        <p id="Infamy"></p>
+        <h2 id="Fame">Fame</h2>
+        <h2 id="Infamy">Infamy</h2>
         <article>
             <h2>Main Quest</h2>
             <H3>Details</H3>
@@ -211,43 +197,33 @@
     </section>
     <section id = "Skills" class ="options">
         <h1>Skills and Powers</h1>
-        <h2>Crafting</h2>
-        <p id="crafting"></p>
+        <h2 id="crafting">Crafting</h2>
         <p>Crafting Powers Known</p>
         <p id = "crafting_known"></p>
-        <h2>Gathering</h2>
-        <p id="gathering"></p>
+        <h2 id="gathering">Gathering</h2>
         <p>Gathering Powers Known</p>
         <p id = "gathering_known"></p>
-        <h2>Magic</h2>
-        <p id="magic"></p>
+        <h2 id="magic">Magic</h2>
         <p>Magic Powers Known</p>
         <p id = "magic_known"></p>
-        <h2>Marksman</h2>
-        <p id="marksman"></p>
+        <h2 id="marksman">Marksman</h2>
         <p>Marksman Powers Known</p>
         <p id = "marksman_known"></p>
-        <h2>Melee</h2>
-        <p id="melee"></p>
+        <h2 id="melee">Melee</h2>
         <p>Melee Powers Known:</p>
         <p id = "melee_known"></p>
-        <h2>Prayer</h2>
-        <p id="prayer"></p>
+        <h2 id="prayer">Prayer</h2>
         <p>Prayer Powers Known:</p>
         <p id = "prayer_known"></p>
-        <h2>Speech</h2>
-        <p id="speech"></p>
+        <h2 id="speech">Speech</h2>
         <p>Speech Powers Known</p>
         <p id = "speech_known"></p>
-        <h2>Survival</h2>
-        <p id="survival"></p>
+        <h2 id="survival">Survival</h2>
         <p>Survival Powers Known</p>
         <p id = "survival_known"></p>
-        <h2>Thievery</h2>
-        <p id="thievery"></p>
+        <h2 id="thievery">Thievery</h2>
         <p>Thievery Powers Known</p>
         <p id = "thievery_known"></p>
-        <!-- want to put skills known -->
     </section>
     <section id = "Training" class ="options">
         <h1>Training</h1>
@@ -321,32 +297,32 @@
         document.getElementById("ATK").innerHTML = "Attack: " + hero.stats.player_atk;
         document.getElementById("DEF").innerHTML = "Defense: " + hero.stats.player_def;
         document.getElementById("Day").innerHTML = "Day: " + hero.journal.day;
-        document.getElementById("Fame").innerHTML = hero.reputation.fame;
-        document.getElementById("Infamy").innerHTML = hero.reputation.infamy;
-        document.getElementById("QC").innerHTML = hero.journal.quests_completed;
-        document.getElementById("CSP").innerHTML = hero.stats.current_sp;
-        document.getElementById("MSP").innerHTML = hero.stats.max_sp;
-        document.getElementById("Life").innerHTML = hero.basics.lifes;
-        document.getElementById("Mwep").innerHTML = hero.equipment.melee_wep;
-        document.getElementById("Rwep").innerHTML = hero.equipment.ranged_wep;
-        document.getElementById("Magwep").innerHTML = hero.equipment.magic_wep;
-        document.getElementById("Head").innerHTML = hero.equipment.head_slot;
-        document.getElementById("Torso").innerHTML = hero.equipment.torso_slot;
-        document.getElementById("Legs").innerHTML = hero.equipment.leg_slot;
-        document.getElementById("Hands").innerHTML = hero.equipment.hand_slot;
-        document.getElementById("Feet").innerHTML = hero.equipment.feet_slot;
-        document.getElementById("Totarm").innerHTML = total_armor;
-        document.getElementById("crafting").innerHTML = hero.skills.crafting;
-        document.getElementById("gathering").innerHTML = hero.skills.gathering;
-        document.getElementById("magic").innerHTML = hero.skills.magic;
-        document.getElementById("marksman").innerHTML = hero.skills.marksman;
-        document.getElementById("melee").innerHTML = hero.skills.melee;
-        document.getElementById("prayer").innerHTML = hero.skills.prayer;
-        document.getElementById("speech").innerHTML = hero.skills.speech;
-        document.getElementById("survival").innerHTML = hero.skills.survival;
-        document.getElementById("thievery").innerHTML = hero.skills.thievery;
-        document.getElementById("Boss").innerHTML = hero.journal.bosses_defeated;
-        document.getElementById("Potion").innerHTML = hero.inventory.potion;
+        document.getElementById("Fame").innerHTML = "Fame: " + hero.reputation.fame;
+        document.getElementById("Infamy").innerHTML = "Infamy: " + hero.reputation.infamy;
+        document.getElementById("QC").innerHTML = "Quests Completed " + hero.journal.quests_completed;
+        document.getElementById("CSP").innerHTML = "Current SP: " + hero.stats.current_sp;
+        document.getElementById("MSP").innerHTML = "Max SP: " + hero.stats.max_sp;
+        document.getElementById("Life").innerHTML = "Lifes: " + hero.basics.lifes;
+        document.getElementById("Mwep").innerHTML = "Melee Weapon: " + hero.equipment.melee_wep;
+        document.getElementById("Rwep").innerHTML = "Ranged Weapon: " + hero.equipment.ranged_wep;
+        document.getElementById("Magwep").innerHTML = "Magic Weapon: " + hero.equipment.magic_wep;
+        document.getElementById("Head").innerHTML = "Head: " + hero.equipment.head_slot;
+        document.getElementById("Torso").innerHTML = "Torso: " + hero.equipment.torso_slot;
+        document.getElementById("Legs").innerHTML = "Legs: " + hero.equipment.leg_slot;
+        document.getElementById("Hands").innerHTML = "Hands: " + hero.equipment.hand_slot;
+        document.getElementById("Feet").innerHTML = "Feet: " + hero.equipment.feet_slot;
+        document.getElementById("Totarm").innerHTML = "Total Armor: " + total_armor;
+        document.getElementById("crafting").innerHTML = "Craftinging: " + hero.skills.crafting;
+        document.getElementById("gathering").innerHTML = "Gathering: " + hero.skills.gathering;
+        document.getElementById("magic").innerHTML = "Magic: " + hero.skills.magic;
+        document.getElementById("marksman").innerHTML = "Marksman: " + hero.skills.marksman;
+        document.getElementById("melee").innerHTML = "Melee: " + hero.skills.melee;
+        document.getElementById("prayer").innerHTML = "Prayer: " + hero.skills.prayer;
+        document.getElementById("speech").innerHTML = "Speech: " + hero.skills.speech;
+        document.getElementById("survival").innerHTML = "Survival: " + hero.skills.survival;
+        document.getElementById("thievery").innerHTML = "Thievery: " + hero.skills.thievery;
+        document.getElementById("Boss").innerHTML = "Bosses Defeated: " + hero.journal.bosses_defeated;
+        document.getElementById("Potion").innerHTML = "Potion(s): " + hero.inventory.potion;
 
         //open section functions
         function character()
