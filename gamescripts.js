@@ -334,7 +334,7 @@ var enemy =
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 0,
-dde        ranged_wep: "R",
+        ranged_wep: "R",
         ranged: false
     }
 function arena_champion(x)
