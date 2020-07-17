@@ -1,4 +1,4 @@
-afunction startGame()
+function startGame()
 {
     document.getElementById("Menu").style.display = "none";
     document.getElementById("Intro").style.display = "block";
@@ -472,7 +472,7 @@ function goblin(x)
         weapon_dmg: 1,
         def: 1,
         armor: "None",
-        armor_value: 1,
+        armor_value: 0,
         speed: 0,
         enemy_buff: 0,
         enemy_debuff: 0,
@@ -1359,6 +1359,9 @@ function DrinkPotion()
     //inns
     var innArray = ["Dreaming Worker", "A Place to Rest your Bread", "Motel Styx"]
     var inn = Math.floor((Math.random() * innArray.length))
+    //places
+    var placeArray = ["Cave","Field", "Forest", "Meadow", "Pond"]
+    var place = Math.floor((Math.random() * placeArray.length))
     //towns
     var townArray = ["Towning Town", "Other Town"]
     var town = Math.floor((Math.random() * townArray.length))
@@ -1367,7 +1370,7 @@ function DrinkPotion()
     var village = Math.floor((Math.random() * villageArray.length))
     //random objectives for quests
     //item retreival
-    var fetchArray = ["Missing Item"]
+    var fetchArray = ["Missing Item", "Other Item"]
     var fetch = Math.floor((Math.random() * fetchArray.length))
     //rescue
     var rescueArray = ["Boy","Girl","Noble"]
@@ -1427,7 +1430,7 @@ function DrinkPotion()
             //need if hp above 0 for each stage.
             if (hero.stats.current_hp > 0)
             {
-                questComplete(x)
+                questComplete(x,y)
                 //if no boss
                 addJournal(x,y)
                 // if boss
@@ -1436,7 +1439,7 @@ function DrinkPotion()
             }
             else
             {
-                Death()
+                death()
             }
         }
     }
@@ -1469,9 +1472,34 @@ function DrinkPotion()
             }
             if (hero.stats.current_hp > 0)
             {
+     
                 questComplete((10*bandits),10)
                 bossReward(20,20)
                 addJournal_boss("kill", "bandits", "Bandit Leader")
+            }
+            else
+            {
+                death()
+            }
+        }
+    }
+    function fetchQuest()
+    {
+        if (hero.stats.current_hp <= 0)  
+        {
+            alert ("You can't go questing in your condition")
+        } 
+        else
+        {   
+            alert("You take a quest to retrieve a " + fetchArray[fetch] + " that was left at a " + placeArray[place])
+            alert("At the " + placeArray[place])
+            goblin(1)
+            alert ("You see a " + enemy.name + " holding the " + fetchArray[fetch])
+            combat(3)
+            if (hero.stats.current_hp > 0)
+            {
+                questComplete(10,1)
+                addJournal("find a ",(fetchArray[fetch]))
             }
             else
             {
@@ -2096,21 +2124,19 @@ function trainThievery()
 //skill check function
 function checkCrafting(x,y)
 {
-    alert ("you are trying to do " + y)
     if (hero.skills.crafting_value > x)
     {
-        alert("you succeed at " + y)
+        y = true;
         //success events
     }
     else
     {
-        alert("you fail at " + y)
+        y = false;
         //failure events
     }
 }
 function checkGathering(x,y)
 {
-    alert ("you are trying to do " + y)
     if (hero.skills.gathering_value > x)
     {
         alert("you succeed at " + y)
@@ -2124,99 +2150,92 @@ function checkGathering(x,y)
 }
 function checkMagic(x,y)
 {
-    alert ("you are trying to do " + y)
     if (hero.skills.magic_value > x)
     {
-        alert("you succeed at " + y)
+        y = true;
         //success events
     }
     else
     {
-        alert("you fail at " + y)
+        y = false;
         //failure events
     }
 }
 function checkMarksman(x,y)
 {
-    alert ("you are trying to do " + y)
     if (hero.skills.marksman_value > x)
     {
-        alert("you succeed at " + y)
+        y = true;
         //success events
     }
     else
     {
-        alert("you fail at " + y)
+        y = false;
         //failure events
     }
 }
 function checkMelee(x,y)
 {
-    alert ("you are trying to do " + y)
     if (hero.skills.melee_value > x)
     {
-        alert("you succeed at " + y)
+        y = true;
         //success events
     }
     else
     {
-        alert("you fail at " + y)
+        y = false;
         //failure events
     }
 }
 function checkPrayer(x,y)
 {
-    alert ("you are trying to do " + y)
     if (hero.skills.prayer_value > x)
     {
-        alert("you succeed at " + y)
+        y = true;
         //success events
     }
     else
     {
-        alert("you fail at " + y)
+        y = false;
         //failure events
     }
 }
 function checkSpeech(x,y)
 {
-    alert ("you are trying to do " + y)
     if (hero.skills.speech_value > x)
     {
-        alert("you succeed at " + y)
+        y = true;
         //success events
     }
     else
     {
-        alert("you fail at " + y)
+        y = false;
         //failure events
     }
 }
 function checkSurvival(x,y)
 {
-    alert ("you are trying to do " + y)
     if (hero.skills.survival_value > x)
     {
-        alert("you succeed at " + y)
+        y = true;
         //success events
     }
     else
     {
-        alert("you fail at " + y)
+        y = false;
         //failure events
     }
 }
 function checkThievery(x,y)
 {
-    alert ("you are trying to do " + y)
     if (hero.skills.thievery_value > x)
     {
-        alert("you succeed at " + y)
+        y = true;
         //success events
     }
     else
     {
-        alert("you fail at " + y)
+        y = false;
         //failure events
     }
 }
