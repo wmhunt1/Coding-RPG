@@ -1,4 +1,4 @@
-function startGame()
+afunction startGame()
 {
     document.getElementById("Menu").style.display = "none";
     document.getElementById("Intro").style.display = "block";
@@ -334,6 +334,8 @@ var enemy =
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 0,
+dde        ranged_wep: "R",
+        ranged: false
     }
 function arena_champion(x)
 {   
@@ -355,6 +357,8 @@ function arena_champion(x)
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 0,
+        ranged_wep: "R",
+        ranged: false
     }
 }   
 function arena_rookie(x)
@@ -377,6 +381,8 @@ function arena_rookie(x)
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 0,
+        ranged_wep: "R",
+        ranged: false
     }
 }   
 function bandit(x)
@@ -399,6 +405,8 @@ function bandit(x)
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 5,
+        ranged_wep: "Crossbow",
+        ranged: true
     }
 }
 function bandit_leader(x)
@@ -421,6 +429,8 @@ function bandit_leader(x)
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 20,
+        ranged_wep: "Crossbow",
+        ranged: true
     }
 }
 function bar_patron(x)
@@ -443,6 +453,8 @@ function bar_patron(x)
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 1,
+        ranged_wep: "R",
+        ranged: false
     }
 }
 function goblin(x)
@@ -465,6 +477,8 @@ function goblin(x)
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 5,
+        ranged_wep: "Sling",
+        ranged: true
     }
 }
 function goblin_boss(x)
@@ -487,6 +501,8 @@ function goblin_boss(x)
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 20,
+        ranged_wep: "Sling",
+        ranged: true
     }
 }
 function mimic(x)
@@ -509,6 +525,8 @@ function mimic(x)
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 0,
+        ranged_wep: "R",
+        ranged: false
     }
 }
 function minotaur(x)
@@ -531,6 +549,8 @@ function minotaur(x)
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 0,
+        ranged_wep: "R",
+        ranged: false
     }
 }
 function rat(x)
@@ -553,6 +573,8 @@ function rat(x)
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 2,
+        ranged_wep: "R",
+        ranged: false
     }
 }
 function skeleton(x)
@@ -575,6 +597,8 @@ function skeleton(x)
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 0,
+        ranged_wep: "Shortbow",
+        ranged: true
     }
 }
 function spider(x)
@@ -597,6 +621,8 @@ function spider(x)
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 2,
+        ranged_wep: "R",
+        ranged: false
     }
 }
 //combat functions
@@ -888,9 +914,15 @@ function playerTurn()
         var action = prompt("Melee (A)ttack, (R)anged Attack, or (M)agic use a (Sk)ill Power or drink a (P)otion?")
         if (action === "A")
         {
-            playerATK(1,1)
-            removeAP(1)
-
+            if (distance > 0)
+            {
+                alert ("You are out of melee range.")
+            }
+            else
+            {
+                playerATK(1,1)
+                removeAP(1)
+            }
         }
         else if (action === "R")
         {
@@ -995,12 +1027,56 @@ function enemyATK()
     console.log(enemy_hit_chance)
     console.log(hero.stats.current_hp + " player hp")
 }
+function ranged_enemyATK()
+{
+    console.log("enemy attacks")
+    alert("The " + enemy.name + " makes a ranged attack with its " + enemy.ranged_wep)
+    var enemy_hit_chance = .5 - .1*(hero.stats.player_def + hero.stats.player_buff - hero.stats.player_debuff);
+    var enemy_hit_roll = Math.random() + .1*(enemy.atk + enemy.enemy_buff - enemy.enemy_debuff)
+    if (enemy_hit_roll > enemy_hit_chance)
+    {
+        if (total_armor +  hero.stats.player_buff - hero.stats.player_debuff >= enemy.weapon_dmg + enemy.enemy_buff - enemy.enemy_debuff)
+        {
+            console.log("no damage")
+            alert("The " + enemy.name + "'s" + enemy.weapon + " bounces off of your armor.")
+        }
+        else
+        {
+            dmg = (enemy.weapon_dmg + enemy.enemy_buff - enemy.enemy_debuff- total_armor);
+            dmgPlayer(dmg)
+            console.log("enemy hits player")
+            alert("player hit for " + dmg + " damage.")
+        }
+    }
+    else
+    {
+        console.log("enemy missed player")
+        alert ("The " + enemy.name + " misses you with its " + enemy.ranged_wep)
+    }
+    console.log(enemy_hit_roll)
+    console.log(enemy_hit_chance)
+    console.log(hero.stats.current_hp + " player hp")
+}
 function enemyTurn()
 {
     //attack for every enemy
     for (var i = 0; i < enemy.number; i++)
     {
         enemyATK()
+    }
+}
+function ranged_enemyTurn()
+{
+    for (var i = 0; i < enemy.number; i++)
+    {
+        if (enemy.ranged != true)
+        {
+            alert ("The " + enemy.name + " is out of range.")
+        }
+        else
+        {
+            ranged_enemyATK()
+        }
     }
 }
 function checkifdead()
@@ -1024,9 +1100,11 @@ function checkifdead()
     console.log("checked if dead")
 }
 //general combat function
-function combat()
+var distance = 0;
+function combat(x)
 {
     console.log ("you face "+ enemy.number + " " + enemy.name + "(s)")
+    distance = x;
     var turn = 0;
     while(hero.stats.current_hp > 0 && enemy.number > 0)
     {
@@ -1034,19 +1112,43 @@ function combat()
         {
             turn += 1;
             console.log ("turn " + turn)
-            if ((hero.stats.speed + hero.stats.speed_boost) > enemy.speed || (hero.stats.speed + hero.stats.speed_boost) == enemy.speed)
+            
+            while (distance > 0 && hero.stats.current_hp > 0 && enemy.number > 0 && distance --)
             {
-                playerTurn()
-                checkifdead()
-                enemyTurn()
+                if ((hero.stats.speed + hero.stats.speed_boost) > enemy.speed || (hero.stats.speed + hero.stats.speed_boost) == enemy.speed)
+                {
+                    playerTurn()
+                    checkifdead()
+                    ranged_enemyTurn()
+                }
+                else
+                {   
+                    ranged_enemyTurn()
+                    playerTurn()
+                    checkifdead()
+                }
+                alert ("The " + enemy.name + "(s) move closer.")
+                alert ("Your current HP is " + hero.stats.current_hp)
+                alert ("There are " + enemy.number + " " + enemy.name + "(s) left.")
             }
-            else
+            alert ("The " + enemy.name + "(s) are now in melee range.")
+            while (distance == 0 && hero.stats.current_hp > 0 && enemy.number > 0)
             {
-                enemyTurn()
-                playerTurn()
-                checkifdead()
+                if ((hero.stats.speed + hero.stats.speed_boost) > enemy.speed || (hero.stats.speed + hero.stats.speed_boost) == enemy.speed)
+                {
+                    playerTurn()
+                    checkifdead()
+                    enemyTurn()
+                }
+                else
+                {   
+                    enemyTurn()
+                    playerTurn()
+                    checkifdead()
+                }
+                    alert ("Your current HP is " + hero.stats.current_hp)
+                    alert ("There are " + enemy.number + " " + enemy.name + "(s) left.")
             }
-            alert ("Your current HP is " + hero.stats.current_hp)
         }
     }
     if (hero.stats.current_hp > 0)
@@ -1104,7 +1206,7 @@ function fightArena()
     if (aChoice === "R")
     {
         arena_rookie(1)
-        combat()
+        combat(1)
         if (hero.stats.current_hp > 0)
         {
             addXP(100)
@@ -1119,6 +1221,7 @@ function fightArena()
     else if (aChoice = "C")
     {
         arena_champion(1)
+        combat(1)
         if (hero.stats.current_hp> 0)
         {
             addXP(1000)
@@ -1168,7 +1271,7 @@ function bar_drink()
                 hero.equipment.melee_wep = "Broken Bottle";
                 hero.equipment.melee_wep_dmg = 0;
                 bar_patron(Math.floor(Math.random() * 10+1))
-                combat()        
+                combat(0)        
                 if (enemy.number == 0)
                 {
                     alert("You are the champion.")
@@ -1353,7 +1456,7 @@ function DrinkPotion()
             var bandits = enemy.number;
             alert ("You go to " + villageArray[village] + " and are pointed towards the. " + dungeonArray[dungeon] +  " that the bandits have claimed as their base.")
             alert ("You must kill " + enemy.number + " bandits")
-            combat()
+            combat(1)
             if (hero.stats.current_hp > 0)
             {
                 alert ("you find the bandit leader.")
@@ -1388,12 +1491,12 @@ function DrinkPotion()
             var goblins = enemy.number;
             alert ("You go to " + villageArray[village] + " and are pointed towards the. " + dungeonArray[dungeon] +  " that the goblins have claimed as their lair.")
             alert ("You must kill " + enemy.number + " goblins")
-            combat()
+            combat(1)
             if (hero.stats.current_hp > 0)
             {
                 alert("you find the goblin boss.")
                 goblin_boss(1)
-                combat()
+                combat(1)
             }
             else
             {
@@ -1423,7 +1526,7 @@ function DrinkPotion()
             var rats = enemy.number;
             alert ("You go to " + barArray[bar] + " and head down the stairs into the cellar.")
             alert ("You must kill " + enemy.number + " rats")
-            combat()
+            combat(2)
             if (hero.stats.current_hp > 0)
             {
                 questComplete((2*rats),2)
@@ -1448,7 +1551,7 @@ function DrinkPotion()
             var spiders = enemy.number;
             alert ("You go to " + innArray[inn] + " and head up the stairs into the attic.")
             alert ("You must kill " + enemy.number + " spider")
-            combat()
+            combat(1)
             if (hero.stats.current_hp > 0)
             {
                 questComplete((2*spiders),2)
