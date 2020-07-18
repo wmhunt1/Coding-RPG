@@ -587,13 +587,13 @@ function skeleton(x)
     {
         number: x,
         name: "Skeleton",
-        current_hp: 0,
-        max_hp: 0,
-        current_ap: 0,
+        current_hp: 1,
+        max_hp: 1,
+        current_ap: 1,
         max_ap: 0,
-        atk: 0,
+        atk: 2,
         weapon: "Rusty Sword",
-        weapon_dmg: 0,
+        weapon_dmg: 2,
         def: 0,
         armor: "Armor Scraps",
         armor_value: 0,
@@ -611,9 +611,9 @@ function spider(x)
     {
         number: x,
         name: "spider",
-        current_hp: 0,
-        max_hp: 0,
-        current_ap: 0,
+        current_hp: 1,
+        max_hp: 1,
+        current_ap: 1,
         max_ap: 0,
         atk: 0,
         weapon: "bite",
@@ -625,6 +625,30 @@ function spider(x)
         enemy_buff: 0,
         enemy_debuff: 0,
         xp_value: 2,
+        ranged_wep: "R",
+        ranged: false
+    }
+}
+function zombie(x)
+{
+    enemy =
+    {
+        number: x,
+        name: "Zombie",
+        current_hp: 5,
+        max_hp: 5,
+        current_ap: 1,
+        max_ap: 0,
+        atk: 1,
+        weapon: "Grasping hand",
+        weapon_dmg: 1,
+        def: 0,
+        armor: "None",
+        armor_value: 0,
+        speed: 0,
+        enemy_buff: 0,
+        enemy_debuff: 0,
+        xp_value: 0,
         ranged_wep: "R",
         ranged: false
     }
@@ -1360,6 +1384,9 @@ function DrinkPotion()
     //dungeons
     var dungeonArray = ["Abandoned Mine", "Cave"]
     var dungeon = Math.floor((Math.random() * dungeonArray.length))
+    //graveyards
+    var graveArray = ["Cemetary,", "Crypt", "Graveyard"]
+    var grave = Math.floor((Math.random() * graveArray.length))
     //inns
     var innArray = ["Dreaming Worker", "A Place to Rest your Bread", "Motel Styx"]
     var inn = Math.floor((Math.random() * innArray.length))
@@ -1844,6 +1871,38 @@ function DrinkPotion()
             {
                 questComplete((2*spiders),2)
                 addJournal("kill","spiders")
+            }
+            else
+            {
+                death()
+            }
+        }
+    }
+    function undeadQuest()
+    {
+        if (hero.stats.current_hp <= 0)  
+        {
+            alert ("You can't go questing in your condition")
+        } 
+        else
+        {   
+            var undeadRoll = Math.random()
+            if (undeadRoll > .5)
+            {
+                skeleton(Math.floor(Math.random() * 10+1))
+            }
+            else 
+            {
+                zombie(Math.floor(Math.random() * 10+1))
+            }
+            alert ("You arrive at the " + graveArray[grave] + " where you find " + enemy.number + " " + enemy.name + "(s)")
+            var undead = enemy.number;
+            combat(1)
+            if (hero.stats.current_hp > 0)
+            {
+                questComplete(undead*10,undead)
+                //if no boss
+                addJournal("kill "," undead")
             }
             else
             {
