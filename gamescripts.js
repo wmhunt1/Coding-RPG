@@ -1464,6 +1464,78 @@ function DrinkPotion()
             }
         }
     }
+    function randomDungeon(x,y)
+    {
+        alert ("You arrive at the " + x)
+        var rooms = y;
+        while (hero.stats.current_hp > 0)
+        {
+            for (var i = 0; i < rooms; i++)
+            {
+                alert ("You enter room: " + rooms)
+                var room_content = Math.random()
+                if (room_content > .8)
+                {
+                    var find_trap = 0;
+                    checkThievery(1,find_trap)
+                    if (find_trap == true)
+                    {
+                        alert ("You notice trigger and avoid a " + trapArray[trap])
+                    }
+                    else
+                    {
+                        alert ("You fail to notice and trigger a " + trapArray[trap] + " taking " + trap_damage + " damage.")
+                        console.log(trap_damage)
+                        dmgPlayer(trap_damage)
+                        console.log(hero.stats.current_hp)
+                    }
+                }
+                else if (room_content <= .8 && room_content > .6)
+                {
+                    randomEncounter()
+                    alert ("You encounter a group of " + enemy.name + "(s).")
+                    combat(1)
+                }
+                else if (room_content <= .6 && room_content > .4)
+                {
+                    var openChest = prompt ("You discover a treasure chest. Open it? (Y/N)")
+                    if (openChest === "Y")
+                    {
+                        var mimicChance = Math.random()
+                        if (mimicChance > .75)
+                        {
+                            mimic(1)
+                            alert ("The chest was actually a " + enemy.name)
+                            combat(0)
+                        }
+                        else
+                        {
+                            //no mimic
+                        }
+                        console.log(hero.inventory.gold)
+                        alert ("You find a " + treasureArray[treasure] + " worth " + treasure_value + " Gold.")
+                        console.log(treasure_value)
+                        addGold(treasure_value)
+                        console.log(hero.inventory.gold)
+    
+                    }
+                    else
+                    {
+                        alert ("You chose not to risk it.")
+                    }
+                }
+                else if (room_content <= .4 && room_content > .2)
+                {
+                    //puzzles would go here.
+                }
+                else 
+                {
+                    alert ("You travel through an empty room.")
+                }
+                alert ("You complete the room and travel to the next.")
+            }
+        }
+    }
     //quest template
     function Template()
     {
