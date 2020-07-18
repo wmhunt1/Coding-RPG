@@ -87,6 +87,9 @@ var hero =
         day: 0,
         quests_completed: 0,
         bosses_defeated: 0,
+        bandit_completed: 0,
+        goblin_completed: 0,
+        undead_completed: 0,
     },
     reputation:
     {
@@ -1650,7 +1653,7 @@ function DrinkPotion()
             {
                 alert ("you find the bandit leader.")
                 bandit_leader(1)
-                combat()
+                combat(0)
             }
             else
             {
@@ -1662,6 +1665,7 @@ function DrinkPotion()
                 questComplete((10*bandits),10)
                 bossReward(20,20)
                 addJournal_boss("kill", "bandits", "Bandit Leader")
+                hero.journal.bandit_completed ++;
             }
             else
             {
@@ -1778,6 +1782,7 @@ function DrinkPotion()
                 questComplete((5*goblins),5)
                 bossReward(10,10)
                 addJournal_boss("kill", "goblins", "Goblin Boss")
+                hero.journal.goblin_completed ++;
             }
             else
             {
@@ -1903,6 +1908,7 @@ function DrinkPotion()
                 questComplete(undead*10,undead)
                 //if no boss
                 addJournal("kill "," undead")
+                hero.journal.undead_completed ++;
             }
             else
             {
