@@ -30,8 +30,8 @@ var hero =
     },
     stats:
     {
-        current_hp: 10,
-        max_hp: 10,
+        current_hp: 100,
+        max_hp: 100,
         current_ap: 1,
         max_ap: 1,
         current_ap: 1,
@@ -1464,6 +1464,43 @@ function DrinkPotion()
             }
         }
     }
+    //random puzzle
+    var riddleArray = ["What has 4 legs, 2 legs, and then 3 legs?", "What's black and white and red all over?"]
+    var riddle_answerArray = ["man", "newspaper"]
+    var riddle = Math.floor((Math.random() * riddleArray.length))
+    function randomPuzzle()
+    {
+        var pRoll = Math.random()
+        if (pRoll > .75)
+        {
+            alert ("You encounter a door with a riddle on it.")
+            alert ("The riddle is... " + riddleArray[riddle])
+            var answer = prompt ("What is the answer? Hint: don't use capital letters.")
+            if (answer == riddle_answerArray[riddle])
+            {
+                alert("You answer correctly and the door opens.")
+            }
+            else
+            {
+                randomEncounter()
+                alert ("You got the wrong answer and are attacked by a group of " + enemy.number + " " + enemy.name + "(s).")
+                combat(0)
+            }
+        }
+        else if (pRoll <= .75 && pRoll > .50)
+        {
+            alert ("PH")
+        }
+        else if (pRoll <= .5 && pRoll > .25)
+        {
+            alert ("PH")
+        }
+        else
+        {
+            alert ("PH")
+        }
+    }
+    //random dungeon
     function randomDungeon(x,y)
     {
         alert ("You arrive at the " + x)
@@ -1527,7 +1564,7 @@ function DrinkPotion()
                 }
                 else if (room_content <= .4 && room_content > .2)
                 {
-                    //puzzles would go here.
+                    randomPuzzle()
                 }
                 else 
                 {
