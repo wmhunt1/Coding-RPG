@@ -1496,7 +1496,7 @@ function DrinkPotion()
         else
         {   
             alert("You take a quest to retrieve a " + fetchArray[fetch] + " that was left at a " + placeArray[place])
-            alert("At the " + placeArray[place])
+            alert("You arrive at the " + placeArray[place])
             goblin(1)
             alert ("You see a " + enemy.name + " holding the " + fetchArray[fetch])
             combat(3)
@@ -1564,6 +1564,51 @@ function DrinkPotion()
                 questComplete((2*rats),2)
                 addJournal("kill","rats")
                 console.log(rats)
+            }
+            else
+            {
+                death()
+            }
+        }
+    }
+    function rescueQuest()
+    {
+        if (hero.stats.current_hp <= 0)  
+        {
+            alert ("You can't go questing in your condition")
+        } 
+        else
+        {   
+            //put random in later.
+            rat(3)
+            alert("You take a quest to rescue a " + rescueArray[rescue] + " that is being held at " + dungeonArray[dungeon] +  " by a group of " + enemy.name + "(s)")
+            alert("You arrive at the " + dungeonArray[dungeon])
+            var rChoice = prompt ("Will you pay the 100GP (R)ansom or (F)ight?")
+            if (rChoice === "R" )
+            {   
+                if(hero.inventory.gold >= 100)
+                {
+                    removeGold(100)
+                    alert("You pay the ransom to the " + enemy.name + "(s) and rescue the " + rescueArray[rescue])
+                }
+                else
+                {
+                    alert ("The " + enemy.name + "(s) attack because you didn't bring enough.")
+                    combat(0)
+                }
+            }
+            else
+            {
+                alert ("You decide to fight the " + enemy.name + "(s).")
+                combat(0)
+            }
+            if (hero.stats.current_hp > 0)
+            {
+                alert ("You have sucessfully rescued the " + rescueArray[rescue] + " and return them home.")
+                questComplete(10,1)
+                //if no boss
+                addJournal("rescued a ",(rescueArray[rescue]))
+                // if boss
             }
             else
             {
