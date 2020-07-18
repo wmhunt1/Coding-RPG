@@ -1471,7 +1471,7 @@ function DrinkPotion()
     function randomPuzzle()
     {
         var pRoll = Math.random()
-        if (pRoll > .75)
+        if (pRoll > 0)
         {
             alert ("You encounter a door with a riddle on it.")
             alert ("The riddle is... " + riddleArray[riddle])
@@ -1485,16 +1485,17 @@ function DrinkPotion()
                 randomEncounter()
                 alert ("You got the wrong answer and are attacked by a group of " + enemy.number + " " + enemy.name + "(s).")
                 combat(0)
+                alert("Fortunately the door opens after the " + enemy.name + "(s) are defeated.")
             }
         }
-        else if (pRoll <= .75 && pRoll > .50)
-        {
-            alert ("PH")
-        }
-        else if (pRoll <= .5 && pRoll > .25)
-        {
-            alert ("PH")
-        }
+        // else if (pRoll <= .75 && pRoll > .50)
+        // {
+        //     alert ("PH")
+        // }
+        // else if (pRoll <= .5 && pRoll > .25)
+        // {
+        //     alert ("PH")
+        // }
         else
         {
             alert ("PH")
