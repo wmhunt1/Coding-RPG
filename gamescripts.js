@@ -1426,6 +1426,44 @@ function DrinkPotion()
         document.getElementById("Boss").innerHTML = "Bosses Defeated: " + hero.journal.bosses_defeated;
         alert ("You gain: " + x + " Gold and " + y + " Fame for defeating the " + enemy.name)
     }
+    //random encounter function based on level
+    function randomEncounter()
+    {
+        var eRoll = Math.random()
+        if (hero.basics.level > 100)
+        {
+            if (eRoll > .5)
+            {
+
+            }
+            else
+            {
+                
+            }
+        }
+        else if (hero.basics.level < 10 && hero.basics.level > 5)
+        {
+            if (eRoll > .5)
+            {
+                bandit(Math.floor(Math.random()*4+2))
+            }
+            else
+            {
+                goblin(Math.floor(Math.random()*4+2))
+            }
+        }
+        else if (hero.basics.level < 5 && hero.basics.level > 0)
+        {
+            if (eRoll > .5)
+            {
+                rat(Math.floor(Math.random()*4+2))
+            }
+            else
+            {
+                spider(Math.floor(Math.random()*4+2))
+            }
+        }
+    }
     //quest template
     function Template()
     {
@@ -1500,6 +1538,7 @@ function DrinkPotion()
     } 
     else
     {   
+        randomEncounter()
         alert("You take a quest to collect " + collectArray[collect] + "(s) at a " + placeArray[place])
         alert("You arrive at the " + placeArray[place])
         var items_collected = 1 + hero.skills.gathering_value;
@@ -1507,8 +1546,7 @@ function DrinkPotion()
         var eChance = Math.random()
         if (eChance > .5)
         {
-            rat(1)
-            alert("Your gathering is interrupted when you are attacked by " + enemy.name + ("(s)."))
+            alert("Your gathering is interrupted when you are attacked by " + enemy.number + " " + enemy.name + ("(s)."))
             combat(0) 
         }
         else
@@ -1535,11 +1573,11 @@ function DrinkPotion()
         } 
         else
         {   
+            randomEncounter()
             alert("You take a quest to retrieve a " + fetchArray[fetch] + " that was left at a " + placeArray[place])
             alert("You arrive at the " + placeArray[place])
-            goblin(1)
-            alert ("You see a " + enemy.name + " holding the " + fetchArray[fetch])
-            combat(3)
+            alert ("You see  " + enemy.number + " " + enemy.name + "(s) holding the " + fetchArray[fetch])
+            combat(hero.stats.thievery_value)
             if (hero.stats.current_hp > 0)
             {
                 questComplete(10,1)
@@ -1619,8 +1657,7 @@ function DrinkPotion()
         } 
         else
         {   
-            //put random in later.
-            rat(3)
+            randomEncounter()
             alert("You take a quest to rescue a " + rescueArray[rescue] + " that is being held at " + dungeonArray[dungeon] +  " by a group of " + enemy.name + "(s)")
             alert("You arrive at the " + dungeonArray[dungeon])
             var rChoice = prompt ("Will you pay the 100GP (R)ansom or (F)ight?")
