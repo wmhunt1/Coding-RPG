@@ -1373,6 +1373,9 @@ function DrinkPotion()
     var villageArray = ["Dale", "Vil"]
     var village = Math.floor((Math.random() * villageArray.length))
     //random objectives for quests
+    //gather
+    var collectArray = ["Flower", "Herb", "Mushroom"]
+    var collect = Math.floor((Math.random() * collectArray.length))
     //item retreival
     var fetchArray = ["Missing Item", "Other Item"]
     var fetch = Math.floor((Math.random() * fetchArray.length))
@@ -1388,6 +1391,7 @@ function DrinkPotion()
     var trap = Math.floor((Math.random() * trapArray.length))
     var trap_damage = Math.floor((Math.random() *10+1))
     var entry = 1
+    //journal functions
     function addJournal(x,y)
     {
         var tag = document.createElement("p")
@@ -1422,6 +1426,7 @@ function DrinkPotion()
         document.getElementById("Boss").innerHTML = "Bosses Defeated: " + hero.journal.bosses_defeated;
         alert ("You gain: " + x + " Gold and " + y + " Fame for defeating the " + enemy.name)
     }
+    //quest template
     function Template()
     {
         if (hero.stats.current_hp <= 0)  
@@ -1486,6 +1491,41 @@ function DrinkPotion()
                 death()
             }
         }
+    }
+    function collectionQuest()
+    {
+    if (hero.stats.current_hp <= 0)  
+    {
+        alert ("You can't go questing in your condition")
+    } 
+    else
+    {   
+        alert("You take a quest to collect " + collectArray[collect] + "(s) at a " + placeArray[place])
+        alert("You arrive at the " + placeArray[place])
+        var items_collected = 1 + hero.skills.gathering_value;
+        alert ("You search for " + collectArray[collect] + "(s).")
+        var eChance = Math.random()
+        if (eChance > .5)
+        {
+            rat(1)
+            alert("Your gathering is interrupted when you are attacked by " + enemy.name + ("(s)."))
+            combat(0) 
+        }
+        else
+        {
+
+        }
+        alert ("You manage to collect " + items_collected + " " + collectArray[collect] + "(s)." )
+        if (hero.stats.current_hp > 0)
+        {
+            questComplete(items_collected*5,0)
+            addJournal("collect ",(collectArray[collect]))
+        }
+        else
+        {
+            death()
+        }
+    }
     }
     function fetchQuest()
     {
@@ -1607,7 +1647,7 @@ function DrinkPotion()
                 alert ("You have sucessfully rescued the " + rescueArray[rescue] + " and return them home.")
                 questComplete(10,1)
                 //if no boss
-                addJournal("rescued a ",(rescueArray[rescue]))
+                addJournal("rescue a ",(rescueArray[rescue]))
                 // if boss
             }
             else
