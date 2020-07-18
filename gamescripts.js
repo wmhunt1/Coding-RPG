@@ -171,7 +171,7 @@ function LevelUp()
         var lChoice = prompt("You have leveled up. Choose 2 level up bonus: 10 (H)P, 2 (S)P, 1 (A)ttack, or 1 (D)efense.")
         if (lChoice === "H")
         {
-            hero.basics.max_hp += 10;
+            hero.stats.max_hp += 10;
             document.getElementById("MHP").innerHTML = "Max HP: " + hero.stats.max_hp;
             lp -= 1;
         }
@@ -1468,11 +1468,12 @@ function DrinkPotion()
     {
         alert ("You arrive at the " + x)
         var rooms = y;
-        while (hero.stats.current_hp > 0)
+        var rooms_defeated = 0;
+        while (hero.stats.current_hp > 0 && rooms_defeated < rooms)
         {
-            for (var i = 0; i < rooms; i++)
+            for (var i = 1; i < (rooms + 1); i++)
             {
-                alert ("You enter room: " + rooms)
+                alert ("You enter room: " + i)
                 var room_content = Math.random()
                 if (room_content > .8)
                 {
@@ -1493,7 +1494,7 @@ function DrinkPotion()
                 else if (room_content <= .8 && room_content > .6)
                 {
                     randomEncounter()
-                    alert ("You encounter a group of " + enemy.name + "(s).")
+                    alert ("You encounter a group of " + enemy.number + " " + enemy.name + "(s).")
                     combat(1)
                 }
                 else if (room_content <= .6 && room_content > .4)
@@ -1533,6 +1534,7 @@ function DrinkPotion()
                     alert ("You travel through an empty room.")
                 }
                 alert ("You complete the room and travel to the next.")
+                rooms_defeated ++;
             }
         }
     }
@@ -1604,38 +1606,59 @@ function DrinkPotion()
     }
     function collectionQuest()
     {
-    if (hero.stats.current_hp <= 0)  
-    {
-        alert ("You can't go questing in your condition")
-    } 
-    else
-    {   
-        randomEncounter()
-        alert("You take a quest to collect " + collectArray[collect] + "(s) at a " + placeArray[place])
-        alert("You arrive at the " + placeArray[place])
-        var items_collected = 1 + hero.skills.gathering_value;
-        alert ("You search for " + collectArray[collect] + "(s).")
-        var eChance = Math.random()
-        if (eChance > .5)
+        if (hero.stats.current_hp <= 0)  
         {
-            alert("Your gathering is interrupted when you are attacked by " + enemy.number + " " + enemy.name + ("(s)."))
-            combat(0) 
-        }
+            alert ("You can't go questing in your condition")
+        } 
         else
-        {
+        {   
+            randomEncounter()
+            alert("You take a quest to collect " + collectArray[collect] + "(s) at a " + placeArray[place])
+            alert("You arrive at the " + placeArray[place])
+            var items_collected = 1 + hero.skills.gathering_value;
+            alert ("You search for " + collectArray[collect] + "(s).")
+            var eChance = Math.random()
+            if (eChance > .5)
+            {
+                alert("Your gathering is interrupted when you are attacked by " + enemy.number + " " + enemy.name + ("(s)."))
+                combat(0) 
+            }
+            else
+            {
 
-        }
-        alert ("You manage to collect " + items_collected + " " + collectArray[collect] + "(s)." )
-        if (hero.stats.current_hp > 0)
-        {
-            questComplete(items_collected*5,0)
-            addJournal("collect ",(collectArray[collect]))
-        }
-        else
-        {
-            death()
+            }
+            alert ("You manage to collect " + items_collected + " " + collectArray[collect] + "(s)." )
+            if (hero.stats.current_hp > 0)
+            {
+                questComplete(items_collected*5,0)
+                addJournal("collect ",(collectArray[collect]))
+            }
+            else
+            {
+                death()
+            }
         }
     }
+    function dungeon_testQuest()
+    {
+        if (hero.stats.current_hp <= 0)  
+        {
+            alert ("You can't go questing in your condition")
+        } 
+        else
+        {   
+            randomDungeon("dungeon", 4)
+            if (hero.stats.current_hp > 0)
+            {
+                alert ("You completed the dungeon.")
+                questComplete(10,1)
+                addJournal("test a ","dungeon")
+            }
+            else
+            {
+                death()
+            }
+        }
     }
     function fetchQuest()
     {
