@@ -144,6 +144,10 @@ function changeName()
     hero.basics.name = chooseName;
     document.getElementById("Name").innerHTML = "Name: " + hero.basics.name;
 }
+function changeClass()
+{
+
+}
 function createHero()
 {
     changeName()
@@ -1698,26 +1702,13 @@ function impArmor(x)
 } 
 var weaponArray = ["Stick","Club", "Dagger", "Shortsword", "Longsword", "Magic Sword", "Hero Sword"]
 var armorArray = ["Peasant", "Leather", "Studded Leather", "Chain Mail", "Plate" ]
-function blacksmith()
+//armor
+function armorer()
 {
-    var forge = prompt("Upgrade (W)eapon or (A)rmor?")
-    if (forge === "W")
+    var forge = prompt("Upgrade your armor? (Y/N)")
+    alert ("Cost of forging is " + hero.equipment.armorCost + " Gold")
+    if (forge === "Y")
     {
-            alert ("Cost of forging is " + hero.equipment.wepCost + " Gold")
-            if (hero.inventory.gold < hero.equipment.wepCost)
-            {
-                alert("You cannot afford to upgrade your weaapon.")
-            }
-            else
-            {
-                impWep(1)
-                removeGold(hero.equipment.wepCost)
-                hero.equipment.wepCost *= 2;
-            }
-    }
-    else if (forge === "A")
-    {
-            alert ("Cost of forging is " + hero.equipment.armorCost + " Gold")
             if (hero.inventory.gold < hero.equipment.armorCost)
             {
                 alert("You cannot afford to upgrade your armor.")
@@ -1734,8 +1725,30 @@ function blacksmith()
             alert ("You choose not to do anything.")
     }
 }
+//weapons
+function weapon_smith()
+{
+    var forge = prompt("Upgrade your weapon? (Y/N)")
+    alert ("Cost of forging is " + hero.equipment.weaponCost + " Gold")
+    if (forge === "Y")
+    {
+            if (hero.inventory.gold < hero.equipment.weaponCost)
+            {
+                alert("You cannot afford to upgrade your armor.")
+            }
+            else
+            {
+                impArmor(1)
+                removeGold(hero.equipment.weaponCost)
+                hero.equipment.weaponCost *= 2;
+            }
+    }
+    else
+    {
+            alert ("You choose not to do anything.")
+    }
+}
 //bowyerfunctions
-
 function impRanged(x)
 {
     hero.equipment.ranged_wep_dmg += x;
