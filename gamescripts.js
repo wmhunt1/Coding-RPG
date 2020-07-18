@@ -1577,9 +1577,10 @@ function DrinkPotion()
             alert("You take a quest to retrieve a " + fetchArray[fetch] + " that was left at a " + placeArray[place])
             alert("You arrive at the " + placeArray[place])
             alert ("You see  " + enemy.number + " " + enemy.name + "(s) holding the " + fetchArray[fetch])
-            combat(hero.stats.thievery_value)
+            combat(1)
             if (hero.stats.current_hp > 0)
             {
+                alert ("You retrieve the " + fetchArray[fetch] + " and return it to the owner.")
                 questComplete(10,1)
                 addJournal("find a ",(fetchArray[fetch]))
             }
