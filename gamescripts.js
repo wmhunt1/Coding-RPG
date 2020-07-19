@@ -327,6 +327,7 @@ var enemy =
     {
         number: 0,
         name: "N",
+        class: "C",
         current_hp: 0,
         max_hp: 0,
         current_ap: 0,
@@ -342,7 +343,8 @@ var enemy =
         enemy_debuff: 0,
         xp_value: 0,
         ranged_wep: "R",
-        ranged: false
+        ranged: false,
+        magic: false
     }
 function arena_champion(x)
 {   
@@ -350,6 +352,7 @@ function arena_champion(x)
     {
         number: x,
         name: "Arena Champion",
+        class: "C",
         current_hp: 0,
         max_hp: 0,
         current_ap: 0,
@@ -365,7 +368,8 @@ function arena_champion(x)
         enemy_debuff: 0,
         xp_value: 0,
         ranged_wep: "R",
-        ranged: false
+        ranged: false,
+        magic: false
     }
 }   
 function arena_rookie(x)
@@ -374,6 +378,7 @@ function arena_rookie(x)
     {
         number: x,
         name: "Rookie",
+        class: "C",
         current_hp: 0,
         max_hp: 0,
         current_ap: 0,
@@ -389,7 +394,8 @@ function arena_rookie(x)
         enemy_debuff: 0,
         xp_value: 0,
         ranged_wep: "R",
-        ranged: false
+        ranged: false,
+        magic: false
     }
 }   
 function bandit(x)
@@ -398,6 +404,7 @@ function bandit(x)
     {
         number: x,
         name: "Bandit",
+        class: "C",
         current_hp: 5,
         max_hp: 5,
         current_ap: 0,
@@ -413,7 +420,8 @@ function bandit(x)
         enemy_debuff: 0,
         xp_value: 5,
         ranged_wep: "Crossbow",
-        ranged: true
+        ranged: true,
+        magic: false
     }
 }
 function bandit_leader(x)
@@ -422,6 +430,7 @@ function bandit_leader(x)
     {
         number: x,
         name: "Bandit Leader",
+        class: "C",
         current_hp: 20,
         max_hp: 20,
         current_ap: 0,
@@ -437,7 +446,8 @@ function bandit_leader(x)
         enemy_debuff: 0,
         xp_value: 20,
         ranged_wep: "Crossbow",
-        ranged: true
+        ranged: true,
+        magic: false
     }
 }
 function bar_patron(x)
@@ -446,6 +456,7 @@ function bar_patron(x)
     {
         number: x,
         name: "Bar Patron",
+        class: "C",
         current_hp: 5,
         max_hp: 5,
         current_ap: 0,
@@ -461,7 +472,8 @@ function bar_patron(x)
         enemy_debuff: 0,
         xp_value: 1,
         ranged_wep: "R",
-        ranged: false
+        ranged: false,
+        magic: false
     }
 }
 function goblin(x)
@@ -470,6 +482,7 @@ function goblin(x)
     {
         number: x,
         name: "Goblin",
+        class: "C",
         current_hp: 4,
         max_hp: 4,
         current_ap: 0,
@@ -485,7 +498,8 @@ function goblin(x)
         enemy_debuff: 0,
         xp_value: 5,
         ranged_wep: "Sling",
-        ranged: true
+        ranged: true,
+        magic: false
     }
 }
 function goblin_boss(x)
@@ -494,6 +508,7 @@ function goblin_boss(x)
     {
         number: x,
         name: "Goblin Boss",
+        class: "C",
         current_hp: 10,
         max_hp: 10,
         current_ap: 0,
@@ -509,7 +524,34 @@ function goblin_boss(x)
         enemy_debuff: 0,
         xp_value: 20,
         ranged_wep: "Sling",
-        ranged: true
+        ranged: true,
+        magic: false
+    }
+}
+function goblin_shaman(x)
+{   
+    enemy =
+    {
+        number: x,
+        name: "Goblin Shaman",
+        class: "Caster",
+        current_hp: 10,
+        max_hp: 10,
+        current_ap: 0,
+        max_ap: 0,
+        atk: 2,
+        weapon: "Staff",
+        weapon_dmg: 2,
+        def: 0,
+        armor: "Robes",
+        armor_value: 1,
+        speed: 0,
+        enemy_buff: 0,
+        enemy_debuff: 0,
+        xp_value: 20,
+        ranged_wep: "Magic Bolt",
+        ranged: true,
+        magic: true
     }
 }
 function mimic(x)
@@ -518,6 +560,7 @@ function mimic(x)
     {
         number: x,
         name: "Mimic",
+        class: "C",
         current_hp: 0,
         max_hp: 0,
         current_ap: 0,
@@ -533,7 +576,8 @@ function mimic(x)
         enemy_debuff: 0,
         xp_value: 0,
         ranged_wep: "R",
-        ranged: false
+        ranged: false,
+        magic: false
     }
 }
 function minotaur(x)
@@ -542,6 +586,7 @@ function minotaur(x)
     {
         number: x,
         name: "Minotaur",
+        class: "C",
         current_hp: 0,
         max_hp: 0,
         current_ap: 0,
@@ -557,7 +602,34 @@ function minotaur(x)
         enemy_debuff: 0,
         xp_value: 0,
         ranged_wep: "R",
-        ranged: false
+        ranged: false,
+        magic: false
+    }
+}
+function necromancer(x)
+{
+    enemy =
+    {
+        number: x,
+        name: "Necromancer",
+        class: "Caster",
+        current_hp: 10,
+        max_hp: 10,
+        current_ap: 0,
+        max_ap: 0,
+        atk: 0,
+        weapon: "Staff",
+        weapon_dmg: 0,
+        def: 0,
+        armor: "Robes",
+        armor_value: 0,
+        speed: 0,
+        enemy_buff: 0,
+        enemy_debuff: 0,
+        xp_value: 0,
+        ranged_wep: "Magic Bolt",
+        ranged: true,
+        magic: true
     }
 }
 function rat(x)
@@ -566,6 +638,7 @@ function rat(x)
     {
         number: x,
         name: "Rat",
+        class: "C",
         current_hp: 1,
         max_hp: 1,
         current_ap: 1,
@@ -581,7 +654,8 @@ function rat(x)
         enemy_debuff: 0,
         xp_value: 2,
         ranged_wep: "R",
-        ranged: false
+        ranged: false,
+        magic: false
     }
 }
 function skeleton(x)
@@ -590,6 +664,7 @@ function skeleton(x)
     {
         number: x,
         name: "Skeleton",
+        class: "C",
         current_hp: 1,
         max_hp: 1,
         current_ap: 1,
@@ -605,7 +680,8 @@ function skeleton(x)
         enemy_debuff: 0,
         xp_value: 0,
         ranged_wep: "Shortbow",
-        ranged: true
+        ranged: true,
+        magic: false
     }
 }
 function spider(x)
@@ -614,6 +690,7 @@ function spider(x)
     {
         number: x,
         name: "spider",
+        class: "C",
         current_hp: 1,
         max_hp: 1,
         current_ap: 1,
@@ -629,7 +706,8 @@ function spider(x)
         enemy_debuff: 0,
         xp_value: 2,
         ranged_wep: "R",
-        ranged: false
+        ranged: false,
+        magic: false
     }
 }
 function zombie(x)
@@ -638,6 +716,7 @@ function zombie(x)
     {
         number: x,
         name: "Zombie",
+        class: "C",
         current_hp: 5,
         max_hp: 5,
         current_ap: 1,
@@ -653,7 +732,8 @@ function zombie(x)
         enemy_debuff: 0,
         xp_value: 0,
         ranged_wep: "R",
-        ranged: false
+        ranged: false,
+        magic: false
     }
 }
 //combat functions
