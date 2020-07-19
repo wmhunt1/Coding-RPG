@@ -617,7 +617,7 @@ function necromancer(x)
         max_hp: 10,
         current_ap: 0,
         max_ap: 0,
-        atk: 0,
+        atk: 4,
         weapon: "Staff",
         weapon_dmg: 0,
         def: 0,
