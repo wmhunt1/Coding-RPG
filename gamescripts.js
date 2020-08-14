@@ -2236,7 +2236,7 @@ function enchanter()
                     alert ("You are now a proud homeowner.")
                 }
         }
-        else
+    
         {
             alert("You decide not to buy a house.")
         }

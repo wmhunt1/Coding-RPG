@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canvas Test</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+
 <body>
-    <header id = "Title">
-        <h1>Coding RPG</h1>
-    </header>
-    <nav id = "Menu">
-        <h1>Menu</h1>
-        <ul>
-            <li><button onclick ="arena()">(A)rena</button></li>
-            <li><button onclick ="character()">(C)haracter</button></a></li>
-            <li><button onclick ="downtime()">(D)owntime</button></li>
-            <li><button onclick ="equipment()">(E)quipment</button></li>
-            <li><button onclick ="factions()">(F)actions</button></li>
-            <li><button onclick ="inventory()">(I)nventory</button></li>
-            <li><button onclick ="journal()">(J)ournal</button></li>
-            <li><button onclick ="quest()">(Q)uest</button></li>
-            <li><button onclick ="rest()">(R)est</button></li>
-            <li><button onclick ="shopping()">(S)hopping</button></li>
-            <li><button onclick ="skill()">Skills and (P)owers</button></li>
-            <li><button onclick ="training()">(T)raining</button></li>
-        </ul>
-    </nav>
-    <canvas id="myCanvas" width="400" height="300" style="border:1px solid #000000;"></canvas>
+    <div id="game"></div>
     <script>
+        var gameTitle = $("<h1>").text("Coding RPG").attr
+            ({
+            });
+        $("#game").append(gameTitle);
+        var gameArea = $("<canvas>").attr
+            ({
+                "id": gameArea,
+                "height": 500,
+                "width": 500,
+            });
+        $("#game").append(gameArea);
+        var heroImage = "assets/blueCircle.png";
+        var hero = $("<img>").attr("src", heroImage);
+        gameArea.append(hero);
     </script>
 </body>
+
 </html>
