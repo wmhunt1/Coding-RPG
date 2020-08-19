@@ -1,5 +1,6 @@
 let turnArray = [];
 let enemyArray = [];
+let allyArray = [];
 var enemyNumber = 0;
 //character prototype
 function character(name, profession, level, xp, alive, ally, currentHp, maxHp, attack, defense, speed, weapon, damage, armor, protection) {
@@ -58,7 +59,7 @@ character.prototype.isAlive = function () {
         console.log(this.basics.name + " has died!");
         this.basics.alive = false;
         if (this.basics.ally == false) {
-            enemyNumber--;
+            enemyNumber --;
             console.log(hero.basics.xp)
             hero.basics.xp += this.basics.xp;
             console.log(hero.basics.xp)
@@ -93,26 +94,31 @@ character.prototype.turn = function (target) {
 //combat function
 function combat() {
 
-    for (i = 0; i < turnArray.length; i++) {
-        if (turnArray[i].basics.ally == true) {
-            let attackTarget = Math.floor((Math.random() * enemyArray.length))
-            turnArray[i].turn(enemyArray[attackTarget]);
+    while (enemyNumber != 0) {
+        for (i = 0; i < turnArray.length; i++) {
+            if (turnArray[i].basics.ally == true) {
+                let attackTarget = Math.floor((Math.random() * enemyArray.length))
+                turnArray[i].turn(enemyArray[attackTarget]);
+            }
+            else {
+                turnArray[i].turn(hero);
+            }
         }
-        else {
-            turnArray[i].turn(hero);
-        }
+        console.log("combat ended")
+        hero.levelUp();
     }
-    console.log("combat ended")
-    hero.levelUp();
 }
 //creates hero
-let hero = new character("Hero", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "Stick", 1, "Naked", 0);
+let hero = new character("Hero", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "Stick", 1, "Clothing", 0);
+let Abe = new character("Abraham Arkwright", "Paladin", 10, 0, true, true, 1, 1, 1, 1, 0, "Longsword", 1, "Plate", 0);
 //creates bandit
 const bandit1 = new character("Bandit1", "Thug", 1, 100, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
 const bandit2 = new character("Bandit2", "Thug", 1, 100, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
+const bandit3 = new character("Bandit3", "Thug", 1, 100, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
+const bandit4 = new character("Bandit4", "Thug", 1, 100, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
 function testCombat() {
     console.log("combat test")
-    turnArray = [hero, bandit1, bandit2];
+    turnArray = [hero, bandit1, bandit2, Abe];
     console.log(turnArray)
     enemyArray = [bandit1, bandit2];
     enemyNumber = enemyArray.length;
