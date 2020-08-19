@@ -121,7 +121,8 @@ function item(name, type, value, price, quantity) {
     this.price = price;
     this.quantity = quantity
 }
-item.prototype.equip(user)
+//equipable items
+item.prototype.equip = function(user)
 {
     if (this.type === "Armor") {
         user.armor.name = this.name;
@@ -135,8 +136,8 @@ item.prototype.equip(user)
 
     }
 }
-//
-item.prototype.use(user)
+//usable items
+item.prototype.use = function(user)
 {
     if (this.type === "Healing" && this.quantity > 0)
     {
@@ -150,6 +151,8 @@ item.prototype.use(user)
 }
 let dagger = new item("Dagger", "Weapon", 1, 0, 1);
 let clothing = new item("Clothing", "Armor", 0, 0, 1);
+let potion = new item("Potion", "Healing", 5, 10, 0);
+
 //creates hero
 let hero = new character("Hero", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "Dagger", 1, "Clothing", 0);
 //creates ally
