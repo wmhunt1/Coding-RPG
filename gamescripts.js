@@ -113,8 +113,46 @@ function combat() {
         }
     }
 }
+//item prototypes
+function item(name, type, value, price, quantity) {
+    this.name = name;
+    this.type = type;
+    this.value = value;
+    this.price = price;
+    this.quantity = quantity
+}
+item.prototype.equip(user)
+{
+    if (this.type === "Armor") {
+        user.armor.name = this.name;
+        user.armor.protection = this.value;
+    }
+    else if (this.type === "Weapon") {
+        user.weapon.name = this.name;
+        user.weapon.damage = this.value;
+    }
+    else {
+
+    }
+}
+//
+item.prototype.use(user)
+{
+    if (this.type === "Healing" && this.quantity > 0)
+    {
+        user.stats.currentHp += this.value;
+        this.quantity --;
+    }
+    else
+    {   
+        console.log("You don't have any " + this.name + "(s)")
+    }
+}
+let dagger = new item("Dagger", "Weapon", 1, 0, 1);
+let clothing = new item("Clothing", "Armor", 0, 0, 1);
 //creates hero
 let hero = new character("Hero", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "Dagger", 1, "Clothing", 0);
+//creates ally
 let abe = new character("Abraham Arkwright", "Paladin", 1, 0, true, true, 10, 1, 1, 1, 0, "Longsword", 1, "Plate", 0);
 //creates bandit
 const bandit1 = new character("Bandit1", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
