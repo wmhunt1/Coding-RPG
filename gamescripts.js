@@ -1,5 +1,7 @@
 let turnArray = [];
-let enenmyArray = [];
+let enemyArray = [];
+var enemyNumber = 0;
+//character prototype
 function character(name, profession, level, alive, ally, currentHp, maxHp, attack, defense, speed, weapon, damage, armor, protection) {
     this.basics = {
         name: name,
@@ -23,45 +25,82 @@ function character(name, profession, level, alive, ally, currentHp, maxHp, attac
         name: armor,
         protection: protection
     }
-
 }
+//attack function
 character.prototype.attack = function (target) {
     console.log(this.basics.name + " attacks " + target.basics.name)
     console.log(target.stats.currentHp)
-    if (this.weapon.damage <= target.armor.protection) {
-        console.log(this.basics.name + "'s attack bounces harmlessly off of " + target.basics.name + "'s " + target.armor.name)
+    if (target.basics.alive == true) {
+        if (this.weapon.damage <= target.armor.protection) {
+            console.log(this.basics.name + "'s attack bounces harmlessly off of " + target.basics.name + "'s " + target.armor.name)
+        }
+        else {
+            target.stats.currentHp -= (this.weapon.damage - target.armor.protection)
+        }
+        console.log(target.stats.currentHp)
     }
     else {
-        target.stats.currentHp -= (this.weapon.damage - target.armor.protection)
+        console.log(target.basics.name + " is already dead.")
     }
-    console.log(target.stats.currentHp)
 };
-character.prototype.isAlive = function(){
-	if (this.stats.currentHp > 0) {
-		console.log(this.basics.name + " is still alive!");
-		console.log("\n-------------\n");
-		// return true;
+//isalive function
+character.prototype.isAlive = function () {
+    if (this.stats.currentHp > 0) {
+        console.log(this.basics.name + " is still alive!");
+        console.log("\n-------------\n");
+        // return true;
     }
-    else
+    else if (this.basics.alive == false)
     {
-	console.log(this.basics.name + " has died!");
-    this.basics.alive = false;
+        console.log("still dead")
+    }
+    else {
+        console.log(this.basics.name + " has died!");
+        this.basics.alive = false;
+        if (this.basics.ally == false) {
+            enemyNumber--;
+        }
+        else {
+
+        }
     }
 };
-let hero = new character("Hero", "Freelancer", 1, true, true, 10, 10, 1, 1, 0, "Stick", 1, "Naked", 0);
-const bandit = new character("Bandit", "Bandit", 1, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
-character.prototype.turn = function(target){
+//turn function
+character.prototype.turn = function (target) {
     this.isAlive()
-    if (this.basics.alive == true)
-    {
+    if (this.basics.alive == true) {
         this.attack(target);
     }
-    else
-    {
+    else {
         console.log("no turn for dead character")
     }
 }
-bandit.turn(hero);
-hero.turn(bandit);
-bandit.turn(hero);
-hero.turn(bandit);
+//combat function
+function combat() {
+
+    for (i = 0; i < turnArray.length; i++) {
+        if (turnArray[i].basics.ally == true) {
+            let attackTarget = Math.floor((Math.random() * enemyArray.length))
+            turnArray[i].turn(enemyArray[attackTarget]);
+        }
+        else {
+            turnArray[i].turn(hero);
+        }
+    }
+    console.log("combat ended")
+}
+//creates hero
+let hero = new character("Hero", "Freelancer", 1, true, true, 10, 10, 1, 1, 0, "Stick", 1, "Naked", 0);
+//creates bandit
+const bandit1 = new character("Bandit1", "Thug", 1, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
+const bandit2 = new character("Bandit2", "Thug", 1, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
+function testCombat() {
+    console.log("combat test")
+    turnArray = [hero, bandit1, bandit2];
+    console.log(turnArray)
+    enemyArray = [bandit1, bandit2];
+    enemyNumber = enemyArray.length;
+    console.log(enemyNumber);
+    combat()
+}
+testCombat()
