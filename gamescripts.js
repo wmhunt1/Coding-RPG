@@ -61,7 +61,9 @@ character.prototype.isAlive = function () {
         if (this.basics.ally == false) {
             enemyNumber--;
             console.log(hero.basics.xp)
-            hero.basics.xp += this.basics.xp;
+            for (var i = 0; i < allyArray.length; i++) {
+                allyArray[i].basics.xp += this.basics.xp;
+            }
             console.log(hero.basics.xp)
         }
         else {
@@ -75,10 +77,10 @@ character.prototype.levelUp = function () {
         this.basics.level++;
         this.basics.currentHp += 10;
         this.basics.maxHp += 10;
-        console.log(this.basics.name + ": leveled up")
+        console.log(this.basics.name + " leveled up")
     }
     else {
-        console.log(this.basics.name + ": not ready for level up")
+        console.log(this.basics.name + " is not ready for level up")
     }
 }
 //turn function
@@ -106,7 +108,9 @@ function combat() {
             }
         }
         console.log("combat ended")
-        hero.levelUp();
+        for (var i = 0; i < allyArray.length; i++) {
+            allyArray[i].levelUp();
+        }
     }
 }
 //creates hero
