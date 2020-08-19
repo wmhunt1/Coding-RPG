@@ -122,8 +122,7 @@ function item(name, type, value, price, quantity) {
     this.quantity = quantity
 }
 //equipable items
-item.prototype.equip = function(user)
-{
+item.prototype.equip = function (user) {
     if (this.type === "Armor") {
         user.armor.name = this.name;
         user.armor.protection = this.value;
@@ -137,15 +136,12 @@ item.prototype.equip = function(user)
     }
 }
 //usable items
-item.prototype.use = function(user)
-{
-    if (this.type === "Healing" && this.quantity > 0)
-    {
+item.prototype.use = function (user) {
+    if (this.type === "Healing" && this.quantity > 0) {
         user.stats.currentHp += this.value;
-        this.quantity --;
+        this.quantity--;
     }
-    else
-    {   
+    else {
         console.log("You don't have any " + this.name + "(s)")
     }
 }
@@ -155,14 +151,15 @@ let potion = new item("Potion", "Healing", 5, 10, 0);
 
 //creates hero
 let hero = new character("Hero", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "Dagger", 1, "Clothing", 0);
-//creates ally
-let abe = new character("Abraham Arkwright", "Paladin", 1, 0, true, true, 10, 1, 1, 1, 0, "Longsword", 1, "Plate", 0);
-//creates bandit
-const bandit1 = new character("Bandit1", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
-const bandit2 = new character("Bandit2", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
-const bandit3 = new character("Bandit3", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
-const bandit4 = new character("Bandit4", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
+
 function testCombat() {
+    //creates ally
+    let abe = new character("Abraham Arkwright", "Paladin", 1, 0, true, true, 10, 1, 1, 1, 0, "Longsword", 1, "Plate", 0);
+    //creates bandit
+    const bandit1 = new character("Bandit1", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
+    const bandit2 = new character("Bandit2", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
+    const bandit3 = new character("Bandit3", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
+    const bandit4 = new character("Bandit4", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
     console.log("combat test")
     turnArray = [hero, bandit1, bandit2, bandit3, bandit4, abe];
     console.log(turnArray)
