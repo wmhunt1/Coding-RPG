@@ -1,7 +1,6 @@
-let turnArray = [];
-let enemyArray = [];
-let allyArray = [];
-var enemyNumber = 0;
+//creates hero
+let heroName = prompt("Choose Your Name")
+let hero = new character(heroName, "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "Dagger", 1, "Clothing", 0);
 //character prototype
 function character(name, profession, level, xp, alive, ally, currentHp, maxHp, attack, defense, speed, weapon, damage, armor, protection) {
     this.basics = {
@@ -93,10 +92,15 @@ character.prototype.turn = function (target) {
         console.log("no turn for dead character")
     }
 }
+//combat elements
+let turnArray = [];
+let enemyArray = [];
+let allyArray = [];
+let enemyNumber = 0;
 //combat function
 function combat() {
 
-    while (enemyNumber != 0) {
+    while (enemyNumber != 0 && hero.stats.currentHp > 0) {
         for (i = 0; i < turnArray.length; i++) {
             if (turnArray[i].basics.ally == true) {
                 let attackTarget = Math.floor((Math.random() * enemyArray.length))
@@ -110,6 +114,12 @@ function combat() {
         console.log("combat ended")
         for (var i = 0; i < allyArray.length; i++) {
             allyArray[i].levelUp();
+        }
+        if (hero.stats.currentHp > 0) {
+
+        }
+        else {
+            console.log("You are defeated.")
         }
     }
 }
@@ -149,9 +159,6 @@ let dagger = new item("Dagger", "Weapon", 1, 0, 1);
 let clothing = new item("Clothing", "Armor", 0, 0, 1);
 let potion = new item("Potion", "Healing", 5, 10, 0);
 
-//creates hero
-let hero = new character("Hero", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "Dagger", 1, "Clothing", 0);
-
 function testCombat() {
     //creates ally
     let abe = new character("Abraham Arkwright", "Paladin", 1, 0, true, true, 10, 1, 1, 1, 0, "Longsword", 1, "Plate", 0);
@@ -169,4 +176,35 @@ function testCombat() {
     console.log(enemyNumber);
     combat()
 }
-testCombat()
+//testCombat()
+function firstEvent() {
+    alert("You are " + hero.basics.name + ", a " + hero.basics.class + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
+    alert("Your test is to travel to The Valley of Dale, figure out what the problem is and solve it.")
+    alert("You enter the valley and travel to a bridge guarded by bandits")
+    alert("As you have no gold they attack you.")
+    const bandit1 = new character("Bandit1", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
+    const bandit2 = new character("Bandit2", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
+    const bandit3 = new character("Bandit3", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
+    turnArray = [hero, bandit1, bandit2, bandit3];
+    console.log(turnArray)
+    enemyArray = [bandit1, bandit2, bandit3];
+    enemyNumber = enemyArray.length;
+    allyArray = [hero];
+    combat()
+    if (hero.stats.currentHp > 0) {
+        alert("You sucessfully drive off the bandits")
+        alert("An armored knight rides up to greet you.")
+        alert("The knight dismounts.")
+    }
+    else {
+        alert("The bandits are about to finish you off.")
+        alert("An armored knight charges the bandit(s), driving them off and saving your life.")
+        alert("The knight dismounts and helps your stand.")
+    }
+    alert ("Knight: Those bandits are getting audicious.")
+    alert ("Knight: You are alright? The knight pats you on the back and you feel some healing energy flow into you,")
+    hero.stats.currentHp = hero.stats.maxHp;
+    alert ("Knight: I am Abraham Arkwright, paladin and current guardian of The Valley of Dale.")
+    alert ("Abraham: We should get to the village before they bring reinforcements.")
+}
+firstEvent()
