@@ -182,6 +182,12 @@ let dagger = new item("Dagger", "Weapon", 1, 0, 1);
 let clothing = new item("Clothing", "Armor", 0, 0, 1);
 let potion = new item("Potion", "Healing", 5, 10, 0);
 
+function startGame() {
+    let heroName = prompt("Choose Your Name")
+    let hero = new character(heroName, "Freelancer", 1, 0, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", 0, 0);
+    dagger.equip(hero)
+    clothing.equip(hero)
+}
 function firstEvent() {
     alert("You are " + hero.basics.name + ", a " + hero.basics.class + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
     alert("Your test is to travel to The Valley of Dale, figure out what the problem is and solve it.")
@@ -211,12 +217,6 @@ function firstEvent() {
     hero.stats.currentHp = hero.stats.maxHp;
     alert("Knight: I am Abraham Arkwright, paladin and current guardian of The Valley of Dale.")
     alert("Abraham: We should get to the village before they bring reinforcements.")
-}
-function startGame() {
-    let heroName = prompt("Choose Your Name")
-    let hero = new character(heroName, "Freelancer", 1, 0, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", 0, 0);
-    dagger.equip(hero)
-    clothing.equip(hero)
 }
 startGame()
 //firstEvent()
