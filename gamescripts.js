@@ -1,13 +1,14 @@
 //creates hero
-let heroName = prompt("Choose Your Name")
-let hero = new character(heroName, "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "Dagger", 1, "Clothing", 0);
+//let heroName = prompt("Choose Your Name")
+let hero = new character("Hero", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", 0, 0);
 //character prototype
-function character(name, profession, level, xp, alive, ally, currentHp, maxHp, attack, defense, speed, weapon, damage, armor, protection) {
+function character(name, profession, level, xp, alive, ally, currentHp, maxHp, attack, defense, speed, weapon, damage, armor, protection, gold) {
     this.basics = {
         name: name,
         class: profession,
         level: level,
         xp: xp,
+        gold: gold,
         alive: alive,
         ally: ally
     };
@@ -26,6 +27,10 @@ function character(name, profession, level, xp, alive, ally, currentHp, maxHp, a
         name: armor,
         protection: protection
     }
+    this.inventory = {
+        gold: gold
+    }
+
 }
 //attack function
 character.prototype.attack = function (target) {
@@ -142,14 +147,17 @@ item.prototype.equip = function (user) {
     if (this.type === "Armor") {
         user.armor.name = this.name;
         user.armor.protection = this.value;
+        console.log(user.basics.name + " equiped " + this.name)
     }
     else if (this.type === "Weapon") {
         user.weapon.name = this.name;
         user.weapon.damage = this.value;
+        console.log(user.basics.name + " equiped " + this.name)
     }
     else {
 
     }
+    console.log(user)
 }
 //usable items
 item.prototype.use = function (user) {
@@ -161,36 +169,27 @@ item.prototype.use = function (user) {
         console.log("You don't have any " + this.name + "(s)")
     }
 }
+item.prototype.buy = function () {
+    item.quantity++;
+    hero.inventory.gold -= item.value;
+
+}
+item.prototype.sell = function () {
+    item.quantity--;
+    hero.inventory.gold += item.value / 2;
+}
 let dagger = new item("Dagger", "Weapon", 1, 0, 1);
 let clothing = new item("Clothing", "Armor", 0, 0, 1);
 let potion = new item("Potion", "Healing", 5, 10, 0);
 
-function testCombat() {
-    //creates ally
-    let abe = new character("Abraham Arkwright", "Paladin", 1, 0, true, true, 10, 1, 1, 1, 0, "Longsword", 1, "Plate", 0);
-    //creates bandit
-    const bandit1 = new character("Bandit1", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
-    const bandit2 = new character("Bandit2", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
-    const bandit3 = new character("Bandit3", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
-    const bandit4 = new character("Bandit4", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
-    console.log("combat test")
-    turnArray = [hero, bandit1, bandit2, bandit3, bandit4, abe];
-    console.log(turnArray)
-    enemyArray = [bandit1, bandit2, bandit3, bandit4];
-    enemyNumber = enemyArray.length;
-    allyArray = [hero, abe];
-    console.log(enemyNumber);
-    combat()
-}
-//testCombat()
 function firstEvent() {
     alert("You are " + hero.basics.name + ", a " + hero.basics.class + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
     alert("Your test is to travel to The Valley of Dale, figure out what the problem is and solve it.")
     alert("You enter the valley and travel to a bridge guarded by bandits")
     alert("As you have no gold they attack you.")
-    const bandit1 = new character("Bandit1", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
-    const bandit2 = new character("Bandit2", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
-    const bandit3 = new character("Bandit3", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0);
+    const bandit1 = new character("Bandit1", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0, 1);
+    const bandit2 = new character("Bandit2", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0, 1);
+    const bandit3 = new character("Bandit3", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0, 1);
     turnArray = [hero, bandit1, bandit2, bandit3];
     console.log(turnArray)
     enemyArray = [bandit1, bandit2, bandit3];
@@ -213,4 +212,11 @@ function firstEvent() {
     alert("Knight: I am Abraham Arkwright, paladin and current guardian of The Valley of Dale.")
     alert("Abraham: We should get to the village before they bring reinforcements.")
 }
-firstEvent()
+function startGame() {
+    let heroName = prompt("Choose Your Name")
+    let hero = new character(heroName, "Freelancer", 1, 0, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", 0, 0);
+    dagger.equip(hero)
+    clothing.equip(hero)
+}
+startGame()
+//firstEvent()
