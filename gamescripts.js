@@ -29,30 +29,34 @@ function character(name, profession, level, xp, alive, ally, currentHp, maxHp, a
 }
 //attack function
 character.prototype.attack = function (target) {
-    console.log(this.basics.name + " attacks " + target.basics.name)
-    console.log(target.stats.currentHp)
+    console.log(this.basics.name + " attacks " + target.basics.name + " with their " + this.weapon.name)
+    //console.log(target.stats.currentHp)
+    let dmg = this.weapon.damage - target.armor.protection;
     if (target.basics.alive == true) {
         if (this.weapon.damage <= target.armor.protection) {
             console.log(this.basics.name + "'s attack bounces harmlessly off of " + target.basics.name + "'s " + target.armor.name)
         }
         else {
-            target.stats.currentHp -= (this.weapon.damage - target.armor.protection)
+            //let dmg = this.weapon.damage - target.armor.protection;
+            console.log(dmg + " damage dealt to " + target.basics.name)
+            target.stats.currentHp -= dmg;
         }
-        console.log(target.stats.currentHp)
+        console.log(target.basics.name + " loses " + dmg + " Hitpoints.")
     }
     else {
-        console.log(target.basics.name + " is already dead.")
+        //console.log(target.basics.name + " is already dead.")
     }
+    target.isAlive();
 };
 //isalive function
 character.prototype.isAlive = function () {
     if (this.stats.currentHp > 0) {
-        console.log(this.basics.name + " is still alive!");
-        console.log("\n-------------\n");
+        //console.log(this.basics.name + " is still alive!");
+        //console.log("\n-------------\n");
         // return true;
     }
     else if (this.basics.alive == false) {
-        console.log("still dead")
+        console.log(this.basics.name + " is already dead.")
     }
     else {
         console.log(this.basics.name + " has died!");
@@ -72,6 +76,7 @@ character.prototype.isAlive = function () {
 };
 //levelup function
 character.prototype.levelUp = function () {
+    console.log(this.basics.name + " has " + this.basics.xp + " total XP.")
     if (this.basics.level * 100 == this.basics.xp) {
         this.basics.level++;
         this.basics.currentHp += 10;
@@ -84,12 +89,12 @@ character.prototype.levelUp = function () {
 }
 //turn function
 character.prototype.turn = function (target) {
-    this.isAlive()
+    //this.isAlive()
     if (this.basics.alive == true) {
         this.attack(target);
     }
     else {
-        console.log("no turn for dead character")
+        //console.log("no turn for dead character")
     }
 }
 //combat elements
@@ -99,7 +104,7 @@ let allyArray = [];
 let enemyNumber = 0;
 //combat function
 function combat() {
-
+    console.log("You face " + enemyNumber + " enemies.")
     while (enemyNumber != 0 && hero.stats.currentHp > 0) {
         for (i = 0; i < turnArray.length; i++) {
             if (turnArray[i].basics.ally == true) {
@@ -111,16 +116,17 @@ function combat() {
                 turnArray[i].turn(allyArray[attackTarget]);
             }
         }
-        console.log("combat ended")
-        for (var i = 0; i < allyArray.length; i++) {
-            allyArray[i].levelUp();
-        }
-        if (hero.stats.currentHp > 0) {
 
-        }
-        else {
-            console.log("You are defeated.")
-        }
+    }
+    console.log("combat ended")
+    for (var i = 0; i < allyArray.length; i++) {
+        allyArray[i].levelUp();
+    }
+    if (hero.stats.currentHp > 0) {
+
+    }
+    else {
+        console.log("You are defeated.")
     }
 }
 //item prototypes
@@ -201,10 +207,10 @@ function firstEvent() {
         alert("An armored knight charges the bandit(s), driving them off and saving your life.")
         alert("The knight dismounts and helps your stand.")
     }
-    alert ("Knight: Those bandits are getting audicious.")
-    alert ("Knight: You are alright? The knight pats you on the back and you feel some healing energy flow into you,")
+    alert("Knight: Those bandits are getting audicious.")
+    alert("Knight: You are alright? The knight pats you on the back and you feel some healing energy flow into you,")
     hero.stats.currentHp = hero.stats.maxHp;
-    alert ("Knight: I am Abraham Arkwright, paladin and current guardian of The Valley of Dale.")
-    alert ("Abraham: We should get to the village before they bring reinforcements.")
+    alert("Knight: I am Abraham Arkwright, paladin and current guardian of The Valley of Dale.")
+    alert("Abraham: We should get to the village before they bring reinforcements.")
 }
 firstEvent()
