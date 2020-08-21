@@ -35,7 +35,7 @@ function character(name, profession, level, xp, alive, ally, currentHp, maxHp, a
 //attack function
 character.prototype.attack = function (target) {
     console.log(this.basics.name + " attacks " + target.basics.name + " with their " + this.weapon.name)
-    //console.log(target.stats.currentHp)
+    console.log(target.stats.currentHp)
     let hitChance = .5 - .1 * (target.stats.defense);
     console.log(hitChance + " hit chance")
     let hitRoll = Math.random() + .1 * (this.stats.attack);
@@ -49,7 +49,8 @@ character.prototype.attack = function (target) {
             else {
                 //let dmg = this.weapon.damage - target.armor.protection;
                 console.log(dmg + " damage dealt to " + target.basics.name)
-                target.stats.currentHp -= dmg;
+                target.damage(dmg)
+                //target.stats.currentHp -= dmg;
             }
             console.log(target.basics.name + " loses " + dmg + " Hitpoints.")
         }
@@ -102,6 +103,12 @@ character.prototype.levelUp = function () {
         console.log(this.basics.name + " is not ready for level up")
     }
 }
+character.prototype.heal = function (cure) {
+    this.stats.currentHp += cure;
+}
+character.prototype.damage = function (wound) {
+    this.stats.currentHp -= wound;
+}
 //turn function
 character.prototype.turn = function (target) {
     //this.isAlive()
@@ -130,11 +137,19 @@ let enemyNumber = 0;
 function combat() {
     console.log("You face " + enemyNumber + " enemies.")
     while (enemyNumber != 0 && hero.stats.currentHp > 0) {
+        console.log(hero.stats.currentHp + " current HP for hero")
         for (i = 0; i < turnArray.length; i++) {
+            console.log(turnArray[i].basics.name + "'s turn.")
             if (turnArray[i].basics.ally == true) {
+                //need to make it so you can't choose an invalid target
                 let attackTarget = prompt("Choose target by number (starting from 0).");
-                //let attackTarget = Math.floor((Math.random() * enemyArray.length))
-                turnArray[i].turn(enemyArray[attackTarget]);
+                if (turnArray[attackTarget] == undefined) {
+                    console.log("you strike at the air, not finding a valid target.")
+                }
+                else {
+                    turnArray[i].turn(enemyArray[attackTarget]);
+                }
+
             }
             else {
                 let attackTarget = Math.floor((Math.random() * allyArray.length))
@@ -203,12 +218,7 @@ let dagger = new item("Dagger", "Weapon", 1, 0, 1);
 let clothing = new item("Clothing", "Armor", 0, 0, 1);
 let potion = new item("Potion", "Healing", 5, 10, 0);
 
-function startGame() {
-    let heroName = prompt("Choose Your Name")
-    let hero = new character(heroName, "Freelancer", 1, 0, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", 0, 0);
-    dagger.equip(hero)
-    clothing.equip(hero)
-}
+//add items to hero
 dagger.equip(hero)
 clothing.equip(hero)
 
@@ -242,5 +252,4 @@ function firstEvent() {
     alert("Knight: I am Abraham Arkwright, paladin and current guardian of The Valley of Dale.")
     alert("Abraham: We should get to the village before they bring reinforcements.")
 }
-//startGame()
 firstEvent()
