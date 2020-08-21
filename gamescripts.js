@@ -189,8 +189,9 @@ item.prototype.equip = function (user) {
 }
 //usable items
 item.prototype.use = function (user) {
-    if (this.type === "Healing" && this.quantity > 0) {
-        user.stats.currentHp += this.value;
+    if (this.type === "Consumable" && this.quantity > 0) {
+        alert (user.basics.name + " uses a " + this.name)
+        this.effect(user, this.value)
         this.quantity--;
     }
     else {
@@ -208,7 +209,7 @@ item.prototype.sell = function () {
 }
 let dagger = new item("Dagger", "Weapon", 1, function (user) {} , 0, 1);
 let clothing = new item("Clothing", "Armor", 0, function (user) {}, 0, 1);
-let potion = new item("Potion", "Healing", 5, function (user) {}, 10, 0);
+let potion = new item("Potion", "Consumable", 5, function (user, value) {user.heal(value);}, 10, 1);
 //let fireArmor = new item("Fire Armor", "Armor", 0, function (user) {user.resistances.fire = true}, 0, 1);
 
 //add items to hero
@@ -245,4 +246,6 @@ function firstEvent() {
     alert("Knight: I am Abraham Arkwright, paladin and current guardian of The Valley of Dale.")
     alert("Abraham: We should get to the village before they bring reinforcements.")
 }
+potion.use(hero)
+console.log(hero)
 //firstEvent()
