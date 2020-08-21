@@ -30,6 +30,10 @@ function character(name, profession, level, xp, alive, ally, currentHp, maxHp, a
     this.inventory = {
         gold: gold
     }
+    this.resistances = {
+        //here for test
+        fire: false
+    }
 
 }
 //attack function
@@ -157,10 +161,11 @@ function combat() {
     }
 }
 //item prototypes
-function item(name, type, value, price, quantity) {
+function item(name, type, value, effect, price, quantity) {
     this.name = name;
     this.type = type;
     this.value = value;
+    this.effect = effect,
     this.price = price;
     this.quantity = quantity
 }
@@ -169,6 +174,7 @@ item.prototype.equip = function (user) {
     if (this.type === "Armor") {
         user.armor.name = this.name;
         user.armor.protection = this.value;
+        this.effect(user);
         console.log(user.basics.name + " equiped " + this.name)
     }
     else if (this.type === "Weapon") {
@@ -200,9 +206,10 @@ item.prototype.sell = function () {
     item.quantity--;
     hero.inventory.gold += item.value / 2;
 }
-let dagger = new item("Dagger", "Weapon", 1, 0, 1);
-let clothing = new item("Clothing", "Armor", 0, 0, 1);
-let potion = new item("Potion", "Healing", 5, 10, 0);
+let dagger = new item("Dagger", "Weapon", 1, function (user) {} , 0, 1);
+let clothing = new item("Clothing", "Armor", 0, function (user) {}, 0, 1);
+let potion = new item("Potion", "Healing", 5, function (user) {}, 10, 0);
+//let fireArmor = new item("Fire Armor", "Armor", 0, function (user) {user.resistances.fire = true}, 0, 1);
 
 //add items to hero
 dagger.equip(hero)
@@ -238,4 +245,4 @@ function firstEvent() {
     alert("Knight: I am Abraham Arkwright, paladin and current guardian of The Valley of Dale.")
     alert("Abraham: We should get to the village before they bring reinforcements.")
 }
-firstEvent()
+//firstEvent()
