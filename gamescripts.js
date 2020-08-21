@@ -34,7 +34,7 @@ function character(name, profession, level, xp, alive, ally, currentHp, maxHp, a
 }
 //attack function
 character.prototype.attack = function (target) {
-    console.log(this.basics.name + " attacks " + target.basics.name + " with their " + this.weapon.name)
+    alert(this.basics.name + " attacks " + target.basics.name + " with their " + this.weapon.name)
     console.log(target.stats.currentHp)
     let hitChance = .5 - .1 * (target.stats.defense);
     console.log(hitChance + " hit chance")
@@ -44,22 +44,19 @@ character.prototype.attack = function (target) {
         let dmg = this.weapon.damage - target.armor.protection;
         if (target.basics.alive == true) {
             if (this.weapon.damage <= target.armor.protection) {
-                console.log(this.basics.name + "'s attack bounces harmlessly off of " + target.basics.name + "'s " + target.armor.name)
+                alert(this.basics.name + "'s attack bounces harmlessly off of " + target.basics.name + "'s " + target.armor.name)
             }
             else {
-                //let dmg = this.weapon.damage - target.armor.protection;
-                console.log(dmg + " damage dealt to " + target.basics.name)
+                alert(dmg + " damage dealt to " + target.basics.name)
                 target.damage(dmg)
-                //target.stats.currentHp -= dmg;
             }
-            console.log(target.basics.name + " loses " + dmg + " Hitpoints.")
+            alert(target.basics.name + " loses " + dmg + " Hitpoints.")
         }
         else {
-            //console.log(target.basics.name + " is already dead.")
         }
     }
     else {
-        console.log(this.basics.name + " misses " + target.basics.name)
+        alert(this.basics.name + " misses " + target.basics.name)
     }
 
     target.isAlive();
@@ -67,9 +64,6 @@ character.prototype.attack = function (target) {
 //isalive function
 character.prototype.isAlive = function () {
     if (this.stats.currentHp > 0) {
-        //console.log(this.basics.name + " is still alive!");
-        //console.log("\n-------------\n");
-        // return true;
     }
     else if (this.basics.alive == false) {
         console.log(this.basics.name + " is already dead.")
@@ -111,21 +105,25 @@ character.prototype.damage = function (wound) {
 }
 //turn function
 character.prototype.turn = function (target) {
-    //this.isAlive()
     if (this.basics.alive == true) {
-        // if (this.basics.ally == true) {
-        //     //let target = prompt("Choose target by number (starting from 0).");
-        //     let target = Math.floor((Math.random() * enemyArray.length))
-        //     this.turn(enemyArray[target]);
-        // }
-        // else {
-        //     let target = Math.floor((Math.random() * allyArray.length))
-        //     this.turn(allyArray[target]);
-        // }
-        this.attack(target);
+        if (this.basics.ally == true) {
+            let target = prompt("Choose target by number (starting from 0).");
+            if (enemyArray.target == undefined)
+            {
+                alert(this.basics.name + " attacks no one.")
+            }
+            else
+            {
+            this.attack(enemyArray[target]);
+            }
+        }
+        else {
+            let target = Math.floor((Math.random() * allyArray.length))
+            this.attack(allyArray[target]);
+        }
     }
     else {
-        //console.log("no turn for dead character")
+        //so no turn
     }
 }
 //combat elements
@@ -139,25 +137,13 @@ function combat() {
     while (enemyNumber != 0 && hero.stats.currentHp > 0) {
         console.log(hero.stats.currentHp + " current HP for hero")
         for (i = 0; i < turnArray.length; i++) {
-            console.log(turnArray[i].basics.name + "'s turn.")
-            if (turnArray[i].basics.ally == true) {
-                //need to make it so you can't choose an invalid target
-                let attackTarget = prompt("Choose target by number (starting from 0).");
-                if (turnArray[attackTarget] == undefined) {
-                    console.log("you strike at the air, not finding a valid target.")
-                }
-                else {
-                    turnArray[i].turn(enemyArray[attackTarget]);
-                }
-
+            if (turnArray[i].basics.alive != true) {
             }
             else {
-                let attackTarget = Math.floor((Math.random() * allyArray.length))
-                turnArray[i].turn(allyArray[attackTarget]);
+                console.log(turnArray[i].basics.name + "'s turn.")
+                turnArray[i].turn();
             }
-            //turnArray[i].turn();
         }
-
     }
     console.log("combat ended")
     for (var i = 0; i < allyArray.length; i++) {
@@ -167,7 +153,7 @@ function combat() {
 
     }
     else {
-        console.log("You are defeated.")
+        alert("You are defeated.")
     }
 }
 //item prototypes
