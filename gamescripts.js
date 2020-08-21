@@ -103,12 +103,10 @@ character.prototype.levelUp = function () {
 }
 character.prototype.heal = function (cure) {
     this.stats.currentHp += cure;
-    if (this.stats.currentHp > this.stats.maxHp)
-    {
+    if (this.stats.currentHp > this.stats.maxHp) {
         this.stats.currentHp = this.stats.maxHp;
     }
-    else
-    {
+    else {
         //nothing
     }
 }
@@ -116,17 +114,24 @@ character.prototype.damage = function (wound) {
     this.stats.currentHp -= wound;
 }
 //turn function
-character.prototype.turn = function (target) {
+character.prototype.turn = function () {
     if (this.basics.alive == true) {
         if (this.basics.ally == true) {
-            let target = prompt("Choose target by number (starting from 0).");
-            if (enemyArray[target] === undefined)
-            {
-                alert(this.basics.name + " attacks no one.")
+            let action = prompt("(A)ttack or user a (P)otion?");
+            if (action === "A") {
+                let target = prompt("Choose target by number (starting from 0).");
+                if (enemyArray[target] === undefined) {
+                    alert(this.basics.name + " attacks no one.")
+                }
+                else {
+                    this.attack(enemyArray[target]);
+                }
             }
-            else
-            {
-            this.attack(enemyArray[target]);
+            else if (action === "P") {
+                potion.use(this)
+            }
+            else {
+                alert("You chose not to do anything.")
             }
         }
         else {
@@ -174,7 +179,7 @@ function item(name, type, value, effect, price, quantity) {
     this.type = type;
     this.value = value;
     this.effect = effect,
-    this.price = price;
+        this.price = price;
     this.quantity = quantity
 }
 //equipable items
@@ -198,7 +203,7 @@ item.prototype.equip = function (user) {
 //usable items
 item.prototype.use = function (user) {
     if (this.type === "Consumable" && this.quantity > 0) {
-        alert (user.basics.name + " uses a " + this.name)
+        alert(user.basics.name + " uses a " + this.name)
         this.effect(user, this.value)
         this.quantity--;
     }
@@ -215,9 +220,9 @@ item.prototype.sell = function () {
     item.quantity--;
     hero.inventory.gold += item.value / 2;
 }
-let dagger = new item("Dagger", "Weapon", 1, function (user) {} , 0, 1);
-let clothing = new item("Clothing", "Armor", 0, function (user) {}, 0, 1);
-let potion = new item("Potion", "Consumable", 5, function (user, value) {user.heal(value);}, 10, 1);
+let dagger = new item("Dagger", "Weapon", 1, function (user) { }, 0, 1);
+let clothing = new item("Clothing", "Armor", 0, function (user) { }, 0, 1);
+let potion = new item("Potion", "Consumable", 5, function (user, value) { user.heal(value); }, 10, 1);
 //let fireArmor = new item("Fire Armor", "Armor", 0, function (user) {user.resistances.fire = true}, 0, 1);
 
 //add items to hero
@@ -254,6 +259,4 @@ function firstEvent() {
     alert("Knight: I am Abraham Arkwright, paladin and current guardian of The Valley of Dale.")
     alert("Abraham: We should get to the village before they bring reinforcements.")
 }
-potion.use(hero)
-console.log(hero)
-//firstEvent()
+firstEvent()
