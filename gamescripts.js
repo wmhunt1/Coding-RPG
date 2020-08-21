@@ -113,7 +113,8 @@ function combat() {
     while (enemyNumber != 0 && hero.stats.currentHp > 0) {
         for (i = 0; i < turnArray.length; i++) {
             if (turnArray[i].basics.ally == true) {
-                let attackTarget = Math.floor((Math.random() * enemyArray.length))
+                let attackTarget = prompt("Choose target by number (starting from 0).");
+                //let attackTarget = Math.floor((Math.random() * enemyArray.length))
                 turnArray[i].turn(enemyArray[attackTarget]);
             }
             else {
