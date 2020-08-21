@@ -103,6 +103,14 @@ character.prototype.levelUp = function () {
 }
 character.prototype.heal = function (cure) {
     this.stats.currentHp += cure;
+    if (this.stats.currentHp > this.stats.maxHp)
+    {
+        this.stats.currentHp = this.stats.maxHp;
+    }
+    else
+    {
+        //nothing
+    }
 }
 character.prototype.damage = function (wound) {
     this.stats.currentHp -= wound;
