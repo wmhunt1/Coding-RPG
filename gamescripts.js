@@ -217,9 +217,9 @@ function firstEvent() {
     alert("Your test is to travel to The Valley of Dale, figure out what the problem is and solve it.")
     alert("You enter the valley and travel to a bridge guarded by bandits")
     alert("As you have no gold they attack you.")
-    const bandit1 = new character("Bandit1", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0, 1);
-    const bandit2 = new character("Bandit2", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0, 1);
-    const bandit3 = new character("Bandit3", "Thug", 1, 10, true, false, 1, 1, 1, 1, 0, "Shortsword", 1, "Leather", 0, 1);
+    const bandit1 = new character("Bandit1", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Leather", 0, 1);
+    const bandit2 = new character("Bandit2", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Leather", 0, 1);
+    const bandit3 = new character("Bandit3", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Leather", 0, 1);
     turnArray = [hero, bandit1, bandit2, bandit3];
     console.log(turnArray)
     enemyArray = [bandit1, bandit2, bandit3];
