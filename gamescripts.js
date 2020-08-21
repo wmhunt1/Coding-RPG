@@ -108,7 +108,7 @@ character.prototype.turn = function (target) {
     if (this.basics.alive == true) {
         if (this.basics.ally == true) {
             let target = prompt("Choose target by number (starting from 0).");
-            if (enemyArray.target == undefined)
+            if (enemyArray[target] === undefined)
             {
                 alert(this.basics.name + " attacks no one.")
             }
