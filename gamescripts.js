@@ -36,21 +36,31 @@ function character(name, profession, level, xp, alive, ally, currentHp, maxHp, a
 character.prototype.attack = function (target) {
     console.log(this.basics.name + " attacks " + target.basics.name + " with their " + this.weapon.name)
     //console.log(target.stats.currentHp)
-    let dmg = this.weapon.damage - target.armor.protection;
-    if (target.basics.alive == true) {
-        if (this.weapon.damage <= target.armor.protection) {
-            console.log(this.basics.name + "'s attack bounces harmlessly off of " + target.basics.name + "'s " + target.armor.name)
+    let hitChance = .5 - .1 * (target.stats.defense);
+    console.log(hitChance + " hit chance")
+    let hitRoll = Math.random() + .1 * (this.stats.attack);
+    console.log(hitRoll + " hit roll")
+    if (hitRoll >= hitChance) {
+        let dmg = this.weapon.damage - target.armor.protection;
+        if (target.basics.alive == true) {
+            if (this.weapon.damage <= target.armor.protection) {
+                console.log(this.basics.name + "'s attack bounces harmlessly off of " + target.basics.name + "'s " + target.armor.name)
+            }
+            else {
+                //let dmg = this.weapon.damage - target.armor.protection;
+                console.log(dmg + " damage dealt to " + target.basics.name)
+                target.stats.currentHp -= dmg;
+            }
+            console.log(target.basics.name + " loses " + dmg + " Hitpoints.")
         }
         else {
-            //let dmg = this.weapon.damage - target.armor.protection;
-            console.log(dmg + " damage dealt to " + target.basics.name)
-            target.stats.currentHp -= dmg;
+            //console.log(target.basics.name + " is already dead.")
         }
-        console.log(target.basics.name + " loses " + dmg + " Hitpoints.")
     }
     else {
-        //console.log(target.basics.name + " is already dead.")
+        console.log(this.basics.name + " misses " + target.basics.name)
     }
+
     target.isAlive();
 };
 //isalive function
@@ -96,6 +106,15 @@ character.prototype.levelUp = function () {
 character.prototype.turn = function (target) {
     //this.isAlive()
     if (this.basics.alive == true) {
+        // if (this.basics.ally == true) {
+        //     //let target = prompt("Choose target by number (starting from 0).");
+        //     let target = Math.floor((Math.random() * enemyArray.length))
+        //     this.turn(enemyArray[target]);
+        // }
+        // else {
+        //     let target = Math.floor((Math.random() * allyArray.length))
+        //     this.turn(allyArray[target]);
+        // }
         this.attack(target);
     }
     else {
@@ -121,6 +140,7 @@ function combat() {
                 let attackTarget = Math.floor((Math.random() * allyArray.length))
                 turnArray[i].turn(allyArray[attackTarget]);
             }
+            //turnArray[i].turn();
         }
 
     }
