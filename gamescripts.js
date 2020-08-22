@@ -6,49 +6,58 @@ function addText(x) {
     element.appendChild(tag);
 }
 //character prototype
-function character(name, profession, level, xp, alive, ally, currentHp, maxHp, attack, defense, speed, weapon, damage, damageType, armor, protection, gold) {
-    this.basics = {
-        name: name,
-        class: profession,
-        level: level,
-        xp: xp,
-        alive: alive,
-        ally: ally,
-    };
-    this.stats = {
-        currentHp: currentHp,
-        maxHp: maxHp,
-        attack: attack,
-        defense: defense,
-        speed: speed,
-        buff: 0,
-        debuff: 0,
-    };
-    this.weapon = {
-        name: weapon,
-        damage: damage,
-        damageType: damageType
-    };
-    this.armor = {
-        name: armor,
-        protection: protection
+class Character {
+    constructor(name, profession, level, xp, alive, ally, currentHp, maxHp, attack, defense, speed, weapon, damage, damageType, armor, protection, gold) {
+        this.basics = {
+            name: name,
+            class: profession,
+            level: level,
+            xp: xp,
+            alive: alive,
+            ally: ally,
+        };
+        this.stats = {
+            currentHp: currentHp,
+            maxHp: maxHp,
+            attack: attack,
+            defense: defense,
+            speed: speed,
+            buff: 0,
+            debuff: 0,
+        };
+        this.weapon = {
+            name: weapon,
+            damage: damage,
+            damageType: damageType
+        };
+        this.armor = {
+            name: armor,
+            protection: protection
+        }
+        this.inventory = {
+            gold: gold
+        }
+        this.resistances = {
+            //add more as used
+            fire: false,
+            piercing: false,
+            slashing: false
+        }
     }
-    this.inventory = {
-        gold: gold
-    }
-    this.resistances = {
-        //add more as used
-        fire: false,
-        piercing: false,
-        slashing: false
+}
+class Rogue extends Character {
+    constructor()
+    {
+        super();
+        this.resistances.fire = true;
     }
 }
 //creates hero
-let hero = new character("Name", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", "None", 0, 10);
+let hero = new Rogue("Name", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", "None", 0, 10);
 //changes based on checkResist
 let resist = false;
 //resist prototype
-character.prototype.checkResist = function (target) {
+Character.prototype.checkResist = function (target) {
     //add more as used
     if (target.resistances.fire == true && this.weapon.damageType === "Fire") {
         resist = true;
@@ -64,7 +73,7 @@ character.prototype.checkResist = function (target) {
     }
 }
 //attack function
-character.prototype.attack = function (target) {
+Character.prototype.attack = function (target) {
     alert(this.basics.name + " attacks " + target.basics.name + " with their " + this.weapon.name)
     console.log(target.stats.currentHp)
     let hitChance = .5 - .1 * (target.stats.defense + target.stats.buff - target.stats.debuff);
@@ -102,7 +111,7 @@ character.prototype.attack = function (target) {
     target.isAlive();
 };
 //isalive function
-character.prototype.isAlive = function () {
+Character.prototype.isAlive = function () {
     if (this.stats.currentHp > 0) {
     }
     else if (this.basics.alive == false) {
@@ -125,7 +134,7 @@ character.prototype.isAlive = function () {
     }
 };
 //levelup function
-character.prototype.levelUp = function () {
+Character.prototype.levelUp = function () {
     console.log(this.basics.name + " has " + this.basics.xp + " total XP.")
     if (this.basics.level * 100 == this.basics.xp) {
         this.basics.level++;
@@ -137,7 +146,7 @@ character.prototype.levelUp = function () {
         console.log(this.basics.name + " is not ready for level up")
     }
 }
-character.prototype.heal = function (cure) {
+Character.prototype.heal = function (cure) {
     this.stats.currentHp += cure;
     if (this.stats.currentHp > this.stats.maxHp) {
         this.stats.currentHp = this.stats.maxHp;
@@ -146,15 +155,15 @@ character.prototype.heal = function (cure) {
         //nothing
     }
 }
-character.prototype.damage = function (wound) {
+Character.prototype.damage = function (wound) {
     this.stats.currentHp -= wound;
 }
 //turn function
-character.prototype.reset = function () {
+Character.prototype.reset = function () {
     this.stats.debuff = 0;
     this.stats.debuff = 0;
 }
-character.prototype.turn = function () {
+Character.prototype.turn = function () {
     if (this.basics.alive == true) {
         if (this.basics.ally == true) {
             let action = prompt("(A)ttack or user a (P)otion?");
@@ -218,14 +227,14 @@ function combat() {
     }
 }
 //gold functions
-character.prototype.addGold = function (x) {
+Character.prototype.addGold = function (x) {
     this.inventory.gold += x;
     alert(hero.stats.name + " gained " + x + " gold.")
 }
-character.prototype.removeGold = function (x) {
+Character.prototype.removeGold = function (x) {
     this.inventory.gold -= x;
 }
-character.prototype.checkGold = function (x) {
+Character.prototype.checkGold = function (x) {
     if (this.inventory.gold == x) {
         this.inventory.gold -= x;
         alert(hero.stats.name + " lost " + x + " gold.")
@@ -235,7 +244,8 @@ character.prototype.checkGold = function (x) {
     }
 }
 //item prototypes
-function item(name, type, damageType, value, effect, price, quantity) {
+class Item {
+    constructor(name, type, damageType, value, effect, price, quantity) {
     this.name = name;
     this.type = type;
     this.damageType = damageType;
@@ -244,8 +254,9 @@ function item(name, type, damageType, value, effect, price, quantity) {
     this.price = price;
     this.quantity = quantity;
 }
+}
 //equipable items
-item.prototype.equip = function (user) {
+Item.prototype.equip = function (user) {
     if (this.type === "Armor") {
         user.armor.name = this.name;
         user.armor.protection = this.value;
@@ -264,7 +275,7 @@ item.prototype.equip = function (user) {
     console.log(user)
 }
 //usable items
-item.prototype.use = function (user) {
+Item.prototype.use = function (user) {
     if (this.type === "Consumable" && this.quantity > 0) {
         alert(user.basics.name + " uses a " + this.name)
         this.effect;
@@ -274,23 +285,23 @@ item.prototype.use = function (user) {
         console.log("You don't have any " + this.name + "(s)")
     }
 }
-item.prototype.buy = function (buyer) {
+Item.prototype.buy = function (buyer) {
     item.quantity++;
     buyer.checkGold(item.price);
 
 }
-item.prototype.sell = function (seller) {
+Item.prototype.sell = function (seller) {
     item.quantity--;
     buyer.addGold(item.value / 2);
 }
-let dagger = new item("Dagger", "Weapon", "Slashing", 1, function (user, value) { }, 0, 1);
-let clothing = new item("Clothing", "Armor", "NA", 0, function (user, value) { }, 0, 1);
-let potion = new item("Potion", "Consumable", "NA", 5, function (user, value) { user.heal(value); }, 10, 1);
+let dagger = new Item("Dagger", "Weapon", "Slashing", 1, function (user, value) { }, 0, 1);
+let clothing = new Item("Clothing", "Armor", "NA", 0, function (user, value) { }, 0, 1);
+let potion = new Item("Potion", "Consumable", "NA", 5, function (user, value) { user.heal(value); }, 10, 1);
 //let fireArmor = new item("Fire Armor", "Armor", 0, function (user) {user.resistances.fire = true}, 0, 1);
 
 function createHero() {
     let heroName = prompt("Choose Your Name")
-    hero = new character(heroName, "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", "None", 0, "None", 0, 0);
+    hero = new Rogue(heroName, "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", "None", 0, "None", 0, 0);
     dagger.equip(hero)
     clothing.equip(hero)
 }
@@ -300,9 +311,9 @@ function firstEvent() {
     alert("Your test is to travel to The Valley of Dale, figure out what the problem is and solve it.")
     alert("You enter the valley and travel to a bridge guarded by bandits")
     alert("As you have no gold they attack you.")
-    const bandit1 = new character("Bandit 1", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
-    const bandit2 = new character("Bandit 2", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
-    const bandit3 = new character("Bandit 3", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
+    const bandit1 = new Character("Bandit 1", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
+    const bandit2 = new Character("Bandit 2", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
+    const bandit3 = new Character("Bandit 3", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
     turnArray = [hero, bandit1, bandit2, bandit3];
     console.log(turnArray)
     enemyArray = [bandit1, bandit2, bandit3];
@@ -322,6 +333,7 @@ function firstEvent() {
     alert("Knight: Those bandits are getting audicious.")
     alert("Knight: You are alright? The knight pats you on the back and you feel some healing energy flow into you,")
     hero.heal(10)
+    hero.basics.alive = true;
     alert("Knight: I am Abraham Arkwright, paladin and current guardian of The Valley of Dale.")
     alert("Abraham: We should get to the village before they bring reinforcements.")
 }
