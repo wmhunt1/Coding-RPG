@@ -1,6 +1,13 @@
+function addText(x) {
+    var tag = document.createElement("p")
+    var text = document.createTextNode(x);
+    tag.appendChild(text);
+    var element = document.getElementById("gameText");
+    element.appendChild(tag);
+}
 //creates hero
-let heroName = prompt("Choose Your Name")
-let hero = new character(heroName, "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", 0, 0);
+//let heroName = prompt("Choose Your Name")
+let hero = new character("Name", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", 0, 0);
 //character prototype
 function character(name, profession, level, xp, alive, ally, currentHp, maxHp, attack, defense, speed, weapon, damage, armor, protection, gold) {
     this.basics = {
@@ -10,14 +17,16 @@ function character(name, profession, level, xp, alive, ally, currentHp, maxHp, a
         xp: xp,
         gold: gold,
         alive: alive,
-        ally: ally
+        ally: ally,
     };
     this.stats = {
         currentHp: currentHp,
         maxHp: maxHp,
         attack: attack,
         defense: defense,
-        speed: speed
+        speed: speed,
+        buff: 0,
+        debuff: 0,
     };
     this.weapon = {
         name: weapon,
@@ -40,9 +49,9 @@ function character(name, profession, level, xp, alive, ally, currentHp, maxHp, a
 character.prototype.attack = function (target) {
     alert(this.basics.name + " attacks " + target.basics.name + " with their " + this.weapon.name)
     console.log(target.stats.currentHp)
-    let hitChance = .5 - .1 * (target.stats.defense);
+    let hitChance = .5 - .1 * (target.stats.defense + target.stats.buff - target.stats.debuff);
     console.log(hitChance + " hit chance")
-    let hitRoll = Math.random() + .1 * (this.stats.attack);
+    let hitRoll = Math.random() + .1 * (this.stats.attack + this.stats.buff - this.stats.debuff);
     console.log(hitRoll + " hit roll")
     if (hitRoll >= hitChance) {
         let dmg = this.weapon.damage - target.armor.protection;
@@ -114,6 +123,11 @@ character.prototype.damage = function (wound) {
     this.stats.currentHp -= wound;
 }
 //turn function
+character.prototype.reset()
+{
+    this.stats.debuff = 0;
+    this.stats.debuff = 0;
+}
 character.prototype.turn = function () {
     if (this.basics.alive == true) {
         if (this.basics.ally == true) {
@@ -163,11 +177,12 @@ function combat() {
         }
     }
     console.log("combat ended")
-    for (var i = 0; i < allyArray.length; i++) {
-        allyArray[i].levelUp();
-    }
-    if (hero.stats.currentHp > 0) {
 
+    if (hero.stats.currentHp > 0) {
+        for (var i = 0; i < allyArray.length; i++) {
+            allyArray[i].levelUp();
+            allyArray[i].reset();
+        }
     }
     else {
         alert("You are defeated.")
@@ -226,9 +241,15 @@ let potion = new item("Potion", "Consumable", 5, function (user, value) { user.h
 //let fireArmor = new item("Fire Armor", "Armor", 0, function (user) {user.resistances.fire = true}, 0, 1);
 
 //add items to hero
-dagger.equip(hero)
-clothing.equip(hero)
+// dagger.equip(hero)
+// clothing.equip(hero)
 
+function createHero() {
+    let heroName = prompt("Choose Your Name")
+    hero = new character(heroName, "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", 0, 0);
+    dagger.equip(hero)
+    clothing.equip(hero)
+}
 function firstEvent() {
     alert("You are " + hero.basics.name + ", a " + hero.basics.class + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
     alert("Your test is to travel to The Valley of Dale, figure out what the problem is and solve it.")
@@ -259,4 +280,4 @@ function firstEvent() {
     alert("Knight: I am Abraham Arkwright, paladin and current guardian of The Valley of Dale.")
     alert("Abraham: We should get to the village before they bring reinforcements.")
 }
-firstEvent()
+//firstEvent()
