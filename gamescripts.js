@@ -124,27 +124,35 @@ class Bandit extends Character {
 //changes based on checkResist
 let immune = false;
 let resist = false;
+let skipTurn = false;
 //resist prototype
 Character.prototype.checkCondition = function () {
+    skipTurn = false;
     if (this.conditions.asleep)
     {
-
+        skipTurn = true;
+        alert(this.basics.name + " missed turn due to sleep")
     }
     else if (this.conditions.burn)
     {
-
+        this.damage(1)
+        alert(this.basics.name + " Took 1 damage due to burn.")
     }
     else if (this.conditions.confused)
     {
-
+        alert(this.basics.name + " Attacked self due to confusion")
+        this.attack(this)
+        skipTurn = true;
     }
     else if (this.conditions.paralyze)
     {
-
+        alert(this.basics.name + " Missed turn due to paralyze")
+        skipTurn = true;
     }
     else if (this.conditions.poison)
     {
-
+        this.damage(1)
+        alert(this.basics.name + " Took 1 damage due to poison.")
     }
     else
     {
@@ -278,10 +286,35 @@ Character.prototype.reset = function () {
     this.stats.debuff = 0;
     this.weapon.tempBonus = 0;
     this.armor.tempBonus = 0;
+    this.conditions.asleep = false;
+    this.conditions.burn = false;
+    this.conditions.confused = false;
+    this.conditions.paralyze = false;
+    this.conditions.poison = false;
+}
+Character.prototype.conditionRecover = function () {
+    let recoverRoll = Math.random();
+    if (recoverRoll >= .5)
+    {
+    console.log(this.basics.name + " recovered from conditions.")
+    this.conditions.asleep = false;
+    this.conditions.burn = false;
+    this.conditions.confused = false;
+    this.conditions.paralyze = false;
+    this.conditions.poison = false;
+    }
+    else
+    {
+
+    }
 }
 Character.prototype.turn = function () {
     if (this.basics.alive == true) {
         this.checkCondition()
+        if (skipTurn == true)
+        {}
+        else
+        {
         if (this.basics.ally == true) {
             let action = prompt("(A)ttack or user a (P)otion?");
             if (action === "A") {
@@ -304,10 +337,12 @@ Character.prototype.turn = function () {
             let target = Math.floor((Math.random() * allyArray.length))
             this.attack(allyArray[target]);
         }
+        }
     }
     else {
         //so no turn
     }
+    this.conditionRecover()
 }
 //combat elements
 let turnArray = [];
