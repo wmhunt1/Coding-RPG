@@ -69,8 +69,7 @@ class Character {
             bludgeoning: false,
             piercing: false,
             slashing: false
-        }
-        
+        }  
     }
 }
 //player classes
@@ -114,8 +113,24 @@ class Bandit extends Character {
     }
 }
 //changes based on checkResist
+let immune = false;
 let resist = false;
 //resist prototype
+Character.prototype.checkImmune = function (target) {
+    //add more as used
+    if (target.resistances.fire == true && this.weapon.damageType === "Fire") {
+        resist = true;
+    }
+    else if (target.resistances.piercing == true && this.weapon.damageType === "Piercing") {
+        resist = true;
+    }
+    else if (target.resistances.slashing == true && this.weapon.damageType === "Slashing") {
+        resist = true;
+    }
+    else {
+        resist = false;
+    }
+}
 Character.prototype.checkResist = function (target) {
     //add more as used
     if (target.resistances.fire == true && this.weapon.damageType === "Fire") {
@@ -148,10 +163,15 @@ Character.prototype.attack = function (target) {
             }
             else {
                 this.checkResist(target)
+                this.checkImmune(target)
                 if (resist == true) {
                     alert(target.basics.name + "resisted the " + this.weapon.damageType + "and took " + dmg / 2 + " damage.")
                     target.damage(dmg / 2)
                     alert(target.basics.name + " loses " + dmg / 2 + " Hitpoints.")
+                }
+                else if (immune == true)
+                {
+                    alert(target.basics.name + "is immune to " + this.weapon.damageType +  " damage.")
                 }
                 else {
                     alert(dmg + " " + this.weapon.damageType + " damage dealt to " + target.basics.name)
