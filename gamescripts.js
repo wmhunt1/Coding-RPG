@@ -7,35 +7,35 @@ function addText(x) {
 }
 //character prototype
 class Character {
-    constructor(name, profession, level, xp, alive, ally, currentHp, maxHp, attack, defense, speed, weapon, damage, damageType, armor, protection, gold) {
+    constructor() {
         this.basics = {
-            name: name,
-            class: profession,
-            level: level,
-            xp: xp,
-            alive: alive,
-            ally: ally,
+            name: "Name",
+            class: "Freelancer",
+            level: 1,
+            xp: 0,
+            alive: true,
+            ally: true,
         };
         this.stats = {
-            currentHp: currentHp,
-            maxHp: maxHp,
-            attack: attack,
-            defense: defense,
-            speed: speed,
+            currentHp: 10,
+            maxHp: 10,
+            attack: 1,
+            defense: 1,
+            speed: 1,
             buff: 0,
             debuff: 0,
         };
         this.weapon = {
-            name: weapon,
-            damage: damage,
-            damageType: damageType
+            name: "None",
+            damage: 0,
+            damageType: "None"
         };
         this.armor = {
-            name: armor,
-            protection: protection
+            name: "None",
+            protection: 0
         }
         this.inventory = {
-            gold: gold
+            gold: 0
         }
         this.resistances = {
             //add more as used
@@ -45,15 +45,38 @@ class Character {
         }
     }
 }
+//example class works
 class Rogue extends Character {
     constructor()
     {
         super();
-        this.resistances.fire = true;
+        this.stats.profession = "Rogue"
+    }
+}
+class Bandit extends Character {
+    constructor()
+    {
+        super(name);
+        this.basics.name = name;
+        this.basics.profession = "Bandit";
+        this.basics.xp = 10;
+        this.basics.ally = false;
+        this.stats.currentHp = 1;
+        this.stats.maxHp = 1;
+        this.stats.attack = 0;
+        this.stats.defense = 0;
+        this.weapon.name = "Shortsword";
+        this.weapon.damage = 1;
+        this.weapon.damageType = "Piercing";
+        this.armor.name = "Leather";
+        this.armor.protection = 0;
+        this.inventory.gold = 5;
+        
+        
     }
 }
 //creates hero
-let hero = new Rogue("Name", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", "None", 0, 10);
+let hero = new Rogue();
 //changes based on checkResist
 let resist = false;
 //resist prototype
@@ -301,7 +324,7 @@ let potion = new Item("Potion", "Consumable", "NA", 5, function (user, value) { 
 
 function createHero() {
     let heroName = prompt("Choose Your Name")
-    hero = new Rogue(heroName, "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", "None", 0, "None", 0, 0);
+    hero.basics.name = heroName;
     dagger.equip(hero)
     clothing.equip(hero)
 }
@@ -311,9 +334,9 @@ function firstEvent() {
     alert("Your test is to travel to The Valley of Dale, figure out what the problem is and solve it.")
     alert("You enter the valley and travel to a bridge guarded by bandits")
     alert("As you have no gold they attack you.")
-    const bandit1 = new Character("Bandit 1", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
-    const bandit2 = new Character("Bandit 2", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
-    const bandit3 = new Character("Bandit 3", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
+    const bandit1 = new Bandit("Bandit 1");
+    const bandit2 = new Bandit("Bandit 2");
+    const bandit3 = new Bandit("Bandit 3");
     turnArray = [hero, bandit1, bandit2, bandit3];
     console.log(turnArray)
     enemyArray = [bandit1, bandit2, bandit3];
