@@ -51,12 +51,26 @@ class Character {
         this.inventory = {
             gold: 0
         }
+        this.conditions = {
+            asleep: false,
+            confused: false,
+            burn: false,
+            paralyze: false,
+            poison: false,
+        }
+        this.immunities = {
+            fire: false
+        }
         this.resistances = {
             //add more as used
+            //elemental
             fire: false,
+            //physical
+            bludgeoning: false,
             piercing: false,
             slashing: false
         }
+        
     }
 }
 //player classes
