@@ -79,6 +79,7 @@ class Bandit extends Character {
         this.stats.maxHp = 2;
         this.stats.attack = 0;
         this.stats.defense = 0;
+        this.stats.speed = 0;
         this.weapon.name = "Shortsword";
         this.weapon.damage = 1;
         this.weapon.damageType = "Piercing";
@@ -232,6 +233,8 @@ let allyArray = [];
 let enemyNumber = 0;
 //combat function
 function combat() {
+    turnArray.sort((a, b) => (a.stats.speed < b.stats.speed) ? 1 : (a.stats.speed === b.stats.speed) ? ((a.basics.name > b.basics.name) ? 1 : -1) : -1 )
+    console.log(turnArray)
     console.log("You face " + enemyNumber + " enemies.")
     while (enemyNumber != 0 && hero.stats.currentHp > 0) {
         console.log(hero.stats.currentHp + " current HP for hero")
@@ -361,7 +364,6 @@ function firstEvent() {
     const bandit2 = new Bandit("Bandit 2");
     const bandit3 = new Bandit("Bandit 3");
     turnArray = [hero, bandit1, bandit2, bandit3];
-    console.log(turnArray)
     enemyArray = [bandit1, bandit2, bandit3];
     enemyNumber = enemyArray.length;
     allyArray = [hero];
