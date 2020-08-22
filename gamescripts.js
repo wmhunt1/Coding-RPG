@@ -10,7 +10,7 @@ let hero = "";
 class Character {
     constructor() {
         //this works for future
-        this.action1 = function (target) {this.attack(target) };
+        this.action1 = function (target) { this.attack(target) };
         this.basics = {
             name: "Name",
             class: "Freelancer",
@@ -246,7 +246,7 @@ let allyArray = [];
 let enemyNumber = 0;
 //combat function
 function combat() {
-    turnArray.sort((a, b) => (a.stats.speed < b.stats.speed) ? 1 : (a.stats.speed === b.stats.speed) ? ((a.basics.name > b.basics.name) ? 1 : -1) : -1 )
+    turnArray.sort((a, b) => (a.stats.speed < b.stats.speed) ? 1 : (a.stats.speed === b.stats.speed) ? ((a.basics.name > b.basics.name) ? 1 : -1) : -1)
     console.log(turnArray)
     console.log("You face " + enemyNumber + " enemies.")
     while (enemyNumber != 0 && hero.stats.currentHp > 0) {
@@ -370,6 +370,15 @@ function createHero() {
     hero.basics.name = heroName;
     dagger.equip(hero)
     clothing.equip(hero)
+}
+//businesss
+class Business {
+    constructor(name, stock, buy) {
+        this.name = name;
+        this.stock = stock;
+        this.function = "N/A"
+        this.whatTheyBuy = buy;
+    }
 }
 function firstEvent() {
     //add option to pay and getting surrounded
