@@ -6,8 +6,8 @@ function addText(x) {
     element.appendChild(tag);
 }
 //creates hero
-//let heroName = prompt("Choose Your Name")
-let hero = new character("Name", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", "None", 0, 0);
+let hero = new character("Name", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", "None", 0, 10);
+let resist = false;
 //character prototype
 function character(name, profession, level, xp, alive, ally, currentHp, maxHp, attack, defense, speed, weapon, damage, damageType, armor, protection, gold) {
     this.basics = {
@@ -15,7 +15,6 @@ function character(name, profession, level, xp, alive, ally, currentHp, maxHp, a
         class: profession,
         level: level,
         xp: xp,
-        gold: gold,
         alive: alive,
         ally: ally,
     };
@@ -41,10 +40,26 @@ function character(name, profession, level, xp, alive, ally, currentHp, maxHp, a
         gold: gold
     }
     this.resistances = {
-        //here for test
-        fire: false
+        //add more as used
+        fire: false,
+        piercing: false,
+        slashing: false
     }
-
+}
+character.prototype.checkResist = function (target) {
+    //add more as used
+    if (target.resistances.fire == true && this.weapon.damageType === "Fire") {
+        resist = true;
+    }
+    else if (target.resistances.piercing == true && this.weapon.damageType === "Piercing") {
+        resist = true;
+    }
+    else if (target.resistances.slashing == true && this.weapon.damageType === "Slashing") {
+        resist = true;
+    }
+    else {
+        resist = false;
+    }
 }
 //attack function
 character.prototype.attack = function (target) {
@@ -56,15 +71,24 @@ character.prototype.attack = function (target) {
     console.log(hitRoll + " hit roll")
     if (hitRoll >= hitChance) {
         let dmg = this.weapon.damage - target.armor.protection;
+        console.log(dmg)
         if (target.basics.alive == true) {
             if (this.weapon.damage <= target.armor.protection) {
                 alert(this.basics.name + "'s attack bounces harmlessly off of " + target.basics.name + "'s " + target.armor.name)
             }
             else {
-                alert(dmg + " damage dealt to " + target.basics.name)
-                target.damage(dmg)
+                this.checkResist(target)
+                if (resist = true) {
+                    alert(target.basics.name + "resisted the " + this.weapon.damageType + "and took " + dmg / 2 + " damage.")
+                    target.damage(dmg / 2)
+                    alert(target.basics.name + " loses " + dmg / 2 + " Hitpoints.")
+                }
+                else {
+                    alert(dmg + " " + this.weapon.damageType + " damage dealt to " + target.basics.name)
+                    target.damage(dmg)
+                    alert(target.basics.name + " loses " + dmg + " Hitpoints.")
+                }
             }
-            alert(target.basics.name + " loses " + dmg + " Hitpoints.")
         }
         else {
         }
@@ -188,6 +212,21 @@ function combat() {
         alert("You are defeated.")
     }
 }
+//gold functions
+character.prototype.addGold = function (x) {
+    this.inventory.gold += x;
+}
+character.prototype.removeGold = function (x) {
+    this.inventory.gold -= x;
+}
+character.prototype.checkGold = function (x) {
+    if (this.inventory.gold == x) {
+        this.inventory.gold -= x;
+    }
+    else {
+        alert(this.basics.name + "does not have enough gold.")
+    }
+}
 //item prototypes
 function item(name, type, damageType, value, effect, price, quantity) {
     this.name = name;
@@ -228,27 +267,23 @@ item.prototype.use = function (user) {
         console.log("You don't have any " + this.name + "(s)")
     }
 }
-item.prototype.buy = function () {
+item.prototype.buy = function (buyer) {
     item.quantity++;
-    hero.inventory.gold -= item.value;
+    buyer.checkGold(item.price);
 
 }
-item.prototype.sell = function () {
+item.prototype.sell = function (seller) {
     item.quantity--;
-    hero.inventory.gold += item.value / 2;
+    buyer.addGold(item.value / 2);
 }
-let dagger = new item("Dagger", "Weapon", 1, function (user, value) { }, 0, 1);
-let clothing = new item("Clothing", "Armor", 0, function (user, value) { }, 0, 1);
-let potion = new item("Potion", "Consumable", 5, function (user, value) { user.heal(value); }, 10, 1);
+let dagger = new item("Dagger", "Weapon", "Slashing", 1, function (user, value) { }, 0, 1);
+let clothing = new item("Clothing", "Armor", "NA", 0, function (user, value) { }, 0, 1);
+let potion = new item("Potion", "Consumable", "NA", 5, function (user, value) { user.heal(value); }, 10, 1);
 //let fireArmor = new item("Fire Armor", "Armor", 0, function (user) {user.resistances.fire = true}, 0, 1);
-
-//add items to hero
-// dagger.equip(hero)
-// clothing.equip(hero)
 
 function createHero() {
     let heroName = prompt("Choose Your Name")
-    hero = new character(heroName, "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", 0, 0);
+    hero = new character(heroName, "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", "None", 0, "None", 0, 0);
     dagger.equip(hero)
     clothing.equip(hero)
 }
@@ -257,9 +292,9 @@ function firstEvent() {
     alert("Your test is to travel to The Valley of Dale, figure out what the problem is and solve it.")
     alert("You enter the valley and travel to a bridge guarded by bandits")
     alert("As you have no gold they attack you.")
-    const bandit1 = new character("Bandit1", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 1);
-    const bandit2 = new character("Bandit2", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 1);
-    const bandit3 = new character("Bandit3", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 1);
+    const bandit1 = new character("Bandit1", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
+    const bandit2 = new character("Bandit2", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
+    const bandit3 = new character("Bandit3", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
     turnArray = [hero, bandit1, bandit2, bandit3];
     console.log(turnArray)
     enemyArray = [bandit1, bandit2, bandit3];
@@ -278,8 +313,7 @@ function firstEvent() {
     }
     alert("Knight: Those bandits are getting audicious.")
     alert("Knight: You are alright? The knight pats you on the back and you feel some healing energy flow into you,")
-    hero.stats.currentHp = hero.stats.maxHp;
+    hero.heal(10)
     alert("Knight: I am Abraham Arkwright, paladin and current guardian of The Valley of Dale.")
     alert("Abraham: We should get to the village before they bring reinforcements.")
 }
-//firstEvent()
