@@ -30,6 +30,68 @@ class Character {
             buff: 0,
             debuff: 0,
         };
+        this.skills = {
+            agility = {
+                rank: "Untrained",
+                value: 0,
+                trainingCost: 100*(1+this.skills.value)
+            }, 
+            crafting = {
+                rank: "Untrained",
+                value: 0,
+                trainingCost: 100*(1+this.skills.value)
+            },  
+            gathering = {
+                rank: "Untrained",
+                value: 0,
+                trainingCost: 100*(1+this.skills.value)
+            },   
+            lore = {
+                rank: "Untrained",
+                value: 0,
+                trainingCost: 100*(1+this.skills.value)
+            },   
+            magic = {
+                rank: "Untrained",
+                value: 0,
+                trainingCost: 100*(1+this.skills.value)
+            }, 
+            marksman = {
+                rank: "Untrained",
+                value: 0,
+                trainingCost: 100*(1+this.skills.value)
+            },  
+            melee = {
+                rank: "Untrained",
+                value: 0,
+                trainingCost: 100*(1+this.skills.value)
+            },  
+            prayer = {
+                rank: "Untrained",
+                value: 0,
+                trainingCost: 100*(1+this.skills.value)
+            },  
+            speech = {
+                rank: "Untrained",
+                value: 0,
+                trainingCost: 100*(1+this.skills.value)
+            }, 
+            survival = {
+                rank: "Untrained",
+                value: 0,
+                trainingCost: 100*(1+this.skills.value)
+            },   
+            thievery = {
+                rank: "Untrained",
+                value: 0,
+                trainingCost: 100*(1+this.skills.value)
+            },    
+            Unarmed = {
+                rank: "Untrained",
+                value: 0,
+                trainingCost: 100*(1+this.skills.value)
+            },    
+        }
         this.weapon = {
             name: "None",
             damage: 0,
@@ -50,6 +112,10 @@ class Character {
         }
         this.inventory = {
             gold: 0
+        }
+        this.journal = {
+            fame: 0,
+            infamy: 0
         }
         this.conditions = {
             asleep: false,
@@ -459,14 +525,14 @@ let potion = new Item("Potion", "Consumable", "NA", 5, function (user, value) { 
 //creates hero
 function createHero() {
     let heroName = prompt("Choose Your Name")
-    let classChoice = prompt(heroName + " are you a (F)ighter, (M)age, (R)ogue, or a Freelancer?")
-    if (classChoice === "F") {
+    let classChoice = prompt(heroName + " are you a (Fig)hter, (Mag)e, (Rog)ue, or a Freelancer?")
+    if (classChoice === "Fig") {
         hero = new Fighter();
     }
-    else if (classChoice === "M") {
+    else if (classChoice === "Mag") {
         hero = new Mage();
     }
-    else if (classChoice === "R") {
+    else if (classChoice === "Rog") {
         hero = new Rogue();
     }
     else {
