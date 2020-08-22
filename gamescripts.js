@@ -54,15 +54,15 @@ class Rogue extends Character {
     }
 }
 class Bandit extends Character {
-    constructor()
+    constructor(name)
     {
-        super(name);
+        super();
         this.basics.name = name;
         this.basics.profession = "Bandit";
         this.basics.xp = 10;
         this.basics.ally = false;
-        this.stats.currentHp = 1;
-        this.stats.maxHp = 1;
+        this.stats.currentHp = 2;
+        this.stats.maxHp = 2;
         this.stats.attack = 0;
         this.stats.defense = 0;
         this.weapon.name = "Shortsword";
