@@ -71,12 +71,8 @@ class Bandit extends Character {
         this.armor.name = "Leather";
         this.armor.protection = 0;
         this.inventory.gold = 5;
-        
-        
     }
 }
-//creates hero
-let hero = new Rogue();
 //changes based on checkResist
 let resist = false;
 //resist prototype
@@ -321,8 +317,9 @@ let dagger = new Item("Dagger", "Weapon", "Slashing", 1, function (user, value) 
 let clothing = new Item("Clothing", "Armor", "NA", 0, function (user, value) { }, 0, 1);
 let potion = new Item("Potion", "Consumable", "NA", 5, function (user, value) { user.heal(value); }, 10, 1);
 //let fireArmor = new item("Fire Armor", "Armor", 0, function (user) {user.resistances.fire = true}, 0, 1);
-
+//creates hero
 function createHero() {
+    let hero = new Rogue();
     let heroName = prompt("Choose Your Name")
     hero.basics.name = heroName;
     dagger.equip(hero)
