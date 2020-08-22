@@ -59,12 +59,21 @@ class Character {
             poison: false,
         }
         this.immunities = {
-            fire: false
+            //elemental
+            fire: false,
+            ice: false,
+            lightning: false,
+            //physical
+            bludgeoning: false,
+            piercing: false,
+            slashing: false
         }
         this.resistances = {
             //add more as used
             //elemental
             fire: false,
+            ice: false,
+            lightning: false,
             //physical
             bludgeoning: false,
             piercing: false,
@@ -116,6 +125,32 @@ class Bandit extends Character {
 let immune = false;
 let resist = false;
 //resist prototype
+Character.prototype.checkCondition = function () {
+    if (this.conditions.asleep)
+    {
+
+    }
+    else if (this.conditions.burn)
+    {
+
+    }
+    else if (this.conditions.confused)
+    {
+
+    }
+    else if (this.conditions.paralyze)
+    {
+
+    }
+    else if (this.conditions.poison)
+    {
+
+    }
+    else
+    {
+
+    }
+}
 Character.prototype.checkImmune = function (target) {
     //add more as used
     if (target.resistances.fire == true && this.weapon.damageType === "Fire") {
@@ -246,6 +281,7 @@ Character.prototype.reset = function () {
 }
 Character.prototype.turn = function () {
     if (this.basics.alive == true) {
+        this.checkCondition()
         if (this.basics.ally == true) {
             let action = prompt("(A)ttack or user a (P)otion?");
             if (action === "A") {
