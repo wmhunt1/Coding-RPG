@@ -78,7 +78,7 @@ character.prototype.attack = function (target) {
             }
             else {
                 this.checkResist(target)
-                if (resist = true) {
+                if (resist == true) {
                     alert(target.basics.name + "resisted the " + this.weapon.damageType + "and took " + dmg / 2 + " damage.")
                     target.damage(dmg / 2)
                     alert(target.basics.name + " loses " + dmg / 2 + " Hitpoints.")
@@ -207,6 +207,9 @@ function combat() {
             allyArray[i].levelUp();
             allyArray[i].reset();
         }
+        for (var i = 0; i < enemyArray.length; i++) {
+            hero.addGold(enemyArray[i])
+        }
     }
     else {
         alert("You are defeated.")
@@ -215,6 +218,7 @@ function combat() {
 //gold functions
 character.prototype.addGold = function (x) {
     this.inventory.gold += x;
+    alert(hero.stats.name + " gained " + x + " gold.")
 }
 character.prototype.removeGold = function (x) {
     this.inventory.gold -= x;
@@ -222,6 +226,7 @@ character.prototype.removeGold = function (x) {
 character.prototype.checkGold = function (x) {
     if (this.inventory.gold == x) {
         this.inventory.gold -= x;
+        alert(hero.stats.name + " lost " + x + " gold.")
     }
     else {
         alert(this.basics.name + "does not have enough gold.")
@@ -288,13 +293,14 @@ function createHero() {
     clothing.equip(hero)
 }
 function firstEvent() {
+    //add option to pay and getting surrounded
     alert("You are " + hero.basics.name + ", a " + hero.basics.class + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
     alert("Your test is to travel to The Valley of Dale, figure out what the problem is and solve it.")
     alert("You enter the valley and travel to a bridge guarded by bandits")
     alert("As you have no gold they attack you.")
-    const bandit1 = new character("Bandit1", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
-    const bandit2 = new character("Bandit2", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
-    const bandit3 = new character("Bandit3", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
+    const bandit1 = new character("Bandit 1", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
+    const bandit2 = new character("Bandit 2", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
+    const bandit3 = new character("Bandit 3", "Thug", 1, 10, true, false, 1, 1, 0, 0, 0, "Shortsword", 1, "Piercing", "Leather", 0, 5);
     turnArray = [hero, bandit1, bandit2, bandit3];
     console.log(turnArray)
     enemyArray = [bandit1, bandit2, bandit3];
