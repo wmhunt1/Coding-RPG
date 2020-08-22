@@ -7,7 +7,6 @@ function addText(x) {
 }
 //creates hero
 let hero = new character("Name", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", "None", 0, 10);
-let resist = false;
 //character prototype
 function character(name, profession, level, xp, alive, ally, currentHp, maxHp, attack, defense, speed, weapon, damage, damageType, armor, protection, gold) {
     this.basics = {
@@ -46,6 +45,9 @@ function character(name, profession, level, xp, alive, ally, currentHp, maxHp, a
         slashing: false
     }
 }
+//changes based on checkResist
+let resist = false;
+//resist prototype
 character.prototype.checkResist = function (target) {
     //add more as used
     if (target.resistances.fire == true && this.weapon.damageType === "Fire") {
