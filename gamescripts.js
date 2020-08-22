@@ -10,7 +10,7 @@ let hero = "";
 class Character {
     constructor() {
         //this works for future
-        this.action1 = function (target) { this.attack(target) };
+        this.action1 = function (target) {this.attack(target) };
         this.basics = {
             name: "Name",
             class: "Freelancer",
@@ -22,6 +22,8 @@ class Character {
         this.stats = {
             currentHp: 10,
             maxHp: 10,
+            currentSp: 0,
+            maxSp: 0,
             attack: 1,
             defense: 1,
             speed: 1,
@@ -31,11 +33,20 @@ class Character {
         this.weapon = {
             name: "None",
             damage: 0,
-            damageType: "None"
+            damageType: "None",
+            damageBonus: 0,
+            tempBonus: 0,
         };
         this.armor = {
             name: "None",
-            protection: 0
+            protection: 0,
+            protectionBonus: 0,
+            tempBonus: 0,
+        }
+        //add other effects later
+        this.accessory = {
+            name: "None",
+            effect: "NA"
         }
         this.inventory = {
             gold: 0
@@ -115,10 +126,10 @@ Character.prototype.attack = function (target) {
     let hitRoll = Math.random() + .1 * (this.stats.attack + this.stats.buff - this.stats.debuff);
     console.log(hitRoll + " hit roll")
     if (hitRoll >= hitChance) {
-        let dmg = this.weapon.damage - target.armor.protection;
+        let dmg = this.weapon.damage + this.weapon.damageBonus + this.weapon.tempBonus - target.armor.protection - target.armor.protectionBonus - target.armor.tempBonus;
         console.log(dmg)
         if (target.basics.alive == true) {
-            if (this.weapon.damage <= target.armor.protection) {
+            if (this.weapon.damage + this.weapon.damageBonus + this.weapon.tempBonus <= target.armor.protection + target.armor.protectionBonus + target.armor.tempBonus) {
                 alert(this.basics.name + "'s attack bounces harmlessly off of " + target.basics.name + "'s " + target.armor.name)
             }
             else {
@@ -196,6 +207,8 @@ Character.prototype.damage = function (wound) {
 Character.prototype.reset = function () {
     this.stats.debuff = 0;
     this.stats.debuff = 0;
+    this.weapon.tempBonus = 0;
+    this.armor.tempBonus = 0;
 }
 Character.prototype.turn = function () {
     if (this.basics.alive == true) {
@@ -280,6 +293,8 @@ Character.prototype.checkGold = function (x) {
     }
 }
 //item prototypes
+//will need something to undo stat changes from items when unequiped
+//perhaps standard values or just add to buffs etc.
 class Item {
     constructor(name, type, damageType, value, effect, price, quantity) {
         this.name = name;
@@ -293,6 +308,8 @@ class Item {
 }
     //equipable items
     Item.prototype.equip = function (user) {
+    user.weapon.damageBonus = 0;
+    user.armor.protectionBonus = 0;
     if (this.type === "Armor") {
     user.armor.name = this.name;
     user.armor.protection = this.value;
