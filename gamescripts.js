@@ -446,6 +446,12 @@ function combat() {
         alert("You are defeated.")
     }
 }
+Character.prototype.rest = function(){
+    for (var i = 0; i < allyArray.length; i++) {
+     allyArray[i].heal(allyArray[i].basics.maxHp)
+     allyArray[i].basics.alive = true;   
+    }
+}
 //gold functions
 Character.prototype.addGold = function (x) {
     this.inventory.gold += x;
@@ -549,6 +555,13 @@ class Business {
         this.stock = stock;
         this.function = "N/A"
         this.whatTheyBuy = buy;
+    }
+}
+class Quest {
+    constructor(name, reward) {
+        this.name = name;
+        this.reward = reward;
+        //events and combats
     }
 }
 function firstEvent() {
