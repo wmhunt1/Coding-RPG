@@ -5,9 +5,12 @@ function addText(x) {
     var element = document.getElementById("gameText");
     element.appendChild(tag);
 }
+let hero = "";
 //character prototype
 class Character {
     constructor() {
+        //this works for future
+        this.action1 = function (target) { this.attack(target) };
         this.basics = {
             name: "Name",
             class: "Freelancer",
@@ -45,17 +48,28 @@ class Character {
         }
     }
 }
-//example class works
+//player classes
+class Fighter extends Character {
+    constructor() {
+        super();
+        this.stats.profession = "Fighter"
+    }
+}
+class Mage extends Character {
+    constructor() {
+        super();
+        this.stats.profession = "Mage"
+    }
+}
 class Rogue extends Character {
-    constructor()
-    {
+    constructor() {
         super();
         this.stats.profession = "Rogue"
     }
 }
+//npc classes
 class Bandit extends Character {
-    constructor(name)
-    {
+    constructor(name) {
         super();
         this.basics.name = name;
         this.basics.profession = "Bandit";
@@ -265,51 +279,51 @@ Character.prototype.checkGold = function (x) {
 //item prototypes
 class Item {
     constructor(name, type, damageType, value, effect, price, quantity) {
-    this.name = name;
-    this.type = type;
-    this.damageType = damageType;
-    this.value = value;
-    this.effect = effect;
-    this.price = price;
-    this.quantity = quantity;
+        this.name = name;
+        this.type = type;
+        this.damageType = damageType;
+        this.value = value;
+        this.effect = effect;
+        this.price = price;
+        this.quantity = quantity;
+    }
 }
-}
-//equipable items
-Item.prototype.equip = function (user) {
+    //equipable items
+    Item.prototype.equip = function (user) {
     if (this.type === "Armor") {
-        user.armor.name = this.name;
-        user.armor.protection = this.value;
-        this.effect;
-        console.log(user.basics.name + " equiped " + this.name)
-    }
-    else if (this.type === "Weapon") {
-        user.weapon.name = this.name;
-        user.weapon.damage = this.value;
-        user.weapon.damageType = this.damageType;
-        console.log(user.basics.name + " equiped " + this.name)
-    }
-    else {
+    user.armor.name = this.name;
+    user.armor.protection = this.value;
+    this.effect;
+    console.log(user.basics.name + " equiped " + this.name)
+}
+else if (this.type === "Weapon") {
+    user.weapon.name = this.name;
+    user.weapon.damage = this.value;
+    user.weapon.damageType = this.damageType;
+    console.log(user.basics.name + " equiped " + this.name)
+}
+else {
 
-    }
+}
     console.log(user)
 }
-//usable items
-Item.prototype.use = function (user) {
-    if (this.type === "Consumable" && this.quantity > 0) {
-        alert(user.basics.name + " uses a " + this.name)
-        this.effect;
-        this.quantity--;
-    }
-    else {
-        console.log("You don't have any " + this.name + "(s)")
-    }
+    //usable items
+    Item.prototype.use = function (user) {
+    if (this.type === "Consumable" && this.quantity> 0) {
+    alert(user.basics.name + " uses a " + this.name)
+    this.effect;
+    this.quantity--;
 }
-Item.prototype.buy = function (buyer) {
+else {
+    console.log("You don't have any " + this.name + "(s)")
+}
+}
+    Item.prototype.buy = function (buyer) {
     item.quantity++;
     buyer.checkGold(item.price);
 
 }
-Item.prototype.sell = function (seller) {
+    Item.prototype.sell = function (seller) {
     item.quantity--;
     buyer.addGold(item.value / 2);
 }
@@ -319,8 +333,20 @@ let potion = new Item("Potion", "Consumable", "NA", 5, function (user, value) { 
 //let fireArmor = new item("Fire Armor", "Armor", 0, function (user) {user.resistances.fire = true}, 0, 1);
 //creates hero
 function createHero() {
-    let hero = new Rogue();
     let heroName = prompt("Choose Your Name")
+    let classChoice = prompt(heroName + " are you a (F)ighter, (M)age, (R)ogue, or a Freelancer?")
+    if (classChoice === "F") {
+        hero = new Fighter();
+    }
+    else if (classChoice === "M") {
+        hero = new Mage();
+    }
+    else if (classChoice === "R") {
+        hero = new Rogue();
+    }
+    else {
+        hero = new Character();
+    }
     hero.basics.name = heroName;
     dagger.equip(hero)
     clothing.equip(hero)
@@ -356,4 +382,7 @@ function firstEvent() {
     hero.basics.alive = true;
     alert("Knight: I am Abraham Arkwright, paladin and current guardian of The Valley of Dale.")
     alert("Abraham: We should get to the village before they bring reinforcements.")
+}
+function secondEvent() {
+    alert("You arrive at The Village of Dale with Abraham.")
 }
