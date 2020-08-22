@@ -5,8 +5,6 @@ function addText(x) {
     var element = document.getElementById("gameText");
     element.appendChild(tag);
 }
-//creates hero
-let hero = new character("Name", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", "None", 0, 10);
 //character prototype
 function character(name, profession, level, xp, alive, ally, currentHp, maxHp, attack, defense, speed, weapon, damage, damageType, armor, protection, gold) {
     this.basics = {
@@ -45,6 +43,8 @@ function character(name, profession, level, xp, alive, ally, currentHp, maxHp, a
         slashing: false
     }
 }
+//creates hero
+let hero = new character("Name", "Freelancer", 1, 0, true, true, 10, 10, 1, 1, 0, "None", 0, "None", "None", 0, 10);
 //changes based on checkResist
 let resist = false;
 //resist prototype
