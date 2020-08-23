@@ -1,3 +1,4 @@
+//need to split into modules
 function addText(x) {
     var tag = document.createElement("p")
     var text = document.createTextNode(x);
@@ -92,6 +93,7 @@ class Character {
                 trainingCost: 100*(1+this.skills.value)
             },    
         }
+        //later move these to an equipment this
         this.weapon = {
             name: "None",
             damage: 0,
@@ -483,6 +485,7 @@ class Item {
         this.quantity = quantity;
     }
 }
+//make subclasses for different item types: weapons, armor. consumable, treasure etc.
     //equipable items
     Item.prototype.equip = function (user) {
     user.weapon.damageBonus = 0;
