@@ -13,6 +13,9 @@ class Character {
     constructor() {
         //this works for future
         this.action1 = function (target) { this.attack(target) };
+        this.action2 = 0;
+        this.action3 = 0;
+        this.action4 = 0;
         this.basics = {
             name: "Name",
             class: "Freelancer",
@@ -32,6 +35,32 @@ class Character {
             buff: 0,
             debuff: 0,
         };
+        //later move these to an equipment this
+        this.weapon = {
+            name: "None",
+            damage: 0,
+            damageType: "None",
+            damageBonus: 0,
+            tempBonus: 0,
+        };
+        this.armor = {
+            name: "None",
+            protection: 0,
+            protectionBonus: 0,
+            tempBonus: 0,
+        }
+        //boots, gloves, etc, 
+        this.accessory = {
+            name: "None",
+            effect: "NA"
+        }
+        this.inventory = {
+            gold: 0
+        }
+        this.journal = {
+            fame: 0,
+            infamy: 0
+        }
         this.skills = {
             agility:  {
                 rank: "Untrained",
@@ -85,32 +114,6 @@ class Character {
                 rank: "Untrained",
                 value: 0
             },    
-        }
-        //later move these to an equipment this
-        this.weapon = {
-            name: "None",
-            damage: 0,
-            damageType: "None",
-            damageBonus: 0,
-            tempBonus: 0,
-        };
-        this.armor = {
-            name: "None",
-            protection: 0,
-            protectionBonus: 0,
-            tempBonus: 0,
-        }
-        //add other effects later
-        this.accessory = {
-            name: "None",
-            effect: "NA"
-        }
-        this.inventory = {
-            gold: 0
-        }
-        this.journal = {
-            fame: 0,
-            infamy: 0
         }
         this.conditions = {
             asleep: false,
@@ -384,7 +387,7 @@ Character.prototype.turn = function () {
                     alert(this.basics.name + " attacks no one.")
                 }
                 else {
-                    this.attack(enemyArray[target]);
+                    this.action1(enemyArray[target]);
                 }
             }
             else if (action === "P") {
@@ -396,7 +399,7 @@ Character.prototype.turn = function () {
         }
         else {
             let target = Math.floor((Math.random() * allyArray.length))
-            this.attack(allyArray[target]);
+            this.action1(allyArray[target]);
         }
         }
     }
