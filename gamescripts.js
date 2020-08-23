@@ -32,65 +32,57 @@ class Character {
             debuff: 0,
         };
         this.skills = {
-            agility = {
+            agility:  {
                 rank: "Untrained",
                 value: 0,
-                trainingCost: 100*(1+this.skills.value)
             }, 
-            crafting = {
+            crafting: {
                 rank: "Untrained",
                 value: 0,
-                trainingCost: 100*(1+this.skills.value)
             },  
-            gathering = {
+            gathering: {
                 rank: "Untrained",
                 value: 0,
-                trainingCost: 100*(1+this.skills.value)
             },   
-            lore = {
+            lore: {
                 rank: "Untrained",
                 value: 0,
-                trainingCost: 100*(1+this.skills.value)
             },   
-            magic = {
+            magic: {
                 rank: "Untrained",
                 value: 0,
-                trainingCost: 100*(1+this.skills.value)
             }, 
-            marksman = {
+            marksman: {
                 rank: "Untrained",
                 value: 0,
-                trainingCost: 100*(1+this.skills.value)
             },  
-            melee = {
+            melee: {
                 rank: "Untrained",
                 value: 0,
-                trainingCost: 100*(1+this.skills.value)
-            },  
-            prayer = {
-                rank: "Untrained",
-                value: 0,
-                trainingCost: 100*(1+this.skills.value)
-            },  
-            speech = {
-                rank: "Untrained",
-                value: 0,
-                trainingCost: 100*(1+this.skills.value)
             }, 
-            survival = {
+            perception: {
                 rank: "Untrained",
                 value: 0,
-                trainingCost: 100*(1+this.skills.value)
+            },  
+            prayer: {
+                rank: "Untrained",
+                value: 0,
+            },  
+            speech: {
+                rank: "Untrained",
+                value: 0,
+            }, 
+            survival: {
+                rank: "Untrained",
+                value: 0,
             },   
-            thievery = {
+            thievery: {
                 rank: "Untrained",
                 value: 0,
-                trainingCost: 100*(1+this.skills.value)
             },    
-            Unarmed = {
+            Unarmed: {
                 rank: "Untrained",
-                value: 0,
-                trainingCost: 100*(1+this.skills.value)
+                value: 0
             },    
         }
         //later move these to an equipment this
