@@ -1,3 +1,4 @@
+//const Item = require("./modules/items");
 //need to split into modules
 function addText(x) {
     var tag = document.createElement("p")
