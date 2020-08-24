@@ -485,23 +485,7 @@ function createHero() {
     dagger.equip(hero)
     clothing.equip(hero)
 }
-//businesss
-class Business {
-    constructor(name, stock, buy) {
-        this.name = name;
-        this.stock = stock;
-        this.function = "N/A"
-        this.whatTheyBuy = buy;
-    }
-}
-class Quest {
-    constructor(name, reward) {
-        this.name = name;
-        this.reward = reward;
-        //events and combats
-    }
-}
-//classes
+
 function firstEvent() {
     //add option to pay and getting surrounded
     alert("You are " + hero.basics.name + ", a " + hero.basics.class + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
