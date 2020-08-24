@@ -1,62 +1,121 @@
-//item prototypes
-//will need something to undo stat changes from items when unequiped
-//perhaps standard values or just add to buffs etc.
 class Item {
-    constructor(name, type, damageType, value, effect, price, quantity) {
+    constructor() {
+        this.name = "";
+        this.type = "";
+        this.damageType = "";
+        this.value = "";
+        this.effect = "";
+        this.effectTxt = ""
+        this.price = "";
+        this.quantity = "";
+    }
+}
+class Accessory extends Item {
+    constructor(name, type, value, effect, effectTxt, price, quantity) {
+        super();
+        this.name = name;
+        this.type = type;
+        this.value = value;
+        this.effect = effect;
+        this.effectTxt = effectTxt;
+        this.price = price;
+        this.quantity = quantity;
+    }
+}
+class Armor extends Item {
+    constructor(name, type, value, effect, effectTxt, price, quantity) {
+        super();
+        this.name = name;
+        this.type = type;
+        this.value = value;
+        this.effect = effect;
+        this.effectTxt = effectTxt
+        this.price = price;
+        this.quantity = quantity;
+    }
+}
+class Consumable extends Item {
+    constructor(name, type, value, effect, effectTxt, price, quantity) {
+        super();
+        this.name = name;
+        this.type = type;
+        this.value = value;
+        this.effect = effect;
+        this.effectTxt = effectTxt;
+        this.price = price;
+        this.quantity = quantity;
+    }
+}
+class Treasure extends Item {
+    constructor(name, type, price, quantity) {
+        super();
+        this.name = name;
+        this.type = type;
+        this.price = price;
+        this.quantity = quantity;
+    }
+}
+class Weapon extends Item {
+    constructor(name, type, damageType, value, effect, effectTxt, price, quantity) {
+        super();
         this.name = name;
         this.type = type;
         this.damageType = damageType;
         this.value = value;
         this.effect = effect;
+        this.effectTxt = effectTxt;
         this.price = price;
         this.quantity = quantity;
     }
 }
-//make subclasses for different item types: weapons, armor. consumable, treasure etc.
-    //equipable items
-    Item.prototype.equip = function (user) {
-    user.weapon.damageBonus = 0;
-    user.armor.protectionBonus = 0;
-    if (this.type === "Armor") {
-    user.armor.name = this.name;
-    user.armor.protection = this.value;
+//equipable items
+Accessory.prototype.equip = function (user) {
+    user.accessory.shieldBonus = 0;
+    user.accessory.name = this.name;
+    user.accessory.effect = this.effectTxt;
     this.effect;
     console.log(user.basics.name + " equiped " + this.name)
+    console.log(user)
 }
-else if (this.type === "Weapon") {
+Armor.prototype.equip = function (user) {
+    user.armor.protectionBonus = 0;
+    user.armor.name = this.name;
+    user.armor.protection = this.value;
+    user.armor.effect = this.effectTxt;
+    this.effect;
+    console.log(user.basics.name + " equiped " + this.name)
+    console.log(user)
+}
+Weapon.prototype.equip = function (user) {
     user.weapon.name = this.name;
     user.weapon.damage = this.value;
     user.weapon.damageType = this.damageType;
+    user.weapon.effect = this.effectTxt;
+    this.effect;
     console.log(user.basics.name + " equiped " + this.name)
-}
-else {
-
-}
     console.log(user)
 }
-    //usable items
-    Item.prototype.use = function (user) {
-    if (this.type === "Consumable" && this.quantity> 0) {
-    alert(user.basics.name + " uses a " + this.name)
-    this.effect;
-    this.quantity--;
-}
-else {
-    console.log("You don't have any " + this.name + "(s)")
-}
-}
-    Item.prototype.buy = function (buyer) {
+Item.prototype.buy = function (buyer) {
     item.quantity++;
     buyer.checkGold(item.price);
-
 }
-    Item.prototype.sell = function (seller) {
+Item.prototype.sell = function (seller) {
     item.quantity--;
-    buyer.addGold(item.value / 2);
+    seller.addGold(item.value / 2);
 }
-let dagger = new Item("Dagger", "Weapon", "Slashing", 1, function (user, value) { }, 0, 1);
-let clothing = new Item("Clothing", "Armor", "NA", 0, function (user, value) { }, 0, 1);
-let potion = new Item("Potion", "Consumable", "NA", 5, function (user, value) { user.heal(value); }, 10, 1);
-//let fireArmor = new item("Fire Armor", "Armor", 0, function (user) {user.resistances.fire = true}, 0, 1);
+//accessories
+let shield = new Accessory("Shield", "Shield", 0, function (user) {user.accessory.shieldBonus += 1}, "Raises Shield Bonus", 0, 1)
+let spellbook = new Accessory("Basic Spellbook", "Spellbook", 1, function (user) { }, "", 0, 1)
+//armor
+let clothing = new Armor("Clothing", "Clothing", 0, function (user, value) { }, "", 0, 1);
+let leather = new Armor("Leather", "Light", 1, function (user, value) { }, "", 0, 1);
+//consumables
+let potion = new Consumable("Potion", "Healing", 5, function (user, value) { user.heal(value); }, "Heals user for 5 HP", 10, 1);
+//weapons
+let club = new Weapon("Club", "Melee", "Bludgeoning", 1, function (user, value) { }, "", 0, 1);
+let dagger = new Weapon("Dagger", "Melee", "Slashing", 1, function (user, value) { }, "", 0, 1);
+let sling = new Weapon("Sling", "Ranged", "Bludgeoning", 1, function (user, value) { }, "", 0, 1);
+let shortSword = new Weapon("Short Sword", "Melee", "Slashing", 2, function (user, value) { }, "", 0, 1);
+let wand = new Weapon("Wand", "Magic", "Force", 1, function (user, value) { }, "", 0, 1);
 
 module.exports = Item;

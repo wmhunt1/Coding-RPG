@@ -476,7 +476,7 @@ class Item {
         this.quantity = "";
     }
 }
-class Accessory extends Character {
+class Accessory extends Item {
     constructor(name, type, value, effect, effectTxt, price, quantity) {
         super();
         this.name = name;
@@ -488,7 +488,7 @@ class Accessory extends Character {
         this.quantity = quantity;
     }
 }
-class Armor extends Character {
+class Armor extends Item {
     constructor(name, type, value, effect, effectTxt, price, quantity) {
         super();
         this.name = name;
@@ -500,7 +500,7 @@ class Armor extends Character {
         this.quantity = quantity;
     }
 }
-class Consumable extends Character {
+class Consumable extends Item {
     constructor(name, type, value, effect, effectTxt, price, quantity) {
         super();
         this.name = name;
@@ -512,7 +512,7 @@ class Consumable extends Character {
         this.quantity = quantity;
     }
 }
-class Treasure extends Character {
+class Treasure extends Item {
     constructor(name, type, price, quantity) {
         super();
         this.name = name;
@@ -521,7 +521,7 @@ class Treasure extends Character {
         this.quantity = quantity;
     }
 }
-class Weapon extends Character {
+class Weapon extends Item {
     constructor(name, type, damageType, value, effect, effectTxt, price, quantity) {
         super();
         this.name = name;
