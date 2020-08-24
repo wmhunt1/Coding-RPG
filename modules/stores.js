@@ -6,12 +6,10 @@ Character.prototype.addGold = function (x) {
 }
 Character.prototype.removeGold = function (x) {
     this.inventory.gold -= x;
+    alert(this.basics.name + " loses " + x + " gold")
 }
-//have to get this to work
 Character.prototype.checkGold = function (x) {
     if (this.inventory.gold >= x) {
-        this.inventory.gold -= x;
-        alert(hero.stats.name + " lost " + x + " gold.")
         enoughGold = true;
     }
     else {
@@ -57,14 +55,16 @@ class Inn extends Store {
             let choice = prompt ("Get a room for " + this.cost + " (Y/N)?")
             if (choice === "Y")
             {
-                if (hero.inventory.gold >= this.cost)
+                hero.checkGold(this.cost)
+                if (enoughGold == true)
                 {
+                    hero.removeGold(this.cost)
                     hero.rest()
                     alert("The party spends the night at the " + this.name)
                 }
                 else
                 {
-                    alert ("You didn't have enough gold.")
+                    //
                 }
             }
             else
