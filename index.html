@@ -7,18 +7,9 @@
     <title>Coding RPG</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- <script src="gamescripts.js"></script>
-    <script src="./modules/character.js"></script>
-    <script src="./modules/classes.js"></script>
-    <script src="./modules/combat.js"></script> -->
-    <!-- <script src="./modules/items.js"></script>
-    <script src="./modules/quests.js"></script>
-    <script src="./modules/settlements.js"></script>
-    <script src="./modules/skills.js"></script>
-    <script src="./modules/stores.js"></script> -->
 </head>
 
-<body onload = "createHero()">
+<body>
     <header id="Title">
         <h1>Coding RPG</h1>
     </header>
@@ -33,17 +24,32 @@
             <li><button onclick="inventory()">(I)nventory</button></li>
             <li><button onclick="journal()">(J)ournal</button></li>
             <li><button onclick="quest()">(Q)uest</button></li>
-            <li><button onclick="rest()">(R)est</button></li>
+             <li><button onclick="rest()">(R)est</button></li>
             <li><button onclick="shopping()">(S)hopping</button></li>
             <li><button onclick="skill()">Skills and (P)owers</button></li>
             <li><button onclick="training()">(T)raining</button></li> -->
         </ul>
     </nav>
-    <div id = "gameText"></div>
-    <!-- <button onclick = "checkText()">Check Text</button> -->
-    <button onclick = "firstEvent()">First Event</button>
-    <button onclick = "secondEvent()">Second Event</button>
-    
+    <section id="Intro">
+        <h1>Intro</h1>
+        <article>
+            <p>Game Intro.</p>
+            <button onclick=createHero() class="margin">Character Creation</button>
+        </article>
+    </section>
+    <!-- area sections, have buttons for areas or shops etc. -->
+    <section id="ValleyDale">
+        <h1>The Valley of Dale</h1>
+    </section>
+    <section id="VillageDale">
+        <h1>The Village of Dale</h1>
+        <button onclick = "dreamingWorker.enterStore()">The Dreaming Worker Inn</button>
+    </section>
+    <div id="gameText"></div>
+    <button onclick="firstEvent()">First Event</button>
+    <button onclick="secondEvent()">Second Event</button>
+    <div></div>
+
     <script src="./modules/character.js"></script>
     <script src="./modules/classes.js"></script>
     <script src="./modules/combat.js"></script>
