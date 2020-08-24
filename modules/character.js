@@ -48,7 +48,7 @@ class Character {
             shieldBonus: 0
         }
         this.inventory = {
-            gold: 10
+            gold: 0
         }
         this.journal = {
             fame: 0,

@@ -7,6 +7,7 @@ Character.prototype.addGold = function (x) {
 Character.prototype.removeGold = function (x) {
     this.inventory.gold -= x;
 }
+//have to get this to work
 Character.prototype.checkGold = function (x) {
     if (this.inventory.gold >= x) {
         this.inventory.gold -= x;
@@ -41,30 +42,9 @@ class Store {
         this.whatTheyBuy = "";
     }
 }
-Store.prototype.enterStore = function()
-{
-    alert ("Welcome to " + this.name + " owned by " + this.owner + " and located in " + this.location)
-    let sChoice = prompt("Would you like to (B)uy, (S)ell, or " + this.use)
-    if (sChoice === "B")
-    {
-
-    }
-    else if (sChoice === "S")
-    {
-
-    }
-    else if (sChoice === this.useLetter)
-    {
-        
-    }
-    else
-    {
-
-    }
-}
 //subclasses for kinds of stores
 class Inn extends Store {
-    constructor(name, owner, location,  cost, useLetter) {
+    constructor(name, owner, location,  cost) {
         super();
         this.name = name;
         this.stock = "Food"
@@ -72,21 +52,11 @@ class Inn extends Store {
         this.location = location;
         this.cost = cost;
         this.use = "(G)et a room?"
-        this.useLetter = useLetter;
+        this.useLetter = "G";
         this.useFunction = function getRoom (){
             let choice = prompt ("Get a room for " + this.cost + " (Y/N)?")
             if (choice === "Y")
             {
-                //hero.checkGold(this.cost)
-                // if (enoughgold == true)
-                // {
-                //     hero.rest()
-                //     alert("The party spends the night at the " + this.name)
-                // }
-                // else
-                // {
-                //     alert ("You didn't have enough gold.")
-                // }
                 if (hero.inventory.gold >= this.cost)
                 {
                     hero.rest()
@@ -106,6 +76,37 @@ class Inn extends Store {
         this.whatTheyBuy = "N/A"
     }
 }
+Store.prototype.buy = function()
+{
+
+}
+Store.prototype.sell = function()
+{
+
+}
+//enter store function
+//maybe option for events
+Store.prototype.enterStore = function()
+{
+    alert ("Welcome to " + this.name + " owned by " + this.owner + " and located in " + this.location)
+    let sChoice = prompt("Would you like to (B)uy, (S)ell, or " + this.use)
+    if (sChoice === "B")
+    {
+        this.buy()
+    }
+    else if (sChoice === "S")
+    {
+        this.sell()
+    }
+    else if (sChoice === this.useLetter)
+    {
+        this.useFunction()
+    }
+    else
+    {
+
+    }
+}
 //stores
 //inns
-const dreamingWorker = new Inn ("Dreaming Worker Inn", "Sweetheart the Ogre.", "The Village of Dale", 5, "(G)");
+const dreamingWorker = new Inn ("Dreaming Worker Inn", "Sweetheart the Ogre.", "The Village of Dale", 5);
