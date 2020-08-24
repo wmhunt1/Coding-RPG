@@ -166,4 +166,5 @@ function createHero() {
     hero.basics.name = heroName;
     dagger.equip(hero)
     clothing.equip(hero)
+    enterValleyDale()
 }

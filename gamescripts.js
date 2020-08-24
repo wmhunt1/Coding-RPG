@@ -1,6 +1,5 @@
-let hero = "";
 //creates hero
-//const Item = require("./modules/items");
+let hero = "";
 //need to split into modules
 function addText(x) {
     var tag = document.createElement("p")
