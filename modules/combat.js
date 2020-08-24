@@ -61,6 +61,7 @@ Character.prototype.checkResist = function (target) {
     }
 }
 //attack function
+//add critical hit
 Character.prototype.attack = function (target) {
     alert(this.basics.name + " attacks " + target.basics.name + " with their " + this.weapon.name)
     console.log(target.stats.currentHp)

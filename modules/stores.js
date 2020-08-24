@@ -1,3 +1,4 @@
+//have arrays for item types
 //gold functions
 let enoughGold = false;
 Character.prototype.addGold = function (x) {

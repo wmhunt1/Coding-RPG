@@ -40,3 +40,10 @@ class Bandit extends Character {
         this.inventory.gold = 5;
     }
 }
+class Commoner extends Character {
+    constructor(name, profession) {
+        super();
+        this.basics.name = name;
+        this.basics.profession = profession;
+    }
+}

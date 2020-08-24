@@ -96,12 +96,13 @@ Weapon.prototype.equip = function (user) {
     console.log(user)
 }
 //accessories
-let shield = new Accessory("Shield", "Shield", 0, function (user) {user.accessory.shieldBonus += 1}, "Raises Shield Bonus", 0, 1)
-let spellbook = new Accessory("Basic Spellbook", "Spellbook", 1, function (user) { }, "", 0, 1)
+let shield = new Accessory("Shield", "Shield", 0, function (user, value) { user.accessory.shieldBonus += 1 }, "Raises Shield Bonus", 0, 1)
+let spellbook = new Accessory("Basic Spellbook", "Spellbook", 1, function (user, value) { }, "", 0, 1)
 //armor
 let clothing = new Armor("Clothing", "Clothing", 0, function (user, value) { }, "", 0, 1);
 let leather = new Armor("Leather", "Light", 1, function (user, value) { }, "", 0, 1);
 //consumables
+let beer = new Consumable("Beer", "Alcohol", 0, function (user, value) { }, "Basic Beer", 1, 1);
 let potion = new Consumable("Potion", "Healing", 5, function (user, value) { user.heal(value); }, "Heals user for 5 HP", 10, 1);
 //weapons
 let club = new Weapon("Club", "Melee", "Bludgeoning", 1, function (user, value) { }, "", 0, 1);
@@ -109,5 +110,3 @@ let dagger = new Weapon("Dagger", "Melee", "Slashing", 1, function (user, value)
 let sling = new Weapon("Sling", "Ranged", "Bludgeoning", 1, function (user, value) { }, "", 0, 1);
 let shortSword = new Weapon("Short Sword", "Melee", "Slashing", 2, function (user, value) { }, "", 0, 1);
 let wand = new Weapon("Wand", "Magic", "Force", 1, function (user, value) { }, "", 0, 1);
-
-//module.exports = Item;

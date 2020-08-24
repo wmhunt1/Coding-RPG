@@ -15,6 +15,7 @@ class Town extends Settlement {
 class Village extends Settlement {
     constructor() {
         super();
+        this.name;
     }
 }
-let villageDale = new Village();
+let villageDale = new Village("Village of Dale.");
