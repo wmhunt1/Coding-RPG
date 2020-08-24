@@ -38,6 +38,7 @@ class Character {
         //later move these to an equipment this
         this.weapon = {
             name: "None",
+            type: "None",
             damage: 0,
             damageType: "None",
             damageBonus: 0,
@@ -45,6 +46,7 @@ class Character {
         };
         this.armor = {
             name: "None",
+            type: "None",
             protection: 0,
             protectionBonus: 0,
             tempBonus: 0,
@@ -52,7 +54,8 @@ class Character {
         //boots, gloves, etc, 
         this.accessory = {
             name: "None",
-            effect: "NA"
+            effect: "NA",
+            shieldBonus: 0
         }
         this.inventory = {
             gold: 0
@@ -62,58 +65,58 @@ class Character {
             infamy: 0
         }
         this.skills = {
-            agility:  {
+            agility: {
                 rank: "Untrained",
                 value: 0,
-            }, 
+            },
             crafting: {
                 rank: "Untrained",
                 value: 0,
-            },  
+            },
             gathering: {
                 rank: "Untrained",
                 value: 0,
-            },   
+            },
             lore: {
                 rank: "Untrained",
                 value: 0,
-            },   
+            },
             magic: {
                 rank: "Untrained",
                 value: 0,
-            }, 
+            },
             marksman: {
                 rank: "Untrained",
                 value: 0,
-            },  
+            },
             melee: {
                 rank: "Untrained",
                 value: 0,
-            }, 
+            },
             perception: {
                 rank: "Untrained",
                 value: 0,
-            },  
+            },
             prayer: {
                 rank: "Untrained",
                 value: 0,
-            },  
+            },
             speech: {
                 rank: "Untrained",
                 value: 0,
-            }, 
+            },
             survival: {
                 rank: "Untrained",
                 value: 0,
-            },   
+            },
             thievery: {
                 rank: "Untrained",
                 value: 0,
-            },    
+            },
             Unarmed: {
                 rank: "Untrained",
                 value: 0
-            },    
+            },
         }
         this.conditions = {
             asleep: false,
@@ -124,6 +127,7 @@ class Character {
         }
         this.immunities = {
             //elemental
+            fire: false,
             fire: false,
             ice: false,
             lightning: false,
@@ -136,13 +140,14 @@ class Character {
             //add more as used
             //elemental
             fire: false,
+            force: false,
             ice: false,
             lightning: false,
             //physical
             bludgeoning: false,
             piercing: false,
             slashing: false
-        }  
+        }
     }
 }
 //player classes
@@ -172,16 +177,18 @@ class Bandit extends Character {
         this.basics.profession = "Bandit";
         this.basics.xp = 10;
         this.basics.ally = false;
-        this.stats.currentHp = 2;
-        this.stats.maxHp = 2;
+        this.stats.currentHp = 4;
+        this.stats.maxHp = 4;
         this.stats.attack = 0;
         this.stats.defense = 0;
         this.stats.speed = 0;
         this.weapon.name = "Shortsword";
-        this.weapon.damage = 1;
+        this.weapon.damage = 2;
+        this.weapon.type = "Melee"
         this.weapon.damageType = "Piercing";
         this.armor.name = "Leather";
-        this.armor.protection = 0;
+        this.armor.type = "Light"
+        this.armor.protection = 1;
         this.inventory.gold = 5;
     }
 }
@@ -192,34 +199,28 @@ let skipTurn = false;
 //resist prototype
 Character.prototype.checkCondition = function () {
     skipTurn = false;
-    if (this.conditions.asleep)
-    {
+    if (this.conditions.asleep) {
         skipTurn = true;
         alert(this.basics.name + " missed turn due to sleep")
     }
-    else if (this.conditions.burn)
-    {
+    else if (this.conditions.burn) {
         this.damage(1)
         alert(this.basics.name + " Took 1 damage due to burn.")
     }
-    else if (this.conditions.confused)
-    {
+    else if (this.conditions.confused) {
         alert(this.basics.name + " Attacked self due to confusion")
         this.attack(this)
         skipTurn = true;
     }
-    else if (this.conditions.paralyze)
-    {
+    else if (this.conditions.paralyze) {
         alert(this.basics.name + " Missed turn due to paralyze")
         skipTurn = true;
     }
-    else if (this.conditions.poison)
-    {
+    else if (this.conditions.poison) {
         this.damage(1)
         alert(this.basics.name + " Took 1 damage due to poison.")
     }
-    else
-    {
+    else {
 
     }
 }
@@ -276,9 +277,8 @@ Character.prototype.attack = function (target) {
                     target.damage(dmg / 2)
                     alert(target.basics.name + " loses " + dmg / 2 + " Hitpoints.")
                 }
-                else if (immune == true)
-                {
-                    alert(target.basics.name + "is immune to " + this.weapon.damageType +  " damage.")
+                else if (immune == true) {
+                    alert(target.basics.name + "is immune to " + this.weapon.damageType + " damage.")
                 }
                 else {
                     alert(dmg + " " + this.weapon.damageType + " damage dealt to " + target.basics.name)
@@ -358,49 +358,45 @@ Character.prototype.reset = function () {
 }
 Character.prototype.conditionRecover = function () {
     let recoverRoll = Math.random();
-    if (recoverRoll >= .5)
-    {
-    console.log(this.basics.name + " recovered from conditions.")
-    this.conditions.asleep = false;
-    this.conditions.burn = false;
-    this.conditions.confused = false;
-    this.conditions.paralyze = false;
-    this.conditions.poison = false;
+    if (recoverRoll >= .5) {
+        console.log(this.basics.name + " recovered from conditions.")
+        this.conditions.asleep = false;
+        this.conditions.burn = false;
+        this.conditions.confused = false;
+        this.conditions.paralyze = false;
+        this.conditions.poison = false;
     }
-    else
-    {
+    else {
 
     }
 }
 Character.prototype.turn = function () {
     if (this.basics.alive == true) {
         this.checkCondition()
-        if (skipTurn == true)
-        {}
-        else
-        {
-        if (this.basics.ally == true) {
-            let action = prompt("(A)ttack or user a (P)otion?");
-            if (action === "A") {
-                let target = prompt("Choose target by number (starting from 0).");
-                if (enemyArray[target] === undefined) {
-                    alert(this.basics.name + " attacks no one.")
+        if (skipTurn == true) { }
+        else {
+            if (this.basics.ally == true) {
+                let action = prompt("(A)ttack or user a (P)otion?");
+                if (action === "A") {
+                    let target = prompt("Choose target by number (starting from 0).");
+                    if (enemyArray[target] === undefined) {
+                        alert(this.basics.name + " attacks no one.")
+                    }
+                    else {
+                        this.action1(enemyArray[target]);
+                    }
+                }
+                else if (action === "P") {
+                    potion.use(this)
                 }
                 else {
-                    this.action1(enemyArray[target]);
+                    alert("You chose not to do anything.")
                 }
             }
-            else if (action === "P") {
-                potion.use(this)
-            }
             else {
-                alert("You chose not to do anything.")
+                let target = Math.floor((Math.random() * allyArray.length))
+                this.action1(allyArray[target]);
             }
-        }
-        else {
-            let target = Math.floor((Math.random() * allyArray.length))
-            this.action1(allyArray[target]);
-        }
         }
     }
     else {
@@ -444,10 +440,10 @@ function combat() {
         alert("You are defeated.")
     }
 }
-Character.prototype.rest = function(){
+Character.prototype.rest = function () {
     for (var i = 0; i < allyArray.length; i++) {
-     allyArray[i].heal(allyArray[i].basics.maxHp)
-     allyArray[i].basics.alive = true;   
+        allyArray[i].heal(allyArray[i].basics.maxHp)
+        allyArray[i].basics.alive = true;
     }
 }
 //gold functions
@@ -468,64 +464,127 @@ Character.prototype.checkGold = function (x) {
     }
 }
 //item prototypes
-//will need something to undo stat changes from items when unequiped
-//perhaps standard values or just add to buffs etc.
 class Item {
-    constructor(name, type, damageType, value, effect, price, quantity) {
+    constructor() {
+        this.name = "";
+        this.type = "";
+        this.damageType = "";
+        this.value = "";
+        this.effect = "";
+        this.effectTxt = ""
+        this.price = "";
+        this.quantity = "";
+    }
+}
+class Accessory extends Character {
+    constructor(name, type, value, effect, effectTxt, price, quantity) {
+        super();
+        this.name = name;
+        this.type = type;
+        this.value = value;
+        this.effect = effect;
+        this.effectTxt = effectTxt;
+        this.price = price;
+        this.quantity = quantity;
+    }
+}
+class Armor extends Character {
+    constructor(name, type, value, effect, effectTxt, price, quantity) {
+        super();
+        this.name = name;
+        this.type = type;
+        this.value = value;
+        this.effect = effect;
+        this.effectTxt = effectTxt
+        this.price = price;
+        this.quantity = quantity;
+    }
+}
+class Consumable extends Character {
+    constructor(name, type, value, effect, effectTxt, price, quantity) {
+        super();
+        this.name = name;
+        this.type = type;
+        this.value = value;
+        this.effect = effect;
+        this.effectTxt = effectTxt;
+        this.price = price;
+        this.quantity = quantity;
+    }
+}
+class Treasure extends Character {
+    constructor(name, type, price, quantity) {
+        super();
+        this.name = name;
+        this.type = type;
+        this.price = price;
+        this.quantity = quantity;
+    }
+}
+class Weapon extends Character {
+    constructor(name, type, damageType, value, effect, effectTxt, price, quantity) {
+        super();
         this.name = name;
         this.type = type;
         this.damageType = damageType;
         this.value = value;
         this.effect = effect;
+        this.effectTxt = effectTxt;
         this.price = price;
         this.quantity = quantity;
     }
 }
 //make subclasses for different item types: weapons, armor. consumable, treasure etc.
-    //equipable items
-    Item.prototype.equip = function (user) {
-    user.weapon.damageBonus = 0;
-    user.armor.protectionBonus = 0;
-    if (this.type === "Armor") {
-    user.armor.name = this.name;
-    user.armor.protection = this.value;
+//equipable items
+Accessory.prototype.equip = function (user) {
+    user.accessory.shieldBonus = 0;
+    user.accessory.name = this.name;
+    user.accessory.effect = this.effectTxt;
     this.effect;
     console.log(user.basics.name + " equiped " + this.name)
+    console.log(user)
 }
-else if (this.type === "Weapon") {
+Armor.prototype.equip = function (user) {
+    user.armor.protectionBonus = 0;
+    user.armor.name = this.name;
+    user.armor.protection = this.value;
+    user.armor.effect = this.effectTxt;
+    this.effect;
+    console.log(user.basics.name + " equiped " + this.name)
+    console.log(user)
+}
+Weapon.prototype.equip = function (user) {
     user.weapon.name = this.name;
     user.weapon.damage = this.value;
     user.weapon.damageType = this.damageType;
+    user.weapon.effect = this.effectTxt;
+    this.effect;
     console.log(user.basics.name + " equiped " + this.name)
-}
-else {
-
-}
     console.log(user)
 }
-    //usable items
-    Item.prototype.use = function (user) {
-    if (this.type === "Consumable" && this.quantity> 0) {
-    alert(user.basics.name + " uses a " + this.name)
-    this.effect;
-    this.quantity--;
-}
-else {
-    console.log("You don't have any " + this.name + "(s)")
-}
-}
-    Item.prototype.buy = function (buyer) {
+Item.prototype.buy = function (buyer) {
     item.quantity++;
     buyer.checkGold(item.price);
-
 }
-    Item.prototype.sell = function (seller) {
+Item.prototype.sell = function (seller) {
     item.quantity--;
-    buyer.addGold(item.value / 2);
+    seller.addGold(item.value / 2);
 }
-let dagger = new Item("Dagger", "Weapon", "Slashing", 1, function (user, value) { }, 0, 1);
-let clothing = new Item("Clothing", "Armor", "NA", 0, function (user, value) { }, 0, 1);
-let potion = new Item("Potion", "Consumable", "NA", 5, function (user, value) { user.heal(value); }, 10, 1);
+//accessories
+let shield = new Accessory("Shield", "Shield", 1, function (user) {user.accessory.shieldBonus += 1}, "Raises Shield Bonus", 0, 1)
+let spellbook = new Accessory("Basic Spellbook", "Spellbook", 1, function (user) { }, "", 0, 1)
+//armor
+let clothing = new Armor("Clothing", "Clothing", 0, function (user, value) { }, "", 0, 1);
+let leather = new Armor("Leather", "Light", 1, function (user, value) { }, "", 0, 1);
+//consumables
+let potion = new Consumable("Potion", "Healing", 5, function (user, value) { user.heal(value); }, "Heals user for 5 HP", 10, 1);
+//weapons
+let club = new Weapon("Club", "Melee", "Bludgeoning", 1, function (user, value) { }, "", 0, 1);
+let dagger = new Weapon("Dagger", "Melee", "Slashing", 1, function (user, value) { }, "", 0, 1);
+let sling = new Weapon("Sling", "Ranged", "Bludgeoning", 1, function (user, value) { }, "", 0, 1);
+let shortSword = new Weapon("Short Sword", "Melee", "Slashing", 2, function (user, value) { }, "", 0, 1);
+let wand = new Weapon("Wand", "Magic", "Force", 1, function (user, value) { }, "", 0, 1);
+
 //let fireArmor = new item("Fire Armor", "Armor", 0, function (user) {user.resistances.fire = true}, 0, 1);
 //creates hero
 function createHero() {
@@ -533,9 +592,11 @@ function createHero() {
     let classChoice = prompt(heroName + " are you a (Fig)hter, (Mag)e, (Rog)ue, or a Freelancer?")
     if (classChoice === "Fig") {
         hero = new Fighter();
+        shield.equip(hero)
     }
     else if (classChoice === "Mag") {
         hero = new Mage();
+        spellbook.equip(hero)
     }
     else if (classChoice === "Rog") {
         hero = new Rogue();
