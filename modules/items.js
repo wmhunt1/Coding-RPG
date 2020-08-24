@@ -118,4 +118,4 @@ let sling = new Weapon("Sling", "Ranged", "Bludgeoning", 1, function (user, valu
 let shortSword = new Weapon("Short Sword", "Melee", "Slashing", 2, function (user, value) { }, "", 0, 1);
 let wand = new Weapon("Wand", "Magic", "Force", 1, function (user, value) { }, "", 0, 1);
 
-module.exports = Item;
+//module.exports = Item;
