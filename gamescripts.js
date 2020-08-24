@@ -534,7 +534,6 @@ class Weapon extends Character {
         this.quantity = quantity;
     }
 }
-//make subclasses for different item types: weapons, armor. consumable, treasure etc.
 //equipable items
 Accessory.prototype.equip = function (user) {
     user.accessory.shieldBonus = 0;
@@ -571,7 +570,7 @@ Item.prototype.sell = function (seller) {
     seller.addGold(item.value / 2);
 }
 //accessories
-let shield = new Accessory("Shield", "Shield", 1, function (user) {user.accessory.shieldBonus += 1}, "Raises Shield Bonus", 0, 1)
+let shield = new Accessory("Shield", "Shield", 0, function (user) {user.accessory.shieldBonus += 1}, "Raises Shield Bonus", 0, 1)
 let spellbook = new Accessory("Basic Spellbook", "Spellbook", 1, function (user) { }, "", 0, 1)
 //armor
 let clothing = new Armor("Clothing", "Clothing", 0, function (user, value) { }, "", 0, 1);
@@ -584,8 +583,6 @@ let dagger = new Weapon("Dagger", "Melee", "Slashing", 1, function (user, value)
 let sling = new Weapon("Sling", "Ranged", "Bludgeoning", 1, function (user, value) { }, "", 0, 1);
 let shortSword = new Weapon("Short Sword", "Melee", "Slashing", 2, function (user, value) { }, "", 0, 1);
 let wand = new Weapon("Wand", "Magic", "Force", 1, function (user, value) { }, "", 0, 1);
-
-//let fireArmor = new item("Fire Armor", "Armor", 0, function (user) {user.resistances.fire = true}, 0, 1);
 //creates hero
 function createHero() {
     let heroName = prompt("Choose Your Name")
@@ -617,6 +614,7 @@ class Business {
         this.whatTheyBuy = buy;
     }
 }
+//subclasses for inns etc.
 class Quest {
     constructor(name, reward) {
         this.name = name;
@@ -624,6 +622,8 @@ class Quest {
         //events and combats
     }
 }
+//subclasses for mainquest sidequest etc.
+//classes for learning and training skills etc.
 function firstEvent() {
     //add option to pay and getting surrounded
     alert("You are " + hero.basics.name + ", a " + hero.basics.class + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
