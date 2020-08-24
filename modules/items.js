@@ -95,14 +95,6 @@ Weapon.prototype.equip = function (user) {
     console.log(user.basics.name + " equiped " + this.name)
     console.log(user)
 }
-Item.prototype.buy = function (buyer) {
-    item.quantity++;
-    buyer.checkGold(item.price);
-}
-Item.prototype.sell = function (seller) {
-    item.quantity--;
-    seller.addGold(item.value / 2);
-}
 //accessories
 let shield = new Accessory("Shield", "Shield", 0, function (user) {user.accessory.shieldBonus += 1}, "Raises Shield Bonus", 0, 1)
 let spellbook = new Accessory("Basic Spellbook", "Spellbook", 1, function (user) { }, "", 0, 1)
