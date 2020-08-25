@@ -73,10 +73,21 @@
         <button>Littleroot Farm</button>
         <button>Quincy's Workshop</button>
         <button>Temple</button>
-        <button onclick = "triggShop.enterStore()">Trig Sprocket's General Goods and Sundries</button>
+        <button onclick="triggShop.enterStore()">Trig Sprocket's General Goods and Sundries</button>
         <button onclick="enterValleyDale()">Leave</button>
     </section>
-
+    <section id="mineDungeon">
+    <button onclick="enterValleyDale()">Leave Area</button>
+    <button>Mine Exterior Encounter</button>
+    <button>Enter Mine</button>
+    <button>Mine Interior 1</button>
+    <button>Free Kobolds</button>
+    <button>Mine Interior 2</button>
+    <button>Free Miners</button>
+    <button>Mine Interior 3</button>
+    <button>Goblin Boss</button>
+    </section>
+    <section id="puzzleDungeon1"></section>
     <script src="./modules/character.js"></script>
     <script src="./modules/classes.js"></script>
     <script src="./modules/combat.js"></script>
@@ -111,6 +122,9 @@
         document.getElementById("villageDaleBtn").style.display = "none";
         document.getElementById("witchCottage").style.display = "none";
         document.getElementById("wizardTower").style.display = "none";
+        //dungeons
+        document.getElementById("mineDungeon").style.display = "none";
+        document.getElementById("puzzleDungeon1").style.display = "none";
         function closeAll() {
             document.getElementById("Intro").style.display = "none";
             document.getElementById("valleyDale").style.display = "none";
@@ -120,10 +134,17 @@
             closeAll()
             document.getElementById("Intro").style.display = "block";
         }
+        function enterMine()
+        {
+            document.getElementById("Menu").style.display = "block";
+            document.getElementById("mineDungeon").style.display = "block";
+            document.getElementById("valleyDale").style.display = "none";
+        }
         function enterValleyDale() {
             closeAll
             document.getElementById("Intro").style.display = "none"
             document.getElementById("Menu").style.display = "block";
+            document.getElementById("mineDungeon").style.display = "none";
             document.getElementById("valleyDale").style.display = "block";
             document.getElementById("villageDale").style.display = "none";
         }
@@ -133,10 +154,10 @@
             document.getElementById("valleyDale").style.display = "none";
             document.getElementById("villageDale").style.display = "block";
         }
-        intro()
         function worldMap() {
             alert("You cannot leave The Valley of Dale")
         }
+        intro()
     </script>
 </body>
 
