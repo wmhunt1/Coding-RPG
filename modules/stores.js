@@ -41,6 +41,20 @@ class Store {
         this.whatTheyBuy = "";
     }
 }
+class General extends Store {
+    constructor(name, owner) {
+        super();
+        this.name = name;
+        this.stock = "General Goods";
+        this.owner = owner;
+        this.use = "None";
+        this.useLetter = "";
+        this.useFunction = function () {
+
+        }
+        this.whatTheyBuy = "Anything"
+    }
+}
 //subclasses for kinds of stores
 class Inn extends Store {
     constructor(name, owner, cost) {
@@ -111,7 +125,9 @@ Store.prototype.enterStore = function () {
     }
 }
 //stores
+//general
+const triggShop = new General("Trigg Sprocket's General Goods and Sundries", "Trigg Sprocket")
 //inns
 const dreamingWorker = new Inn("Dreaming Worker Inn", "Sweetheart the Ogre.", 1);
 //smiths
-const forgeheartSmithy = new Inn("Forgeheart Smithy", "Ferra Forgeheart.");
+const forgeheartSmithy = new Smith("Forgeheart Smithy", "Ferra Forgeheart.");
