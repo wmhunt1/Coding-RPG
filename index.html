@@ -89,7 +89,7 @@
     <script src="gamescripts.js"></script>
     <script>
         //hides buttons until location discovered
-        document.getElementById("Menu").style.display = "block";
+        document.getElementById("Menu").style.display = "none";
         document.getElementById("banditCamp").style.display = "none";
         document.getElementById("banditHideout").style.display = "none";
         document.getElementById("bbVillage").style.display = "none";
@@ -123,6 +123,7 @@
         function enterValleyDale() {
             closeAll
             document.getElementById("Intro").style.display = "none"
+            document.getElementById("Menu").style.display = "block";
             document.getElementById("valleyDale").style.display = "block";
             document.getElementById("villageDale").style.display = "none";
         }
