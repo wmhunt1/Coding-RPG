@@ -54,7 +54,8 @@ class Character {
             fame: 0,
             infamy: 0,
             entries: [],
-            tollBridgeEncounter: false
+            tollBridgeEncounter: false,
+            metWithContact: false,
         }
         this.skills = {
             agility: {

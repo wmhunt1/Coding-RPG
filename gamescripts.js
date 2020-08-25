@@ -46,6 +46,7 @@ function tollBridgeEncounter() {
         alert("The bridge is currently unguarded.")
     }
 }
-function secondEvent() {
+function welcomeDale() {
     alert("You arrive at The Village of Dale with Abraham.")
+    hero.journal.metWithContact = true;
 }
