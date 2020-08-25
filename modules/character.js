@@ -52,7 +52,8 @@ class Character {
         }
         this.journal = {
             fame: 0,
-            infamy: 0
+            infamy: 0,
+            tollBridgeEncounter: false
         }
         this.skills = {
             agility: {
@@ -140,11 +141,11 @@ class Character {
         }
     }
 }
-Character.prototype.rest = function () {
-    for (var i = 0; i < allyArray.length; i++) {
-        allyArray[i].heal(allyArray[i].basics.maxHp)
-        allyArray[i].basics.alive = true;
-    }
+    Character.prototype.rest = function () {
+    for (var i = 0; i<allyArray.length; i++) {
+    allyArray[i].heal(allyArray[i].basics.maxHp)
+    allyArray[i].basics.alive = true;
+}
 }
 function createHero() {
     let heroName = prompt("Choose Your Name")
@@ -166,5 +167,10 @@ function createHero() {
     hero.basics.name = heroName;
     dagger.equip(hero)
     clothing.equip(hero)
+    alert("You are " + hero.basics.name + ", a " + hero.basics.class + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
+    alert("But first you must complete a task.")
+    alert("You task is go to The Village of Dale, located within The Valley of Dale, and speak with your contact at the local inn to recieve further.")
+    alert("You went through The Dale Pass to enter the valley, the first steps on your journey.")
+    alert("On your way to the village you encounter a toll bridge, which appears to be guarded by several rough-looking individuals.")
     enterValleyDale()
 }

@@ -40,22 +40,23 @@
     <!-- area sections, have buttons for areas or shops etc. -->
     <section id="valleyDale">
         <h1>The Valley of Dale</h1>
-        <button>Broken Blade Village</button>
-        <button>Dale Keep</button>
-        <button>Dwarven Mine</button>
-        <button>Dwarven Outpost</button>
-        <button>Gnoll Den</button>
-        <button>Goblin Village</button>
-        <button>Kurek's Hut</button>
-        <button>Lake Dale</button>
-        <button>Logging Camp</button>
-        <button>Sheepscale's Lair</button>
-        <button>Toll Bridge</button>
-        <button>Trading Post</button>
-        <button onclick="enterVillageDale()">Village of Dale</button>
-        <button>Witch's Cottage</button>
-        <button>Wizard Tower</button>
-        <button>Leave</button>
+        <button id="bbVillage">Broken Blade Village</button>
+        <button id=daleKeep>Dale Keep</button>
+        <button id="dMine">Dwarven Mine</button>
+        <button id="dOutpost">Dwarven Outpost</button>
+        <button id="giantCave">Giant Cave</button>
+        <button id="gnollDen">Gnoll Den</button>
+        <button id="goblinVillage">Goblin Village</button>
+        <button id="kurekHut">Kurek's Hut</button>
+        <button id="lakeDale">Lake Dale</button>
+        <button id="logCamp">Logging Camp</button>
+        <button id="sheepLair">Sheepscale's Lair</button>
+        <button onclick="tollBridgeEncounter()">Toll Bridge</button>
+        <button id="tradePost">Trading Post</button>
+        <button id="villageDaleBtn" onclick="enterVillageDale()">Village of Dale</button>
+        <button id="witchCottage">Witch's Cottage</button>
+        <button id="wizardTower">Wizard Tower</button>
+        <button onclick="worldMap()">Leave Valley</button>
     </section>
     <section id="villageDale">
         <h1>The Village of Dale</h1>
@@ -66,10 +67,8 @@
         <button>Quincy's Workshop</button>
         <button>Temple</button>
         <button>Trig Sprocket's Goods and Sundries</button>
-        <button onclick ="enterValleyDale()">Leave</button>
+        <button onclick="enterValleyDale()">Leave</button>
     </section>
-    <!-- <button onclick="firstEvent()">First Event</button>
-    <button onclick="secondEvent()">Second Event</button> -->
 
     <script src="./modules/character.js"></script>
     <script src="./modules/classes.js"></script>
@@ -82,31 +81,49 @@
     <script src="./modules/stores.js"></script>
     <script src="gamescripts.js"></script>
     <script>
+        //hides buttons until location discovered
+        document.getElementById("Menu").style.display = "block";
+        document.getElementById("bbVillage").style.display = "none";
+        document.getElementById("daleKeep").style.display = "none";
+        document.getElementById("dMine").style.display = "none";
+        document.getElementById("dOutpost").style.display = "none";
+        document.getElementById("dMine").style.display = "none";
+        document.getElementById("giantCave").style.display = "none";
+        document.getElementById("gnollDen").style.display = "none";
+        document.getElementById("goblinVillage").style.display = "none";
+        document.getElementById("kurekHut").style.display = "none";
+        document.getElementById("lakeDale").style.display = "none";
+        document.getElementById("logCamp").style.display = "none";
+        document.getElementById("sheepLair").style.display = "none";
+        document.getElementById("tradePost").style.display = "none";
+        document.getElementById("villageDaleBtn").style.display = "none";
+        document.getElementById("witchCottage").style.display = "none";
+        document.getElementById("wizardTower").style.display = "none";
         function closeAll() {
-            document.getElementById("Menu").style.display = "none";
             document.getElementById("Intro").style.display = "none";
             document.getElementById("valleyDale").style.display = "none";
             document.getElementById("villageDale").style.display = "none";
         }
-        function intro()
-        {
+        function intro() {
             closeAll()
             document.getElementById("Intro").style.display = "block";
         }
-        function enterValleyDale()
-        {
+        function enterValleyDale() {
             closeAll
             document.getElementById("Intro").style.display = "none"
             document.getElementById("valleyDale").style.display = "block";
             document.getElementById("villageDale").style.display = "none";
         }
-        function enterVillageDale()
-        {
+        function enterVillageDale() {
             closeAll()
+            alert("You enter The Village of Dale.")
             document.getElementById("valleyDale").style.display = "none";
             document.getElementById("villageDale").style.display = "block";
         }
         intro()
+        function worldMap() {
+            alert("You cannot leave The Valley of Dale")
+        }
     </script>
 </body>
 
