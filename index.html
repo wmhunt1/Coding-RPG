@@ -40,6 +40,8 @@
     <!-- area sections, have buttons for areas or shops etc. -->
     <section id="valleyDale">
         <h1>The Valley of Dale</h1>
+        <button id="banditCamp">Bandit Camp</button>
+        <button id="banditHideout">Bandit Hideout</button>
         <button id="bbVillage">Broken Blade Village</button>
         <button id=daleKeep>Dale Keep</button>
         <button id="dMine">Dwarven Mine</button>
@@ -50,7 +52,10 @@
         <button id="kurekHut">Kurek's Hut</button>
         <button id="lakeDale">Lake Dale</button>
         <button id="logCamp">Logging Camp</button>
+        <button id="ruins">Ruins</button>
         <button id="sheepLair">Sheepscale's Lair</button>
+        <button id="sheepPasture">Sheep Pasture</button>
+        <button id="spiderCave">Spider Cave</button>
         <button onclick="tollBridgeEncounter()">Toll Bridge</button>
         <button id="tradePost">Trading Post</button>
         <button id="villageDaleBtn" onclick="enterVillageDale()">Village of Dale</button>
@@ -60,9 +65,11 @@
     </section>
     <section id="villageDale">
         <h1>The Village of Dale</h1>
+        <button>Abraham's House</button>
+        <button>Dale Graveyard</button>
         <button>Dale Manor</button>
         <button onclick="dreamingWorker.enterStore()">The Dreaming Worker Inn</button>
-        <button>Forgeheart Smithy</button>
+        <button onclick="forgeheartSmith.enterStore()">Forgeheart Smithy</button>
         <button>Littleroot Farm</button>
         <button>Quincy's Workshop</button>
         <button>Temple</button>
@@ -83,6 +90,8 @@
     <script>
         //hides buttons until location discovered
         document.getElementById("Menu").style.display = "block";
+        document.getElementById("banditCamp").style.display = "none";
+        document.getElementById("banditHideout").style.display = "none";
         document.getElementById("bbVillage").style.display = "none";
         document.getElementById("daleKeep").style.display = "none";
         document.getElementById("dMine").style.display = "none";
@@ -94,7 +103,10 @@
         document.getElementById("kurekHut").style.display = "none";
         document.getElementById("lakeDale").style.display = "none";
         document.getElementById("logCamp").style.display = "none";
+        document.getElementById("ruins").style.display = "none";
         document.getElementById("sheepLair").style.display = "none";
+        document.getElementById("sheepPasture").style.display = "none";
+        document.getElementById("spiderCave").style.display = "none";
         document.getElementById("tradePost").style.display = "none";
         document.getElementById("villageDaleBtn").style.display = "none";
         document.getElementById("witchCottage").style.display = "none";

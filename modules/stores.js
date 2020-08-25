@@ -32,7 +32,7 @@ Item.prototype.sell = function (seller) {
 class Store {
     constructor() {
         this.name = "";
-        this.owner = ""; 
+        this.owner = "";
         this.location = ""
         this.stock = "";
         this.use = ""
@@ -43,33 +43,28 @@ class Store {
 }
 //subclasses for kinds of stores
 class Inn extends Store {
-    constructor(name, owner, location,  cost) {
+    constructor(name, owner, cost) {
         super();
         this.name = name;
-        this.stock = "Food"
-        this.owner = owner
-        this.location = location;
+        this.stock = "Food";
+        this.owner = owner;
         this.cost = cost;
-        this.use = "(G)et a room?"
+        this.use = "(G)et a room?";
         this.useLetter = "G";
-        this.useFunction = function getRoom (){
-            let choice = prompt ("Get a room for " + this.cost + " (Y/N)?")
-            if (choice === "Y")
-            {
+        this.useFunction = function getRoom() {
+            let choice = prompt("Get a room for " + this.cost + " (Y/N)?")
+            if (choice === "Y") {
                 hero.checkGold(this.cost)
-                if (enoughGold == true)
-                {
+                if (enoughGold == true) {
                     hero.removeGold(this.cost)
                     hero.rest()
                     alert("The party spends the night at the " + this.name)
                 }
-                else
-                {
+                else {
                     //
                 }
             }
-            else
-            {
+            else {
                 alert("You decide not to rent a room.")
             }
 
@@ -77,37 +72,46 @@ class Inn extends Store {
         this.whatTheyBuy = "N/A"
     }
 }
-Store.prototype.buy = function()
-{
+class Smith extends Store {
+    constructor(name, owner) {
+        super();
+        this.name = name;
+        this.stock = "Weapons and Armor";
+        this.owner = owner;
+        this.use = "(I)mprove Weapon or Armor?";
+        this.useLetter = "I";
+        this.useFunction = function forge() {
+
+        }
+        this.whatTheyBuy = "Weapons and Armor"
+    }
+}
+Store.prototype.buy = function () {
 
 }
-Store.prototype.sell = function()
-{
+Store.prototype.sell = function () {
 
 }
 //enter store function
 //maybe option for events
-Store.prototype.enterStore = function()
-{
-    alert ("Welcome to " + this.name + " owned by " + this.owner + " and located in " + this.location)
-    let sChoice = prompt("Would you like to (B)uy, (S)ell, or " + this.use)
-    if (sChoice === "B")
-    {
+Store.prototype.enterStore = function () {
+    alert("You enter " + this.name)
+    let sChoice = prompt(this.owner + " Asks, would you like to (B)uy, (S)ell, or " + this.use)
+    if (sChoice === "B") {
         this.buy()
     }
-    else if (sChoice === "S")
-    {
+    else if (sChoice === "S") {
         this.sell()
     }
-    else if (sChoice === this.useLetter)
-    {
+    else if (sChoice === this.useLetter) {
         this.useFunction()
     }
-    else
-    {
+    else {
 
     }
 }
 //stores
 //inns
-const dreamingWorker = new Inn ("Dreaming Worker Inn", "Sweetheart the Ogre.", "The Village of Dale", 5);
+const dreamingWorker = new Inn("Dreaming Worker Inn", "Sweetheart the Ogre.", 1);
+//smiths
+const forgeheartSmithy = new Inn("Forgeheart Smithy", "Ferra Forgeheart.");

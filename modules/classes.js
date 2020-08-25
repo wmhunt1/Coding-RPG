@@ -1,4 +1,10 @@
 //player classes
+class Cleric extends Character {
+    constructor() {
+        super();
+        this.stats.profession = "Cleric"
+    }
+}
 class Fighter extends Character {
     constructor() {
         super();
@@ -9,6 +15,12 @@ class Mage extends Character {
     constructor() {
         super();
         this.stats.profession = "Mage"
+    }
+}
+class Paladin extends Character {
+    constructor() {
+        super();
+        this.stats.profession = "Paladin"
     }
 }
 class Rogue extends Character {
