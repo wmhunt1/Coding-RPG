@@ -53,6 +53,7 @@ class Character {
         this.journal = {
             fame: 0,
             infamy: 0,
+            entries: [],
             tollBridgeEncounter: false
         }
         this.skills = {
