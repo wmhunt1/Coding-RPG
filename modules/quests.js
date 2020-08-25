@@ -6,3 +6,4 @@ class Quest {
     }
 }
 //subclasses for kinds of quests
+const goblinSlayer = newQuest("Goblin Slayer", "Gold")
