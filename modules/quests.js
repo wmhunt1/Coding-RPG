@@ -22,4 +22,4 @@ Quest.prototype.completeQuest = function()
     
 }
 //subclasses for kinds of quests
-const goblinSlayer = newQuest("Goblin Slayer", "Gold")
+const goblinSlayer = new Quest("Goblin Slayer", "Gold")
