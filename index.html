@@ -44,7 +44,7 @@
         <button id="banditHideout">Bandit Hideout</button>
         <button id="bbVillage">Broken Blade Village</button>
         <button id=daleKeep>Dale Keep</button>
-        <button id="dMine">Dwarven Mine</button>
+        <button onclick = "mineDungeon.encounter1()" id="dMine">Dwarven Mine</button>
         <button id="dOutpost">Dwarven Outpost</button>
         <button id="giantCave">Giant Cave</button>
         <button id="gnollDen">Gnoll Den</button>
@@ -78,14 +78,14 @@
     </section>
     <section id="mineDungeon">
         <button onclick="enterValleyDale()">Leave Area</button>
-        <button>Mine Exterior Encounter</button>
-        <button>Enter Mine</button>
-        <button>Mine Interior 1</button>
-        <button>Free Kobolds</button>
-        <button>Mine Interior 2</button>
-        <button>Free Miners</button>
-        <button>Mine Interior 3</button>
-        <button>Goblin Boss</button>
+        <button onclick = "mineDungeon.encounter2()" id = "mee">Mine Exterior Encounter</button>
+        <button id ="em">Enter Mine</button>
+        <button id = "mi1">Mine Interior 1</button>
+        <button id = "fk" >Free Kobolds</button>
+        <button id = "mi2">Mine Interior 2</button>
+        <button id = "fm">Free Miners</button>
+        <button id = "mi3">Mine Interior 3</button>
+        <button id ="gBoss">Goblin Boss</button>
     </section>
     <section id="puzzleDungeon1"></section>
     <script src="./modules/character.js"></script>
@@ -123,7 +123,16 @@
         document.getElementById("witchCottage").style.display = "none";
         document.getElementById("wizardTower").style.display = "none";
         //dungeons
+        //mine dungeon
         document.getElementById("mineDungeon").style.display = "none";
+        document.getElementById("mee").style.display = "none";
+        document.getElementById("em").style.display = "none";
+        document.getElementById("mi1").style.display = "none";
+        document.getElementById("fk").style.display = "none";
+        document.getElementById("mi2").style.display = "none";
+        document.getElementById("fm").style.display = "none";
+        document.getElementById("mi3").style.display = "none";
+        document.getElementById("gBoss").style.display = "none";
         document.getElementById("puzzleDungeon1").style.display = "none";
         function closeAll() {
             document.getElementById("Intro").style.display = "none";
@@ -152,7 +161,7 @@
             alert("You enter The Village of Dale.")
             document.getElementById("valleyDale").style.display = "none";
             document.getElementById("villageDale").style.display = "block";
-            if (metWithContact === false)
+            if (hero.journal.metWithContact === false)
             {
                 welcomeDale()
             }

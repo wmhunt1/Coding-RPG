@@ -59,3 +59,25 @@ class Commoner extends Character {
         this.basics.profession = profession;
     }
 }
+class Goblin extends Character {
+    constructor(name) {
+        super();
+        this.basics.name = name;
+        this.basics.profession = "Goblin";
+        this.basics.xp = 5;
+        this.basics.ally = false;
+        this.stats.currentHp = 2;
+        this.stats.maxHp = 2;
+        this.stats.attack = 0;
+        this.stats.defense = 0;
+        this.stats.speed = 0;
+        this.weapon.name = "Club";
+        this.weapon.damage = 1;
+        this.weapon.type = "Melee"
+        this.weapon.damageType = "Bludgeoning";
+        this.armor.name = "Rags";
+        this.armor.type = "Cloth";
+        this.armor.protection = 0;
+        this.inventory.gold = 1;
+    }
+}

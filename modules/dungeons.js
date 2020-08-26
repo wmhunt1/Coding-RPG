@@ -12,4 +12,24 @@ class Dungeon {
         this.encounter9 = encounter9;
     }
 }
-const mineDungeon = new Dungeon("Dwarven Mines",)
+const mineDungeon = new Dungeon("Dwarven Mines",
+    function () {
+        alert("You arrive at the Dwarven Mine");
+        enterMine()
+        document.getElementById("mee").style.display = "block"
+
+    },
+    function () {
+        alert("You encounter goblins guarding the entrance.")
+        const goblin1 = new Goblin("Goblin 1")
+        const goblin2 = new Goblin("Goblin 2")
+        const goblin3 = new Goblin("Goblin 3")
+        enemyArray = [goblin1, goblin2, goblin3]
+        turnArray = [hero, goblin1, goblin2, goblin3]
+        combat()
+        document.getElementById("em").style.display = "block";
+    },
+    function(){
+        alert ("Before you enter the mine you notice some kobolds who ask you to free the other kobolds.")
+        document.getElementById("mi1").style.display = "block";
+    })

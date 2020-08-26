@@ -56,6 +56,10 @@ class Character {
             entries: [],
             tollBridgeEncounter: false,
             metWithContact: false,
+            goblinSlayer: false,
+            koboldsRescued: false,
+            minersRescued: false,
+            goblinBossDefeated: false
         }
         this.skills = {
             agility: {
