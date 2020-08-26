@@ -62,6 +62,7 @@ function tollBridgeEncounter() {
         }
         else { }
         alert("Knight: I am Abraham Arkwright, a paladin and resident of Dale.")
+        alert("Abraham is a middle-aged human male with salt and pepper hair with a somewhat roughly cut beard and steel-blue eyes.")
         alert("Abraham: You look like you can handle yourself but please allow me to escort you to the village.")
         hero.journal.tollBridgeEncounter = true;
         document.getElementById("villageDaleBtn").style.display = "block";
