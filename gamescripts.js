@@ -42,11 +42,15 @@ function tollBridgeEncounter() {
                 alert("You sucessfully drive off the bandits")
                 alert("An armored knight rides up to greet you.")
                 alert("The knight dismounts.")
+                alert("Knight: that was impressive.")
+                hero.gainRel(abe, 5)
             }
             else {
                 alert("The bandits are about to finish you off.")
                 alert("An armored knight charges the bandit(s), driving them off and saving your life.")
                 alert("The knight dismounts and helps your stand.")
+                alert("That was brave but foolish.")
+                hero.gainRel(abe, 1)
             }
 
         }

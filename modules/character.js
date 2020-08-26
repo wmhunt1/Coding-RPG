@@ -61,11 +61,12 @@ class Character {
         }
         this.relationships = {
             abe: 0,
-            ferra: 0,
+            ferra: 0
         }
         this.reputation = {
             fame: 0,
             infamy: 0,
+            daleVillage: 0,
         }
         this.skills = {
             agility: {
@@ -159,6 +160,14 @@ class Character {
     allyArray[i].basics.alive = true;
 }
 }
+    Character.prototype.gainRel = function (person, value){
+        this.relationships.person += value;
+        console.log("Gained " + value + " relationship point(s) with " + person.basics.name)
+    }
+    Character.prototype.loseRel = function (person, value){
+        this.relationships.person -= value;
+        console.log("Lost " + value + " relationship point(s) with " + person.basics.name)
+    }
 function createHero() {
     let heroName = prompt("Choose Your Name")
     let classChoice = prompt(heroName + " are you a (Fig)hter, (Mag)e, (Rog)ue, or a Freelancer?")
