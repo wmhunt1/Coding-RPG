@@ -79,13 +79,13 @@
     <section id="mineDungeon">
         <button onclick="enterValleyDale()">Leave Area</button>
         <button onclick = "mineDungeon.encounter2()" id = "mee">Mine Exterior Encounter</button>
-        <button id ="em">Enter Mine</button>
-        <button id = "mi1">Mine Interior 1</button>
-        <button id = "fk" >Free Kobolds</button>
-        <button id = "mi2">Mine Interior 2</button>
-        <button id = "fm">Free Miners</button>
-        <button id = "mi3">Mine Interior 3</button>
-        <button id ="gBoss">Goblin Boss</button>
+        <button onclick = "mineDungeon.encounter3()" id ="em">Enter Mine</button>
+        <button onclick = "mineDungeon.encounter4()" id = "mi1">Mine Interior 1</button>
+        <button onclick = "mineDungeon.encounter5()" id = "fk" >Free Kobolds</button>
+        <button onclick = "mineDungeon.encounter6()" id = "mi2">Mine Interior 2</button>
+        <button onclick = "mineDungeon.encounter7()" id = "fm">Free Miners</button>
+        <button onclick = "mineDungeon.encounter8()" id = "mi3">Mine Interior 3</button>
+        <button onclick = "mineDungeon.encounter9()" id ="gBoss">Goblin Boss</button>
     </section>
     <section id="puzzleDungeon1"></section>
     <script src="./modules/character.js"></script>
@@ -164,6 +164,11 @@
             if (hero.journal.metWithContact === false)
             {
                 welcomeDale()
+            }
+            else if (hero.journal.goblinSlayer === true && hero.journal.goblinBossDefeated === true)
+            {
+                alert ("Reward for goblin slayer")
+                hero.journal.goblinSlayer = false;
             }
             else
             {}

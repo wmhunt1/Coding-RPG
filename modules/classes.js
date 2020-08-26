@@ -82,3 +82,25 @@ class Goblin extends Character {
         this.inventory.gold = 1;
     }
 }
+class Goblin extends Character {
+    constructor(name) {
+        super();
+        this.basics.name = name;
+        this.basics.profession = "Goblin Boss";
+        this.basics.xp = 10;
+        this.basics.ally = false;
+        this.stats.currentHp = 4;
+        this.stats.maxHp = 4;
+        this.stats.attack = 0;
+        this.stats.defense = 0;
+        this.stats.speed = 0;
+        this.weapon.name = "Rusty Sword";
+        this.weapon.damage = 2;
+        this.weapon.type = "Melee"
+        this.weapon.damageType = "Slashing";
+        this.armor.name = "Leather";
+        this.armor.type = "Light";
+        this.armor.protection = 1;
+        this.inventory.gold = 20;
+    }
+}

@@ -13,12 +13,14 @@ class Dungeon {
     }
 }
 const mineDungeon = new Dungeon("Dwarven Mines",
+    //encounter 1
     function () {
         alert("You arrive at the Dwarven Mine");
         enterMine()
         document.getElementById("mee").style.display = "block"
 
     },
+    //encounter 2
     function () {
         alert("You encounter goblins guarding the entrance.")
         const goblin1 = new Goblin("Goblin 1")
@@ -29,7 +31,88 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         combat()
         document.getElementById("em").style.display = "block";
     },
-    function(){
-        alert ("Before you enter the mine you notice some kobolds who ask you to free the other kobolds.")
+    //encounter 3
+    function () {
+        alert("Before you enter the mine you notice some kobolds who ask you to free the other kobolds.")
         document.getElementById("mi1").style.display = "block";
-    })
+    },
+    //encounter 4
+    function () {
+        alert("Inside the dungeon you are attacked by more goblins.")
+        alert("You encounter goblins guarding the entrance.")
+        const goblin1 = new Goblin("Goblin 1")
+        const goblin2 = new Goblin("Goblin 2")
+        const goblin3 = new Goblin("Goblin 3")
+        enemyArray = [goblin1, goblin2, goblin3]
+        turnArray = [hero, ferra, goblin1, goblin2, goblin3]
+        combat()
+        document.getElementById("fk").style.display = "block";
+        document.getElementById("mi2").style.display = "block";
+    },//encounter 5
+    function () {
+        if (hero.journal.koboldsRescued === false) {
+            alert("You free the kobolds who thank you and suggest meeting their master Sheepscale for a reward.")
+            document.getElementById("sheepPasture").style.display = "block";
+            hero.journal.koboldsRescued = true;
+        }
+        else {
+            alert("You already freed the kobolds.")
+        }
+    },
+    //encounter 6
+    function () {
+        alert("You encounter goblins guarding a makeshift prison cell.")
+        const goblin1 = new Goblin("Goblin 1")
+        const goblin2 = new Goblin("Goblin 2")
+        const goblin3 = new Goblin("Goblin 3")
+        enemyArray = [goblin1, goblin2, goblin3]
+        turnArray = [hero, ferra, goblin1, goblin2, goblin3]
+        combat()
+        document.getElementById("fm").style.display = "block";
+        document.getElementById("mi3").style.display = "block";
+    },
+    //encounter 7
+    function () {
+        if (hero.journal.minersRescued === false) {
+            alert("You free the miners.")
+            document.getElementById("sheepPasture").style.display = "block";
+            hero.journal.minersRescued = true;
+        }
+        else {
+            alert("You already freed the miners.")
+        }
+    },
+    //encounter 8
+    function () {
+        alert("You encounter goblins guarding a makeshift prison cell.")
+        const goblin1 = new Goblin("Goblin 1")
+        const goblin2 = new Goblin("Goblin 2")
+        const goblin3 = new Goblin("Goblin 3")
+        enemyArray = [goblin1, goblin2, goblin3]
+        turnArray = [hero, ferra, goblin1, goblin2, goblin3]
+        combat()
+        document.getElementById("gBoss").style.display = "block";
+    },
+    //encounter 9
+    function () {
+        if (hero.journal.goblinBossDefeated === false) {
+            alert("You discover the boss of the goblins.")
+            const goblin1 = new Goblin("Goblin 1")
+            const goblin2 = new Goblin("Goblin 2")
+            const goblin3 = new Goblin("Goblin 3")
+            enemyArray = [goblin1, goblin2, goblin3]
+            turnArray = [hero, ferra, goblin1, goblin2, goblin3]
+            combat()
+            if (hero.startsWith.currentHP > 0) {
+                hero.journal.goblinBossDefeated = true
+                alert ("You defeated the Goblin Boss and have secured the mine.")
+            }
+            else {
+                alert("You were defeated by the goblin boss.")
+            }
+        }
+        else {
+            alert("You secured the mine so the miners and get back to work.")
+        }
+    }
+)
