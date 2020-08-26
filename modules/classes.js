@@ -7,14 +7,16 @@ class Cleric extends Character {
     }
 }
 class Fighter extends Character {
-    constructor() {
+    constructor(name) {
         super();
+        this.basics.name = name;
         this.stats.profession = "Fighter"
     }
 }
 class Mage extends Character {
-    constructor() {
+    constructor(name) {
         super();
+        this.basics.name = name;
         this.stats.profession = "Mage"
     }
 }
@@ -26,8 +28,9 @@ class Paladin extends Character {
     }
 }
 class Rogue extends Character {
-    constructor() {
+    constructor(name) {
         super();
+        this.basics.name = name;
         this.stats.profession = "Rogue"
     }
 }
