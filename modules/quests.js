@@ -1,8 +1,9 @@
-//maybe move quest dialog etc into the quests.
+//maybe move quest dialog etc into the quests. events and entries are seperate.
 class Quest {
     constructor(name, reward, event1, event2, event3, event4, event5, event6) {
         this.name = name;
         this.reward = reward;
+        this.status = "Incomplete"
         this.event1 = event1;
         this.event2 = event2;
         this.event3 = event3;
@@ -13,23 +14,23 @@ class Quest {
     }
 }
 Quest.prototype.addJournal = function()
-{
-    
+{    
+    //add jounral entriees by this.event or entry.
 }
 Quest.prototype.getQuest = function()
 {
-
+    //first journal entry or the true/false
 }
 Quest.prototype.questReward = function ()
 {
-
+    hero.addGold(this.reward)
 }
 Quest.prototype.completeQuest = function()
 {
-    
+    this.stats = "Completed"
 }
 //subclasses for kinds of quests
-const welcomeDale = new Quest("Welcome to Dale", "Gold",
+const welcomeDaleFuture = new Quest("Welcome to Dale", 50,
 "I am " + hero.basics.name + ", a " + hero.basics.profession + ".",
 "I took a job to meet the innkeeper in The Village of Dale",
 "I encountered some bandits on the way and met Abraham Arkwright.",

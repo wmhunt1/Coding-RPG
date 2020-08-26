@@ -19,8 +19,9 @@ class Mage extends Character {
     }
 }
 class Paladin extends Character {
-    constructor() {
+    constructor(name) {
         super();
+        this.basics.name = name;
         this.stats.profession = "Paladin"
     }
 }

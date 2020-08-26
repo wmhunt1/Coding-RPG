@@ -50,9 +50,7 @@ class Character {
         this.inventory = {
             gold: 0
         }
-        this.journal = {
-            fame: 0,
-            infamy: 0,
+        this.journal = {  
             entries: [],
             tollBridgeEncounter: false,
             metWithContact: false,
@@ -60,6 +58,14 @@ class Character {
             koboldsRescued: false,
             minersRescued: false,
             goblinBossDefeated: false
+        }
+        this.relationships = {
+            abe: 0,
+            ferra: 0,
+        }
+        this.reputation = {
+            fame: 0,
+            infamy: 0,
         }
         this.skills = {
             agility: {
@@ -173,7 +179,7 @@ function createHero() {
     // hero.basics.name = heroName;
     dagger.equip(hero)
     clothing.equip(hero)
-    hero.addGold(10)
+    hero.inventory.gold = 10;
     alert("You are " + hero.basics.name + ", a " + hero.basics.class + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
     alert("But first you must complete a task.")
     alert("You task is go to The Village of Dale, located within The Valley of Dale, and speak with your contact at the local inn to recieve further.")

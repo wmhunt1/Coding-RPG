@@ -25,13 +25,14 @@ function tollBridgeEncounter() {
             alert("You hand over the gold without a fuss and prepare to cross the bridge.")
             alert("As you are about to cross out of the corner of your eye you see one of the 'guards' preparing to stab you.")
             alert("He stops as an armored knight charges the bandit(s), driving them off.")
+            alert("The knight dismounts.")
         }
         else {
             const bandit1 = new Bandit("Bandit 1");
             const bandit2 = new Bandit("Bandit 2");
             const bandit3 = new Bandit("Bandit 3");
-            const bandit4 = new Bandit("Bandit 3");
-            const bandit5 = new Bandit("Bandit 3");
+            const bandit4 = new Bandit("Bandit 4");
+            const bandit5 = new Bandit("Bandit 5");
             turnArray = [hero, bandit1, bandit2, bandit3, bandit4, bandit5];
             enemyArray = [bandit1, bandit2, bandit3, bandit4, bandit5];
             enemyNumber = enemyArray.length;
@@ -76,6 +77,15 @@ function welcomeDale() {
     document.getElementById("dMine").style.display = "block";
     allyArray[hero, ferra]
 }
+let abe = new Paladin("Abraham Arkwright")
+abe.basics.level += 10;
+abe.stats.currentHp += 100
+abe.stats.maxHp += 100;
+abe.stats.attack += 10;
+abe.stats.defense += 10;
+paladinArmor.equip(abe)
+holySword.equip(abe)
+shield.equip(abe)
 let ferra = new Cleric("Ferra Forgeheart");
 chainShirt.equip(ferra)
 shield.equip(ferra)
