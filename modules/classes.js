@@ -82,7 +82,7 @@ class Goblin extends Character {
         this.inventory.gold = 1;
     }
 }
-class Goblin extends Character {
+class GoblinBoss extends Character {
     constructor(name) {
         super();
         this.basics.name = name;
