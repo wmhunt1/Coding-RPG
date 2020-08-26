@@ -60,8 +60,13 @@ class Character {
             goblinBossDefeated: false
         }
         this.relationships = {
+            //companions
             abe: 0,
-            ferra: 0
+            ferra: 0,
+            //npcs
+            ambrosius: 0,
+            sheepscale: 0,
+            sweetheart: 0,
         }
         this.reputation = {
             fame: 0,
