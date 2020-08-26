@@ -1,13 +1,13 @@
 //character prototype
 class Character {
-    constructor() {
+    constructor(name) {
         //this works for future
         this.action1 = function (target) { this.attack(target) };
         this.action2 = 0;
         this.action3 = 0;
         this.action4 = 0;
         this.basics = {
-            name: "Name",
+            name: name,
             class: "Freelancer",
             level: 1,
             xp: 0,
@@ -157,20 +157,20 @@ function createHero() {
     let heroName = prompt("Choose Your Name")
     let classChoice = prompt(heroName + " are you a (Fig)hter, (Mag)e, (Rog)ue, or a Freelancer?")
     if (classChoice === "Fig") {
-        hero = new Fighter();
+        hero = new Fighter(heroName);
         shield.equip(hero)
     }
     else if (classChoice === "Mag") {
-        hero = new Mage();
+        hero = new Mage(heroName);
         spellbook.equip(hero)
     }
     else if (classChoice === "Rog") {
-        hero = new Rogue();
+        hero = new Rogue(heroName);
     }
     else {
-        hero = new Character();
+        hero = new Character(heroName);
     }
-    hero.basics.name = heroName;
+    // hero.basics.name = heroName;
     dagger.equip(hero)
     clothing.equip(hero)
     alert("You are " + hero.basics.name + ", a " + hero.basics.class + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")

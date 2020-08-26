@@ -99,6 +99,7 @@ Weapon.prototype.equip = function (user) {
 let shield = new Accessory("Shield", "Shield", 0, function (user, value) { user.accessory.shieldBonus += 1 }, "Raises Shield Bonus", 0, 1)
 let spellbook = new Accessory("Basic Spellbook", "Spellbook", 1, function (user, value) { }, "", 0, 1)
 //armor
+let chainShirt = new Armor("Chain Shirt", "Light", 1, function (user, value) { }, "", 0, 1);
 let clothing = new Armor("Clothing", "Clothing", 0, function (user, value) { }, "", 0, 1);
 let leather = new Armor("Leather", "Light", 1, function (user, value) { }, "", 0, 1);
 //consumables
@@ -107,6 +108,7 @@ let potion = new Consumable("Potion", "Healing", 5, function (user, value) { use
 //weapons
 let club = new Weapon("Club", "Melee", "Bludgeoning", 1, function (user, value) { }, "", 0, 1);
 let dagger = new Weapon("Dagger", "Melee", "Slashing", 1, function (user, value) { }, "", 0, 1);
+let warHammer = new Weapon("Warhammer", "Melee", "Bludgeoning", 1, function (user, value) { }, "", 0, 2);
 let sling = new Weapon("Sling", "Ranged", "Bludgeoning", 1, function (user, value) { }, "", 0, 1);
 let shortSword = new Weapon("Short Sword", "Melee", "Slashing", 2, function (user, value) { }, "", 0, 1);
 let wand = new Weapon("Wand", "Magic", "Force", 1, function (user, value) { }, "", 0, 1);

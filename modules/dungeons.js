@@ -25,7 +25,7 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         const goblin2 = new Goblin("Goblin 2")
         const goblin3 = new Goblin("Goblin 3")
         enemyArray = [goblin1, goblin2, goblin3]
-        turnArray = [hero, goblin1, goblin2, goblin3]
+        turnArray = [hero, ferra, goblin1, goblin2, goblin3]
         combat()
         document.getElementById("em").style.display = "block";
     },

@@ -49,10 +49,15 @@ function tollBridgeEncounter() {
 function welcomeDale() {
     alert("You arrive at The Village of Dale with Abraham.")
     alert("You meet with Sweetheart the Ogre and are asked to clearout the Dwarven Mine of the goblins and rescue the miners.")
-    alert("Abraham goes with you.")
+    alert("You stop by the smithy to pick up Ferra")
     //sweetheart gives you some gold for supplies.
     //or Abraham suggests that you go ask Ferra for help since it's her father's mine.
     hero.journal.metWithContact = true;
     hero.journal.goblinSlayer = true;
     document.getElementById("dMine").style.display = "block";
+    allyArray[hero, ferra]
 }
+let ferra = new Cleric ("Ferra Forgeheart");
+chainShirt.equip(ferra)
+shield.equip(ferra)
+warHammer.equip(ferra)
