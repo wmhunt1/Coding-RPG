@@ -55,6 +55,7 @@ class Character {
             tollBridgeEncounter: false,
             metWithContact: false,
             goblinSlayer: false,
+            spokeWithFaldan: false,
             koboldsRescued: false,
             minersRescued: false,
             goblinBossDefeated: false

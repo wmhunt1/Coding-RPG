@@ -170,8 +170,26 @@ const dreamingWorker = new Inn("Dreaming Worker Inn", "Sweetheart the Ogre.", 1,
 );
 //smiths
 const forgeheartSmithy = new Smith("Forgeheart Smithy", "Faldan Forgeheart.", function () {
-    alert("Faldan asks you to kill goblins")
-    alert("Ferra decides to go with you.")
-    document.getElementById("dMine").style.display = "block";
-    allyArray[hero, ferra]
+    if (hero.journal.spokeWithFaldan === false) {
+        alert("Faldan asks you to kill goblins")
+        alert("Ferra decides to go with you.")
+        document.getElementById("dMine").style.display = "block";
+        allyArray[hero, ferra]
+        hero.journal.spokeWithFaldan = true;
+    }
+    else if (hero.journal.goblinSlayer === "Completed") { }
+    else {
+        if (hero.journal.minersRescued === false) {
+            alert("Faldan asks if you're going to go rescue them.")
+        }
+        else {
+            if (hero.journal.goblinBossDefeated === false) {
+                alert("Faldans apprecites you rescuing the miners but still wants the goblins killed.")
+            }
+            else {
+                alert("Faldan Rewards you.")
+                hero.journal.goblinSlayer = "Completed";
+            }
+        }
+    }
 });
