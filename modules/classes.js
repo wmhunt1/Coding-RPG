@@ -1,4 +1,25 @@
 //player classes
+class Artificer extends Character {
+    constructor(name) {
+        super();
+        this.basics.name = name;
+        this.stats.profession = "Artificer"
+    }
+}
+class Barbarian extends Character {
+    constructor(name) {
+        super();
+        this.basics.name = name;
+        this.stats.profession = "Barbarian"
+    }
+}
+class Bard extends Character {
+    constructor(name) {
+        super();
+        this.basics.name = name;
+        this.stats.profession = "Bard"
+    }
+}
 class Cleric extends Character {
     constructor(name) {
         super();
@@ -10,28 +31,28 @@ class Fighter extends Character {
     constructor(name) {
         super();
         this.basics.name = name;
-        this.stats.profession = "Fighter"
+        this.basics.profession = "Fighter"
     }
 }
 class Mage extends Character {
     constructor(name) {
         super();
         this.basics.name = name;
-        this.stats.profession = "Mage"
+        this.basics.profession = "Mage"
     }
 }
 class Paladin extends Character {
     constructor(name) {
         super();
         this.basics.name = name;
-        this.stats.profession = "Paladin"
+        this.basics.profession = "Paladin"
     }
 }
 class Rogue extends Character {
     constructor(name) {
         super();
         this.basics.name = name;
-        this.stats.profession = "Rogue"
+        this.basics.profession = "Rogue"
     }
 }
 //npc classes
