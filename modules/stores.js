@@ -39,10 +39,12 @@ class Store {
         this.useLetter = ""
         this.useFunction = ""
         this.whatTheyBuy = "";
+        this.event1 = "";
+        this.event2 = "";
     }
 }
 class General extends Store {
-    constructor(name, owner) {
+    constructor(name, owner, event1, event2) {
         super();
         this.name = name;
         this.stock = "General Goods";
@@ -53,11 +55,13 @@ class General extends Store {
 
         }
         this.whatTheyBuy = "Anything"
+        this.event1 = event1;
+        this.event2 = event2;
     }
 }
 //subclasses for kinds of stores
 class Inn extends Store {
-    constructor(name, owner, cost) {
+    constructor(name, owner, cost, event1, event2) {
         super();
         this.name = name;
         this.stock = "Food";
@@ -84,10 +88,12 @@ class Inn extends Store {
 
         }
         this.whatTheyBuy = "N/A"
+        this.event1 = event1;
+        this.event2 = event2;
     }
 }
 class Smith extends Store {
-    constructor(name, owner) {
+    constructor(name, owner, event1, event2) {
         super();
         this.name = name;
         this.stock = "Weapons and Armor";
@@ -97,7 +103,9 @@ class Smith extends Store {
         this.useFunction = function forge() {
 
         }
-        this.whatTheyBuy = "Weapons and Armor"
+        this.whatTheyBuy = "Weapons and Armor";
+        this.event1 = event1;
+        this.event2 = event2;
     }
 }
 Store.prototype.buy = function () {
@@ -108,26 +116,45 @@ Store.prototype.sell = function () {
 }
 //enter store function
 //maybe option for events
-Store.prototype.enterStore = function () {
+Store.prototype.enterStore = function (condition) {
     alert("You enter " + this.name)
-    let sChoice = prompt(this.owner + " Asks, would you like to (B)uy, (S)ell, or " + this.use)
-    if (sChoice === "B") {
-        this.buy()
-    }
-    else if (sChoice === "S") {
-        this.sell()
-    }
-    else if (sChoice === this.useLetter) {
-        this.useFunction()
+    if (condition === false) {
+        this.event1()
+        hero.journal.condition = false;
     }
     else {
+        let sChoice = prompt(this.owner + " Asks, would you like to (B)uy, (S)ell, or " + this.use)
+        if (sChoice === "B") {
+            this.buy()
+        }
+        else if (sChoice === "S") {
+            this.sell()
+        }
+        else if (sChoice === this.useLetter) {
+            this.useFunction()
+        }
+        else {
 
+        }
     }
 }
 //stores
 //general
 const triggShop = new General("Trigg Sprocket's General Goods and Sundries", "Trigg Sprocket")
 //inns
-const dreamingWorker = new Inn("Dreaming Worker Inn", "Sweetheart the Ogre.", 1);
+const dreamingWorker = new Inn("Dreaming Worker Inn", "Sweetheart the Ogre.", 1, function () {
+    //finish this dialog
+    alert("You speak with the barmaid who directs you to Sweeheart and she has you speak with her in the kitchen.")
+    alert("She tells you to help the village so they'll trust you before you can start.")
+    hero.journal.metWithContact = true,
+        hero.journal.goblinSlayer = true;
+    //other quests
+}
+);
 //smiths
-const forgeheartSmithy = new Smith("Forgeheart Smithy", "Ferra Forgeheart.");
+const forgeheartSmithy = new Smith("Forgeheart Smithy", "Faldan Forgeheart.", function () {
+    alert("Faldan asks you to kill goblins")
+    alert("Ferra decides to go with you.")
+    document.getElementById("dMine").style.display = "block";
+    allyArray[hero, ferra]
+});

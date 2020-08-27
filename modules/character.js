@@ -196,7 +196,7 @@ function createHero() {
     hero.inventory.gold = 10;
     alert("You are " + hero.basics.name + ", a " + hero.basics.class + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
     alert("But first you must complete a task.")
-    alert("You task is go to The Village of Dale, located within The Valley of Dale, and speak with your contact at the local inn to recieve further.")
+    alert("You task is go to The Village of Dale, located within The Valley of Dale, and speak with your contact at the local inn to receive further.")
     alert("You went through The Dale Pass to enter the valley, the first steps on your journey.")
     alert("On your way to the village you encounter a toll bridge, which appears to be guarded by several rough-looking individuals.")
     enterValleyDale()
