@@ -8,7 +8,7 @@ class Character {
         this.action4 = 0;
         this.basics = {
             name: name,
-            class: "Freelancer",
+            profession: "Freelancer",
             level: 1,
             xp: 0,
             alive: true,
@@ -194,7 +194,7 @@ function createHero() {
     dagger.equip(hero)
     clothing.equip(hero)
     hero.inventory.gold = 10;
-    alert("You are " + hero.basics.name + ", a " + hero.basics.class + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
+    alert("You are " + hero.basics.name + ", a " + hero.basics.profession + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
     alert("But first you must complete a task.")
     alert("You task is go to The Village of Dale, located within The Valley of Dale, and speak with your contact at the local inn to receive further.")
     alert("You went through The Dale Pass to enter the valley, the first steps on your journey.")

@@ -1,9 +1,10 @@
 //maybe move quest dialog etc into the quests. events and entries are seperate.
 class Quest {
-    constructor(name, reward, event1, event2, event3, event4, event5, event6) {
+    constructor(name, reward, entry1, event1, event3, event4, event5, event6) {
         this.name = name;
         this.reward = reward;
         this.status = "Incomplete"
+        this.entry1 = entry1;
         this.event1 = event1;
         this.event2 = event2;
         this.event3 = event3;
@@ -30,6 +31,7 @@ Quest.prototype.completeQuest = function()
     this.stats = "Completed"
 }
 //subclasses for kinds of quests
+//tollroad is event1, arriving at dale is event2, talking to sweetheart is event3
 const welcomeDaleFuture = new Quest("Welcome to Dale", 50,
 "I am " + hero.basics.name + ", a " + hero.basics.profession + ".",
 "I took a job to meet the innkeeper in The Village of Dale",

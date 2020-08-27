@@ -116,9 +116,9 @@ Store.prototype.sell = function () {
 }
 //enter store function
 //maybe option for events
-Store.prototype.enterStore = function (condition) {
+Store.prototype.enterStore = function (event, condition) {
     alert("You enter " + this.name)
-    if (condition === false) {
+    if (event === condition) {
         this.event1()
         hero.journal.condition = false;
     }
