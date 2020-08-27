@@ -146,8 +146,8 @@ const dreamingWorker = new Inn("Dreaming Worker Inn", "Sweetheart the Ogre.", 1,
     //finish this dialog
     alert("You speak with the barmaid who directs you to Sweeheart and she has you speak with her in the kitchen.")
     alert("She tells you to help the village so they'll trust you before you can start.")
-    hero.journal.metWithContact = true,
-        hero.journal.goblinSlayer = true;
+    hero.journal.metWithContact = true;
+    hero.journal.goblinSlayer = true;
     //other quests
 }
 );
