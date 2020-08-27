@@ -222,6 +222,7 @@ let enemyNumber = 0;
 function combat() {
     turnArray.sort((a, b) => (a.stats.speed < b.stats.speed) ? 1 : (a.stats.speed === b.stats.speed) ? ((a.basics.name > b.basics.name) ? 1 : -1) : -1)
     console.log(turnArray)
+    enemyNumber = enemyArray.length;
     console.log("You face " + enemyNumber + " enemies.")
     while (enemyNumber != 0 && hero.stats.currentHp > 0) {
         console.log(hero.stats.currentHp + " current HP for hero")

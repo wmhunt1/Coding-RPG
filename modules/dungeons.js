@@ -29,7 +29,10 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         enemyArray = [goblin1, goblin2, goblin3]
         turnArray = [hero, ferra, goblin1, goblin2, goblin3]
         combat()
-        document.getElementById("em").style.display = "block";
+        if (hero.stats.currentHp > 0) {
+            document.getElementById("em").style.display = "block";
+        }
+        else { }
     },
     //encounter 3
     function () {
@@ -46,14 +49,18 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         enemyArray = [goblin1, goblin2, goblin3]
         turnArray = [hero, ferra, goblin1, goblin2, goblin3]
         combat()
-        document.getElementById("fk").style.display = "block";
-        document.getElementById("mi2").style.display = "block";
+        if (hero.stats.currentHp > 0) {
+            document.getElementById("fk").style.display = "block";
+            document.getElementById("mi2").style.display = "block";
+        }
+        else { }
     },//encounter 5
     function () {
         if (hero.journal.koboldsRescued === false) {
             alert("You free the kobolds who thank you and suggest meeting their master Sheepscale for a reward.")
             document.getElementById("sheepPasture").style.display = "block";
             hero.journal.koboldsRescued = true;
+            hero.gainRel(ferra, 1)
         }
         else {
             alert("You already freed the kobolds.")
@@ -68,8 +75,11 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         enemyArray = [goblin1, goblin2, goblin3]
         turnArray = [hero, ferra, goblin1, goblin2, goblin3]
         combat()
-        document.getElementById("fm").style.display = "block";
-        document.getElementById("mi3").style.display = "block";
+        if (hero.stats.currentHp > 0) {
+            document.getElementById("fm").style.display = "block";
+            document.getElementById("mi3").style.display = "block";
+        }
+        else { }
     },
     //encounter 7
     function () {
@@ -77,6 +87,7 @@ const mineDungeon = new Dungeon("Dwarven Mines",
             alert("You free the miners.")
             document.getElementById("sheepPasture").style.display = "block";
             hero.journal.minersRescued = true;
+            hero.gainRel(ferra, 5)
         }
         else {
             alert("You already freed the miners.")
@@ -91,7 +102,10 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         enemyArray = [goblin1, goblin2, goblin3]
         turnArray = [hero, ferra, goblin1, goblin2, goblin3]
         combat()
-        document.getElementById("gBoss").style.display = "block";
+        if (hero.stats.currentHp > 0) {
+            document.getElementById("gBoss").style.display = "block";
+        }
+        else { }
     },
     //encounter 9
     function () {
@@ -103,9 +117,9 @@ const mineDungeon = new Dungeon("Dwarven Mines",
             enemyArray = [goblin1, goblin2, goblin3]
             turnArray = [hero, ferra, goblin1, goblin2, goblin3]
             combat()
-            if (hero.startsWith.currentHP > 0) {
+            if (hero.stats.currentHp > 0) {
                 hero.journal.goblinBossDefeated = true
-                alert ("You defeated the Goblin Boss and have secured the mine.")
+                alert("You defeated the Goblin Boss and have secured the mine.")
             }
             else {
                 alert("You were defeated by the goblin boss.")

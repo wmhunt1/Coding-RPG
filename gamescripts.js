@@ -36,7 +36,6 @@ function tollBridgeEncounter() {
             const bandit5 = new Bandit("Bandit 5");
             turnArray = [hero, bandit1, bandit2, bandit3, bandit4, bandit5];
             enemyArray = [bandit1, bandit2, bandit3, bandit4, bandit5];
-            enemyNumber = enemyArray.length;
             allyArray = [hero];
             combat()
             if (hero.stats.currentHp > 0) {

@@ -90,7 +90,7 @@ class Goblin extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Goblin";
-        this.basics.xp = 5;
+        this.basics.xp = 10;
         this.basics.ally = false;
         this.stats.currentHp = 2;
         this.stats.maxHp = 2;
@@ -112,7 +112,7 @@ class GoblinBoss extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Goblin Boss";
-        this.basics.xp = 10;
+        this.basics.xp = 50;
         this.basics.ally = false;
         this.stats.currentHp = 4;
         this.stats.maxHp = 4;
