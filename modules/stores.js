@@ -120,22 +120,21 @@ Store.prototype.enterStore = function (event, condition) {
     alert("You enter " + this.name)
     if (event === condition) {
         this.event1()
-        hero.journal.condition = false;
     }
     else {
-        let sChoice = prompt(this.owner + " Asks, would you like to (B)uy, (S)ell, or " + this.use)
-        if (sChoice === "B") {
-            this.buy()
-        }
-        else if (sChoice === "S") {
-            this.sell()
-        }
-        else if (sChoice === this.useLetter) {
-            this.useFunction()
-        }
-        else {
-            alert("You leave.")
-        }
+    }
+    let sChoice = prompt(this.owner + " Asks, would you like to (B)uy, (S)ell, or " + this.use)
+    if (sChoice === "B") {
+        this.buy()
+    }
+    else if (sChoice === "S") {
+        this.sell()
+    }
+    else if (sChoice === this.useLetter) {
+        this.useFunction()
+    }
+    else {
+        alert("You leave.")
     }
 }
 //stores
