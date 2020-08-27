@@ -73,7 +73,6 @@ function tollBridgeEncounter() {
     }
 }
 function welcomeDale() {
-    alert("You arrive at The Village of Dale with Abraham.")
     alert("Abraham: Well we've arrived. If you're going to be staying here a while you should get a room over at the inn.")
     alert("He points over to the inn, the sign says 'The Dreaming Worker Inn'")
     alert("Abraham: Come talk to me if you need anything.")

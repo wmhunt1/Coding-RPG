@@ -134,7 +134,7 @@ Store.prototype.enterStore = function (condition) {
             this.useFunction()
         }
         else {
-
+            alert("You leave.")
         }
     }
 }
@@ -144,8 +144,25 @@ const triggShop = new General("Trigg Sprocket's General Goods and Sundries", "Tr
 //inns
 const dreamingWorker = new Inn("Dreaming Worker Inn", "Sweetheart the Ogre.", 1, function () {
     //finish this dialog
-    alert("You speak with the barmaid who directs you to Sweeheart and she has you speak with her in the kitchen.")
-    alert("She tells you to help the village so they'll trust you before you can start.")
+    //alert("You speak with the barmaid who directs you to Sweeheart and she has you speak with her in the kitchen.")
+    //alert("She tells you to help the village so they'll trust you before you can start.")
+    alert("There are a few dwarves drinking and playing cards while a blonde woman with some elven heritage brings cleans.")
+    alert("Barmaid: Good morning, I'm Faye, what can I get you?")
+    alert(hero.basics.name + ": I'm looking for the innkeeper.")
+    alert("Faye: *looks towards the kitchen* There's someone here to see you, Ma'am.")
+    alert("Ma'am: I'll be out in a moment, dear.")
+    alert("A moment later, a giant of a woman walks out wearing a pink dress with an apron. She has a matronly quality about her...she's also an ogre.")
+    alert("Ma'am: Well hello there, I'm Sweetheart the Ogre, the owner of this establishment. What can I do for you?")
+    alert(hero.basics.name + ": hello Sweetheart...")
+    alert("Sweetheart: Please it's Sweetheart the Ogre, otherwise I'm doing to think you're flirting with me *she says with a wink*.")
+    alert(hero.basics.name + ": alright Sweetheart the Ogre. *You discretly hand her a letter.")
+    alert("Sweetheart: *takes the letter and reads it* Come speak with me in the kitchen for a moment.")
+    alert("You follow her into the kitchen*")
+    alert("Sweetheart: So you're, " + hero.basics.name + " our " + hero.basics.profession + ".")
+    alert("Sweetheart: Before you start you're going to need to improve your relationship with the villagers.")
+    alert("Sweetheart: To begin, I believe that Faldan Forgeheart over at the smithy is looking for help reclaiming the mine.")
+    alert("Sweetheart: It would also get these drunken layabouts out of my inn *she says looking over at the Dwarves.")
+    alert("You leave the inn.")
     hero.journal.metWithContact = true;
     hero.journal.goblinSlayer = true;
     //other quests
