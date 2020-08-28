@@ -15,6 +15,6 @@ chainShirt.equip(ferra)
 shield.equip(ferra)
 warHammer.equip(ferra)
 //npcs
-let ambrosius = new Character("Ambrosius the Sage")
-let sheepscale = new Character("Sheepscale")
-let sweetheart = new Character("Sweetheart the Ogre")
+let ambrosius = new Character("Ambrosius the Sage");
+let sheepscale = new Character("Sheepscale");
+let sweetheart = new Character("Sweetheart the Ogre");

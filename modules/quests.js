@@ -96,9 +96,6 @@ function () {
 },
 //talking with Sweetheart event
 function () {
-    //finish this dialog
-    //alert("You speak with the barmaid who directs you to Sweeheart and she has you speak with her in the kitchen.")
-    //alert("She tells you to help the village so they'll trust you before you can start.")
     alert("There are a few dwarves drinking and playing cards while a blonde woman with some elven heritage brings cleans.")
     alert("Barmaid: Good morning, I'm Faye, what can I get you?")
     alert(hero.basics.name + ": I'm looking for the innkeeper.")

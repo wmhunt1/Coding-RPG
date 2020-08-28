@@ -119,7 +119,7 @@ Store.prototype.sell = function () {
 Store.prototype.enterStore = function (event, condition) {
     alert("You enter " + this.name)
     if (event === condition) {
-        this.event1()
+        this.event1
     }
     else {
     }
@@ -141,9 +141,7 @@ Store.prototype.enterStore = function (event, condition) {
 //general
 const triggShop = new General("Trigg Sprocket's General Goods and Sundries", "Trigg Sprocket")
 //inns
-const dreamingWorker = new Inn("Dreaming Worker Inn", "Sweetheart the Ogre.", 1, 
-// welcomeDale.event3()
-);
+const dreamingWorker = new Inn("Dreaming Worker Inn", "Sweetheart the Ogre.", 1, welcomeDale.event3(), "")
 //smiths
 const forgeheartSmithy = new Smith("Forgeheart Smithy", "Faldan Forgeheart.", function () {
     if (hero.journal.spokeWithFaldan === false) {

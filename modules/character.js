@@ -1,3 +1,4 @@
+let hero = "";
 //character prototype
 class Character {
     constructor(name) {
@@ -176,6 +177,11 @@ class Character {
     }
 function createHero() {
     let heroName = prompt("Choose Your Name")
+    if (heroName === "")
+    {
+        heroName = "Hero"
+    }
+    else{}
     let classChoice = prompt(heroName + " are you a (Fig)hter, (Mag)e, (Rog)ue, or a Freelancer?")
     if (classChoice === "Fig") {
         hero = new Fighter(heroName);
