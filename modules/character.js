@@ -200,5 +200,6 @@ function createHero() {
     alert("You task is go to The Village of Dale, located within The Valley of Dale, and speak with your contact at the local inn to receive further.")
     alert("You went through The Dale Pass to enter the valley, the first steps on your journey.")
     alert("On your way to the village you encounter a toll bridge, which appears to be guarded by several rough-looking individuals.")
+    allyArray.push(hero)
     enterValleyDale()
 }

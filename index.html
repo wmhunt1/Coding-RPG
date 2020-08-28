@@ -56,7 +56,7 @@
         <button id="sheepLair">Sheepscale's Lair</button>
         <button id="sheepPasture">Sheep Pasture</button>
         <button id="spiderCave">Spider Cave</button>
-        <button onclick="tollBridgeEncounter()">Toll Bridge</button>
+        <button onclick="welcomeDale.event1()">Toll Bridge</button>
         <button id="tradePost">Trading Post</button>
         <button id="villageDaleBtn" onclick="enterVillageDale()">Village of Dale</button>
         <button id="witchCottage">Witch's Cottage</button>
@@ -163,7 +163,7 @@
             document.getElementById("valleyDale").style.display = "none";
             document.getElementById("villageDale").style.display = "block";
             if (hero.journal.metWithContact === false) {
-                welcomeDale()
+                welcomeDale.event2()
             }
             else if (hero.journal.goblinSlayer === true && hero.journal.goblinBossDefeated === true) {
                 alert("Reward for goblin slayer")

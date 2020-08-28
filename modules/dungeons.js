@@ -27,7 +27,6 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         const goblin2 = new Goblin("Goblin 2")
         const goblin3 = new Goblin("Goblin 3")
         enemyArray = [goblin1, goblin2, goblin3]
-        turnArray = [hero, ferra, goblin1, goblin2, goblin3]
         combat()
         if (hero.stats.currentHp > 0) {
             document.getElementById("em").style.display = "block";
@@ -47,7 +46,6 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         const goblin2 = new Goblin("Goblin 2")
         const goblin3 = new Goblin("Goblin 3")
         enemyArray = [goblin1, goblin2, goblin3]
-        turnArray = [hero, ferra, goblin1, goblin2, goblin3]
         combat()
         if (hero.stats.currentHp > 0) {
             document.getElementById("fk").style.display = "block";
@@ -73,7 +71,6 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         const goblin2 = new Goblin("Goblin 2")
         const goblin3 = new Goblin("Goblin 3")
         enemyArray = [goblin1, goblin2, goblin3]
-        turnArray = [hero, ferra, goblin1, goblin2, goblin3]
         combat()
         if (hero.stats.currentHp > 0) {
             document.getElementById("fm").style.display = "block";
@@ -100,7 +97,6 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         const goblin2 = new Goblin("Goblin 2")
         const goblin3 = new Goblin("Goblin 3")
         enemyArray = [goblin1, goblin2, goblin3]
-        turnArray = [hero, ferra, goblin1, goblin2, goblin3]
         combat()
         if (hero.stats.currentHp > 0) {
             document.getElementById("gBoss").style.display = "block";
@@ -115,7 +111,6 @@ const mineDungeon = new Dungeon("Dwarven Mines",
             const goblin2 = new Goblin("Goblin 2")
             const goblin3 = new Goblin("Goblin 3")
             enemyArray = [goblin1, goblin2, goblin3]
-            turnArray = [hero, ferra, goblin1, goblin2, goblin3]
             combat()
             if (hero.stats.currentHp > 0) {
                 hero.journal.goblinBossDefeated = true

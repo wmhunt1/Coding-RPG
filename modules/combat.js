@@ -1,3 +1,8 @@
+//combat elements
+let turnArray = [];
+let enemyArray = [];
+let allyArray = [];
+let enemyNumber = 0;
 //changes based on checkResist
 let immune = false;
 let resist = false;
@@ -213,13 +218,9 @@ Character.prototype.turn = function () {
     }
     this.conditionRecover()
 }
-//combat elements
-let turnArray = [];
-let enemyArray = [];
-let allyArray = [];
-let enemyNumber = 0;
 //combat function
 function combat() {
+    turnArray = allyArray.concat(enemyArray)
     turnArray.sort((a, b) => (a.stats.speed < b.stats.speed) ? 1 : (a.stats.speed === b.stats.speed) ? ((a.basics.name > b.basics.name) ? 1 : -1) : -1)
     console.log(turnArray)
     enemyNumber = enemyArray.length;
