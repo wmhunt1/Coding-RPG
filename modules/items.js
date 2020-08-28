@@ -73,7 +73,7 @@ Accessory.prototype.equip = function (user) {
     user.accessory.shieldBonus = 0;
     user.accessory.name = this.name;
     user.accessory.effect = this.effectTxt;
-    this.effect;
+    this.effect(user)
     console.log(user.basics.name + " equiped " + this.name)
     console.log(user)
 }
@@ -82,7 +82,7 @@ Armor.prototype.equip = function (user) {
     user.armor.name = this.name;
     user.armor.protection = this.value;
     user.armor.effect = this.effectTxt;
-    this.effect;
+    this.effect(user);
     console.log(user.basics.name + " equiped " + this.name)
     console.log(user)
 }
@@ -91,11 +91,12 @@ Weapon.prototype.equip = function (user) {
     user.weapon.damage = this.value;
     user.weapon.damageType = this.damageType;
     user.weapon.effect = this.effectTxt;
-    this.effect;
+    this.effect(user);
     console.log(user.basics.name + " equiped " + this.name)
     console.log(user)
 }
 //accessories
+let knittedSweater = new Accessory("Knitted Sweater", "Sweater", 1, function (user, value) {user.resistances.ice = true}, "A sweater knitted by Sheepscale.", 0, 1)
 let shield = new Accessory("Shield", "Shield", 0, function (user, value) { user.accessory.shieldBonus += 1 }, "Raises Shield Bonus", 0, 1)
 let spellbook = new Accessory("Basic Spellbook", "Spellbook", 1, function (user, value) { }, "", 0, 1)
 //armor

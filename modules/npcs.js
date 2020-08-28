@@ -11,7 +11,7 @@ holySword.equip(abe)
 shield.equip(abe)
 //ferra forgeheart
 let ferra = new Cleric("Ferra Forgeheart");
-chainShirt.equip(ferra)
+clothing.equip(ferra)
 shield.equip(ferra)
 warHammer.equip(ferra)
 //npcs

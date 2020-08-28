@@ -201,6 +201,7 @@ function createHero() {
     // hero.basics.name = heroName;
     holySword.equip(hero)
     clothing.equip(hero)
+    knittedSweater.equip(hero)
     hero.inventory.gold = 10;
     alert("You are " + hero.basics.name + ", a " + hero.basics.profession + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
     alert("But first you must complete a task.")
@@ -208,5 +209,6 @@ function createHero() {
     alert("You went through The Dale Pass to enter the valley, the first steps on your journey.")
     alert("On your way to the village you encounter a toll bridge, which appears to be guarded by several rough-looking individuals.")
     allyArray.push(hero)
+    console.log(hero)
     enterValleyDale()
 }
