@@ -3,7 +3,7 @@
 let enoughGold = false;
 Character.prototype.addGold = function (x) {
     this.inventory.gold += x;
-    alert(hero.stats.name + " gained " + x + " gold.")
+    alert(this.basics.name + " gained " + x + " gold.")
 }
 Character.prototype.removeGold = function (x) {
     this.inventory.gold -= x;
@@ -119,7 +119,7 @@ Store.prototype.sell = function () {
 Store.prototype.enterStore = function (event, condition) {
     alert("You enter " + this.name)
     if (event === condition) {
-        this.event1
+        this.event1()
     }
     else {
     }
@@ -141,15 +141,11 @@ Store.prototype.enterStore = function (event, condition) {
 //general
 const triggShop = new General("Trigg Sprocket's General Goods and Sundries", "Trigg Sprocket")
 //inns
-const dreamingWorker = new Inn("Dreaming Worker Inn", "Sweetheart the Ogre.", 1, welcomeDale.event3(), "")
+const dreamingWorker = new Inn("Dreaming Worker Inn", "Sweetheart the Ogre.", 1, function () { welcomeDale.event3() }, "")
 //smiths
 const forgeheartSmithy = new Smith("Forgeheart Smithy", "Faldan Forgeheart.", function () {
     if (hero.journal.spokeWithFaldan === false) {
-        alert("Faldan asks you to kill goblins")
-        alert("Ferra decides to go with you.")
-        document.getElementById("dMine").style.display = "block";
-        allyArray.push(hero)
-        hero.journal.spokeWithFaldan = true;
+        goblinSlayer.event1()
     }
     else if (hero.journal.goblinSlayer === "Completed") { }
     else {
@@ -160,10 +156,10 @@ const forgeheartSmithy = new Smith("Forgeheart Smithy", "Faldan Forgeheart.", fu
             if (hero.journal.goblinBossDefeated === false) {
                 alert("Faldans apprecites you rescuing the miners but still wants the goblins killed.")
             }
-            else {
-                alert("Faldan Rewards you.")
-                hero.journal.goblinSlayer = "Completed";
+            else if (hero.journal.goblinSlayerReward === false) {
+                goblinSlayer.event5()
             }
+            else { }
         }
     }
 });

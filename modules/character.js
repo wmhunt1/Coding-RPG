@@ -59,7 +59,8 @@ class Character {
             spokeWithFaldan: false,
             koboldsRescued: false,
             minersRescued: false,
-            goblinBossDefeated: false
+            goblinBossDefeated: false,
+            goblinSlayerReward: false
         }
         this.relationships = {
             //companions

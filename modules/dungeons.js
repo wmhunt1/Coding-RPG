@@ -35,13 +35,12 @@ const mineDungeon = new Dungeon("Dwarven Mines",
     },
     //encounter 3
     function () {
-        alert("Before you enter the mine you notice some kobolds who ask you to free the other kobolds.")
+        goblinSlayer.event2()
         document.getElementById("mi1").style.display = "block";
     },
     //encounter 4
     function () {
-        alert("Inside the dungeon you are attacked by more goblins.")
-        alert("You encounter goblins guarding the entrance.")
+        alert("Inside the dungeon you are attacked by goblins that are forcing some kobolds to work.")
         const goblin1 = new Goblin("Goblin 1")
         const goblin2 = new Goblin("Goblin 2")
         const goblin3 = new Goblin("Goblin 3")
@@ -54,15 +53,7 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         else { }
     },//encounter 5
     function () {
-        if (hero.journal.koboldsRescued === false) {
-            alert("You free the kobolds who thank you and suggest meeting their master Sheepscale for a reward.")
-            document.getElementById("sheepPasture").style.display = "block";
-            hero.journal.koboldsRescued = true;
-            hero.gainRel(ferra, 1)
-        }
-        else {
-            alert("You already freed the kobolds.")
-        }
+        goblinSlayer.event3()
     },
     //encounter 6
     function () {
@@ -80,19 +71,11 @@ const mineDungeon = new Dungeon("Dwarven Mines",
     },
     //encounter 7
     function () {
-        if (hero.journal.minersRescued === false) {
-            alert("You free the miners.")
-            document.getElementById("sheepPasture").style.display = "block";
-            hero.journal.minersRescued = true;
-            hero.gainRel(ferra, 5)
-        }
-        else {
-            alert("You already freed the miners.")
-        }
+        goblinSlayer.event4()
     },
     //encounter 8
     function () {
-        alert("You encounter goblins guarding a makeshift prison cell.")
+        alert("You encounter goblins guarding the foreman's office")
         const goblin1 = new Goblin("Goblin 1")
         const goblin2 = new Goblin("Goblin 2")
         const goblin3 = new Goblin("Goblin 3")
