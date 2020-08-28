@@ -70,7 +70,7 @@ class Inn extends Store {
         this.use = "(G)et a room?";
         this.useLetter = "G";
         this.useFunction = function getRoom() {
-            let choice = prompt("Get a room for " + this.cost + " (Y/N)?")
+            let choice = prompt("Get a room for " + this.cost + " gold (Y/N)?")
             if (choice === "Y") {
                 hero.checkGold(this.cost)
                 if (enoughGold == true) {
@@ -158,6 +158,7 @@ const forgeheartSmithy = new Smith("Forgeheart Smithy", "Faldan Forgeheart.", fu
             }
             else if (hero.journal.goblinSlayerReward === false) {
                 goblinSlayer.event5()
+                hero.journal.goblinSlayerReward = false
             }
             else { }
         }

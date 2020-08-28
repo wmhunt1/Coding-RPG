@@ -189,6 +189,7 @@ Character.prototype.turn = function () {
         this.checkCondition()
         if (skipTurn == true) { }
         else {
+            console.log("It is " + this.basics.name + "'s turn.")
             if (this.basics.ally == true) {
                 let action = prompt("(A)ttack or user a (P)otion?");
                 if (action === "A") {
@@ -244,7 +245,7 @@ function combat() {
             allyArray[i].reset();
         }
         for (var i = 0; i < enemyArray.length; i++) {
-            hero.addGold(enemyArray[i])
+            hero.addGold(enemyArray[i].inventory.gold)
         }
     }
     else {

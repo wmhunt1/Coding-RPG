@@ -199,7 +199,7 @@ function createHero() {
         hero = new Character(heroName);
     }
     // hero.basics.name = heroName;
-    dagger.equip(hero)
+    holySword.equip(hero)
     clothing.equip(hero)
     hero.inventory.gold = 10;
     alert("You are " + hero.basics.name + ", a " + hero.basics.profession + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")

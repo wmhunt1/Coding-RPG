@@ -27,7 +27,7 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         const goblin2 = new Goblin("Goblin 2")
         const goblin3 = new Goblin("Goblin 3")
         enemyArray = [goblin1, goblin2, goblin3]
-        combat()
+        //combat()
         if (hero.stats.currentHp > 0) {
             document.getElementById("em").style.display = "block";
         }
@@ -45,7 +45,7 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         const goblin2 = new Goblin("Goblin 2")
         const goblin3 = new Goblin("Goblin 3")
         enemyArray = [goblin1, goblin2, goblin3]
-        combat()
+        //combat()
         if (hero.stats.currentHp > 0) {
             document.getElementById("fk").style.display = "block";
             document.getElementById("mi2").style.display = "block";
@@ -62,16 +62,16 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         const goblin2 = new Goblin("Goblin 2")
         const goblin3 = new Goblin("Goblin 3")
         enemyArray = [goblin1, goblin2, goblin3]
-        combat()
+        //combat()
         if (hero.stats.currentHp > 0) {
             document.getElementById("fm").style.display = "block";
-            document.getElementById("mi3").style.display = "block";
         }
         else { }
     },
     //encounter 7
     function () {
         goblinSlayer.event4()
+        document.getElementById("mi3").style.display = "block";
     },
     //encounter 8
     function () {
@@ -80,7 +80,7 @@ const mineDungeon = new Dungeon("Dwarven Mines",
         const goblin2 = new Goblin("Goblin 2")
         const goblin3 = new Goblin("Goblin 3")
         enemyArray = [goblin1, goblin2, goblin3]
-        combat()
+        //combat()
         if (hero.stats.currentHp > 0) {
             document.getElementById("gBoss").style.display = "block";
         }
@@ -94,7 +94,7 @@ const mineDungeon = new Dungeon("Dwarven Mines",
             const goblin2 = new Goblin("Goblin 2")
             const goblin3 = new Goblin("Goblin 3")
             enemyArray = [goblin1, goblin2, goblin3]
-            combat()
+            //combat()
             if (hero.stats.currentHp > 0) {
                 hero.journal.goblinBossDefeated = true
                 alert("You defeated the Goblin Boss and have secured the mine.")
