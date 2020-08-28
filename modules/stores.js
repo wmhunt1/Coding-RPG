@@ -154,7 +154,7 @@ const forgeheartSmithy = new Smith("Forgeheart Smithy", "Faldan Forgeheart.", fu
         }
         else {
             if (hero.journal.goblinBossDefeated === false) {
-                alert("Faldans apprecites you rescuing the miners but still wants the goblins killed.")
+                alert("Faldans appreciates you rescuing the miners but still wants the goblins killed.")
             }
             else if (hero.journal.goblinSlayerReward === false) {
                 goblinSlayer.event5()
