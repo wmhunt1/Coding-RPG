@@ -39,7 +39,7 @@ class Mage extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Mage"
-        this.action2 = ""
+        this.action2 = function(user,target) {magicMissile.effect(user,target)}
     }
 }
 class Paladin extends Character {

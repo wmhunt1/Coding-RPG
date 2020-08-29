@@ -201,14 +201,19 @@ Character.prototype.turn = function () {
                         this.action1(enemyArray[target]);
                     }
                 }
-                else if (action === "S")
-                {
+                else if (action === "S") {
                     let target = prompt("Choose target by number (starting from 0).");
                     if (enemyArray[target] === undefined) {
                         alert(this.basics.name + " attacks no one.")
                     }
                     else {
-                        this.action2(enemyArray[this, target])
+                        if (this.stats.currentSp > 0) {
+                            this.action2(this, enemyArray[target])
+                            this.stats.currentSp--;
+                        }
+                        else {
+                            alert(this.basics.name + "didn't have enough SP.")
+                        }
                     }
                 }
                 else if (action === "P") {

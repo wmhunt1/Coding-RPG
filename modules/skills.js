@@ -6,8 +6,8 @@ class Ability {
 class Spell extends Ability {
     constructor(name, effect) {
         super();
-        this.name = name
-        this.effect = effect
+        this.name = name;
+        this.effect = effect;
     }
 }
 let magicMissile = new Spell("Magic Missile", function (user, target) {
@@ -16,8 +16,8 @@ let magicMissile = new Spell("Magic Missile", function (user, target) {
         alert(user.basics.name + " fires a magical missile at " + target.basics.name + " dealing " + user.weapon.damage + " damage.")
 
     let dmg = user.weapon.damage;
-    this.checkResist(target)
-    this.checkImmune(target)
+    user.checkResist(target)
+    user.checkImmune(target)
     if (resist == true) {
         alert(target.basics.name + "resisted the " + user.weapon.damageType + "and took " + dmg / 2 + " damage.")
         target.damage(dmg / 2)
@@ -31,5 +31,5 @@ let magicMissile = new Spell("Magic Missile", function (user, target) {
         target.damage(dmg)
         alert(target.basics.name + " loses " + dmg + " Hitpoints.")
     }
-
+    target.isAlive();
 })

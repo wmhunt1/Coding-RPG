@@ -18,8 +18,8 @@ class Character {
         this.stats = {
             currentHp: 10,
             maxHp: 10,
-            currentSp: 0,
-            maxSp: 0,
+            currentSp: 2,
+            maxSp: 2,
             attack: 1,
             defense: 1,
             speed: 1,
@@ -183,12 +183,12 @@ function createHero() {
         heroName = "Hero"
     }
     else{}
-    let classChoice = prompt(heroName + " are you a (Cle)ric, (Fig)hter, (Mag)e, (Rog)ue, or a Freelancer?")
-    if (classChoice === "Cle") {
-        hero = new Mage(heroName);
-        spellbook.equip(hero)
-    }
-    else if (classChoice === "Fig") {
+    let classChoice = prompt(heroName + " are you a (Fig)hter, (Mag)e, (Rog)ue, or a Freelancer?")
+    // if (classChoice === "Cle") {
+    //     hero = new Mage(heroName);
+    //     spellbook.equip(hero)
+    // }
+    if (classChoice === "Fig") {
         hero = new Fighter(heroName);
         shield.equip(hero)
     }
