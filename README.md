@@ -6,7 +6,6 @@ to-Do:
 - Characters: Dialog for NPCs
 - Classes: Action2 for each class
     * Artificer - Bomb(damage on entire enemy Array)
-    * Barbarain - Rage (increases temp damage)
     * Bard - Inspire (buff for ally array)
     * Cleric - Heal
     * Druid

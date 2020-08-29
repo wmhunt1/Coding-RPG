@@ -8,3 +8,9 @@ function addText(x) {
     var element = document.getElementById("gameText");
     element.appendChild(tag);
 }
+function combatTest()
+{
+    const goblin1 = new Goblin("Goblin 1")
+    enemyArray = [goblin1]
+    combat()
+}

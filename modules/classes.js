@@ -11,6 +11,8 @@ class Barbarian extends Character {
         super();
         this.basics.name = name;
         this.stats.profession = "Barbarian"
+        this.action2 = function(user) {rage.effect(user)}
+
     }
 }
 class Bard extends Character {

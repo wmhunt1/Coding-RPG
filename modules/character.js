@@ -176,6 +176,7 @@ class Character {
         this.relationships.person -= value;
         console.log("Lost " + value + " relationship point(s) with " + person.basics.name)
     }
+    //eventually make this into options etc.
 function createHero() {
     let heroName = prompt("Choose Your Name")
     if (heroName === "")
@@ -184,10 +185,6 @@ function createHero() {
     }
     else{}
     let classChoice = prompt(heroName + " are you a (Fig)hter, (Mag)e, (Rog)ue, or a Freelancer?")
-    // if (classChoice === "Cle") {
-    //     hero = new Mage(heroName);
-    //     spellbook.equip(hero)
-    // }
     if (classChoice === "Fig") {
         hero = new Fighter(heroName);
         shield.equip(hero)
@@ -200,7 +197,7 @@ function createHero() {
         hero = new Rogue(heroName);
     }
     else {
-        hero = new Character(heroName);
+        hero = new Cleric(heroName);
     }
     // hero.basics.name = heroName;
     holySword.equip(hero)

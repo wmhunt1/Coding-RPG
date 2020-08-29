@@ -12,6 +12,17 @@ class Spell extends Ability {
         this.effect = effect;
     }
 }
+//abilities
+let rage = new Ability("Rage",
+function (user){
+    if (user.stats.currentSp > 0) {
+        alert(user.basics.name + " begins to rage.")
+        user.weapon.tempBonus = user.basics.level;
+    }
+    else {
+        alert(user.basics.name + "didn't have enough SP.")
+    }
+})
 //spells
 let magicMissile = new Spell("Magic Missile", function (user) {
     let target = prompt("Choose target by number (starting from 0).");
