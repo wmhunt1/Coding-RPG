@@ -35,6 +35,10 @@ class Character {
             damageBonus: 0,
             tempBonus: 0,
         };
+        this.helmet = {
+            name: "None",
+            effect: "NA",
+        }
         this.armor = {
             name: "None",
             type: "None",
