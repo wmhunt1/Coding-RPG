@@ -1,8 +1,8 @@
 # Coding-RPG
 
 to-Do: 
-- Functions: Store Buy/Sell
-- Quests: Finish Goblin Slayer dialog, make new quests
+- General: Combat and text on screen
+- Combat: Spec abilities for NPCs
 - Characters: Dialog for NPCs
 - Classes: Action2 for each class
     * Artificer - Bomb(damage on entire enemy Array)
@@ -17,5 +17,10 @@ to-Do:
     * Rogue
     * Sorcerer 
     * Warlock
-
+- Stores: Buy/Sell
+- Quests: Finish Goblin Slayer dialog, make new quests
+    * Bird Quest (Stolen ring and scarecrow plus spider)
+    * Puzzle Dungeon
+    * Bandit Hideout
+    * Haunted Manor
 
