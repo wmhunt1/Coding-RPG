@@ -12,5 +12,7 @@ function combatTest()
 {
     const goblin1 = new Goblin("Goblin 1")
     enemyArray = [goblin1]
+    // const spider1 = new Spider ("Spider 1", 1, 1)
+    // enemyArray = [spider1]
     combat()
 }

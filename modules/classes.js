@@ -169,3 +169,26 @@ class GoblinBoss extends Character {
         this.inventory.gold = 20;
     }
 }
+class Spider extends Character {
+    constructor(name, currentHp, maxHp) {
+        super();
+        this.action1 = function (target) {poisonFangs(this, target) }
+        this.basics.name = name;
+        this.basics.profession = "Bandit";
+        this.basics.xp = maxHp*5;
+        this.basics.ally = false;
+        this.stats.currentHp = currentHp;
+        this.stats.maxHp = maxHp;
+        this.stats.attack = 0;
+        this.stats.defense = 0;
+        this.stats.speed = 0;
+        this.weapon.name = "Bite";
+        this.weapon.damage = 1;
+        this.weapon.type = "Melee"
+        this.weapon.damageType = "Piercing";
+        this.armor.name = "Carapace";
+        this.armor.type = "Natural"
+        this.armor.protection = 0;
+        this.inventory.gold = 0;
+    }
+}

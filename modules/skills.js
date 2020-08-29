@@ -95,3 +95,9 @@ let magicMissile = new Spell("Magic Missile", function (user) {
         }
     }
 })
+//enemy abilities
+let poisonFangs = ("Poisoned Fangs", function(user,target){
+    user.attack(target)
+    target.conditions.poison = true;
+    alert ("The poisoned fangs inflict poison on " + target.basics.name)
+})
