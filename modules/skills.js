@@ -33,12 +33,12 @@ let cureWounds = new Spell("Cure Wounds", function (user) {
         if (user.stats.currentSp > 0) {
             if (allyArray[target].basics.alive == true) {
                 alert(user.basics.name + " heals " + allyArray[target].basics.name + " for " + user.basics.level * 5 + " hitpoints.")
-                let heal = user.basics.level* 5;
+                let heal = user.basics.level * 5;
                 //target.stats.currentHp += heal;
                 allyArray[target].heal(heal)
                 user.stats.currentSp--;
             }
-            else { 
+            else {
                 alert("Can't heal dead target.")
             }
         }
@@ -64,7 +64,7 @@ let magicMissile = new Spell("Magic Missile", function (user) {
                 user.stats.currentSp--;
                 console.log(user.stats.currentSp)
             }
-            else { 
+            else {
                 alert("Target already dead.")
             }
         }

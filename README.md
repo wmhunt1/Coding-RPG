@@ -7,7 +7,6 @@ to-Do:
 - Classes: Action2 for each class
     * Artificer - Bomb(damage on entire enemy Array)
     * Bard - Inspire (buff for ally array)
-    * Cleric - Heal
     * Druid
     * Fighter
     * Monk
