@@ -27,6 +27,13 @@ class Cleric extends Character {
         this.stats.profession = "Cleric"
     }
 }
+class Druid extends Character {
+    constructor(name) {
+        super();
+        this.basics.name = name;
+        this.stats.profession = "Druid"
+    }
+}
 class Fighter extends Character {
     constructor(name) {
         super();
@@ -34,12 +41,11 @@ class Fighter extends Character {
         this.basics.profession = "Fighter"
     }
 }
-class Mage extends Character {
+class Monk extends Character {
     constructor(name) {
         super();
         this.basics.name = name;
-        this.basics.profession = "Mage"
-        this.action2 = function(user,target) {magicMissile.effect(user,target)}
+        this.basics.profession = "Monk"
     }
 }
 class Paladin extends Character {
@@ -49,11 +55,40 @@ class Paladin extends Character {
         this.basics.profession = "Paladin"
     }
 }
+class Ranger extends Character {
+    constructor(name) {
+        super();
+        this.basics.name = name;
+        this.basics.profession = "Ranger"
+    }
+}
 class Rogue extends Character {
     constructor(name) {
         super();
         this.basics.name = name;
         this.basics.profession = "Rogue"
+    }
+}
+class Sorcerer extends Character {
+    constructor(name) {
+        super();
+        this.basics.name = name;
+        this.basics.profession = "Sorcerer"
+    }
+}
+class Warlock extends Character {
+    constructor(name) {
+        super();
+        this.basics.name = name;
+        this.basics.profession = "Warlock"
+    }
+}
+class Wizard extends Character {
+    constructor(name) {
+        super();
+        this.basics.name = name;
+        this.basics.profession = "Wizard"
+        this.action2 = function(user,target) {magicMissile.effect(user,target)}
     }
 }
 //npc classes
