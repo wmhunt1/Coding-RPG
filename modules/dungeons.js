@@ -15,8 +15,6 @@ class Dungeon {
 const mineDungeon = new Dungeon("Dwarven Mines",
     //encounter 1
     function () {
-        alert("You arrive at the Dwarven Mine");
-        enterMine()
         document.getElementById("mee").style.display = "block"
 
     },

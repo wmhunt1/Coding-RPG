@@ -30,6 +30,7 @@ class Quest {
     this.questReward()
 }
 //subclasses for kinds of quests
+//first quest
 const welcomeDale = new Quest("Welcome to Dale", 10,
     //tollroad event
     function () {
@@ -116,10 +117,13 @@ const welcomeDale = new Quest("Welcome to Dale", 10,
         alert("Sweetheart: It would also get these drunken layabouts out of my inn *she says looking over at the Dwarves.")
         hero.journal.metWithContact = true;
         hero.journal.goblinSlayer = true;
+        hero.journal.birdWord = true;
+        hero.journal.minotaurRescue = true;
         welcomeDale.completeQuest()
         //other quests
     }
 )
+const birdWord = new Quest ("Bird is The Word", 10)
 const goblinSlayer = new Quest("Goblin Slayer", 20,
     //getting quest 1
     function () {
@@ -163,3 +167,4 @@ const goblinSlayer = new Quest("Goblin Slayer", 20,
         goblinSlayer.completeQuest()
     }
 )
+const minotaurRescue = new Quest ("Of Minotaurs and Men", 10)

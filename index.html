@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
-<body>
+<body onload="startGame()">
     <header id="Title">
         <h1>Coding RPG</h1>
     </header>
@@ -45,7 +45,7 @@
         <button id="banditHideout">Bandit Hideout</button>
         <button id="bbVillage">Broken Blade Village</button>
         <button id=daleKeep>Dale Keep</button>
-        <button onclick="mineDungeon.encounter1()" id="dMine">Dwarven Mine</button>
+        <button onclick="dwarvenMine.enterPlace()" id="dMine">Dwarven Mine</button>
         <button id="dOutpost">Dwarven Outpost</button>
         <button id="giantCave">Giant Cave</button>
         <button id="gnollDen">Gnoll Den</button>
@@ -57,9 +57,9 @@
         <button id="sheepLair">Sheepscale's Lair</button>
         <button id="sheepPasture">Sheep Pasture</button>
         <button id="spiderCave">Spider Cave</button>
-        <button onclick="welcomeDale.event1()">Toll Bridge</button>
+        <button onclick="tollBridge.enterPlace()">Toll Bridge</button>
         <button id="tradePost">Trading Post</button>
-        <button id="villageDaleBtn" onclick="enterVillageDale()">Village of Dale</button>
+        <button id="villageDaleBtn" onclick="villageDale.enterPlace()">Village of Dale</button>
         <button id="witchCottage">Witch's Cottage</button>
         <button id="wizardTower">Wizard Tower</button>
         <button onclick="worldMap()">Leave Valley</button>
@@ -75,10 +75,10 @@
         <button>Quincy's Workshop</button>
         <button>Temple</button>
         <button onclick="triggShop.enterStore()">Trig Sprocket's General Goods and Sundries</button>
-        <button onclick="enterValleyDale()">Leave</button>
+        <button onclick="valleyDale.enterPlace()">Leave</button>
     </section>
     <section id="mineDungeon">
-        <button onclick="enterValleyDale()">Leave Area</button>
+        <button onclick="valleyDale.enterPlace()">Leave Area</button>
         <button onclick="mineDungeon.encounter2()" id="mee">Mine Exterior Encounter</button>
         <button onclick="mineDungeon.encounter3()" id="em">Enter Mine</button>
         <button onclick="mineDungeon.encounter4()" id="mi1">Mine Interior 1</button>
@@ -102,78 +102,6 @@
     <script src="./modules/stores.js"></script>
     <script src="gamescripts.js"></script>
     <script>
-        //hides buttons until location discovered
-        document.getElementById("Menu").style.display = "none";
-        document.getElementById("banditCamp").style.display = "none";
-        document.getElementById("banditHideout").style.display = "none";
-        document.getElementById("bbVillage").style.display = "none";
-        document.getElementById("daleKeep").style.display = "none";
-        document.getElementById("dMine").style.display = "none";
-        document.getElementById("dOutpost").style.display = "none";
-        document.getElementById("dMine").style.display = "none";
-        document.getElementById("giantCave").style.display = "none";
-        document.getElementById("gnollDen").style.display = "none";
-        document.getElementById("goblinVillage").style.display = "none";
-        document.getElementById("kurekHut").style.display = "none";
-        document.getElementById("lakeDale").style.display = "none";
-        document.getElementById("logCamp").style.display = "none";
-        document.getElementById("ruins").style.display = "none";
-        document.getElementById("sheepLair").style.display = "none";
-        document.getElementById("sheepPasture").style.display = "none";
-        document.getElementById("spiderCave").style.display = "none";
-        document.getElementById("tradePost").style.display = "none";
-        document.getElementById("villageDaleBtn").style.display = "none";
-        document.getElementById("witchCottage").style.display = "none";
-        document.getElementById("wizardTower").style.display = "none";
-        //dungeons
-        //mine dungeon
-        document.getElementById("mineDungeon").style.display = "none";
-        document.getElementById("mee").style.display = "none";
-        document.getElementById("em").style.display = "none";
-        document.getElementById("mi1").style.display = "none";
-        document.getElementById("fk").style.display = "none";
-        document.getElementById("mi2").style.display = "none";
-        document.getElementById("fm").style.display = "none";
-        document.getElementById("mi3").style.display = "none";
-        document.getElementById("gBoss").style.display = "none";
-        document.getElementById("puzzleDungeon1").style.display = "none";
-        function closeAll() {
-            document.getElementById("Intro").style.display = "none";
-            document.getElementById("valleyDale").style.display = "none";
-            document.getElementById("villageDale").style.display = "none";
-        }
-        function intro() {
-            closeAll()
-            document.getElementById("Intro").style.display = "block";
-        }
-        function enterMine() {
-            document.getElementById("Menu").style.display = "block";
-            document.getElementById("mineDungeon").style.display = "block";
-            document.getElementById("valleyDale").style.display = "none";
-        }
-        function enterValleyDale() {
-            closeAll
-            document.getElementById("Intro").style.display = "none"
-            document.getElementById("Menu").style.display = "block";
-            document.getElementById("mineDungeon").style.display = "none";
-            document.getElementById("valleyDale").style.display = "block";
-            document.getElementById("villageDale").style.display = "none";
-        }
-        function enterVillageDale() {
-            closeAll()
-            alert("You enter The Village of Dale.")
-            document.getElementById("valleyDale").style.display = "none";
-            document.getElementById("villageDale").style.display = "block";
-            if (hero.journal.metWithContact === false) {
-                welcomeDale.event2()
-            }
-            else { }
-
-        }
-        function worldMap() {
-            alert("You cannot leave The Valley of Dale")
-        }
-        intro()
     </script>
 </body>
 

@@ -71,7 +71,9 @@ class Character {
             koboldsRescued: false,
             minersRescued: false,
             goblinBossDefeated: false,
-            goblinSlayerReward: false
+            goblinSlayerReward: false,
+            birdWord: false,
+            minotaurRescue: false,
         }
         this.relationships = {
             //companions
@@ -223,5 +225,5 @@ function createHero() {
     alert("On your way to the village you encounter a toll bridge, which appears to be guarded by several rough-looking individuals.")
     allyArray.push(hero)
     console.log(hero)
-    enterValleyDale()
+    valleyDale.enter()
 }
