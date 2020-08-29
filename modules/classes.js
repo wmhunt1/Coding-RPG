@@ -39,6 +39,7 @@ class Mage extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Mage"
+        this.action2 = ""
     }
 }
 class Paladin extends Character {

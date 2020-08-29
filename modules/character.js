@@ -183,8 +183,12 @@ function createHero() {
         heroName = "Hero"
     }
     else{}
-    let classChoice = prompt(heroName + " are you a (Fig)hter, (Mag)e, (Rog)ue, or a Freelancer?")
-    if (classChoice === "Fig") {
+    let classChoice = prompt(heroName + " are you a (Cle)ric, (Fig)hter, (Mag)e, (Rog)ue, or a Freelancer?")
+    if (classChoice === "Cle") {
+        hero = new Mage(heroName);
+        spellbook.equip(hero)
+    }
+    else if (classChoice === "Fig") {
         hero = new Fighter(heroName);
         shield.equip(hero)
     }

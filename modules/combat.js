@@ -191,7 +191,7 @@ Character.prototype.turn = function () {
         else {
             console.log("It is " + this.basics.name + "'s turn.")
             if (this.basics.ally == true) {
-                let action = prompt("(A)ttack or user a (P)otion?");
+                let action = prompt("(A)ttack, use a (S)pecial Ability or use a (P)otion?");
                 if (action === "A") {
                     let target = prompt("Choose target by number (starting from 0).");
                     if (enemyArray[target] === undefined) {
@@ -199,6 +199,16 @@ Character.prototype.turn = function () {
                     }
                     else {
                         this.action1(enemyArray[target]);
+                    }
+                }
+                else if (action === "S")
+                {
+                    let target = prompt("Choose target by number (starting from 0).");
+                    if (enemyArray[target] === undefined) {
+                        alert(this.basics.name + " attacks no one.")
+                    }
+                    else {
+                        this.action2(enemyArray[this, target])
                     }
                 }
                 else if (action === "P") {
