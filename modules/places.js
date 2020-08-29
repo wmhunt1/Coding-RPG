@@ -17,7 +17,6 @@ class Settlement extends Place {
 Place.prototype.enterPlace = function () {
     alert("You enter " + this.name);
     this.enter()
-    console.log("this function")
 }
 Place.prototype.exitPlace = function () {
     alert("You leave " + this.name);
