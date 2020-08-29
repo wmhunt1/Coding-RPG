@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
-<body onload="startGame()">
+<body>
     <header id="Title">
         <h1>Coding RPG</h1>
     </header>
@@ -62,7 +62,7 @@
         <button id="villageDaleBtn" onclick="villageDale.enterPlace()">Village of Dale</button>
         <button id="witchCottage">Witch's Cottage</button>
         <button id="wizardTower">Wizard Tower</button>
-        <button onclick="worldMap()">Leave Valley</button>
+        <button onclick="valleyDale.exitPlace()">World Map</button>
     </section>
     <section id="villageDale">
         <h1>The Village of Dale</h1>
@@ -75,10 +75,10 @@
         <button>Quincy's Workshop</button>
         <button>Temple</button>
         <button onclick="triggShop.enterStore()">Trig Sprocket's General Goods and Sundries</button>
-        <button onclick="valleyDale.enterPlace()">Leave</button>
+        <button onclick="villageDale.exitPlace()">Leave</button>
     </section>
     <section id="mineDungeon">
-        <button onclick="valleyDale.enterPlace()">Leave Area</button>
+        <button onclick="dwarvenMine.exitPlace()">Leave Area</button>
         <button onclick="mineDungeon.encounter2()" id="mee">Mine Exterior Encounter</button>
         <button onclick="mineDungeon.encounter3()" id="em">Enter Mine</button>
         <button onclick="mineDungeon.encounter4()" id="mi1">Mine Interior 1</button>

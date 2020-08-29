@@ -56,3 +56,4 @@ function combatTest()
     // enemyArray = [spider1]
     combat()
 }
+startGame()

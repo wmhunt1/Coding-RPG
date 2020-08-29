@@ -19,7 +19,7 @@ Place.prototype.enterPlace = function () {
     this.enter()
     console.log("this function")
 }
-Place.prototype.leavePlace = function () {
+Place.prototype.exitPlace = function () {
     alert("You leave " + this.name);
     this.exit()
 }
@@ -43,7 +43,7 @@ const dwarvenMine = new Place("The Dwarven Mine",
         document.getElementById("valleyDale").style.display = "none";
         mineDungeon.encounter1()
     },
-    valleyDale.enterPlace()
+    function () { valleyDale.enterPlace() }
 )
 const tollBridge = new Place("The Toll bridge", function () { welcomeDale.event1() })
 //settlements
@@ -56,7 +56,7 @@ const villageDale = new Settlement("The Village of Dale.",
         }
         else { }
 
-        
+
     },
-    function(){valleyDale.enter()}
+    function () {valleyDale.enter()}
 );
