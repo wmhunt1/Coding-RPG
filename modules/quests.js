@@ -37,7 +37,7 @@ const welcomeDale = new Quest("Welcome to Dale", 10,
             alert("The rough-looking individuals wear scraps of what could have once been guard armor but now look more like common bandits than respectable guards. ")
             alert("One of the 'guards' approaches you.")
             alert("'guard': this is an official Dale Guard tollbridge and you have to pay the toll. The toll is 10 gold so fork it over.")
-            alert("You notice that there are more 'guards' hiddem in the treeline with crossbows pointed at you.")
+            alert("You notice that there are more 'guards' hidden in the treeline with crossbows pointed at you.")
             alert("You also see an unlucky victim of these guards off to the side of the river, beaten and bloodied. They apparently didn't or couldn't pay the toll.")
             let tChoice = prompt("Will you (P)ay the toll or try and (F)ight?")
             if (tChoice === "P") {
@@ -48,11 +48,11 @@ const welcomeDale = new Quest("Welcome to Dale", 10,
                 alert("The knight dismounts.")
             }
             else {
-                const bandit1 = new Bandit("Bandit 1");
-                const bandit2 = new Bandit("Bandit 2");
-                const bandit3 = new Bandit("Bandit 3");
-                const bandit4 = new Bandit("Bandit 4");
-                const bandit5 = new Bandit("Bandit 5");
+                const bandit1 = new Bandit("Bandit 1", "Shortsword");
+                const bandit2 = new Bandit("Bandit 2", "Shortsword");
+                const bandit3 = new Bandit("Bandit 3", "Shortsword");
+                const bandit4 = new Bandit("Bandit 4", "Crossbow");
+                const bandit5 = new Bandit("Bandit 5", "Crossbow");
                 //turnArray = [hero, bandit1, bandit2, bandit3, bandit4, bandit5];
                 enemyArray = [bandit1, bandit2, bandit3, bandit4, bandit5];
                 //allyArray = [hero];

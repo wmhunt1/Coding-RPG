@@ -58,7 +58,7 @@ class Rogue extends Character {
 }
 //npc classes
 class Bandit extends Character {
-    constructor(name) {
+    constructor(name, weapon) {
         super();
         this.basics.name = name;
         this.basics.profession = "Bandit";
@@ -69,7 +69,7 @@ class Bandit extends Character {
         this.stats.attack = 0;
         this.stats.defense = 0;
         this.stats.speed = 0;
-        this.weapon.name = "Shortsword";
+        this.weapon.name = weapon;
         this.weapon.damage = 2;
         this.weapon.type = "Melee"
         this.weapon.damageType = "Piercing";

@@ -3,6 +3,7 @@ let turnArray = [];
 let enemyArray = [];
 let allyArray = [];
 let enemyNumber = 0;
+let hit = false;
 //changes based on checkResist
 let immune = false;
 let resist = false;
@@ -35,6 +36,21 @@ Character.prototype.checkCondition = function () {
 
     }
 }
+Character.prototype.checkIfHit = function (target){
+    let hitChance = .5 - .1 * (target.stats.defense + target.stats.buff - target.stats.debuff);
+    console.log(hitChance + " hit chance")
+    let hitRoll = Math.random() + .1 * (this.stats.attack + this.stats.buff - this.stats.debuff);
+    console.log(hitRoll + " hit roll")
+    if (hitRoll >= hitChance)
+    {
+        hit = true;
+    }
+    else
+    {
+        hit = false;
+        
+    }
+}
 Character.prototype.checkImmune = function (target) {
     //add more as used
     if (target.resistances.fire == true && this.weapon.damageType === "Fire") {
@@ -65,42 +81,43 @@ Character.prototype.checkResist = function (target) {
         resist = false;
     }
 }
+Character.prototype.damageReduction = function(target, dmg)
+{
+    if (target.basics.alive == true) {
+        if (this.weapon.damage + this.weapon.damageBonus + this.weapon.tempBonus <= target.armor.protection + target.armor.protectionBonus + target.armor.tempBonus) {
+            alert(this.basics.name + "'s attack bounces harmlessly off of " + target.basics.name + "'s " + target.armor.name)
+        }
+        else {
+            this.checkResist(target)
+            this.checkImmune(target)
+            if (resist == true) {
+                alert(target.basics.name + "resisted the " + this.weapon.damageType + "and took " + dmg / 2 + " damage.")
+                target.damage(dmg / 2)
+                alert(target.basics.name + " loses " + dmg / 2 + " Hitpoints.")
+            }
+            else if (immune == true) {
+                alert(target.basics.name + "is immune to " + this.weapon.damageType + " damage.")
+            }
+            else {
+                alert(dmg + " " + this.weapon.damageType + " damage dealt to " + target.basics.name)
+                target.damage(dmg)
+                alert(target.basics.name + " loses " + dmg + " Hitpoints.")
+            }
+        }
+    }
+    else {
+    }
+}
 //attack function
 //add critical hit
 Character.prototype.attack = function (target) {
     alert(this.basics.name + " attacks " + target.basics.name + " with their " + this.weapon.name)
     console.log(target.stats.currentHp)
-    let hitChance = .5 - .1 * (target.stats.defense + target.stats.buff - target.stats.debuff);
-    console.log(hitChance + " hit chance")
-    let hitRoll = Math.random() + .1 * (this.stats.attack + this.stats.buff - this.stats.debuff);
-    console.log(hitRoll + " hit roll")
-    if (hitRoll >= hitChance) {
+    this.checkIfHit(target)
+    if (hit = true) {
         let dmg = this.weapon.damage + this.weapon.damageBonus + this.weapon.tempBonus - target.armor.protection - target.armor.protectionBonus - target.armor.tempBonus;
         console.log(dmg)
-        if (target.basics.alive == true) {
-            if (this.weapon.damage + this.weapon.damageBonus + this.weapon.tempBonus <= target.armor.protection + target.armor.protectionBonus + target.armor.tempBonus) {
-                alert(this.basics.name + "'s attack bounces harmlessly off of " + target.basics.name + "'s " + target.armor.name)
-            }
-            else {
-                this.checkResist(target)
-                this.checkImmune(target)
-                if (resist == true) {
-                    alert(target.basics.name + "resisted the " + this.weapon.damageType + "and took " + dmg / 2 + " damage.")
-                    target.damage(dmg / 2)
-                    alert(target.basics.name + " loses " + dmg / 2 + " Hitpoints.")
-                }
-                else if (immune == true) {
-                    alert(target.basics.name + "is immune to " + this.weapon.damageType + " damage.")
-                }
-                else {
-                    alert(dmg + " " + this.weapon.damageType + " damage dealt to " + target.basics.name)
-                    target.damage(dmg)
-                    alert(target.basics.name + " loses " + dmg + " Hitpoints.")
-                }
-            }
-        }
-        else {
-        }
+        this.damageReduction(target, dmg)
     }
     else {
         alert(this.basics.name + " misses " + target.basics.name)
@@ -116,7 +133,7 @@ Character.prototype.isAlive = function () {
         console.log(this.basics.name + " is already dead.")
     }
     else {
-        console.log(this.basics.name + " has died!");
+        alert(this.basics.name + " has died!");
         this.basics.alive = false;
         if (this.basics.ally == false) {
             enemyNumber--;
@@ -189,7 +206,7 @@ Character.prototype.turn = function () {
         this.checkCondition()
         if (skipTurn == true) { }
         else {
-            console.log("It is " + this.basics.name + "'s turn.")
+            alert("It is " + this.basics.name + "'s turn.")
             if (this.basics.ally == true) {
                 let action = prompt("(A)ttack, use a (S)pecial Ability or use a (P)otion?");
                 if (action === "A") {
