@@ -166,6 +166,7 @@ class Character {
     for (var i = 0; i<allyArray.length; i++) {
     allyArray[i].heal(allyArray[i].basics.maxHp)
     allyArray[i].basics.alive = true;
+    allyArray[i].stats.currentSp = allyArray[i].stats.maxSp;
 }
 }
     Character.prototype.gainRel = function (person, value){
@@ -197,7 +198,7 @@ function createHero() {
         hero = new Rogue(heroName);
     }
     else {
-        hero = new Cleric(heroName);
+        hero = new Bard(heroName);
     }
     // hero.basics.name = heroName;
     holySword.equip(hero)

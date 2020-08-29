@@ -175,6 +175,10 @@ Character.prototype.heal = function (cure) {
 Character.prototype.damage = function (wound) {
     this.stats.currentHp -= wound;
 }
+Character.prototype.useSp = function (cost){
+    this.stats.currentSp -= cost;
+    console.log(this.basics.name + " uses " + cost + " SP.")
+}
 //turn function
 Character.prototype.reset = function () {
     this.stats.debuff = 0;

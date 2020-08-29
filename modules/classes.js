@@ -20,6 +20,7 @@ class Bard extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Bard"
+        this.action2 = function(user) {inspireAlly.effect(user)}
     }
 }
 class Cleric extends Character {

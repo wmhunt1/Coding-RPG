@@ -13,6 +13,29 @@ class Spell extends Ability {
     }
 }
 //abilities
+let inspireAlly = new Ability("Inspire Ally", function (user) {
+    let target = prompt("Choose an ally to heal by number (starting from 0).");
+    if (allyArray[target] === undefined) {
+        alert(user.basics.name + " heals no one..")
+    }
+    else {
+        if (user.stats.currentSp > 0) {
+            if (allyArray[target].basics.alive == true) {
+                alert(user.basics.name + " inspires " + allyArray[target].basics.name)
+                allyArray[target].stats.buff += user.basics.level;
+                console.log(allyArray[target].stats.buff)
+                user.useSP(1)
+            }
+            else {
+                alert("Can't heal dead target.")
+            }
+        }
+        else {
+            alert(user.basics.name + "didn't have enough SP.")
+        }
+    }
+}
+)
 let rage = new Ability("Rage",
     function (user) {
         if (user.stats.currentSp > 0) {
@@ -36,7 +59,7 @@ let cureWounds = new Spell("Cure Wounds", function (user) {
                 let heal = user.basics.level * 5;
                 //target.stats.currentHp += heal;
                 allyArray[target].heal(heal)
-                user.stats.currentSp--;
+                user.useSP(1)
             }
             else {
                 alert("Can't heal dead target.")
@@ -61,8 +84,7 @@ let magicMissile = new Spell("Magic Missile", function (user) {
                 let dmg = user.weapon.damage;
                 user.damageReduction(enemyArray[target], dmg)
                 enemyArray[target].isAlive();
-                user.stats.currentSp--;
-                console.log(user.stats.currentSp)
+                user.useSP(1)
             }
             else {
                 alert("Target already dead.")
