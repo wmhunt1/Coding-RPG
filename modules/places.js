@@ -23,8 +23,8 @@ Place.prototype.exitPlace = function () {
     alert("You leave " + this.name);
     this.exit()
 }
+//Valley of Dales and places in it.
 const valleyDale = new Place("The Valley of Dale", function () {
-    console.log("this function vd")
     document.getElementById("Intro").style.display = "none"
     document.getElementById("Menu").style.display = "block";
     document.getElementById("mineDungeon").style.display = "none";
@@ -45,8 +45,10 @@ const dwarvenMine = new Place("The Dwarven Mine",
     },
     function () { valleyDale.enterPlace() }
 )
+const loggingCamp = new Place("Logging Camp")
 const tollBridge = new Place("The Toll bridge", function () { welcomeDale.event1() })
 //settlements
+const spiderCave = new Place("Spider Cave")
 const villageDale = new Settlement("The Village of Dale.",
     function () {
         document.getElementById("valleyDale").style.display = "none";
@@ -58,5 +60,5 @@ const villageDale = new Settlement("The Village of Dale.",
 
 
     },
-    function () {valleyDale.enter()}
+    function () { valleyDale.enter() }
 );

@@ -17,6 +17,7 @@ $("document").ready(function () {
         document.getElementById("giantCave").style.display = "none";
         document.getElementById("gnollDen").style.display = "none";
         document.getElementById("goblinVillage").style.display = "none";
+        document.getElementById("kenkuCamp").style.display = "none";
         document.getElementById("kurekHut").style.display = "none";
         document.getElementById("lakeDale").style.display = "none";
         document.getElementById("logCamp").style.display = "none";
