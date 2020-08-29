@@ -10,7 +10,7 @@ class Barbarian extends Character {
     constructor(name) {
         super();
         this.basics.name = name;
-        this.stats.profession = "Barbarian"
+        this.basics.profession = "Barbarian"
         this.action2 = function(user) {rage.effect(user)}
 
     }
@@ -19,21 +19,22 @@ class Bard extends Character {
     constructor(name) {
         super();
         this.basics.name = name;
-        this.stats.profession = "Bard"
+        this.basics.profession = "Bard"
     }
 }
 class Cleric extends Character {
     constructor(name) {
         super();
         this.basics.name = name;
-        this.stats.profession = "Cleric"
+        this.basics.profession = "Cleric";
+        this.action2 = function(user) {cureWounds.effect(user)}
     }
 }
 class Druid extends Character {
     constructor(name) {
         super();
         this.basics.name = name;
-        this.stats.profession = "Druid"
+        this.basics.profession = "Druid"
     }
 }
 class Fighter extends Character {
@@ -90,7 +91,7 @@ class Wizard extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Wizard"
-        this.action2 = function(user,target) {magicMissile.effect(user,target)}
+        this.action2 = function(user) {magicMissile.effect(user)}
     }
 }
 //npc classes
