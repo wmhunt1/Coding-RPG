@@ -219,19 +219,7 @@ Character.prototype.turn = function () {
                     }
                 }
                 else if (action === "S") {
-                    let target = prompt("Choose target by number (starting from 0).");
-                    if (enemyArray[target] === undefined) {
-                        alert(this.basics.name + " attacks no one.")
-                    }
-                    else {
-                        if (this.stats.currentSp > 0) {
-                            this.action2(this, enemyArray[target])
-                            this.stats.currentSp--;
-                        }
-                        else {
-                            alert(this.basics.name + "didn't have enough SP.")
-                        }
-                    }
+                            this.action2(this)
                 }
                 else if (action === "P") {
                     potion.use(this)
