@@ -96,17 +96,19 @@ Weapon.prototype.equip = function (user) {
     console.log(user)
 }
 //accessories
-let knittedSweater = new Accessory("Knitted Sweater", "Sweater", 1, function (user, value) {user.resistances.ice = true}, "A sweater knitted by Sheepscale.", 0, 1)
 let shield = new Accessory("Shield", "Shield", 0, function (user, value) { user.accessory.shieldBonus += 1 }, "Raises Shield Bonus", 0, 1)
 let spellbook = new Accessory("Basic Spellbook", "Spellbook", 1, function (user, value) { }, "", 0, 1)
 //armor
 let chainShirt = new Armor("Chain Shirt", "Light", 1, function (user, value) { }, "", 0, 1);
 let clothing = new Armor("Clothing", "Clothing", 0, function (user, value) { }, "", 0, 1);
-let paladinArmor = new Armor("Paladin's Armor", "Heavy", 5, function (user, value) { }, "", 0, 1);
+let knittedSweater = new Accessory("Knitted Sweater", "Clothing", 1, function (user, value) {user.resistances.ice = true}, "A sweater knitted by Sheepscale.", 0, 1)
 let leather = new Armor("Leather", "Light", 1, function (user, value) { }, "", 0, 1);
+let paladinArmor = new Armor("Paladin's Armor", "Heavy", 5, function (user, value) { }, "", 0, 1);
+//boots
 //consumables
 let beer = new Consumable("Beer", "Alcohol", 0, function (user, value) { }, "Basic Beer", 1, 1);
 let potion = new Consumable("Potion", "Healing", 5, function (user, value) { user.heal(value); }, "Heals user for 5 HP", 10, 1);
+//gloves
 //weapons
 let club = new Weapon("Club", "Melee", "Bludgeoning", 1, function (user, value) { }, "", 0, 1);
 let dagger = new Weapon("Dagger", "Melee", "Slashing", 1, function (user, value) { }, "", 0, 1);

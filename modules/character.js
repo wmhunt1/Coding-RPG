@@ -42,7 +42,14 @@ class Character {
             protectionBonus: 0,
             tempBonus: 0,
         }
-        //boots, gloves, etc, 
+        this.boots = {
+            name: "None",
+            effect: "NA",
+        }
+        this.gloves = {
+            name: "None",
+            effect: "NA",
+        }
         this.accessory = {
             name: "None",
             effect: "NA",
