@@ -1,9 +1,9 @@
 # Coding-RPG
 
 to-Do: 
-- General: Combat and text on screen
+- General: Combat and text on screen, Character Sheet, Inventory etc.
 - Combat: Spec abilities for NPCs
-- Characters: Dialog for NPCs
+- Character:
 - Classes: Action2 for each class
     * Artificer - Bomb(damage on entire enemy Array)
     * Druid
@@ -14,6 +14,7 @@ to-Do:
     * Rogue
     * Sorcerer 
     * Warlock
+ NPC: Dialog for NPCs
 - Stores: Buy/Sell
 - Quests: Finish Goblin Slayer dialog, make new quests
     * Bird Quest (Stolen ring and scarecrow plus spider)

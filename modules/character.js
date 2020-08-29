@@ -205,7 +205,7 @@ function createHero() {
         hero = new Rogue(heroName);
     }
     else {
-        hero = new Bard(heroName);
+        hero = new Character(heroName);
     }
     // hero.basics.name = heroName;
     holySword.equip(hero)
