@@ -59,14 +59,6 @@ function combatTest()
 }
 startGame()
 
-function removeAllElements(array, elem) {
-    var index = array.indexOf(elem);
-    while (index > -1) {
-        array.splice(index, 1);
-        index = array.indexOf(elem);
-    }
-}
-function testRemove(){
-ferra.addParty()
-ferra.leaveParty()
+function testFeature(){
+    
 }
