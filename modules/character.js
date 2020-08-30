@@ -222,7 +222,6 @@ function createHero() {
     // hero.basics.name = heroName;
     holySword.equip(hero)
     clothing.equip(hero)
-    knittedSweater.equip(hero)
     hero.inventory.gold = 10;
     alert("You are " + hero.basics.name + ", a " + hero.basics.profession + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
     alert("But first you must complete a task.")

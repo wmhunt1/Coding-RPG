@@ -164,8 +164,14 @@ const birdWord = new Quest("Bird is The Word", 10,
     function () {
         //kill spiders and free birds for ring
         //also a dead mage with letter for Ambrosius
+        if (hero.currentHp > 0)
+        {
         alert("Return to farm")
         hero.journal.birdRescued = true;
+        hero.journal.letterForAmbrosius = true;
+        document.getElementById("wizardTower").style.display = "block";
+        }
+        else{}
     },
     //event 6
     function () {
