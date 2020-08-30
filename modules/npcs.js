@@ -22,3 +22,21 @@ warHammer.equip(ferra)
 let ambrosius = new Character("Ambrosius the Sage");
 let sheepscale = new Character("Sheepscale");
 let sweetheart = new Character("Sweetheart the Ogre");
+
+//npc management functions
+function removeAllElements(array, elem) {
+    var index = array.indexOf(elem);
+    while (index > -1) {
+        array.splice(index, 1);
+        index = array.indexOf(elem);
+    }
+}
+Character.prototype.addParty = function () {
+    allyArray.push(this)
+    alert(this.basics.name + " joins the party.")
+
+}
+Character.prototype.leaveParty = function () {
+    removeAllElements(allyArray, this)
+    alert(this.basics.name + " leaves the party.")
+}

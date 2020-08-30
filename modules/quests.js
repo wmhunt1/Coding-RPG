@@ -162,7 +162,7 @@ const goblinSlayer = new Quest("Goblin Slayer", 20,
         alert("Faldan asks you to kill goblins and Ferra and Faldan argue about her going to.")
         alert("Ferra decides to go with you.")
         document.getElementById("dMine").style.display = "block";
-        allyArray.push(ferra)
+        ferra.addParty()
         hero.journal.spokeWithFaldan = true;
     },
     //kobolds ask you to free others 2
@@ -196,6 +196,8 @@ const goblinSlayer = new Quest("Goblin Slayer", 20,
     //get rewarded 5
     function () {
         alert("Faldan Rewards you.")
+        alert("Ferra leaves the party")
+        ferra.leaveParty()
         goblinSlayer.completeQuest()
     }
 )
