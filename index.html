@@ -51,14 +51,14 @@
         <button id="giantCave">Giant Cave</button>
         <button id="gnollDen">Gnoll Den</button>
         <button id="goblinVillage">Goblin Village</button>
-        <button id="kenkuCamp">Kenku Camp</button>
+        <button onclick="birdWord.event4()" id="kenkuCamp">Kenku Camp</button>
         <button id="kurekHut">Kurek's Hut</button>
         <button id="lakeDale">Lake Dale</button>
         <button id="logCamp">Logging Camp</button>
         <button id="ruins">Ruins</button>
         <button id="sheepLair">Sheepscale's Lair</button>
         <button id="sheepPasture">Sheep Pasture</button>
-        <button id="spiderCave">Spider Cave</button>
+        <button onclick="spiderCave.enterPlace()" id="spiderCave">Spider Cave</button>
         <button onclick="tollBridge.enterPlace()">Toll Bridge</button>
         <button id="tradePost">Trading Post</button>
         <button id="villageDaleBtn" onclick="villageDale.enterPlace()">Village of Dale</button>
@@ -73,9 +73,9 @@
         <button>Dale Manor</button>
         <button onclick="dreamingWorker.enterStore(hero.journal.metWithContact, false)">The Dreaming Worker Inn</button>
         <button onclick="forgeheartSmithy.enterStore(hero.journal.goblinSlayer, true)">Forgeheart Smithy</button>
-        <button>Littleroot Farm</button>
+        <button onclick="littleRoot.enterPlace()">Littleroot Farm</button>
         <button>Quincy's Workshop</button>
-        <button>Temple</button>
+        <button onclick="daleTemple.enterPlace()">Temple</button>
         <button onclick="triggShop.enterStore()">Trig Sprocket's General Goods and Sundries</button>
         <button onclick="villageDale.exitPlace()">Leave</button>
     </section>

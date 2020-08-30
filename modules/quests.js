@@ -1,6 +1,6 @@
 //maybe move quest dialog etc into the quests. events and entries are seperate.
 class Quest {
-    constructor(name, reward, event1, event2, event3, event4, event5) {
+    constructor(name, reward, event1, event2, event3, event4, event5, event6) {
         this.name = name;
         this.reward = reward;
         this.status = "Incomplete";
@@ -9,6 +9,7 @@ class Quest {
         this.event3 = event3;
         this.event4 = event4;
         this.event5 = event5;
+        this.event6 = event6;
     }
 }
     Quest.prototype.addJournal = function()
@@ -54,10 +55,8 @@ const welcomeDale = new Quest("Welcome to Dale", 10,
                 const bandit3 = new Bandit("Bandit 3", "Shortsword");
                 const bandit4 = new Bandit("Bandit 4", "Crossbow");
                 const bandit5 = new Bandit("Bandit 5", "Crossbow");
-                //turnArray = [hero, bandit1, bandit2, bandit3, bandit4, bandit5];
                 enemyArray = [bandit1, bandit2, bandit3, bandit4, bandit5];
-                //allyArray = [hero];
-                combat()
+                //combat()
                 if (hero.stats.currentHp > 0) {
                     alert("You sucessfully drive off the bandits")
                     alert("An armored knight rides up to greet you.")
@@ -124,6 +123,7 @@ const welcomeDale = new Quest("Welcome to Dale", 10,
     }
 )
 const birdWord = new Quest("Bird is The Word", 10,
+    //event 1
     function () {
         //getting quest when you go to littleroot farm and find out about the scarecrow.
         //screaming about thieving birds
@@ -131,28 +131,49 @@ const birdWord = new Quest("Bird is The Word", 10,
         //Chris suggests you go ask the priest and priestess at the temple about putting him to rest
         //since she would prefer if it wasn't a forceful exorcism
         //maybe already know how if player is a cleric
+        alert("Getting quest")
     },
+    //event 2
     function () {
         //going to temple and scaring lucy revealing her wings
         //she and ray says tell you that something must be preventing him from passing on
         //could just do forced exorcism
+        alert("Info from temple")
+        hero.journal.ghostInfo = true;
     },
+    //event 3
     function () {
+        alert("Go to camp")
         //go back to Chris who says her mother's ring is missing but doesn't see how that would be a cause an issue
         //her son bo looks susipicous and when confronted says he'll tell you a secret.
         //he has a black birdy friend who likes shiny things, says she lives on other side of river
+        document.getElementById("kenkuCamp").style.display = "block";
+        hero.journal.discoveredBirds = true;
     },
+    //event 4
     function () {
+        alert("Go to Spider Cave")
         //camp is abandoned except for chirp-chirp who says tells you family was captured by spiders
         //chirp-chirp as temporary party member
+        chirp2.addParty()
+        document.getElementById("spiderCave").style.display = "block";
+        hero.journal.birdCamp = true;
+        
     },
+    //event 5
     function () {
         //kill spiders and free birds for ring
         //also a dead mage with letter for Ambrosius
+        alert("Return to farm")
+        hero.journal.birdRescued = true;
     },
+    //event 6
     function () {
         //return ring to Chris and put father to rest.
         //can get job for birds
+        chirp2.leaveParty()
+        hero.journal.birdReward = true;
+        birdWord.completeQuest()
     }
 )
 //need to improve the dialog

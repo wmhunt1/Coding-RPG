@@ -45,9 +45,28 @@ const dwarvenMine = new Place("The Dwarven Mine",
     function () { valleyDale.enterPlace() }
 )
 const loggingCamp = new Place("Logging Camp")
+const kenkuCamp = new Place("Kenku Camp",
+function(){
+    if (hero.journal.birdCamp === false)
+    {
+        birdWord.event4()
+    }
+    else
+    {}
+}
+)
 const tollBridge = new Place("The Toll bridge", function () { welcomeDale.event1() })
 //settlements
-const spiderCave = new Place("Spider Cave")
+const spiderCave = new Place("Spider Cave",
+    function () {
+        if (hero.journal.rescuedBirds === false)
+        {
+        birdWord.event5()
+        }
+        else{
+            alert("No spiders are left")
+        }
+    })
 const villageDale = new Settlement("The Village of Dale.",
     function () {
         document.getElementById("valleyDale").style.display = "none";
@@ -61,3 +80,33 @@ const villageDale = new Settlement("The Village of Dale.",
     },
     function () { valleyDale.enter() }
 );
+const daleTemple = new Place("The Temple of Sunshin",
+    function () {
+        if (hero.journal.birdWord == true && hero.journal.ghostInfo == false) { birdWord.event2() }
+        else { }
+    })
+const littleRoot = new Place("Littleroot Farm",
+    function () {
+        if (hero.journal.birdWord === true) {
+            if (hero.journal.ghostInfo === true) {
+                if (hero.journal.birdRescued === true) {
+                   if (hero.journal.birdReward === true)
+                   {}
+                   else
+                   {
+                    birdWord.event6()
+                   }
+                }
+                else {
+                    birdWord.event3()
+                }
+            }
+            else {
+                birdWord.event1()
+            }
+        }
+        else{
+            alert("This")
+        }
+    }
+)

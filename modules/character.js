@@ -73,6 +73,12 @@ class Character {
             goblinBossDefeated: false,
             goblinSlayerReward: false,
             birdWord: false,
+            ghostInfo: false,
+            discoveredBirds: false,
+            birdCamp: false,
+            rescuedBirds: false,
+            birdReward: false,
+            letterForAmbrosius: false,
             minotaurRescue: false,
         }
         this.relationships = {
