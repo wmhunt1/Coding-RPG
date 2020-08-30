@@ -5,10 +5,10 @@ class Quest {
         this.reward = reward;
         this.status = "Incomplete";
         this.event1 = event1;
-            this.event2 = event2;
-            this.event3 = event3;
-            this.event4 = event4;
-            this.event5 = event5;
+        this.event2 = event2;
+        this.event3 = event3;
+        this.event4 = event4;
+        this.event5 = event5;
     }
 }
     Quest.prototype.addJournal = function()
@@ -123,7 +123,39 @@ const welcomeDale = new Quest("Welcome to Dale", 10,
         //other quests
     }
 )
-const birdWord = new Quest ("Bird is The Word", 10)
+const birdWord = new Quest("Bird is The Word", 10,
+    function () {
+        //getting quest when you go to littleroot farm and find out about the scarecrow.
+        //screaming about thieving birds
+        //could look in chicken coup
+        //Chris suggests you go ask the priest and priestess at the temple about putting him to rest
+        //since she would prefer if it wasn't a forceful exorcism
+        //maybe already know how if player is a cleric
+    },
+    function () {
+        //going to temple and scaring lucy revealing her wings
+        //she and ray says tell you that something must be preventing him from passing on
+        //could just do forced exorcism
+    },
+    function () {
+        //go back to Chris who says her mother's ring is missing but doesn't see how that would be a cause an issue
+        //her son bo looks susipicous and when confronted says he'll tell you a secret.
+        //he has a black birdy friend who likes shiny things, says she lives on other side of river
+    },
+    function () {
+        //camp is abandoned except for chirp-chirp who says tells you family was captured by spiders
+        //chirp-chirp as temporary party member
+    },
+    function () {
+        //kill spiders and free birds for ring
+        //also a dead mage with letter for Ambrosius
+    },
+    function () {
+        //return ring to Chris and put father to rest.
+        //can get job for birds
+    }
+)
+//need to improve the dialog
 const goblinSlayer = new Quest("Goblin Slayer", 20,
     //getting quest 1
     function () {
@@ -167,4 +199,15 @@ const goblinSlayer = new Quest("Goblin Slayer", 20,
         goblinSlayer.completeQuest()
     }
 )
-const minotaurRescue = new Quest ("Of Minotaurs and Men", 10)
+const littlerootWorkers = new Quest("Workers for Littleroot Farm", 10,
+    function () {
+        //get quest from chris to find workers
+    },
+    function () {
+        //can get workers from dwarves, loggers, or birds
+    },
+    function () {
+        //report to chris
+    }
+)
+const minotaurRescue = new Quest("Of Minotaurs and Men", 10)

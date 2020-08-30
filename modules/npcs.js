@@ -9,6 +9,10 @@ abe.stats.defense += 10;
 paladinArmor.equip(abe)
 holySword.equip(abe)
 shield.equip(abe)
+//chirp-chirp
+let chirp2 = new Rogue("Chirp-Chirp")
+clothing.equip(chirp2)
+dagger.equip(chirp2)
 //ferra forgeheart
 let ferra = new Cleric("Ferra Forgeheart");
 clothing.equip(ferra)
