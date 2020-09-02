@@ -160,8 +160,7 @@ class Character {
         this.immunities = {
             //elemental
             fire: false,
-            fire: false,
-            ice: false,
+            force: false,
             lightning: false,
             //physical
             bludgeoning: false,
@@ -169,6 +168,18 @@ class Character {
             slashing: false
         }
         this.resistances = {
+            //add more as used
+            //elemental
+            fire: false,
+            force: false,
+            ice: false,
+            lightning: false,
+            //physical
+            bludgeoning: false,
+            piercing: false,
+            slashing: false
+        }
+        this.weakness = {
             //add more as used
             //elemental
             fire: false,
@@ -205,17 +216,18 @@ function createHero() {
         heroName = "Hero"
     }
     else{}
-    let classChoice = prompt(heroName + " are you a (Fig)hter, (Mag)e, (Rog)ue, or a Freelancer?")
+    let classChoice = prompt(heroName + " are you a (Fig)hter, (Rog)ue, (Wiz)ard or a Freelancer?")
     if (classChoice === "Fig") {
         hero = new Fighter(heroName);
         shield.equip(hero)
     }
-    else if (classChoice === "Mag") {
-        hero = new Mage(heroName);
-        spellbook.equip(hero)
-    }
+    
     else if (classChoice === "Rog") {
         hero = new Rogue(heroName);
+    }
+    else if (classChoice === "Wiz") {
+        hero = new Wizard(heroName);
+        spellbook.equip(hero)
     }
     else {
         hero = new Character(heroName);

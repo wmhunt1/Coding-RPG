@@ -24,7 +24,7 @@ let inspireAlly = new Ability("Inspire Ally", function (user) {
                 alert(user.basics.name + " inspires " + allyArray[target].basics.name)
                 allyArray[target].stats.buff += user.basics.level;
                 console.log(allyArray[target].stats.buff)
-                user.useSP(1)
+                user.useSp(1)
             }
             else {
                 alert("Can't heal dead target.")
@@ -59,7 +59,7 @@ let cureWounds = new Spell("Cure Wounds", function (user) {
                 let heal = user.basics.level * 5;
                 //target.stats.currentHp += heal;
                 allyArray[target].heal(heal)
-                user.useSP(1)
+                user.useSp(1)
             }
             else {
                 alert("Can't heal dead target.")
@@ -79,12 +79,12 @@ let magicMissile = new Spell("Magic Missile", function (user) {
     else {
         if (user.stats.currentSp > 0) {
             if (enemyArray[target].basics.alive == true) {
-                alert(user.basics.name + " fires a magical missile at " + enemyArray[target].basics.name + " dealing " + user.weapon.damage + " damage.")
-
+                alert(user.basics.name + " fires a magical missile at " + enemyArray[target].basics.name)
+                let damageType = "Force";
                 let dmg = user.weapon.damage;
-                user.damageReduction(enemyArray[target], dmg)
+                user.damageReduction(enemyArray[target], dmg, damageType)
                 enemyArray[target].isAlive();
-                user.useSP(1)
+                user.useSp(1)
             }
             else {
                 alert("Target already dead.")

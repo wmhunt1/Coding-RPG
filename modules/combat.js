@@ -7,6 +7,7 @@ let hit = false;
 //changes based on checkResist
 let immune = false;
 let resist = false;
+let weak = false;
 let skipTurn = false;
 //resist prototype
 Character.prototype.checkCondition = function () {
@@ -51,55 +52,85 @@ Character.prototype.checkIfHit = function (target){
         
     }
 }
-Character.prototype.checkImmune = function (target) {
+Character.prototype.checkImmune = function (target, damageType) {
     //add more as used
-    if (target.resistances.fire == true && this.weapon.damageType === "Fire") {
+    if (target.immunities.fire == true && damageType === "Fire") {
+        immune = true;
+    }
+    else if (target.immunities.force == true && damageType === "Force") {
+        immune = true;
+    }
+    else if (target.immunities.piercing == true && this.weapon.damageType === "Piercing") {
+        immune = true;
+    }
+    else if (target.immunities.slashing == true && this.weapon.damageType === "Slashing") {
+        immune = true;
+    }
+    else {
+        immune = false;
+    }
+}
+Character.prototype.checkResist = function (target, damageType) {
+    //add more as used
+    if (target.resistances.fire == true && damageType === "Fire") {
         resist = true;
     }
-    else if (target.resistances.piercing == true && this.weapon.damageType === "Piercing") {
+    else if (target.immunities.force == true && damageType === "Force") {
         resist = true;
     }
-    else if (target.resistances.slashing == true && this.weapon.damageType === "Slashing") {
+    else if (target.resistances.piercing == true && damageType === "Piercing") {
+        resist = true;
+    }
+    else if (target.resistances.slashing == true && damageType === "Slashing") {
         resist = true;
     }
     else {
         resist = false;
     }
 }
-Character.prototype.checkResist = function (target) {
+Character.prototype.checkWeakness = function (target, damageType) {
     //add more as used
-    if (target.resistances.fire == true && this.weapon.damageType === "Fire") {
-        resist = true;
+    if (target.weakness.fire == true && damageType === "Fire") {
+        weak = true;
     }
-    else if (target.resistances.piercing == true && this.weapon.damageType === "Piercing") {
-        resist = true;
+    else if (target.weakness.force == true && damageType === "Force") {
+        weak = true;
     }
-    else if (target.resistances.slashing == true && this.weapon.damageType === "Slashing") {
-        resist = true;
+    else if (target.weakness.piercing == true && damageType === "Piercing") {
+        weak = true;
+    }
+    else if (target.weakness.slashing == true && damageType === "Slashing") {
+        weak = true;
     }
     else {
-        resist = false;
+        weak = false;
     }
 }
-Character.prototype.damageReduction = function(target, dmg)
+Character.prototype.damageReduction = function(target, dmg, damageType)
 {
     if (target.basics.alive == true) {
         if (this.weapon.damage + this.weapon.damageBonus + this.weapon.tempBonus <= target.armor.protection + target.armor.protectionBonus + target.armor.tempBonus) {
             alert(this.basics.name + "'s attack bounces harmlessly off of " + target.basics.name + "'s " + target.armor.name)
         }
         else {
-            this.checkResist(target)
-            this.checkImmune(target)
+            this.checkResist(target, damageType)
+            this.checkImmune(target, damageType)
+            this.checkWeakness(target,damageType)
             if (resist == true) {
-                alert(target.basics.name + "resisted the " + this.weapon.damageType + "and took " + dmg / 2 + " damage.")
+                alert(target.basics.name + "resisted the " + damageType + "and took " + dmg / 2 + " damage.")
                 target.damage(dmg / 2)
                 alert(target.basics.name + " loses " + dmg / 2 + " Hitpoints.")
             }
             else if (immune == true) {
-                alert(target.basics.name + "is immune to " + this.weapon.damageType + " damage.")
+                alert(target.basics.name + "is immune to " + damageType + " damage.")
+            }
+            else if (weak == true) {
+                alert(target.basics.name + "is weak to " + damageType + " damage.")
+                target.damage(2*dmg)
+                alert(target.basics.name + " loses " + 2*dmg + " Hitpoints.")
             }
             else {
-                alert(dmg + " " + this.weapon.damageType + " damage dealt to " + target.basics.name)
+                alert(dmg + " " + damageType + " damage dealt to " + target.basics.name)
                 target.damage(dmg)
                 alert(target.basics.name + " loses " + dmg + " Hitpoints.")
             }
@@ -117,7 +148,7 @@ Character.prototype.attack = function (target) {
     if (hit = true) {
         let dmg = this.weapon.damage + this.weapon.damageBonus + this.weapon.tempBonus - target.armor.protection - target.armor.protectionBonus - target.armor.tempBonus;
         console.log(dmg)
-        this.damageReduction(target, dmg)
+        this.damageReduction(target, dmg, this.weapon.damageType)
     }
     else {
         alert(this.basics.name + " misses " + target.basics.name)
