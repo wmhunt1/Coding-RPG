@@ -176,6 +176,7 @@ class Spider extends Character {
         this.basics.name = name;
         this.basics.profession = "Bandit";
         this.basics.xp = maxHp*5;
+        this.basics.type = "Animal"
         this.basics.ally = false;
         this.stats.currentHp = currentHp;
         this.stats.maxHp = maxHp;

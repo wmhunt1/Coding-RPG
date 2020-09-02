@@ -12,6 +12,7 @@ class Character {
             profession: "Freelancer",
             level: 1,
             xp: 0,
+            type: "Humanoid",
             alive: true,
             ally: true,
         };
