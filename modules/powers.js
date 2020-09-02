@@ -1,5 +1,5 @@
 //classes for learning and training skills etc.
-class Ability {
+class Power {
     constructor(name, effect) {
         this.name = name;
         this.effect = effect;
@@ -13,7 +13,7 @@ class Spell extends Ability {
     }
 }
 //abilities
-let bomb = new Ability("Bomb", function (user) {
+let bomb = new Power("Bomb", function (user) {
     alert(user.basics.name + " throws a bomb.")
     if (user.stats.currentSp > 0) {
         for (var i = 0; i < enemyArray.length; i++) {
@@ -39,7 +39,7 @@ let bomb = new Ability("Bomb", function (user) {
         alert(user.basics.name + "didn't have enough SP.")
     }
 })
-let doubleAttack = new Ability("Double Attack",
+let doubleAttack = new Power("Double Attack",
     function (user) {
         if (user.stats.currentSp > 0) {
             alert(user.basics.name + "Focuses and prepares to make a double attack.")
@@ -63,7 +63,7 @@ let doubleAttack = new Ability("Double Attack",
             alert(user.basics.name + "didn't have enough SP.")
         }
     })
-let inspireAlly = new Ability("Inspire Ally", function (user) {
+let inspireAlly = new Power("Inspire Ally", function (user) {
     let target = prompt("Choose an ally to heal by number (starting from 0).");
     if (allyArray[target] === undefined) {
         alert(user.basics.name + " heals no one..")
@@ -85,7 +85,7 @@ let inspireAlly = new Ability("Inspire Ally", function (user) {
         }
     }
 })
-let palmStrike = new Ability("Palm Strike",
+let palmStrike = new Power("Palm Strike",
     function (user) {
         if (user.stats.currentSp > 0) {
             alert(user.basics.name + " prepares to stun their foe with a palm strike.")
@@ -116,7 +116,7 @@ let palmStrike = new Ability("Palm Strike",
         }
     }
 )
-let rage = new Ability("Rage",
+let rage = new Power("Rage",
     function (user) {
         if (user.stats.currentSp > 0) {
             alert(user.basics.name + " begins to rage.")
@@ -127,7 +127,7 @@ let rage = new Ability("Rage",
             alert(user.basics.name + "didn't have enough SP.")
         }
     })
-let smite = new Ability("Smite",
+let smite = new Power("Smite",
     function (user) {
         if (user.stats.currentSp > 0) {
             alert(user.basics.name + " prepares to smite their foe.")
@@ -157,7 +157,7 @@ let smite = new Ability("Smite",
         }
     }
 )
-let sneakAttack = new Ability("Sneak Attack",
+let sneakAttack = new Power("Sneak Attack",
     function (user) { })
 //spells
 let cureWounds = new Spell("Cure Wounds", function (user) {
