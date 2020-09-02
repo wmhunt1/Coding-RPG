@@ -182,6 +182,9 @@ const birdWord = new Quest("Bird is The Word", 10,
         birdWord.completeQuest()
     }
 )
+const hauntedManor = new Quest("The Haunte Manor", 10,
+//kids going missing and going to manor to find them
+)
 //need to improve the dialog
 const goblinSlayer = new Quest("Goblin Slayer", 20,
     //getting quest 1
@@ -239,4 +242,14 @@ const littlerootWorkers = new Quest("Workers for Littleroot Farm", 10,
         //report to chris
     }
 )
-const minotaurRescue = new Quest("Of Minotaurs and Men", 10)
+const minotaurRescue = new Quest("Of Minotaurs and Men", 10,
+//being asked to find George
+//tracking down george to giant cave
+//encounter with giant
+//returning with George for reward
+)
+const puzzleDungeonQuest1 = new Quest("A Puzzling Dungeon", 10,
+//getting quest
+//talking to wizard apprentice in dungeon
+//leaving dungeon
+)

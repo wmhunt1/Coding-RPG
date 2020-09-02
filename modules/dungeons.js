@@ -12,6 +12,7 @@ class Dungeon {
         this.encounter9 = encounter9;
     }
 }
+const daleManorDungeon = new Dungeon("Dale Manor")
 const mineDungeon = new Dungeon("Dwarven Mines",
     //encounter 1
     function () {
@@ -105,4 +106,21 @@ const mineDungeon = new Dungeon("Dwarven Mines",
             alert("You secured the mine so the miners and get back to work.")
         }
     }
+)
+const puzzleDungeon = new Dungeon("Puzzle Dungeon",
+//entry hall (and rest spot)
+//NE passage
+//NE Encounter
+//NE Puzzle
+//NW passage
+//NW Encounter
+//NW Puzzle
+//SW Passage
+//SW Encounter
+//SW Puzzle
+//SE Passage
+//SE Encounter
+//SE Puzzle
+//boss room (condition for if you don't have keys)
+//treasure room
 )

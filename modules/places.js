@@ -53,8 +53,10 @@ function(){
     }
     else
     {}
-}
-)
+})
+const puzzleDungeon1 = new Place("Puzzle Dungeon",
+//display for first parts of dungeon.
+function(){ambrosiusTower.enterPlace()})
 const tollBridge = new Place("The Toll bridge", function () { welcomeDale.event1() })
 //settlements
 const spiderCave = new Place("Spider Cave",
@@ -67,6 +69,9 @@ const spiderCave = new Place("Spider Cave",
             alert("No spiders are left")
         }
     })
+const ambrosiusTower = new Place("Ambrosius's tower.", 
+function(){},
+function(){ambrosiusTower.enter()})
 const villageDale = new Settlement("The Village of Dale.",
     function () {
         document.getElementById("valleyDale").style.display = "none";
@@ -80,6 +85,7 @@ const villageDale = new Settlement("The Village of Dale.",
     },
     function () { valleyDale.enter() }
 );
+const daleManor = new Place("Dale Manor","",function() {villageDale.enterPlace()})
 const daleTemple = new Place("The Temple of Sunshin",
     function () {
         if (hero.journal.birdWord == true && hero.journal.ghostInfo == false) { birdWord.event2() }
