@@ -54,8 +54,8 @@ function combatTest()
     const goblin1 = new Goblin("Goblin 1")
     const goblin2 = new Goblin("Goblin 2")
     const goblin3 = new Goblin("Goblin 3")
-    //enemyArray = [goblin1]
-    enemyArray = [goblin1, goblin2]
+    enemyArray = [goblin1]
+    //enemyArray = [goblin1, goblin2]
     //enemyArray = [goblin1, goblin2, goblin3]
     // const spider1 = new Spider ("Spider 1", 1, 1)
     // enemyArray = [spider1]

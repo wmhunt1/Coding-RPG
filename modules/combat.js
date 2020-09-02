@@ -60,6 +60,9 @@ Character.prototype.checkImmune = function (target, damageType) {
     else if (target.immunities.force == true && damageType === "Force") {
         immune = true;
     }
+    else if (target.immunities.radiant == true && damageType === "Radiant") {
+        immune = true;
+    }
     else if (target.immunities.piercing == true && this.weapon.damageType === "Piercing") {
         immune = true;
     }
@@ -76,6 +79,9 @@ Character.prototype.checkResist = function (target, damageType) {
         resist = true;
     }
     else if (target.immunities.force == true && damageType === "Force") {
+        resist = true;
+    }
+    else if (target.immunities.radiant == true && damageType === "Radiant") {
         resist = true;
     }
     else if (target.resistances.piercing == true && damageType === "Piercing") {
@@ -95,6 +101,9 @@ Character.prototype.checkWeakness = function (target, damageType) {
     }
     else if (target.weakness.force == true && damageType === "Force") {
         weak = true;
+    }
+    else if (target.immunities.radiant == true && damageType === "Radiant") {
+        resist = true;
     }
     else if (target.weakness.piercing == true && damageType === "Piercing") {
         weak = true;

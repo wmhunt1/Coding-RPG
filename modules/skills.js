@@ -13,29 +13,56 @@ class Spell extends Ability {
     }
 }
 //abilities
-let doubleAttack = new Ability("Double Attack",
-function (user){
+let bomb = new Ability("Bomb", function (user) {
+    alert(user.basics.name + " throws a bomb.")
     if (user.stats.currentSp > 0) {
-        alert(user.basics.name + "Focuses and prepares to make a double attack.")
-        let target = prompt("Choose target by number (starting from 0).");
-        if (enemyArray[target] === undefined) {
-            alert(user.basics.name + " attacks no one.")
+        for (var i = 0; i < enemyArray.length; i++) {
+            console.log(enemyArray[i].basics.name + " is the target.")
+            user.checkIfHit(enemyArray[i])
+            if (hit = true) {
+                let damageType = "Fire"
+                let dmg = user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus - enemyArray[i].armor.protection - enemyArray[i].armor.protectionBonus - enemyArray[i].armor.tempBonus;
+                console.log(dmg)
+                alert(enemyArray[i].basics.name + " is caught in the explostion")
+                user.damageReduction(enemyArray[i], dmg, damageType)
+                enemyArray[i].isAlive();
+
+            }
+            else {
+                alert(enemyArray[i].basics.name + "avoids the blast.")
+            }
         }
-        else {
-            user.action1(enemyArray[target]);
-        }
-        target = prompt("Choose target by number (starting from 0).");
-        if (enemyArray[target] === undefined) {
-            alert(user.basics.name + " attacks no one.")
-        }
-        else {
-            user.action1(enemyArray[target]);
-        }
+        user.useSp(1)
+
     }
     else {
         alert(user.basics.name + "didn't have enough SP.")
     }
 })
+let doubleAttack = new Ability("Double Attack",
+    function (user) {
+        if (user.stats.currentSp > 0) {
+            alert(user.basics.name + "Focuses and prepares to make a double attack.")
+            let target = prompt("Choose target by number (starting from 0).");
+            if (enemyArray[target] === undefined) {
+                alert(user.basics.name + " attacks no one.")
+            }
+            else {
+                user.action1(enemyArray[target]);
+            }
+            target = prompt("Choose target by number (starting from 0).");
+            if (enemyArray[target] === undefined) {
+                alert(user.basics.name + " attacks no one.")
+            }
+            else {
+                user.action1(enemyArray[target]);
+            }
+            user.useSp(1)
+        }
+        else {
+            alert(user.basics.name + "didn't have enough SP.")
+        }
+    })
 let inspireAlly = new Ability("Inspire Ally", function (user) {
     let target = prompt("Choose an ally to heal by number (starting from 0).");
     if (allyArray[target] === undefined) {
@@ -64,38 +91,41 @@ let rage = new Ability("Rage",
         if (user.stats.currentSp > 0) {
             alert(user.basics.name + " begins to rage.")
             user.weapon.tempBonus = user.basics.level;
+            user.useSp(1)
         }
         else {
             alert(user.basics.name + "didn't have enough SP.")
         }
     })
-let bomb = new Ability("Bomb", function (user) {
-    alert(user.basics.name + " throws a bomb.")
-    if (user.stats.currentSp > 0) {
-        for (var i = 0; i < enemyArray.length; i++) {
-            console.log(enemyArray[i].basics.name + " is the target.")
-            user.checkIfHit(enemyArray[i])
-            if (hit = true) {
-                let damageType = "Fire"
-                let dmg = user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus - enemyArray[i].armor.protection - enemyArray[i].armor.protectionBonus - enemyArray[i].armor.tempBonus;
-                console.log(dmg)
-                alert(enemyArray[i].basics.name + " is caught in the explostion")
-                user.damageReduction(enemyArray[i], dmg, damageType)
-                enemyArray[i].isAlive();
-
+let smite = new Ability("Smite",
+    function (user) {
+        if (user.stats.currentSp > 0) {
+            alert(user.basics.name + " prepares to smite their foe.")
+            let target = prompt("Choose target by number (starting from 0).");
+            if (enemyArray[target] === undefined) {
+                alert(user.basics.name + " attacks no one.")
             }
             else {
-                alert(enemyArray[i].basics.name + "avoids the blast.")
+                user.checkIfHit(enemyArray[target])
+                let damageType = "Radiant";
+                if (hit = true) {
+                    alert(user.basics.name + " smites " + enemyArray[target].basics.name)
+                    let dmg = 2*(user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus) - enemyArray[target].armor.protection - enemyArray[target].armor.protectionBonus - enemyArray[target].armor.tempBonus;
+                    console.log(dmg)
+                    user.damageReduction(enemyArray[target], dmg, damageType)
+                }
+                else {
+                    alert(user.basics.name + " misses " + enemyArray[target].basics.name)
+                }
+
+                enemyArray[target].isAlive();
             }
+            user.useSp(1)
         }
-        user.useSp(1)
-
+        else {
+            alert(user.basics.name + "didn't have enough SP.")
+        }
     }
-    else {
-        alert(user.basics.name + "didn't have enough SP.")
-    }
-
-}
 )
 //spells
 let cureWounds = new Spell("Cure Wounds", function (user) {

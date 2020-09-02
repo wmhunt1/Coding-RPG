@@ -162,6 +162,7 @@ class Character {
             fire: false,
             force: false,
             lightning: false,
+            radiant: false,
             //physical
             bludgeoning: false,
             piercing: false,
@@ -174,6 +175,7 @@ class Character {
             force: false,
             ice: false,
             lightning: false,
+            radiant: false,
             //physical
             bludgeoning: false,
             piercing: false,
@@ -186,6 +188,7 @@ class Character {
             force: false,
             ice: false,
             lightning: false,
+            radiant: false,
             //physical
             bludgeoning: false,
             piercing: false,
@@ -230,7 +233,7 @@ function createHero() {
         spellbook.equip(hero)
     }
     else {
-        hero = new Fighter(heroName);
+        hero = new Paladin(heroName);
     }
     // hero.basics.name = heroName;
     holySword.equip(hero)

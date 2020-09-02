@@ -59,6 +59,7 @@ class Paladin extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Paladin"
+        this.action2 = function(user) {smite.effect(user)}
     }
 }
 class Ranger extends Character {
