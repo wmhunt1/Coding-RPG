@@ -36,7 +36,9 @@ class Druid extends Character {
     constructor(name) {
         super();
         this.basics.name = name;
-        this.basics.profession = "Druid"
+        this.basics.profession = "Druid";
+        //maybe replace latter
+        this.action2 = function(user) {cureWounds.effect(user)}
     }
 }
 class Fighter extends Character {
@@ -52,6 +54,7 @@ class Monk extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Monk"
+        this.action2 = function(user) {palmStrike.effect(user)}
     }
 }
 class Paladin extends Character {
@@ -67,6 +70,8 @@ class Ranger extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Ranger"
+        //maybe replace latter
+        this.action2 = function(user) {doubleAttack.effect(user)}
     }
 }
 class Rogue extends Character {
@@ -74,6 +79,7 @@ class Rogue extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Rogue"
+        this.action2 = function(user) {sneakAttack.effect(user)}
     }
 }
 class Sorcerer extends Character {
@@ -81,6 +87,7 @@ class Sorcerer extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Sorcerer"
+        this.action2 = function(user) {magicMissile.effect(user)}
     }
 }
 class Warlock extends Character {
@@ -88,6 +95,8 @@ class Warlock extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Warlock"
+        //maybe replace later
+        this.action2 = function(user) {magicMissile.effect(user)}
     }
 }
 class Wizard extends Character {

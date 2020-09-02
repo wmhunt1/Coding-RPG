@@ -84,7 +84,37 @@ let inspireAlly = new Ability("Inspire Ally", function (user) {
             alert(user.basics.name + "didn't have enough SP.")
         }
     }
-}
+})
+let palmStrike = new Ability("Palm Strike",
+    function (user) {
+        if (user.stats.currentSp > 0) {
+            alert(user.basics.name + " prepares to stun their foe with a palm strike.")
+            let target = prompt("Choose target by number (starting from 0).");
+            if (enemyArray[target] === undefined) {
+                alert(user.basics.name + " attacks no one.")
+            }
+            else {
+                user.checkIfHit(enemyArray[target])
+                let damageType = "Bludgeoning"
+                if (hit = true) {
+                    alert(user.basics.name + " stuns " + enemyArray[target].basics.name)
+                    let dmg = (user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus) - enemyArray[target].armor.protection - enemyArray[target].armor.protectionBonus - enemyArray[target].armor.tempBonus;
+                    enemyArray[target].conditions.paralyze = true;
+                    console.log(dmg)
+                    user.damageReduction(enemyArray[target], dmg, damageType)
+                }
+                else {
+                    alert(user.basics.name + " misses " + enemyArray[target].basics.name)
+                }
+
+                enemyArray[target].isAlive();
+            }
+            user.useSp(1)
+        }
+        else {
+            alert(user.basics.name + "didn't have enough SP.")
+        }
+    }
 )
 let rage = new Ability("Rage",
     function (user) {
@@ -110,7 +140,7 @@ let smite = new Ability("Smite",
                 let damageType = "Radiant";
                 if (hit = true) {
                     alert(user.basics.name + " smites " + enemyArray[target].basics.name)
-                    let dmg = 2*(user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus) - enemyArray[target].armor.protection - enemyArray[target].armor.protectionBonus - enemyArray[target].armor.tempBonus;
+                    let dmg = 2 * (user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus) - enemyArray[target].armor.protection - enemyArray[target].armor.protectionBonus - enemyArray[target].armor.tempBonus;
                     console.log(dmg)
                     user.damageReduction(enemyArray[target], dmg, damageType)
                 }
@@ -127,6 +157,8 @@ let smite = new Ability("Smite",
         }
     }
 )
+let sneakAttack = new Ability("Sneak Attack",
+    function (user) { })
 //spells
 let cureWounds = new Spell("Cure Wounds", function (user) {
     let target = prompt("Choose an ally to heal by number (starting from 0).");

@@ -26,7 +26,7 @@ Character.prototype.checkCondition = function () {
         skipTurn = true;
     }
     else if (this.conditions.paralyze) {
-        alert(this.basics.name + " Missed turn due to paralyze")
+        alert(this.basics.name + " Missed turn due to paralysis")
         skipTurn = true;
     }
     else if (this.conditions.poison) {

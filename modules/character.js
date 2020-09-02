@@ -233,7 +233,7 @@ function createHero() {
         spellbook.equip(hero)
     }
     else {
-        hero = new Paladin(heroName);
+        hero = new Rogue(heroName);
     }
     // hero.basics.name = heroName;
     holySword.equip(hero)
