@@ -13,6 +13,29 @@ class Spell extends Ability {
     }
 }
 //abilities
+let doubleAttack = new Ability("Double Attack",
+function (user){
+    if (user.stats.currentSp > 0) {
+        alert(user.basics.name + "Focuses and prepares to make a double attack.")
+        let target = prompt("Choose target by number (starting from 0).");
+        if (enemyArray[target] === undefined) {
+            alert(user.basics.name + " attacks no one.")
+        }
+        else {
+            user.action1(enemyArray[target]);
+        }
+        target = prompt("Choose target by number (starting from 0).");
+        if (enemyArray[target] === undefined) {
+            alert(user.basics.name + " attacks no one.")
+        }
+        else {
+            user.action1(enemyArray[target]);
+        }
+    }
+    else {
+        alert(user.basics.name + "didn't have enough SP.")
+    }
+})
 let inspireAlly = new Ability("Inspire Ally", function (user) {
     let target = prompt("Choose an ally to heal by number (starting from 0).");
     if (allyArray[target] === undefined) {
@@ -46,6 +69,34 @@ let rage = new Ability("Rage",
             alert(user.basics.name + "didn't have enough SP.")
         }
     })
+let bomb = new Ability("Bomb", function (user) {
+    alert(user.basics.name + " throws a bomb.")
+    if (user.stats.currentSp > 0) {
+        for (var i = 0; i < enemyArray.length; i++) {
+            console.log(enemyArray[i].basics.name + " is the target.")
+            user.checkIfHit(enemyArray[i])
+            if (hit = true) {
+                let damageType = "Fire"
+                let dmg = user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus - enemyArray[i].armor.protection - enemyArray[i].armor.protectionBonus - enemyArray[i].armor.tempBonus;
+                console.log(dmg)
+                alert(enemyArray[i].basics.name + " is caught in the explostion")
+                user.damageReduction(enemyArray[i], dmg, damageType)
+                enemyArray[i].isAlive();
+
+            }
+            else {
+                alert(enemyArray[i].basics.name + "avoids the blast.")
+            }
+        }
+        user.useSp(1)
+
+    }
+    else {
+        alert(user.basics.name + "didn't have enough SP.")
+    }
+
+}
+)
 //spells
 let cureWounds = new Spell("Cure Wounds", function (user) {
     let target = prompt("Choose an ally to heal by number (starting from 0).");
@@ -96,8 +147,8 @@ let magicMissile = new Spell("Magic Missile", function (user) {
     }
 })
 //enemy abilities
-let poisonFangs = ("Poisoned Fangs", function(user,target){
+let poisonFangs = ("Poisoned Fangs", function (user, target) {
     user.attack(target)
     target.conditions.poison = true;
-    alert ("The poisoned fangs inflict poison on " + target.basics.name)
+    alert("The poisoned fangs inflict poison on " + target.basics.name)
 })

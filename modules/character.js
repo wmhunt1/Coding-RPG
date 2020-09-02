@@ -4,7 +4,7 @@ class Character {
     constructor(name) {
         //this works for future
         this.action1 = function (target) { this.attack(target) };
-        this.action2 = 0;
+        this.action2 = function(){console.log("No special ability")};
         this.action3 = 0;
         this.action4 = 0;
         this.basics = {
@@ -230,7 +230,7 @@ function createHero() {
         spellbook.equip(hero)
     }
     else {
-        hero = new Character(heroName);
+        hero = new Fighter(heroName);
     }
     // hero.basics.name = heroName;
     holySword.equip(hero)

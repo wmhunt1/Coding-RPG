@@ -4,6 +4,7 @@ class Artificer extends Character {
         super();
         this.basics.name = name;
         this.stats.profession = "Artificer"
+        this.action2 = function(user) {bomb.effect(user)}
     }
 }
 class Barbarian extends Character {
@@ -43,6 +44,7 @@ class Fighter extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Fighter"
+        this.action2 = function(user) {doubleAttack.effect(user)}
     }
 }
 class Monk extends Character {
