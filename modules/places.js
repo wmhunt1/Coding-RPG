@@ -55,6 +55,9 @@ function(){
     else
     {}
 })
+const witchCabin = new Place("Witch's Cabin",
+//first time you meet Wyle and Kurek and are offered a potion 
+)
 const puzzleDungeon1 = new Place("Puzzle Dungeon",
 //display for first parts of dungeon.
 function(){ambrosiusTower.enterPlace()})

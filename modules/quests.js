@@ -189,11 +189,22 @@ const hauntedManor = new Quest("The Haunte Manor", 10,
 const goblinSlayer = new Quest("Goblin Slayer", 20,
     //getting quest 1
     function () {
-        alert("Faldan asks you to kill goblins and Ferra and Faldan argue about her going to.")
-        alert("Ferra decides to go with you.")
+        alert("You enter the Forgeheart Smithy.")
+        alert("Inside you see an old dwarf sitting in a rocking chair. One leg is replaced with a metal prosthetic.")
+        alert("Faldan: *He looks at you* Lass, you have a customer.")
+        alert("Surprisingly a young human woman with red hair walks out of the back.")
+        alert("Ferra: How can I help you?")
+        alert("You explain that you're actually here about the goblins.")
+        alert("Faldan: *spits* Good, they've taken over my mine. I'll pay you " + this.reward + " if you get rid of them.")
+        alert("Ferra: father, they can't kill all of those goblins by themselves. I'll go with them.")
+        alert("Faldan: Very well, go with them.")
+        alert("Ferra: Don't worry about me, I'm a cleric and strong from spending all day at the forge.")
         document.getElementById("dMine").style.display = "block";
         ferra.addParty()
+        alert("*As you prepare to leave*")
+        alert("Faldan: *looks you in the eye* If you get my little girl hurt I'll hunt you.")
         hero.journal.spokeWithFaldan = true;
+        
     },
     //kobolds ask you to free others 2
     function () {
