@@ -216,26 +216,59 @@ class Character {
 }
 //eventually make this into options etc.
 function createHero() {
-    let heroName = prompt("Choose Your Name")
+    let heroName = document.getElementById("name").value
     if (heroName === "") {
         heroName = "Hero"
     }
     else { }
-    let classChoice = prompt(heroName + " are you a (Fig)hter, (Rog)ue, (Wiz)ard or a Freelancer?")
-    if (classChoice === "Fig") {
+    let classChoice = document.getElementById("class").value;
+    console.log(classChoice)
+    //let classChoice = prompt(heroName + " are you a (Fig)hter, (Rog)ue, (Wiz)ard or a Freelancer?")
+    if (classChoice === "artificer"){
+        hero = new Artificer(heroName);
+    }
+    else if (classChoice === "barbarian") {
+        hero = new Barbarian(heroName);
+    }
+    else if (classChoice === "bard") {
+        hero = new Bard(heroName);
+    }
+    else if (classChoice === "cleric") {
+        hero = new Cleric(heroName);
+    }
+    else if (classChoice === "druid") {
+        hero = new Druid(heroName);
+        holySymbol.equip(hero)
+    }
+    else if (classChoice === "fighter") {
         hero = new Fighter(heroName);
         shield.equip(hero)
     }
-
-    else if (classChoice === "Rog") {
+    else if (classChoice === "monk") {
+        hero = new Monk(heroName);
+    }
+    else if (classChoice === "paladin") {
+        hero = new Paladin(heroName);
+        shield.equip(hero)
+    }
+    else if (classChoice === "ranger") {
+        hero = new Ranger(heroName);
+    }
+    else if (classChoice === "rogue") {
         hero = new Rogue(heroName);
     }
-    else if (classChoice === "Wiz") {
+    else if (classChoice === "sorcerer") {
+        hero = new Sorcerer(heroName);
+    }
+    else if (classChoice === "warlock") {
+        hero = new Warlock(heroName);
+    }
+    else if (classChoice === "wizard") {
         hero = new Wizard(heroName);
         spellbook.equip(hero)
     }
     else {
-        hero = new Ranger(heroName);
+        hero = new Character(heroName);
     }
     // hero.basics.name = heroName;
     holySword.equip(hero)

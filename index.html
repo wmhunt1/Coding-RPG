@@ -34,7 +34,29 @@
         <h1>Intro</h1>
         <article>
             <p>Game Intro.</p>
-            <button onclick=createHero() class="margin">Character Creation</button>
+        </article>
+        <h2>Character Creation</h2>
+        <article>
+            <label>Name</label>
+            <input type="text" id="name" name="name">
+            <label>Select Class</label>
+            <select name="class" id="class">
+                <option value="freelancer">Freelancer</option>
+                <option value="artificer">Artificer</option>
+                <option value="barbarian">Barbarian</option>
+                <option value="bard">Bard</option>
+                <option value="cleric">Cleric</option>
+                <option value="druid">Druid</option>
+                <option value="fighter">Fighter</option>
+                <option value="monk">Monk</option>
+                <option value="paladin">Paladin</option>
+                <option value="ranger">Ranger</option>
+                <option value="rogue">Rogue</option>
+                <option value="sorcerer">Sorcerer</option>
+                <option value="warlock">Warlock</option>
+                <option value="wizard">Wizard</option>
+            </select>
+            <button onclick=createHero() class="margin">Create Character</button>
         </article>
     </section>
     <!-- area sections, have buttons for areas or shops etc. -->

@@ -3,7 +3,7 @@ class Artificer extends Character {
     constructor(name) {
         super();
         this.basics.name = name;
-        this.stats.profession = "Artificer"
+        this.basics.profession = "Artificer"
         this.action2 = function (user) { bomb.effect(user) }
     }
 }

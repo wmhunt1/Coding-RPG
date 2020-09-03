@@ -96,6 +96,7 @@ Weapon.prototype.equip = function (user) {
     console.log(user)
 }
 //accessories
+let holySymbol = new Accessory("Holy Symbol", "Holy Symbol", 1, function (user, value) { }, "The symbol of a god.", 0, 1)
 let shield = new Accessory("Shield", "Shield", 0, function (user, value) { user.accessory.shieldBonus += 1 }, "Raises Shield Bonus", 0, 1)
 let spellbook = new Accessory("Basic Spellbook", "Spellbook", 1, function (user, value) { }, "", 0, 1)
 //armor
