@@ -4,7 +4,7 @@ class Artificer extends Character {
         super();
         this.basics.name = name;
         this.stats.profession = "Artificer"
-        this.action2 = function(user) {bomb.effect(user)}
+        this.action2 = function (user) { bomb.effect(user) }
     }
 }
 class Barbarian extends Character {
@@ -12,7 +12,7 @@ class Barbarian extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Barbarian"
-        this.action2 = function(user) {rage.effect(user)}
+        this.action2 = function (user) { rage.effect(user) }
 
     }
 }
@@ -21,7 +21,7 @@ class Bard extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Bard"
-        this.action2 = function(user) {inspireAlly.effect(user)}
+        this.action2 = function (user) { inspireAlly.effect(user) }
     }
 }
 class Cleric extends Character {
@@ -29,7 +29,7 @@ class Cleric extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Cleric";
-        this.action2 = function(user) {cureWounds.effect(user)}
+        this.action2 = function (user) { cureWounds.effect(user) }
     }
 }
 class Druid extends Character {
@@ -38,7 +38,7 @@ class Druid extends Character {
         this.basics.name = name;
         this.basics.profession = "Druid";
         //maybe replace latter
-        this.action2 = function(user) {cureWounds.effect(user)}
+        this.action2 = function (user) { cureWounds.effect(user) }
     }
 }
 class Fighter extends Character {
@@ -46,7 +46,7 @@ class Fighter extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Fighter"
-        this.action2 = function(user) {doubleAttack.effect(user)}
+        this.action2 = function (user) { doubleAttack.effect(user) }
     }
 }
 class Monk extends Character {
@@ -54,7 +54,7 @@ class Monk extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Monk"
-        this.action2 = function(user) {palmStrike.effect(user)}
+        this.action2 = function (user) { palmStrike.effect(user) }
     }
 }
 class Paladin extends Character {
@@ -62,7 +62,7 @@ class Paladin extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Paladin"
-        this.action2 = function(user) {smite.effect(user)}
+        this.action2 = function (user) { smite.effect(user) }
     }
 }
 class Ranger extends Character {
@@ -72,7 +72,7 @@ class Ranger extends Character {
         this.basics.profession = "Ranger"
         //maybe replace latter
         //maybe gets an animal companion instead.
-        this.action2 = function(user) {doubleAttack.effect(user)}
+        this.action2 = function (user) { doubleAttack.effect(user) }
     }
 }
 class Rogue extends Character {
@@ -80,7 +80,7 @@ class Rogue extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Rogue"
-        this.action2 = function(user) {sneakAttack.effect(user)}
+        this.action2 = function (user) { sneakAttack.effect(user) }
     }
 }
 class Sorcerer extends Character {
@@ -88,7 +88,7 @@ class Sorcerer extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Sorcerer"
-        this.action2 = function(user) {magicMissile.effect(user)}
+        this.action2 = function (user) { magicMissile.effect(user) }
     }
 }
 class Warlock extends Character {
@@ -97,7 +97,7 @@ class Warlock extends Character {
         this.basics.name = name;
         this.basics.profession = "Warlock"
         //maybe replace later
-        this.action2 = function(user) {magicMissile.effect(user)}
+        this.action2 = function (user) { magicMissile.effect(user) }
     }
 }
 class Wizard extends Character {
@@ -105,11 +105,30 @@ class Wizard extends Character {
         super();
         this.basics.name = name;
         this.basics.profession = "Wizard"
-        this.action2 = function(user) {magicMissile.effect(user)}
+        this.action2 = function (user) { magicMissile.effect(user) }
+    }
+}
+class Familiar extends Character {
+    constructor(name) {
+        super();
+        this.basics.name = name;
+        this.basics.profession = "Familiar";
+        this.stats.baseHp = 2;
+        this.stats.currentHp = 2;
+        this.stats.maxHp = 2;
+        this.stats.attack = 0;
+        this.stats.defense = 0;
+        this.stats.speed = 5;
+        this.weapon.name = "Magical Blast"
+        this.weapon.damage = 1;
+        this.weapon.type = "Ranged"
+        this.weapon.damageType = "Force";
+        this.armor.name = "None";
+        this.armor.type = "Natural"
     }
 }
 //animal companion
-class Pet extends Character{
+class Pet extends Character {
     constructor(name) {
         super();
         this.basics.name = name;
@@ -205,7 +224,7 @@ class GoblinBoss extends Character {
 class Spider extends Character {
     constructor(name, currentHp, maxHp) {
         super();
-        this.action1 = function (target) {poisonFangs(this, target) }
+        this.action1 = function (target) { poisonFangs(this, target) }
         this.basics.name = name;
         this.basics.profession = "Bandit";
         //this.basics.xp = maxHp*5;

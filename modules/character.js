@@ -1,5 +1,6 @@
 let hero = "";
 let pet = "";
+let familiar = "";
 //character prototype
 class Character {
     constructor(name) {
@@ -243,13 +244,23 @@ function createHero() {
     allyArray.push(hero)
     //maybe everyone gets pet or ranger just buffs pet.
     if (hero.basics.profession === "Ranger") {
-        let petName = prompt("As a ranger you get an animal companion. What will you name them?")
+        let petName = prompt("As a Ranger you have a loyal animal companion. What is their name?")
         if (petName === "") {
             petName = "Doggo"
         }
         else{}
         pet = new Pet(petName)
         allyArray.push(pet)
+    }
+    else { }
+    if (hero.basics.profession === "Warlock") {
+        let familiarName = prompt("As a Warlock you have the service of a summoned familiar. What name did you use to summon them?")
+        if (familiarName === "") {
+            familiarName = "Ziggy"
+        }
+        else{}
+        familiar = new Familiar(familiarName)
+        allyArray.push(familiar)
     }
     else { }
     alert("You are " + hero.basics.name + ", a " + hero.basics.profession + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
