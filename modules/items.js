@@ -102,7 +102,7 @@ let spellbook = new Accessory("Basic Spellbook", "Spellbook", 1, function (user,
 //armor
 let chainShirt = new Armor("Chain Shirt", "Light", 1, function (user, value) { }, "", 0, 1);
 let clothing = new Armor("Clothing", "Clothing", 0, function (user, value) { }, "", 0, 1);
-let knittedSweater = new Accessory("Knitted Sweater", "Clothing", 1, function (user, value) {user.resistances.ice = true}, "A sweater knitted by Sheepscale.", 0, 1)
+let knittedSweater = new Accessory("Knitted Sweater", "Clothing", 1, function (user, value) { user.resistances.ice = true }, "A sweater knitted by Sheepscale.", 0, 1)
 let leather = new Armor("Leather", "Light", 1, function (user, value) { }, "", 0, 1);
 let paladinArmor = new Armor("Paladin's Armor", "Heavy", 5, function (user, value) { }, "", 0, 1);
 //boots

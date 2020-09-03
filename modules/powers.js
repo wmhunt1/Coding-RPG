@@ -174,7 +174,7 @@ let sneakAttack = new Power("Sneak Attack",
                     //maybe ignore armor depending on balance
                     if (skipTurn == true) {
                         //let dmg = 2 * (user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus);
-                        let dmg = 2*(user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus) - enemyArray[target].armor.protection - enemyArray[target].armor.protectionBonus - enemyArray[target].armor.tempBonus;
+                        let dmg = 2 * (user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus) - enemyArray[target].armor.protection - enemyArray[target].armor.protectionBonus - enemyArray[target].armor.tempBonus;
                         console.log(dmg)
                         user.damageReduction(enemyArray[target], dmg, user.weapon.damageType)
                     }

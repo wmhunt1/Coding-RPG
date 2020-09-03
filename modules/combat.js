@@ -24,7 +24,7 @@ Character.prototype.checkConditionAbility = function () {
     else if (this.conditions.paralyze) {
         skipTurn = true;
     }
-    else if (this.conditions.poison) {}
+    else if (this.conditions.poison) { }
     else {
 
     }
@@ -56,19 +56,17 @@ Character.prototype.checkCondition = function () {
 
     }
 }
-Character.prototype.checkIfHit = function (target){
+Character.prototype.checkIfHit = function (target) {
     let hitChance = .5 - .1 * (target.stats.defense + target.stats.buff - target.stats.debuff);
     console.log(hitChance + " hit chance")
     let hitRoll = Math.random() + .1 * (this.stats.attack + this.stats.buff - this.stats.debuff);
     console.log(hitRoll + " hit roll")
-    if (hitRoll >= hitChance)
-    {
+    if (hitRoll >= hitChance) {
         hit = true;
     }
-    else
-    {
+    else {
         hit = false;
-        
+
     }
 }
 Character.prototype.checkImmune = function (target, damageType) {
@@ -134,8 +132,7 @@ Character.prototype.checkWeakness = function (target, damageType) {
         weak = false;
     }
 }
-Character.prototype.damageReduction = function(target, dmg, damageType)
-{
+Character.prototype.damageReduction = function (target, dmg, damageType) {
     if (target.basics.alive == true) {
         if (this.weapon.damage + this.weapon.damageBonus + this.weapon.tempBonus <= target.armor.protection + target.armor.protectionBonus + target.armor.tempBonus) {
             alert(this.basics.name + "'s attack bounces harmlessly off of " + target.basics.name + "'s " + target.armor.name)
@@ -143,7 +140,7 @@ Character.prototype.damageReduction = function(target, dmg, damageType)
         else {
             this.checkResist(target, damageType)
             this.checkImmune(target, damageType)
-            this.checkWeakness(target,damageType)
+            this.checkWeakness(target, damageType)
             if (resist == true) {
                 alert(target.basics.name + "resisted the " + damageType + "and took " + dmg / 2 + " damage.")
                 target.damage(dmg / 2)
@@ -154,8 +151,8 @@ Character.prototype.damageReduction = function(target, dmg, damageType)
             }
             else if (weak == true) {
                 alert(target.basics.name + "is weak to " + damageType + " damage.")
-                target.damage(2*dmg)
-                alert(target.basics.name + " loses " + 2*dmg + " Hitpoints.")
+                target.damage(2 * dmg)
+                alert(target.basics.name + " loses " + 2 * dmg + " Hitpoints.")
             }
             else {
                 alert(dmg + " " + damageType + " damage dealt to " + target.basics.name)
@@ -235,7 +232,7 @@ Character.prototype.heal = function (cure) {
 Character.prototype.damage = function (wound) {
     this.stats.currentHp -= wound;
 }
-Character.prototype.useSp = function (cost){
+Character.prototype.useSp = function (cost) {
     this.stats.currentSp -= cost;
     console.log(this.basics.name + " uses " + cost + " SP.")
 }
@@ -283,7 +280,7 @@ Character.prototype.turn = function () {
                     }
                 }
                 else if (action === "S") {
-                            this.action2(this)
+                    this.action2(this)
                 }
                 else if (action === "P") {
                     potion.use(this)
