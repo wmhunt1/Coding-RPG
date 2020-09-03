@@ -223,7 +223,6 @@ function createHero() {
     else { }
     let classChoice = document.getElementById("class").value;
     console.log(classChoice)
-    //let classChoice = prompt(heroName + " are you a (Fig)hter, (Rog)ue, (Wiz)ard or a Freelancer?")
     if (classChoice === "artificer"){
         hero = new Artificer(heroName);
     }

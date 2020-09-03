@@ -4,6 +4,7 @@ $("document").ready(function () {
 function startGame() {
     //hides buttons until location discovered
     document.getElementById("Intro").style.display = "block";
+    document.getElementById("characterCreation").style.display = "none";
     document.getElementById("Menu").style.display = "none";
     document.getElementById("valleyDale").style.display = "none";
     document.getElementById("villageDale").style.display = "none";
@@ -41,6 +42,11 @@ function startGame() {
     document.getElementById("mi3").style.display = "none";
     document.getElementById("gBoss").style.display = "none";
     document.getElementById("puzzleDungeon1").style.display = "none";
+}
+function charCreation()
+{
+    document.getElementById("Intro").style.display = "none";
+    document.getElementById("characterCreation").style.display = "block";
 }
 function addText(x) {
     var tag = document.createElement("p")

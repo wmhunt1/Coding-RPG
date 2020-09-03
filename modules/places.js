@@ -25,6 +25,7 @@ Place.prototype.exitPlace = function () {
 //Valley of Dales and places in it.
 const valleyDale = new Place("The Valley of Dale", function () {
     document.getElementById("Intro").style.display = "none"
+    document.getElementById("characterCreation").style.display = "none";
     document.getElementById("Menu").style.display = "block";
     document.getElementById("mineDungeon").style.display = "none";
     document.getElementById("valleyDale").style.display = "block";
