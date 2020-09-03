@@ -10,6 +10,25 @@ let resist = false;
 let weak = false;
 let skipTurn = false;
 //resist prototype
+//one for turn and one for abilities
+Character.prototype.checkConditionAbility = function () {
+    skipTurn = false;
+    if (this.conditions.asleep) {
+        skipTurn = true;
+    }
+    else if (this.conditions.burn) {
+    }
+    else if (this.conditions.confused) {
+        skipTurn = true;
+    }
+    else if (this.conditions.paralyze) {
+        skipTurn = true;
+    }
+    else if (this.conditions.poison) {}
+    else {
+
+    }
+}
 Character.prototype.checkCondition = function () {
     skipTurn = false;
     if (this.conditions.asleep) {

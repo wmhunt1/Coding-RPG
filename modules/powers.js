@@ -5,7 +5,7 @@ class Power {
         this.effect = effect;
     }
 }
-class Spell extends Ability {
+class Spell extends Power {
     constructor(name, effect) {
         super();
         this.name = name;
@@ -130,8 +130,8 @@ let rage = new Power("Rage",
 let smite = new Power("Smite",
     function (user) {
         if (user.stats.currentSp > 0) {
-            alert(user.basics.name + " prepares to smite their foe.")
             let target = prompt("Choose target by number (starting from 0).");
+            alert(user.basics.name + " prepares to smite their foe.")
             if (enemyArray[target] === undefined) {
                 alert(user.basics.name + " attacks no one.")
             }
@@ -158,7 +158,46 @@ let smite = new Power("Smite",
     }
 )
 let sneakAttack = new Power("Sneak Attack",
-    function (user) { })
+    function (user) {
+        if (user.stats.currentSp > 0) {
+            let target = prompt("Choose target by number (starting from 0).");
+            alert(user.basics.name + " looks for their opponent's vulnerabilities.")
+            if (enemyArray[target] === undefined) {
+                alert(user.basics.name + " attacks no one.")
+            }
+            else {
+                user.checkIfHit(enemyArray[target])
+                if (hit = true) {
+                    //alert(user.basics.name + " sneak attacks " + enemyArray[target].basics.name + " finding a gap in their armor")
+                    alert(user.basics.name + "sneak attacks " + enemyArray[target].basics.name)
+                    enemyArray[target].checkConditionAbility()
+                    //maybe ignore armor depending on balance
+                    if (skipTurn == true) {
+                        //let dmg = 2 * (user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus);
+                        let dmg = 2*(user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus) - enemyArray[target].armor.protection - enemyArray[target].armor.protectionBonus - enemyArray[target].armor.tempBonus;
+                        console.log(dmg)
+                        user.damageReduction(enemyArray[target], dmg, user.weapon.damageType)
+                    }
+                    else {
+                        //let dmg = (user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus);
+                        let dmg = (user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus) - enemyArray[target].armor.protection - enemyArray[target].armor.protectionBonus - enemyArray[target].armor.tempBonus;
+                        console.log(dmg)
+                        user.damageReduction(enemyArray[target], dmg, user.weapon.damageType)
+                    }
+                }
+                else {
+                    alert(user.basics.name + " misses " + enemyArray[target].basics.name)
+                }
+
+                enemyArray[target].isAlive();
+            }
+            user.useSp(1)
+        }
+        else {
+            alert(user.basics.name + "didn't have enough SP.")
+        }
+
+    })
 //spells
 let cureWounds = new Spell("Cure Wounds", function (user) {
     let target = prompt("Choose an ally to heal by number (starting from 0).");
