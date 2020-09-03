@@ -57,8 +57,7 @@ function combatTest()
     //enemyArray = [goblin1]
     //enemyArray = [goblin1, goblin2]
     //enemyArray = [goblin1, goblin2, goblin3]
-    const spider1 = new Spider ("Spider 1", 5, 1)
-    spider1.conditions.paralyze = true;
+    const spider1 = new Spider ("Spider 1", 1, 1)
     enemyArray = [spider1]
     combat()
 }

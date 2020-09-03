@@ -71,6 +71,7 @@ class Ranger extends Character {
         this.basics.name = name;
         this.basics.profession = "Ranger"
         //maybe replace latter
+        //maybe gets an animal companion instead.
         this.action2 = function(user) {doubleAttack.effect(user)}
     }
 }
@@ -105,6 +106,26 @@ class Wizard extends Character {
         this.basics.name = name;
         this.basics.profession = "Wizard"
         this.action2 = function(user) {magicMissile.effect(user)}
+    }
+}
+//animal companion
+class Pet extends Character{
+    constructor(name) {
+        super();
+        this.basics.name = name;
+        this.basics.profession = "Animal Companion";
+        this.stats.baseHp = 2;
+        this.stats.currentHp = 2;
+        this.stats.maxHp = 2;
+        this.stats.attack = 0;
+        this.stats.defense = 0;
+        this.stats.speed = 5;
+        this.weapon.name = "Bite"
+        this.weapon.damage = 1;
+        this.weapon.type = "Melee"
+        this.weapon.damageType = "Piercing";
+        this.armor.name = "Fur";
+        this.armor.type = "Natural"
     }
 }
 //npc classes
@@ -187,7 +208,8 @@ class Spider extends Character {
         this.action1 = function (target) {poisonFangs(this, target) }
         this.basics.name = name;
         this.basics.profession = "Bandit";
-        this.basics.xp = maxHp*5;
+        //this.basics.xp = maxHp*5;
+        this.basics.xp = 100;
         this.basics.type = "Animal"
         this.basics.ally = false;
         this.stats.currentHp = currentHp;

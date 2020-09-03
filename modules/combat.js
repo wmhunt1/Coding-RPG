@@ -212,11 +212,12 @@ Character.prototype.levelUp = function () {
     console.log(this.basics.name + " has " + this.basics.xp + " total XP.")
     if (this.basics.level * 100 == this.basics.xp) {
         this.basics.level++;
-        this.stats.currentHp += 10;
-        this.stats.maxHp += 10;
+        this.stats.currentHp += this.stats.baseHp;
+        this.stats.maxHp += this.stats.baseHp;
         this.stats.attack += 1;
         this.stats.defense += 1;
         console.log(this.basics.name + " leveled up")
+        console.log(this)
     }
     else {
         console.log(this.basics.name + " is not ready for level up")

@@ -1,10 +1,11 @@
 let hero = "";
+let pet = "";
 //character prototype
 class Character {
     constructor(name) {
         //this works for future
         this.action1 = function (target) { this.attack(target) };
-        this.action2 = function(){console.log("No special ability")};
+        this.action2 = function () { console.log("No special ability") };
         this.action3 = 0;
         this.action4 = 0;
         this.basics = {
@@ -17,6 +18,7 @@ class Character {
             ally: true,
         };
         this.stats = {
+            baseHp: 10,
             currentHp: 10,
             maxHp: 10,
             currentSp: 2,
@@ -63,7 +65,7 @@ class Character {
         this.inventory = {
             gold: 0
         }
-        this.journal = {  
+        this.journal = {
             entries: [],
             tollBridgeEncounter: false,
             metWithContact: false,
@@ -203,28 +205,27 @@ class Character {
     allyArray[i].stats.currentSp = allyArray[i].stats.maxSp;
 }
 }
-    Character.prototype.gainRel = function (person, value){
-        this.relationships.person += value;
-        console.log("Gained " + value + " relationship point(s) with " + person.basics.name)
-    }
-    Character.prototype.loseRel = function (person, value){
-        this.relationships.person -= value;
-        console.log("Lost " + value + " relationship point(s) with " + person.basics.name)
-    }
-    //eventually make this into options etc.
+    Character.prototype.gainRel = function (person, value) {
+    this.relationships.person += value;
+    console.log("Gained " + value + " relationship point(s) with " + person.basics.name)
+}
+    Character.prototype.loseRel = function (person, value) {
+    this.relationships.person -= value;
+    console.log("Lost " + value + " relationship point(s) with " + person.basics.name)
+}
+//eventually make this into options etc.
 function createHero() {
     let heroName = prompt("Choose Your Name")
-    if (heroName === "")
-    {
+    if (heroName === "") {
         heroName = "Hero"
     }
-    else{}
+    else { }
     let classChoice = prompt(heroName + " are you a (Fig)hter, (Rog)ue, (Wiz)ard or a Freelancer?")
     if (classChoice === "Fig") {
         hero = new Fighter(heroName);
         shield.equip(hero)
     }
-    
+
     else if (classChoice === "Rog") {
         hero = new Rogue(heroName);
     }
@@ -233,18 +234,29 @@ function createHero() {
         spellbook.equip(hero)
     }
     else {
-        hero = new Rogue(heroName);
+        hero = new Ranger(heroName);
     }
     // hero.basics.name = heroName;
     holySword.equip(hero)
     clothing.equip(hero)
     hero.inventory.gold = 10;
+    allyArray.push(hero)
+    //maybe everyone gets pet or ranger just buffs pet.
+    if (hero.basics.profession === "Ranger") {
+        let petName = prompt("As a ranger you get an animal companion. What will you name them?")
+        if (petName === "") {
+            petName = "Doggo"
+        }
+        else{}
+        pet = new Pet(petName)
+        allyArray.push(pet)
+    }
+    else { }
     alert("You are " + hero.basics.name + ", a " + hero.basics.profession + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
     alert("But first you must complete a task.")
     alert("You task is go to The Village of Dale, located within The Valley of Dale, and speak with your contact at the local inn to receive further.")
     alert("You went through The Dale Pass to enter the valley, the first steps on your journey.")
     alert("On your way to the village you encounter a toll bridge, which appears to be guarded by several rough-looking individuals.")
-    allyArray.push(hero)
     console.log(hero)
     valleyDale.enter()
 }
