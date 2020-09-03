@@ -1,4 +1,3 @@
-let hero = "";
 let pet = "";
 let familiar = "";
 //character prototype
@@ -199,18 +198,19 @@ class Character {
         }
     }
 }
-    Character.prototype.rest = function () {
-    for (var i = 0; i<allyArray.length; i++) {
-    allyArray[i].heal(allyArray[i].basics.maxHp)
-    allyArray[i].basics.alive = true;
-    allyArray[i].stats.currentSp = allyArray[i].stats.maxSp;
+let hero = new Character("Hero");
+Character.prototype.rest = function () {
+    for (var i = 0; i < allyArray.length; i++) {
+        allyArray[i].heal(allyArray[i].basics.maxHp)
+        allyArray[i].basics.alive = true;
+        allyArray[i].stats.currentSp = allyArray[i].stats.maxSp;
+    }
 }
-}
-    Character.prototype.gainRel = function (person, value) {
+Character.prototype.gainRel = function (person, value) {
     this.relationships.person += value;
     console.log("Gained " + value + " relationship point(s) with " + person.basics.name)
 }
-    Character.prototype.loseRel = function (person, value) {
+Character.prototype.loseRel = function (person, value) {
     this.relationships.person -= value;
     console.log("Lost " + value + " relationship point(s) with " + person.basics.name)
 }
@@ -223,7 +223,7 @@ function createHero() {
     else { }
     let classChoice = document.getElementById("class").value;
     console.log(classChoice)
-    if (classChoice === "artificer"){
+    if (classChoice === "artificer") {
         hero = new Artificer(heroName);
     }
     else if (classChoice === "barbarian") {
@@ -280,7 +280,7 @@ function createHero() {
         if (petName === "") {
             petName = "Doggo"
         }
-        else{}
+        else { }
         pet = new Pet(petName)
         allyArray.push(pet)
     }
@@ -290,16 +290,28 @@ function createHero() {
         if (familiarName === "") {
             familiarName = "Ziggy"
         }
-        else{}
+        else { }
         familiar = new Familiar(familiarName)
         allyArray.push(familiar)
     }
     else { }
-    alert("You are " + hero.basics.name + ", a " + hero.basics.profession + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
-    alert("But first you must complete a task.")
-    alert("You task is go to The Village of Dale, located within The Valley of Dale, and speak with your contact at the local inn to receive further.")
-    alert("You went through The Dale Pass to enter the valley, the first steps on your journey.")
-    alert("On your way to the village you encounter a toll bridge, which appears to be guarded by several rough-looking individuals.")
+    // alert("You are " + hero.basics.name + ", a " + hero.basics.profession + ". You have the opportunity to join The Birdwatchers of The Imperial Federation.")
+    // alert("But first you must complete a task.")
+    // alert("You task is go to The Village of Dale, located within The Valley of Dale, and speak with your contact at the local inn to receive further.")
+    // alert("You went through The Dale Pass to enter the valley, the first steps on your journey.")
+    // alert("On your way to the village you encounter a toll bridge, which appears to be guarded by several rough-looking individuals.")
     console.log(hero)
     valleyDale.enter()
+    updateCharacter()
+}
+//for characteer sheet
+document.getElementById("heroName").innerHTML = "Name: " + hero.basics.name;
+document.getElementById("heroProf").innerHTML = "Class: " + hero.basics.profession;
+document.getElementById("heroLevel").innerHTML = "Level: " + hero.basics.level;
+document.getElementById("heroXp").innerHTML = "XP: " + hero.basics.xp;
+function updateCharacter() {
+    document.getElementById("heroName").innerHTML = "Name: " + hero.basics.name;
+    document.getElementById("heroProf").innerHTML = "Class: " + hero.basics.profession;
+    document.getElementById("heroLevel").innerHTML = "Level: " + hero.basics.level;
+    document.getElementById("heroXp").innerHTML = "XP: " + hero.basics.xp;
 }

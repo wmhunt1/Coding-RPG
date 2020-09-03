@@ -16,18 +16,46 @@
     <nav id="Menu">
         <h1>Menu</h1>
         <ul>
-            <!-- <li><button onclick="arena()">(A)rena</button></li>
-            <li><button onclick="character()">(C)haracter</button></a></li>
-            <li><button onclick="downtime()">(D)owntime</button></li>
-            <li><button onclick="equipment()">(E)quipment</button></li>
-            <li><button onclick="factions()">(F)actions</button></li>
-            <li><button onclick="inventory()">(I)nventory</button></li>
-            <li><button onclick="journal()">(J)ournal</button></li>
-            <li><button onclick="quest()">(Q)uest</button></li>
-             <li><button onclick="rest()">(R)est</button></li>
-            <li><button onclick="shopping()">(S)hopping</button></li>
-            <li><button onclick="skill()">Skills and (P)owers</button></li>
-            <li><button onclick="training()">(T)raining</button></li> -->
+            <li><button id="charBtn">Character</button> </li>
+            <div id="charModal" class="modal">
+                <div class="modal-content">
+                    <span id="charSpan" class="close">&times;</span>
+                    <h1>Character Sheet</h1>
+                    <h4 id="heroName">Name:</h4>
+                    <h4 id="heroProf">Profession:</h4>
+                    <h4 id="heroLevel">Level:</h4>
+                    <h4 id="heroXp">XP:</h4>
+                </div>
+
+            </div>
+            <li><button id=equipBtn>Equipment</button></li>
+            <div id="equipModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h1>Equipment</h1>
+                </div>
+            </div>
+            <li><button id="factionBtn">Factions and Reputation</button></li>
+            <div id="factionModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h1>Factions and Reputation</h1>
+                </div>
+            </div>
+            <li><button id="invBtn">Inventory</button></li>
+            <div id="invModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h1>Inventory</h1>
+                </div>
+            </div>
+            <li><button id="journalBtn">Journal</button></li>
+            <div id="journalModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h1>Journal</h1>
+                </div>
+            </div>
         </ul>
     </nav>
     <section id="Intro">
@@ -42,32 +70,32 @@
             <h3>Current Day</h3>
             <p>text</p>
         </article>
-        <button onclick = "charCreation()">Go to character creation</button>
+        <button onclick="charCreation()">Go to character creation</button>
     </section>
-    <section id = characterCreation>
+    <section id=characterCreation>
         <h1>Character Creation</h2>
-        <article>
-            <label>Name</label>
-            <input type="text" id="name" name="name">
-            <label>Select Class</label>
-            <select name="class" id="class">
-                <option value="freelancer">Freelancer</option>
-                <option value="artificer">Artificer</option>
-                <option value="barbarian">Barbarian</option>
-                <option value="bard">Bard</option>
-                <option value="cleric">Cleric</option>
-                <option value="druid">Druid</option>
-                <option value="fighter">Fighter</option>
-                <option value="monk">Monk</option>
-                <option value="paladin">Paladin</option>
-                <option value="ranger">Ranger</option>
-                <option value="rogue">Rogue</option>
-                <option value="sorcerer">Sorcerer</option>
-                <option value="warlock">Warlock</option>
-                <option value="wizard">Wizard</option>
-            </select>
-            <button onclick=createHero() class="margin">Create Character</button>
-        </article>
+            <article>
+                <label>Name</label>
+                <input type="text" id="name" name="name">
+                <label>Select Class</label>
+                <select name="class" id="class">
+                    <option value="freelancer">Freelancer</option>
+                    <option value="artificer">Artificer</option>
+                    <option value="barbarian">Barbarian</option>
+                    <option value="bard">Bard</option>
+                    <option value="cleric">Cleric</option>
+                    <option value="druid">Druid</option>
+                    <option value="fighter">Fighter</option>
+                    <option value="monk">Monk</option>
+                    <option value="paladin">Paladin</option>
+                    <option value="ranger">Ranger</option>
+                    <option value="rogue">Rogue</option>
+                    <option value="sorcerer">Sorcerer</option>
+                    <option value="warlock">Warlock</option>
+                    <option value="wizard">Wizard</option>
+                </select>
+                <button onclick=createHero() class="margin">Create Character</button>
+            </article>
     </section>
     <!-- area sections, have buttons for areas or shops etc. -->
     <section id="valleyDale">

@@ -43,8 +43,7 @@ function startGame() {
     document.getElementById("gBoss").style.display = "none";
     document.getElementById("puzzleDungeon1").style.display = "none";
 }
-function charCreation()
-{
+function charCreation() {
     document.getElementById("Intro").style.display = "none";
     document.getElementById("characterCreation").style.display = "block";
 }
@@ -70,4 +69,103 @@ startGame()
 
 function testFeature() {
 
+}
+var charModal = document.getElementById("charModal");
+// Get the button that opens the modal
+var charBtn = document.getElementById("charBtn");
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+// When the user clicks on the button, open the modal
+charBtn.onclick = function () {
+    charModal.style.display = "block";
+}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+    charModal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == charModal) {
+        charModal.style.display = "none";
+    }
+}
+//equipment modal
+var equipModal = document.getElementById("equipModal");
+// Get the button that opens the modal
+var equipBtn = document.getElementById("equipBtn");
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[1];
+// When the user clicks on the button, open the modal
+equipBtn.onclick = function () {
+    equipModal.style.display = "block";
+}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+    equipModal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == equipModal) {
+        equipModal.style.display = "none";
+    }
+}
+//faction modal
+var factionModal = document.getElementById("factionModal");
+// Get the button that opens the modal
+var factionBtn = document.getElementById("factionBtn");
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[2];
+// When the user clicks on the button, open the modal
+factionBtn.onclick = function () {
+    factionModal.style.display = "block";
+}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+    factionModal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == factionModal) {
+        factionModal.style.display = "none";
+    }
+}
+//inventory modal
+var invModal = document.getElementById("invModal");
+// Get the button that opens the modal
+var invBtn = document.getElementById("invBtn");
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[3];
+// When the user clicks on the button, open the modal
+invBtn.onclick = function () {
+    invModal.style.display = "block";
+}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+    invModal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == invModal) {
+        invModal.style.display = "none";
+    }
+}
+//journal modal
+var journalModal = document.getElementById("journalModal");
+// Get the button that opens the modal
+var journalBtn = document.getElementById("journalBtn");
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[4];
+// When the user clicks on the button, open the modal
+journalBtn.onclick = function () {
+    journalModal.style.display = "block";
+}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+    journalModal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == journalModal) {
+        journalModal.style.display = "none";
+    }
 }
