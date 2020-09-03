@@ -162,6 +162,13 @@ const birdWord = new Quest("Bird is The Word", 10,
     },
     //event 5
     function () {
+        const spider1 = new Spider("Spider 1", 1, 1)
+        const spider2 = new Spider("Spider 2", 1, 1)
+        const spider3 = new Spider("Spider 3", 1, 1)
+        const spider4 = new Spider("Spider 4", 1, 1)
+        const spider5 = new Spider("Spider 5", 1, 1)
+        enemyArray = [spider1, spider2, spider3, spider4, spider5]
+        combat()
         //kill spiders and free birds for ring
         //also a dead mage with letter for Ambrosius
         if (hero.currentHp > 0)
