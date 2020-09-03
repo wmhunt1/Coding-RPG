@@ -227,8 +227,8 @@ class Spider extends Character {
         this.action1 = function (target) { poisonFangs(this, target) }
         this.basics.name = name;
         this.basics.profession = "Bandit";
-        //this.basics.xp = maxHp*5;
-        this.basics.xp = 100;
+        this.basics.xp = maxHp*5;
+        //this.basics.xp = 100;
         this.basics.type = "Animal"
         this.basics.ally = false;
         this.stats.currentHp = currentHp;

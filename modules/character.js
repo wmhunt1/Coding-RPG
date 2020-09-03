@@ -309,9 +309,20 @@ document.getElementById("heroName").innerHTML = "Name: " + hero.basics.name;
 document.getElementById("heroProf").innerHTML = "Class: " + hero.basics.profession;
 document.getElementById("heroLevel").innerHTML = "Level: " + hero.basics.level;
 document.getElementById("heroXp").innerHTML = "XP: " + hero.basics.xp;
+document.getElementById("heroCurrentHp").innerHTML = "Current HP: " + hero.stats.currentHp;
+document.getElementById("heroMaxHp").innerHTML = "Max HP: " + hero.stats.maxHp;
+document.getElementById("heroCurrentSp").innerHTML = "Current SP: " + hero.stats.currentSp;
+document.getElementById("heroMaxSp").innerHTML = "Max SP: " + hero.stats.maxSp;
+document.getElementById("heroAttack").innerHTML = "Attack: " + hero.stats.attack;
+document.getElementById("heroDefense").innerHTML = "Defense: " + hero.stats.defense;
+document.getElementById("heroSpeed").innerHTML = "Speed: " + hero.stats.speed;
 function updateCharacter() {
     document.getElementById("heroName").innerHTML = "Name: " + hero.basics.name;
     document.getElementById("heroProf").innerHTML = "Class: " + hero.basics.profession;
     document.getElementById("heroLevel").innerHTML = "Level: " + hero.basics.level;
     document.getElementById("heroXp").innerHTML = "XP: " + hero.basics.xp;
+    document.getElementById("heroCurrentHp").innerHTML = "Current HP: " + hero.stats.currentHp;
+    document.getElementById("heroMaxHp").innerHTML = "Max HP: " + hero.stats.maxHp;
+    document.getElementById("heroCurrentSp").innerHTML = "Current SP: " + hero.stats.currentSp;
+    document.getElementById("heroMaxSp").innerHTML = "Max SP: " + hero.stats.maxSp;
 }

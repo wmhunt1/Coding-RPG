@@ -219,6 +219,7 @@ Character.prototype.levelUp = function () {
     else {
         console.log(this.basics.name + " is not ready for level up")
     }
+    updateCharacter()
 }
 Character.prototype.heal = function (cure) {
     this.stats.currentHp += cure;
@@ -332,4 +333,5 @@ function combat() {
     else {
         alert("You are defeated.")
     }
+    updateCharacter()
 }
