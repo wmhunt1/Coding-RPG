@@ -66,10 +66,6 @@ function combatTest() {
     combat()
 }
 startGame()
-
-function testFeature() {
-
-}
 var charModal = document.getElementById("charModal");
 // Get the button that opens the modal
 var charBtn = document.getElementById("charBtn");
@@ -168,4 +164,7 @@ window.onclick = function (event) {
     if (event.target == journalModal) {
         journalModal.style.display = "none";
     }
+}
+function testFeature() {
+    combat()
 }
