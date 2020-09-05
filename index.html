@@ -17,71 +17,78 @@
         <h1>Menu</h1>
         <ul>
             <li><button id="charBtn">Character</button> </li>
-            <div id="charModal" class="modal">
-                <div class="modal-content">
-                    <span id="charSpan" class="close">&times;</span>
-                    <h1>Character Sheet</h1>
-                    <h3>Bio</h3>
+            <li><button id=equipBtn>Equipment</button></li>
+            <li><button id="factionBtn">Factions and Reputation</button></li>
+            <li><button id="invBtn">Inventory</button></li>
+            <li><button id="journalBtn">Journal</button></li>
+        </ul>
+    </nav>
+    <section id="Modals">
+        <div id="charModal" class="modal">
+            <div class="modal-content">
+                <span id="charSpan" class="close">&times;</span>
+                <h1>Character Sheet</h1>
+                <h2>Bio</h3>
                     <h4 id="heroName">Name:</h4>
                     <h4 id="heroProf">Profession:</h4>
                     <h4 id="heroLevel">Level:</h4>
                     <h4 id="heroXp">XP:</h4>
-                    <h3>Stats</h3>
-                    <h4 id = "heroCurrentHp">CHP</h4>
-                    <h4 id = "heroMaxHp">MHP</h4>
-                    <h4 id = "heroCurrentSp">CSP</h4>
-                    <h4 id = "heroMaxSp">MSP</h4>
-                    <h4 id = "heroAttack">A</h4>
-                    <h4 id = "heroDefense">D</h4>
-                    <h4 id = "heroSpeed">S</h4>
-                </div>
-
+                    <h2>Stats</h3>
+                        <h4 id="heroCurrentHp">CHP</h4>
+                        <h4 id="heroMaxHp">MHP</h4>
+                        <h4 id="heroCurrentSp">CSP</h4>
+                        <h4 id="heroMaxSp">MSP</h4>
+                        <h4 id="heroAttack">A</h4>
+                        <h4 id="heroDefense">D</h4>
+                        <h4 id="heroSpeed">S</h4>
             </div>
-            <li><button id=equipBtn>Equipment</button></li>
-            <div id="equipModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h1>Equipment</h1>
-                    <h3>Weapon</h3>
-                    <h4 id = "heroWepName"></h4>
-                    <h4 id = "heroWepType"></h4>
-                    <h4 id = "heroWepDamage"></h4>
-                    <h4 id = "heroWepDamageType"></h4>
-                    <h4 id = "heroWepDamageBonus"></h4>
-                    <h3>Armor</h3>
-                    <h4 id = "heroArmorName"></h4>
-                    <h4 id = "heroArmorType"></h4>
-                    <h4 id = "heroArmorProtection"></h4>
-                    <h4 id = "heroArmorProtectionBonus"></h4>
-                    <h3>Accessory</h3>
-                    <h4 id = "heroAccessName"></h4>
-                    <h4 id = "heroAccessType"></h4>
-                    <h4 id = "heroAccessEffect"></h4>
-                </div>
+        </div>
+        <div id="equipModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h1>Equipment</h1>
+                <h3>Weapon</h3>
+                <h4 id="heroWepName"></h4>
+                <h4 id="heroWepType"></h4>
+                <h4 id="heroWepDamage"></h4>
+                <h4 id="heroWepDamageType"></h4>
+                <h4 id="heroWepDamageBonus"></h4>
+                <h3>Armor</h3>
+                <h4 id="heroArmorName"></h4>
+                <h4 id="heroArmorType"></h4>
+                <h4 id="heroArmorProtection"></h4>
+                <h4 id="heroArmorProtectionBonus"></h4>
+                <h3>Accessory</h3>
+                <h4 id="heroAccessName"></h4>
+                <h4 id="heroAccessType"></h4>
+                <h4 id="heroAccessEffect"></h4>
             </div>
-            <li><button id="factionBtn">Factions and Reputation</button></li>
-            <div id="factionModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h1>Factions and Reputation</h1>
-                </div>
+        </div>
+        <div id="factionModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h1>Factions and Reputation</h1>
+                <h3>Overall</h3>
+                <h4 id = "fame"></h4>
+                <h4 id = "infamy"></h4>
+                <h3>Places</h3>
+                <h4 id = daleVillageRep></h4>
+                <h3>People</h3>
             </div>
-            <li><button id="invBtn">Inventory</button></li>
-            <div id="invModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h1>Inventory</h1>
-                </div>
+        </div>
+        <div id="invModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h1>Inventory</h1>
             </div>
-            <li><button id="journalBtn">Journal</button></li>
-            <div id="journalModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h1>Journal</h1>
-                </div>
+        </div>
+        <div id="journalModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h1>Journal</h1>
             </div>
-        </ul>
-    </nav>
+        </div>
+    </section>
     <section id="Intro">
         <h1>Intro</h1>
         <article>

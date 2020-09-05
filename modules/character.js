@@ -329,6 +329,9 @@ document.getElementById("heroArmorProtectionBonus").innerHTML = "Protection Bonu
 document.getElementById("heroAccessName").innerHTML = "Name: " + hero.accessory.name;
 document.getElementById("heroAccessType").innerHTML = "Type: " + hero.accessory.type;
 document.getElementById("heroAccessEffect").innerHTML = "Effect: " + hero.accessory.effect;
+document.getElementById("fame").innerHTML = "Fame: " + hero.reputation.fame;
+document.getElementById("infamy").innerHTML = "Infamy: " + hero.reputation.infamy;
+document.getElementById("daleVillageRep").innerHTML = "The Village of Dale: " + hero.reputation.daleVillage;
 function updateCharacter() {
     document.getElementById("heroName").innerHTML = "Name: " + hero.basics.name;
     document.getElementById("heroProf").innerHTML = "Class: " + hero.basics.profession;
@@ -350,4 +353,7 @@ function updateCharacter() {
     document.getElementById("heroAccessName").innerHTML = "Name: " + hero.accessory.name;
     document.getElementById("heroAccessType").innerHTML = "Type: " + hero.accessory.type;
     document.getElementById("heroAccessEffect").innerHTML = "Effect: " + hero.accessory.effect;
+    document.getElementById("fame").innerHTML = "Fame: " + hero.reputation.fame;
+    document.getElementById("infamy").innerHTML = "Infamy: " + hero.reputation.infamy;
+    document.getElementById("daleVillageRep").innerHTML = "The Village of Dale: " + hero.reputation.daleVillage;
 }
