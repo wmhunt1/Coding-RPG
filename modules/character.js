@@ -59,6 +59,7 @@ class Character {
         }
         this.accessory = {
             name: "None",
+            type: "NA",
             effect: "NA",
             shieldBonus: 0
         }
@@ -234,10 +235,10 @@ function createHero() {
     }
     else if (classChoice === "cleric") {
         hero = new Cleric(heroName);
+        holySymbol.equip(hero)
     }
     else if (classChoice === "druid") {
         hero = new Druid(heroName);
-        holySymbol.equip(hero)
     }
     else if (classChoice === "fighter") {
         hero = new Fighter(heroName);
@@ -321,6 +322,13 @@ document.getElementById("heroWepType").innerHTML = "Type: " + hero.weapon.type;
 document.getElementById("heroWepDamage").innerHTML = "Damage: " + hero.weapon.damage;
 document.getElementById("heroWepDamageType").innerHTML = "Damage Type: " + hero.weapon.damageType;
 document.getElementById("heroWepDamageBonus").innerHTML = "Damage Bonus: " + hero.weapon.damageBonus;
+document.getElementById("heroArmorName").innerHTML = "Name: " + hero.armor.name;
+document.getElementById("heroArmorType").innerHTML = "Type: " + hero.armor.type;
+document.getElementById("heroArmorProtection").innerHTML = "Protection: " + hero.armor.protection;
+document.getElementById("heroArmorProtectionBonus").innerHTML = "Protection Bonus: " + hero.armor.protectionBonus;
+document.getElementById("heroAccessName").innerHTML = "Name: " + hero.accessory.name;
+document.getElementById("heroAccessType").innerHTML = "Type: " + hero.accessory.type;
+document.getElementById("heroAccessEffect").innerHTML = "Effect: " + hero.accessory.effect;
 function updateCharacter() {
     document.getElementById("heroName").innerHTML = "Name: " + hero.basics.name;
     document.getElementById("heroProf").innerHTML = "Class: " + hero.basics.profession;
@@ -335,5 +343,11 @@ function updateCharacter() {
     document.getElementById("heroWepDamage").innerHTML = "Damage: " + hero.weapon.damage;
     document.getElementById("heroWepDamageType").innerHTML = "Damage Type: " + hero.weapon.damageType;
     document.getElementById("heroWepDamageBonus").innerHTML = "Damage Bonus: " + hero.weapon.damageBonus;
-   
+    document.getElementById("heroArmorName").innerHTML = "Name: " + hero.armor.name;
+    document.getElementById("heroArmorType").innerHTML = "Type: " + hero.armor.type;
+    document.getElementById("heroArmorProtection").innerHTML = "Protection: " + hero.armor.protection;
+    document.getElementById("heroArmorProtectionBonus").innerHTML = "Protection Bonus: " + hero.armor.protectionBonus;
+    document.getElementById("heroAccessName").innerHTML = "Name: " + hero.accessory.name;
+    document.getElementById("heroAccessType").innerHTML = "Type: " + hero.accessory.type;
+    document.getElementById("heroAccessEffect").innerHTML = "Effect: " + hero.accessory.effect;
 }

@@ -72,6 +72,7 @@ class Weapon extends Item {
 Accessory.prototype.equip = function (user) {
     user.accessory.shieldBonus = 0;
     user.accessory.name = this.name;
+    user.accessory.type = this.type;
     user.accessory.effect = this.effectTxt;
     this.effect(user)
     console.log(user.basics.name + " equiped " + this.name)
