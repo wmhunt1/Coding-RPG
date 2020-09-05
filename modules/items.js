@@ -76,6 +76,7 @@ Accessory.prototype.equip = function (user) {
     this.effect(user)
     console.log(user.basics.name + " equiped " + this.name)
     console.log(user)
+    updateCharacter()
 }
 Armor.prototype.equip = function (user) {
     user.armor.protectionBonus = 0;
@@ -85,15 +86,18 @@ Armor.prototype.equip = function (user) {
     this.effect(user);
     console.log(user.basics.name + " equiped " + this.name)
     console.log(user)
+    updateCharacter()
 }
 Weapon.prototype.equip = function (user) {
     user.weapon.name = this.name;
     user.weapon.damage = this.value;
+    user.weapon.type = this.type;
     user.weapon.damageType = this.damageType;
     user.weapon.effect = this.effectTxt;
     this.effect(user);
     console.log(user.basics.name + " equiped " + this.name)
     console.log(user)
+    updateCharacter()
 }
 //accessories
 let holySymbol = new Accessory("Holy Symbol", "Holy Symbol", 1, function (user, value) { }, "The symbol of a god.", 0, 1)

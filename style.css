@@ -43,6 +43,11 @@ nav h4
     text-align: left;
     margin-left: 10px;
 }
+nav h5 
+{
+    text-align: left;
+    margin-left: 10px;
+}
 #Intro
 {
     text-align: center;

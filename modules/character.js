@@ -316,6 +316,11 @@ document.getElementById("heroMaxSp").innerHTML = "Max SP: " + hero.stats.maxSp;
 document.getElementById("heroAttack").innerHTML = "Attack: " + hero.stats.attack;
 document.getElementById("heroDefense").innerHTML = "Defense: " + hero.stats.defense;
 document.getElementById("heroSpeed").innerHTML = "Speed: " + hero.stats.speed;
+document.getElementById("heroWepName").innerHTML = "Name: " + hero.weapon.name;
+document.getElementById("heroWepType").innerHTML = "Type: " + hero.weapon.type;
+document.getElementById("heroWepDamage").innerHTML = "Damage: " + hero.weapon.damage;
+document.getElementById("heroWepDamageType").innerHTML = "Damage Type: " + hero.weapon.damageType;
+document.getElementById("heroWepDamageBonus").innerHTML = "Damage Bonus: " + hero.weapon.damageBonus;
 function updateCharacter() {
     document.getElementById("heroName").innerHTML = "Name: " + hero.basics.name;
     document.getElementById("heroProf").innerHTML = "Class: " + hero.basics.profession;
@@ -325,4 +330,10 @@ function updateCharacter() {
     document.getElementById("heroMaxHp").innerHTML = "Max HP: " + hero.stats.maxHp;
     document.getElementById("heroCurrentSp").innerHTML = "Current SP: " + hero.stats.currentSp;
     document.getElementById("heroMaxSp").innerHTML = "Max SP: " + hero.stats.maxSp;
+    document.getElementById("heroWepName").innerHTML = "Name: " + hero.weapon.name;
+    document.getElementById("heroWepType").innerHTML = "Type: " + hero.weapon.type;
+    document.getElementById("heroWepDamage").innerHTML = "Damage: " + hero.weapon.damage;
+    document.getElementById("heroWepDamageType").innerHTML = "Damage Type: " + hero.weapon.damageType;
+    document.getElementById("heroWepDamageBonus").innerHTML = "Damage Bonus: " + hero.weapon.damageBonus;
+   
 }
