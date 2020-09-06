@@ -166,5 +166,4 @@ window.onclick = function (event) {
     }
 }
 function testFeature() {
-    combat()
 }

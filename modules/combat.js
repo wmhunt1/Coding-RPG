@@ -1,4 +1,3 @@
-//var combatModal = document.getElementById("combatModal");
 //combat elements
 let turnArray = [];
 let enemyArray = [];
@@ -304,8 +303,6 @@ Character.prototype.turn = function () {
 }
 //combat function
 function combat() {
-    //combatModal.style.display = "block";
-    document.getElementById("combatModal").style.display = "block";
     turnArray = allyArray.concat(enemyArray)
     turnArray.sort((a, b) => (a.stats.speed < b.stats.speed) ? 1 : (a.stats.speed === b.stats.speed) ? ((a.basics.name > b.basics.name) ? 1 : -1) : -1)
     console.log(turnArray)
@@ -337,6 +334,4 @@ function combat() {
         alert("You are defeated.")
     }
     updateCharacter()
-    combatModal.style.display = "none";
-    document.getElementById("combatModal").style.display = "block";
 }
