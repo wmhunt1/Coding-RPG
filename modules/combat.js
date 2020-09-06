@@ -276,6 +276,7 @@ Character.prototype.turn = function () {
                     if (enemyArray[target] === undefined) {
                         alert(this.basics.name + " attacks no one.")
                     }
+                    
                     else {
                         this.action1(enemyArray[target]);
                     }
