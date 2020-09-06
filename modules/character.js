@@ -84,6 +84,10 @@ class Character {
             birdReward: false,
             letterForAmbrosius: false,
             minotaurRescue: false,
+            neKey: false,
+            nwKey: false,
+            swKey: false,
+            seKey: false,
         }
         this.relationships = {
             //companions

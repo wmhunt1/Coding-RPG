@@ -1,5 +1,7 @@
 class Dungeon {
-    constructor(name, encounter1, encounter2, encounter3, encounter4, encounter5, encounter6, encounter7, encounter8, encounter9) {
+    constructor(name, encounter1, encounter2, encounter3, encounter4, encounter5, encounter6,
+        encounter7, encounter8, encounter9, encounter10, encounter11, encounter12,
+        encounter13, encounter14, encounter15) {
         this.name = name;
         this.encounter1 = encounter1;
         this.encounter2 = encounter2;
@@ -10,6 +12,12 @@ class Dungeon {
         this.encounter7 = encounter7;
         this.encounter8 = encounter8;
         this.encounter9 = encounter9;
+        this.encounter10 = encounter10;
+        this.encounter11 = encounter11;
+        this.encounter12 = encounter12;
+        this.encounter13 = encounter13;
+        this.encounter14 = encounter14;
+        this.encounter15 = encounter15;
     }
 }
 const daleManorDungeon = new Dungeon("Dale Manor")
@@ -108,19 +116,80 @@ const mineDungeon = new Dungeon("Dwarven Mines",
     }
 )
 const puzzleDungeon = new Dungeon("Puzzle Dungeon",
-//entry hall (and rest spot)
-//NE passage
-//NE Encounter
-//NE Puzzle
-//NW passage
-//NW Encounter
-//NW Puzzle
-//SW Passage
-//SW Encounter
-//SW Puzzle
-//SE Passage
-//SE Encounter
-//SE Puzzle
-//boss room (condition for if you don't have keys)
-//treasure room
+    //entry hall (and rest spot) 1
+    function () { },
+    //NE passage 2
+    function () { },
+    //NE Encounter 3
+    function () { },
+    //NE Puzzle 4
+    function () {
+        if (hero.journal.neKey === false) {
+            alert("You enter a room with 4 pedestals on each side.")
+            alert("On the left there are elemental symbols (in order) Air, Earth, Fire, and Water.")
+            alert("On the right there is is a Coin, a Cup, a Sword, and a Wand.")
+            alert("The items on the right can be moved. Which item corresponds to which element?")
+            let airEle = prompt("Which item goes with Air?")
+            let earthEle = prompt("Which item goes with Earth?")
+            let fireEle = prompt("Which item goes with Fire?")
+            let waterEle = prompt("Which item goes with Water?")
+            if (airEle === "Sword" && earthEle === "Coin" && fireEle === "Wand" && waterEle === "Cup") {
+                alert("You were correct and a key materializes in your hand.")
+                hero.journal.neKey = true;
+            }
+            else (
+                alert("Nothing Happens.")
+            )
+            //key obtained
+        }
+        else {
+            alert("You have already solved this puzzle.")
+        }
+    },
+    //NW passage 5
+    function () { },
+    //NW Encounter 6
+    function () { },
+    //NW Puzzle 7
+    function () {
+        if (hero.journal.nwKey === false) {
+
+            //key obtained
+        }
+        else {
+            alert("You have already solved this puzzle.")
+        }
+    },
+    //SW Passage 8
+    function () { },
+    //SW Encounter 9
+    function () { },
+    //SW Puzzle 10
+    function () {
+        if (hero.journal.swKey === false) {
+
+            //key obtained
+        }
+        else {
+            alert("You have already solved this puzzle.")
+        }
+    },
+    //SE Passage 11
+    function () { },
+    //SE Encounter 12
+    function () { },
+    //SE Puzzle 13
+    function () {
+        if (hero.journal.seKey === false) {
+
+            //key obtained
+        }
+        else {
+            alert("You have already solved this puzzle.")
+        }
+    },
+    //boss room (condition for if you don't have keys) 14
+    function () { },
+    //treasure room 15
+    function () { }
 )

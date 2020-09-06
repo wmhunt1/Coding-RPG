@@ -1,7 +1,7 @@
 # Coding-RPG
 
 to-Do: 
-- General: Combat and text on screen, Character Sheet, Inventory etc.
+- General: Combat and text on screen
 - Combat: Spec abilities for NPCs
  NPC: Dialog for NPCs
 - Stores: Buy/Sell
