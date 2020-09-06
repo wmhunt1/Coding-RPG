@@ -16,20 +16,40 @@ class Spell extends Power {
 let bomb = new Power("Bomb", function (user) {
     alert(user.basics.name + " throws a bomb.")
     if (user.stats.currentSp > 0) {
-        for (var i = 0; i < enemyArray.length; i++) {
-            console.log(enemyArray[i].basics.name + " is the target.")
-            user.checkIfHit(enemyArray[i])
-            if (hit = true) {
-                let damageType = "Fire"
-                let dmg = user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus - enemyArray[i].armor.protection - enemyArray[i].armor.protectionBonus - enemyArray[i].armor.tempBonus;
-                console.log(dmg)
-                alert(enemyArray[i].basics.name + " is caught in the explostion")
-                user.damageReduction(enemyArray[i], dmg, damageType)
-                enemyArray[i].isAlive();
+        if (user.basics.ally != true) {
+            for (var i = 0; i < allyArray.length; i++) {
+                console.log(allyArray[i].basics.name + " is the target.")
+                user.checkIfHit(allyArray[i])
+                if (hit = true) {
+                    let damageType = "Fire"
+                    let dmg = user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus - allyArray[i].armor.protection - allyArray[i].armor.protectionBonus - allyArray[i].armor.tempBonus;
+                    console.log(dmg)
+                    alert(allyArray[i].basics.name + " is caught in the explostion")
+                    user.damageReduction(allyArray[i], dmg, damageType)
+                    allyArray[i].isAlive();
 
+                }
+                else {
+                    alert(allyArray[i].basics.name + "avoids the blast.")
+                }
             }
-            else {
-                alert(enemyArray[i].basics.name + "avoids the blast.")
+        }
+        else {
+            for (var i = 0; i < enemyArray.length; i++) {
+                console.log(enemyArray[i].basics.name + " is the target.")
+                user.checkIfHit(enemyArray[i])
+                if (hit = true) {
+                    let damageType = "Fire"
+                    let dmg = user.weapon.damage + user.weapon.damageBonus + user.weapon.tempBonus - enemyArray[i].armor.protection - enemyArray[i].armor.protectionBonus - enemyArray[i].armor.tempBonus;
+                    console.log(dmg)
+                    alert(enemyArray[i].basics.name + " is caught in the explostion")
+                    user.damageReduction(enemyArray[i], dmg, damageType)
+                    enemyArray[i].isAlive();
+
+                }
+                else {
+                    alert(enemyArray[i].basics.name + "avoids the blast.")
+                }
             }
         }
         user.useSp(1)
@@ -42,22 +62,42 @@ let bomb = new Power("Bomb", function (user) {
 let doubleAttack = new Power("Double Attack",
     function (user) {
         if (user.stats.currentSp > 0) {
-            alert(user.basics.name + "Focuses and prepares to make a double attack.")
-            let target = prompt("Choose target by number (starting from 0).");
-            if (enemyArray[target] === undefined) {
-                alert(user.basics.name + " attacks no one.")
+            if (user.basics.ally != true) {
+                alert(user.basics.name + "Focuses and prepares to make a double attack.")
+                let target = Math.floor((Math.random() * allyArray.length))
+                if (allyArray[target] === undefined) {
+                    alert(user.basics.name + " attacks no one.")
+                }
+                else {
+                    user.action1(allyArray[target]);
+                }
+                target = prompt("Choose target by number (starting from 0).");
+                if (allyArray[target] === undefined) {
+                    alert(user.basics.name + " attacks no one.")
+                }
+                else {
+                    user.action1(allyArray[target]);
+                }
+                user.useSp(1)
             }
             else {
-                user.action1(enemyArray[target]);
+                alert(user.basics.name + "Focuses and prepares to make a double attack.")
+                let target = prompt("Choose target by number (starting from 0).");
+                if (enemyArray[target] === undefined) {
+                    alert(user.basics.name + " attacks no one.")
+                }
+                else {
+                    user.action1(enemyArray[target]);
+                }
+                target = prompt("Choose target by number (starting from 0).");
+                if (enemyArray[target] === undefined) {
+                    alert(user.basics.name + " attacks no one.")
+                }
+                else {
+                    user.action1(enemyArray[target]);
+                }
+                user.useSp(1)
             }
-            target = prompt("Choose target by number (starting from 0).");
-            if (enemyArray[target] === undefined) {
-                alert(user.basics.name + " attacks no one.")
-            }
-            else {
-                user.action1(enemyArray[target]);
-            }
-            user.useSp(1)
         }
         else {
             alert(user.basics.name + "didn't have enough SP.")
@@ -221,8 +261,7 @@ let cureWounds = new Spell("Cure Wounds", function (user) {
             alert(user.basics.name + "didn't have enough SP.")
         }
     }
-}
-)
+})
 let magicMissile = new Spell("Magic Missile", function (user) {
     let target = prompt("Choose target by number (starting from 0).");
     if (enemyArray[target] === undefined) {
