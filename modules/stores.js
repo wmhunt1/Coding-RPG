@@ -1,4 +1,9 @@
 //have arrays for item types
+let apothecaryArray = [potion]
+let barArray = [beer];
+let generalArray = [];
+let magicArray = [spellbook, wand]
+let smithyArray = [chainShirt, club, dagger, leather, longSword, shield, shortSword, warHammer]
 //gold functions
 let enoughGold = false;
 Character.prototype.addGold = function (x) {
@@ -47,7 +52,7 @@ class General extends Store {
     constructor(name, owner, event1, event2) {
         super();
         this.name = name;
-        this.stock = "General Goods";
+        this.stock = generalArray;
         this.owner = owner;
         this.use = "None";
         this.useLetter = "";
@@ -64,7 +69,7 @@ class Inn extends Store {
     constructor(name, owner, cost, event1, event2) {
         super();
         this.name = name;
-        this.stock = "Food";
+        this.stock = barArray;
         this.owner = owner;
         this.cost = cost;
         this.use = "(G)et a room?";
@@ -92,11 +97,27 @@ class Inn extends Store {
         this.event2 = event2;
     }
 }
+class Magic extends Store {
+    constructor(name, owner, event1, event2) {
+        super();
+        this.name = name;
+        this.stock = magicArray
+        this.owner = owner;
+        this.use = "None";
+        this.useLetter = "";
+        this.useFunction = function () {
+
+        }
+        this.whatTheyBuy = "Anything"
+        this.event1 = event1;
+        this.event2 = event2;
+    }
+}
 class Smith extends Store {
     constructor(name, owner, event1, event2) {
         super();
         this.name = name;
-        this.stock = "Weapons and Armor";
+        this.stock = smithyArray;
         this.owner = owner;
         this.use = "(I)mprove Weapon or Armor?";
         this.useLetter = "I";
