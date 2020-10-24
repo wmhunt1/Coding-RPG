@@ -1,6 +1,6 @@
 import React from "react";
 
-function Intro() {
+function Intro(props) {
     return (
      <section id="Intro">
         <h1>Intro</h1>
@@ -8,7 +8,10 @@ function Intro() {
             <p>text</p>
         </article>
         {/* <button onclick="charCreation()">Go to character creation</button> */}
-        <button>Go to character creation</button>
+        <button
+        onClick={() => props.handlePageChange("CharCreate")}
+        >Go to character creation
+        </button>
     </section>
     );
   }
