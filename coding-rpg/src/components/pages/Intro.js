@@ -7,9 +7,8 @@ function Intro(props) {
         <article>
             <p>text</p>
         </article>
-        {/* <button onclick="charCreation()">Go to character creation</button> */}
         <button
-        onClick={() => props.handlePageChange("CharCreate")}
+        onClick={() => props.handlePageChange("Create")}
         >Go to character creation
         </button>
     </section>

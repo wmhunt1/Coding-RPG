@@ -1,67 +1,64 @@
-// import React from "react";
 import React, { Component } from "react";
+import Intro from "./pages/Intro";
+import CharacterCreation from "./pages/CharacterCreation";
+import Main from "./pages/Main";
 import Title from "./Title";
-import Menu from "./Menu";
-import Intro from "./Intro";
-import CharacterCreation from "./CharacterCreation";
 
-// function Game() {
-//     return (
-//         <div>
-//       <header id = "title">
-//         <h1>Coding RPG</h1>
-//       </header>
-//       <Menu/>
-//       <Intro/>
-//       <CharacterCreation/>
-//       </div>
-//     );
-//   }
 class Game extends Component {
-    state = {
-        currentPage: "Start"
+    constructor (props){
+        super(props);
+        // this.handleMain = this.handleMain.bind(this);
+        // this.handleCreate = this.handleCreate.bind(this);
+        this.state = {current: "Intro"}
     };
-
     handlePageChange = page => {
-        this.setState({ currentPage: page });
-    };
-
-    renderPage = () => {
-        if (this.state.currentPage === "Start") {
-            return (
-                <div>
-                    <Title />
-                    <Intro />
-                </div>
-            );
+        this.setstate({current: page})
+    }
+    // handleCreate (){
+    //     this.setstate({current: "Create"})
+    // }
+    // handleMain (){
+    //     this.setstate({current: "Main"})
+    // }
+    // renderPage = () => {
+    //     if (this.state.current === "Main") {
+    //       return <Main />;
+    //     } else if (this.state.current === "Create") {
+    //       return <CharacterCreation />;
+    //     } else {
+    //       return <Intro />;
+    //     }
+    //   };
+    render (){
+        const {current} = this.state.current;
+        let content;
+        if (current === "Main"){
+            // current = <Main/>;
+            content = <Main onClick={this.handlePageChange} />;
         }
-        else if (this.state.currentPage === "CharCreate") {
-            return (
-                <div>
-                    <Title />
-                    <CharacterCreation />
-                </div>
-            );
+        else if (current === "Create")
+        {
+            // current = <CharacterCreation/>;
+            content = <CharacterCreation onClick={this.handlePageChange} />;
         }
-        else {
-            return (
-                <div>
-                    <Title />
-                    <Menu/>
-                </div>
-            );
+        else
+        {
+            content = <Intro/>;
         }
-    };
-    render() {
-      return (
-        <div>
-          <Game
-            currentPage={this.state.currentPage}
-            handlePageChange={this.handlePageChange}
-          />
-          {this.renderPage()}
+        return (
+            <div>
+        <Title/>
+        {content}
         </div>
-      );
+        );
+        // return (
+        //     <div>
+        //         <Title
+        //         current={this.state.current}
+        //         handleChange={this.handleChange}/>
+        //          {this.renderPage()}
+        //     </div>
+        // );
     }
 }
 export default Game;
