@@ -1,11 +1,11 @@
 import React from "react";
-import Header from "./components/Header";
+import Game from "./components/Game";
 
-function Game() {
+function startGame() {
     return (
         <div>
-            <Header/>
+            <Game/>
         </div>
     );
 }
-export default Game;
+export default startGame;
