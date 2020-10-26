@@ -8,7 +8,6 @@ function Intro(props) {
             <p>text</p>
         </article>
         <button
-        onClick={() => props.handlePageChange("Create")}
         >Go to character creation
         </button>
     </section>

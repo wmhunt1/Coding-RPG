@@ -9,7 +9,6 @@ function CharacterCreation (props)
             <p>text</p>
         </article>
         <button
-            onClick={() => props.handlePageChange("Main")}
          >Create Character</button>
     </section>
     );
