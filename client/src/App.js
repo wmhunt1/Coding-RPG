@@ -1,10 +1,11 @@
 import React from 'react';
-import TextTest from './components/TextTest.js'
+import Intro from './components/Intro/'
 
 function App() {
   return (
     <div>
-      <TextTest />
+      <h1>Coding RPG</h1>
+      <Intro />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import React, { useState, } from 'react';
 
-function TextTest() {
-    const story = ["Once upon a time", "There was a thing"]
-    const [text, setText] = useState(0)
+function Intro() {
+    const story = ["Once upon a time", "There was a thing"];
+    const [text, setText] = useState(0);
     return (
         <div>
             <p>{story[text]}</p>
@@ -12,4 +12,4 @@ function TextTest() {
         </div>
     )
 }
-export default TextTest;
+export default Intro;
