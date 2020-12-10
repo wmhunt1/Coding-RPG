@@ -1,4 +1,4 @@
-import react, { useState, } from 'react';
+import React, { useState, } from 'react';
 
 function TextTest() {
     const story = ["Once upon a time", "There was a thing"]

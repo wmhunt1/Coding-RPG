@@ -1,12 +1,10 @@
-import './App.css';
-import Home from './components/Home.js'
+import React from 'react';
 import TextTest from './components/TextTest.js'
 
 function App() {
   return (
     <div>
-      <Home></Home>
-      <TextTest/>
+      <TextTest />
     </div>
   );
 }
