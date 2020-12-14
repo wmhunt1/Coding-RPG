@@ -17,6 +17,12 @@ export default function Text() {
             ]
         },
         {
+            storyText: 'What is your name?',
+            answerOptions: [
+                { answerText: "Hero"},
+            ]
+        },
+        {
             storyText: 'Choose your Class.',
             answerOptions: [
                 { answerText: "Fighter"},
