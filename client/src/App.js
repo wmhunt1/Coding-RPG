@@ -1,13 +1,11 @@
 import React from 'react';
-import Intro from './components/Intro/'
-import CharacterSheet from './components/CharacterSheet/'
+import Text from './components/Text/'
 
 function App() {
   return (
     <div>
       <h1>Coding RPG</h1>
-      <Intro />
-      <CharacterSheet />
+      <Text />
     </div>
   );
 }
