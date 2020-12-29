@@ -8,7 +8,7 @@ export default function Text() {
         {
             storyText: 'Welcome to Coding RPG',
             answerOptions: [
-                { answerText: "Next", }
+                { answerText: "Next"}
             ]
         },
         {
@@ -20,8 +20,8 @@ export default function Text() {
         {
             storyText: 'What is your name?',
             answerOptions: [
-                { answerText: "Hero" },
-                { answerText: "Joe" }
+                { answerText: "Hero", choseName: true },
+                { answerText: "Joe", choseName: true }
             ]
         },
         {
@@ -38,6 +38,18 @@ export default function Text() {
                 { answerText: "Fighter" },
                 { answerText: "Rogue" },
                 { answerText: "Wizard" },
+            ]
+        },
+        {
+            storyText: 'This is a game.',
+            answerOptions: [
+                { answerText: "Next" },
+            ]
+        },
+        {
+            storyText: '',
+            answerOptions: [
+                { answerText: "Next" },
             ]
         }
     ]
