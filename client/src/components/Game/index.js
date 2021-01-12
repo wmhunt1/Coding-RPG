@@ -2,18 +2,49 @@ import React, { useState, } from 'react';
 //import Combat from '../Combat/'
 //import Text from '../Text/'
 import Forest from "../../assets/terrain/forest.png";
+import Mountains from "../../assets/terrain/mountains.png";
+import No from "../../assets/terrain/no.png";
 
-const location = [{
-    areaName: "Test",
-    areaIMG: Forest
-}]
+const OutofBounds = [
+    {
+        areaName: "Out of Bounds",
+        areaIMG: No
+    }
+]
+const locationArray = [
+    {
+        areaName: "Test1",
+        areaIMG: Forest,
+        x: 0,
+        y: 0
+    },
+    {
+        areaName: "Test2",
+        areaIMG: Mountains,
+        x: 1,
+        y: 0
+    }
+]
 export default function Game() {
-    const [area, setArea] = useState(location[0]);
-    const [xCoord, setXCoord] = useState(0);
-    const [yCoord, setYCoord] = useState(0);
+    let [area, setArea] = useState(locationArray[0]);
+    let [xCoord, setXCoord] = useState(locationArray[0].x);
+    let [yCoord, setYCoord] = useState(locationArray[0].y);
     const handleSetArea = () => {
-        // if (xCoord == 0 && yCoord == 0) { setArea("Area 1") }
-        // else { setArea("Area2") }
+        var i;
+        for (i = 0; i < locationArray.length; i++) {
+            if (locationArray[i].x === xCoord && locationArray[i].y === yCoord) {
+                const newArea = locationArray[i];
+                setArea(newArea)
+                console.log("Area Found")
+                break;
+            }
+            else {
+                console.log("Out of Bounds")
+                setArea(OutofBounds[0])
+                //setXCoord(0);
+                //setYCoord(0)
+            }
+        }
     }
     const moveForward = () => {
         const newY = yCoord + 1;
