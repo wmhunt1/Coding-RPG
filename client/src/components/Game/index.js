@@ -5,7 +5,7 @@ import Forest from "../../assets/terrain/forest.png";
 import Mountains from "../../assets/terrain/mountains.png";
 import No from "../../assets/terrain/no.png";
 
-const OutofBounds = [
+const outOfBounds = [
     {
         areaName: "Out of Bounds",
         areaIMG: No
@@ -23,6 +23,30 @@ const locationArray = [
         areaIMG: Mountains,
         x: 1,
         y: 0
+    },
+    {
+        areaName: "Test3",
+        areaIMG: Forest,
+        x: -1,
+        y: 0
+    },
+    {
+        areaName: "Test4",
+        areaIMG: Mountains,
+        x: 0,
+        y: 1
+    },
+    {
+        areaName: "Test5",
+        areaIMG: Forest,
+        x: 0,
+        y: -1
+    },
+    {
+        areaName: "Test6",
+        areaIMG: Forest,
+        x: 2,
+        y: 0
     }
 ]
 export default function Game() {
@@ -32,6 +56,7 @@ export default function Game() {
     const handleSetArea = () => {
         var i;
         for (i = 0; i < locationArray.length; i++) {
+            console.log(i)
             if (locationArray[i].x === xCoord && locationArray[i].y === yCoord) {
                 const newArea = locationArray[i];
                 setArea(newArea)
@@ -40,34 +65,27 @@ export default function Game() {
             }
             else {
                 console.log("Out of Bounds")
-                setArea(OutofBounds[0])
+                setArea(outOfBounds[0])
                 //setXCoord(0);
                 //setYCoord(0)
             }
         }
     }
+    //seems to be delayed one move.
     const moveForward = () => {
-        const newY = yCoord + 1;
-        setYCoord(newY);
-        console.log(xCoord, yCoord)
+        setYCoord(++yCoord);
         handleSetArea();
     };
     const moveRight = () => {
-        const newX = xCoord + 1;
-        setXCoord(newX);
-        console.log(xCoord, yCoord)
+        setXCoord(++xCoord);
         handleSetArea();
     };
     const moveLeft = () => {
-        const newX = xCoord - 1;
-        setXCoord(newX);
-        console.log(xCoord, yCoord)
+        setXCoord(--xCoord);
         handleSetArea();
     };
     const moveBack = () => {
-        const newY = yCoord - 1;
-        setYCoord(newY);
-        console.log(xCoord, yCoord)
+        setYCoord(--yCoord);
         handleSetArea();
     };
     return (
