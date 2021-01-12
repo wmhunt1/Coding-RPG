@@ -3,12 +3,12 @@ import React, { useState, } from 'react';
 //import Text from '../Text/'
 import Forest from "../../assets/terrain/forest.png";
 import Mountains from "../../assets/terrain/mountains.png";
-import No from "../../assets/terrain/no.png";
+import Stop from "../../assets/terrain/stop.png";
 
 const outOfBounds = [
     {
         areaName: "Out of Bounds",
-        areaIMG: No
+        areaIMG: Stop
     }
 ]
 const locationArray = [
