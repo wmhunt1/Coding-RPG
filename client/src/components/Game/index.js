@@ -1,9 +1,15 @@
 import React, { useState, } from 'react';
+import "./index.css"
 //import Combat from '../Combat/'
 //import Text from '../Text/'
+
+//terrain imports
 import Forest from "../../assets/terrain/forest.png";
+import Hills from "../../assets/terrain/hills.png";
 import Mountains from "../../assets/terrain/mountains.png";
+import River from "../../assets/terrain/river.png";
 import Stop from "../../assets/terrain/stop.png";
+import Village from "../../assets/terrain/village.png";
 
 const outOfBounds = [
     {
@@ -13,41 +19,59 @@ const outOfBounds = [
 ]
 const locationArray = [
     {
-        areaName: "Test1",
-        areaIMG: Forest,
+        areaName: "Village",
+        areaIMG: Village,
         x: 0,
         y: 0
     },
     {
-        areaName: "Test2",
-        areaIMG: Mountains,
-        x: 1,
-        y: 0
-    },
-    {
-        areaName: "Test3",
+        areaName: "Forest N",
         areaIMG: Forest,
-        x: -1,
-        y: 0
-    },
-    {
-        areaName: "Test4",
-        areaIMG: Mountains,
         x: 0,
         y: 1
     },
     {
-        areaName: "Test5",
+        areaName: "Forest NE",
+        areaIMG: Forest,
+        x: 1,
+        y: 1
+    },
+    {
+        areaName: "Forest E",
+        areaIMG: Forest,
+        x: 1,
+        y: 0
+    },
+    {
+        areaName: "Forest SE",
+        areaIMG: Forest,
+        x: 1,
+        y: -1
+    },
+    {
+        areaName: "Forest S",
         areaIMG: Forest,
         x: 0,
         y: -1
     },
     {
-        areaName: "Test6",
+        areaName: "Forest SW",
         areaIMG: Forest,
-        x: 2,
+        x: -1,
+        y: -1
+    },
+    {
+        areaName: "Forest W",
+        areaIMG: Forest,
+        x: -1,
         y: 0
-    }
+    },
+    {
+        areaName: "Forest NW",
+        areaIMG: Forest,
+        x: -1,
+        y: 1
+    },
 ]
 export default function Game() {
     let [area, setArea] = useState(locationArray[0]);
@@ -72,32 +96,39 @@ export default function Game() {
         }
     }
     //seems to be delayed one move.
-    const moveForward = () => {
+    const goNorth = () => {
         setYCoord(++yCoord);
         handleSetArea();
     };
-    const moveRight = () => {
+    const goEast = () => {
         setXCoord(++xCoord);
         handleSetArea();
     };
-    const moveLeft = () => {
+    const goWest = () => {
         setXCoord(--xCoord);
         handleSetArea();
     };
-    const moveBack = () => {
+    const goSouth = () => {
         setYCoord(--yCoord);
         handleSetArea();
     };
     return (
-        <div>
-            <h2>{area.areaName}</h2>
+        <div id ="Game">
+            <h2>Location: {area.areaName}</h2>
             <h3>Coordinates ({xCoord}, {yCoord})</h3>
             <img src={area.areaIMG} alt=""></img>
+            <br></br>
             {/* <Combat /> */}
-            <button onClick={moveForward}>Forward</button>
-            <button onClick={moveLeft}>Left</button>
-            <button onClick={moveRight}>Right</button>
-            <button onClick={moveBack}>Back</button>
+            <div class = "directions">
+            <button class ="north-south" onClick={goNorth}>North</button>
+            <br></br>
+            <div class = "east-west">
+            <button class ="east-westBtn" onClick={goWest}>West</button>
+            <button class ="east-westBtn" onClick={goEast}>East</button>
+            </div>
+            <br></br>
+            <button  class ="north-south" onClick={goSouth}>South</button>
+            </div>
             {/* <Text /> */}
         </div>
     )
