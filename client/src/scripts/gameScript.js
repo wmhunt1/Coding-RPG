@@ -22,7 +22,7 @@ export const locationArray = [
         areaIMG: ForestImg,
         x: 0,
         y: 1,
-        areaEvent() { console.log("In Forest North") }
+        areaEvent() { combat(hero,goblin) }
 
     },
     {
@@ -92,8 +92,7 @@ export const combat = (char1, char2) => {
 }
 //characters
 class Character {
-    constructor(name, img)
-    {
+    constructor(name, img) {
         this.name = name;
         this.hp = 10;
         this.img = img;

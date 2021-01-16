@@ -44,26 +44,41 @@ export default function Game() {
     };
     return (
         <div id="Game">
-            <h2>Name: {player.name}</h2>
-            <img src={player.img} height="100px" width="100px" alt=""></img>
-            <h2>Location: {area.areaName}</h2>
-            <h3>Coordinates ({xCoord}, {yCoord})</h3>
-            <img src={area.areaIMG} alt=""></img>
-            <br></br>
-
-            <div class="directions">
-                <button class="north-south" onClick={goNorth}>North</button>
+                <h1>Coding RPG</h1>
+            {/* <h2>Name: {player.name}</h2>
+            <img src={player.img} height="100px" width="100px" alt=""></img> */}
+            <nav>
+                <h1>Menu</h1>
+                <ul>
+                    <li><button>Character</button> </li>
+                    <li><button id>Equipment</button></li>
+                    {/* <li><button>Factions and Reputation</button></li> */}
+                    <li><button>Inventory</button></li>
+                    <li><button>Journal</button></li>
+                </ul>
+            </nav>
+            <div id="gameArea">
+                <h2>Location: {area.areaName}</h2>
+                {/* <h3>Coordinates ({xCoord}, {yCoord})</h3> */}
+                <img src={area.areaIMG} alt=""></img>
                 <br></br>
-                <div class="east-west">
-                    <button class="east-westBtn" onClick={goWest}>West</button>
-                    <button class="east-westBtn" onClick={goEast}>East</button>
+                <div id="text">
+                    <h3>Text Log</h3>
+                    <p id="textOutput"></p>
                 </div>
-                <br></br>
-                <button class="north-south" onClick={goSouth}>South</button>
+                {/* should move these */}
+                <div id="directions">
+                    <h3>Controls</h3>
+                    <button class="north-south" onClick={goNorth}>North</button>
+                    <br></br>
+                    <div class="east-west">
+                        <button class="east-westBtn" onClick={goWest}>West</button>
+                        <button class="east-westBtn" onClick={goEast}>East</button>
+                    </div>
+                    <br></br>
+                    <button class="north-south" onClick={goSouth}>South</button>
+                </div>
             </div>
-            {/* <Combat /> */}
-            <button onClick={() => { combat(hero, goblin) }}>fight</button>
-            {/* <Text /> */}
         </div>
     )
 }
