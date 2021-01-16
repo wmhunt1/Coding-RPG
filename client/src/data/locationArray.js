@@ -1,9 +1,9 @@
 //terrain imports
-import Forest from "../../assets/terrain/forest.png";
-import Hills from "../../assets/terrain/hills.png";
-import Mountains from "../../assets/terrain/mountains.png";
-import River from "../../assets/terrain/river.png";
-import Village from "../../assets/terrain/village.png";
+import Forest from "../assets/terrain/forest.png";
+// import Hills from "../../assets/terrain/hills.png";
+// import Mountains from "../../assets/terrain/mountains.png";
+// import River from "../../assets/terrain/river.png";
+import Village from "../assets/terrain/village.png";
 export const locationArray = [
     {
         areaName: "Village",

@@ -1,9 +1,12 @@
 import React, { useState, } from 'react';
 import "./index.css"
-import Combat from '../Combat/'
+//import Combat from '../Combat/'
 //import Text from '../Text/'
+import {combat} from "../../scripts/combatScripts.js";
+import player from "../../data/characterData/player.js";
 //imports locations
-import locationArray from "./locationArray"
+import goblin from "../../data/characterData/goblin.js";
+import locationArray from "../../data/locationArray";
 //if outside of locationArray
 import Stop from "../../assets/terrain/stop.png";
 const outOfBounds = [
@@ -12,8 +15,8 @@ const outOfBounds = [
         areaIMG: Stop
     }
 ]
-
 export default function Game() {
+    let [hero, setHero] = useState(player)
     let [area, setArea] = useState(locationArray[0]);
     let [xCoord, setXCoord] = useState(locationArray[0].x);
     let [yCoord, setYCoord] = useState(locationArray[0].y);
@@ -54,6 +57,8 @@ export default function Game() {
     };
     return (
         <div id="Game">
+             <h2>Name: {hero.name}</h2>
+             <img src = {hero.img} height="100px" width="100px"></img>
             <h2>Location: {area.areaName}</h2>
             <h3>Coordinates ({xCoord}, {yCoord})</h3>
             <img src={area.areaIMG} alt=""></img>
@@ -69,7 +74,8 @@ export default function Game() {
                 <br></br>
                 <button class="north-south" onClick={goSouth}>South</button>
             </div>
-            <Combat />
+            {/* <Combat /> */}
+            <button onClick={() =>{combat(player,goblin)}}>fight</button>
             {/* <Text /> */}
         </div>
     )
