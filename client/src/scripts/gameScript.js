@@ -26,7 +26,7 @@ export const locationArray = [
         areaIMG: ForestImg,
         x: 0,
         y: 1,
-        areaEvent() {console.log("Entering North Forest") }
+        areaEvent() {combat(hero,goblin)}
 
     },
     {
@@ -88,11 +88,11 @@ export const outOfBounds = [
 ]
 //combat functions
 export const combat = (char1, char2) => {
-    console.log(char1.name + " is in combat with " + char2.name)
-    char1.hp -= 5;
-    console.log(char1.hp)
-    char2.hp -= 5;
-    console.log(char2.hp)
+    addTextLog(char1.name + " is now in combat with " + char2.name)
+    // char1.hp -= 5;
+    // console.log(char1.hp)
+    // char2.hp -= 5;
+    // console.log(char2.hp)
 }
 //characters
 class Character {

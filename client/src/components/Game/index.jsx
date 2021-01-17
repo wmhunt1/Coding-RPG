@@ -2,7 +2,7 @@ import React, { useState, } from 'react';
 import "./index.css"
 import { combat, textLog, addTextLog, locationArray, outOfBounds, hero, goblin } from "../../scripts/gameScript.js";
 export default function Game() {
-    let [player, setPlayer] = useState(hero)
+    // let [player, setPlayer] = useState(hero)
     let [area, setArea] = useState(locationArray[0]);
     let [xCoord, setXCoord] = useState(locationArray[0].x);
     let [yCoord, setYCoord] = useState(locationArray[0].y);
@@ -15,8 +15,8 @@ export default function Game() {
                 const newArea = locationArray[i];
                 setArea(newArea)
                 console.log("Area Found")
-                locationArray[i].areaEvent()
                 addTextLog("You have Entered: " + locationArray[i].areaName)
+                locationArray[i].areaEvent()
                 break;
             }
             else {
@@ -71,7 +71,7 @@ export default function Game() {
                 <div id="text">
                     <h3>Text Log</h3>
                     <div id="textOutput" >
-                        {textLog.map((text) => <p key={text}>
+                        {textLog.map((text, n) => <p key={text, n}>
                             {text}
                         </p>)}
                     </div>
