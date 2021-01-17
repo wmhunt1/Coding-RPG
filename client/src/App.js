@@ -1,12 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Menu from './components/Menu'
 import GameView from "./views/GameView.js";
 import CharacterView from "./views/CharacterView.js";
 import InventoryView from "./views/InventoryView.js";
 import JournalView from "./views/JournalView.js";
-import "./App.css"
-
+import "./App.css";
 function App() {
   return (
     <div>
@@ -14,7 +13,9 @@ function App() {
         <h1>Coding RPG</h1>
       </header>
       <Menu />
-      <Router>
+      <GameView/>
+      <CharacterView/>
+      {/* <Router>
       <div>
           <Switch>
             <Route exact path="/" component={GameView} />
@@ -24,9 +25,8 @@ function App() {
             <Route exact path="/journal" component={JournalView} />
           </Switch>
       </div>
-    </Router>
+    </Router> */}
     </div>
   );
 }
-
 export default App;
