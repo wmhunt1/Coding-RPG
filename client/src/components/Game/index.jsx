@@ -1,11 +1,12 @@
 import React, { useState, } from 'react';
 import "./index.css"
-import { combat, locationArray, outOfBounds, hero, goblin } from "../../scripts/gameScript.js";
+import { combat, textLog, addTextLog, locationArray, outOfBounds, hero, goblin } from "../../scripts/gameScript.js";
 export default function Game() {
     let [player, setPlayer] = useState(hero)
     let [area, setArea] = useState(locationArray[0]);
     let [xCoord, setXCoord] = useState(locationArray[0].x);
     let [yCoord, setYCoord] = useState(locationArray[0].y);
+    const [text, setText] = useState([textLog])
     const handleSetArea = () => {
         var i;
         for (i = 0; i < locationArray.length; i++) {
@@ -15,11 +16,13 @@ export default function Game() {
                 setArea(newArea)
                 console.log("Area Found")
                 locationArray[i].areaEvent()
+                addTextLog("You have Entered: " + locationArray[i].areaName)
                 break;
             }
             else {
                 console.log("Out of Bounds")
                 setArea(outOfBounds[0])
+                // addTextLog("You are out of bounds")
                 //setXCoord(0);
                 //setYCoord(0)
             }
@@ -42,9 +45,12 @@ export default function Game() {
         setYCoord(--yCoord);
         handleSetArea();
     };
+    
     return (
         <div id="Game">
+            <header>
                 <h1>Coding RPG</h1>
+            </header>
             {/* <h2>Name: {player.name}</h2>
             <img src={player.img} height="100px" width="100px" alt=""></img> */}
             <nav>
@@ -64,7 +70,11 @@ export default function Game() {
                 <br></br>
                 <div id="text">
                     <h3>Text Log</h3>
-                    <p id="textOutput"></p>
+                    <div id="textOutput" >
+                        {textLog.map((text) => <p key={text}>
+                            {text}
+                        </p>)}
+                    </div>
                 </div>
                 {/* should move these */}
                 <div id="directions">

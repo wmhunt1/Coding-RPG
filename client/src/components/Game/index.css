@@ -3,6 +3,9 @@ html
     margin-left: 10%;
     margin-right: 10%;
 }
+header{
+    border: 1px solid black;
+}
 h1 {text-align: center;}
 h2 {text-align: center;}
 h3{text-align: center;}
@@ -72,6 +75,15 @@ button {
 }
 #text{
     border: 1px solid black;
+}
+#textOutput{
+    border: 1px solid black;
+    height: 100px;
+    overflow: auto;
+}
+#textOutput p {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 #directions{
     border: 1px solid black;

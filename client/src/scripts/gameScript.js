@@ -8,6 +8,10 @@ import ForestImg from "../assets/terrain/forest.png";
 // import RiverImg from "../assets/terrain/river.png";
 import VillageImg from "../assets/terrain/village.png";
 import StopImg from "../assets/terrain/stop.png";
+
+export const textLog = ["Text: Welcome to Coding RPG "]
+export const addTextLog = (x) => {textLog.push("Text: " + x + " "
+)}
 //location array and OutofBounds
 export const locationArray = [
     {
@@ -22,7 +26,7 @@ export const locationArray = [
         areaIMG: ForestImg,
         x: 0,
         y: 1,
-        areaEvent() { combat(hero,goblin) }
+        areaEvent() {console.log("Entering North Forest") }
 
     },
     {
