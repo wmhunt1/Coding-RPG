@@ -31,41 +31,6 @@ div{
 .east-westBtn{
  display: inline-block;   
 }
-nav
-{
-    border: 1px solid black;
-    width: 100%;
-}
-nav h1
-{
-    text-align: center;
-}
-nav h3
-{
-    text-align: left;
-}
-nav ul
-{
-    text-align: center;
-}
-nav ul li 
-{
-    width: fit-content;
-    height: 25px;
-    display: inline-block;
-    text-align: center;
-    
-}
-nav h4 
-{
-    text-align: left;
-    margin-left: 10px;
-}
-nav h5 
-{
-    text-align: left;
-    margin-left: 10px;
-}
 button {
     margin-left: 5px;
     margin-right: 5px;
