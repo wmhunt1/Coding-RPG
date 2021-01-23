@@ -1,6 +1,6 @@
 import React, { useState, } from 'react';
 import "./index.css"
-import { combat, textLog, addTextLog, locationArray, outOfBounds, hero, goblin } from "../../scripts/gameScript.js";
+import {textLog, addTextLog, locationArray, outOfBounds, hero, goblin } from "../../scripts/gameScript.js";
 export default function Game() {
     // let [player, setPlayer] = useState(hero)
     let [area, setArea] = useState(locationArray[0]);

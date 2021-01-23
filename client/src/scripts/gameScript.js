@@ -93,6 +93,7 @@ export const combat = (char1, char2) => {
     // console.log(char1.hp)
     // char2.hp -= 5;
     // console.log(char2.hp)
+    //document.getElementById("combat").style.display = "none";
 }
 //characters
 class Character {
