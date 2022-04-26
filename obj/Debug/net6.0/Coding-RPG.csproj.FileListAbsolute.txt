@@ -1,0 +1,15 @@
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\bin\Debug\net6.0\Coding-RPG.exe
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\bin\Debug\net6.0\Coding-RPG.deps.json
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\bin\Debug\net6.0\Coding-RPG.runtimeconfig.json
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\bin\Debug\net6.0\Coding-RPG.dll
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\bin\Debug\net6.0\Coding-RPG.pdb
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\obj\Debug\net6.0\Coding-RPG.csproj.AssemblyReference.cache
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\obj\Debug\net6.0\Coding-RPG.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\obj\Debug\net6.0\Coding-RPG.AssemblyInfoInputs.cache
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\obj\Debug\net6.0\Coding-RPG.AssemblyInfo.cs
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\obj\Debug\net6.0\Coding-RPG.csproj.CoreCompileInputs.cache
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\obj\Debug\net6.0\Coding-RPG.dll
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\obj\Debug\net6.0\refint\Coding-RPG.dll
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\obj\Debug\net6.0\Coding-RPG.pdb
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\obj\Debug\net6.0\Coding-RPG.genruntimeconfig.cache
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\obj\Debug\net6.0\ref\Coding-RPG.dll
