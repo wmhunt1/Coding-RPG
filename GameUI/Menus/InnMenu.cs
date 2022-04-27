@@ -2,9 +2,9 @@ using System;
 using GameModels;
 
 namespace GameUI;
-public class TownMenu : Menu
+public class InnMenu : Menu
 {
-    new public string Name = "Town";
+    new public string Name = "Inn";
     public override void ShowMenu(Character hero)
     {
         bool exitMenu = false;
@@ -13,9 +13,8 @@ public class TownMenu : Menu
             Console.WriteLine("---------- Coding RPG ----------");
             Console.WriteLine($"---------- {Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
-            Console.WriteLine("[2] Go to Inn");
-            Console.WriteLine("[9] Kill rats");
-            Console.WriteLine("[0] Leave Town");
+            Console.WriteLine("[2] Rest");
+            Console.WriteLine("[0] Leave Inn");
 
             string? UserInput = Console.ReadLine();
             switch(UserInput)
@@ -24,16 +23,16 @@ public class TownMenu : Menu
                     Console.WriteLine("Character Sheet");
                     break;
                 case "2":
-                    InnMenu innMenu = new InnMenu();
-                    innMenu.ShowMenu(hero);
+                    Console.WriteLine("Resting");
+                    hero.CurrentHP = hero.MaxHP;
                     break;
                 case "0":
-                    GameMenu gameMenu = new GameMenu();
-                    gameMenu.ShowMenu(hero);
+                    TownMenu townMenu = new TownMenu();
+                    townMenu.ShowMenu(hero);
                     break;
                 default:
                     break;
             }
-        }
+        }       
     }
 }

@@ -1,4 +1,5 @@
-﻿using GameModels;
+﻿using System;
+using GameModels;
 
 namespace GameUI;
 public class Menu
@@ -6,6 +7,11 @@ public class Menu
     public string Name = "Menu";
     public virtual void ShowMenu(Character hero)
     {
-        Console.WriteLine(Name);
+        bool exitMenu = false;
+        while (!exitMenu)
+        {
+            Console.WriteLine(Name);
+            exitMenu = true;
+        }
     }
 }
