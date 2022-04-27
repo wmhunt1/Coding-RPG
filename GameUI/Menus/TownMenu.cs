@@ -31,17 +31,47 @@ public class TownMenu : Menu
                     innMenu.ShowMenu(hero);
                     break;
                 case "3":
-                    Console.WriteLine("General Store");
+                    Console.WriteLine("Blacksmith");
+                    Console.WriteLine("Buy a new Weapon (10GP)? Yes[1] No [2]");
+                    string? blacksmithInput = Console.ReadLine();
+                    switch (blacksmithInput)
+                    {
+                        case "1":
+                        if (hero.Weapon == "Sword")
+                        {
+                            Console.WriteLine("You already bought the sword");
+                        }
+                        else
+                        {
+                            if (hero.HasEnoughGold(10) == false)
+                            {
+                                hero.RemoveGold(10);
+                                hero.Weapon = "Sword";
+                                hero.Attack = 5;
+                            }
+                            else
+                            {
+                                Console.WriteLine("You can't afford the sword");
+                            }
+                        }
+                        break;
+                        case "2":
+                        break;
+                        default:
+                        break;
+                    }
                     Console.WriteLine("Press any key to continue");
                     Console.ReadLine();
                     break;
                 case "4":
-                    Console.WriteLine("Blacksmith");
+                    Console.WriteLine("General Store");
                     Console.WriteLine("Press any key to continue");
                     Console.ReadLine();
                     break;
                 case "5":
                     Console.WriteLine("Mayor's House");
+                    Console.WriteLine("I've put out a bounty on bandits in the forest");
+                    hero.BanditQuest = true;
                     Console.WriteLine("Press any key to continue");
                     Console.ReadLine();
                     break;

@@ -41,6 +41,7 @@ public class DungeonMenu : Menu
                 case "2":
                     if (hero.CurrentHP > 0)
                     {
+                        Encounter.GainHP(Encounter.MaxHP);
                         CombatScripts dungeonCombat = new CombatScripts();
                         dungeonCombat.RunCombat(hero, Encounter);
                     }
@@ -58,11 +59,11 @@ public class DungeonMenu : Menu
                     break;
                 case "0":
                     
-                    if (Encounter.Name == "Bandit")
+                    if (Encounter.Name == "Forest Bandit")
                     {
                         forestMenu.ShowMenu(hero);
                     }
-                    else if(Encounter.Name == "Rat")
+                    else if(Encounter.Name == "Cellar Rat")
                     {
                         townMenu.ShowMenu(hero);
                     }

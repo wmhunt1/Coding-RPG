@@ -5,7 +5,7 @@ public class Character
     public string Name;
     public int Level = 1;
     public int CurrentXP = 0;
-    public int MaxXP = 100;
+    public int MaxXP = 50;
     public int CurrentHP = 10;
     public int MaxHP = 10;
     public int CurrentMP = 0;
@@ -51,11 +51,55 @@ public class Character
         }
         return CurrentHP;
     }
+    public int GainMP(int mp)
+    {
+        CurrentMP += mp;
+        if (CurrentMP > MaxMP)
+        {
+            CurrentMP = MaxMP;
+        }
+        return CurrentMP;
+    }
+    public int SpendMP(int cost)
+    {
+        CurrentMP -= cost;
+        if (CurrentMP < 0)
+        {
+            CurrentMP = 0;
+        }
+        return CurrentMP;
+    }
+     public int GainSP(int sp)
+    {
+        CurrentSP += sp;
+        if (CurrentSP > MaxSP)
+        {
+            CurrentSP = MaxSP;
+        }
+        return CurrentSP;
+    }
+    public int SpendSP(int cost)
+    {
+        CurrentSP -= cost;
+        if (CurrentSP < 0)
+        {
+            CurrentSP = 0;
+        }
+        return CurrentSP;
+    }
+    public void FullRest()
+    {
+        GainHP(MaxHP);
+        GainMP(MaxMP);
+        GainSP(MaxSP);
+    }
     public int LevelUP()
     {
         Level++;
-        MaxXP += 100;
+        MaxXP += 50*Level;
         MaxHP += 10;
+        MaxMP += 10;
+        MaxSP += 10;
         return Level;
     }
     public void CheckIfReadyToLevelUp()

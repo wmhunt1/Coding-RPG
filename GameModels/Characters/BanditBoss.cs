@@ -1,16 +1,16 @@
 namespace GameModels;
-public class Bandit : Character
+public class BanditBoss : Character
 {
-    public Bandit(string name):base(name)
+    public BanditBoss(string name):base(name)
     {
         Name = name;
-        CurrentHP = 5;
-        MaxHP = 5;
+        CurrentHP = 10;
+        MaxHP = 10;
         Weapon = "Dagger";
         Attack = 2;
         Armor = "Hide Armor";
         Defense = 1;
         CurrentXP = 5;
-        Gold = 5;
+        Gold = 50;
     }
 }
