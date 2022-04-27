@@ -7,6 +7,7 @@ public class DungeonMenu : Menu
 {
     new public string Name = "Dungeon";
     TownMenu townMenu = new TownMenu();
+    CharacterSheetMenu characterSheet = new CharacterSheetMenu();
     public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
@@ -22,7 +23,7 @@ public class DungeonMenu : Menu
             switch(UserInput)
             {
                 case "1":
-                    hero.DisplayCharacterSheet();
+                    characterSheet.ShowMenu(hero);
                     break;
                 case "2":
                     if (hero.CurrentHP > 0)

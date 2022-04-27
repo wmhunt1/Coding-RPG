@@ -6,6 +6,7 @@ namespace GameUI;
 public class GameMenu : Menu
 {
     new public string Name = "Game Menu";
+    CharacterSheetMenu characterSheet = new CharacterSheetMenu();
     public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
@@ -20,7 +21,7 @@ public class GameMenu : Menu
             switch(UserInput)
             {
                 case "1":
-                    hero.DisplayCharacterSheet();
+                    characterSheet.ShowMenu(hero);
                     break;
                 case "2":
                     TownMenu townMenu = new TownMenu();

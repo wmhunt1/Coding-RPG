@@ -9,5 +9,6 @@ public class Rat : Character
         Weapon = "Bite";
         Armor = "Fur";
         CurrentXP = 5;
+        Gold = 1;
     }
 }

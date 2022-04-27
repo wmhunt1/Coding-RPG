@@ -14,15 +14,24 @@ public class Character
     public int MaxSP = 0;
     public int Attack = 1;
     public int Defense = 0;
+    public int Gold = 0;
     public string Weapon = "";
     public string Armor = "";
     public Character(string name)
     {
         Name = name;
     }
-    public void DisplayCharacterSheet()
+    public void DisplayStats()
     {
-        Console.WriteLine($"Character Sheet\nName: {Name} - Level: {Level}\nEXP: {CurrentXP}/{MaxXP}\nHP: {CurrentHP}/{MaxHP}");
+        Console.WriteLine($"Level: {Level}\nEXP: {CurrentXP}/{MaxXP}\nHP: {CurrentHP}/{MaxHP}");
+    }
+    public void DisplayEquipment()
+    {
+        Console.WriteLine($"Equipment\nWeapon: {Weapon} ({Attack} Damage)\nArmor: {Armor} ({Defense} Protection)");
+    }
+    public void DisplayInventory()
+    {
+        Console.WriteLine($"Inventory\nGold: {Gold}");
     }
     public int GainHP(int hp)
     {
@@ -61,5 +70,26 @@ public class Character
         CurrentXP += xp;
         CheckIfReadyToLevelUp();
         return CurrentXP;
+    }
+    public int AddGold(int gold)
+    {
+        Gold += gold;
+        return Gold;
+    }
+    public int RemoveGold(int gold)
+    {
+        Gold -= gold;
+        return Gold;
+    }
+    public bool HasEnoughGold(int gold)
+    {
+        if (Gold >= gold)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

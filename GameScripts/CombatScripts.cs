@@ -48,7 +48,8 @@ public class CombatScripts
             if (ranAway != true)
             {
                 Console.WriteLine($"{char1.Name} Wins!");
-                Console.WriteLine($"{char1.Name} gains {char2.CurrentXP} XP");
+                Console.WriteLine($"{char1.Name} gains {char2.CurrentXP} XP and {char2.Gold} Gold");
+                char1.AddGold(char2.Gold);
                 char1.GainXP(char2.CurrentXP);
             }
         }
@@ -56,5 +57,7 @@ public class CombatScripts
         {
             Console.WriteLine($"{char1.Name} was defeated!");
         }
+        Console.WriteLine("Press any key to continue");
+        Console.ReadLine();
     }
 }
