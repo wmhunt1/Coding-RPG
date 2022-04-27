@@ -1,11 +1,11 @@
+using System;
 using GameUI;
 using GameModels;
 class Game
 {
-    Character hero = new Character("");
+    Hero hero = new Hero("Placeholder0");
     public void StartGame()
     {
-        Console.WriteLine("---------- Coding RPG ----------");
         MainMenu mainMenu = new MainMenu();
         mainMenu.ShowMenu(hero);
 

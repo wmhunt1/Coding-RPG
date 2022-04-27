@@ -5,7 +5,7 @@ namespace GameUI;
 public class TownMenu : Menu
 {
     new public string Name = "Town";
-    public override void ShowMenu(Character hero)
+    public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
         while (!exitMenu)
@@ -14,14 +14,13 @@ public class TownMenu : Menu
             Console.WriteLine($"---------- {Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Go to Inn");
-            Console.WriteLine("[9] Kill rats");
             Console.WriteLine("[0] Leave Town");
 
             string? UserInput = Console.ReadLine();
             switch(UserInput)
             {
                 case "1":
-                    Console.WriteLine("Character Sheet");
+                    hero.DisplayCharacterSheet();
                     break;
                 case "2":
                     InnMenu innMenu = new InnMenu();

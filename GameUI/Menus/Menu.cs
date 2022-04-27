@@ -5,7 +5,7 @@ namespace GameUI;
 public class Menu
 {
     public string Name = "Menu";
-    public virtual void ShowMenu(Character hero)
+    public virtual void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
         while (!exitMenu)

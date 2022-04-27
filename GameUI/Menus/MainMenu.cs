@@ -5,13 +5,14 @@ namespace GameUI;
 public class MainMenu : Menu
 {
     new public string Name = "Main Menu";
-    Character hero = new Character("Hero");
+    Hero hero = new Hero("Hero");
     public GameMenu gameMenu = new GameMenu();
-    public override void ShowMenu(Character hero)
+    public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
         while (!exitMenu)
         {
+            hero.Name = "Hero";
             Console.WriteLine("---------- Coding RPG ----------");
             Console.WriteLine($"---------- {Name}  ----------");
             Console.WriteLine("[1] Continue");

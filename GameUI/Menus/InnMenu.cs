@@ -5,7 +5,7 @@ namespace GameUI;
 public class InnMenu : Menu
 {
     new public string Name = "Inn";
-    public override void ShowMenu(Character hero)
+    public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
         while (!exitMenu)
@@ -14,17 +14,22 @@ public class InnMenu : Menu
             Console.WriteLine($"---------- {Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Rest");
+            Console.WriteLine("[3] Enter cellar");
             Console.WriteLine("[0] Leave Inn");
 
             string? UserInput = Console.ReadLine();
             switch(UserInput)
             {
                 case "1":
-                    Console.WriteLine("Character Sheet");
+                    hero.DisplayCharacterSheet();
                     break;
                 case "2":
                     Console.WriteLine("Resting");
                     hero.CurrentHP = hero.MaxHP;
+                    break;
+                case "3":
+                    DungeonMenu ratCellar = new DungeonMenu();
+                    ratCellar.ShowMenu(hero);
                     break;
                 case "0":
                     TownMenu townMenu = new TownMenu();
