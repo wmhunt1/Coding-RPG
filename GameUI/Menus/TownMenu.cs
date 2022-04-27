@@ -18,7 +18,6 @@ public class TownMenu : Menu
             Console.WriteLine("[3] Blacksmith");
             Console.WriteLine("[4] General Store");
             Console.WriteLine("[5] Mayor's House");
-            Console.WriteLine("[6] Temple");
             Console.WriteLine("[0] Leave Town");
 
             string? UserInput = Console.ReadLine();
@@ -31,9 +30,37 @@ public class TownMenu : Menu
                     InnMenu innMenu = new InnMenu();
                     innMenu.ShowMenu(hero);
                     break;
+                case "3":
+                    Console.WriteLine("General Store");
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadLine();
+                    break;
+                case "4":
+                    Console.WriteLine("Blacksmith");
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadLine();
+                    break;
+                case "5":
+                    Console.WriteLine("Mayor's House");
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadLine();
+                    break;
                 case "0":
-                    GameMenu gameMenu = new GameMenu();
-                    gameMenu.ShowMenu(hero);
+                    Console.WriteLine("Explore Forest [1] View World Map [2]?");
+                    string? leaveInput = Console.ReadLine();
+                    switch(leaveInput)
+                    {
+                        case "1":
+                            ForestMenu forestMenu = new ForestMenu();
+                            forestMenu.ShowMenu(hero);
+                            break;
+                        case "2":
+                            GameMenu gameMenu = new GameMenu();
+                            gameMenu.ShowMenu(hero);
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 default:
                     break;

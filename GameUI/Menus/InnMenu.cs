@@ -61,7 +61,8 @@ public class InnMenu : Menu
                     Console.ReadLine();
                     break;
                 case "5":
-                    DungeonMenu ratCellar = new DungeonMenu();
+                    Rat rat = new Rat("Cellar Rat");
+                    DungeonMenu ratCellar = new DungeonMenu("Rat Cellar", rat);
                     ratCellar.ShowMenu(hero);
                     break;
                 case "0":

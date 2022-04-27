@@ -9,8 +9,16 @@ public class CombatScripts
     }
     public void Attack(Character char1, Character char2)
     {
-        Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon}, dealing {char1.Attack} damage");
-        char2.DamageHP(char1.Attack);
+        
+        if (char2.Defense >= char1.Attack)
+        {
+            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon}, but {char2.Name}'s Armor deflects all damage");
+        }
+        else
+        {
+            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon}, dealing {char1.Attack-char2.Defense} damage");
+            char2.DamageHP(char1.Attack-char2.Defense);
+        }
     }
     public void CombatTurn(Character char1, Character char2)
     {

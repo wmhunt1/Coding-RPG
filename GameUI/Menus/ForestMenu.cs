@@ -3,9 +3,9 @@ using System;
 using GameModels;
 
 namespace GameUI;
-public class GameMenu : Menu
+public class ForestMenu : Menu
 {
-    new public string Name = "World Map";
+    new public string Name = "Forest";
     CharacterSheetMenu characterSheet = new CharacterSheetMenu();
     public override void ShowMenu(Hero hero)
     {
@@ -14,9 +14,9 @@ public class GameMenu : Menu
         {
             Console.WriteLine($"---------- {Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
-            Console.WriteLine("[2] Explore Forest");
-            Console.WriteLine("[3] Enter Town");
-            Console.WriteLine("[0] Back to Main Menu");
+            Console.WriteLine("[2] Enter Town");
+            Console.WriteLine("[3] Bandit Hideout");
+            Console.WriteLine("[0] To World Map");
 
             string? UserInput = Console.ReadLine();
             switch(UserInput)
@@ -25,16 +25,19 @@ public class GameMenu : Menu
                     characterSheet.ShowMenu(hero);
                     break;
                 case "2":
-                    ForestMenu forestMenu = new ForestMenu();
-                    forestMenu.ShowMenu(hero);
-                    break;
-                case "3":
                     TownMenu townMenu = new TownMenu();
                     townMenu.ShowMenu(hero);
                     break;
+                case "3":
+                    Bandit bandit = new Bandit("Forest Bandit");
+                    Bandit banditBoss = new Bandit("Forest Bandit Boss");
+                    DungeonMenu banditHideout = new DungeonMenu("Bandit Hideout", bandit);
+                    banditHideout.Boss = banditBoss;
+                    banditHideout.ShowMenu(hero);
+                    break;
                 case "0":
-                    MainMenu mainMenu = new MainMenu();
-                    mainMenu.ShowMenu(hero);
+                    GameMenu gameMenu = new GameMenu();
+                    gameMenu.ShowMenu(hero);
                     break;
                 default:
                     break;
