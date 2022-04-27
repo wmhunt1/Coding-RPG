@@ -35,7 +35,9 @@ public class ForestMenu : Menu
                     townMenu.ShowMenu(hero);
                     break;
                 case "3":
-                    Console.WriteLine("Go Hunting");
+                    Console.WriteLine("Hunting Animals");
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadLine();
                     break;
                 case "4":
                     Console.WriteLine("Chopping Down Trees");

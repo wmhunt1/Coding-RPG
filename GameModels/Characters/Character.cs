@@ -69,6 +69,17 @@ public class Character
         }
         return CurrentMP;
     }
+    public bool HasEnoughMP(int mp)
+    {
+        if (CurrentMP >= mp)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
      public int GainSP(int sp)
     {
         CurrentSP += sp;
@@ -86,6 +97,17 @@ public class Character
             CurrentSP = 0;
         }
         return CurrentSP;
+    }
+    public bool HasEnoughSP(int sp)
+    {
+        if (CurrentSP >= sp)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
     public void FullRest()
     {
