@@ -5,7 +5,6 @@ namespace GameUI;
 public class InnMenu : Menu
 {
     new public string Name = "Inn";
-    CharacterSheetMenu characterSheet = new CharacterSheetMenu();
     public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
@@ -27,10 +26,10 @@ public class InnMenu : Menu
             switch(UserInput)
             {
                 case "1":
+                    CharacterSheetMenu characterSheet = new CharacterSheetMenu();
                     characterSheet.ShowMenu(hero);
                     break;
                 case "2":
-                       hero.HasEnoughGold(1);
                     if (hero.HasEnoughGold(1) == false)
                     {
                         hero.RemoveGold(1);
@@ -44,7 +43,6 @@ public class InnMenu : Menu
                     Console.ReadLine();
                     break;
                 case "3":
-                    hero.HasEnoughGold(1);
                     if (hero.HasEnoughGold(1) == false)
                     {
                         hero.RemoveGold(1);

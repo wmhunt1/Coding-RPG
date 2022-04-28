@@ -5,7 +5,6 @@ namespace GameUI;
 public class TownMenu : Menu
 {
     new public string Name = "Town";
-    CharacterSheetMenu characterSheet = new CharacterSheetMenu();
     public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
@@ -24,6 +23,7 @@ public class TownMenu : Menu
             switch(UserInput)
             {
                 case "1":
+                    CharacterSheetMenu characterSheet = new CharacterSheetMenu();
                     characterSheet.ShowMenu(hero);
                     break;
                 case "2":
@@ -31,37 +31,8 @@ public class TownMenu : Menu
                     innMenu.ShowMenu(hero);
                     break;
                 case "3":
-                    Console.WriteLine("Blacksmith");
-                    Console.WriteLine("Buy a new Weapon (10GP)? Yes[1] No [2]");
-                    string? blacksmithInput = Console.ReadLine();
-                    switch (blacksmithInput)
-                    {
-                        case "1":
-                        if (hero.Weapon.Name == "Sword")
-                        {
-                            Console.WriteLine("You already bought the sword");
-                        }
-                        else
-                        {
-                            if (hero.HasEnoughGold(10) == false)
-                            {
-                                hero.RemoveGold(10);
-                                Weapon sword = new Weapon("Sword", 0, 5);
-                                sword.EquipItem(hero);
-                            }
-                            else
-                            {
-                                Console.WriteLine("You can't afford the sword");
-                            }
-                        }
-                        break;
-                        case "2":
-                        break;
-                        default:
-                        break;
-                    }
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadLine();
+                    BlacksmithMenu blacksmithMenu = new BlacksmithMenu();
+                    blacksmithMenu.ShowMenu(hero);
                     break;
                 case "4":
                     Console.WriteLine("General Store");

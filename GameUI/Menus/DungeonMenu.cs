@@ -8,10 +8,6 @@ public class DungeonMenu : Menu
     new public string Name;
     public Character Encounter;
     public Character? Boss;
-    ForestMenu forestMenu = new ForestMenu();
-    GameMenu gameMenu = new GameMenu();
-    TownMenu townMenu = new TownMenu();
-    CharacterSheetMenu characterSheet = new CharacterSheetMenu();
     public DungeonMenu(string name, Character encounter)
     {
         Name = name;
@@ -36,6 +32,7 @@ public class DungeonMenu : Menu
             switch(UserInput)
             {
                 case "1":
+                    CharacterSheetMenu characterSheet = new CharacterSheetMenu();
                     characterSheet.ShowMenu(hero);
                     break;
                 case "2":
@@ -61,14 +58,17 @@ public class DungeonMenu : Menu
                     
                     if (Encounter.Name == "Forest Bandit")
                     {
+                        ForestMenu forestMenu = new ForestMenu();
                         forestMenu.ShowMenu(hero);
                     }
                     else if(Encounter.Name == "Cellar Rat")
                     {
-                        townMenu.ShowMenu(hero);
+                        InnMenu innMenu = new InnMenu();
+                        innMenu.ShowMenu(hero);
                     }
                     else
                     {
+                        GameMenu gameMenu = new GameMenu();
                         gameMenu.ShowMenu(hero);
                     }
                     break;
