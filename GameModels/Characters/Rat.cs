@@ -6,8 +6,8 @@ public class Rat : Character
         Name = name;
         CurrentHP = 2;
         MaxHP = 2;
-        Weapon = "Bite";
-        Armor = "Fur";
+        Weapon = new Weapon("Bite", 0, 1);
+        Attack = 1;
         CurrentXP = 5;
         Gold = 1;
     }

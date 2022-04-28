@@ -12,11 +12,12 @@ public class Character
     public int MaxMP = 0;
     public int CurrentSP = 0;
     public int MaxSP = 0;
-    public int Attack = 1;
+    public int Attack = 0;
     public int Defense = 0;
     public int Gold = 0;
-    public string Weapon = "";
-    public string Armor = "";
+    public Accessory Accessory = new Accessory("None", 0);
+    public Weapon Weapon = new Weapon("Unarmed", 0, 0);
+    public Armor Armor = new Armor("Unarmored", 0, 0);
     public Character(string name)
     {
         Name = name;
@@ -27,7 +28,7 @@ public class Character
     }
     public void DisplayEquipment()
     {
-        Console.WriteLine($"Equipment\nWeapon: {Weapon} ({Attack} Damage)\nArmor: {Armor} ({Defense} Protection)");
+        Console.WriteLine($"Equipment\nWeapon: {Weapon.Name} ({Attack} Damage)\nArmor: {Armor.Name} ({Defense} Protection)");
     }
     public void DisplayInventory()
     {

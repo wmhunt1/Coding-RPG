@@ -37,7 +37,7 @@ public class TownMenu : Menu
                     switch (blacksmithInput)
                     {
                         case "1":
-                        if (hero.Weapon == "Sword")
+                        if (hero.Weapon.Name == "Sword")
                         {
                             Console.WriteLine("You already bought the sword");
                         }
@@ -46,8 +46,8 @@ public class TownMenu : Menu
                             if (hero.HasEnoughGold(10) == false)
                             {
                                 hero.RemoveGold(10);
-                                hero.Weapon = "Sword";
-                                hero.Attack = 5;
+                                Weapon sword = new Weapon("Sword", 0, 5);
+                                sword.EquipItem(hero);
                             }
                             else
                             {
