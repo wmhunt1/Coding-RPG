@@ -12,22 +12,34 @@ public class CombatScripts
         
         if (char2.Defense >= char1.Attack)
         {
-            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon}, but {char2.Name}'s Armor deflects all damage");
+            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, but {char2.Name}'s Armor deflects all damage");
         }
         else
         {
-            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon}, dealing {char1.Attack-char2.Defense} damage");
+            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, dealing {char1.Attack-char2.Defense} damage");
             char2.DamageHP(char1.Attack-char2.Defense);
         }
     }
     public void CombatTurn(Character char1, Character char2)
     {
-        Attack(char1, char2);
+        if (char1.CurrentHP > 0)
+        {
+            Attack(char1, char2);
+        } 
     }
     public void CombatRound(Character char1, Character char2)
     {
-        CombatTurn(char1, char2);
-        CombatTurn(char2, char1);
+        if (char1.Speed >= char2.Speed)
+        {
+            CombatTurn(char1, char2);
+            CombatTurn(char2, char1);
+        }
+        else
+        {
+            CombatTurn(char2, char1);
+            CombatTurn(char1, char2);
+        }
+      
     }
     public void RunCombat(Character char1, Character char2)
     {

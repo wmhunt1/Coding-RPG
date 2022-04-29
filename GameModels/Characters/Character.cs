@@ -3,6 +3,7 @@ namespace GameModels;
 public class Character
 {
     public string Name;
+    //stats
     public int Level = 1;
     public int CurrentXP = 0;
     public int MaxXP = 50;
@@ -14,10 +15,18 @@ public class Character
     public int MaxSP = 0;
     public int Attack = 0;
     public int Defense = 0;
+    public int MagicAttack = 0;
+    public int MagicDefense = 0;
+    public int Speed = 1;
+    //inventory;
     public int Gold = 0;
+    //equipment
     public Accessory Accessory = new Accessory("None", 0);
     public Weapon Weapon = new Weapon("Unarmed", 0, 0);
     public Armor Armor = new Armor("Unarmored", 0, 0);
+    //skills
+    public int Mining = 1;
+    public int WoodCutting = 1;
     public Character(string name)
     {
         Name = name;

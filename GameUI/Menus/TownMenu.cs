@@ -47,21 +47,23 @@ public class TownMenu : Menu
                     Console.ReadLine();
                     break;
                 case "0":
-                    Console.WriteLine("Explore Forest [1] View World Map [2]?");
-                    string? leaveInput = Console.ReadLine();
-                    switch(leaveInput)
-                    {
-                        case "1":
-                            ForestMenu forestMenu = new ForestMenu();
-                            forestMenu.ShowMenu(hero);
-                            break;
-                        case "2":
-                            GameMenu gameMenu = new GameMenu();
-                            gameMenu.ShowMenu(hero);
-                            break;
-                        default:
-                            break;
-                    }
+                    GameMenu gameMenu = new GameMenu();
+                    gameMenu.ShowMenu(hero);
+                    // Console.WriteLine("Explore Forest [1] or View World Map [2]?");
+                    // string? leaveInput = Console.ReadLine();
+                    // switch(leaveInput)
+                    // {
+                    //     case "1":
+                    //         ForestMenu forestMenu = new ForestMenu();
+                    //         forestMenu.ShowMenu(hero);
+                    //         break;
+                    //     case "2":
+                    //         GameMenu gameMenu = new GameMenu();
+                    //         gameMenu.ShowMenu(hero);
+                    //         break;
+                    //     default:
+                    //         break;
+                    // }
                     break;
                 default:
                     break;
