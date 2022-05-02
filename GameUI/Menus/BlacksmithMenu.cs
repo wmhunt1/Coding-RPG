@@ -14,6 +14,7 @@ public class BlacksmithMenu : Menu
             Console.WriteLine($"---------- {Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Buy Weapons and Armor");
+            Console.WriteLine("[3] Talk to Blacksmith");
             Console.WriteLine("[0] Leave Blacksmith");
               string? UserInput = Console.ReadLine();
             switch(UserInput)
@@ -49,6 +50,13 @@ public class BlacksmithMenu : Menu
                                 Console.WriteLine("You already own a Sword");
                                 Console.WriteLine("Press any key to continue");
                                 Console.ReadLine();
+                            }
+                            break;
+                        case "3":
+                            if (hero.GoblinQuest == 0)
+                            {
+                                Console.WriteLine("The local mines have overrun by goblins. Go clear them out?");
+                                hero.GoblinQuest++;
                             }
                             break;
                         case "0":

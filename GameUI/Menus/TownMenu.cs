@@ -41,10 +41,13 @@ public class TownMenu : Menu
                     break;
                 case "5":
                     Console.WriteLine("Mayor's House");
-                    Console.WriteLine("I've put out a bounty on bandits in the forest");
-                    hero.BanditQuest = true;
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadLine();
+                    if (hero.BanditQuest == 0)
+                    {
+                        Console.WriteLine("I've put out a bounty on bandits in the forest");
+                        hero.BanditQuest++;
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                    }
                     break;
                 case "0":
                     GameMenu gameMenu = new GameMenu();

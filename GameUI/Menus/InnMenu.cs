@@ -16,7 +16,7 @@ public class InnMenu : Menu
             Console.WriteLine("[2] Buy Beer (1 Gold)");
             Console.WriteLine("[3] Rent Room (1 Gold)");
             Console.WriteLine("[4] Talk to InnKeeper");
-            if (hero.RatQuest)
+            if (hero.RatQuest > 0)
             {
                 Console.WriteLine("[5] Enter cellar");
             }
@@ -57,13 +57,16 @@ public class InnMenu : Menu
                     Console.ReadLine();
                     break;
                 case "4":
+                    if (hero.RatQuest == 0)
+                    {
                     Console.WriteLine("Innkeeper: 'Want to make some Gold? Go kill some rats in the cellar.'");
-                    hero.RatQuest = true;
+                    hero.RatQuest++;
                     Console.WriteLine("Press any key to continue");
                     Console.ReadLine();
+                    }
                     break;
                 case "5":
-                    if (hero.RatQuest)
+                    if (hero.RatQuest > 0)
                     {
                         Rat rat = new Rat("Cellar Rat");
                         DungeonMenu ratCellar = new DungeonMenu("Rat Cellar", rat);

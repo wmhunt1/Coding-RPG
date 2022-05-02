@@ -27,6 +27,10 @@ public class Character
     //skills
     public int Mining = 1;
     public int WoodCutting = 1;
+    //quests
+    public int BanditQuest = 0;
+    public int GoblinQuest = 0;
+    public int RatQuest = 0;
     public Character(string name)
     {
         Name = name;

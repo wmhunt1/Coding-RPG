@@ -16,7 +16,7 @@ public class ForestMenu : Menu
             Console.WriteLine("[2] Enter Town");
             Console.WriteLine("[3] Cut Wood");
             Console.WriteLine("[4] Go Hunting");
-            if (hero.BanditQuest)
+            if (hero.BanditQuest > 1)
             {
                  Console.WriteLine("[5] Bandit Hideout");
             }
@@ -45,7 +45,7 @@ public class ForestMenu : Menu
                     Console.ReadLine();
                     break;
                 case "5":
-                    if (hero.BanditQuest)
+                    if (hero.BanditQuest > 0)
                     {
                         Bandit bandit = new Bandit("Forest Bandit");
                         BanditBoss banditBoss = new BanditBoss("Forest Bandit Boss");
