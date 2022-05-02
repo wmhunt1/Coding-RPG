@@ -8,7 +8,5 @@ stats
 seperate attack/accuracy and damage stats?
 chance to hit?
 combat with multiple foes and allies?
-graveyard overrun by skeletons
 lumbermill quest
-
-turn quests into quests
+need parameters for quest success

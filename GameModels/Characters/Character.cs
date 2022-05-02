@@ -39,6 +39,8 @@ public class Character
         Journal.Add(goblinQuest);
         RatQuest ratQuest = new RatQuest();
         Journal.Add(ratQuest);
+        SkeletonQuest skeletonQuest = new SkeletonQuest();
+        Journal.Add(skeletonQuest);
     }
     public void DisplayStats()
     {

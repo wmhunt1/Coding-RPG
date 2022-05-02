@@ -23,7 +23,7 @@ public class BlacksmithMenu : Menu
             {
                 case "1":
                     CharacterSheetMenu characterSheet = new CharacterSheetMenu();
-                    characterSheet.ShowMenu(hero);
+                    characterSheet.ShowMenu(hero!);
                     break;
                 case "2":
                     Console.WriteLine("Blacksmith Inventory");
@@ -36,15 +36,15 @@ public class BlacksmithMenu : Menu
                     {
                         case "1":
                             Dagger dagger = new Dagger();
-                            blackSmith.BuyEquipment(hero, dagger);
+                            blackSmith.BuyEquipment(hero!, dagger);
                             break;
                         case "2":
                             Sword sword = new Sword();
-                            blackSmith.BuyEquipment(hero, sword);
+                            blackSmith.BuyEquipment(hero!, sword);
                             break;
                         case "3":
                             LeatherVest leatherVest = new LeatherVest();
-                            blackSmith.BuyEquipment(hero, leatherVest);
+                            blackSmith.BuyEquipment(hero!, leatherVest);
                             break;
                         case "0":
                             break;
@@ -53,7 +53,7 @@ public class BlacksmithMenu : Menu
                     }
                     break;
                 case "3":
-                    if (hero.Journal[1].QuestState == 0 && hero.Journal[1] != null)
+                    if (hero!.Journal[1].QuestState == 0 && hero.Journal[1] != null)
                     {
                         Console.WriteLine("The local mines have overrun by goblins. Go clear them out?");
                         hero.Journal[1].QuestState += 1;
@@ -75,7 +75,7 @@ public class BlacksmithMenu : Menu
                     break;
                 case "0":
                     TownMenu townMenu = new TownMenu();
-                    townMenu.ShowMenu(hero);
+                    townMenu.ShowMenu(hero!);
                     break;
                 default:
                     break;

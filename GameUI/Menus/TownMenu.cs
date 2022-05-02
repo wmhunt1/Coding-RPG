@@ -18,7 +18,11 @@ public class TownMenu : Menu
             Console.WriteLine("[4] General Store");
             Console.WriteLine("[5] Mayor's House");
             Console.WriteLine("[6] Church");
-            Console.WriteLine("[7] Graveyard");
+            if (hero.Journal[3].QuestState > 0)
+            {
+                Console.WriteLine("[7] Graveyard");
+            }
+            
             Console.WriteLine("[0] Leave Town");
 
             string? UserInput = Console.ReadLine();
@@ -58,20 +62,40 @@ public class TownMenu : Menu
                     }
                     else
                     {
-                        Console.WriteLine("Thanks for killing those banduts");
+                        Console.WriteLine("Thanks for killing those bandits");
                         Console.WriteLine("Press any key to continue");
                         Console.ReadLine();
                     }
                     break;
                 case "6":
                     Console.WriteLine("Visting Church");
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadLine();
+                   if (hero.Journal[3].QuestState == 0)
+                    {
+                        Console.WriteLine("Can you deal with the skeletons rising in the graveyard");
+                        hero.Journal[3].QuestState++;
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                    }
+                    else if(hero.Journal[3].QuestState == 1)
+                    {
+                        Console.WriteLine("Please kill those skeletons");
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Thanks for killing those skeletons");
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                    }
                     break;
                 case "7":
-                    Console.WriteLine("Visting Graveyard");
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadLine();
+                    if (hero.Journal[3].QuestState > 0)
+                    {
+                        SkeletonDungeon skeletonDungeon = new SkeletonDungeon();
+                        DungeonMenu skeletonDungeonMenu = new DungeonMenu(skeletonDungeon);
+                        skeletonDungeonMenu.ShowMenu(hero);
+                    }
                     break;
                 case "0":
                     GameMenu gameMenu = new GameMenu();

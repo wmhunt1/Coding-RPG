@@ -7,7 +7,6 @@ public class Race
     public List<Type>? Immunities;
     public List<Type>? Resistances;
     public List<Type>? Vulnerabilities;
-    public List<Type>? Weakness;
     public Race(string name)
     {
         Name = name;
