@@ -59,10 +59,22 @@ public class InnMenu : Menu
                 case "4":
                     if (hero.RatQuest == 0)
                     {
-                    Console.WriteLine("Innkeeper: 'Want to make some Gold? Go kill some rats in the cellar.'");
-                    hero.RatQuest++;
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadLine();
+                        Console.WriteLine("Innkeeper: 'Want to make some Gold? Go kill some rats in the cellar.'");
+                        hero.RatQuest++;
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                    }
+                    else if (hero.RatQuest == 1)
+                    {
+                        Console.WriteLine("Well get going");
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Thanks for killing those rats");
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
                     }
                     break;
                 case "5":

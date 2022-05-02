@@ -48,6 +48,18 @@ public class TownMenu : Menu
                         Console.WriteLine("Press any key to continue");
                         Console.ReadLine();
                     }
+                    else if(hero.BanditQuest == 1)
+                    {
+                        Console.WriteLine("Please kill those bandits");
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Thanks for killing those banduts");
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                    }
                     break;
                 case "0":
                     GameMenu gameMenu = new GameMenu();

@@ -10,5 +10,6 @@ public class Rat : Character
         Attack = 1;
         CurrentXP = 5;
         Gold = 1;
+        RatQuest = 1;
     }
 }
