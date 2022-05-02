@@ -29,17 +29,22 @@ public class BlacksmithMenu : Menu
                     Console.WriteLine("Blacksmith Inventory");
                     Console.WriteLine("[1] Buy Dagger: 5 GP");
                     Console.WriteLine("[2] Buy Sword : 10 GP");
+                    Console.WriteLine("[3] Leather Vest: 5 GP");
                     Console.WriteLine("[0] Go Back");
                     string? BuyingInput = Console.ReadLine();
                     switch (BuyingInput)
                     {
                         case "1":
-                            Weapon dagger = new Weapon("Dagger", 5, 2);
+                            Dagger dagger = new Dagger();
                             blackSmith.BuyEquipment(hero, dagger);
                             break;
                         case "2":
-                            Weapon sword = new Weapon("Sword", 10, 3);
+                            Sword sword = new Sword();
                             blackSmith.BuyEquipment(hero, sword);
+                            break;
+                        case "3":
+                            LeatherVest leatherVest = new LeatherVest();
+                            blackSmith.BuyEquipment(hero, leatherVest);
                             break;
                         case "0":
                             break;

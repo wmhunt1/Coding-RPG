@@ -6,9 +6,9 @@ public class GoblinBoss : Character
         Name = name;
         CurrentHP = 10;
         MaxHP = 10;
-        Weapon = new Weapon("Spear", 0, 2);
+        Weapon = new Spear();
         Attack = 2;
-        Armor = new Armor("Hide Armor", 0, 1);
+        Armor = new LeatherScraps();
         Defense = 1;
         CurrentXP = 50;
         Gold = 50;

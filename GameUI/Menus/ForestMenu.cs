@@ -14,11 +14,13 @@ public class ForestMenu : Menu
             Console.WriteLine($"---------- {Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Enter Town");
-            Console.WriteLine("[3] Cut Wood");
-            Console.WriteLine("[4] Go Hunting");
-            if (hero.BanditQuest > 1)
+            Console.WriteLine("[3] Visit Lumbermill");
+            Console.WriteLine("[4] Chop Wood");
+            Console.WriteLine("[5] Go Hunting");
+            Console.WriteLine();
+            if (hero.BanditQuest > 0)
             {
-                 Console.WriteLine("[5] Bandit Hideout");
+                 Console.WriteLine("[6] Bandit Hideout");
             }
             Console.WriteLine("[0] To World Map");
 
@@ -40,18 +42,22 @@ public class ForestMenu : Menu
                     Console.ReadLine();
                     break;
                 case "4":
-                    Console.WriteLine("Chopping Down Trees");
+                    Console.WriteLine("Visting Lumbermill");
                     Console.WriteLine("Press any key to continue");
                     Console.ReadLine();
                     break;
                 case "5":
+                    Console.WriteLine("Chopping Down Trees");
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadLine();
+                    break;
+                case "6":
                     if (hero.BanditQuest > 0)
                     {
-                        Bandit bandit = new Bandit("Forest Bandit");
-                        BanditBoss banditBoss = new BanditBoss("Forest Bandit Boss");
-                        DungeonMenu banditHideout = new DungeonMenu("Bandit Hideout", bandit);
-                        banditHideout.Boss = banditBoss;
-                        banditHideout.ShowMenu(hero);
+                        
+                        BanditDungeon banditHideout = new BanditDungeon();
+                        DungeonMenu banditHideoutMenu = new DungeonMenu(banditHideout);
+                        banditHideoutMenu.ShowMenu(hero);
                     }
                     break;
                 case "0":

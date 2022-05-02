@@ -17,6 +17,8 @@ public class TownMenu : Menu
             Console.WriteLine("[3] Blacksmith");
             Console.WriteLine("[4] General Store");
             Console.WriteLine("[5] Mayor's House");
+            Console.WriteLine("[6] Church");
+            Console.WriteLine("[7] Graveyard");
             Console.WriteLine("[0] Leave Town");
 
             string? UserInput = Console.ReadLine();
@@ -61,24 +63,19 @@ public class TownMenu : Menu
                         Console.ReadLine();
                     }
                     break;
+                case "6":
+                    Console.WriteLine("Visting Church");
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadLine();
+                    break;
+                case "7":
+                    Console.WriteLine("Visting Graveyard");
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadLine();
+                    break;
                 case "0":
                     GameMenu gameMenu = new GameMenu();
                     gameMenu.ShowMenu(hero);
-                    // Console.WriteLine("Explore Forest [1] or View World Map [2]?");
-                    // string? leaveInput = Console.ReadLine();
-                    // switch(leaveInput)
-                    // {
-                    //     case "1":
-                    //         ForestMenu forestMenu = new ForestMenu();
-                    //         forestMenu.ShowMenu(hero);
-                    //         break;
-                    //     case "2":
-                    //         GameMenu gameMenu = new GameMenu();
-                    //         gameMenu.ShowMenu(hero);
-                    //         break;
-                    //     default:
-                    //         break;
-                    // }
                     break;
                 default:
                     break;

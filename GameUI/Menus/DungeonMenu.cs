@@ -5,13 +5,10 @@ using GameScripts;
 namespace GameUI;
 public class DungeonMenu : Menu
 {
-    new public string Name;
-    public Character Encounter;
-    public Character? Boss;
-    public DungeonMenu(string name, Character encounter)
+    public Dungeon Dungeon;
+    public DungeonMenu(Dungeon dungeon)
     {
-        Name = name;
-        Encounter = encounter;
+        Dungeon = dungeon;
     }
     public override void ShowMenu(Hero hero)
     {
@@ -19,14 +16,14 @@ public class DungeonMenu : Menu
         while (!exitMenu)
         {
             Console.WriteLine("---------- Coding RPG ----------");
-            Console.WriteLine($"---------- {Name}  ----------");
+            Console.WriteLine($"---------- {Dungeon.Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
-            Console.WriteLine($"[2] Fight {Encounter.Name}s");
-            if (Boss != null)
+            Console.WriteLine($"[2] Fight {Dungeon.Encounter.Name}s");
+            if (Dungeon.Boss != null)
             {
-                Console.WriteLine($"[3] Fight {Boss?.Name} (Dungeon Boss)");
+                Console.WriteLine($"[3] Fight {Dungeon.Boss?.Name} (Dungeon Boss)");
             }
-            Console.WriteLine($"[0] Leave {Name}");
+            Console.WriteLine($"[0] Leave {Dungeon.Name}");
 
             string? UserInput = Console.ReadLine();
             switch(UserInput)
@@ -38,9 +35,9 @@ public class DungeonMenu : Menu
                 case "2":
                     if (hero.CurrentHP > 0)
                     {
-                        Encounter.GainHP(Encounter.MaxHP);
+                        Dungeon.Encounter.GainHP(Dungeon.Encounter.MaxHP);
                         CombatScripts dungeonCombat = new CombatScripts();
-                        dungeonCombat.RunCombat(hero, Encounter);
+                        dungeonCombat.RunCombat(hero, Dungeon.Encounter);
                     }
                     else
                     {
@@ -48,20 +45,20 @@ public class DungeonMenu : Menu
                     }
                     break;
                 case "3":
-                    if (Boss != null)
+                    if (Dungeon.Boss != null)
                     {
                         CombatScripts bossCombat = new CombatScripts();
-                        bossCombat.RunCombat(hero, Boss);
+                        bossCombat.RunCombat(hero, Dungeon.Boss);
                     }
                     break;
                 case "0":
                     
-                    if (Encounter.Name == "Forest Bandit")
+                    if (Dungeon.Encounter.Name == "Forest Bandit")
                     {
                         ForestMenu forestMenu = new ForestMenu();
                         forestMenu.ShowMenu(hero);
                     }
-                    else if(Encounter.Name == "Cellar Rat")
+                    else if(Dungeon.Encounter.Name == "Cellar Rat")
                     {
                         InnMenu innMenu = new InnMenu();
                         innMenu.ShowMenu(hero);

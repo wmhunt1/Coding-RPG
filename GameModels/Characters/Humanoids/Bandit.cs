@@ -1,14 +1,14 @@
 namespace GameModels;
-public class Goblin : Character
+public class Bandit : Character
 {
-    public Goblin(string name):base(name)
+    public Bandit(string name):base(name)
     {
         Name = name;
         CurrentHP = 5;
         MaxHP = 5;
-        Weapon = new Weapon("Spear", 0, 2);
+        Weapon = new Dagger();
         Attack = 2;
-        Armor = new Armor("Hide Armor", 0, 1);
+        Armor = new HideArmor();
         Defense = 1;
         CurrentXP = 5;
         Gold = 5;

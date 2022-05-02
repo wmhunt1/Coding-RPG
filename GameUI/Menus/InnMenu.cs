@@ -30,9 +30,10 @@ public class InnMenu : Menu
                     characterSheet.ShowMenu(hero);
                     break;
                 case "2":
-                    if (hero.HasEnoughGold(1) == false)
+                    Beer beer = new Beer();
+                    if (hero.HasEnoughGold(beer.Cost) == false)
                     {
-                        hero.RemoveGold(1);
+                        hero.RemoveGold(beer.Cost);
                         Console.WriteLine("You enjoy a refreshing Beer");
                     }
                     else
@@ -80,9 +81,9 @@ public class InnMenu : Menu
                 case "5":
                     if (hero.RatQuest > 0)
                     {
-                        Rat rat = new Rat("Cellar Rat");
-                        DungeonMenu ratCellar = new DungeonMenu("Rat Cellar", rat);
-                        ratCellar.ShowMenu(hero);
+                        RatDungeon ratCellar = new RatDungeon();
+                        DungeonMenu ratCellarMenu = new DungeonMenu(ratCellar);
+                        ratCellarMenu.ShowMenu(hero);
                     }
                     break;
                 case "0":

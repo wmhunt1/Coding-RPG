@@ -6,9 +6,9 @@ public class BanditBoss : Character
         Name = name;
         CurrentHP = 10;
         MaxHP = 10;
-        Weapon = new Weapon("Dagger", 0, 2);
+        Weapon = new Dagger();
         Attack = 2;
-        Armor = new Armor("Hide Armor", 0, 1);
+        Armor = new HideArmor();
         Defense = 1;
         CurrentXP = 50;
         Gold = 50;

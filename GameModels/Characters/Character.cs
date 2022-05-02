@@ -3,6 +3,7 @@ namespace GameModels;
 public class Character
 {
     public string Name;
+    public Race Race = new Humanoid();
     //stats
     public int Level = 1;
     public int CurrentXP = 0;
@@ -41,7 +42,7 @@ public class Character
     }
     public void DisplayEquipment()
     {
-        Console.WriteLine($"Equipment\nWeapon: {Weapon.Name} ({Attack} Damage)\nArmor: {Armor.Name} ({Defense} Protection)");
+        Console.WriteLine($"Equipment\nAccessory: {Accessory.Name}\nWeapon: {Weapon.Name} ({Attack} Damage)\nArmor: {Armor.Name} ({Defense} Protection)");
     }
     public void DisplayInventory()
     {

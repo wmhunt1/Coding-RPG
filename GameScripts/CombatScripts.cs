@@ -12,11 +12,12 @@ public class CombatScripts
         
         if (char2.Defense >= char1.Attack)
         {
-            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, but {char2.Name}'s Armor deflects all damage");
+            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, but {char2.Name}'s Armor deflects most of the {char1.Attack-char2.Defense} damage");
+            char2.DamageHP(1);
         }
         else
         {
-            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, dealing {char1.Attack-char2.Defense} damage");
+            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, dealing {char1.Attack-char2.Defense} {char1.Weapon.DamageType.Name} damage");
             char2.DamageHP(char1.Attack-char2.Defense);
         }
     }
