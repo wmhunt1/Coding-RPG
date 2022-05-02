@@ -28,13 +28,17 @@ public class Character
     //skills
     public int Mining = 1;
     public int WoodCutting = 1;
-    //quests
-    public int BanditQuest = 0;
-    public int GoblinQuest = 0;
-    public int RatQuest = 0;
+    public List<Quest> Journal;
     public Character(string name)
     {
         Name = name;
+        BanditQuest banditQuest = new BanditQuest();
+        Journal = new List<Quest>();
+        Journal.Add(banditQuest);
+        GoblinQuest goblinQuest = new GoblinQuest();
+        Journal.Add(goblinQuest);
+        RatQuest ratQuest = new RatQuest();
+        Journal.Add(ratQuest);
     }
     public void DisplayStats()
     {
@@ -47,6 +51,17 @@ public class Character
     public void DisplayInventory()
     {
         Console.WriteLine($"Inventory\nGold: {Gold}");
+    }
+    public void DisplayJournal()
+    {
+        Console.WriteLine("Journal");
+        for (int i = 0; i < Journal.Count; i++)
+        {
+            if (Journal[i].QuestState > 0)
+            {
+                Console.WriteLine($"Name: {Journal[i].Name} - Description: {Journal[i].Description}");
+            }
+        }
     }
     public int GainHP(int hp)
     {

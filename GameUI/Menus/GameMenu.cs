@@ -15,11 +15,11 @@ public class GameMenu : Menu
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Visit Town");
             Console.WriteLine("[3] Explore Forest");
-            if (hero.GoblinQuest > 0)
+            if (hero.Journal[1].QuestState > 0)
             {
                 Console.WriteLine("[4] Dwarven Mine");
             }
-            if (hero.GoblinQuest > 1)
+            if (hero.Journal[1].QuestState > 1)
             {
                 Console.WriteLine("[5] Mine Ore");
             }
@@ -41,7 +41,7 @@ public class GameMenu : Menu
                     forestMenu.ShowMenu(hero);
                     break;
                 case "4":
-                    if (hero.GoblinQuest > 0)
+                    if (hero.Journal[1].QuestState > 0)
                     {
                         GoblinDungeon dwarfMine = new GoblinDungeon();
                         DungeonMenu dwarfMineMenu = new DungeonMenu(dwarfMine);
@@ -49,7 +49,7 @@ public class GameMenu : Menu
                     }
                     break;
                 case "5":
-                    if (hero.GoblinQuest > 1)
+                    if (hero.Journal[1].QuestState > 1)
                     {
                         Console.WriteLine("Mining Ore");
                         Console.WriteLine("Press any key to continue");

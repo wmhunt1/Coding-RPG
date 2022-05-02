@@ -72,18 +72,6 @@ public class CombatScripts
                 Console.WriteLine($"{char1.Name} gains {char2.CurrentXP} XP and {char2.Gold} Gold");
                 char1.AddGold(char2.Gold);
                 char1.GainXP(char2.CurrentXP);
-                if (char2.BanditQuest == 1)
-                {
-                    char1.BanditQuest++;
-                }
-                if (char2.GoblinQuest == 1)
-                {
-                    char1.GoblinQuest++;
-                }
-                 if (char2.RatQuest == 1)
-                {
-                    char1.RatQuest++;
-                }
             }
         }
         else

@@ -12,6 +12,5 @@ public class BanditBoss : Character
         Defense = 1;
         CurrentXP = 50;
         Gold = 50;
-        BanditQuest = 1;;
     }
 }

@@ -58,6 +58,11 @@ public class DungeonMenu : Menu
                         ForestMenu forestMenu = new ForestMenu();
                         forestMenu.ShowMenu(hero);
                     }
+                    else if (Dungeon.Encounter.Name == "Goblin")
+                    {
+                        GameMenu gameMenu = new GameMenu();
+                        gameMenu.ShowMenu(hero);
+                    }
                     else if(Dungeon.Encounter.Name == "Cellar Rat")
                     {
                         InnMenu innMenu = new InnMenu();

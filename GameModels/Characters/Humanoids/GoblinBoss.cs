@@ -12,6 +12,5 @@ public class GoblinBoss : Character
         Defense = 1;
         CurrentXP = 50;
         Gold = 50;
-        GoblinQuest = 1;
     }
 }

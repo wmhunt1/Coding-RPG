@@ -53,14 +53,14 @@ public class BlacksmithMenu : Menu
                     }
                     break;
                 case "3":
-                    if (hero.GoblinQuest == 0)
+                    if (hero.Journal[1].QuestState == 0 && hero.Journal[1] != null)
                     {
                         Console.WriteLine("The local mines have overrun by goblins. Go clear them out?");
-                        hero.GoblinQuest++;
+                        hero.Journal[1].QuestState += 1;
                         Console.WriteLine("Press any key to continue");
                         Console.ReadLine();
                     }
-                    else if (hero.GoblinQuest == 1)
+                    else if (hero?.Journal?[1].QuestState == 1)
                     {
                         Console.WriteLine("Please kill those goblins");
                         Console.WriteLine("Press any key to continue");

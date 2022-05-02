@@ -18,7 +18,7 @@ public class ForestMenu : Menu
             Console.WriteLine("[4] Chop Wood");
             Console.WriteLine("[5] Go Hunting");
             Console.WriteLine();
-            if (hero.BanditQuest > 0)
+            if (hero.Journal[0].QuestState > 0)
             {
                  Console.WriteLine("[6] Bandit Hideout");
             }
@@ -52,7 +52,7 @@ public class ForestMenu : Menu
                     Console.ReadLine();
                     break;
                 case "6":
-                    if (hero.BanditQuest > 0)
+                    if (hero.Journal[0].QuestState > 0)
                     {
                         
                         BanditDungeon banditHideout = new BanditDungeon();
