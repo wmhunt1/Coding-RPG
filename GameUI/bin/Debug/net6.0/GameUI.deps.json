@@ -1,0 +1,50 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "GameUI/1.0.0": {
+        "dependencies": {
+          "GameModels": "1.0.0",
+          "GameScripts": "1.0.0"
+        },
+        "runtime": {
+          "GameUI.dll": {}
+        }
+      },
+      "GameModels/1.0.0": {
+        "runtime": {
+          "GameModels.dll": {}
+        }
+      },
+      "GameScripts/1.0.0": {
+        "dependencies": {
+          "GameModels": "1.0.0"
+        },
+        "runtime": {
+          "GameScripts.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GameUI/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GameModels/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GameScripts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
