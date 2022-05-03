@@ -10,4 +10,10 @@ public class HealthPotion : Potion
         Cost = cost;
         HealingAmount = healingAmount;
     }
+    public override void UseItem(Character character)
+    {
+        Console.WriteLine($"{character.Name} drinks a potion, restoring {HealingAmount}");
+        character.GainHP(HealingAmount);
+        character.RemoveFromInventory(this);
+    }
 }

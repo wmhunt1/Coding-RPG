@@ -12,7 +12,7 @@ public class DungeonMenu : Menu
         Dungeon = dungeon;
         Exit = exit;
     }
-    public override async void ShowMenu(Hero hero)
+    public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
         while (!exitMenu)

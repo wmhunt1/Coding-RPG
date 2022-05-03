@@ -8,4 +8,8 @@ public class Consumable : Item
         Name = name;
         Cost = cost;
     }
+    public override void UseItem(Character character)
+    {
+
+    }
 }

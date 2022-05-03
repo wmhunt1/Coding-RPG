@@ -22,7 +22,7 @@ public class Character
     public int Speed = 1;
     //inventory;
     public int Gold = 0;
-    public List<Item>? Inventory;
+    public List<Item>? Inventory = new List<Item>();
     //equipment
     public Accessory Accessory = new Accessory("None", 0);
     public Weapon Weapon = new Weapon("Unarmed", 0, 0);
@@ -60,6 +60,10 @@ public class Character
     public void DisplayInventory()
     {
         Console.WriteLine($"Inventory\nGold: {Gold}");
+        for (int i = 0; i < Inventory.Count; i++)
+        {
+            Console.WriteLine($"{Inventory[i].Name}");
+        }
     }
     public void DisplayJournal()
     {
@@ -198,6 +202,18 @@ public class Character
         {
             return true;
         }
+    }
+    public List<Item> AddToInventory(Item item)
+    {
+        Inventory.Add(item);
+        Console.WriteLine($"{item.Name} added to Inventory");
+        return Inventory;
+    }
+    public List<Item> RemoveFromInventory(Item item)
+    {
+        Inventory.Remove(item);
+        Console.WriteLine($"{item.Name} removed from Inventory");
+        return Inventory;
     }
     public bool CheckImmunities(Type type)
     {

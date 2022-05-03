@@ -34,7 +34,7 @@ public class InnMenu : Menu
                     if (hero.HasEnoughGold(beer.Cost) == false)
                     {
                         hero.RemoveGold(beer.Cost);
-                        Console.WriteLine("You enjoy a refreshing Beer");
+                        beer.UseItem(hero);
                     }
                     else
                     {

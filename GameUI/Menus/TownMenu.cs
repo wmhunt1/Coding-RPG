@@ -41,7 +41,9 @@ public class TownMenu : Menu
                     blacksmithMenu.ShowMenu(hero);
                     break;
                 case "4":
-                    Console.WriteLine("General Store");
+                    Console.WriteLine("Getting Potion from store");
+                    HealthPotion healthPotion = new HealthPotion("Health Potion", 5, 5);
+                    hero.AddToInventory(healthPotion);
                     Console.WriteLine("Press any key to continue");
                     Console.ReadLine();
                     break;

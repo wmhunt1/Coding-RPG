@@ -10,4 +10,9 @@ public class Item
         Name = name;
         Cost = cost;
     }
+    public virtual void UseItem(Character character)
+    {
+
+    }
+
 }

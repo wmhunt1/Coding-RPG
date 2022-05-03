@@ -49,11 +49,14 @@ public class CombatScripts
             Attack(char1, char2);
         } 
     }
-    public void CombatRound(Character char1, Character target, List<Character> enemies)
+    public void CombatRound(Character char1, Character target, List<Character> enemies, bool skippedTurn)
     {
         if (char1.Speed >= target.Speed)
         {
-            CombatTurn(char1, target);
+            if (skippedTurn == false)
+            {
+                CombatTurn(char1, target);
+            }
             for (int i = 0; i < enemies.Count; i++)
             {
                 CombatTurn(enemies[i], char1);
@@ -65,7 +68,10 @@ public class CombatScripts
             {
                 CombatTurn(enemies[i], char1);
             }
-            CombatTurn(char1, target);
+            if (skippedTurn == false)
+            {
+                CombatTurn(char1, target);
+            }
         }
         for (int i = 0; i < enemies.Count; i++)
         {
@@ -76,7 +82,11 @@ public class CombatScripts
         }
       
     }
-    public async void RunCombat(Character char1, List<Character> enemies)
+    public void UseItem(Item consumable, Character character)
+    {
+        consumable.UseItem(character);
+    }
+    public void RunCombat(Character char1, List<Character> enemies)
     {
         List<Character> rewards = new List<Character>();
         for (int i = 0; i < enemies.Count; i++)
@@ -96,6 +106,7 @@ public class CombatScripts
                 }
             }
             Console.WriteLine("[1] Attack");
+            Console.WriteLine("[2] Use Item");
             Console.WriteLine("[0] Run Away");
             string? userInput = Console.ReadLine();
             switch (userInput)
@@ -114,6 +125,7 @@ public class CombatScripts
                         }
                         Console.WriteLine("[0] Back");
                         int target = int.Parse(Console.ReadLine());
+                        // need input validatioon
                         if (target == 0)
                         {
                             break;
@@ -121,14 +133,40 @@ public class CombatScripts
                         else
                         {
                             //need input validation
-                            CombatRound(char1, enemies[target-1], enemies);
+                            CombatRound(char1, enemies[target-1], enemies, false);
                         }
                         
                     }
                     else
                     {
-                        CombatRound(char1, enemies[0], enemies);
+                        CombatRound(char1, enemies[0], enemies, false);
                     }                    
+                    break;
+                case "2":
+                    if (char1.Inventory?.Count > 0)
+                    {
+                        for (int i = 0; i < char1.Inventory.Count; i++)
+                        {
+                            Console.WriteLine($"[{i+1}] {char1.Inventory[i].Name}");
+                        }
+                        Console.WriteLine("[0] Back");
+                        int selection = int.Parse(Console.ReadLine());
+                        // need input validatioon
+                        if (selection == 0)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            //need input validation
+                            UseItem(char1.Inventory[selection-1], char1);
+                            CombatRound(char1, enemies[0], enemies, true);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Inventory empty");
+                    }
                     break;
                 case "0":
                     Console.WriteLine("You Run Away");

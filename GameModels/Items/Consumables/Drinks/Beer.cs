@@ -8,4 +8,8 @@ public class Beer : Drink
         Name = name;
         Cost = cost;
     }
+    public override void UseItem(Character character)
+    {
+        Console.WriteLine("You drink a refreshing beer");
+    }
 }
