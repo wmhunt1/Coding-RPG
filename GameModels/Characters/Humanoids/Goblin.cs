@@ -7,9 +7,9 @@ public class Goblin : Character
         CurrentHP = 5;
         MaxHP = 5;
         Weapon = new Spear();
-        Attack = 2;
         Armor = new LeatherScraps();
-        Defense = 1;
+        Attack = Weapon.Damage;
+        Defense = Armor.Protection;
         CurrentXP = 5;
         Gold = 5;
     }

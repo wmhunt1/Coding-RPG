@@ -18,7 +18,7 @@ public class DungeonMenu : Menu
             Console.WriteLine("---------- Coding RPG ----------");
             Console.WriteLine($"---------- {Dungeon.Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
-            Console.WriteLine($"[2] Fight {Dungeon.Encounter.Name}s");
+            Console.WriteLine($"[2] Fight {Dungeon.Encounter[0].Name}s");
             if (Dungeon.Boss != null)
             {
                 Console.WriteLine($"[3] Fight {Dungeon.Boss?.Name} (Dungeon Boss)");
@@ -35,9 +35,9 @@ public class DungeonMenu : Menu
                 case "2":
                     if (hero.CurrentHP > 0)
                     {
-                        Dungeon.Encounter.GainHP(Dungeon.Encounter.MaxHP);
+                        Dungeon.Encounter[0].GainHP(Dungeon.Encounter[0].MaxHP);
                         CombatScripts dungeonCombat = new CombatScripts();
-                        dungeonCombat.RunCombat(hero, Dungeon.Encounter);
+                        dungeonCombat.RunCombat(hero, Dungeon.Encounter[0]);
                     }
                     else
                     {
@@ -53,17 +53,17 @@ public class DungeonMenu : Menu
                     break;
                 case "0":
                     
-                    if (Dungeon.Encounter.Name == "Forest Bandit")
+                    if (Dungeon.Encounter[0].Name == "Forest Bandit")
                     {
                         ForestMenu forestMenu = new ForestMenu();
                         forestMenu.ShowMenu(hero);
                     }
-                    else if (Dungeon.Encounter.Name == "Goblin")
+                    else if (Dungeon.Encounter[0].Name == "Goblin")
                     {
                         GameMenu gameMenu = new GameMenu();
                         gameMenu.ShowMenu(hero);
                     }
-                    else if(Dungeon.Encounter.Name == "Cellar Rat")
+                    else if(Dungeon.Encounter[0].Name == "Cellar Rat")
                     {
                         InnMenu innMenu = new InnMenu();
                         innMenu.ShowMenu(hero);

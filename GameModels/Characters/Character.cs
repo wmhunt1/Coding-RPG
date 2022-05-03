@@ -4,6 +4,7 @@ public class Character
 {
     public string Name;
     public Race Race = new Humanoid();
+    public Job Job = new Job("Freelancer");
     //stats
     public int Level = 1;
     public int CurrentXP = 0;
@@ -21,14 +22,20 @@ public class Character
     public int Speed = 1;
     //inventory;
     public int Gold = 0;
+    public List<Item>? Inventory;
     //equipment
     public Accessory Accessory = new Accessory("None", 0);
     public Weapon Weapon = new Weapon("Unarmed", 0, 0);
     public Armor Armor = new Armor("Unarmored", 0, 0);
     //skills
-    public int Mining = 1;
-    public int WoodCutting = 1;
+    public Skill Mining = new Skill("Mining", 1);
+    public Skill Woodcutting = new Skill("Woodcutting", 1);
+    public List<Ability>? ActionBar;
+    public List<Spell>? Spellbook;
     public List<Quest> Journal;
+    public List<Type>? Immunities;
+    public List<Type>? Resistances;
+    public List<Type>? Vulnerabilities;
     public Character(string name)
     {
         Name = name;
@@ -154,6 +161,8 @@ public class Character
         MaxHP += 10;
         MaxMP += 10;
         MaxSP += 10;
+        Console.WriteLine($"{Name} reaches level {Level}");
+        FullRest();
         return Level;
     }
     public void CheckIfReadyToLevelUp()
@@ -190,4 +199,53 @@ public class Character
             return true;
         }
     }
+    public bool CheckImmunities(Type type)
+    {
+        
+        bool immunity = false;
+        if (Immunities != null)
+        {
+            for (int i = 0; i < Immunities.Count; i++)
+            {
+                if (type.Name == Immunities[i].Name)
+                {
+                    immunity = true;
+                }
+            }
+        }
+        return immunity;
+    }
+    public bool CheckResistances(Type type)
+    {
+        bool resistance = false;
+        if (Resistances != null)
+        {
+            for (int i = 0; i < Resistances.Count; i++)
+            {
+                if (type.Name == Resistances[i].Name)
+                {
+                    resistance = true;
+                }
+            }
+        }
+        return resistance;
+    }
+    public bool CheckVulnerabilities(Type type)
+    {
+        bool vunerability = false;
+        Console.WriteLine("v1");
+        if (Vulnerabilities != null)
+        {
+            Console.WriteLine("v2");
+            for (int i = 0; i < Vulnerabilities.Count; i++)
+            {
+                if (type.Name == Vulnerabilities[i].Name)
+                {
+                    return true;
+                }
+            }
+        }
+        return vunerability;
+    }
+
 }

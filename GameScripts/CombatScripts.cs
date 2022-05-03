@@ -7,19 +7,40 @@ public class CombatScripts
     public CombatScripts()
     {
     }
+    public int CalculateDamage(Character char1, Character char2)
+    {
+        int damage = char1.Attack - char2.Defense;
+        if (char1.CheckImmunities(char2.Weapon.DamageType) == true)
+        {
+            Console.WriteLine("i");
+            damage = 0;
+            Console.WriteLine(damage);
+        }
+        if (char1.CheckResistances(char2.Weapon.DamageType) == true)
+        {
+            Console.WriteLine("r");
+            damage /= 2;
+            Console.WriteLine(damage);
+        }
+        if (char1.CheckVulnerabilities(char2.Weapon.DamageType) == true)
+        {
+            Console.WriteLine("v");
+            damage *= 2;
+            Console.WriteLine(damage);
+        }
+        if (damage <= 0)
+        {
+            Console.WriteLine("d");
+            damage = 0;
+        }
+        return damage;
+    }
     public void Attack(Character char1, Character char2)
     {
         
-        if (char2.Defense >= char1.Attack)
-        {
-            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, but {char2.Name}'s Armor deflects most of the {char1.Attack-char2.Defense} damage");
-            char2.DamageHP(1);
-        }
-        else
-        {
-            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, dealing {char1.Attack-char2.Defense} {char1.Weapon.DamageType.Name} damage");
-            char2.DamageHP(char1.Attack-char2.Defense);
-        }
+        int damage = CalculateDamage(char1, char2);
+        Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, dealing {damage} damage");  
+        char2.DamageHP(damage);
     }
     public void CombatTurn(Character char1, Character char2)
     {

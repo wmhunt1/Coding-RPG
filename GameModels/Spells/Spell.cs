@@ -4,10 +4,12 @@ namespace GameModels;
 public class Spell
 {
     public string Name;
-    public int StaminaCost;
-    public Spell(string name, int cost)
+    public int SpellLevel;
+    public int ManaCost;
+    public Spell(string name, int level, int cost)
     {
         Name = name;
-        StaminaCost = cost;
+        SpellLevel = level;
+        ManaCost = cost;
     }
 }

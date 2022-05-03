@@ -7,9 +7,9 @@ public class BanditBoss : Character
         CurrentHP = 10;
         MaxHP = 10;
         Weapon = new Dagger();
-        Attack = 2;
         Armor = new HideArmor();
-        Defense = 1;
+        Attack = Weapon.Damage;
+        Defense = Armor.Protection;
         CurrentXP = 50;
         Gold = 50;
     }

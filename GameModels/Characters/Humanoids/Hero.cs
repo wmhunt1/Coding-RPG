@@ -5,8 +5,9 @@ public class Hero : Character
     {
         Name = name;
         Weapon = new Club();
-        Attack = 1;
         Armor = new ClothTunic();
+        Attack = Weapon.Damage;
+        Defense = Armor.Protection;
         Gold = 10;
     }
 }

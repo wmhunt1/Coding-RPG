@@ -8,7 +8,8 @@ public class Rat : Character
         CurrentHP = 2;
         MaxHP = 2;
         Weapon = new Bite();
-        Attack = 1;
+        Attack = Weapon.Damage;
+        Defense = Armor.Protection;
         CurrentXP = 5;
         Gold = 1;
     }
