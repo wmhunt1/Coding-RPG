@@ -44,7 +44,8 @@ public class GameMenu : Menu
                     if (hero.Journal[1].QuestState > 0)
                     {
                         GoblinDungeon dwarfMine = new GoblinDungeon();
-                        DungeonMenu dwarfMineMenu = new DungeonMenu(dwarfMine);
+                        GameMenu gameMenuExit = new GameMenu();
+                        DungeonMenu dwarfMineMenu = new DungeonMenu(dwarfMine, gameMenuExit);
                         dwarfMineMenu.ShowMenu(hero);
                     }
                     break;

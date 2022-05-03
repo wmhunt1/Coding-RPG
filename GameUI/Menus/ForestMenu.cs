@@ -56,7 +56,8 @@ public class ForestMenu : Menu
                     {
                         
                         BanditDungeon banditHideout = new BanditDungeon();
-                        DungeonMenu banditHideoutMenu = new DungeonMenu(banditHideout);
+                        ForestMenu forestMenu = new ForestMenu();
+                        DungeonMenu banditHideoutMenu = new DungeonMenu(banditHideout, forestMenu);
                         banditHideoutMenu.ShowMenu(hero);
                     }
                     break;

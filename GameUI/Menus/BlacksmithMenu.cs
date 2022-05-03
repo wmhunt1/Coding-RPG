@@ -7,6 +7,10 @@ public class BlacksmithMenu : Menu
 {
     new public string Name = "Blacksmith";
     ShoppingScripts blackSmith = new ShoppingScripts();
+    public BlacksmithMenu()
+    {
+        
+    }
     public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;

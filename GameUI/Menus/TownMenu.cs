@@ -93,7 +93,8 @@ public class TownMenu : Menu
                     if (hero.Journal[3].QuestState > 0)
                     {
                         SkeletonDungeon skeletonDungeon = new SkeletonDungeon();
-                        DungeonMenu skeletonDungeonMenu = new DungeonMenu(skeletonDungeon);
+                        TownMenu townMenuExit = new TownMenu();
+                        DungeonMenu skeletonDungeonMenu = new DungeonMenu(skeletonDungeon, townMenuExit);
                         skeletonDungeonMenu.ShowMenu(hero);
                     }
                     break;

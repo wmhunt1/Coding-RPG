@@ -82,7 +82,8 @@ public class InnMenu : Menu
                     if (hero.Journal[2].QuestState > 0)
                     {
                         RatDungeon ratCellar = new RatDungeon();
-                        DungeonMenu ratCellarMenu = new DungeonMenu(ratCellar);
+                        InnMenu innMenu = new InnMenu();
+                        DungeonMenu ratCellarMenu = new DungeonMenu(ratCellar, innMenu);
                         ratCellarMenu.ShowMenu(hero);
                     }
                     break;

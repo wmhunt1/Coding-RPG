@@ -6,9 +6,11 @@ namespace GameUI;
 public class DungeonMenu : Menu
 {
     public Dungeon Dungeon;
-    public DungeonMenu(Dungeon dungeon)
+    public Menu Exit;
+    public DungeonMenu(Dungeon dungeon, Menu exit)
     {
         Dungeon = dungeon;
+        Exit = exit;
     }
     public override void ShowMenu(Hero hero)
     {
@@ -52,27 +54,7 @@ public class DungeonMenu : Menu
                     }
                     break;
                 case "0":
-                    
-                    if (Dungeon.Encounter[0].Name == "Forest Bandit")
-                    {
-                        ForestMenu forestMenu = new ForestMenu();
-                        forestMenu.ShowMenu(hero);
-                    }
-                    else if (Dungeon.Encounter[0].Name == "Goblin")
-                    {
-                        GameMenu gameMenu = new GameMenu();
-                        gameMenu.ShowMenu(hero);
-                    }
-                    else if(Dungeon.Encounter[0].Name == "Cellar Rat")
-                    {
-                        InnMenu innMenu = new InnMenu();
-                        innMenu.ShowMenu(hero);
-                    }
-                    else
-                    {
-                        GameMenu gameMenu = new GameMenu();
-                        gameMenu.ShowMenu(hero);
-                    }
+                    Exit.ShowMenu(hero);
                     break;
                 default:
                     break;
