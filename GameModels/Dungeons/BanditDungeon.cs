@@ -7,6 +7,6 @@ public class BanditDungeon : Dungeon
     {
         Name = name;
         Encounter = new List<Character>() {new Bandit("Forest Bandit")};
-        Boss = new BanditBoss("Forest Bandit Boss");
+        Boss = new List<Character>() {new BanditBoss("Forest Bandit Boss")};
     }
 }

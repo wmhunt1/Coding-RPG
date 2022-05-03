@@ -7,6 +7,6 @@ public class GoblinDungeon : Dungeon
     {
         Name = name;
         Encounter = new List<Character>() {new Goblin("Goblin")};
-        Boss = new GoblinBoss("Goblin Boss");
+        Boss = new List<Character>() {new GoblinBoss("Goblin Boss")};
     }
 }

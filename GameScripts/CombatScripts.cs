@@ -49,33 +49,86 @@ public class CombatScripts
             Attack(char1, char2);
         } 
     }
-    public void CombatRound(Character char1, Character char2)
+    public void CombatRound(Character char1, Character target, List<Character> enemies)
     {
-        if (char1.Speed >= char2.Speed)
+        if (char1.Speed >= target.Speed)
         {
-            CombatTurn(char1, char2);
-            CombatTurn(char2, char1);
+            CombatTurn(char1, target);
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                CombatTurn(enemies[i], char1);
+            }
         }
         else
         {
-            CombatTurn(char2, char1);
-            CombatTurn(char1, char2);
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                CombatTurn(enemies[i], char1);
+            }
+            CombatTurn(char1, target);
+        }
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            if (enemies[i].CurrentHP <= 0)
+            {
+                enemies.Remove(enemies[i]);
+            }
         }
       
     }
-    public void RunCombat(Character char1, Character char2)
+    public async void RunCombat(Character char1, List<Character> enemies)
     {
-        bool ranAway = false;
-        while (char1.CurrentHP > 0 && char2.CurrentHP > 0 && ranAway == false)
+        List<Character> rewards = new List<Character>();
+        for (int i = 0; i < enemies.Count; i++)
         {
-            Console.WriteLine($"{char1.Name}: {char1.CurrentHP}/{char1.MaxHP} VS {char2.Name}: {char2.CurrentHP}/{char2.MaxHP}");
+            rewards.Add(enemies[i]);
+        }
+        bool ranAway = false;
+        while (char1.CurrentHP > 0 && enemies.Count > 0 && ranAway == false)
+        {
+            Console.WriteLine ("Fight!");
+            Console.WriteLine($"{char1.Name}: {char1.CurrentHP}/{char1.MaxHP}\nVS");
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].CurrentHP > 0)
+                {
+                    Console.WriteLine($"{enemies[i].Name}: {enemies[i].CurrentHP}/{enemies[i].MaxHP}");
+                }
+            }
             Console.WriteLine("[1] Attack");
             Console.WriteLine("[0] Run Away");
             string? userInput = Console.ReadLine();
             switch (userInput)
             {
                 case "1":
-                    CombatRound(char1, char2);
+                    if (enemies.Count > 1)
+                    {
+                        Console.WriteLine("Select Target");
+                        for (int i = 0; i < enemies.Count; i++)
+                        {
+                            if (enemies[i].CurrentHP > 0)
+                            {
+                                Console.WriteLine($"[{i+1}] {enemies[i].Name}: {enemies[i].CurrentHP}/{enemies[i].MaxHP}");
+                            }
+                            
+                        }
+                        Console.WriteLine("[0] Back");
+                        int target = int.Parse(Console.ReadLine());
+                        if (target == 0)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            //need input validation
+                            CombatRound(char1, enemies[target-1], enemies);
+                        }
+                        
+                    }
+                    else
+                    {
+                        CombatRound(char1, enemies[0], enemies);
+                    }                    
                     break;
                 case "0":
                     Console.WriteLine("You Run Away");
@@ -90,14 +143,22 @@ public class CombatScripts
             if (ranAway != true)
             {
                 Console.WriteLine($"{char1.Name} Wins!");
-                Console.WriteLine($"{char1.Name} gains {char2.CurrentXP} XP and {char2.Gold} Gold");
-                char1.AddGold(char2.Gold);
-                char1.GainXP(char2.CurrentXP);
+                for (int i = 0; i < rewards.Count; i++)
+                {
+                    Console.WriteLine($"{char1.Name} gains {rewards[i].CurrentXP} XP and {rewards[i].Gold} Gold");
+                    char1.AddGold(rewards[i].Gold);
+                    char1.GainXP(rewards[i].CurrentXP);
+                }
+              
             }
         }
         else
         {
             Console.WriteLine($"{char1.Name} was defeated!");
+        }
+        for (int i = 0; i < rewards.Count; i++)
+        {
+            enemies.Add(rewards[i]);
         }
         Console.WriteLine("Press any key to continue");
         Console.ReadLine();
