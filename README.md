@@ -1,8 +1,8 @@
 # Coding-RPG
 to-do
 abilities
-    power attack skill
-    sneak attack skill
+characters
+    seperate armor and defense stat?
 items
 quests
     lumbermill quest
@@ -12,4 +12,6 @@ scripts
     seperate attack/accuracy and damage stats?
     chance to hit?
     combat multiple allies?
+story
+    intro
 

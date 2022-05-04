@@ -16,8 +16,13 @@ public class MagicMissile: DamagingSpell
         caster.SpendMP(ManaCost);
         for (int i = 0; i< targets.Count; i++)
         {
-            int damage = targets[i].CalculateDamage(caster, targets[i], true);
-            targets[i].DamageHP(damage);
+            Console.WriteLine($"[{i+1}] {targets[i].Name}");   
         }
+        int target = int.Parse(Console.ReadLine());
+        int damage = targets[target-1].CalculateDamage(caster, targets[target-1], true);
+        Console.WriteLine($"{caster.Name} casts {Name}");
+        targets[target-1].DamageHP(damage);
+        targets[target-1].DamageHP(damage);
+        targets[target-1].DamageHP(damage);
     }
 }

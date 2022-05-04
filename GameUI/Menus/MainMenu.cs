@@ -19,20 +19,32 @@ public class MainMenu : Menu
         hero.Name = name;
         Console.WriteLine("Choose Class");
         Console.WriteLine("[1] Freelancer");
-        Console.WriteLine("[2] Rogue");
-        Console.WriteLine("[3] Wizard");
+        Console.WriteLine("[2] Fighter");
+        Console.WriteLine("[3] Rogue");
+        Console.WriteLine("[4] Wizard");
         
         int job = int.Parse(Console.ReadLine());
         if (job == 1)
         {
            
         }
-        else if (job == 2)
+        else if (job ==2)
+        {
+            Fighter fighter = new Fighter();
+            fighter.ChooseJob(hero);
+            Cleave cleave = new Cleave();
+            PowerAttack powerAttack = new PowerAttack();
+            cleave.GainAbility(hero);
+            powerAttack.GainAbility(hero);
+        }
+        else if (job == 3)
         {
             Rogue rogue = new Rogue();
             rogue.ChooseJob(hero);
+            SneakAttack sneakAttack = new SneakAttack();
+            sneakAttack.GainAbility(hero);
         }
-        else if (job == 3)
+        else if (job == 4)
         {
             Wizard wizard = new Wizard();
             wizard.ChooseJob(hero);

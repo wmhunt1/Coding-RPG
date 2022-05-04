@@ -8,13 +8,13 @@ public class Cleave : Ability
         Name = name;
         StaminaCost = cost;
     }
-    public override void UseAbility(Character user, List<Character> Targets)
+    public override void UseAbility(Character user, List<Character> targets)
     {
         user.SpendMP(StaminaCost);
         Console.WriteLine($"{user.Name} cleaves through their foes");
-        for (int i = 0; i < Targets.Count; i++)
+        for (int i = 0; i < targets.Count; i++)
         {
-            user.BasicAttack(user, Targets[i]);
+            user.BasicAttack(user, targets[i]);
         }
     }
 }
