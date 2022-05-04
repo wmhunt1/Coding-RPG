@@ -17,7 +17,7 @@ public class Character
     public int MaxSP = 0;
     public int Attack = 0;
     public int Defense = 0;
-    public int MagicAttack = 0;
+    public int MagicAttack = 1;
     public int MagicDefense = 0;
     public int Speed = 1;
     //inventory;

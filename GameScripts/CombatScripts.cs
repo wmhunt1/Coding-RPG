@@ -9,7 +9,15 @@ public class CombatScripts
     }
     public int CalculateDamage(Character char1, Character char2)
     {
-        int damage = char1.Attack - char2.Defense;
+        int damage;
+        if (char1.Weapon.DamageType.Name == "Bludgeoning" || char1.Weapon.DamageType.Name == "Natural" || char1.Weapon.DamageType.Name == "Piercing" || char1.Weapon.DamageType.Name == "Slashing")
+        {
+             damage = char1.Attack - char2.Defense;
+        }
+        else
+        {
+             damage = char1.MagicAttack - char2.MagicDefense;
+        }
         if (char1.CheckImmunities(char2.Weapon.DamageType) == true)
         {
             Console.WriteLine("i");

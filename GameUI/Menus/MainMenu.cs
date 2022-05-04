@@ -7,6 +7,42 @@ public class MainMenu : Menu
     new public string Name = "Main Menu";
     Hero hero = new Hero("Hero");
     public GameMenu gameMenu = new GameMenu();
+    public Hero CharacterCreation(Hero hero)
+    {
+        string name = "";
+        Console.WriteLine("What is your name?");
+        name = Console.ReadLine();
+        if (name == "")
+        {
+            name = "Hero";
+        }
+        hero.Name = name;
+        Console.WriteLine("Choose Class");
+        Console.WriteLine("[1] Freelancer");
+        Console.WriteLine("[2] Rogue");
+        Console.WriteLine("[3] Wizard");
+        
+        int job = int.Parse(Console.ReadLine());
+        if (job == 1)
+        {
+           
+        }
+        else if (job == 2)
+        {
+            Rogue rogue = new Rogue();
+            rogue.ChooseJob(hero);
+        }
+        else if (job == 3)
+        {
+            Wizard wizard = new Wizard();
+            wizard.ChooseJob(hero);
+        }
+        else
+        {
+
+        }
+        return hero;
+    }
     public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
@@ -28,6 +64,7 @@ public class MainMenu : Menu
                     gameMenu.ShowMenu(hero);
                     break;
                 case "2":
+                    CharacterCreation(hero);
                     gameMenu.ShowMenu(hero);
                     break;
                 case "3":

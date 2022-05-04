@@ -12,7 +12,7 @@ public class CharacterSheetMenu : Menu
         while (!exitMenu)
         {
             Console.WriteLine($"---------- {Name}  ----------");
-            Console.WriteLine($"{hero.Name}");
+            Console.WriteLine($"{hero.Name} - {hero.Job.Name}");
             Console.WriteLine("[1] Stats");
             Console.WriteLine("[2] Equipment");
             Console.WriteLine("[3] Inventory");
