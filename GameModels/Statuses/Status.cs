@@ -8,4 +8,8 @@ public class Status
     {
         Name = name;
     }
+    public virtual Character StatusEffect(Character character)
+    {
+        return character;
+    }
 }

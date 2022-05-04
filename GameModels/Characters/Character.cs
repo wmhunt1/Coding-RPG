@@ -20,6 +20,8 @@ public class Character
     public int MagicAttack = 1;
     public int MagicDefense = 0;
     public int Speed = 1;
+    public Buff Buff = new Buff("No Buff");
+    public DeBuff DeBuff = new DeBuff("No Debuff");
     //inventory;
     public int Gold = 0;
     public List<Item>? Inventory = new List<Item>();
@@ -30,12 +32,12 @@ public class Character
     //skills
     public Skill Mining = new Skill("Mining", 1);
     public Skill Woodcutting = new Skill("Woodcutting", 1);
-    public List<Ability>? ActionBar;
-    public List<Spell>? Spellbook;
-    public List<Quest> Journal;
-    public List<Type>? Immunities;
-    public List<Type>? Resistances;
-    public List<Type>? Vulnerabilities;
+    public List<Ability>? ActionBar = new List<Ability>();
+    public List<Spell>? Spellbook = new List<Spell>();
+    public List<Quest> Journal = new List<Quest>();
+    public List<Type>? Immunities = new List<Type>();
+    public List<Type>? Resistances = new List<Type>();
+    public List<Type>? Vulnerabilities = new List<Type>();
     public Character(string name)
     {
         Name = name;
@@ -249,10 +251,8 @@ public class Character
     public bool CheckVulnerabilities(Type type)
     {
         bool vunerability = false;
-        Console.WriteLine("v1");
         if (Vulnerabilities != null)
         {
-            Console.WriteLine("v2");
             for (int i = 0; i < Vulnerabilities.Count; i++)
             {
                 if (type.Name == Vulnerabilities[i].Name)
@@ -262,6 +262,46 @@ public class Character
             }
         }
         return vunerability;
+    }
+        public int CalculateDamage(Character char1, Character char2, bool spell)
+    {
+        int damage;
+        if (char1.Weapon.DamageType.Name == "Bludgeoning" || char1.Weapon.DamageType.Name == "Natural" || char1.Weapon.DamageType.Name == "Piercing" || char1.Weapon.DamageType.Name == "Slashing" && spell == false)
+        {
+             damage = char1.Attack - char2.Defense;
+        }
+        else
+        {
+             damage = char1.MagicAttack - char2.MagicDefense;
+        }
+        if (char1.CheckImmunities(char2.Weapon.DamageType) == true)
+        {
+            damage = 0;
+            Console.WriteLine(damage);
+        }
+        if (char1.CheckResistances(char2.Weapon.DamageType) == true)
+        {
+            damage /= 2;
+            Console.WriteLine(damage);
+        }
+        if (char1.CheckVulnerabilities(char2.Weapon.DamageType) == true)
+        {
+            damage *= 2;
+            Console.WriteLine(damage);
+        }
+        if (damage <= 0)
+        {
+            Console.WriteLine("d");
+            damage = 0;
+        }
+        return damage;
+    }
+    public void BasicAttack(Character char1, Character char2)
+    {
+        
+        int damage = CalculateDamage(char1, char2, false);
+        Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, dealing {damage} damage");  
+        char2.DamageHP(damage);
     }
 
 }

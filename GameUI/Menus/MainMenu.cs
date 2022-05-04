@@ -36,6 +36,8 @@ public class MainMenu : Menu
         {
             Wizard wizard = new Wizard();
             wizard.ChooseJob(hero);
+            MagicMissile magicMissile = new MagicMissile();
+            magicMissile.LearnSpell(hero);
         }
         else
         {

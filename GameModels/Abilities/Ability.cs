@@ -10,4 +10,13 @@ public class Ability
         Name = name;
         StaminaCost = cost;
     }
+    public virtual void UseAbility(Character user, List<Character> Targets)
+    {
+
+    }
+    public Character GainAbility(Character character)
+    {
+        character.ActionBar?.Add(this);
+        return character;
+    }
 }

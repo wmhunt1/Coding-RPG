@@ -12,4 +12,13 @@ public class Spell
         SpellLevel = level;
         ManaCost = cost;
     }
+    public virtual void CastSpell(Character caster, List<Character> targets)
+    {
+
+    }
+      public Character LearnSpell(Character character)
+    {
+        character.Spellbook?.Add(this);
+        return character;
+    }
 }

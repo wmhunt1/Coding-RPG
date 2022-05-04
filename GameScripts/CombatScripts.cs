@@ -7,63 +7,31 @@ public class CombatScripts
     public CombatScripts()
     {
     }
-    public int CalculateDamage(Character char1, Character char2)
-    {
-        int damage;
-        if (char1.Weapon.DamageType.Name == "Bludgeoning" || char1.Weapon.DamageType.Name == "Natural" || char1.Weapon.DamageType.Name == "Piercing" || char1.Weapon.DamageType.Name == "Slashing")
-        {
-             damage = char1.Attack - char2.Defense;
-        }
-        else
-        {
-             damage = char1.MagicAttack - char2.MagicDefense;
-        }
-        if (char1.CheckImmunities(char2.Weapon.DamageType) == true)
-        {
-            Console.WriteLine("i");
-            damage = 0;
-            Console.WriteLine(damage);
-        }
-        if (char1.CheckResistances(char2.Weapon.DamageType) == true)
-        {
-            Console.WriteLine("r");
-            damage /= 2;
-            Console.WriteLine(damage);
-        }
-        if (char1.CheckVulnerabilities(char2.Weapon.DamageType) == true)
-        {
-            Console.WriteLine("v");
-            damage *= 2;
-            Console.WriteLine(damage);
-        }
-        if (damage <= 0)
-        {
-            Console.WriteLine("d");
-            damage = 0;
-        }
-        return damage;
-    }
-    public void Attack(Character char1, Character char2)
-    {
-        
-        int damage = CalculateDamage(char1, char2);
-        Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, dealing {damage} damage");  
-        char2.DamageHP(damage);
-    }
     public void CombatTurn(Character char1, Character char2)
     {
         if (char1.CurrentHP > 0)
         {
-            Attack(char1, char2);
+            char1.BasicAttack(char1, char2);
         } 
     }
-    public void CombatRound(Character char1, Character target, List<Character> enemies, bool skippedTurn)
+    public void CombatRound(Character char1, Character target, List<Character> enemies, bool skippedTurn, bool usedAbility, Ability ability, bool spellUsed, Spell spell)
     {
         if (char1.Speed >= target.Speed)
         {
-            if (skippedTurn == false)
+             if (skippedTurn == false)
             {
-                CombatTurn(char1, target);
+                if (usedAbility == true)
+                {
+                    ability.UseAbility(char1, enemies);
+                }
+                else if(spellUsed == true)
+                {
+                    spell.CastSpell(char1, enemies);
+                }
+                else
+                {
+                    CombatTurn(char1, target);
+                }
             }
             for (int i = 0; i < enemies.Count; i++)
             {
@@ -78,7 +46,14 @@ public class CombatScripts
             }
             if (skippedTurn == false)
             {
-                CombatTurn(char1, target);
+                 if (usedAbility == true)
+                {
+                    ability.UseAbility(char1, enemies);
+                }
+                else
+                {
+                    CombatTurn(char1, target);
+                }
             }
         }
         for (int i = 0; i < enemies.Count; i++)
@@ -94,7 +69,7 @@ public class CombatScripts
     {
         consumable.UseItem(character);
     }
-    public void RunCombat(Character char1, List<Character> enemies)
+    public async void RunCombat(Character char1, List<Character> enemies)
     {
         List<Character> rewards = new List<Character>();
         for (int i = 0; i < enemies.Count; i++)
@@ -105,16 +80,18 @@ public class CombatScripts
         while (char1.CurrentHP > 0 && enemies.Count > 0 && ranAway == false)
         {
             Console.WriteLine ("Fight!");
-            Console.WriteLine($"{char1.Name}: {char1.CurrentHP}/{char1.MaxHP}\nVS");
+            Console.WriteLine($"{char1.Name} - HP: {char1.CurrentHP}/{char1.MaxHP} MP: {char1.CurrentMP}/{char1.MaxMP} SP: {char1.CurrentSP}/{char1.MaxSP}\nVS");
             for (int i = 0; i < enemies.Count; i++)
             {
                 if (enemies[i].CurrentHP > 0)
                 {
-                    Console.WriteLine($"{enemies[i].Name}: {enemies[i].CurrentHP}/{enemies[i].MaxHP}");
+                    Console.WriteLine($"{enemies[i].Name} - HP: {enemies[i].CurrentHP}/{enemies[i].MaxHP}");
                 }
             }
             Console.WriteLine("[1] Attack");
-            Console.WriteLine("[2] Use Item");
+            Console.WriteLine("[2] Ability");
+            Console.WriteLine("[3] Use Spell");
+            Console.WriteLine("[4] Use Item");
             Console.WriteLine("[0] Run Away");
             string? userInput = Console.ReadLine();
             switch (userInput)
@@ -141,16 +118,78 @@ public class CombatScripts
                         else
                         {
                             //need input validation
-                            CombatRound(char1, enemies[target-1], enemies, false);
+                            CombatRound(char1, enemies[target-1], enemies, false, false, null, false, null);
                         }
                         
                     }
                     else
                     {
-                        CombatRound(char1, enemies[0], enemies, false);
+                        CombatRound(char1, enemies[0], enemies, false, false, null, false, null);
                     }                    
                     break;
                 case "2":
+                 if (char1.ActionBar?.Count > 0)
+                    {
+                        for (int i = 0; i < char1.ActionBar.Count; i++)
+                        {
+                            Console.WriteLine($"[{i+1}] {char1.ActionBar[i].Name}");
+                        }
+                        Console.WriteLine("[0] Back");
+                        int selection = int.Parse(Console.ReadLine());
+                        // need input validatioon
+                        if (selection == 0)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            if (char1.ActionBar[selection-1].StaminaCost > char1.CurrentSP)
+                            {
+                                Console.WriteLine("Not enought stamina");
+                            }
+                            else
+                            {
+                                CombatRound(char1, enemies[0], enemies, false, true, char1.ActionBar[selection-1], false, null);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("You don't have an abilities");
+                    }
+                    break;
+                    case "3":
+                 if (char1.Spellbook?.Count > 0)
+                    {
+                        for (int i = 0; i < char1.Spellbook.Count; i++)
+                        {
+                            Console.WriteLine($"[{i+1}] {char1.Spellbook[i].Name}");
+                        }
+                        Console.WriteLine("[0] Back");
+                        int selection = int.Parse(Console.ReadLine());
+                        // need input validatioon
+                        if (selection == 0)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            if (char1.Spellbook[selection-1].ManaCost > char1.CurrentMP)
+                            {
+                                Console.WriteLine("Not enought man");
+                            }
+                            else
+                            {
+                                CombatRound(char1, enemies[0], enemies, false, true, null, true, char1.Spellbook[selection-1]);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("You don't know any spells");
+                    }
+                    break;
+                case "4":
                     if (char1.Inventory?.Count > 0)
                     {
                         for (int i = 0; i < char1.Inventory.Count; i++)
@@ -168,7 +207,7 @@ public class CombatScripts
                         {
                             //need input validation
                             UseItem(char1.Inventory[selection-1], char1);
-                            CombatRound(char1, enemies[0], enemies, true);
+                            CombatRound(char1, enemies[0], enemies, true, false, null, false, null);
                         }
                     }
                     else
