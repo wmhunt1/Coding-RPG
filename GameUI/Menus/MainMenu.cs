@@ -54,6 +54,18 @@ public class MainMenu : Menu
         {
             
         }
+        Dog dog = new Dog("Dog");
+        Console.WriteLine("Name your dog");
+        string dogName = Console.ReadLine();
+        if (dogName == "")
+        {
+            dog.Name = "Dog";
+        }
+        else
+        {
+            dog.Name = dogName;
+        }
+        hero.AddToParty(dog);
         return hero;
     }
     public override void ShowMenu(Hero hero)

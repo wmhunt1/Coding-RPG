@@ -6,11 +6,8 @@ characters
     reputation and relationships
     bonuses/bonus calculation
     perks/feats on level up
-    increase stats on level up
-    allies (attack random enemy)
 combat
-    critical hits (inc by luck)
-    calculate rounds (includes how long buffs/debuffs last)
+    buffs and debuffs last x round
     debuffs and buffs reset at the end of combat
     variable amount of enemies
     enemy distance

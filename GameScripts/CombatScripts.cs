@@ -14,46 +14,62 @@ public class CombatScripts
             char1.BasicAttack(char1, char2);
         } 
     }
-    public void CombatRound(Character char1, Character target, List<Character> enemies, bool skippedTurn, bool usedAbility, Ability ability, bool spellUsed, Spell spell)
+    public void CombatRound(List<Character> allies, Character target, List<Character> enemies, bool skippedTurn, bool usedAbility, Ability ability, bool spellUsed, Spell spell)
     {
-        if (char1.Speed >= target.Speed)
+        if (allies[0].Speed >= target.Speed)
         {
              if (skippedTurn == false)
             {
                 if (usedAbility == true)
                 {
-                    ability.UseAbility(char1, enemies);
+                    ability.UseAbility(allies[0], enemies);
                 }
                 else if(spellUsed == true)
                 {
-                    spell.CastSpell(char1, enemies);
+                    spell.CastSpell(allies[0], enemies);
                 }
                 else
                 {
-                    CombatTurn(char1, target);
+                    CombatTurn(allies[0], target);
                 }
+            }
+            for (int i = 0; i < allies[0].Companions.Count; i++)
+            {
+                Random rnd = new Random();
+                int rndTarget = rnd.Next(1, enemies.Count);
+                CombatTurn(allies[0].Companions[i], enemies[rndTarget-1]);
             }
             for (int i = 0; i < enemies.Count; i++)
             {
-                CombatTurn(enemies[i], char1);
+                Random rnd = new Random();
+                int rndTarget = rnd.Next(1, allies.Count);
+                CombatTurn(enemies[i], allies[rndTarget-1]);
             }
         }
         else
         {
             for (int i = 0; i < enemies.Count; i++)
             {
-                CombatTurn(enemies[i], char1);
+                Random rnd = new Random();
+                int rndTarget = rnd.Next(1, allies.Count);
+                CombatTurn(enemies[i], allies[rndTarget-1]);
             }
             if (skippedTurn == false)
             {
                  if (usedAbility == true)
                 {
-                    ability.UseAbility(char1, enemies);
+                    ability.UseAbility(allies[0], enemies);
                 }
                 else
                 {
-                    CombatTurn(char1, target);
+                    CombatTurn(allies[0], target);
                 }
+            }
+            for (int i = 0; i < allies[0].Companions.Count; i++)
+            {
+                Random rnd = new Random();
+                int rndTarget = rnd.Next(1, enemies.Count);
+                CombatTurn(allies[0].Companions[i], enemies[rndTarget-1]);
             }
         }
         for (int i = 0; i < enemies.Count; i++)
@@ -72,15 +88,27 @@ public class CombatScripts
     public async void RunCombat(Character char1, List<Character> enemies)
     {
         List<Character> rewards = new List<Character>();
+        List<Character> allies = new List<Character>();
+        allies.Add(char1);
+        for (int i = 0; i < char1.Companions.Count; i++)
+        {
+            allies.Add(char1.Companions[i]);
+        }
         for (int i = 0; i < enemies.Count; i++)
         {
             rewards.Add(enemies[i]);
         }
         bool ranAway = false;
+        int round = 0;
         while (char1.CurrentHP > 0 && enemies.Count > 0 && ranAway == false)
         {
-            Console.WriteLine ("Fight!");
-            Console.WriteLine($"{char1.Name} - HP: {char1.CurrentHP}/{char1.MaxHP} MP: {char1.CurrentMP}/{char1.MaxMP} SP: {char1.CurrentSP}/{char1.MaxSP}\nVS");
+            round++;
+            Console.WriteLine ($"Fight! - Round: {round}");
+            for (int i = 0; i < allies.Count; i++)
+            {
+                Console.WriteLine($"{allies[i].Name} - HP: {allies[i].CurrentHP}/{allies[i].MaxHP} MP: {allies[i].CurrentMP}/{allies[i].MaxMP} SP: {allies[i].CurrentSP}/{allies[i].MaxSP}");
+            }
+            Console.WriteLine("VS");
             for (int i = 0; i < enemies.Count; i++)
             {
                 if (enemies[i].CurrentHP > 0)
@@ -118,13 +146,13 @@ public class CombatScripts
                         else
                         {
                             //need input validation
-                            CombatRound(char1, enemies[target-1], enemies, false, false, null, false, null);
+                            CombatRound(allies, enemies[target-1], enemies, false, false, null, false, null);
                         }
                         
                     }
                     else
                     {
-                        CombatRound(char1, enemies[0], enemies, false, false, null, false, null);
+                        CombatRound(allies, enemies[0], enemies, false, false, null, false, null);
                     }                    
                     break;
                 case "2":
@@ -149,7 +177,7 @@ public class CombatScripts
                             }
                             else
                             {
-                                CombatRound(char1, enemies[0], enemies, false, true, char1.ActionBar[selection-1], false, null);
+                                CombatRound(allies, enemies[0], enemies, false, true, char1.ActionBar[selection-1], false, null);
                             }
                         }
                     }
@@ -180,7 +208,7 @@ public class CombatScripts
                             }
                             else
                             {
-                                CombatRound(char1, enemies[0], enemies, false, true, null, true, char1.Spellbook[selection-1]);
+                                CombatRound(allies, enemies[0], enemies, false, true, null, true, char1.Spellbook[selection-1]);
                             }
                         }
                     }
@@ -207,7 +235,7 @@ public class CombatScripts
                         {
                             //need input validation
                             UseItem(char1.Inventory[selection-1], char1);
-                            CombatRound(char1, enemies[0], enemies, true, false, null, false, null);
+                            CombatRound(allies, enemies[0], enemies, true, false, null, false, null);
                         }
                     }
                     else

@@ -49,6 +49,10 @@ public class InnMenu : Menu
                         hero.RemoveGold(1);
                         Console.WriteLine("You rest for the night");
                         hero.FullRest();
+                        for (int i = 0; i < hero.Companions.Count; i++)
+                        {
+                            hero.Companions[i].FullRest();
+                        }
                     }
                     else
                     {

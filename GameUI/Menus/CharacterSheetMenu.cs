@@ -17,6 +17,7 @@ public class CharacterSheetMenu : Menu
             Console.WriteLine("[2] Equipment");
             Console.WriteLine("[3] Inventory");
             Console.WriteLine("[4] Journal");
+            Console.WriteLine("[5] Party");
             Console.WriteLine("[0] Close");
 
             string? UserInput = Console.ReadLine();
@@ -39,6 +40,11 @@ public class CharacterSheetMenu : Menu
                     break;
                 case "4":
                     hero.DisplayJournal();
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadLine();
+                    break;
+                case "5":
+                    hero.DisplayCompanions();
                     Console.WriteLine("Press any key to continue");
                     Console.ReadLine();
                     break;

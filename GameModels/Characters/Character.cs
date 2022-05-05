@@ -5,6 +5,7 @@ public class Character
     public string Name;
     public Race Race = new Humanoid();
     public Job Job = new Job("Freelancer");
+    public List<Character> Companions = new List<Character>();
     //stats
     public int Level = 1;
     public int CurrentXP = 0;
@@ -44,8 +45,7 @@ public class Character
     public Weapon Weapon = new Weapon("Unarmed", 0, 0);
     public Armor Armor = new Armor("Unarmored", 0, 0);
     //skills
-    public Skill Mining = new Skill("Mining", 1);
-    public Skill Woodcutting = new Skill("Woodcutting", 1);
+    public List<Skill> Skills = new List<Skill>();
     public List<Ability>? ActionBar = new List<Ability>();
     public List<Spell>? Spellbook = new List<Spell>();
     public List<Quest> Journal = new List<Quest>();
@@ -68,7 +68,8 @@ public class Character
     }
     public void DisplayStats()
     {
-        Console.WriteLine($"Level: {Level}\nEXP: {CurrentXP}/{MaxXP}\nHP: {CurrentHP}/{MaxHP}");
+        Console.WriteLine($"Level: {Level}\nEXP: {CurrentXP}/{MaxXP}\nHP: {CurrentHP}/{MaxHP} MP: {CurrentMP}/{MaxMP} SP: {CurrentSP}/{MaxSP}");
+        Console.WriteLine($"Stats\n STR: {Strength} AGL: {Agility} END: {Endurance}\nINT: {Intelligence} PER: {Perception} WIL:{WillPower}\nCHA: {Charisma} ATR: {Attractiveness} LCK: {Luck}");
     }
     public void DisplayEquipment()
     {
@@ -91,6 +92,14 @@ public class Character
             {
                 Console.WriteLine($"Name: {Journal[i].Name} - Description: {Journal[i].Description}");
             }
+        }
+    }
+    public void DisplayCompanions()
+    {
+          Console.WriteLine("Companions");
+        for (int i = 0; i < Companions.Count; i++)
+        {
+            Console.WriteLine($"Name: {Companions[i].Name} - Job: {Companions[i].Job.Name}");
         }
     }
     public Character CalculateStats()
@@ -346,6 +355,18 @@ public class Character
         Console.WriteLine($"{item.Name} removed from Inventory");
         return Inventory;
     }
+    public List<Character> AddToParty(Character character)
+    {
+        Companions.Add(character);
+        Console.WriteLine($"{character.Name} joins the your party");
+        return Companions;
+    }
+    public List<Character> RemoveFromParty(Character character)
+    {
+        Companions.Remove(character);
+        Console.WriteLine($"{character.Name} leaves your party");
+        return Companions;
+    }
     public bool CheckImmunities(Type type)
     {
         
@@ -406,7 +427,7 @@ public class Character
         }
         return vunerability;
     }
-        public int CalculateDamage(Character char1, Character char2, bool spell)
+    public int CalculateDamage(Character char1, Character char2, bool spell)
     {
         int damage;
         if (char1.Weapon.DamageType.Name == "Bludgeoning" || char1.Weapon.DamageType.Name == "Natural" || char1.Weapon.DamageType.Name == "Piercing" || char1.Weapon.DamageType.Name == "Slashing" && spell == false)
