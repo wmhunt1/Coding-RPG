@@ -17,6 +17,11 @@ public class PowerAttack : Ability
         }
         int target = int.Parse(Console.ReadLine());
         int damage = targets[target-1].CalculateDamage(user, targets[target-1], true);
+        bool crit = user.CheckforCriticalHit();
+        if (crit == true)
+        {
+            damage *= 2;
+        }
         Console.WriteLine($"{user.Name} Power Attacks {Name}");
         targets[target-1].DamageHP(damage+damage);
     }

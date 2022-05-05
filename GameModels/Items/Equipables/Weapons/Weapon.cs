@@ -14,7 +14,6 @@ public class Weapon : Equipable
     public override void EquipItem(Character character)
     {
         character.Weapon = this;
-        character.Attack = this.Damage;
         Console.WriteLine($"{this.Name} Equipped");
     }
 }

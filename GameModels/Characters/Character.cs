@@ -9,17 +9,31 @@ public class Character
     public int Level = 1;
     public int CurrentXP = 0;
     public int MaxXP = 50;
-    public int CurrentHP = 10;
-    public int MaxHP = 10;
+
+    //BaseStats
+    public int Strength = 10;
+    public int Agility = 10;
+    public int Endurance = 10;
+    public int Intelligence = 10;
+    public int Perception = 10;
+    public int WillPower = 10;
+    public int Charisma = 10;
+    public int Attractiveness = 10;
+    public int Luck = 10;
+
+    //Derived Stats
+    public int CurrentHP = 0;
+    public int MaxHP = 0;
     public int CurrentMP = 0;
     public int MaxMP = 0;
     public int CurrentSP = 0;
     public int MaxSP = 0;
     public int Attack = 0;
     public int Defense = 0;
-    public int MagicAttack = 1;
+    public int MagicAttack = 0;
     public int MagicDefense = 0;
-    public int Speed = 1;
+    public int Speed = 0;
+    public int CritChance = 0;
     public Buff Buff = new Buff("No Buff");
     public DeBuff DeBuff = new DeBuff("No Debuff");
     //inventory;
@@ -50,6 +64,7 @@ public class Character
         Journal.Add(ratQuest);
         SkeletonQuest skeletonQuest = new SkeletonQuest();
         Journal.Add(skeletonQuest);
+        CalculateStats();
     }
     public void DisplayStats()
     {
@@ -77,6 +92,67 @@ public class Character
                 Console.WriteLine($"Name: {Journal[i].Name} - Description: {Journal[i].Description}");
             }
         }
+    }
+    public Character CalculateStats()
+    {
+        CurrentHP = Endurance*Level;
+        MaxHP = Endurance*Level;
+        CurrentMP = Intelligence*Level;
+        MaxMP = Intelligence*Level;
+        CurrentSP = Endurance*Level;
+        CurrentSP = Endurance*Level;
+        Attack = (Strength + Agility)/5;
+        Defense = (Endurance + Agility)/5;
+        MagicAttack = Intelligence/5;
+        MagicDefense = WillPower/5;
+        Speed = Agility/5;
+        CritChance = Luck/5;
+        return this;
+    }
+    public int IncreaseSTR(int inc)
+    {   
+        Strength += inc;
+        return Strength;
+    }
+    public int IncreaseAGL(int inc)
+    {   
+        Agility += inc;
+        return Agility;
+    }
+    public int IncreaseEND(int inc)
+    {   
+        Endurance += inc;
+        return Endurance;
+    }
+    public int IncreaseINT(int inc)
+    {   
+        Intelligence += inc;
+        return Intelligence;
+    }
+    public int IncreasePER(int inc)
+    {   
+        Perception += inc;
+        return Perception;
+    }
+    public int IncreaseWIL(int inc)
+    {   
+        WillPower += inc;
+        return WillPower;
+    }
+    public int IncreaseCHA(int inc)
+    {   
+        Charisma += inc;
+        return Charisma;
+    }
+    public int IncreaseATR(int inc)
+    {   
+        Attractiveness += inc;
+        return Attractiveness;
+    }
+    public int IncreaseLCK(int inc)
+    {   
+        Luck += inc;
+        return Luck;
     }
     public int GainHP(int hp)
     {
@@ -164,10 +240,63 @@ public class Character
     {
         Level++;
         MaxXP += 50*Level;
-        MaxHP += 10;
-        MaxMP += 10;
-        MaxSP += 10;
         Console.WriteLine($"{Name} reaches level {Level}");
+        Console.WriteLine("Choose Stat Increases");
+        int inc = 5;
+        while (inc > 0)
+        {
+            Console.WriteLine($"[1] STR - {Strength}");
+            Console.WriteLine($"[2] AGL - {Agility}");
+            Console.WriteLine($"[3] END - {Endurance}");
+            Console.WriteLine($"[4] INT - {Intelligence}");
+            Console.WriteLine($"[5] PER - {Perception}");
+            Console.WriteLine($"[6] WIL - {WillPower}");
+            Console.WriteLine($"[7] CHA - {Charisma}");
+            Console.WriteLine($"[8] ATR - {Attractiveness}");
+            Console.WriteLine($"[9] LCK - {Luck}");
+            string selection = Console.ReadLine();
+            switch (selection)
+            {
+                case "1":
+                    inc--;
+                    IncreaseSTR(1);
+                    break;
+                case "2":
+                    inc--;
+                    IncreaseAGL(1);
+                    break;
+                case "3":
+                    inc--;
+                    IncreaseEND(1);
+                    break;
+                case "4":
+                    inc--;
+                    IncreaseINT(1);
+                    break;
+                case "5":
+                    inc--;
+                    IncreasePER(1);
+                    break;
+                case "6":
+                    inc--;
+                    IncreaseWIL(1);
+                    break;
+                case "7":
+                    inc--;
+                    IncreaseCHA(1);
+                    break;
+                case "8":
+                    inc--;
+                    IncreaseATR(1);
+                    break;
+                case "9":
+                    IncreaseLCK(1);
+                    break;
+                default:
+                    break;
+            }
+        }
+        CalculateStats();
         FullRest();
         return Level;
     }
@@ -233,6 +362,20 @@ public class Character
         }
         return immunity;
     }
+    public bool CheckforCriticalHit()
+    {
+        Random rnd = new Random();
+        int crit = rnd.Next(1, 20);
+        if (crit + CritChance >= 20)
+        {
+            Console.WriteLine("Critical Hit!");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     public bool CheckResistances(Type type)
     {
         bool resistance = false;
@@ -268,7 +411,7 @@ public class Character
         int damage;
         if (char1.Weapon.DamageType.Name == "Bludgeoning" || char1.Weapon.DamageType.Name == "Natural" || char1.Weapon.DamageType.Name == "Piercing" || char1.Weapon.DamageType.Name == "Slashing" && spell == false)
         {
-             damage = char1.Attack - char2.Defense;
+             damage = char1.Attack+char1.Weapon.Damage - char2.Defense+char2.Armor.Protection;
         }
         else
         {
@@ -300,7 +443,12 @@ public class Character
     {
         
         int damage = CalculateDamage(char1, char2, false);
-        Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, dealing {damage} damage");  
+        Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, dealing {damage} damage");
+        bool crit = char1.CheckforCriticalHit();
+        if (crit == true)
+        {
+            damage *= 2;
+        }
         char2.DamageHP(damage);
     }
 

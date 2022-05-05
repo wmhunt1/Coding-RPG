@@ -16,8 +16,14 @@ public class SneakAttack : Ability
             Console.WriteLine($"[{i+1}] {targets[i].Name}");   
         }
         int target = int.Parse(Console.ReadLine());
+        
         int damage = targets[target-1].CalculateDamage(user, targets[target-1], true);
-        Console.WriteLine($"{user.Name} Power Attacks {Name}");
-        targets[target-1].DamageHP(damage+user.Attack);
+        bool crit = user.CheckforCriticalHit();
+        if (crit == true)
+        {
+            damage *= 2;
+        }
+        Console.WriteLine($"{user.Name} Sneak Attacks {Name}, ignoring their armor");
+        targets[target-1].DamageHP(damage+targets[target-1].Armor.Protection);
     }
 }
