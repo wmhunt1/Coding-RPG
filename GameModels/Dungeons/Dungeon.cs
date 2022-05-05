@@ -10,4 +10,9 @@ public class Dungeon
     {
         Name = name;
     }
+    public virtual List<Character> GenerateEncounter()
+    {
+        List<Character> newEncounter = new List<Character>();
+        return newEncounter;
+    }
 }

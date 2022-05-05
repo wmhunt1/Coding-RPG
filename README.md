@@ -10,6 +10,7 @@ combat
     buffs and debuffs last x round
     debuffs and buffs reset at the end of combat
     enemy distance
+    enemies use spells and abilities
 dungeons
     puzzles
     dungeon delving

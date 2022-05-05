@@ -42,8 +42,8 @@ public class CombatScripts
             for (int i = 0; i < enemies.Count; i++)
             {
                 Random rnd = new Random();
-                int rndTarget = rnd.Next(1, allies.Count);
-                CombatTurn(enemies[i], allies[rndTarget-1]);
+                int rndTarget = rnd.Next(0, allies.Count);
+                CombatTurn(enemies[i], allies[rndTarget]);
             }
         }
         else
@@ -51,8 +51,8 @@ public class CombatScripts
             for (int i = 0; i < enemies.Count; i++)
             {
                 Random rnd = new Random();
-                int rndTarget = rnd.Next(1, allies.Count);
-                CombatTurn(enemies[i], allies[rndTarget-1]);
+                int rndTarget = rnd.Next(0, allies.Count);
+                CombatTurn(enemies[i], allies[0]);
             }
             if (skippedTurn == false)
             {
@@ -98,9 +98,10 @@ public class CombatScripts
         {
             rewards.Add(enemies[i]);
         }
+        bool combat = true;
         bool ranAway = false;
         int round = 0;
-        while (char1.CurrentHP > 0 && enemies.Count > 0 && ranAway == false)
+        while (char1.CurrentHP > 0 && enemies.Count > 0 && ranAway == false && combat == true)
         {
             round++;
             Console.WriteLine ($"Fight! - Round: {round}");
@@ -115,6 +116,10 @@ public class CombatScripts
                 {
                     Console.WriteLine($"{enemies[i].Name} - HP: {enemies[i].CurrentHP}/{enemies[i].MaxHP}");
                 }
+            }
+            if (enemies.Count == 0)
+            {
+                combat = false;
             }
             Console.WriteLine("[1] Attack");
             Console.WriteLine("[2] Ability");

@@ -109,7 +109,7 @@ public class Character
         CurrentMP = Intelligence*Level;
         MaxMP = Intelligence*Level;
         CurrentSP = Endurance*Level;
-        CurrentSP = Endurance*Level;
+        MaxSP = MaxSP*Level;
         Attack = (Strength + Agility)/5;
         Defense = (Endurance + Agility)/5;
         MagicAttack = Intelligence/5;
@@ -314,6 +314,10 @@ public class Character
         if (CurrentXP >= MaxXP)
         {
             LevelUP();
+            for (int i = 0; i < Companions.Count; i++)
+            {
+                Companions[i].LevelUP();
+            }
         }
     }
     public int GainXP(int xp)

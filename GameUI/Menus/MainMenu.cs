@@ -65,6 +65,7 @@ public class MainMenu : Menu
         {
             dog.Name = dogName;
         }
+        dog.CalculateStats();
         hero.AddToParty(dog);
         return hero;
     }

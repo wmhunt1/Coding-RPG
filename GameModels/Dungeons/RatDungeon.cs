@@ -8,4 +8,15 @@ public class RatDungeon : Dungeon
         Name = name;
         Encounter = new Rat($"Cellar Rat");
     }
+    public override List<Character> GenerateEncounter()
+    {
+        Random rnd = new Random();
+        int random = rnd.Next(2, 5);
+        List<Character> encounterEnemies = new List<Character>();
+        for (int i = 0; i < random; i++)
+        {
+            encounterEnemies.Add(new Rat("Cellar Rat"));
+        }
+        return encounterEnemies;
+    }
 }

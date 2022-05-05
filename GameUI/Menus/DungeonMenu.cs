@@ -37,14 +37,8 @@ public class DungeonMenu : Menu
                 case "2":
                     if (hero.CurrentHP > 0)
                     {
-                        Dungeon.Encounter.GainHP(Dungeon.Encounter.MaxHP);
-                        Random rnd = new Random();
-                        int random = rnd.Next(2, 5);
-                        List<Character> encounterEnemies = new List<Character>();
-                        for (int i = 0; i < random; i++)
-                        {
-                            encounterEnemies.Add(Dungeon.Encounter);
-                        }
+                     
+                        List<Character> encounterEnemies = Dungeon.GenerateEncounter();
                         CombatScripts dungeonCombat = new CombatScripts();
                         dungeonCombat.RunCombat(hero, encounterEnemies);
                     }

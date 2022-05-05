@@ -9,4 +9,15 @@ public class BanditDungeon : Dungeon
         Encounter = new Bandit("Forest Bandit");
         Boss = new List<Character>() {new BanditBoss("Forest Bandit Boss")};
     }
+    public override List<Character> GenerateEncounter()
+    {
+        Random rnd = new Random();
+        int random = rnd.Next(2, 5);
+        List<Character> encounterEnemies = new List<Character>();
+        for (int i = 0; i < random; i++)
+        {
+            encounterEnemies.Add(new Bandit("Forest Bandit"));
+        }
+        return encounterEnemies;
+    }
 }

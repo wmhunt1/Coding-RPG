@@ -5,12 +5,11 @@ public class Rat : Character
     {
         Name = name;
         Race = new Beast();
-        CurrentHP = 2;
-        MaxHP = 2;
         Weapon = new Bite();
-        Attack = Weapon.Damage;
-        Defense = Armor.Protection;
+        Strength = 10;
+        Endurance = 5;
         CurrentXP = 5;
         Gold = 1;
+        CalculateStats();
     }
 }

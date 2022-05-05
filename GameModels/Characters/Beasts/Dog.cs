@@ -7,5 +7,6 @@ public class Dog : Character
         Race = new Beast();
         Weapon = new Bite();
         Job = new Pet();
+        CalculateStats();
     }
 }
