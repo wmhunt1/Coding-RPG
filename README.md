@@ -17,7 +17,6 @@ dungeons
 factions
     members, reputation, rank
 items
-    stack item by quantity
     more slots and item types
     gauntlets/boots etc that stack
     more types of weapons and armor
@@ -31,15 +30,12 @@ menus
     object more for towns/inns
 quests
     lumbermill quest
-    need parameters for quest success
-    dungeon, collection, and slaying quests
+    collection quests
 spells
     healing spell
+    buff spells
     debuff spells
 scripts
-    seperate attack/accuracy and damage stats?
-    chance to hit?
-    combat multiple allies?
 skills
     fishing, cooking, blacksmithing, weapon and attack skills
 statuses

@@ -12,7 +12,7 @@ public class HealthPotion : Potion
     }
     public override void UseItem(Character character)
     {
-        Console.WriteLine($"{character.Name} drinks a potion, restoring {HealingAmount}");
+        Console.WriteLine($"{character.Name} drinks a potion, restoring {HealingAmount} HP");
         character.GainHP(HealingAmount);
         character.RemoveFromInventory(this);
     }

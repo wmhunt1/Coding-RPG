@@ -6,6 +6,8 @@ public class RatQuest : Quest
     public RatQuest(string name = "Rat Quest"):base(name)
     {
         Name = name;
-        Description = "Kill Rats in the Inn Cellar";
+        QuestObjective = 3;
+        Description = $"Kill the rats in the inn cellar";
+        QuestTarget = "Cellar Rat";
     }
 }

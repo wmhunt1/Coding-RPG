@@ -41,11 +41,8 @@ public class TownMenu : Menu
                     blacksmithMenu.ShowMenu(hero);
                     break;
                 case "4":
-                    Console.WriteLine("Getting Potion from store");
-                    HealthPotion healthPotion = new HealthPotion("Health Potion", 5, 5);
-                    hero.AddToInventory(healthPotion);
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadLine();
+                    StoreMenu store = new StoreMenu("General Store");
+                    store.ShowMenu(hero);
                     break;
                 case "5":
                     Console.WriteLine("Mayor's House");
@@ -56,9 +53,17 @@ public class TownMenu : Menu
                         Console.WriteLine("Press any key to continue");
                         Console.ReadLine();
                     }
-                    else if(hero.Journal[0].QuestState == 1)
+                    else if(hero.Journal[0].QuestState == 1 && hero.Journal[0].QuestObjectiveProgess < hero.Journal[0].QuestObjective)
                     {
                         Console.WriteLine("Please kill those bandits");
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                    }
+                    else if (hero.Journal[0].QuestObjective <= hero.Journal[0].QuestObjectiveProgess && hero.Journal[0].QuestState < 100)
+                    {
+                        Console.WriteLine("You killed the bandits. Here's some gold");
+                        hero.AddGold(100);
+                        hero.Journal[2].QuestState = 100;
                         Console.WriteLine("Press any key to continue");
                         Console.ReadLine();
                     }
@@ -78,9 +83,17 @@ public class TownMenu : Menu
                         Console.WriteLine("Press any key to continue");
                         Console.ReadLine();
                     }
-                    else if(hero.Journal[3].QuestState == 1)
+                    else if(hero.Journal[3].QuestState == 1 && hero.Journal[3].QuestObjectiveProgess < hero.Journal[3].QuestObjective)
                     {
                         Console.WriteLine("Please kill those skeletons");
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                    }
+                    else if (hero.Journal[3].QuestObjective <= hero.Journal[3].QuestObjectiveProgess && hero.Journal[3].QuestState < 100)
+                    {
+                        Console.WriteLine("You killed the skeletons. Here's some gold");
+                        hero.AddGold(100);
+                        hero.Journal[2].QuestState = 50;
                         Console.WriteLine("Press any key to continue");
                         Console.ReadLine();
                     }

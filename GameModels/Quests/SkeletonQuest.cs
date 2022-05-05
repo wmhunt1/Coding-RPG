@@ -1,11 +1,13 @@
 using System;
 namespace GameModels;
 
-public class SkeletonQuest : Quest
+public class SkeletonQuest : DungeonQuest
 {
     public SkeletonQuest(string name = "Skeleton Quest"):base(name)
     {
         Name = name;
-        Description = "Kill Skeletons in the Town Graveyard";
+        QuestObjective = 5;
+        Description = $"Kill skeletons in the graveyard";
+        QuestTarget = "Graveyard Skeleton";
     }
 }

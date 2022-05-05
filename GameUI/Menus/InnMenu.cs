@@ -69,9 +69,17 @@ public class InnMenu : Menu
                         Console.WriteLine("Press any key to continue");
                         Console.ReadLine();
                     }
-                    else if (hero.Journal[2].QuestState == 1)
+                    else if (hero.Journal[2].QuestState == 1 && hero.Journal[2].QuestObjectiveProgess < hero.Journal[2].QuestObjective)
                     {
                         Console.WriteLine("Well get going");
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                    }
+                    else if (hero.Journal[2].QuestObjective <= hero.Journal[2].QuestObjectiveProgess && hero.Journal[2].QuestState < 100)
+                    {
+                        Console.WriteLine("You killed the rats. Here's some gold");
+                        hero.AddGold(25);
+                        hero.Journal[2].QuestState = 100;
                         Console.WriteLine("Press any key to continue");
                         Console.ReadLine();
                     }

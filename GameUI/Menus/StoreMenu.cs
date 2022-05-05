@@ -3,10 +3,11 @@ using GameModels;
 using GameScripts;
 
 namespace GameUI;
-public class BlacksmithMenu : StoreMenu
+public class StoreMenu : Menu
 {
-    ShoppingScripts blackSmith = new ShoppingScripts();
-    public BlacksmithMenu(string name = "Blacksmith"):base(name)
+    new public string Name;
+    ShoppingScripts store = new ShoppingScripts();
+    public StoreMenu(string name)
     {
         Name = name;
     }
@@ -18,9 +19,8 @@ public class BlacksmithMenu : StoreMenu
             Console.WriteLine("---------- Coding RPG ----------");
             Console.WriteLine($"---------- {Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
-            Console.WriteLine("[2] Buy Weapons and Armor");
-            Console.WriteLine("[3] Talk to Blacksmith");
-            Console.WriteLine("[0] Leave Blacksmith");
+            Console.WriteLine("[2] Shop");
+            Console.WriteLine($"[0] Leave {Name}");
             string? UserInput = Console.ReadLine();
             switch (UserInput)
             {
@@ -29,25 +29,15 @@ public class BlacksmithMenu : StoreMenu
                     characterSheet.ShowMenu(hero!);
                     break;
                 case "2":
-                    Console.WriteLine("Blacksmith Inventory");
-                    Console.WriteLine("[1] Buy Dagger: 5 GP");
-                    Console.WriteLine("[2] Buy Sword : 10 GP");
-                    Console.WriteLine("[3] Leather Vest: 5 GP");
+                    Console.WriteLine($"{Name} Inventory");
+                    Console.WriteLine("[1] Buy Potion: 10 GP");
                     Console.WriteLine("[0] Go Back");
                     string? BuyingInput = Console.ReadLine();
                     switch (BuyingInput)
                     {
                         case "1":
-                            Dagger dagger = new Dagger();
-                            blackSmith.BuyEquipment(hero!, dagger);
-                            break;
-                        case "2":
-                            Sword sword = new Sword();
-                            blackSmith.BuyEquipment(hero!, sword);
-                            break;
-                        case "3":
-                            LeatherVest leatherVest = new LeatherVest();
-                            blackSmith.BuyEquipment(hero!, leatherVest);
+                            HealthPotion healthPotion = new HealthPotion("Health Potion", 5, 10);
+                            store.BuyItem(hero!, healthPotion);
                             break;
                         case "0":
                             break;
@@ -56,24 +46,16 @@ public class BlacksmithMenu : StoreMenu
                     }
                     break;
                 case "3":
-                    if (hero!.Journal?[1].QuestState == 0 && hero.Journal[1] != null)
+                    if (hero!.Journal[1].QuestState == 0 && hero.Journal[1] != null)
                     {
                         Console.WriteLine("The local mines have overrun by goblins. Go clear them out?");
                         hero.Journal[1].QuestState += 1;
                         Console.WriteLine("Press any key to continue");
                         Console.ReadLine();
                     }
-                    else if (hero?.Journal?[1].QuestState == 1 && hero.Journal[1].QuestObjectiveProgess < hero.Journal[1].QuestObjective)
+                    else if (hero?.Journal?[1].QuestState == 1)
                     {
                         Console.WriteLine("Please kill those goblins");
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
-                    }
-                    else if (hero!.Journal?[1].QuestObjective <= hero.Journal?[1].QuestObjectiveProgess && hero.Journal?[1].QuestState < 100)
-                    {
-                        Console.WriteLine("You killed the goblins. Here's some gold");
-                        hero.AddGold(100);
-                        hero.Journal[2].QuestState = 75;
                         Console.WriteLine("Press any key to continue");
                         Console.ReadLine();
                     }

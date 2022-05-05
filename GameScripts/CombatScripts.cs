@@ -266,6 +266,13 @@ public class CombatScripts
                     Console.WriteLine($"{char1.Name} gains {rewards[i].CurrentXP} XP and {rewards[i].Gold} Gold");
                     char1.AddGold(rewards[i].Gold);
                     char1.GainXP(rewards[i].CurrentXP);
+                    for (int j = 0; j < char1.Journal.Count; j++)
+                    {
+                        if (rewards[i].Name == char1.Journal[j].QuestTarget)
+                        {
+                            char1.Journal[j].TrackQuestProgress();
+                        }
+                    }
                 }
               
             }

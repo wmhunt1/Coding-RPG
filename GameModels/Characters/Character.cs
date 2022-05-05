@@ -35,8 +35,8 @@ public class Character
     public int MagicDefense = 0;
     public int Speed = 0;
     public int CritChance = 0;
-    public Buff Buff = new Buff("No Buff");
-    public DeBuff DeBuff = new DeBuff("No Debuff");
+    public List<Buff> Buffs = new List<Buff>();
+    public List<DeBuff> DeBuff = new List<DeBuff>();
     //inventory;
     public int Gold = 0;
     public List<Item>? Inventory = new List<Item>();
@@ -80,7 +80,7 @@ public class Character
         Console.WriteLine($"Inventory\nGold: {Gold}");
         for (int i = 0; i < Inventory.Count; i++)
         {
-            Console.WriteLine($"{Inventory[i].Name}");
+            Console.WriteLine($"{Inventory[i].Name} X {Inventory[i].Quantity}");
         }
     }
     public void DisplayJournal()
@@ -88,9 +88,10 @@ public class Character
         Console.WriteLine("Journal");
         for (int i = 0; i < Journal.Count; i++)
         {
-            if (Journal[i].QuestState > 0)
+            if (Journal[i].QuestState > 0 || Journal[i].QuestState == 100)
             {
                 Console.WriteLine($"Name: {Journal[i].Name} - Description: {Journal[i].Description}");
+                Console.WriteLine($"Name: {Journal[i].QuestTarget}: {Journal[i].QuestObjectiveProgess}/{Journal[i].QuestObjective}");
             }
         }
     }
@@ -349,13 +350,29 @@ public class Character
     }
     public List<Item> AddToInventory(Item item)
     {
-        Inventory.Add(item);
+        bool present = false;
+        for (int i = 0; i < Inventory.Count; i++)
+        {
+            if (Inventory[i].Name == item.Name)
+            {
+                present = true;
+                Inventory[i].Quantity++;
+            }
+        }
+        if (present == false)
+        {
+            Inventory.Add(item);
+        }
         Console.WriteLine($"{item.Name} added to Inventory");
         return Inventory;
     }
     public List<Item> RemoveFromInventory(Item item)
     {
-        Inventory.Remove(item);
+        item.Quantity--;
+        if (item.Quantity == 0)
+        {
+            Inventory.Remove(item);
+        }
         Console.WriteLine($"{item.Name} removed from Inventory");
         return Inventory;
     }
@@ -468,13 +485,21 @@ public class Character
     {
         
         int damage = CalculateDamage(char1, char2, false);
-        Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, dealing {damage} damage");
-        bool crit = char1.CheckforCriticalHit();
-        if (crit == true)
+        if (damage > 0)
         {
-            damage *= 2;
+            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, dealing {damage} damage");
+            bool crit = char1.CheckforCriticalHit();
+            if (crit == true)
+            {
+                damage *= 2;
+            }
+            char2.DamageHP(damage);
         }
-        char2.DamageHP(damage);
+        else
+        {
+            Console.WriteLine($"{char1.Name} misses {char2.Name}");
+        }
+       
     }
 
 }
