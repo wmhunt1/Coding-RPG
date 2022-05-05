@@ -9,7 +9,6 @@ characters
 combat
     buffs and debuffs last x round
     debuffs and buffs reset at the end of combat
-    variable amount of enemies
     enemy distance
 dungeons
     puzzles

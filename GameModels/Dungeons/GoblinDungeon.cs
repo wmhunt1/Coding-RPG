@@ -6,7 +6,7 @@ public class GoblinDungeon : Dungeon
     public GoblinDungeon(string name = "Dwarven Mine"):base(name)
     {
         Name = name;
-        Encounter = new List<Character>() {new Goblin("Goblin")};
+        Encounter = new Goblin("Goblin");
         Boss = new List<Character>() {new GoblinBoss("Goblin Boss")};
     }
 }

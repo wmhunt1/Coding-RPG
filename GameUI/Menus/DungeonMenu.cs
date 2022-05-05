@@ -12,7 +12,7 @@ public class DungeonMenu : Menu
         Dungeon = dungeon;
         Exit = exit;
     }
-    public override void ShowMenu(Hero hero)
+    public override async void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
         while (!exitMenu)
@@ -20,7 +20,7 @@ public class DungeonMenu : Menu
             Console.WriteLine("---------- Coding RPG ----------");
             Console.WriteLine($"---------- {Dungeon.Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
-            Console.WriteLine($"[2] Fight {Dungeon.Encounter[0].Name}s");
+            Console.WriteLine($"[2] Fight {Dungeon.Encounter.Name}s");
             if (Dungeon.Boss != null)
             {
                 Console.WriteLine($"[3] Fight {Dungeon.Boss?[0].Name} (Dungeon Boss)");
@@ -37,12 +37,16 @@ public class DungeonMenu : Menu
                 case "2":
                     if (hero.CurrentHP > 0)
                     {
-                        for (int i = 0; i < Dungeon.Encounter.Count; i++)
+                        Dungeon.Encounter.GainHP(Dungeon.Encounter.MaxHP);
+                        Random rnd = new Random();
+                        int random = rnd.Next(2, 5);
+                        List<Character> encounterEnemies = new List<Character>();
+                        for (int i = 0; i < random; i++)
                         {
-                            Dungeon.Encounter[i].GainHP(Dungeon.Encounter[i].MaxHP);
+                            encounterEnemies.Add(Dungeon.Encounter);
                         }
                         CombatScripts dungeonCombat = new CombatScripts();
-                        dungeonCombat.RunCombat(hero, Dungeon.Encounter);
+                        dungeonCombat.RunCombat(hero, encounterEnemies);
                     }
                     else
                     {
@@ -52,9 +56,9 @@ public class DungeonMenu : Menu
                 case "3":
                     if (Dungeon.Boss != null)
                     {
-                         for (int i = 0; i < Dungeon.Boss.Count; i++)
+                        for (int i = 0; i < Dungeon.Boss.Count; i++)
                         {
-                            Dungeon.Encounter[i].GainHP(Dungeon.Encounter[i].MaxHP);
+                            Dungeon.Boss[i].GainHP(Dungeon.Boss[i].MaxHP);
                         }
                         CombatScripts bossCombat = new CombatScripts();
                         bossCombat.RunCombat(hero, Dungeon.Boss);
