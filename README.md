@@ -19,8 +19,8 @@ encounters
 factions
     members, reputation, rank
 items
-    off hand and weapon types
-    ranged weapons
+    when 2H is equiped prevent offhand
+    equip and unequip effect
 jobs
     remove jobs and just learn spells or abilities es/whatever
 locations
