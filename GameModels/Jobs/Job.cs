@@ -5,7 +5,7 @@ public class Job
 {
     public string Name;
     public Weapon Weapon = new Club();
-    public Armor Armor = new ClothTunic();
+    public Torso Torso = new ClothTunic();
     public Job(string name)
     {
         Name = name;
@@ -14,7 +14,7 @@ public class Job
     {
         character.Job = this;
         character.Weapon = Weapon;
-        character.Armor = Armor;
+        character.Torso = Torso;
         return character;
 
     }

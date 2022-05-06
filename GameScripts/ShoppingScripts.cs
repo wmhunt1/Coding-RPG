@@ -39,19 +39,43 @@ public class ShoppingScripts
         {
             hero.RemoveGold(item.Cost);
             Console.WriteLine($"You buy a new {item.Name}");
-            item.EquipItem(hero);
-            if (item is Accessory)
+            if (item is Neck)
             {
-                SellEquipment(hero, hero.Accessory);
+                SellEquipment(hero, hero.Neck);
             }
-            if (item is Armor)
+            if (item is Ring)
             {
-                SellEquipment(hero, hero.Armor);
+                SellEquipment(hero, hero.Ring);
+            }
+            if (item is Head)
+            {
+                SellEquipment(hero, hero.Head);
+            }
+            if (item is Torso)
+            {
+                SellEquipment(hero, hero.Torso);
+            }
+            if (item is Legs)
+            {
+                SellEquipment(hero, hero.Legs);
+            }
+            if (item is Hands)
+            {
+                SellEquipment(hero, hero.Hands);
+            }
+            if (item is Feet)
+            {
+                SellEquipment(hero, hero.Feet);
+            }
+            if (item is Back)
+            {
+                SellEquipment(hero, hero.Back);
             }
             if (item is Weapon)
             {
                 SellEquipment(hero, hero.Weapon);
             }
+            item.EquipItem(hero);
         }
         else
         {
@@ -78,7 +102,7 @@ public class ShoppingScripts
             Console.ReadLine();
         }
     }
-      public void BuyFromShop(Character hero, List<Item> inventory)
+    public void BuyFromShop(Character hero, List<Item> inventory)
     {
         for (int i = 0; i < inventory.Count; i++)
         {

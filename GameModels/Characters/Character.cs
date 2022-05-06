@@ -41,9 +41,17 @@ public class Character
     public int Gold = 0;
     public List<Item>? Inventory = new List<Item>();
     //equipment
-    public Accessory Accessory = new Accessory("None", 0);
+    public Neck Neck = new Neck("None", 0);
+    public Ring Ring = new Ring("None", 0);
+
     public Weapon Weapon = new Weapon("Unarmed", 0, 0);
-    public Armor Armor = new Armor("Unarmored", 0, 0);
+    //armor
+    public Head Head = new Head("None", 0 , 0);
+    public Torso Torso = new Torso("None", 0, 0);
+    public Legs Legs = new Legs("None", 0, 0);
+    public Hands Hands = new Hands("None", 0, 0);
+    public Feet Feet = new Feet("None", 0, 0);
+    public Back Back = new Back("None", 0, 0);
     //skills
     public List<Skill> Skills = new List<Skill>();
     public List<Ability>? ActionBar = new List<Ability>();
@@ -73,7 +81,7 @@ public class Character
     }
     public void DisplayEquipment()
     {
-        Console.WriteLine($"Equipment\nAccessory: {Accessory.Name}\nWeapon: {Weapon.Name} ({Attack} Damage)\nArmor: {Armor.Name} ({Defense} Protection)");
+        Console.WriteLine($"Equipment\nWeapon: {Weapon.Name} ({Attack} Damage)\nArmor: {Torso.Name} ({Defense} Protection)");
     }
     public void DisplayInventory()
     {
@@ -453,7 +461,7 @@ public class Character
         int damage;
         if (char1.Weapon.DamageType.Name == "Bludgeoning" || char1.Weapon.DamageType.Name == "Natural" || char1.Weapon.DamageType.Name == "Piercing" || char1.Weapon.DamageType.Name == "Slashing" && spell == false)
         {
-             damage = char1.Attack+char1.Weapon.Damage - char2.Defense+char2.Armor.Protection;
+             damage = char1.Attack+char1.Weapon.Damage - char2.Defense+char2.Torso.Protection;
         }
         else
         {

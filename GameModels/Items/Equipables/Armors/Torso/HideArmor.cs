@@ -1,7 +1,7 @@
 using System;
 namespace GameModels;
 
-public class HideArmor : Armor
+public class HideArmor : Torso
 {
 
     public HideArmor(string name = "Hide Armor", int cost = 5, int protection = 1):base(name, cost, protection)

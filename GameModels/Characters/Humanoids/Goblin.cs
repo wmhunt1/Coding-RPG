@@ -5,7 +5,7 @@ public class Goblin : Character
     {
         Name = name;
         Weapon = new Spear();
-        Armor = new LeatherScraps();
+        Torso = new LeatherScraps();
         CurrentXP = 5;
         Gold = 5;
         CalculateStats();

@@ -1,7 +1,7 @@
 using System;
 namespace GameModels;
 
-public class ClothTunic : Armor
+public class ClothTunic : Torso
 {
 
     public ClothTunic(string name = "Cloth Tunic", int cost = 0, int protection = 0):base(name, cost, protection)

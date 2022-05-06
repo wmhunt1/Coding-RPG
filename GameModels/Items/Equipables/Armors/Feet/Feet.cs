@@ -1,11 +1,10 @@
 using System;
 namespace GameModels;
 
-public class Armor : Equipable
+public class Feet : Armor
 {
-    public int Protection;
-    public Type ProtectionType = new ArmorType();
-    public Armor(string name, int cost, int protection):base(name, cost)
+
+    public Feet(string name, int cost, int protection):base(name, cost, protection)
     {
         Name = name;
         Cost = cost;
@@ -13,5 +12,7 @@ public class Armor : Equipable
     }
     public override void EquipItem(Character character)
     {
+        character.Feet = this;
+        Console.WriteLine($"{this.Name} Equipped");
     }
 }

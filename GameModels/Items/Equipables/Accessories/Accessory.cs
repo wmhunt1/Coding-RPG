@@ -8,9 +8,4 @@ public class Accessory : Equipable
         Name = name;
         Cost = cost;
     }
-    public override void EquipItem(Character character)
-    {
-        character.Accessory = this;
-        Console.WriteLine($"{this.Name} Equipped");
-    }
 }

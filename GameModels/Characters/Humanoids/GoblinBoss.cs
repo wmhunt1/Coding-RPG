@@ -5,7 +5,7 @@ public class GoblinBoss : Character
     {
         Name = name;
         Weapon = new Spear();
-        Armor = new LeatherScraps();
+        Torso = new LeatherScraps();
         CurrentXP = 50;
         Gold = 50;
         CalculateStats();

@@ -19,11 +19,8 @@ encounters
 factions
     members, reputation, rank
 items
-    more slots and item types
-    gauntlets/boots etc that stack
-    more types of weapons and armor
+    off hand and weapon types
     ranged weapons
-    offhands
 jobs
     remove jobs and just learn spells or abilities es/whatever
 locations

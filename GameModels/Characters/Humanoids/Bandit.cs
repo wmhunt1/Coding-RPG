@@ -5,7 +5,7 @@ public class Bandit : Character
     {
         Name = name;
         Weapon = new Dagger();
-        Armor = new HideArmor();
+        Torso = new HideArmor();
         CurrentXP = 5;
         Gold = 5;
         CalculateStats();

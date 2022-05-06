@@ -24,6 +24,6 @@ public class SneakAttack : Ability
             damage *= 2;
         }
         Console.WriteLine($"{user.Name} Sneak Attacks {Name}, ignoring their armor");
-        targets[target-1].DamageHP(damage+targets[target-1].Armor.Protection);
+        targets[target-1].DamageHP(damage+targets[target-1].Torso.Protection);
     }
 }
