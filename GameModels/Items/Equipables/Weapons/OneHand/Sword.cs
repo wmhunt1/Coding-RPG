@@ -1,7 +1,7 @@
 using System;
 namespace GameModels;
 
-public class Sword : Weapon
+public class Sword : OneHand
 {
     public Sword(string name = "Sword", int cost = 10, int damage = 3):base(name, cost, damage)
     {

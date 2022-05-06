@@ -35,6 +35,14 @@ public class Character
     public int MagicDefense = 0;
     public int Speed = 0;
     public int CritChance = 0;
+    public int AttackBonus = 0;
+    public int TempAttackBonus = 0;
+    public int MagicAttackBonus = 0;
+    public int TempMagicAttackBonus = 0;
+    public int DefenseBonus = 0;
+    public int TempDefenseBonus = 0;
+    public int MagicDefenseBonus = 0;
+    public int TempMagicDefenseBonus = 0;
     public List<Buff> Buffs = new List<Buff>();
     public List<DeBuff> DeBuff = new List<DeBuff>();
     //inventory;
@@ -45,6 +53,7 @@ public class Character
     public Ring Ring = new Ring("None", 0);
 
     public Weapon Weapon = new Weapon("Unarmed", 0, 0);
+    public OffHand OffHand = new OffHand("None", 0);
     //armor
     public Head Head = new Head("None", 0 , 0);
     public Torso Torso = new Torso("None", 0, 0);
@@ -461,11 +470,11 @@ public class Character
         int damage;
         if (char1.Weapon.DamageType.Name == "Bludgeoning" || char1.Weapon.DamageType.Name == "Natural" || char1.Weapon.DamageType.Name == "Piercing" || char1.Weapon.DamageType.Name == "Slashing" && spell == false)
         {
-             damage = char1.Attack+char1.Weapon.Damage - char2.Defense+char2.Torso.Protection;
+             damage = char1.Attack+char1.Weapon.Damage+char1.AttackBonus+char1.TempAttackBonus - char2.Defense+char2.Torso.Protection+char2.DefenseBonus+char2.TempDefenseBonus;
         }
         else
         {
-             damage = char1.MagicAttack - char2.MagicDefense;
+             damage = char1.MagicAttack+char1.Weapon.Damage+char1.MagicAttackBonus+char1.TempMagicAttackBonus - char2.MagicDefense+char2.MagicDefenseBonus+char2.TempMagicDefenseBonus;
         }
         if (char1.CheckImmunities(char2.Weapon.DamageType) == true)
         {
@@ -484,7 +493,6 @@ public class Character
         }
         if (damage <= 0)
         {
-            Console.WriteLine("d");
             damage = 0;
         }
         return damage;
