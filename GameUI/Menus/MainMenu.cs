@@ -20,19 +20,23 @@ public class MainMenu : Menu
         }
         hero.Name = name;
         Console.WriteLine("Choose Class");
-        Console.WriteLine("[1] Fighter");
-        Console.WriteLine("[2] Rogue");
-        Console.WriteLine("[3] Wizard");
+        Console.WriteLine("[1] Barbarian");
+        Console.WriteLine("[2] Fighter");
+        Console.WriteLine("[3] Rogue");
+        Console.WriteLine("[4] Wizard");
         
         string job = Console.ReadLine();
-        if (job == "1")
+         if (job == "1")
+        {
+            Barbarian barb = new Barbarian();
+            barb.ChooseJob(hero);
+            Rage rage = new Rage();
+            rage.GainAbility(hero);
+        }
+        if (job == "2")
         {
             Fighter fighter = new Fighter();
             fighter.ChooseJob(hero);
-            Cleave cleave = new Cleave();
-            PowerAttack powerAttack = new PowerAttack();
-            cleave.GainAbility(hero);
-            powerAttack.GainAbility(hero);
         }
         else if (job == "2")
         {

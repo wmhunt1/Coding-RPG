@@ -44,7 +44,7 @@ public class Character
     public int MagicDefenseBonus = 0;
     public int TempMagicDefenseBonus = 0;
     public List<Buff> Buffs = new List<Buff>();
-    public List<DeBuff> DeBuff = new List<DeBuff>();
+    public List<DeBuff> DeBuffs = new List<DeBuff>();
     //inventory;
     public int Gold = 0;
     public List<Item>? Inventory = new List<Item>();
@@ -55,7 +55,7 @@ public class Character
     public Weapon Weapon = new Weapon("Unarmed", 0, 0);
     public OffHand OffHand = new OffHand("None", 0);
     //armor
-    public Head Head = new Head("None", 0 , 0);
+    public Head Head = new Head("None", 0, 0);
     public Torso Torso = new Torso("None", 0, 0);
     public Legs Legs = new Legs("None", 0, 0);
     public Hands Hands = new Hands("None", 0, 0);
@@ -114,7 +114,7 @@ public class Character
     }
     public void DisplayCompanions()
     {
-          Console.WriteLine("Companions");
+        Console.WriteLine("Companions");
         for (int i = 0; i < Companions.Count; i++)
         {
             Console.WriteLine($"Name: {Companions[i].Name} - Job: {Companions[i].Job.Name}");
@@ -122,62 +122,62 @@ public class Character
     }
     public Character CalculateStats()
     {
-        CurrentHP = Endurance*Level;
-        MaxHP = Endurance*Level;
-        CurrentMP = Intelligence*Level;
-        MaxMP = Intelligence*Level;
-        CurrentSP = Endurance*Level;
-        MaxSP = MaxSP*Level;
-        Attack = (Strength + Agility)/5;
-        Defense = (Endurance + Agility)/5;
-        MagicAttack = Intelligence/5;
-        MagicDefense = WillPower/5;
-        Speed = Agility/5;
-        CritChance = Luck/5;
+        CurrentHP = Endurance * Level;
+        MaxHP = Endurance * Level;
+        CurrentMP = Intelligence * Level;
+        MaxMP = Intelligence * Level;
+        CurrentSP = Endurance * Level;
+        MaxSP = MaxSP * Level;
+        Attack = (Strength + Agility) / 5;
+        Defense = (Endurance + Agility) / 5;
+        MagicAttack = Intelligence / 5;
+        MagicDefense = WillPower / 5;
+        Speed = Agility / 5;
+        CritChance = Luck / 5;
         return this;
     }
     public int IncreaseSTR(int inc)
-    {   
+    {
         Strength += inc;
         return Strength;
     }
     public int IncreaseAGL(int inc)
-    {   
+    {
         Agility += inc;
         return Agility;
     }
     public int IncreaseEND(int inc)
-    {   
+    {
         Endurance += inc;
         return Endurance;
     }
     public int IncreaseINT(int inc)
-    {   
+    {
         Intelligence += inc;
         return Intelligence;
     }
     public int IncreasePER(int inc)
-    {   
+    {
         Perception += inc;
         return Perception;
     }
     public int IncreaseWIL(int inc)
-    {   
+    {
         WillPower += inc;
         return WillPower;
     }
     public int IncreaseCHA(int inc)
-    {   
+    {
         Charisma += inc;
         return Charisma;
     }
     public int IncreaseATR(int inc)
-    {   
+    {
         Attractiveness += inc;
         return Attractiveness;
     }
     public int IncreaseLCK(int inc)
-    {   
+    {
         Luck += inc;
         return Luck;
     }
@@ -228,7 +228,7 @@ public class Character
             return true;
         }
     }
-     public int GainSP(int sp)
+    public int GainSP(int sp)
     {
         CurrentSP += sp;
         if (CurrentSP > MaxSP)
@@ -266,7 +266,7 @@ public class Character
     public int LevelUP()
     {
         Level++;
-        MaxXP += 50*Level;
+        MaxXP += 50 * Level;
         Console.WriteLine($"{Name} reaches level {Level}");
         Console.WriteLine("Choose Stat Increases");
         int inc = 5;
@@ -365,6 +365,82 @@ public class Character
             return true;
         }
     }
+    public Character ResetTemp()
+    {
+        TempAttackBonus = 0;
+        TempDefenseBonus = 0;
+        TempMagicAttackBonus = 0;
+        TempMagicDefenseBonus = 0;
+        return this;
+    }
+    public List<Buff> AddBuff(Buff buff)
+    {
+        bool present = false;
+        for (int i = 0; i < Buffs.Count; i++)
+        {
+            if (Buffs[i].Name == buff.Name)
+            {
+                present = true;
+                Buffs[i].DurationLeft = Buffs[i].Duration;
+            }
+        }
+        if (present == false)
+        {
+            Buffs.Add(buff);
+        }
+        Console.WriteLine($"{Name} buffed with {buff.Name}");
+        return Buffs;
+    }
+    public List<DeBuff> AddDeBuff(DeBuff deBuff)
+    {
+        bool present = false;
+        for (int i = 0; i < DeBuffs.Count; i++)
+        {
+            if (DeBuffs[i].Name == deBuff.Name)
+            {
+                present = true;
+                DeBuffs[i].DurationLeft = DeBuffs[i].Duration;
+            }
+        }
+        if (present == false)
+        {
+            DeBuffs.Add(deBuff);
+        }
+        Console.WriteLine($"{Name} afflicted with {deBuff.Name}");
+        return DeBuffs;
+    }
+    public List<Buff> RemoveBuff(Buff buff)
+    {
+        if (buff.DurationLeft == 0)
+        {
+            buff.RemoveEffect(this);
+            Buffs.Remove(buff);
+        }
+        Console.WriteLine($"{Name} no longer buffed with {buff.Name}");
+        return Buffs;
+    }
+    public List<DeBuff> RemoveDeBuff(DeBuff deBuff)
+    {
+        if (deBuff.DurationLeft == 0)
+        {
+            deBuff.RemoveEffect(this);
+            DeBuffs.Remove(deBuff);
+        }
+        Console.WriteLine($"{Name} no longer afflicted with {deBuff.Name}");
+        return DeBuffs;
+    }
+       public List<Buff> RemoveAllBuffs(List<Buff> buffs)
+    {
+        Buffs = new List<Buff>();
+        ResetTemp();
+        return Buffs;
+    }
+    public List<DeBuff> RemoveAllDeBuffs(List<DeBuff> deBuffs)
+    {
+        DeBuffs = new List<DeBuff>();
+        ResetTemp();
+        return DeBuffs;
+    }
     public List<Item> AddToInventory(Item item)
     {
         bool present = false;
@@ -407,7 +483,7 @@ public class Character
     }
     public bool CheckImmunities(Type type)
     {
-        
+
         bool immunity = false;
         if (Immunities != null)
         {
@@ -470,11 +546,11 @@ public class Character
         int damage;
         if (char1.Weapon.DamageType.Name == "Bludgeoning" || char1.Weapon.DamageType.Name == "Natural" || char1.Weapon.DamageType.Name == "Piercing" || char1.Weapon.DamageType.Name == "Slashing" && spell == false)
         {
-             damage = char1.Attack+char1.Weapon.Damage+char1.AttackBonus+char1.TempAttackBonus - char2.Defense+char2.Torso.Protection+char2.DefenseBonus+char2.TempDefenseBonus;
+            damage = char1.Attack + char1.Weapon.Damage + char1.AttackBonus + char1.TempAttackBonus - char2.Defense + char2.Torso.Protection + char2.DefenseBonus + char2.TempDefenseBonus;
         }
         else
         {
-             damage = char1.MagicAttack+char1.Weapon.Damage+char1.MagicAttackBonus+char1.TempMagicAttackBonus - char2.MagicDefense+char2.MagicDefenseBonus+char2.TempMagicDefenseBonus;
+            damage = char1.MagicAttack + char1.Weapon.Damage + char1.MagicAttackBonus + char1.TempMagicAttackBonus - char2.MagicDefense + char2.MagicDefenseBonus + char2.TempMagicDefenseBonus;
         }
         if (char1.CheckImmunities(char2.Weapon.DamageType) == true)
         {
@@ -499,7 +575,7 @@ public class Character
     }
     public void BasicAttack(Character char1, Character char2)
     {
-        
+
         int damage = CalculateDamage(char1, char2, false);
         if (damage > 0)
         {
@@ -515,7 +591,7 @@ public class Character
         {
             Console.WriteLine($"{char1.Name} misses {char2.Name}");
         }
-       
+
     }
 
 }

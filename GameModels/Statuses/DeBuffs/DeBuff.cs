@@ -3,8 +3,9 @@ namespace GameModels;
 
 public class DeBuff : Status
 {
-    public DeBuff(string name):base(name)
+    public DeBuff(string name, int duration):base(name, duration)
     {
         Name = name;
+        Duration = duration;
     }
 }

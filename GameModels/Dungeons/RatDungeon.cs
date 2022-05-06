@@ -11,7 +11,7 @@ public class RatDungeon : Dungeon
     public override List<Character> GenerateEncounter()
     {
         Random rnd = new Random();
-        int random = rnd.Next(1, 3);
+        int random = rnd.Next(2, 3);
         List<Character> encounterEnemies = new List<Character>();
         for (int i = 0; i < random; i++)
         {
