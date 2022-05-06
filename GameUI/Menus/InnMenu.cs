@@ -1,10 +1,12 @@
 using System;
 using GameModels;
+using GameScripts;
 
 namespace GameUI;
 public class InnMenu : Menu
 {
     new public string Name = "Inn";
+    public UIScripts ui = new UIScripts();
     public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
@@ -66,28 +68,24 @@ public class InnMenu : Menu
                     {
                         Console.WriteLine("Innkeeper: 'Want to make some Gold? Go kill some rats in the cellar.'");
                         hero.Journal[2].QuestState++;
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     else if (hero.Journal[2].QuestState == 1 && hero.Journal[2].QuestObjectiveProgess < hero.Journal[2].QuestObjective)
                     {
                         Console.WriteLine("Well get going");
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     else if (hero.Journal[2].QuestObjective <= hero.Journal[2].QuestObjectiveProgess && hero.Journal[2].QuestState < 100)
                     {
                         Console.WriteLine("You killed the rats. Here's some gold");
                         hero.AddGold(25);
                         hero.Journal[2].QuestState = 100;
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     else
                     {
                         Console.WriteLine("Thanks for killing those rats");
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     break;
                 case "5":

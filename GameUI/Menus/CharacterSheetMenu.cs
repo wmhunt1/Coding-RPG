@@ -1,11 +1,12 @@
 using System;
-
 using GameModels;
+using GameScripts;
 
 namespace GameUI;
 public class CharacterSheetMenu : Menu
 {
     new public string Name = "Character Sheet";
+    UIScripts ui = new UIScripts();
     public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
@@ -21,32 +22,27 @@ public class CharacterSheetMenu : Menu
             Console.WriteLine("[0] Close");
 
             string? UserInput = Console.ReadLine();
-            switch(UserInput)
+            switch (UserInput)
             {
                 case "1":
                     hero.DisplayStats();
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadLine();
+                    ui.AnyKey();
                     break;
                 case "2":
                     hero.DisplayEquipment();
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadLine();
+                    ui.AnyKey();
                     break;
                 case "3":
                     hero.DisplayInventory();
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadLine();
+                    ui.AnyKey();
                     break;
                 case "4":
                     hero.DisplayJournal();
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadLine();
+                    ui.AnyKey();
                     break;
                 case "5":
                     hero.DisplayCompanions();
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadLine();
+                    ui.AnyKey();
                     break;
                 case "0":
                     exitMenu = true;

@@ -1,11 +1,12 @@
 using System;
-
 using GameModels;
+using GameScripts;
 
 namespace GameUI;
 public class ForestMenu : Menu
 {
     new public string Name = "Forest";
+    UIScripts ui = new UIScripts();
     public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
@@ -32,18 +33,15 @@ public class ForestMenu : Menu
                     break;
                 case "2":
                     Console.WriteLine("Hunting Animals");
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadLine();
+                    ui.AnyKey();
                     break;
                 case "3":
                     Console.WriteLine("Visting Lumbermill");
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadLine();
+                    ui.AnyKey();
                     break;
                 case "4":
                     Console.WriteLine("Chopping Down Trees");
-                    Console.WriteLine("Press any key to continue");
-                    Console.ReadLine();
+                    ui.AnyKey();
                     break;
                 case "5":
                     if (hero.Journal[0].QuestState > 0)

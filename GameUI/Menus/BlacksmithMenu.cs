@@ -6,6 +6,8 @@ namespace GameUI;
 public class BlacksmithMenu : StoreMenu
 {
     ShoppingScripts blackSmith = new ShoppingScripts();
+    UIScripts ui = new UIScripts();
+
     List<Equipable> inventory = new List<Equipable>();
     public BlacksmithMenu(string name = "Blacksmith"):base(name)
     {
@@ -45,28 +47,24 @@ public class BlacksmithMenu : StoreMenu
                     {
                         Console.WriteLine("The local mines have overrun by goblins. Go clear them out?");
                         hero.Journal[1].QuestState += 1;
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     else if (hero?.Journal?[1].QuestState == 1 && hero.Journal[1].QuestObjectiveProgess < hero.Journal[1].QuestObjective)
                     {
                         Console.WriteLine("Please kill those goblins");
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     else if (hero!.Journal?[1].QuestObjective <= hero.Journal?[1].QuestObjectiveProgess && hero.Journal?[1].QuestState < 100)
                     {
                         Console.WriteLine("You killed the goblins. Here's some gold");
                         hero.AddGold(100);
                         hero.Journal[2].QuestState = 75;
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     else
                     {
                         Console.WriteLine("Feel free to mine ore if you need it");
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     break;
                 case "0":

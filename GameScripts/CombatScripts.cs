@@ -4,6 +4,7 @@ using GameModels;
 namespace GameScripts;
 public class CombatScripts
 {
+    UIScripts ui = new UIScripts();
     public CombatScripts()
     {
     }
@@ -285,7 +286,6 @@ public class CombatScripts
         {
             enemies.Add(rewards[i]);
         }
-        Console.WriteLine("Press any key to continue");
-        Console.ReadLine();
+        ui.AnyKey();
     }
 }

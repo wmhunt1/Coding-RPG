@@ -1,11 +1,12 @@
 using System;
-
 using GameModels;
+using GameScripts;
 
 namespace GameUI;
 public class GameMenu : Menu
 {
     new public string Name = "Valley of Dale";
+    public UIScripts ui = new UIScripts();
     public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
@@ -53,8 +54,7 @@ public class GameMenu : Menu
                     if (hero.Journal[1].QuestState > 1)
                     {
                         Console.WriteLine("Mining Ore");
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     break;
                 case "0":

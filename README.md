@@ -4,7 +4,6 @@ abilities
     rage
 characters
     reputation and relationships
-    bonuses/bonus calculation
     perks/feats on level up
 combat
     buffs and debuffs last x round
@@ -35,6 +34,7 @@ quests
 spells
     healing spell
     buff spells
+        bless
     debuff spells
 scripts
 skills

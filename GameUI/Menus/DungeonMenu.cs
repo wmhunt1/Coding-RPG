@@ -7,6 +7,7 @@ public class DungeonMenu : Menu
 {
     public Dungeon Dungeon;
     public Menu Exit;
+    public UIScripts ui = new UIScripts();
     public DungeonMenu(Dungeon dungeon, Menu exit)
     {
         Dungeon = dungeon;

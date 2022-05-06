@@ -1,10 +1,12 @@
 using System;
 using GameModels;
+using GameScripts;
 
 namespace GameUI;
 public class TownMenu : Menu
 {
     new public string Name = "Town";
+    public UIScripts ui = new UIScripts();
     public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
@@ -22,11 +24,11 @@ public class TownMenu : Menu
             {
                 Console.WriteLine("[7] Graveyard");
             }
-            
+
             Console.WriteLine("[0] Leave Town");
 
             string? UserInput = Console.ReadLine();
-            switch(UserInput)
+            switch (UserInput)
             {
                 case "1":
                     CharacterSheetMenu characterSheet = new CharacterSheetMenu();
@@ -50,58 +52,50 @@ public class TownMenu : Menu
                     {
                         Console.WriteLine("I've put out a bounty on bandits in the forest");
                         hero.Journal[0].QuestState++;
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
-                    else if(hero.Journal[0].QuestState == 1 && hero.Journal[0].QuestObjectiveProgess < hero.Journal[0].QuestObjective)
+                    else if (hero.Journal[0].QuestState == 1 && hero.Journal[0].QuestObjectiveProgess < hero.Journal[0].QuestObjective)
                     {
                         Console.WriteLine("Please kill those bandits");
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     else if (hero.Journal[0].QuestObjective <= hero.Journal[0].QuestObjectiveProgess && hero.Journal[0].QuestState < 100)
                     {
                         Console.WriteLine("You killed the bandits. Here's some gold");
                         hero.AddGold(100);
                         hero.Journal[2].QuestState = 100;
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     else
                     {
                         Console.WriteLine("Thanks for killing those bandits");
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     break;
                 case "6":
                     Console.WriteLine("Visting Church");
-                   if (hero.Journal[3].QuestState == 0)
+                    if (hero.Journal[3].QuestState == 0)
                     {
                         Console.WriteLine("Can you deal with the skeletons rising in the graveyard");
                         hero.Journal[3].QuestState++;
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
-                    else if(hero.Journal[3].QuestState == 1 && hero.Journal[3].QuestObjectiveProgess < hero.Journal[3].QuestObjective)
+                    else if (hero.Journal[3].QuestState == 1 && hero.Journal[3].QuestObjectiveProgess < hero.Journal[3].QuestObjective)
                     {
                         Console.WriteLine("Please kill those skeletons");
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     else if (hero.Journal[3].QuestObjective <= hero.Journal[3].QuestObjectiveProgess && hero.Journal[3].QuestState < 100)
                     {
                         Console.WriteLine("You killed the skeletons. Here's some gold");
                         hero.AddGold(100);
                         hero.Journal[2].QuestState = 50;
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     else
                     {
                         Console.WriteLine("Thanks for killing those skeletons");
-                        Console.WriteLine("Press any key to continue");
-                        Console.ReadLine();
+                        ui.AnyKey();
                     }
                     break;
                 case "7":

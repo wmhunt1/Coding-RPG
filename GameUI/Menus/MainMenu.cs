@@ -1,12 +1,14 @@
 using System;
 using GameModels;
+using GameScripts;
 
 namespace GameUI;
 public class MainMenu : Menu
 {
     new public string Name = "Main Menu";
     Hero hero = new Hero("Hero");
-    public GameMenu gameMenu = new GameMenu();
+    GameMenu gameMenu = new GameMenu();
+    UIScripts ui = new UIScripts();
     public Hero CharacterCreation(Hero hero)
     {
         string name = "";
@@ -90,6 +92,8 @@ public class MainMenu : Menu
                     gameMenu.ShowMenu(hero);
                     break;
                 case "2":
+                    StoryScripts story = new StoryScripts();
+                    story.GameIntro();
                     CharacterCreation(hero);
                     gameMenu.ShowMenu(hero);
                     break;

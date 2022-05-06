@@ -7,6 +7,7 @@ public class StoreMenu : Menu
 {
     new public string Name;
     ShoppingScripts store = new ShoppingScripts();
+    UIScripts ui = new UIScripts();
     List<Item> inventory = new List<Item>();
     public StoreMenu(string name)
     {
