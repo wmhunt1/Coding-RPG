@@ -14,6 +14,8 @@ combat
 dungeons
     puzzles
     dungeon delving
+encounters
+    to pluginto towns etc
 factions
     members, reputation, rank
 items
@@ -21,11 +23,13 @@ items
     gauntlets/boots etc that stack
     more types of weapons and armor
     ranged weapons
+    offhands
 jobs
     remove jobs and just learn spells or abilities es/whatever
 locations
     dungeons/towns etc
     plug into menus etc
+    riverside/lake/docks
 menus
     object more for towns/inns
 quests

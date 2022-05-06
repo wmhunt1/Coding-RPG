@@ -6,6 +6,7 @@ namespace GameUI;
 public class BlacksmithMenu : StoreMenu
 {
     ShoppingScripts blackSmith = new ShoppingScripts();
+    List<Equipable> inventory = new List<Equipable>();
     public BlacksmithMenu(string name = "Blacksmith"):base(name)
     {
         Name = name;
@@ -19,7 +20,8 @@ public class BlacksmithMenu : StoreMenu
             Console.WriteLine($"---------- {Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Buy Weapons and Armor");
-            Console.WriteLine("[3] Talk to Blacksmith");
+            Console.WriteLine("[3] Sell");
+            Console.WriteLine("[4] Talk to Blacksmith");
             Console.WriteLine("[0] Leave Blacksmith");
             string? UserInput = Console.ReadLine();
             switch (UserInput)
@@ -30,32 +32,15 @@ public class BlacksmithMenu : StoreMenu
                     break;
                 case "2":
                     Console.WriteLine("Blacksmith Inventory");
-                    Console.WriteLine("[1] Buy Dagger: 5 GP");
-                    Console.WriteLine("[2] Buy Sword : 10 GP");
-                    Console.WriteLine("[3] Leather Vest: 5 GP");
-                    Console.WriteLine("[0] Go Back");
-                    string? BuyingInput = Console.ReadLine();
-                    switch (BuyingInput)
-                    {
-                        case "1":
-                            Dagger dagger = new Dagger();
-                            blackSmith.BuyEquipment(hero!, dagger);
-                            break;
-                        case "2":
-                            Sword sword = new Sword();
-                            blackSmith.BuyEquipment(hero!, sword);
-                            break;
-                        case "3":
-                            LeatherVest leatherVest = new LeatherVest();
-                            blackSmith.BuyEquipment(hero!, leatherVest);
-                            break;
-                        case "0":
-                            break;
-                        default:
-                            break;
-                    }
+                    Dagger dagger = new Dagger();
+                    Sword sword = new Sword();
+                    LeatherVest leatherVest = new LeatherVest();
+                    blackSmith.BuyFromBlacksmith(hero, inventory);
                     break;
                 case "3":
+                    blackSmith.SellToShop(hero);
+                    break;
+                case "4":
                     if (hero!.Journal?[1].QuestState == 0 && hero.Journal[1] != null)
                     {
                         Console.WriteLine("The local mines have overrun by goblins. Go clear them out?");
@@ -79,7 +64,7 @@ public class BlacksmithMenu : StoreMenu
                     }
                     else
                     {
-                        Console.WriteLine("Thank you for help");
+                        Console.WriteLine("Feel free to mine ore if you need it");
                         Console.WriteLine("Press any key to continue");
                         Console.ReadLine();
                     }

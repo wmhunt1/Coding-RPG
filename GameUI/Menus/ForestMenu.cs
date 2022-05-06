@@ -13,14 +13,13 @@ public class ForestMenu : Menu
         {
             Console.WriteLine($"---------- {Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
-            Console.WriteLine("[2] Enter Town");
-            Console.WriteLine("[3] Visit Lumbermill");
-            Console.WriteLine("[4] Chop Wood");
-            Console.WriteLine("[5] Go Hunting");
+            Console.WriteLine("[2] Visit Lumbermill");
+            Console.WriteLine("[3] Chop Wood");
+            Console.WriteLine("[4] Go Hunting");
             Console.WriteLine();
             if (hero.Journal[0].QuestState > 0)
             {
-                 Console.WriteLine("[6] Bandit Hideout");
+                 Console.WriteLine("[5] Bandit Hideout");
             }
             Console.WriteLine("[0] To World Map");
 
@@ -31,27 +30,22 @@ public class ForestMenu : Menu
                     CharacterSheetMenu characterSheet = new CharacterSheetMenu();
                     characterSheet.ShowMenu(hero);
                     break;
-              
                 case "2":
-                    TownMenu townMenu = new TownMenu();
-                    townMenu.ShowMenu(hero);
-                    break;
-                case "3":
                     Console.WriteLine("Hunting Animals");
                     Console.WriteLine("Press any key to continue");
                     Console.ReadLine();
                     break;
-                case "4":
+                case "3":
                     Console.WriteLine("Visting Lumbermill");
                     Console.WriteLine("Press any key to continue");
                     Console.ReadLine();
                     break;
-                case "5":
+                case "4":
                     Console.WriteLine("Chopping Down Trees");
                     Console.WriteLine("Press any key to continue");
                     Console.ReadLine();
                     break;
-                case "6":
+                case "5":
                     if (hero.Journal[0].QuestState > 0)
                     {
                         

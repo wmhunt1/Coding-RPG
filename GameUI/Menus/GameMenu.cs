@@ -19,7 +19,7 @@ public class GameMenu : Menu
             {
                 Console.WriteLine("[4] Dwarven Mine");
             }
-            if (hero.Journal[1].QuestState > 1)
+            if (hero.Journal[1].QuestState == 100)
             {
                 Console.WriteLine("[5] Mine Ore");
             }
