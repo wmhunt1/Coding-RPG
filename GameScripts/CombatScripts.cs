@@ -67,7 +67,14 @@ public class CombatScripts
                 }
                 else if (spellUsed == true)
                 {
-                    spell.CastSpell(allies[0], enemies);
+                    if (spell is BuffingSpell || spell is HealingSpell)
+                    {
+                        spell.CastSpell(allies[0], allies);
+                    }
+                    else
+                    {
+                        spell.CastSpell(allies[0], enemies);
+                    }
                     ui.AnyKey();
                 }
                 else
@@ -251,7 +258,7 @@ public class CombatScripts
                         {
                             if (char1.Spellbook[selection - 1].ManaCost > char1.CurrentMP)
                             {
-                                Console.WriteLine("Not enought man");
+                                Console.WriteLine("Not enought mana");
                             }
                             else
                             {

@@ -27,15 +27,10 @@ quests
     lumbermill quest
     collection quests
 spells
-    healing spell
-    buff spells
-        bless
-    debuff spells
 scripts
 skills
-    fishing, cooking, blacksmithing, weapon and attack skills
+    weapon and attack skills
 statuses
-    duration
 story
     intro
     more conversations and conversation options

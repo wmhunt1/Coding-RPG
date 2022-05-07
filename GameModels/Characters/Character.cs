@@ -68,7 +68,10 @@ public class Character
     public List<Type>? Immunities = new List<Type>();
     public List<Type>? Resistances = new List<Type>();
     public List<Type>? Vulnerabilities = new List<Type>();
+    public Cooking Cooking = new Cooking();
+    public Fishing Fishing = new Fishing();
     public Mining Mining = new Mining();
+    public Smithing Smithing = new Smithing();
     public WoodCutting WoodCutting = new WoodCutting();
     public Character(string name)
     {
@@ -156,6 +159,10 @@ public class Character
     public void DisplaySkills()
     {
         Console.WriteLine("Skills");
+        Console.WriteLine($"{Cooking.Name} - {Cooking.Level}");
+        Console.WriteLine($"{Fishing.Name} - {Fishing.Level}");
+        Console.WriteLine($"{Mining.Name} - {Mining.Level}");
+        Console.WriteLine($"{Smithing.Name} - {Smithing.Level}");
         Console.WriteLine($"{WoodCutting.Name} - {WoodCutting.Level}");
     }
     public void DisplayCompanions()

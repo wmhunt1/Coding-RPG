@@ -16,11 +16,11 @@ public class GameMenu : Menu
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Visit Town");
             Console.WriteLine("[3] Explore Forest");
-            if (hero.Journal[1].QuestState > 0)
+            if (hero.Journal.Find(x => x.Name == "Goblin Quest").QuestState > 0)
             {
                 Console.WriteLine("[4] Dwarven Mine");
             }
-            if (hero.Journal[1].QuestState == 100)
+            if (hero.Journal.Find(x => x.Name == "Goblin Quest").QuestState == 100)
             {
                 Console.WriteLine("[5] Dwarven Mine - Mine Copper");
                 Console.WriteLine("[6] Dwarven Mine - Mine Tin");
@@ -44,7 +44,7 @@ public class GameMenu : Menu
                     forestMenu.ShowMenu(hero);
                     break;
                 case "4":
-                    if (hero.Journal[1].QuestState > 0)
+                    if (hero.Journal.Find(x => x.Name == "Goblon Quest").QuestState > 0)
                     {
                         GoblinDungeon dwarfMine = new GoblinDungeon();
                         GameMenu gameMenuExit = new GameMenu();
@@ -53,7 +53,7 @@ public class GameMenu : Menu
                     }
                     break;
                 case "5":
-                    if (hero.Journal[1].QuestState > 1)
+                    if (hero.Journal.Find(x => x.Name == "Goblin Quest").QuestState == 100)
                     {
                         CopperOre copper = new CopperOre();
                         hero.Mining.GatherResource(hero, copper);
@@ -61,7 +61,7 @@ public class GameMenu : Menu
                     }
                     break;
                 case "6":
-                  if (hero.Journal[1].QuestState > 1)
+                  if (hero.Journal.Find(x => x.Name == "Goblin Quest").QuestState > 100)
                     {
                         TinOre tin = new TinOre();
                         hero.Mining.GatherResource(hero, tin);

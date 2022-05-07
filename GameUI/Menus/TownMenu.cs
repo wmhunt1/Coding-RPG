@@ -25,11 +25,10 @@ public class TownMenu : Menu
             Console.WriteLine("[4] General Store");
             Console.WriteLine("[5] Mayor's House");
             Console.WriteLine("[6] Church");
-            if (hero.Journal[3].QuestState > 0)
+            if (hero.Journal.Find(x => x.Name == "Skeleton Quest").QuestState > 0)
             {
                 Console.WriteLine("[7] Graveyard");
             }
-
             Console.WriteLine("[0] Leave Town");
 
             string? UserInput = Console.ReadLine();
@@ -62,7 +61,7 @@ public class TownMenu : Menu
                     story.SkeletonQuest(hero);
                     break;
                 case "7":
-                    if (hero.Journal[3].QuestState > 0)
+                    if (hero.Journal.Find(x => x.Name == "Skeleton Quest").QuestState > 0)
                     {
                         SkeletonDungeon skeletonDungeon = new SkeletonDungeon();
                         Town town = new Town("Town");

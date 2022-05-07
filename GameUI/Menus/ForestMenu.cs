@@ -17,7 +17,7 @@ public class ForestMenu : Menu
             Console.WriteLine("[2] Visit Lumbermill");
             Console.WriteLine("[3] Chop Wood");
             Console.WriteLine("[4] Go Hunting");
-            if (hero.Journal[0].QuestState > 0)
+            if (hero.Journal.Find(x => x.Name == "Bandit Quest").QuestState > 0)
             {
                 Console.WriteLine("[5] Bandit Hideout");
             }
@@ -45,7 +45,7 @@ public class ForestMenu : Menu
                     ui.AnyKey();
                     break;
                 case "5":
-                    if (hero.Journal[0].QuestState > 0)
+                    if (hero.Journal.Find(x => x.Name == "Bandit Quest").QuestState > 0)
                     {
                         BanditDungeon banditHideout = new BanditDungeon();
                         ForestMenu forestMenu = new ForestMenu();

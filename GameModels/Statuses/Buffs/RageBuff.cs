@@ -3,7 +3,7 @@ namespace GameModels;
 
 public class RageBuff : Buff
 {
-    public RageBuff(string name = "Rage", int duration = 1) : base(name, duration)
+    public RageBuff(string name = "Rage", int duration = 3) : base(name, duration)
     {
         Name = name;
         Duration = duration;
