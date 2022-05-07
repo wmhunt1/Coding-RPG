@@ -5,15 +5,19 @@ using GameScripts;
 namespace GameUI;
 public class TownMenu : Menu
 {
-    new public string Name = "Town";
+    public Town Town;
     public UIScripts ui = new UIScripts();
+    public TownMenu(Town town)
+    {
+        Town = town;
+    }
     public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
         while (!exitMenu)
         {
             Console.WriteLine("---------- Coding RPG ----------");
-            Console.WriteLine($"---------- {Name}  ----------");
+            Console.WriteLine($"---------- {Town.Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Inn");
             Console.WriteLine("[3] Blacksmith");
@@ -102,7 +106,8 @@ public class TownMenu : Menu
                     if (hero.Journal[3].QuestState > 0)
                     {
                         SkeletonDungeon skeletonDungeon = new SkeletonDungeon();
-                        TownMenu townMenuExit = new TownMenu();
+                        Town town = new Town("Town");
+                        TownMenu townMenuExit = new TownMenu(town);
                         DungeonMenu skeletonDungeonMenu = new DungeonMenu(skeletonDungeon, townMenuExit);
                         skeletonDungeonMenu.ShowMenu(hero);
                     }

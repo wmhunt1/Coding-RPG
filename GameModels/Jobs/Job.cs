@@ -5,7 +5,7 @@ public class Job
 {
     public string Name;
     public Weapon Weapon = new Club();
-    public Torso Torso = new ClothTunic();
+    public Torso Torso = new Tunic();
     public Job(string name)
     {
         Name = name;

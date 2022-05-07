@@ -1,16 +1,17 @@
 using System;
 namespace GameModels;
 
-public class GatheringSkill : Skill
+public class Mining : GatheringSkill
 {
-    public GatheringSkill(string name, int level, string stat) : base(name, level, stat)
+    public Mining(string name = "Mining", int level = 1, string stat = "Endurance") : base(name, level, stat)
     {
         Name = name;
         Level = level;
         Stat = stat;
     }
-    public virtual Character GatherResource(Character character, Resource resource)
+    public override Character GatherResource(Character character, Resource resource)
     {
+        Console.WriteLine($"You start mining a {resource.Name} Vein");
         bool energy = character.HasEnoughSP(1);
         if (energy == true)
         {
@@ -20,7 +21,7 @@ public class GatheringSkill : Skill
         }
         else
         {
-            Console.WriteLine($"You are too tired to gather {resource.Name}");
+            Console.WriteLine($"You are too tired to mine the {resource.Name} vein");
         }
         return character;
     }

@@ -68,7 +68,8 @@ public class BlacksmithMenu : StoreMenu
                     }
                     break;
                 case "0":
-                    TownMenu townMenu = new TownMenu();
+                    Town town = new Town("Town");
+                    TownMenu townMenu = new TownMenu(town);
                     townMenu.ShowMenu(hero!);
                     break;
                 default:

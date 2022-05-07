@@ -9,5 +9,11 @@ public class TwoHand : Weapon
         Cost = cost;
         Damage = damage;
     }
+     public override void EquipItem(Character character)
+    {
+        character.Weapon = this;
+        character.OffHand = new OffHandWeapon(this.Name, 0, 0);
+        Console.WriteLine($"{this.Name} Equipped");
+    }
 
 }

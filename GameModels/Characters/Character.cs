@@ -52,8 +52,8 @@ public class Character
     public Neck Neck = new Neck("None", 0);
     public Ring Ring = new Ring("None", 0);
 
-    public Weapon Weapon = new Weapon("Unarmed", 0, 0);
-    public OffHand OffHand = new OffHand("None", 0);
+    public Weapon Weapon = new Unarmed();
+    public OffHand OffHand = new EmptyOffHand();
     //armor
     public Head Head = new Head("None", 0, 0);
     public Torso Torso = new Torso("None", 0, 0);
@@ -62,13 +62,14 @@ public class Character
     public Feet Feet = new Feet("None", 0, 0);
     public Back Back = new Back("None", 0, 0);
     //skills
-    public List<Skill> Skills = new List<Skill>();
     public List<Ability>? ActionBar = new List<Ability>();
     public List<Spell>? Spellbook = new List<Spell>();
     public List<Quest> Journal = new List<Quest>();
     public List<Type>? Immunities = new List<Type>();
     public List<Type>? Resistances = new List<Type>();
     public List<Type>? Vulnerabilities = new List<Type>();
+    public Mining Mining = new Mining();
+    public WoodCutting WoodCutting = new WoodCutting();
     public Character(string name)
     {
         Name = name;
@@ -90,7 +91,11 @@ public class Character
     }
     public void DisplayEquipment()
     {
-        Console.WriteLine($"Equipment\nWeapon: {Weapon.Name} ({Attack} Damage)\nArmor: {Torso.Name} ({Defense} Protection)");
+        Console.WriteLine("Equipment");
+        Console.WriteLine($"Weapons\nMainHand: {Weapon.Name} - {Weapon.Damage} OffHand: {OffHand.Name} - {OffHand.Bonus}");
+        Console.WriteLine($"Armor\nHead: {Head.Name} - {Head.Protection} Torso: {Torso.Name} - {Torso.Protection} Legs: {Legs.Name}");
+        Console.WriteLine($"Hands: {Hands.Name} - {Hands.Protection} Feet: {Feet.Name} - {Feet.Protection}");
+        Console.WriteLine($"Accessories\nNeck: {Neck.Name} Ring: {Ring.Name} Back {Back.Name}");
     }
     public void DisplayInventory()
     {
@@ -112,6 +117,11 @@ public class Character
             }
         }
     }
+    public void DisplaySkills()
+    {
+        Console.WriteLine("Skills");
+        Console.WriteLine($"{WoodCutting.Name} - {WoodCutting.Level}");
+    }
     public void DisplayCompanions()
     {
         Console.WriteLine("Companions");
@@ -127,7 +137,7 @@ public class Character
         CurrentMP = Intelligence * Level;
         MaxMP = Intelligence * Level;
         CurrentSP = Endurance * Level;
-        MaxSP = MaxSP * Level;
+        MaxSP = Endurance * Level;
         Attack = (Strength + Agility) / 5;
         Defense = (Endurance + Agility) / 5;
         MagicAttack = Intelligence / 5;
@@ -250,11 +260,11 @@ public class Character
     {
         if (CurrentSP >= sp)
         {
-            return false;
+            return true;
         }
         else
         {
-            return true;
+            return false;
         }
     }
     public void FullRest()
@@ -409,6 +419,16 @@ public class Character
         Console.WriteLine($"{Name} afflicted with {deBuff.Name}");
         return DeBuffs;
     }
+    public Buff DecreaseBuffDuration(Buff buff)
+    {
+        buff.DurationLeft--;
+        return buff;
+    }
+    public DeBuff DecreaseDeBuffDuration(DeBuff deBuff)
+    {
+        deBuff.DurationLeft--;
+        return deBuff;
+    }
     public List<Buff> RemoveBuff(Buff buff)
     {
         if (buff.DurationLeft == 0)
@@ -429,7 +449,7 @@ public class Character
         Console.WriteLine($"{Name} no longer afflicted with {deBuff.Name}");
         return DeBuffs;
     }
-       public List<Buff> RemoveAllBuffs(List<Buff> buffs)
+    public List<Buff> RemoveAllBuffs(List<Buff> buffs)
     {
         Buffs = new List<Buff>();
         ResetTemp();
@@ -544,9 +564,10 @@ public class Character
     public int CalculateDamage(Character char1, Character char2, bool spell)
     {
         int damage;
+        int protection = char2.Head.Protection + char2.Torso.Protection + char2.Legs.Protection + char2.Hands.Protection + char2.Feet.Protection;
         if (char1.Weapon.DamageType.Name == "Bludgeoning" || char1.Weapon.DamageType.Name == "Natural" || char1.Weapon.DamageType.Name == "Piercing" || char1.Weapon.DamageType.Name == "Slashing" && spell == false)
         {
-            damage = char1.Attack + char1.Weapon.Damage + char1.AttackBonus + char1.TempAttackBonus - char2.Defense + char2.Torso.Protection + char2.DefenseBonus + char2.TempDefenseBonus;
+            damage = char1.Attack + char1.Weapon.Damage + char1.AttackBonus + char1.TempAttackBonus - char2.Defense + protection + char2.DefenseBonus + char2.TempDefenseBonus;
         }
         else
         {

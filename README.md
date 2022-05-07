@@ -6,8 +6,6 @@ characters
     reputation and relationships
     perks/feats on level up
 combat
-    buffs and debuffs last x round
-    debuffs and buffs reset at the end of combat
     enemy distance
     enemies use spells and abilities
 dungeons
@@ -18,8 +16,9 @@ encounters
 factions
     members, reputation, rank
 items
-    when 2H is equiped prevent offhand
     equip and unequip effect
+    equip from inventory (send to equipment)
+    unequip from equipment (send to inventory)
 jobs
     remove jobs and just learn spells or abilities es/whatever
 locations

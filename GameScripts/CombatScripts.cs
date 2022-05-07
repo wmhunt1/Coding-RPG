@@ -93,12 +93,12 @@ public class CombatScripts
         {
             for (int j = 0; j < allies[i].Buffs.Count; j++)
             {
-                allies[i].Buffs[j].DurationLeft--;
+                allies[i].DecreaseBuffDuration(allies[i].Buffs[j]);
                 allies[i].RemoveBuff(allies[i].Buffs[j]);
             }
             for (int j = 0; j < allies[i].DeBuffs.Count; j++)
             {
-                allies[i].DeBuffs[j].DurationLeft--;
+                allies[i].DecreaseDeBuffDuration(allies[i].DeBuffs[j]);
                 allies[i].RemoveDeBuff(allies[i].DeBuffs[j]);
             }
         }
@@ -111,12 +111,12 @@ public class CombatScripts
         {
             for (int j = 0; j < allies[i].Buffs.Count; j++)
             {
-                enemies[i].Buffs[j].DurationLeft--;
+                enemies[i].DecreaseBuffDuration(enemies[i].Buffs[j]);
                 enemies[i].RemoveBuff(enemies[i].Buffs[j]);
             }
             for (int j = 0; j < allies[i].DeBuffs.Count; j++)
             {
-                enemies[i].DeBuffs[j].DurationLeft--;
+                enemies[i].DecreaseDeBuffDuration(enemies[i].DeBuffs[j]);
                 enemies[i].RemoveDeBuff(enemies[i].DeBuffs[j]);
             }
         }
@@ -145,6 +145,10 @@ public class CombatScripts
         while (char1.CurrentHP > 0 && enemies.Count > 0 && ranAway == false && combat == true)
         {
             round++;
+            if (enemies.Count == 0)
+            {
+                combat = false;
+            }
             Console.WriteLine($"Fight! - Round: {round}");
             for (int i = 0; i < allies.Count; i++)
             {
@@ -157,10 +161,6 @@ public class CombatScripts
                 {
                     Console.WriteLine($"{enemies[i].Name} - HP: {enemies[i].CurrentHP}/{enemies[i].MaxHP}");
                 }
-            }
-            if (enemies.Count == 0)
-            {
-                combat = false;
             }
             ui.AnyKey();
             Console.WriteLine("[1] Attack");
@@ -269,7 +269,10 @@ public class CombatScripts
                     {
                         for (int i = 0; i < char1.Inventory.Count; i++)
                         {
-                            Console.WriteLine($"[{i + 1}] {char1.Inventory[i].Name}");
+                            if (char1.Inventory[i] is Consumable)
+                            {
+                                Console.WriteLine($"[{i + 1}] {char1.Inventory[i].Name}");
+                            }
                         }
                         Console.WriteLine("[0] Back");
                         int selection = int.Parse(Console.ReadLine());

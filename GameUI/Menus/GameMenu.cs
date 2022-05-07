@@ -22,7 +22,8 @@ public class GameMenu : Menu
             }
             if (hero.Journal[1].QuestState == 100)
             {
-                Console.WriteLine("[5] Mine Ore");
+                Console.WriteLine("[5] Dwarven Mine - Mine Copper");
+                Console.WriteLine("[6] Dwarven Mine - Mine Tin");
             }
             Console.WriteLine("[0] Back to Main Menu");
 
@@ -34,7 +35,8 @@ public class GameMenu : Menu
                     characterSheet.ShowMenu(hero);
                     break;
                 case "2":
-                    TownMenu townMenu = new TownMenu();
+                    Town town = new Town("Town");
+                    TownMenu townMenu = new TownMenu(town);
                     townMenu.ShowMenu(hero);
                     break;
                 case "3":
@@ -53,7 +55,16 @@ public class GameMenu : Menu
                 case "5":
                     if (hero.Journal[1].QuestState > 1)
                     {
-                        Console.WriteLine("Mining Ore");
+                        CopperOre copper = new CopperOre();
+                        hero.Mining.GatherResource(hero, copper);
+                        ui.AnyKey();
+                    }
+                    break;
+                case "6":
+                  if (hero.Journal[1].QuestState > 1)
+                    {
+                        TinOre tin = new TinOre();
+                        hero.Mining.GatherResource(hero, tin);
                         ui.AnyKey();
                     }
                     break;

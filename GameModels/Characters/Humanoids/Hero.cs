@@ -5,7 +5,9 @@ public class Hero : Character
     {
         Name = name;
         Weapon = new Club();
-        Torso = new ClothTunic();
+        Torso = new Tunic();
+        Legs = new Pants();
+        Feet = new Shoes();
         Gold = 10;
         CalculateStats();
     }

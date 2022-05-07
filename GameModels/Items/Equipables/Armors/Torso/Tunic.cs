@@ -1,10 +1,10 @@
 using System;
 namespace GameModels;
 
-public class ClothTunic : Torso
+public class Tunic : Torso
 {
 
-    public ClothTunic(string name = "Cloth Tunic", int cost = 0, int protection = 0):base(name, cost, protection)
+    public Tunic(string name = "Tunic", int cost = 0, int protection = 0):base(name, cost, protection)
     {
         Name = name;
         Cost = cost;

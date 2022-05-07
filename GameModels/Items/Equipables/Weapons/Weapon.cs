@@ -16,4 +16,8 @@ public class Weapon : Equipable
         character.Weapon = this;
         Console.WriteLine($"{this.Name} Equipped");
     }
+     public override void UnEquipItem(Character character)
+    {
+        character.Weapon = new Unarmed();
+    }
 }
