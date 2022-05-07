@@ -38,42 +38,42 @@ public class ShoppingScripts
         if (hero.HasEnoughGold(item.Cost) == false)
         {
             hero.RemoveGold(item.Cost);
-            Console.WriteLine($"You buy a new {item.Name}");
+            Console.WriteLine($"You buying and equiping {item.Name}");
             if (item is Neck)
             {
-                SellEquipment(hero, hero.Neck);
+                hero.Neck.UnEquipItem(hero);
             }
             if (item is Ring)
             {
-                SellEquipment(hero, hero.Ring);
+                 hero.Ring.UnEquipItem(hero);
             }
             if (item is Head)
             {
-                SellEquipment(hero, hero.Head);
+                 hero.Head.UnEquipItem(hero);
             }
             if (item is Torso)
             {
-                SellEquipment(hero, hero.Torso);
+                 hero.Torso.UnEquipItem(hero);
             }
             if (item is Legs)
             {
-                SellEquipment(hero, hero.Legs);
+                 hero.Legs.UnEquipItem(hero);
             }
             if (item is Hands)
             {
-                SellEquipment(hero, hero.Hands);
+                 hero.Hands.UnEquipItem(hero);
             }
             if (item is Feet)
             {
-                SellEquipment(hero, hero.Feet);
+                 hero.Feet.UnEquipItem(hero);
             }
             if (item is Back)
             {
-                SellEquipment(hero, hero.Back);
+                 hero.Back.UnEquipItem(hero);
             }
             if (item is Weapon)
             {
-                SellEquipment(hero, hero.Weapon);
+                 hero.Weapon.UnEquipItem(hero);
             }
             item.EquipItem(hero);
         }
@@ -86,7 +86,7 @@ public class ShoppingScripts
     {
         for (int i = 0; i < inventory.Count; i++)
         {
-            Console.WriteLine($"[{i + 1}] {inventory[i].Name} : {inventory[i].Cost} GP");
+            Console.WriteLine($"[{i + 1}] {inventory[i].Name}: {inventory[i].Cost} GP");
         }
         Console.WriteLine("[0] Back");
         int selection = int.Parse(Console.ReadLine());

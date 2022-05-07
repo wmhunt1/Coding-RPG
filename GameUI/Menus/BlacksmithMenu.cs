@@ -3,15 +3,16 @@ using GameModels;
 using GameScripts;
 
 namespace GameUI;
-public class BlacksmithMenu : StoreMenu
+public class BlacksmithMenu : Menu
 {
     ShoppingScripts blackSmith = new ShoppingScripts();
+    StoryScripts story = new StoryScripts();
     UIScripts ui = new UIScripts();
+    Blacksmith Blacksmith;
 
-    List<Equipable> inventory = new List<Equipable>();
-    public BlacksmithMenu(string name = "Blacksmith"):base(name)
+    public BlacksmithMenu(Blacksmith blacksmith)
     {
-        Name = name;
+        Blacksmith = blacksmith;
     }
     public override void ShowMenu(Hero hero)
     {
@@ -34,38 +35,13 @@ public class BlacksmithMenu : StoreMenu
                     break;
                 case "2":
                     Console.WriteLine("Blacksmith Inventory");
-                    Dagger dagger = new Dagger();
-                    Sword sword = new Sword();
-                    LeatherVest leatherVest = new LeatherVest();
-                    blackSmith.BuyFromBlacksmith(hero, inventory);
+                    blackSmith.BuyFromBlacksmith(hero, Blacksmith.Inventory);
                     break;
                 case "3":
                     blackSmith.SellToShop(hero);
                     break;
                 case "4":
-                    if (hero!.Journal?[1].QuestState == 0 && hero.Journal[1] != null)
-                    {
-                        Console.WriteLine("The local mines have overrun by goblins. Go clear them out?");
-                        hero.Journal[1].QuestState += 1;
-                        ui.AnyKey();
-                    }
-                    else if (hero?.Journal?[1].QuestState == 1 && hero.Journal[1].QuestObjectiveProgess < hero.Journal[1].QuestObjective)
-                    {
-                        Console.WriteLine("Please kill those goblins");
-                        ui.AnyKey();
-                    }
-                    else if (hero!.Journal?[1].QuestObjective <= hero.Journal?[1].QuestObjectiveProgess && hero.Journal?[1].QuestState < 100)
-                    {
-                        Console.WriteLine("You killed the goblins. Here's some gold");
-                        hero.AddGold(100);
-                        hero.Journal[2].QuestState = 75;
-                        ui.AnyKey();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Feel free to mine ore if you need it");
-                        ui.AnyKey();
-                    }
+                    story.GoblinQuest(hero);
                     break;
                 case "0":
                     Town town = new Town("Town");

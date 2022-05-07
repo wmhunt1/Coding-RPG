@@ -6,7 +6,8 @@ namespace GameUI;
 public class InnMenu : Menu
 {
     new public string Name = "Inn";
-    public UIScripts ui = new UIScripts();
+    StoryScripts story = new StoryScripts();
+    UIScripts ui = new UIScripts();
     public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
@@ -25,7 +26,7 @@ public class InnMenu : Menu
             Console.WriteLine("[0] Leave Inn");
 
             string? UserInput = Console.ReadLine();
-            switch(UserInput)
+            switch (UserInput)
             {
                 case "1":
                     CharacterSheetMenu characterSheet = new CharacterSheetMenu();
@@ -64,29 +65,7 @@ public class InnMenu : Menu
                     Console.ReadLine();
                     break;
                 case "4":
-                    if (hero.Journal[2].QuestState == 0)
-                    {
-                        Console.WriteLine("Innkeeper: 'Want to make some Gold? Go kill some rats in the cellar.'");
-                        hero.Journal[2].QuestState++;
-                        ui.AnyKey();
-                    }
-                    else if (hero.Journal[2].QuestState == 1 && hero.Journal[2].QuestObjectiveProgess < hero.Journal[2].QuestObjective)
-                    {
-                        Console.WriteLine("Well get going");
-                        ui.AnyKey();
-                    }
-                    else if (hero.Journal[2].QuestObjective <= hero.Journal[2].QuestObjectiveProgess && hero.Journal[2].QuestState < 100)
-                    {
-                        Console.WriteLine("You killed the rats. Here's some gold");
-                        hero.AddGold(25);
-                        hero.Journal[2].QuestState = 100;
-                        ui.AnyKey();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Thanks for killing those rats");
-                        ui.AnyKey();
-                    }
+                    story.RatQuest(hero);
                     break;
                 case "5":
                     if (hero.Journal[2].QuestState > 0)
@@ -105,6 +84,6 @@ public class InnMenu : Menu
                 default:
                     break;
             }
-        }       
+        }
     }
 }

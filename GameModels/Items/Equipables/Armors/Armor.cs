@@ -14,4 +14,8 @@ public class Armor : Equipable
     public override void EquipItem(Character character)
     {
     }
+    public override void UnEquipItem(Character character)
+    {
+        character.AddToInventory(this);
+    }
 }

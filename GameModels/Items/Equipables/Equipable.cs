@@ -8,7 +8,7 @@ public class Equipable : Item
         Name = name;
         Cost = cost;
     }
-    public virtual void EquipItem(Character character)
+    public override void EquipItem(Character character)
     {
 
     }

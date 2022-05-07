@@ -6,7 +6,8 @@ namespace GameUI;
 public class TownMenu : Menu
 {
     public Town Town;
-    public UIScripts ui = new UIScripts();
+    StoryScripts story = new StoryScripts();
+    UIScripts ui = new UIScripts();
     public TownMenu(Town town)
     {
         Town = town;
@@ -43,64 +44,22 @@ public class TownMenu : Menu
                     innMenu.ShowMenu(hero);
                     break;
                 case "3":
-                    BlacksmithMenu blacksmithMenu = new BlacksmithMenu();
+                    Blacksmith blacksmith = new Blacksmith("Blacksmith");
+                    BlacksmithMenu blacksmithMenu = new BlacksmithMenu(blacksmith);
                     blacksmithMenu.ShowMenu(hero);
                     break;
                 case "4":
-                    StoreMenu store = new StoreMenu("General Store");
-                    store.ShowMenu(hero);
+                    GeneralStore store = new GeneralStore("General Store");
+                    StoreMenu storeMenu = new StoreMenu(store);
+                    storeMenu.ShowMenu(hero);
                     break;
                 case "5":
                     Console.WriteLine("Mayor's House");
-                    if (hero.Journal[0].QuestState == 0)
-                    {
-                        Console.WriteLine("I've put out a bounty on bandits in the forest");
-                        hero.Journal[0].QuestState++;
-                        ui.AnyKey();
-                    }
-                    else if (hero.Journal[0].QuestState == 1 && hero.Journal[0].QuestObjectiveProgess < hero.Journal[0].QuestObjective)
-                    {
-                        Console.WriteLine("Please kill those bandits");
-                        ui.AnyKey();
-                    }
-                    else if (hero.Journal[0].QuestObjective <= hero.Journal[0].QuestObjectiveProgess && hero.Journal[0].QuestState < 100)
-                    {
-                        Console.WriteLine("You killed the bandits. Here's some gold");
-                        hero.AddGold(100);
-                        hero.Journal[2].QuestState = 100;
-                        ui.AnyKey();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Thanks for killing those bandits");
-                        ui.AnyKey();
-                    }
+                    story.BanditQuest(hero);
                     break;
                 case "6":
                     Console.WriteLine("Visting Church");
-                    if (hero.Journal[3].QuestState == 0)
-                    {
-                        Console.WriteLine("Can you deal with the skeletons rising in the graveyard");
-                        hero.Journal[3].QuestState++;
-                        ui.AnyKey();
-                    }
-                    else if (hero.Journal[3].QuestState == 1 && hero.Journal[3].QuestObjectiveProgess < hero.Journal[3].QuestObjective)
-                    {
-                        Console.WriteLine("Please kill those skeletons");
-                        ui.AnyKey();
-                    }
-                    else if (hero.Journal[3].QuestObjective <= hero.Journal[3].QuestObjectiveProgess && hero.Journal[3].QuestState < 100)
-                    {
-                        Console.WriteLine("You killed the skeletons. Here's some gold");
-                        hero.AddGold(100);
-                        hero.Journal[2].QuestState = 50;
-                        ui.AnyKey();
-                    }
-                    else
-                    {
-                        Console.WriteLine("Thanks for killing those skeletons");
-                        ui.AnyKey();
-                    }
+                    story.SkeletonQuest(hero);
                     break;
                 case "7":
                     if (hero.Journal[3].QuestState > 0)

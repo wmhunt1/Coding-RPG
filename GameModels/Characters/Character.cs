@@ -92,10 +92,10 @@ public class Character
     public void DisplayEquipment()
     {
         Console.WriteLine("Equipment");
-        Console.WriteLine($"Weapons\nMainHand: {Weapon.Name} - {Weapon.Damage} OffHand: {OffHand.Name} - {OffHand.Bonus}");
-        Console.WriteLine($"Armor\nHead: {Head.Name} - {Head.Protection} Torso: {Torso.Name} - {Torso.Protection} Legs: {Legs.Name}");
-        Console.WriteLine($"Hands: {Hands.Name} - {Hands.Protection} Feet: {Feet.Name} - {Feet.Protection}");
-        Console.WriteLine($"Accessories\nNeck: {Neck.Name} Ring: {Ring.Name} Back {Back.Name}");
+        Console.WriteLine($"Weapons\nMainHand - {Weapon.Name}: {Weapon.Damage} OffHand - {OffHand.Name}: {OffHand.Bonus}");
+        Console.WriteLine($"Armor\nHead - {Head.Name}: {Head.Protection} Torso - {Torso.Name}: {Torso.Protection} Legs - {Legs.Name}: {Legs.Protection}");
+        Console.WriteLine($"Hands -  {Hands.Name}: {Hands.Protection} Feet - {Feet.Name}: {Feet.Protection}");
+        Console.WriteLine($"Accessories\nNeck - {Neck.Name} Ring - {Ring.Name} Back - {Back.Name}");
     }
     public void DisplayInventory()
     {
@@ -103,6 +103,42 @@ public class Character
         for (int i = 0; i < Inventory.Count; i++)
         {
             Console.WriteLine($"{Inventory[i].Name} X {Inventory[i].Quantity}");
+        }
+        Console.WriteLine("[1] Equip");
+        Console.WriteLine("[0] Exit Inventory");
+        string selection = Console.ReadLine();
+        if (selection == "1")
+        {
+            EquipFromInventory();
+        }
+        else
+        {
+
+        }
+    }
+    public void EquipFromInventory()
+    {
+        List<Item> equipables = new List<Item>();
+        for (int i = 0; i < Inventory.Count; i++)
+        {
+            if (Inventory[i] is Equipable)
+            {
+                equipables.Add(Inventory[i]);
+            }
+        }
+        for (int i = 0; i < Inventory.Count; i++)
+        {
+            Console.WriteLine($"[{i + 1}]: {equipables[i].Name}");
+        }
+        Console.WriteLine("[0] Back");
+        int selection = int.Parse(Console.ReadLine());
+        // need input validatioon
+        if (selection == 0)
+        {
+        }
+        else
+        {
+            equipables[selection - 1].EquipItem(this);
         }
     }
     public void DisplayJournal()
@@ -463,20 +499,23 @@ public class Character
     }
     public List<Item> AddToInventory(Item item)
     {
-        bool present = false;
-        for (int i = 0; i < Inventory.Count; i++)
+        if (item.Name != "None")
         {
-            if (Inventory[i].Name == item.Name)
+            bool present = false;
+            for (int i = 0; i < Inventory.Count; i++)
             {
-                present = true;
-                Inventory[i].Quantity++;
+                if (Inventory[i].Name == item.Name)
+                {
+                    present = true;
+                    Inventory[i].Quantity++;
+                }
             }
+            if (present == false)
+            {
+                Inventory.Add(item);
+            }
+            Console.WriteLine($"{item.Name} added to Inventory");
         }
-        if (present == false)
-        {
-            Inventory.Add(item);
-        }
-        Console.WriteLine($"{item.Name} added to Inventory");
         return Inventory;
     }
     public List<Item> RemoveFromInventory(Item item)

@@ -15,5 +15,9 @@ public class Item
     {
 
     }
+    public virtual void EquipItem(Character character)
+    {
+
+    }
 
 }

@@ -19,5 +19,6 @@ public class Weapon : Equipable
      public override void UnEquipItem(Character character)
     {
         character.Weapon = new Unarmed();
+        character.AddToInventory(this);
     }
 }

@@ -15,4 +15,9 @@ public class Back: Armor
         character.Back = this;
         Console.WriteLine($"{this.Name} Equipped");
     }
+    public override void UnEquipItem(Character character)
+    {
+        character.Back = new Back("None", 0 , 0);
+        character.AddToInventory(this);
+    }
 }

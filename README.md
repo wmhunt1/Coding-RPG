@@ -16,9 +16,6 @@ encounters
 factions
     members, reputation, rank
 items
-    equip and unequip effect
-    equip from inventory (send to equipment)
-    unequip from equipment (send to inventory)
 jobs
     remove jobs and just learn spells or abilities es/whatever
 locations
@@ -26,7 +23,6 @@ locations
     plug into menus etc
     riverside/lake/docks
 menus
-    object more for towns/inns
 quests
     lumbermill quest
     collection quests

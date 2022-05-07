@@ -7,7 +7,7 @@ public class ForestMenu : Menu
 {
     new public string Name = "Forest";
     UIScripts ui = new UIScripts();
-    public override async void ShowMenu(Hero hero)
+    public override void ShowMenu(Hero hero)
     {
         bool exitMenu = false;
         while (!exitMenu)

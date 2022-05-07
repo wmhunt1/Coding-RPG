@@ -14,6 +14,7 @@ public class TwoHand : Weapon
         character.Weapon = this;
         character.OffHand = new OffHandWeapon(this.Name, 0, 0);
         Console.WriteLine($"{this.Name} Equipped");
+        character.AddToInventory(this);
     }
 
 }

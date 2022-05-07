@@ -15,4 +15,9 @@ public class Torso : Armor
         character.Torso = this;
         Console.WriteLine($"{this.Name} Equipped");
     }
+    public override void UnEquipItem(Character character)
+    {
+        character.Torso = new Torso("None", 0 , 0);
+        character.AddToInventory(this);
+    }
 }
