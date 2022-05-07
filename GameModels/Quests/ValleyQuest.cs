@@ -8,5 +8,7 @@ public class ValleyQuest : Quest
         Name = name;
         QuestID = id;
         QuestState = 1;
+        Description = "Deliver Letter";
+        QuestObjective = 1;
     }
 }

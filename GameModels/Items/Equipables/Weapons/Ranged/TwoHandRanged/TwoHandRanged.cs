@@ -1,9 +1,9 @@
 using System;
 namespace GameModels;
 
-public class TwoHand : Weapon
+public class TwoHandRanged : RangedWeapon
 {
-    public TwoHand(string name, int cost, int damage):base(name, cost, damage)
+    public TwoHandRanged(string name, int cost, int damage):base(name, cost, damage)
     {
         Name = name;
         Cost = cost;

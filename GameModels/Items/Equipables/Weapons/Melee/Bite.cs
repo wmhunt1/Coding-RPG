@@ -1,7 +1,7 @@
 using System;
 namespace GameModels;
 
-public class Bite : Weapon
+public class Bite : MeleeWeapon
 {
     public Bite(string name = "Bite", int cost = 0, int damage = 1):base(name, cost, damage)
     {

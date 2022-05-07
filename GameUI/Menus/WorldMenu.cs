@@ -16,6 +16,7 @@ public class WorldMenu : Menu
             Console.WriteLine($"---------- {Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Enter The Valley of Dale");
+            Console.WriteLine("[3] Test Feature");
             Console.WriteLine("[0] Back to Main Menu");
 
             string? UserInput = Console.ReadLine();
@@ -33,6 +34,8 @@ public class WorldMenu : Menu
                     }
                     ValleyMenu valleyMenu = new ValleyMenu();
                     valleyMenu.ShowMenu(hero);
+                    break;
+                case "3":
                     break;
                 case "0":
                     MainMenu mainMenu = new MainMenu();

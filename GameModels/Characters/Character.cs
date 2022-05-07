@@ -35,6 +35,8 @@ public class Character
     public int MagicDefense = 0;
     public int Speed = 0;
     public int CritChance = 0;
+    public int HealthBonus = 0;
+    public int TempHealthBonus = 0;
     public int AttackBonus = 0;
     public int TempAttackBonus = 0;
     public int MagicAttackBonus = 0;
@@ -45,13 +47,18 @@ public class Character
     public int TempMagicDefenseBonus = 0;
     public List<Buff> Buffs = new List<Buff>();
     public List<DeBuff> DeBuffs = new List<DeBuff>();
+    public List<Type>? Immunities = new List<Type>();
+    public List<Type>? Resistances = new List<Type>();
+    public List<Type>? Vulnerabilities = new List<Type>();
     //inventory;
     public int Gold = 0;
     public List<Item>? Inventory = new List<Item>();
     //equipment
+    //accessories
     public Neck Neck = new Neck("None", 0);
     public Ring Ring = new Ring("None", 0);
-
+    public Back Back = new Back("None", 0, 0);
+    //weapons
     public Weapon Weapon = new Unarmed();
     public OffHand OffHand = new EmptyOffHand();
     //armor
@@ -60,22 +67,30 @@ public class Character
     public Legs Legs = new Legs("None", 0, 0);
     public Hands Hands = new Hands("None", 0, 0);
     public Feet Feet = new Feet("None", 0, 0);
-    public Back Back = new Back("None", 0, 0);
-    //skills
-    public List<Ability>? ActionBar = new List<Ability>();
-    public List<Spell>? Spellbook = new List<Spell>();
+    public List<Ability> ActionBar = new List<Ability>();
+    public List<Spell> Spellbook = new List<Spell>();
+    public List<Faction> Factions = new List<Faction>();
+    public int Fame = 0;
+    public int Infamy = 0;
     public List<Quest> Journal = new List<Quest>();
-    public List<Type>? Immunities = new List<Type>();
-    public List<Type>? Resistances = new List<Type>();
-    public List<Type>? Vulnerabilities = new List<Type>();
+    //skills
+    public Alchemy Alchemy = new Alchemy();
     public Cooking Cooking = new Cooking();
     public Fishing Fishing = new Fishing();
+    public Herblore Herblore = new Herblore();
     public Mining Mining = new Mining();
     public Smithing Smithing = new Smithing();
     public WoodCutting WoodCutting = new WoodCutting();
+    //Perks and Feats
+    public List<Feat> Feats = new List<Feat>();
+    public List<Perk> Perks = new List<Perk>();
+    public List<Perk> AvailablePerks = new List<Perk>();
     public Character(string name)
     {
         Name = name;
+        Toughness toughness = new Toughness();
+        AvailablePerks.Add(toughness);
+        //quests
         Journal = new List<Quest>();
         ValleyQuest valleyQuest = new ValleyQuest();
         Journal.Add(valleyQuest);
@@ -95,15 +110,15 @@ public class Character
     public void DisplayStats()
     {
         Console.WriteLine($"Level: {Level}\nEXP: {CurrentXP}/{MaxXP}\nHP: {CurrentHP}/{MaxHP} MP: {CurrentMP}/{MaxMP} SP: {CurrentSP}/{MaxSP}");
-        Console.WriteLine($"Stats\n STR: {Strength} AGL: {Agility} END: {Endurance}\nINT: {Intelligence} PER: {Perception} WIL:{WillPower}\nCHA: {Charisma} ATR: {Attractiveness} LCK: {Luck}");
+        Console.WriteLine($"Stats\nSTR: {Strength} AGL: {Agility} END: {Endurance}\nINT: {Intelligence} PER: {Perception} WIL:{WillPower}\nCHA: {Charisma} ATR: {Attractiveness} LCK: {Luck}");
     }
     public void DisplayEquipment()
     {
         Console.WriteLine("Equipment");
-        Console.WriteLine($"Weapons\nMainHand - {Weapon.Name}: {Weapon.Damage} OffHand - {OffHand.Name}: {OffHand.Bonus}");
-        Console.WriteLine($"Armor\nHead - {Head.Name}: {Head.Protection} Torso - {Torso.Name}: {Torso.Protection} Legs - {Legs.Name}: {Legs.Protection}");
-        Console.WriteLine($"Hands -  {Hands.Name}: {Hands.Protection} Feet - {Feet.Name}: {Feet.Protection}");
-        Console.WriteLine($"Accessories\nNeck - {Neck.Name} Ring - {Ring.Name} Back - {Back.Name}");
+        Console.WriteLine($"Weapons\nMainHand - {Weapon.Name}: {Weapon.Damage}, OffHand - {OffHand.Name}: {OffHand.Bonus}");
+        Console.WriteLine($"Armor\nHead - {Head.Name}: {Head.Protection}, Torso - {Torso.Name}: {Torso.Protection}, Legs - {Legs.Name}: {Legs.Protection}");
+        Console.WriteLine($"Hands -  {Hands.Name}: {Hands.Protection}, Feet - {Feet.Name}: {Feet.Protection}");
+        Console.WriteLine($"Accessories\nNeck - {Neck.Name}, Ring - {Ring.Name}, Back - {Back.Name}");
     }
     public void DisplayInventory()
     {
@@ -122,6 +137,20 @@ public class Character
         else
         {
 
+        }
+    }
+    public void DisplayFeats()
+    {
+        for (int i = 0; i < Feats.Count; i++)
+        {
+            Console.WriteLine($"{Feats[i].Name}: {Feats[i].Description}");
+        }
+    }
+    public void DisplayPerks()
+    {
+        for (int i = 0; i < Perks.Count; i++)
+        {
+            Console.WriteLine($"{Perks[i].Name}: {Perks[i].Description}");
         }
     }
     public void EquipFromInventory()
@@ -171,8 +200,10 @@ public class Character
     public void DisplaySkills()
     {
         Console.WriteLine("Skills");
+        Console.WriteLine($"{Alchemy.Name} - {Alchemy.Level}");
         Console.WriteLine($"{Cooking.Name} - {Cooking.Level}");
         Console.WriteLine($"{Fishing.Name} - {Fishing.Level}");
+        Console.WriteLine($"{Herblore.Name} - {Herblore.Level}");
         Console.WriteLine($"{Mining.Name} - {Mining.Level}");
         Console.WriteLine($"{Smithing.Name} - {Smithing.Level}");
         Console.WriteLine($"{WoodCutting.Name} - {WoodCutting.Level}");
@@ -187,14 +218,14 @@ public class Character
     }
     public Character CalculateStats()
     {
-        CurrentHP = Endurance * Level;
-        MaxHP = Endurance * Level;
+        CurrentHP = (Endurance + HealthBonus) * Level;
+        MaxHP = (Endurance + HealthBonus) * Level;
         CurrentMP = Intelligence * Level;
         MaxMP = Intelligence * Level;
         CurrentSP = Endurance * Level;
         MaxSP = Endurance * Level;
         Attack = (Strength + Agility) / 5;
-        Defense = Agility/ 5;
+        Defense = Agility / 5;
         MagicAttack = Intelligence / 5;
         MagicDefense = WillPower / 5;
         Speed = Agility / 5;
@@ -328,6 +359,26 @@ public class Character
         GainMP(MaxMP);
         GainSP(MaxSP);
     }
+    public void SelectPerks()
+    {
+        List<Perk> PerksToChoose = new List<Perk>();
+        for (int i = 0; i < AvailablePerks.Count; i++)
+        {
+            if (AvailablePerks[i].RequiredLevel <= Level && AvailablePerks[i].Has == false)
+            {
+                PerksToChoose.Add(AvailablePerks[i]);
+            }
+        }
+        for (int i = 0; i < PerksToChoose.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}: {PerksToChoose[i].Name}");
+        }
+        if (PerksToChoose.Count > 0)
+        {
+            int selection = int.Parse(Console.ReadLine());
+            PerksToChoose[selection - 1].ApplyPerk(this);
+        }
+    }
     public int LevelUP()
     {
         Level++;
@@ -389,6 +440,7 @@ public class Character
             }
         }
         CalculateStats();
+        SelectPerks();
         FullRest();
         return Level;
     }
@@ -432,6 +484,7 @@ public class Character
     }
     public Character ResetTemp()
     {
+        TempHealthBonus = 0;
         TempAttackBonus = 0;
         TempDefenseBonus = 0;
         TempMagicAttackBonus = 0;

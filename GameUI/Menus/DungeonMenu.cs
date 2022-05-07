@@ -55,8 +55,13 @@ public class DungeonMenu : Menu
                         {
                             Dungeon.Boss[i].GainHP(Dungeon.Boss[i].MaxHP);
                         }
+                        List<Character> bossPlusMinions = Dungeon.GenerateEncounter();
+                         for (int i = 0; i < Dungeon.Boss.Count; i++)
+                        {
+                            bossPlusMinions.Add(Dungeon.Boss[i]);
+                        }
                         CombatScripts bossCombat = new CombatScripts();
-                        bossCombat.RunCombat(hero, Dungeon.Boss);
+                        bossCombat.RunCombat(hero, bossPlusMinions);
                     }
                     break;
                 case "0":

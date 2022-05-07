@@ -19,7 +19,8 @@ public class CharacterSheetMenu : Menu
             Console.WriteLine("[3] Inventory");
             Console.WriteLine("[4] Journal");
             Console.WriteLine("[5] Skills");
-            Console.WriteLine("[6] Party");
+            Console.WriteLine("[6] Feats & Perks");
+            Console.WriteLine("[7] Party");
             Console.WriteLine("[0] Close");
 
             string? UserInput = Console.ReadLine();
@@ -46,6 +47,11 @@ public class CharacterSheetMenu : Menu
                     ui.AnyKey();
                     break;
                 case "6":
+                    hero.DisplayFeats();
+                    hero.DisplayPerks();
+                    ui.AnyKey();
+                    break;
+                case "7":
                     hero.DisplayCompanions();
                     ui.AnyKey();
                     break;
