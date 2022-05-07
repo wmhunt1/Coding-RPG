@@ -32,8 +32,10 @@ skills
     weapon and attack skills
 statuses
 story
-    intro
-    more conversations and conversation options
+    * new adventurer on quest to deliver letter to lord-mayor of dale town
+    * attacked and letter stolen by goblins
+    * no current mayor so need to get back the letter and help figure out who the next in line is
+    * tracking down letter from goblins to bandits
 ui
     format menus etc
 other

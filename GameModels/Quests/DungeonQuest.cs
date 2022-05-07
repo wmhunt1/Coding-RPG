@@ -3,8 +3,9 @@ namespace GameModels;
 
 public class DungeonQuest : Quest
 {
-    public DungeonQuest(string name):base(name)
+    public DungeonQuest(string name, string id):base(name, id)
     {
         Name = name;
+        QuestID = id;
     }
 }

@@ -76,8 +76,10 @@ public class Character
     public Character(string name)
     {
         Name = name;
-        BanditQuest banditQuest = new BanditQuest();
         Journal = new List<Quest>();
+        ValleyQuest valleyQuest = new ValleyQuest();
+        Journal.Add(valleyQuest);
+        BanditQuest banditQuest = new BanditQuest();
         Journal.Add(banditQuest);
         GoblinQuest goblinQuest = new GoblinQuest();
         Journal.Add(goblinQuest);
@@ -85,6 +87,9 @@ public class Character
         Journal.Add(ratQuest);
         SkeletonQuest skeletonQuest = new SkeletonQuest();
         Journal.Add(skeletonQuest);
+        LetterMayor letter = new LetterMayor();
+        Inventory.Add(letter);
+
         CalculateStats();
     }
     public void DisplayStats()
@@ -129,19 +134,26 @@ public class Character
                 equipables.Add(Inventory[i]);
             }
         }
-        for (int i = 0; i < Inventory.Count; i++)
+        if (equipables.Count > 0)
         {
-            Console.WriteLine($"[{i + 1}]: {equipables[i].Name}");
-        }
-        Console.WriteLine("[0] Back");
-        int selection = int.Parse(Console.ReadLine());
-        // need input validatioon
-        if (selection == 0)
-        {
+            for (int i = 0; i < Inventory.Count; i++)
+            {
+                Console.WriteLine($"[{i + 1}]: {equipables[i].Name}");
+            }
+            Console.WriteLine("[0] Back");
+            int selection = int.Parse(Console.ReadLine());
+            // need input validatioon
+            if (selection == 0)
+            {
+            }
+            else
+            {
+                equipables[selection - 1].EquipItem(this);
+            }
         }
         else
         {
-            equipables[selection - 1].EquipItem(this);
+            Console.WriteLine("No Equipable Items");
         }
     }
     public void DisplayJournal()
@@ -182,7 +194,7 @@ public class Character
         CurrentSP = Endurance * Level;
         MaxSP = Endurance * Level;
         Attack = (Strength + Agility) / 5;
-        Defense = (Endurance + Agility) / 5;
+        Defense = Agility/ 5;
         MagicAttack = Intelligence / 5;
         MagicDefense = WillPower / 5;
         Speed = Agility / 5;
@@ -646,12 +658,12 @@ public class Character
         int damage = CalculateDamage(char1, char2, false);
         if (damage > 0)
         {
-            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, dealing {damage} damage");
             bool crit = char1.CheckforCriticalHit();
             if (crit == true)
             {
                 damage *= 2;
             }
+            Console.WriteLine($"{char1.Name} attacks {char2.Name} with their {char1.Weapon.Name}, dealing {damage} damage");
             char2.DamageHP(damage);
         }
         else

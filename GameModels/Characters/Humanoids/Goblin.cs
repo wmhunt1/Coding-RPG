@@ -8,6 +8,7 @@ public class Goblin : Character
         Torso = new LeatherScraps();
         CurrentXP = 5;
         Gold = 5;
+        Endurance = 5;
         CalculateStats();
     }
 }

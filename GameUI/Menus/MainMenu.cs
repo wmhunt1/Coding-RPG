@@ -7,70 +7,20 @@ public class MainMenu : Menu
 {
     new public string Name = "Main Menu";
     Hero hero = new Hero("Hero");
-    GameMenu gameMenu = new GameMenu();
+    WorldMenu gameMenu = new WorldMenu();
     UIScripts ui = new UIScripts();
     public Hero CharacterCreation(Hero hero)
     {
         string name = "";
         Console.WriteLine("What is your name?");
         name = Console.ReadLine();
-        if (name == "")
-        {
-            name = "Hero";
-        }
-        hero.Name = name;
-        Console.WriteLine("Choose Class");
-        Console.WriteLine("[1] Barbarian");
-        Console.WriteLine("[2] Fighter");
-        Console.WriteLine("[3] Rogue");
-        Console.WriteLine("[4] Wizard");
-        
-        string job = Console.ReadLine();
-         if (job == "1")
-        {
-            Barbarian barb = new Barbarian();
-            barb.ChooseJob(hero);
-            Rage rage = new Rage();
-            rage.GainAbility(hero);
-        }
-        if (job == "2")
-        {
-            Fighter fighter = new Fighter();
-            fighter.ChooseJob(hero);
-        }
-        else if (job == "2")
-        {
-            Rogue rogue = new Rogue();
-            rogue.ChooseJob(hero);
-            SneakAttack sneakAttack = new SneakAttack();
-            sneakAttack.GainAbility(hero);
-        }
-        else if (job == "4")
-        {
-            Wizard wizard = new Wizard();
-            wizard.ChooseJob(hero);
-            MagicMissile magicMissile = new MagicMissile();
-            magicMissile.LearnSpell(hero);
-        }
-        else if (job == "")
-        {
-
-        }
-        else
-        {
-            
-        }
-        Dog dog = new Dog("Dog");
-        Console.WriteLine("Name your dog");
+        Console.WriteLine("What is your loyal canine companion's name?");
         string dogName = Console.ReadLine();
         if (dogName == "")
         {
-            dog.Name = "Dog";
+            dogName = "Dog";
         }
-        else
-        {
-            dog.Name = dogName;
-        }
+        Dog dog = new Dog(dogName);
         dog.CalculateStats();
         hero.AddToParty(dog);
         return hero;

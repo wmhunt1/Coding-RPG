@@ -96,35 +96,49 @@ public class CombatScripts
                 enemies.Remove(enemies[i]);
             }
         }
-        for (int i = 0; i < allies.Count; i++)
+          for (int i = 0; i < allies.Count; i++)
         {
-            for (int j = 0; j < allies[i].Buffs.Count; j++)
+            if (allies[i].CurrentHP <= 0)
             {
-                allies[i].DecreaseBuffDuration(allies[i].Buffs[j]);
-                allies[i].RemoveBuff(allies[i].Buffs[j]);
-            }
-            for (int j = 0; j < allies[i].DeBuffs.Count; j++)
-            {
-                allies[i].DecreaseDeBuffDuration(allies[i].DeBuffs[j]);
-                allies[i].RemoveDeBuff(allies[i].DeBuffs[j]);
+                allies.Remove(allies[i]);
             }
         }
-        for (int j = 0; j < allies[0].Buffs.Count; j++)
+        for (int i = 0; i < allies.Count; i++)
         {
-            Console.WriteLine(allies[0].Buffs[j].Name);
-            ui.AnyKey();
+            if (allies[i].Buffs.Count > 0)
+            {
+                for (int j = 0; j < allies[i].Buffs.Count; j++)
+                {
+                    allies[i].DecreaseBuffDuration(allies[i].Buffs[j]);
+                    allies[i].RemoveBuff(allies[i].Buffs[j]);
+                }
+            }
+            if (allies[i].DeBuffs.Count > 0)
+            {
+                for (int j = 0; j < allies[i].DeBuffs.Count; j++)
+                {
+                    allies[i].DecreaseDeBuffDuration(allies[i].DeBuffs[j]);
+                    allies[i].RemoveDeBuff(allies[i].DeBuffs[j]);
+                }
+            }
         }
         for (int i = 0; i < enemies.Count; i++)
         {
-            for (int j = 0; j < allies[i].Buffs.Count; j++)
+            if (enemies[i].Buffs.Count > 0)
             {
-                enemies[i].DecreaseBuffDuration(enemies[i].Buffs[j]);
-                enemies[i].RemoveBuff(enemies[i].Buffs[j]);
+                for (int j = 0; j < enemies[i].Buffs.Count; j++)
+                {
+                    enemies[i].DecreaseBuffDuration(enemies[i].Buffs[j]);
+                    enemies[i].RemoveBuff(enemies[i].Buffs[j]);
+                }
             }
-            for (int j = 0; j < allies[i].DeBuffs.Count; j++)
+            if (enemies[i].DeBuffs.Count > 0)
             {
-                enemies[i].DecreaseDeBuffDuration(enemies[i].DeBuffs[j]);
-                enemies[i].RemoveDeBuff(enemies[i].DeBuffs[j]);
+                for (int j = 0; j < enemies[i].DeBuffs.Count; j++)
+                {
+                    enemies[i].DecreaseDeBuffDuration(enemies[i].DeBuffs[j]);
+                    enemies[i].RemoveDeBuff(enemies[i].DeBuffs[j]);
+                }
             }
         }
 

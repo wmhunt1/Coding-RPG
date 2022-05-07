@@ -128,7 +128,10 @@ public class ShoppingScripts
         {
             for (int i = 0; i < hero.Inventory.Count; i++)
             {
-                Console.WriteLine($"[{i + 1}] {hero.Inventory[i].Name} : {hero.Inventory[i].Cost / 2} GP");
+                if (hero.Inventory[i] is not QuestItem)
+                {
+                    Console.WriteLine($"[{i + 1}] {hero.Inventory[i].Name} : {hero.Inventory[i].Cost / 2} GP");
+                }
             }
             Console.WriteLine("[0] Back");
             int selection = int.Parse(Console.ReadLine());

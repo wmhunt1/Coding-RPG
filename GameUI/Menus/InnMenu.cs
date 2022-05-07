@@ -19,7 +19,7 @@ public class InnMenu : Menu
             Console.WriteLine("[2] Buy Beer (1 Gold)");
             Console.WriteLine("[3] Rent Room (1 Gold)");
             Console.WriteLine("[4] Talk to InnKeeper");
-            if (hero.Journal.Find(x => x.Name == "Rat Quest").QuestState > 0)
+            if (hero.Journal.Find(x => x.QuestID == "RQ1").QuestState > 0)
             {
                 Console.WriteLine("[5] Enter cellar");
             }
@@ -68,7 +68,7 @@ public class InnMenu : Menu
                     story.RatQuest(hero);
                     break;
                 case "5":
-                    if (hero.Journal.Find(x => x.Name == "Rat Quest").QuestState > 0)
+                    if (hero.Journal.Find(x => x.QuestID == "RQ1").QuestState > 0)
                     {
                         RatDungeon ratCellar = new RatDungeon();
                         InnMenu innMenu = new InnMenu();
