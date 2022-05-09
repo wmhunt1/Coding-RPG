@@ -3,7 +3,7 @@ namespace GameModels;
 public class Character
 {
     public string Name;
-    public Race Race = new Humanoid();
+    public Race Race = new Human();
     public Job Job = new Job("Freelancer");
     public List<Character> Companions = new List<Character>();
     //stats
@@ -78,6 +78,7 @@ public class Character
     public Cooking Cooking = new Cooking();
     public Fishing Fishing = new Fishing();
     public Herblore Herblore = new Herblore();
+    public Hunting Hunting = new Hunting();
     public Mining Mining = new Mining();
     public Smithing Smithing = new Smithing();
     public WoodCutting WoodCutting = new WoodCutting();
@@ -204,6 +205,7 @@ public class Character
         Console.WriteLine($"{Cooking.Name} - {Cooking.Level}");
         Console.WriteLine($"{Fishing.Name} - {Fishing.Level}");
         Console.WriteLine($"{Herblore.Name} - {Herblore.Level}");
+        Console.WriteLine($"{Hunting.Name} - {Hunting.Level}");
         Console.WriteLine($"{Mining.Name} - {Mining.Level}");
         Console.WriteLine($"{Smithing.Name} - {Smithing.Level}");
         Console.WriteLine($"{WoodCutting.Name} - {WoodCutting.Level}");
