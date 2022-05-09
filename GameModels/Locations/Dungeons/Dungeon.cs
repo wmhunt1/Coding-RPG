@@ -9,19 +9,25 @@ public class Dungeon : Location
     {
         Name = name;
     }
-    public virtual List<Character> GenerateEncounter1()
+    public virtual List<Character> GenerateEncounter(int x, int y)
     {
         List<Character> newEncounter = new List<Character>();
         return newEncounter;
     }
+    public virtual List<Character> GenerateEncounter1()
+    {
+        List<Character> newEncounter = GenerateEncounter(1, 2);
+        return newEncounter;
+
+    }
     public virtual List<Character> GenerateEncounter2()
     {
-        List<Character> newEncounter = new List<Character>();
+        List<Character> newEncounter = GenerateEncounter(1, 2);
         return newEncounter;
     }
     public virtual List<Character> GenerateEncounter3()
     {
-        List<Character> newEncounter = new List<Character>();
+        List<Character> newEncounter = GenerateEncounter(1, 2);
         return newEncounter;
     }
 }

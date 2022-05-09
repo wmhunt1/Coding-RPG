@@ -18,12 +18,12 @@ public class StoryScripts
         ui.AnyKey();
     }
     //quests
-    public void BanditQuest(Character hero)
+    public void BanditQuest1(Character hero)
     {
-        if (hero.Journal[0].QuestState == 0)
+        if (hero.Journal.Find(x => x.QuestID == "BQ1").QuestState == 0)
         {
             Console.WriteLine("I've put out a bounty on bandits in the forest");
-            hero.Journal[0].QuestState++;
+            hero.Journal.Find(x => x.QuestID == "BQ1").QuestState += 1;
             ui.AnyKey();
         }
         else if (hero.Journal.Find(x => x.QuestID == "BQ1").QuestState == 1 && hero.Journal.Find(x => x.QuestID == "BQ1").QuestObjectiveProgess < hero.Journal.Find(x => x.QuestID == "BQ1").QuestObjective)
@@ -35,7 +35,7 @@ public class StoryScripts
         {
             Console.WriteLine("You killed the bandits. Here's some gold");
             hero.AddGold(100);
-            hero.Journal[2].QuestState = 100;
+            hero.Journal.Find(x => x.QuestID == "BQ1").QuestState = 100;
             ui.AnyKey();
         }
         else
@@ -44,12 +44,38 @@ public class StoryScripts
             ui.AnyKey();
         }
     }
-    public void GoblinQuest(Character hero)
+    public void GiantQuest1(Character hero)
+    {
+         if (hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestState == 0)
+        {
+            Console.WriteLine("Please help up, our Foreman George has been kidnapped by Paul the Giant");
+            hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestState ++;
+            ui.AnyKey();
+        }
+        else if (hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestState == 1 && hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestObjectiveProgess < hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestObjective)
+        {
+            Console.WriteLine("Please rescue Goerge");
+            ui.AnyKey();
+        }
+        else if (hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestObjective <= hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestObjectiveProgess && hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestState < 100)
+        {
+            Console.WriteLine("You rescued George. Here's some gold");
+            hero.AddGold(100);
+            hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestState = 100;
+            ui.AnyKey();
+        }
+        else
+        {
+            Console.WriteLine("Feel free to chop some wood if you need it");
+            ui.AnyKey();
+        }
+    }
+    public void GoblinQuest1(Character hero)
     {
         if (hero.Journal.Find(x => x.QuestID == "GQ1").QuestState == 0)
         {
             Console.WriteLine("The local mines have overrun by goblins. Go clear them out?");
-            hero.Journal[1].QuestState += 1;
+            hero.Journal.Find(x => x.QuestID == "GQ1").QuestState ++;
             ui.AnyKey();
         }
         else if (hero.Journal.Find(x => x.QuestID == "GQ1").QuestState == 1 && hero.Journal.Find(x => x.QuestID == "GQ1").QuestObjectiveProgess < hero.Journal.Find(x => x.QuestID == "GQ1").QuestObjective)
@@ -61,7 +87,7 @@ public class StoryScripts
         {
             Console.WriteLine("You killed the goblins. Here's some gold");
             hero.AddGold(100);
-            hero.Journal[2].QuestState = 75;
+            hero.Journal.Find(x => x.QuestID == "GQ1").QuestState = 100;
             ui.AnyKey();
         }
         else
@@ -70,12 +96,12 @@ public class StoryScripts
             ui.AnyKey();
         }
     }
-    public void RatQuest(Character hero)
+    public void RatQuest1(Character hero)
     {
         if (hero.Journal.Find(x => x.QuestID == "RQ1").QuestState == 0)
         {
             Console.WriteLine("Innkeeper: 'Want to make some Gold? Go kill some rats in the cellar.'");
-            hero.Journal[2].QuestState++;
+            hero.Journal.Find(x => x.QuestID == "RQ1").QuestState++;
             ui.AnyKey();
         }
         else if (hero.Journal.Find(x => x.QuestID == "RQ1").QuestState == 1 && hero.Journal.Find(x => x.QuestID == "RQ1").QuestObjectiveProgess < hero.Journal.Find(x => x.QuestID == "RQ1").QuestObjective)
@@ -87,7 +113,7 @@ public class StoryScripts
         {
             Console.WriteLine("You killed the rats. Here's some gold");
             hero.AddGold(25);
-            hero.Journal[2].QuestState = 100;
+            hero.Journal.Find(x => x.QuestID == "RQ1").QuestState = 100;
             ui.AnyKey();
         }
         else
@@ -96,12 +122,12 @@ public class StoryScripts
             ui.AnyKey();
         }
     }
-    public void SkeletonQuest(Character hero)
+    public void SkeletonQuest1(Character hero)
     {
         if (hero.Journal.Find(x => x.QuestID == "SQ1").QuestState == 0)
         {
             Console.WriteLine("Can you deal with the skeletons rising in the graveyard");
-            hero.Journal[3].QuestState++;
+            hero.Journal.Find(x => x.QuestID == "SQ1").QuestState++;
             ui.AnyKey();
         }
         else if (hero.Journal.Find(x => x.QuestID == "SQ1").QuestState == 1 && hero.Journal.Find(x => x.QuestID == "SQ1").QuestObjectiveProgess < hero.Journal.Find(x => x.QuestID == "SQ1").QuestObjective)
@@ -113,7 +139,7 @@ public class StoryScripts
         {
             Console.WriteLine("You killed the skeletons. Here's some gold");
             hero.AddGold(100);
-            hero.Journal[2].QuestState = 50;
+            hero.Journal.Find(x => x.QuestID == "SQ1").QuestState = 50;
             ui.AnyKey();
         }
         else
@@ -122,7 +148,7 @@ public class StoryScripts
             ui.AnyKey();
         }
     }
-    public void ValleyQuest(Character hero)
+    public void ValleyQuest1(Character hero)
     {
         if (hero.Journal.Find(x => x.QuestID == "MQ1").QuestState == 1)
         {

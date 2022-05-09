@@ -54,16 +54,16 @@ public class TownMenu : Menu
                     break;
                 case "5":
                     Console.WriteLine("Mayor's House");
-                    story.BanditQuest(hero);
+                    story.BanditQuest1(hero);
                     break;
                 case "6":
                     Console.WriteLine("Visting Church");
-                    story.SkeletonQuest(hero);
+                    story.SkeletonQuest1(hero);
                     break;
                 case "7":
                     if (hero.Journal.Find(x => x.QuestID == "SQ1").QuestState > 0)
                     {
-                        SkeletonDungeon skeletonDungeon = new SkeletonDungeon();
+                        SkeletonDungeon1 skeletonDungeon = new SkeletonDungeon1();
                         Town town = new Town("Town");
                         TownMenu townMenuExit = new TownMenu(town);
                         DungeonMenu skeletonDungeonMenu = new DungeonMenu(skeletonDungeon, townMenuExit);

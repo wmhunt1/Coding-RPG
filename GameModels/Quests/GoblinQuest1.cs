@@ -1,9 +1,9 @@
 using System;
 namespace GameModels;
 
-public class GoblinQuest : DungeonQuest
+public class GoblinQuest1 : DungeonQuest
 {
-    public GoblinQuest(string name = "Goblin Quest", string id = "GQ1"):base(name, id)
+    public GoblinQuest1(string name = "Goblin Slayer", string id = "GQ1"):base(name, id)
     {
         Name = name;
         QuestID = id;

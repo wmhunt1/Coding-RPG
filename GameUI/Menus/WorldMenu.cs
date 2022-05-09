@@ -30,7 +30,7 @@ public class WorldMenu : Menu
 
                     if (hero.Journal.Find(x => x.QuestID == "MQ1").QuestState == 1)
                     {
-                        story.ValleyQuest(hero);
+                        story.ValleyQuest1(hero);
                     }
                     ValleyMenu valleyMenu = new ValleyMenu();
                     valleyMenu.ShowMenu(hero);

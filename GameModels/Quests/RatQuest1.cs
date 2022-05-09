@@ -1,9 +1,9 @@
 using System;
 namespace GameModels;
 
-public class RatQuest : Quest
+public class RatQuest1 : Quest
 {
-    public RatQuest(string name = "Rat Quest", string id = "RQ1"):base(name, id)
+    public RatQuest1(string name = "Rats in The Cellar", string id = "RQ1"):base(name, id)
     {
         Name = name;
         QuestID = id;

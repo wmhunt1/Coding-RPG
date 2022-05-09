@@ -97,7 +97,7 @@ public class DungeonMenu : Menu
                         {
                             Dungeon.Boss[i].GainHP(Dungeon.Boss[i].MaxHP);
                         }
-                        List<Character> bossPlusMinions = Dungeon.GenerateEncounter3();
+                        List<Character> bossPlusMinions = Dungeon.GenerateEncounter1();
                         for (int i = 0; i < Dungeon.Boss.Count; i++)
                         {
                             bossPlusMinions.Add(Dungeon.Boss[i]);

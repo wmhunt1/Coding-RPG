@@ -65,12 +65,12 @@ public class InnMenu : Menu
                     Console.ReadLine();
                     break;
                 case "4":
-                    story.RatQuest(hero);
+                    story.RatQuest1(hero);
                     break;
                 case "5":
                     if (hero.Journal.Find(x => x.QuestID == "RQ1").QuestState > 0)
                     {
-                        RatDungeon ratCellar = new RatDungeon();
+                        RatDungeon1 ratCellar = new RatDungeon1();
                         InnMenu innMenu = new InnMenu();
                         DungeonMenu ratCellarMenu = new DungeonMenu(ratCellar, innMenu);
                         ratCellarMenu.ShowMenu(hero);

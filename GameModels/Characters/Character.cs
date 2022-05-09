@@ -93,16 +93,17 @@ public class Character
         AvailablePerks.Add(toughness);
         //quests
         Journal = new List<Quest>();
-        ValleyQuest valleyQuest = new ValleyQuest();
-        Journal.Add(valleyQuest);
-        BanditQuest banditQuest = new BanditQuest();
-        Journal.Add(banditQuest);
-        GoblinQuest goblinQuest = new GoblinQuest();
-        Journal.Add(goblinQuest);
-        RatQuest ratQuest = new RatQuest();
-        Journal.Add(ratQuest);
-        SkeletonQuest skeletonQuest = new SkeletonQuest();
-        Journal.Add(skeletonQuest);
+        ValleyQuest1 valleyQuest1 = new ValleyQuest1();
+        Journal.Add(valleyQuest1);
+        BanditQuest1 banditQuest1 = new BanditQuest1();
+        Journal.Add(banditQuest1);
+        GiantQuest1 giantQuest1 = new GiantQuest1();
+        GoblinQuest1 goblinQuest1 = new GoblinQuest1();
+        Journal.Add(goblinQuest1);
+        RatQuest1 ratQuest1 = new RatQuest1();
+        Journal.Add(ratQuest1);
+        SkeletonQuest1 skeletonQuest1 = new SkeletonQuest1();
+        Journal.Add(skeletonQuest1);
         LetterMayor letter = new LetterMayor();
         Inventory.Add(letter);
 

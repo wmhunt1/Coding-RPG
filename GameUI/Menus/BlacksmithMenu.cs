@@ -41,7 +41,7 @@ public class BlacksmithMenu : Menu
                     blackSmith.SellToShop(hero);
                     break;
                 case "4":
-                    story.GoblinQuest(hero);
+                    story.GoblinQuest1(hero);
                     break;
                 case "0":
                     Town town = new Town("Town");

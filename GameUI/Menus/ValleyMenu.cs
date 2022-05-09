@@ -42,7 +42,7 @@ public class ValleyMenu : Menu
 
                     if (hero.Journal.Find(x => x.QuestID == "MQ1").QuestState == 2)
                     {
-                        story.ValleyQuest(hero);
+                        story.ValleyQuest1(hero);
                     }
                     Town town = new Town("Town");
                     TownMenu townMenu = new TownMenu(town);
@@ -58,7 +58,7 @@ public class ValleyMenu : Menu
                 case "4":
                     if (hero.Journal.Find(x => x.QuestID == "GQ1").QuestState > 0)
                     {
-                        GoblinDungeon dwarfMine = new GoblinDungeon();
+                        GoblinDungeon1 dwarfMine = new GoblinDungeon1();
                         ValleyMenu gameMenuExit = new ValleyMenu();
                         DungeonMenu dwarfMineMenu = new DungeonMenu(dwarfMine, gameMenuExit);
                         dwarfMineMenu.ShowMenu(hero);

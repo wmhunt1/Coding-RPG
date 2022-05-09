@@ -6,6 +6,7 @@ namespace GameUI;
 public class ForestMenu : Menu
 {
     new public string Name = "Forest";
+    StoryScripts story = new StoryScripts();
     UIScripts ui = new UIScripts();
     public override void ShowMenu(Hero hero)
     {
@@ -17,9 +18,13 @@ public class ForestMenu : Menu
             Console.WriteLine("[2] Visit Lumbermill");
             Console.WriteLine("[3] Chop Wood");
             Console.WriteLine("[4] Go Hunting");
+            if (hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestState > 0)
+            {
+                Console.WriteLine("[5] Giant Cave");
+            }
             if (hero.Journal.Find(x => x.QuestID == "BQ1").QuestState > 0)
             {
-                Console.WriteLine("[5] Bandit Hideout");
+                Console.WriteLine("[6] Bandit Hideout");
             }
             Console.WriteLine("[0] To World Map");
 
@@ -32,7 +37,7 @@ public class ForestMenu : Menu
                     break;
 
                 case "2":
-                    Console.WriteLine("Visting Lumbermill");
+                    story.GiantQuest1(hero);
                     ui.AnyKey();
                     break;
                 case "3":
@@ -45,9 +50,18 @@ public class ForestMenu : Menu
                     ui.AnyKey();
                     break;
                 case "5":
+                    if (hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestState > 0)
+                    {
+                        GiantDungeon1 cave = new GiantDungeon1();
+                        ForestMenu forestMenu = new ForestMenu();
+                        DungeonMenu caveMenu = new DungeonMenu(cave, forestMenu);
+                        caveMenu.ShowMenu(hero);
+                    }
+                    break;
+                case "6":
                     if (hero.Journal.Find(x => x.QuestID == "BQ1").QuestState > 0)
                     {
-                        BanditDungeon banditHideout = new BanditDungeon();
+                        BanditDungeon1 banditHideout = new BanditDungeon1();
                         ForestMenu forestMenu = new ForestMenu();
                         DungeonMenu banditHideoutMenu = new DungeonMenu(banditHideout, forestMenu);
                         banditHideoutMenu.ShowMenu(hero);
