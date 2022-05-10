@@ -24,8 +24,14 @@ public class DungeonMenu : Menu
             Console.WriteLine($"---------- {Dungeon.Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine($"[2] Encounter 1: Fight {Dungeon.Encounter.Name}s");
-            Console.WriteLine($"[2] Encounter 2: Fight {Dungeon.Encounter.Name}s");
-            Console.WriteLine($"[2] Encounter 3: Fight {Dungeon.Encounter.Name}s");
+            if (EncountersDefeated > 0)
+            {
+                Console.WriteLine($"[3] Encounter 2: Fight {Dungeon.Encounter.Name}s");
+            }
+            if (EncountersDefeated > 1)
+            {
+                Console.WriteLine($"[4] Encounter 3: Fight {Dungeon.Encounter.Name}s");
+            }
             if (Dungeon.Boss != null && BossDoor == true)
             {
                 Console.WriteLine($"[5] Fight {Dungeon.Boss?[0].Name} (Dungeon Boss)");

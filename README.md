@@ -11,6 +11,8 @@ combat
     enemies use spells and abilities
     magic attack vs magic defense for all spells
     ai packages (Healer, Attacker etc)
+conversation
+topics?
 dungeons
     puzzles
     dungeon exploration

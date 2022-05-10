@@ -16,10 +16,10 @@ public class ValleyMenu : Menu
             Console.WriteLine($"---------- {Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Visit Dale Town");
-            if (hero.Journal.Find(x => x.QuestID == "BQ1").QuestState > 0)
-            {
+            //if (hero.Journal.Find(x => x.QuestID == "BQ1").QuestState > 0)
+           // {
                 Console.WriteLine("[3] Explore Forest");
-            }
+           // }
             if (hero.Journal.Find(x => x.QuestID == "GQ1").QuestState > 0)
             {
                 Console.WriteLine("[4] Dwarven Mine");

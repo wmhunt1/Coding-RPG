@@ -18,14 +18,16 @@ public class ForestMenu : Menu
             Console.WriteLine("[2] Visit Lumbermill");
             Console.WriteLine("[3] Chop Wood");
             Console.WriteLine("[4] Go Hunting");
-            if (hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestState > 0)
-            {
-                Console.WriteLine("[5] Giant Cave");
-            }
+            Console.WriteLine("[5] Collect Herbs");
             if (hero.Journal.Find(x => x.QuestID == "BQ1").QuestState > 0)
             {
                 Console.WriteLine("[6] Bandit Hideout");
             }
+            if (hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestState > 0)
+            {
+                Console.WriteLine("[7] Giant Cave");
+            }
+
             Console.WriteLine("[0] To World Map");
 
             string? UserInput = Console.ReadLine();
@@ -50,13 +52,8 @@ public class ForestMenu : Menu
                     ui.AnyKey();
                     break;
                 case "5":
-                    if (hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestState > 0)
-                    {
-                        GiantDungeon1 cave = new GiantDungeon1();
-                        ForestMenu forestMenu = new ForestMenu();
-                        DungeonMenu caveMenu = new DungeonMenu(cave, forestMenu);
-                        caveMenu.ShowMenu(hero);
-                    }
+                    Console.WriteLine("Collecting Herbs");
+                    ui.AnyKey();
                     break;
                 case "6":
                     if (hero.Journal.Find(x => x.QuestID == "BQ1").QuestState > 0)
@@ -65,6 +62,15 @@ public class ForestMenu : Menu
                         ForestMenu forestMenu = new ForestMenu();
                         DungeonMenu banditHideoutMenu = new DungeonMenu(banditHideout, forestMenu);
                         banditHideoutMenu.ShowMenu(hero);
+                    }
+                    break;
+                case "7":
+                    if (hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestState > 0)
+                    {
+                        GiantDungeon1 cave = new GiantDungeon1();
+                        ForestMenu forestMenu = new ForestMenu();
+                        DungeonMenu caveMenu = new DungeonMenu(cave, forestMenu);
+                        caveMenu.ShowMenu(hero);
                     }
                     break;
                 case "0":

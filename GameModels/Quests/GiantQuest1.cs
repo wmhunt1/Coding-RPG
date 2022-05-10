@@ -8,7 +8,7 @@ public class GiantQuest1 : DungeonQuest
         Name = name;
         QuestID = id;
         QuestObjective = 1;
-        Description = $"Rescue Foreman George";
+        Description = "Rescue Foreman George";
         QuestTarget = "Paul the Giant";
     }
 }

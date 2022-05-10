@@ -98,6 +98,7 @@ public class Character
         BanditQuest1 banditQuest1 = new BanditQuest1();
         Journal.Add(banditQuest1);
         GiantQuest1 giantQuest1 = new GiantQuest1();
+        Journal.Add(giantQuest1);
         GoblinQuest1 goblinQuest1 = new GoblinQuest1();
         Journal.Add(goblinQuest1);
         RatQuest1 ratQuest1 = new RatQuest1();
@@ -606,7 +607,7 @@ public class Character
     public List<Character> AddToParty(Character character)
     {
         Companions.Add(character);
-        Console.WriteLine($"{character.Name} joins the your party");
+        Console.WriteLine($"{character.Name} joins your party");
         return Companions;
     }
     public List<Character> RemoveFromParty(Character character)
