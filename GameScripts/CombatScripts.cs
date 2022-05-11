@@ -29,7 +29,14 @@ public class CombatScripts
                 }
                 else if (spellUsed == true)
                 {
-                    spell.CastSpell(allies[0], enemies);
+                    if (spell is BuffingSpell || spell is HealingSpell || spell is SummoningSpell)
+                    {
+                        spell.CastSpell(allies[0], allies);
+                    }
+                    else
+                    {
+                        spell.CastSpell(allies[0], enemies);
+                    }
                     ui.AnyKey();
                 }
                 else
@@ -67,7 +74,7 @@ public class CombatScripts
                 }
                 else if (spellUsed == true)
                 {
-                    if (spell is BuffingSpell || spell is HealingSpell)
+                    if (spell is BuffingSpell || spell is HealingSpell || spell is SummoningSpell)
                     {
                         spell.CastSpell(allies[0], allies);
                     }
@@ -96,7 +103,7 @@ public class CombatScripts
                 enemies.Remove(enemies[i]);
             }
         }
-          for (int i = 0; i < allies.Count; i++)
+        for (int i = 0; i < allies.Count; i++)
         {
             if (allies[i].CurrentHP <= 0)
             {

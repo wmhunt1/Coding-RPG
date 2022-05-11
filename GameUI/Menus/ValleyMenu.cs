@@ -17,9 +17,9 @@ public class ValleyMenu : Menu
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Visit Dale Town");
             //if (hero.Journal.Find(x => x.QuestID == "BQ1").QuestState > 0)
-           // {
-                Console.WriteLine("[3] Explore Forest");
-           // }
+            // {
+            Console.WriteLine("[3] Explore Forest");
+            // }
             if (hero.Journal.Find(x => x.QuestID == "GQ1").QuestState > 0)
             {
                 Console.WriteLine("[4] Dwarven Mine");
@@ -49,11 +49,11 @@ public class ValleyMenu : Menu
                     townMenu.ShowMenu(hero);
                     break;
                 case "3":
-                    if (hero.Journal.Find(x => x.QuestID == "BQ1").QuestState > 0)
-                    {
-                        ForestMenu forestMenu = new ForestMenu();
-                        forestMenu.ShowMenu(hero);
-                    }
+                    //if (hero.Journal.Find(x => x.QuestID == "BQ1").QuestState > 0)
+                    //{
+                    ForestMenu forestMenu = new ForestMenu();
+                    forestMenu.ShowMenu(hero);
+                    //}
                     break;
                 case "4":
                     if (hero.Journal.Find(x => x.QuestID == "GQ1").QuestState > 0)
