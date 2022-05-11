@@ -8,4 +8,8 @@ public class Location
     {
         Name = name;
     }
+    public virtual void VisitLocation(Hero hero)
+    {
+
+    }
 }

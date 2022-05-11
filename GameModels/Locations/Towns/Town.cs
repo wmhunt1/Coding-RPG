@@ -7,4 +7,8 @@ public class Town : Location
     {
         Name = name;
     }
+    public override void VisitLocation(Hero hero)
+    {
+
+    }
 }

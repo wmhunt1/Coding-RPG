@@ -38,6 +38,8 @@ public class GiantDungeon1 : Dungeon
         return newEncounter;
 
     }
-
-
+     public override void AfterBossEvent(Character hero)
+    {   
+        Console.WriteLine("With Paul the Giant Defeated you rescue Foreman George.");
+    }
 }

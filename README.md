@@ -22,15 +22,10 @@ factions
 items
 jobs
 locations
-    dungeons/towns etc
-    plug into menus etc
     riverside/lake/docks
-    event after dungeon boss or event after encounters
     caves/mountains
-    Display options per location instead of menu
 menus
     converstation menu
-    need to figure out how to do options array with ifs
 quests
     collection quests
 spells

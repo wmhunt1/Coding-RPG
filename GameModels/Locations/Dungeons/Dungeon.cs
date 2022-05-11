@@ -30,4 +30,8 @@ public class Dungeon : Location
         List<Character> newEncounter = GenerateEncounter(1, 2);
         return newEncounter;
     }
+    public virtual void AfterBossEvent(Character hero)
+    {   
+        Console.WriteLine("Boss Defeated");
+    }
 }
