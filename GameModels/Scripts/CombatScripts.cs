@@ -282,7 +282,7 @@ public class CombatScripts
                             }
                             else
                             {
-                                CombatRound(allies, enemies[0], enemies, false, true, null, true, char1.Spellbook[selection - 1]);
+                                CombatRound(allies, enemies[0], enemies, false, false, null, true, char1.Spellbook[selection - 1]);
                             }
                         }
                     }

@@ -15,5 +15,6 @@ public class SummoningSpell: Spell
     {
         caster.SpendMP(ManaCost);
         targets.Add(Summon);
+        Console.WriteLine($"{caster.Name} summons a {Summon.Name}");
     }
 }

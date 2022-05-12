@@ -6,12 +6,14 @@ characters
     balancing for characters
     more companions
     set enemy level with ovveride calculate stats
+    swolebold
 combat
     enemy distance
     enemies use spells and abilities
     magic attack vs magic defense for all spells
     ai packages (Healer, Attacker etc)
 conversation
+    conversation options
 topics?
 dungeons
     puzzles
@@ -24,6 +26,11 @@ jobs
 locations
     riverside/lake/docks
     caves/mountains
+    witch's hut
+    bandit camp
+    orc cabin
+    orc village
+    dwarf outpost
 menus
     converstation menu
 quests

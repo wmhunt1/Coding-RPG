@@ -20,5 +20,6 @@ public class HealingSpell : Spell
         }
         int target = int.Parse(Console.ReadLine());
         targets[target -1].GainHP(HealingAmount);
+        Console.WriteLine($"{caster.Name} heals {targets[target-1]} for {HealingAmount}");
     }
 }

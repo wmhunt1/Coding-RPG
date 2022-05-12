@@ -30,7 +30,8 @@ public class WorldMenu : Menu
                     {
                         story.ValleyQuest1(hero);
                     }
-                    ValleyMenu valleyMenu = new ValleyMenu();
+                    DaleValley daleValley = new DaleValley();
+                    LocationMenu valleyMenu = new LocationMenu(daleValley);
                     valleyMenu.ShowMenu(hero);
                     break;
                 case "3":

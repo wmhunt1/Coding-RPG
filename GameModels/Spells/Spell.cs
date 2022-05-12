@@ -16,9 +16,33 @@ public class Spell
     {
 
     }
-      public Character LearnSpell(Character character)
+    public bool CheckIfKnowSpell(Character character)
     {
-        character.Spellbook?.Add(this);
+        bool known = false;
+        if (character.Spellbook.Count > 0)
+        {
+            for (int i = 0; i < character.Spellbook.Count; i++)
+            {
+                if (character.Spellbook[i].Name == this.Name)
+                {
+                    known = true;
+                }
+            }
+        }
+        return known;
+    }
+    public Character LearnSpell(Character character)
+    {
+        bool known = CheckIfKnowSpell(character);
+        if (known == false)
+        {
+            character.Spellbook?.Add(this);
+            Console.WriteLine($"{character.Name} learns {this.Name}");
+        }
+        else
+        {
+            Console.WriteLine($"{character.Name} already knows {this.Name}");
+        }
         return character;
     }
 }

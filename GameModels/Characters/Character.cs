@@ -212,6 +212,14 @@ public class Character
         Console.WriteLine($"{Smithing.Name} - {Smithing.Level}");
         Console.WriteLine($"{WoodCutting.Name} - {WoodCutting.Level}");
     }
+    public void DisplaySpellBook()
+    {
+         Console.WriteLine("Spells");
+        for (int i = 0; i < Companions.Count; i++)
+        {
+            Console.WriteLine($"Name: {Spellbook[i].Name}");
+        }
+    }
     public void DisplayCompanions()
     {
         Console.WriteLine("Companions");

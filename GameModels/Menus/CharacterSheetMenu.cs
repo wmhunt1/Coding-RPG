@@ -47,6 +47,7 @@ public class CharacterSheetMenu : Menu
                     ui.AnyKey();
                     break;
                 case "6":
+                    hero.DisplaySpellBook();
                     ui.AnyKey();
                     break;
                 case "7":

@@ -18,7 +18,7 @@ public class BlacksmithMenu : Menu
         while (!exitMenu)
         {
             Console.WriteLine("---------- Coding RPG ----------");
-            Console.WriteLine($"---------- {Name}  ----------");
+            Console.WriteLine($"---------- {Blacksmith.Name}  ----------");
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Buy Weapons and Armor");
             Console.WriteLine("[3] Sell");
@@ -42,7 +42,7 @@ public class BlacksmithMenu : Menu
                     story.GoblinQuest1(hero);
                     break;
                 case "0":
-                    Town town = new Town("Town");
+                    DaleTown town = new DaleTown();
                     TownMenu townMenu = new TownMenu(town);
                     townMenu.ShowMenu(hero!);
                     break;

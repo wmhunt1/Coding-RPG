@@ -18,8 +18,7 @@ public class LocationMenu : Menu
         {
             Console.WriteLine("---------- Coding RPG ----------");
             Console.WriteLine($"---------- {Location.Name}  ----------");
-          
-
+            Location.VisitLocation(hero);
         }
     }
 }

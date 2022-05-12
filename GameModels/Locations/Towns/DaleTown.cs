@@ -64,7 +64,8 @@ public class DaleTown : Town
                 }
                 break;
             case "0":
-                ValleyMenu gameMenu = new ValleyMenu();
+                DaleValley daleValley = new DaleValley();
+                LocationMenu gameMenu = new LocationMenu(daleValley);
                 gameMenu.ShowMenu(hero);
                 break;
             default:
