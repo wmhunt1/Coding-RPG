@@ -126,13 +126,13 @@ public class Character
     public void DisplayInventory()
     {
         Console.WriteLine($"Inventory\nGold: {Gold}");
-        for (int i = 0; i < Inventory.Count; i++)
+        for (int i = 0; i < Inventory?.Count; i++)
         {
             Console.WriteLine($"{Inventory[i].Name} X {Inventory[i].Quantity}");
         }
         Console.WriteLine("[1] Equip");
         Console.WriteLine("[0] Exit Inventory");
-        string selection = Console.ReadLine();
+        string? selection = Console.ReadLine();
         if (selection == "1")
         {
             EquipFromInventory();
@@ -159,7 +159,7 @@ public class Character
     public void EquipFromInventory()
     {
         List<Item> equipables = new List<Item>();
-        for (int i = 0; i < Inventory.Count; i++)
+        for (int i = 0; i < Inventory?.Count; i++)
         {
             if (Inventory[i] is Equipable)
             {
@@ -168,7 +168,7 @@ public class Character
         }
         if (equipables.Count > 0)
         {
-            for (int i = 0; i < Inventory.Count; i++)
+            for (int i = 0; i < Inventory?.Count; i++)
             {
                 Console.WriteLine($"[{i + 1}]: {equipables[i].Name}");
             }
@@ -586,7 +586,7 @@ public class Character
         if (item.Name != "None")
         {
             bool present = false;
-            for (int i = 0; i < Inventory.Count; i++)
+            for (int i = 0; i < Inventory?.Count; i++)
             {
                 if (Inventory[i].Name == item.Name)
                 {
@@ -596,7 +596,7 @@ public class Character
             }
             if (present == false)
             {
-                Inventory.Add(item);
+                Inventory?.Add(item);
             }
             Console.WriteLine($"{item.Name} added to Inventory");
         }
@@ -607,7 +607,7 @@ public class Character
         item.Quantity--;
         if (item.Quantity == 0)
         {
-            Inventory.Remove(item);
+            Inventory?.Remove(item);
         }
         Console.WriteLine($"{item.Name} removed from Inventory");
         return Inventory;

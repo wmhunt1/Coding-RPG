@@ -15,7 +15,7 @@ public class CombatScripts
             ui.AnyKey();
         }
     }
-    public async void CombatRound(List<Character> allies, Character target, List<Character> enemies, bool skippedTurn, bool usedAbility, Ability ability, bool spellUsed, Spell spell)
+    public void CombatRound(List<Character> allies, Character target, List<Character> enemies, bool skippedTurn, bool usedAbility, Ability ability, bool spellUsed, Spell spell)
     {
         if (allies[0].Speed >= target.Speed)
         {
@@ -153,7 +153,7 @@ public class CombatScripts
     {
         consumable.UseItem(character);
     }
-    public async void RunCombat(Character char1, List<Character> enemies)
+    public void RunCombat(Character char1, List<Character> enemies)
     {
         List<Character> rewards = new List<Character>();
         List<Character> allies = new List<Character>();

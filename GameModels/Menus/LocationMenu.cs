@@ -3,7 +3,6 @@ using System;
 namespace GameModels;
 public class LocationMenu : Menu
 {
-    StoryScripts story = new StoryScripts();
     UIScripts ui = new UIScripts();
     Location Location;
 

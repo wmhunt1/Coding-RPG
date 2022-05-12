@@ -20,4 +20,8 @@ public class Quest
         QuestObjectiveProgess++;
         return QuestObjectiveProgess;
     }
+    public virtual void QuestDialogue(Character hero)
+    {
+
+    }
 }

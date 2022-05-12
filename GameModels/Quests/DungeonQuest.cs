@@ -8,4 +8,8 @@ public class DungeonQuest : Quest
         Name = name;
         QuestID = id;
     }
+    public override void QuestDialogue(Character hero)
+    {
+
+    }
 }

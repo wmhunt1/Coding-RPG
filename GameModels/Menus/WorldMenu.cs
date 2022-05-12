@@ -4,7 +4,6 @@ namespace GameModels;
 public class WorldMenu : Menu
 {
     new public string Name = "World Map";
-    public StoryScripts story = new StoryScripts();
     public UIScripts ui = new UIScripts();
     public override void ShowMenu(Hero hero)
     {
@@ -26,9 +25,9 @@ public class WorldMenu : Menu
                     break;
                 case "2":
 
-                    if (hero.Journal.Find(x => x.QuestID == "MQ1").QuestState == 1)
+                    if (hero.Journal.Find(x => x.QuestID == "MQ1")?.QuestState == 1)
                     {
-                        story.ValleyQuest1(hero);
+                        hero.Journal.Find(x => x.QuestID == "MQ1")?.QuestDialogue(hero);
                     }
                     DaleValley daleValley = new DaleValley();
                     LocationMenu valleyMenu = new LocationMenu(daleValley);

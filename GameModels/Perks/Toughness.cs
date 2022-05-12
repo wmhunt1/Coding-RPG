@@ -3,7 +3,6 @@ namespace GameModels;
 
 public class Toughness : Perk
 {
-    public string Name;
     public Toughness(string name = "Toughness"):base(name)
     {
         Name = name;

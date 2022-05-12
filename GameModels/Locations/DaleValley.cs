@@ -3,7 +3,6 @@ namespace GameModels;
 
 public class DaleValley : Location
 {
-    public StoryScripts story = new StoryScripts();
     public UIScripts ui = new UIScripts();
     public DaleValley(string name = "Dale Valley") : base(name)
     {
@@ -17,11 +16,11 @@ public class DaleValley : Location
         // {
         Console.WriteLine("[3] Explore Forest");
         // }
-        if (hero.Journal.Find(x => x.QuestID == "GQ1").QuestState > 0)
+        if (hero.Journal.Find(x => x.QuestID == "GQ1")?.QuestState > 0)
         {
             Console.WriteLine("[4] Dwarven Mine");
         }
-        if (hero.Journal.Find(x => x.QuestID == "GQ1").QuestState == 100)
+        if (hero.Journal.Find(x => x.QuestID == "GQ1")?.QuestState == 100)
         {
             Console.WriteLine("[5] Dwarven Mine - Mine Copper");
             Console.WriteLine("[6] Dwarven Mine - Mine Tin");
@@ -37,9 +36,9 @@ public class DaleValley : Location
                 break;
             case "2":
 
-                if (hero.Journal.Find(x => x.QuestID == "MQ1").QuestState == 2)
+                if (hero.Journal.Find(x => x.QuestID == "MQ1")?.QuestState == 2)
                 {
-                    story.ValleyQuest1(hero);
+                    hero.Journal.Find(x => x.QuestID == "MQ1")?.QuestDialogue(hero);
                 }
                 DaleTown town = new DaleTown();
                 TownMenu townMenu = new TownMenu(town);
@@ -54,7 +53,7 @@ public class DaleValley : Location
                 //}
                 break;
             case "4":
-                if (hero.Journal.Find(x => x.QuestID == "GQ1").QuestState > 0)
+                if (hero.Journal.Find(x => x.QuestID == "GQ1")?.QuestState > 0)
                 {
                     GoblinDungeon1 dwarfMine = new GoblinDungeon1();
                     DaleValley daleValley = new DaleValley();
@@ -64,7 +63,7 @@ public class DaleValley : Location
                 }
                 break;
             case "5":
-                if (hero.Journal.Find(x => x.QuestID == "GQ1").QuestState == 100)
+                if (hero.Journal.Find(x => x.QuestID == "GQ1")?.QuestState == 100)
                 {
                     CopperOre copper = new CopperOre();
                     hero.Mining.GatherResource(hero, copper);
@@ -72,7 +71,7 @@ public class DaleValley : Location
                 }
                 break;
             case "6":
-                if (hero.Journal.Find(x => x.QuestID == "GQ1").QuestState > 100)
+                if (hero.Journal.Find(x => x.QuestID == "GQ1")?.QuestState > 100)
                 {
                     TinOre tin = new TinOre();
                     hero.Mining.GatherResource(hero, tin);

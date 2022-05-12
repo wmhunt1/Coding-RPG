@@ -3,7 +3,6 @@ namespace GameModels;
 
 public class DaleForest : Location
 {
-    public StoryScripts story = new StoryScripts();
     public UIScripts ui = new UIScripts();
     public DaleForest(string name = "Dale Forest") : base(name)
     {
@@ -16,11 +15,11 @@ public class DaleForest : Location
         Console.WriteLine("[3] Chop Wood");
         Console.WriteLine("[4] Go Hunting");
         Console.WriteLine("[5] Collect Herbs");
-        if (hero.Journal.Find(x => x.QuestID == "BQ1").QuestState > 0)
+        if (hero.Journal.Find(x => x.QuestID == "BQ1")?.QuestState > 0)
         {
             Console.WriteLine("[6] Bandit Hideout");
         }
-        if (hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestState > 0)
+        if (hero.Journal.Find(x => x.QuestID == "GiantQ1")?.QuestState > 0)
         {
             Console.WriteLine("[7] Giant Cave");
         }
@@ -36,7 +35,7 @@ public class DaleForest : Location
                 break;
 
             case "2":
-                story.GiantQuest1(hero);
+                hero.Journal.Find(x => x.QuestID == "GiantQ1")?.QuestDialogue(hero);
                 ui.AnyKey();
                 break;
             case "3":
@@ -53,7 +52,7 @@ public class DaleForest : Location
                 ui.AnyKey();
                 break;
             case "6":
-                if (hero.Journal.Find(x => x.QuestID == "BQ1").QuestState > 0)
+                if (hero.Journal.Find(x => x.QuestID == "BQ1")?.QuestState > 0)
                 {
                     BanditDungeon1 banditHideout = new BanditDungeon1();
                     DaleForest forest = new DaleForest();
@@ -63,7 +62,7 @@ public class DaleForest : Location
                 }
                 break;
             case "7":
-                if (hero.Journal.Find(x => x.QuestID == "GiantQ1").QuestState > 0)
+                if (hero.Journal.Find(x => x.QuestID == "GiantQ1")?.QuestState > 0)
                 {
                     GiantDungeon1 cave = new GiantDungeon1();
                     DaleForest forest = new DaleForest();

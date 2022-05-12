@@ -10,11 +10,10 @@ public class MainMenu : Menu
     UIScripts ui = new UIScripts();
     public Hero CharacterCreation(Hero hero)
     {
-        string name = "";
         Console.WriteLine("What is your name?");
-        name = Console.ReadLine();
+        string? name = Console.ReadLine();
         Console.WriteLine("What is your loyal canine companion's name?");
-        string dogName = Console.ReadLine();
+        string? dogName = Console.ReadLine();
         if (dogName == "")
         {
             dogName = "Dog";
@@ -45,8 +44,6 @@ public class MainMenu : Menu
                     gameMenu.ShowMenu(hero);
                     break;
                 case "2":
-                    StoryScripts story = new StoryScripts();
-                    story.GameIntro();
                     CharacterCreation(hero);
                     gameMenu.ShowMenu(hero);
                     break;

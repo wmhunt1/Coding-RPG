@@ -3,7 +3,6 @@ namespace GameModels;
 
 public class DaleTown : Town
 {
-    StoryScripts story = new StoryScripts();
     public DaleTown(string name = "Dale Town") : base(name)
     {
         Name = name;
@@ -16,7 +15,7 @@ public class DaleTown : Town
         Console.WriteLine("[4] General Store");
         Console.WriteLine("[5] Mayor's House");
         Console.WriteLine("[6] Church");
-        if (hero.Journal.Find(x => x.QuestID == "SQ1").QuestState > 0)
+        if (hero.Journal.Find(x => x.QuestID == "SQ1")?.QuestState > 0)
         {
             Console.WriteLine("[7] Graveyard");
         }
@@ -32,12 +31,12 @@ public class DaleTown : Town
             case "2":
 
                 Inn inn = new Inn("Inn");
-                InnMenu innMenu = new InnMenu(inn);
+                StoreMenu innMenu = new StoreMenu(inn);
                 innMenu.ShowMenu(hero);
                 break;
             case "3":
                 Blacksmith blacksmith = new Blacksmith("Blacksmith");
-                BlacksmithMenu blacksmithMenu = new BlacksmithMenu(blacksmith);
+                StoreMenu blacksmithMenu = new StoreMenu(blacksmith);
                 blacksmithMenu.ShowMenu(hero);
                 break;
             case "4":
@@ -47,14 +46,14 @@ public class DaleTown : Town
                 break;
             case "5":
                 Console.WriteLine("Mayor's House");
-                story.BanditQuest1(hero);
+                hero.Journal.Find(x => x.QuestID == "BQ1")?.QuestDialogue(hero);
                 break;
             case "6":
                 Console.WriteLine("Visting Church");
-                story.SkeletonQuest1(hero);
+                hero.Journal.Find(x => x.QuestID == "SQ1")?.QuestDialogue(hero);
                 break;
             case "7":
-                if (hero.Journal.Find(x => x.QuestID == "SQ1").QuestState > 0)
+                if (hero.Journal.Find(x => x.QuestID == "SQ1")?.QuestState > 0)
                 {
                     SkeletonDungeon1 skeletonDungeon = new SkeletonDungeon1();
                     DaleTown town = new DaleTown();

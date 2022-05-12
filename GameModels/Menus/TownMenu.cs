@@ -4,7 +4,6 @@ namespace GameModels;
 public class TownMenu : Menu
 {
     public Town Town;
-    StoryScripts story = new StoryScripts();
     UIScripts ui = new UIScripts();
     public TownMenu(Town town)
     {
