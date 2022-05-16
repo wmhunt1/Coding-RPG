@@ -16,14 +16,15 @@ public class SneakAttack : Ability
             Console.WriteLine($"[{i+1}] {targets[i].Name}");   
         }
         int target = int.Parse(Console.ReadLine());
-        
-        int damage = targets[target-1].CalculateDamage(user, targets[target-1], true);
+              
+        int damage = targets[target-1].CalculateDamage(user, targets[target-1], false);
         bool crit = user.CheckforCriticalHit();
         if (crit == true)
         {
             damage *= 2;
         }
+        int protection = targets[target-1].Head.Protection + targets[target-1].Torso.Protection + targets[target-1].Legs.Protection + targets[target-1].Hands.Protection + targets[target-1].Feet.Protection;
         Console.WriteLine($"{user.Name} Sneak Attacks {Name}, ignoring their armor");
-        targets[target-1].DamageHP(damage+targets[target-1].Torso.Protection);
+        targets[target-1].DamageHP(damage+protection);
     }
 }

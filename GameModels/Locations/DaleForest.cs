@@ -55,9 +55,7 @@ public class DaleForest : Location
                 if (hero.Journal.Find(x => x.QuestID == "BQ1")?.QuestState > 0)
                 {
                     BanditDungeon1 banditHideout = new BanditDungeon1();
-                    DaleForest forest = new DaleForest();
-                    LocationMenu forestMenu = new LocationMenu(forest);
-                    DungeonMenu banditHideoutMenu = new DungeonMenu(banditHideout, forestMenu);
+                    DungeonMenu banditHideoutMenu = new DungeonMenu(banditHideout);
                     banditHideoutMenu.ShowMenu(hero);
                 }
                 break;
@@ -65,9 +63,7 @@ public class DaleForest : Location
                 if (hero.Journal.Find(x => x.QuestID == "GiantQ1")?.QuestState > 0)
                 {
                     GiantDungeon1 cave = new GiantDungeon1();
-                    DaleForest forest = new DaleForest();
-                    LocationMenu forestMenu = new LocationMenu(forest);
-                    DungeonMenu caveMenu = new DungeonMenu(cave, forestMenu);
+                    DungeonMenu caveMenu = new DungeonMenu(cave);
                     caveMenu.ShowMenu(hero);
                 }
                 break;

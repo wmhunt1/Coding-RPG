@@ -7,6 +7,9 @@ public class RatDungeon1 : Dungeon
     {
         Name = name;
         Encounter = new Rat("Cellar Rat");
+        Inn inn = new Inn("Inn");
+        StoreMenu innMenu = new StoreMenu(inn);
+        Exit = innMenu;
     }
     public override List<Character> GenerateEncounter(int x, int y)
     {

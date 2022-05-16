@@ -7,6 +7,9 @@ public class SkeletonDungeon1 : Dungeon
     {
         Name = name;
         Encounter = new BasicSkeleton("Graveyard Skeleton");
+        DaleTown town = new DaleTown();
+        TownMenu townMenuExit = new TownMenu(town);
+        Exit = townMenuExit;
     }
     public override List<Character> GenerateEncounter(int x, int y)
     {

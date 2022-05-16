@@ -8,6 +8,9 @@ public class GiantDungeon1 : Dungeon
         Name = name;
         Encounter = new Wolf("Tamed Wofl");
         Boss = new List<Character>() { new HillGiant("Paul the Giant") };
+        DaleForest forest = new DaleForest();
+        LocationMenu forestMenu = new LocationMenu(forest);
+        Exit = forestMenu;
     }
     public override List<Character> GenerateEncounter(int x, int y)
     {
@@ -38,8 +41,8 @@ public class GiantDungeon1 : Dungeon
         return newEncounter;
 
     }
-     public override void AfterBossEvent(Character hero)
-    {   
+    public override void AfterBossEvent(Character hero)
+    {
         Console.WriteLine("With Paul the Giant Defeated you rescue Foreman George.");
     }
 }

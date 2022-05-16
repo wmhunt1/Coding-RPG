@@ -56,9 +56,7 @@ public class DaleValley : Location
                 if (hero.Journal.Find(x => x.QuestID == "GQ1")?.QuestState > 0)
                 {
                     GoblinDungeon1 dwarfMine = new GoblinDungeon1();
-                    DaleValley daleValley = new DaleValley();
-                    LocationMenu gameMenuExit = new LocationMenu(daleValley);
-                    DungeonMenu dwarfMineMenu = new DungeonMenu(dwarfMine, gameMenuExit);
+                    DungeonMenu dwarfMineMenu = new DungeonMenu(dwarfMine);
                     dwarfMineMenu.ShowMenu(hero);
                 }
                 break;

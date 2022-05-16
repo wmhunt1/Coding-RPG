@@ -66,9 +66,7 @@ public class Inn : Store
                 if (hero.Journal.Find(x => x.QuestID == "RQ1")?.QuestState > 0)
                 {
                     RatDungeon1 ratCellar = new RatDungeon1();
-                    Inn inn = new Inn("Inn");
-                    StoreMenu innMenu = new StoreMenu(inn);
-                    DungeonMenu ratCellarMenu = new DungeonMenu(ratCellar, innMenu);
+                    DungeonMenu ratCellarMenu = new DungeonMenu(ratCellar);
                     ratCellarMenu.ShowMenu(hero);
                 }
                 break;

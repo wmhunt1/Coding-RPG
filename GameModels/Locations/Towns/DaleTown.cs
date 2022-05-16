@@ -56,9 +56,7 @@ public class DaleTown : Town
                 if (hero.Journal.Find(x => x.QuestID == "SQ1")?.QuestState > 0)
                 {
                     SkeletonDungeon1 skeletonDungeon = new SkeletonDungeon1();
-                    DaleTown town = new DaleTown();
-                    TownMenu townMenuExit = new TownMenu(town);
-                    DungeonMenu skeletonDungeonMenu = new DungeonMenu(skeletonDungeon, townMenuExit);
+                    DungeonMenu skeletonDungeonMenu = new DungeonMenu(skeletonDungeon);
                     skeletonDungeonMenu.ShowMenu(hero);
                 }
                 break;

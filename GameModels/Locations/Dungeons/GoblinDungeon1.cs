@@ -8,6 +8,9 @@ public class GoblinDungeon1 : Dungeon
         Name = name;
         Encounter = new Goblin("Goblin");
         Boss = new List<Character>() { new GoblinBoss("Goblin Boss") };
+        DaleValley daleValley = new DaleValley();
+        LocationMenu gameMenuExit = new LocationMenu(daleValley);
+        Exit = gameMenuExit;
     }
     public override List<Character> GenerateEncounter(int x, int y)
     {

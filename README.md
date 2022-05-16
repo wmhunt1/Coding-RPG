@@ -31,10 +31,17 @@ locations
     orc cabin
     orc village
     dwarf outpost
+    bat cave
 menus
     converstation menu
+    variable number of encounters
 quests
     collection quests
+        get bat poop for Quincy
+    quest choices
+    freeing kobolds
+    quest state descriptions
+    sheepscale
 spells
     spell schools for conjuration and types for necromancy etc
     Healing/Restoration
