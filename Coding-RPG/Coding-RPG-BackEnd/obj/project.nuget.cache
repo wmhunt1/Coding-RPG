@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "9/SBUG78I2WW8ZRNYxlHm0A8YIoPZtQcq5LsLlgabeZM29e/iBYE05tzSZBF5QMcn8D2oOjk+3L4jf6n2dACwQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\wmatt\\Desktop\\Coding\\Coding-RPG\\Coding-RPG\\Coding-RPG-BackEnd\\Coding-RPG-BackEnd.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\wmatt\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\wmatt\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\wmatt\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\wmatt\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\wmatt\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\wmatt\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
