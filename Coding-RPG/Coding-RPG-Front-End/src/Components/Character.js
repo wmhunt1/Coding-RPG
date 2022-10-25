@@ -5,7 +5,11 @@ export const Character = () => {
 
     const [mode, setMode] = useState('')
     return (
-        <div><h3 id ="char-sheet-title">Character Sheet</h3></div>)
+        <div id ="char-sheet"><h3 id ="char-sheet-title">Character Sheet</h3>
+        <h4>Character Name: </h4>
+        <h4>Level: </h4>
+        </div>)
+
 
 }
 export default Character;
