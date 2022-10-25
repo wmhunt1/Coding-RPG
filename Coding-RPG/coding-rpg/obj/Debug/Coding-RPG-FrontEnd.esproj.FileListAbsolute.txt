@@ -1,2 +1,0 @@
-C:\Users\wmatt\Desktop\Coding\Coding-RPG\Coding-RPG\Coding-RPG\obj\Debug\Coding-RPG-FrontEnd.esproj.SuggestedBindingRedirects.cache
-C:\Users\wmatt\Desktop\Coding\Coding-RPG\Coding-RPG\Coding-RPG\obj\Debug\Coding-RPG-FrontEnd.esproj.CoreCompileInputs.cache
