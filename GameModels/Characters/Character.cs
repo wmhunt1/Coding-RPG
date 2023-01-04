@@ -4,7 +4,7 @@ public class Character
     public string Name = "";
     public int Level = 1;
     public int CurrentXP = 0;
-    public int MaxXP = 100;
+    public int MaxXP = 10;
     public int CurrentHP = 10;
     public int MaxHP = 10;
     public int CurrentMP = 10;
@@ -12,12 +12,23 @@ public class Character
     public int CurrentSP = 10;
     public int MaxSP = 10;
     public int Strength = 10;
+    public int Constitution = 10;
     public int Dexterity = 10;
-    public Weapon Weapon = new Weapon("Unarmed", 0, "Bludgeoning");
+    public int Intelligence = 10;
+    public int Wisdom = 10;
+    public int Charisma = 10;
+    public int WillPower = 10;
+    public int Perception = 10;
+    public int Luck = 10;
+    public int Beauty = 10;
+    public bool Ally = false;
+    public Weapon Weapon = new Weapon("Unarmed", 1, "Bludgeoning");
     public Armor Armor = new Armor("Unarmored", 0, "None");
+    public List<Character> Companions = new List<Character>();
     public Character(string name)
     {
         Name = name;
+        Ally = true;
     }
     public int LevelUp()
     {
@@ -60,12 +71,46 @@ public class Character
     }
     public int TakeDamage(int damage)
     {
-        this.CurrentHP -= damage;
+        if (damage >= 0)
+        {
+            this.CurrentHP -= damage;
+        }
         return this.CurrentHP;
     }
-    public void Attack(Character target)
+    public bool CheckForCrit()
     {
-        int damage = target.TakeDamage(this.Strength + this.Weapon.WeaponDmg - target.Armor.Protection);
-        Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, dealing {damage} {this.Weapon.WeaponDmgType} Damage");
+        Random rand = new Random();
+        int number = rand.Next(0, 100);
+        if (number <= this.Luck)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public void BasicAttack(Character target)
+    {
+        bool crit = CheckForCrit();
+        int damage = this.Strength + this.Weapon.WeaponDmg - target.Armor.Protection - target.Dexterity;
+        if (crit == true)
+        {
+            damage *= 2;
+        }
+        target.TakeDamage(damage);
+        if (damage > 0)
+        {
+            Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, dealing {damage} {this.Weapon.WeaponDmgType} Damage");
+            if (crit == true)
+            {
+                Console.WriteLine("Critical Hit!");
+
+            }
+        }
+        else
+        {
+            Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, but deals no damage");
+        }
     }
 }

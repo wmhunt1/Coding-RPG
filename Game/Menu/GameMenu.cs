@@ -24,8 +24,14 @@ namespace GameSpace
                         break;
                     case "2":
                         CombatMenu combatMenu = new CombatMenu();
-                        Rat rat = new Rat();
-                        combatMenu.RunCombat(hero, rat); 
+                        List<Character> rats = new List<Character>();
+                        Rat rat1 = new Rat();
+                        Rat rat2 = new Rat();
+                        Rat rat3 = new Rat();
+                        rats.Add(rat1);
+                        rats.Add(rat2);
+                        rats.Add(rat3);
+                        combatMenu.RunCombat(hero, rats);
                         break;
                     case "3":
                         hero.HealHP(hero.MaxHP);

@@ -13,18 +13,25 @@ namespace GameSpace
                 showMenu = false;
             }
         }
-        public void CombatOptions(Character char1, Character char2)
+        public void CombatOptions(Character char1, List<Character> enemies)
         {
             bool showOptions = true;
             while (showOptions)
             {
-                Console.WriteLine("Combat Options");
-                Console.WriteLine("[1] Attack");
+                Console.WriteLine($"{char1.Name} - Combat Options");
+                Console.WriteLine("[1] Basic Attack");
                 string? input = Console.ReadLine();
                 switch (input)
                 {
                     case "1":
-                        char1.Attack(char2);
+                        Console.WriteLine("Select target");
+                        for (int enemy = 0; enemy < enemies.Count; enemy++)
+                        {
+                            Console.WriteLine($"[{enemy + 1}]{enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
+                        }
+                        string? targetInput = Console.ReadLine();
+                        int target = Int32.Parse(targetInput);
+                        char1.BasicAttack(enemies[target - 1]);
                         break;
                     default:
                         break;
@@ -32,58 +39,86 @@ namespace GameSpace
                 showOptions = false;
             }
         }
-        public void CombatTurn(Character char1, Character char2)
+        public void CombatTurn(Character char1, List<Character> enemies)
         {
-            if (char1.Name == "Hero")
+            if (char1.Ally == true)
             {
-                CombatOptions(char1, char2);
+                CombatOptions(char1, enemies);
             }
             else
             {
-                char1.Attack(char2);
+                Random randomTarget = new Random();
+                int target = randomTarget.Next(0, enemies.Count);
+                char1.BasicAttack(enemies[target]);
             }
         }
-        public void CombatRound(Character char1, Character char2)
+        
+        public void CombatRound(List<Character> allies, List<Character> enemies)
         {
-            if (char1.Dexterity >= char2.Dexterity)
+            for (int ally = 0; ally < allies.Count; ally++)
             {
-                if (char1.CurrentHP > 0)
+                if (allies[ally].CurrentHP > 0)
                 {
-                    CombatTurn(char1, char2);
-                }
-                if (char2.CurrentHP > 0)
-                {
-                    CombatTurn(char2, char1);
-                }
-                AnyKey();
-            }
-            else
-            {
-                if (char2.CurrentHP > 0)
-                {
-                    CombatTurn(char2, char1);
-                }
-                if (char1.CurrentHP > 0)
-                {
-                    CombatTurn(char1, char2);
+                    CombatTurn(allies[ally], enemies);
                 }
             }
+            for (int enemy = 0; enemy < enemies.Count; enemy++)
+            {
+                if (enemies[enemy].CurrentHP > 0)
+                {
+                    CombatTurn(enemies[enemy], allies);
+                }
+            }
+
+            AnyKey();
         }
-        public void RunCombat(Character hero, Character enemy)
+        public void RunCombat(Character hero, List<Character> enemies)
         {
             bool combatOver = false;
             int round = 1;
+            List<Character> allies = new List<Character>();
+            allies.Add(hero);
+            for (int ally = 0; ally < hero.Companions.Count; ally++)
+            {
+                allies.Add(hero.Companions[ally]);
+            }
             while (!combatOver)
             {
-                Console.WriteLine($"Round: {round} - {hero.Name}: {hero.CurrentHP}/{hero.MaxHP} VS {enemy.Name}: {enemy.CurrentHP}/{enemy.MaxHP}");
-                CombatRound(hero, enemy);
-                round++;
-                if (hero.CurrentHP <= 0 || enemy.CurrentHP <= 0)
+                if (hero.CurrentHP > 0 && enemies.Count > 0)
+                {
+                    for (int enemy = 0; enemy < enemies.Count; enemy++)
+                    {
+                        if (enemies[enemy].CurrentHP <= 0)
+                        {
+                            enemies.Remove(enemies[enemy]);
+                        }
+                    }
+                    if (enemies.Count > 0)
+                    {
+                        for (int ally = 0; ally < allies.Count; ally++)
+                        {
+                            Console.WriteLine($"{allies[ally].Name}: {allies[ally].CurrentHP}/{allies[ally].MaxHP}");
+                        }
+                        Console.WriteLine("VS");
+                        for (int enemy = 0; enemy < enemies.Count; enemy++)
+                        {
+                            Console.WriteLine($"{enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
+                        }
+                        CombatRound(allies, enemies);
+                        round++;
+                    }
+                }
+                if (hero.CurrentHP <= 0 || enemies.Count == 0)
                 {
                     if (hero.CurrentHP > 0)
                     {
                         Console.WriteLine($"{hero.Name} is Victorious");
-                        hero.EarnXP(enemy.CurrentXP);
+                        for (int enemy = 0; enemy < enemies.Count; enemy++)
+                        {
+                            Console.WriteLine($"VS {enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
+                            hero.EarnXP(enemies[enemy].CurrentXP);
+                        }
+
                     }
                     else
                     {
