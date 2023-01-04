@@ -19,10 +19,16 @@ namespace GameSpace
         }
         public void EquipmentTest(Character hero)
         {
-            Armor tunic = new Armor("Tunic", 1, "Cloth");
-            Weapon club = new Weapon("Club", 1, "Bludegeoning");
-            tunic.Equip(hero);
-            club.Equip(hero);
+
+            Weapon club = new Club();
+            Torso tunic = new Tunic();
+            tunic.EquipItem(hero);
+            club.EquipItem(hero);
+        }
+        public void StoreTest(Character hero)
+        {
+            HealingPotion healingPotion = new HealingPotion("Healing Potion", 1, 5);
+            healingPotion.BuyItem(hero);
         }
         public override void DisplayMenu(Character hero)
         {
@@ -33,6 +39,7 @@ namespace GameSpace
                 Console.WriteLine("[1] Character Sheet");
                 Console.WriteLine("[2] Combat Test");
                 Console.WriteLine("[3] Equip Test");
+                Console.WriteLine("[4] Store Test");
                 Console.WriteLine("[9] Heal");
                 Console.WriteLine("[0] Main Menu");
                 string? input = Console.ReadLine();
@@ -47,6 +54,9 @@ namespace GameSpace
                         break;
                     case "3":
                         EquipmentTest(hero);
+                        break;
+                    case "4":
+                        StoreTest(hero);
                         break;
                     case "9":
                         hero.FullRest();

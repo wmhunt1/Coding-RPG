@@ -6,7 +6,9 @@ public class Skeleton : Undead
         Name = name;
         Ally = false;
         this.CurrentXP = 10;
-        Weapon = new Weapon("Wooden Club", 1, "Bludgeoning");
-        Armor = new Armor("Leather Scraps", 1, "Leather");
+        Weapon = new Club();
+        Torso = new Torso("Leather Scraps", 0, 1, "Leather");
+        // resistance to peircing and slashing
+        // weakness to bludeoning
     }
 }

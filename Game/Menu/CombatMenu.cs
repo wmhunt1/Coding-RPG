@@ -20,6 +20,9 @@ namespace GameSpace
             {
                 Console.WriteLine($"{char1.Name} - Combat Options");
                 Console.WriteLine("[1] Basic Attack");
+                Console.WriteLine("[2] Use Ability");
+                Console.WriteLine("[3] Cast Spell");
+                Console.WriteLine("[4] Use Item");
                 string? input = Console.ReadLine();
                 switch (input)
                 {

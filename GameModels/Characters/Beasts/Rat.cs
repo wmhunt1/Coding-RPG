@@ -1,7 +1,7 @@
 namespace GameModels;
 public class Rat : Beast
-{   
-    public Rat(string name = "Rat"):base(name)
+{
+    public Rat(string name = "Rat") : base(name)
     {
         Name = name;
         Ally = false;
@@ -10,7 +10,6 @@ public class Rat : Beast
         this.Strength = 10;
         this.Dexterity = 5;
         this.CurrentXP = 10;
-        Weapon = new Weapon("Bite", 1, "Piercing");
-        Armor = new Armor("Fur", 0, "Natural");
+        Weapon = new Bite();
     }
 }

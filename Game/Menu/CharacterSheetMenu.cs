@@ -8,11 +8,19 @@ namespace GameSpace
         public void DisplayEquipment(Character hero)
         {
             Console.WriteLine($"Weapon: {hero.Weapon.Name} - {hero.Weapon.WeaponDmg} {hero.Weapon.WeaponDmgType} Damage");
-            Console.WriteLine($"Armor: {hero.Armor.Name} - {hero.Armor.Protection} {hero.Armor.ProtectionType} Protection");
+            Console.WriteLine($"Armor: {hero.Torso.Name} - {hero.Torso.Protection} {hero.Torso.ProtectionType} Protection");
             AnyKey();
         }
         public void DisplayInventory(Character hero)
         {
+            Console.WriteLine($"{hero.Gold} GP");
+            for (int item = 0; item < hero.Inventory.Count; item++)
+            {
+                if (hero.Inventory[item].Quantity > 0)
+                {
+                     Console.WriteLine($"{hero.Inventory[item].Name} X {hero.Inventory[item].Quantity}");
+                }
+            }
             AnyKey();
         }
         public override void DisplayMenu(Character hero)
@@ -34,6 +42,7 @@ namespace GameSpace
                         DisplayEquipment(hero);
                         break;
                     case "2":
+                        DisplayInventory(hero);
                         break;
                     case "0":
                         showMenu = false;

@@ -22,10 +22,12 @@ public class Character
     public int Luck = 10;
     public int Beauty = 10;
     public bool Ally = false;
-    public Weapon Weapon = new Weapon("Fists", 0, "Bludgeoning");
-    public Armor Armor = new Armor("Naked", 0, "No");
-    public Accessory Accessory = new Accessory("None");
+    public Weapon Weapon = new Weapon("Fists", 0, 0, "Bludgeoning");
+    public Torso Torso = new Torso("Naked", 0, 0, "No");
+    public Accessory Accessory = new Accessory("None", 0);
     public List<Character> Companions = new List<Character>();
+    public int Gold = 0;
+    public List<Item> Inventory = new List<Item>();
     public Character(string name)
     {
         Name = name;
@@ -64,7 +66,7 @@ public class Character
     public int HealHP(int heal)
     {
         this.CurrentHP += heal;
-        Console.WriteLine($"{this.Name} heals {heal} HP");
+
         if (this.CurrentHP > this.MaxHP)
         {
             this.CurrentHP = this.MaxHP;
@@ -73,6 +75,7 @@ public class Character
     }
     public void FullRest()
     {
+        Console.WriteLine($"{this.Name} rests and fully recovers.");
         HealHP(MaxHP);
     }
     public int TakeDamage(int damage)
@@ -99,7 +102,7 @@ public class Character
     public void BasicAttack(Character target)
     {
         bool crit = CheckForCrit();
-        int damage = this.Strength + this.Weapon.WeaponDmg - target.Armor.Protection - target.Dexterity;
+        int damage = this.Strength + this.Weapon.WeaponDmg - target.Torso.Protection - target.Dexterity;
         if (crit == true)
         {
             damage *= 2;
@@ -118,5 +121,27 @@ public class Character
         {
             Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, but deals no damage");
         }
+    }
+    public int AddGold(int gp)
+    {
+        Gold += gp;
+        return Gold;
+    }
+      public int RemoveGold(int gp)
+    {
+        Gold -= gp;
+        return Gold;
+    }
+    public List<Item> AddItemToInventory(Item item)
+    {
+        //if item in inventory increase quantity
+        Inventory.Add(item);
+        return Inventory;
+    }
+    public List<Item> RemoveItemFromInventory(Item item)
+    {
+        //if quantity is 0 remove item
+        Inventory.Remove(item);
+        return Inventory;
     }
 }

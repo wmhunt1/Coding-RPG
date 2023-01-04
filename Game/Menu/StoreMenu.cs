@@ -3,7 +3,7 @@ using GameModels;
 
 namespace GameSpace
 {
-    public class StoreMenu : Menu
+    public class StoreMenu : LocationMenu
     {
         public string StoreName = "Store";
         public List<Item> StoreInventory = new List<Item>();
