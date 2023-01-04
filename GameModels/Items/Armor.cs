@@ -9,4 +9,9 @@ public class Armor : Equipable
         Protection = protection;
         ProtectionType = protectionType;
     }
+    public override void Equip(Character hero)
+    {
+        hero.Armor = this;
+        Console.WriteLine($"{hero.Name} equips {this.Name}");
+    }
 }

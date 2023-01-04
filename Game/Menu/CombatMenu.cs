@@ -30,8 +30,12 @@ namespace GameSpace
                             Console.WriteLine($"[{enemy + 1}]{enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
                         }
                         string? targetInput = Console.ReadLine();
-                        int target = Int32.Parse(targetInput);
-                        char1.BasicAttack(enemies[target - 1]);
+                        if (targetInput != null)
+                        {
+                            int target = Int32.Parse(targetInput);
+                            char1.BasicAttack(enemies[target - 1]);
+                        }
+                        char1.BasicAttack(enemies[0]);
                         break;
                     default:
                         break;
@@ -52,7 +56,7 @@ namespace GameSpace
                 char1.BasicAttack(enemies[target]);
             }
         }
-        
+
         public void CombatRound(List<Character> allies, List<Character> enemies)
         {
             for (int ally = 0; ally < allies.Count; ally++)
@@ -76,6 +80,7 @@ namespace GameSpace
         {
             bool combatOver = false;
             int round = 1;
+            List<Character> defeatedEnemies = new List<Character>();
             List<Character> allies = new List<Character>();
             allies.Add(hero);
             for (int ally = 0; ally < hero.Companions.Count; ally++)
@@ -90,6 +95,7 @@ namespace GameSpace
                     {
                         if (enemies[enemy].CurrentHP <= 0)
                         {
+                            defeatedEnemies.Add(enemies[enemy]);
                             enemies.Remove(enemies[enemy]);
                         }
                     }
@@ -113,10 +119,9 @@ namespace GameSpace
                     if (hero.CurrentHP > 0)
                     {
                         Console.WriteLine($"{hero.Name} is Victorious");
-                        for (int enemy = 0; enemy < enemies.Count; enemy++)
+                        for (int enemy = 0; enemy < defeatedEnemies.Count; enemy++)
                         {
-                            Console.WriteLine($"VS {enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
-                            hero.EarnXP(enemies[enemy].CurrentXP);
+                            hero.EarnXP(defeatedEnemies[enemy].CurrentXP);
                         }
 
                     }

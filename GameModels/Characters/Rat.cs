@@ -1,5 +1,5 @@
 namespace GameModels;
-public class Rat : Character
+public class Rat : Beast
 {   
     public Rat(string name = "Rat"):base(name)
     {

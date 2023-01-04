@@ -9,4 +9,9 @@ public class Weapon : Equipable
         WeaponDmg = weaponDmg;
         WeaponDmgType = weaponDmgType;
     }
+    public override void Equip(Character hero)
+    {
+        hero.Weapon = this;
+        Console.WriteLine($"{hero.Name} equips {this.Name}");
+    }
 }

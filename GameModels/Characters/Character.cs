@@ -4,7 +4,7 @@ public class Character
     public string Name = "";
     public int Level = 1;
     public int CurrentXP = 0;
-    public int MaxXP = 10;
+    public int MaxXP = 100;
     public int CurrentHP = 10;
     public int MaxHP = 10;
     public int CurrentMP = 10;
@@ -22,8 +22,9 @@ public class Character
     public int Luck = 10;
     public int Beauty = 10;
     public bool Ally = false;
-    public Weapon Weapon = new Weapon("Unarmed", 1, "Bludgeoning");
-    public Armor Armor = new Armor("Unarmored", 0, "None");
+    public Weapon Weapon = new Weapon("Fists", 0, "Bludgeoning");
+    public Armor Armor = new Armor("Naked", 0, "No");
+    public Accessory Accessory = new Accessory("None");
     public List<Character> Companions = new List<Character>();
     public Character(string name)
     {
@@ -35,6 +36,7 @@ public class Character
         this.Level++;
         Console.WriteLine($"{this.Name} Levels Up, reaching Level {this.Level}");
         this.MaxXP = this.Level * this.MaxXP;
+        HealHP(this.MaxHP);
         return this.Level;
     }
     public bool CheckForLevelUp()
@@ -62,12 +64,16 @@ public class Character
     public int HealHP(int heal)
     {
         this.CurrentHP += heal;
-        Console.WriteLine($"{this.Name} heals {heal} XP");
+        Console.WriteLine($"{this.Name} heals {heal} HP");
         if (this.CurrentHP > this.MaxHP)
         {
             this.CurrentHP = this.MaxHP;
         }
         return this.CurrentHP;
+    }
+    public void FullRest()
+    {
+        HealHP(MaxHP);
     }
     public int TakeDamage(int damage)
     {
