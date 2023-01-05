@@ -5,14 +5,50 @@ namespace GameSpace
 {
     public class CharacterSheetMenu : Menu
     {
+        
+        public void UnEquipFromDisplayEquipment(Character hero)
+        {
+
+        }
         public void DisplayEquipment(Character hero)
         {
-            Console.WriteLine($"Weapon: {hero.Weapon.Name} - {hero.Weapon.WeaponDmg} {hero.Weapon.WeaponDmgType} Damage");
+            Console.WriteLine($"Weapon: {hero.Weapon.Name} - {hero.Weapon.WeaponDmg} {hero.Weapon.WeaponDmgType.Name} Damage");
             Console.WriteLine($"Armor: {hero.Torso.Name} - {hero.Torso.Protection} {hero.Torso.ProtectionType} Protection");
             AnyKey();
         }
+        public void EquipFromDisplayInventory(Character hero, List<Equipable> equipable)
+        {
+            for (int equip = 0; equip < equipable.Count; equip++)
+            {
+                Console.WriteLine($"[{equip + 1}] {equipable[equip].Name}");
+            }
+            Console.WriteLine("Equip Items? (Y/N)");
+            string? input = Console.ReadLine();
+            switch (input)
+            {
+                case "Y":
+                case "y":
+                    for (int equip = 0; equip < equipable.Count; equip++)
+                    {
+                        Console.WriteLine($"[{equip + 1}] {equipable[equip].Name}");
+                    }
+                    string? selectionInput = Console.ReadLine();
+                    if (selectionInput != null)
+                    {
+                        int selection = Int32.Parse(selectionInput);
+                        equipable[selection - 1].EquipItemFromInventory(hero);
+                    }
+                    break;
+                case "N":
+                case "n":
+                    break;
+                default:
+                    break;
+            }
+        }
         public void DisplayInventory(Character hero)
         {
+            List<Equipable> equipable = new List<Equipable>();
             Console.WriteLine($"{hero.Gold} GP");
             for (int item = 0; item < hero.Inventory.Count; item++)
             {
@@ -20,6 +56,15 @@ namespace GameSpace
                 {
                     Console.WriteLine($"{hero.Inventory[item].Name} X {hero.Inventory[item].Quantity}");
                 }
+                if (hero.Inventory[item] is Equipable)
+                {
+                    var equipableItem = (Equipable)hero.Inventory[item];
+                    equipable.Add(equipableItem);
+                }
+            }
+            if (equipable.Count > 0)
+            {
+                EquipFromDisplayInventory(hero, equipable);
             }
             AnyKey();
         }

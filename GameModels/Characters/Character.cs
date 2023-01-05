@@ -24,8 +24,8 @@ public class Character
     public int StrengthBonus = 0;
     public int StrengthPenalty= 0;
     public bool Ally = false;
-    public Weapon Weapon = new Weapon("Fists", 0, 0);
-    public Torso Torso = new Torso("Naked", 0, 0, "No");
+    public Weapon Weapon = new Fist();
+    public Torso Torso = new NakedTorso();
     public Accessory Accessory = new Accessory("None", 0);
     public List<Character> Companions = new List<Character>();
     public int Gold = 0;

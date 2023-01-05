@@ -24,7 +24,9 @@ namespace GameSpace
             Rage rage = new Rage();
             tunic.EquipItem(hero);
             //club.EquipItem(hero);
-            dagger.EquipItem(hero);
+            //dagger.EquipItem(hero);
+            hero.AddItemToInventory(club);
+            hero.AddItemToInventory(dagger);
             hero.LearnAbility(cleave);
             hero.LearnSpell(magicMissile);
             hero.LearnAbility(rage);

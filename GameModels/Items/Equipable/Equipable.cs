@@ -10,7 +10,15 @@ public class Equipable : Item
     {
 
     }
+    public virtual void EquipItemFromInventory(Character hero)
+    {
+
+    }
     public virtual void UnEquipItem(Character hero)
+    {
+
+    }
+    public virtual void UnEquipItemFromEquipment(Character hero)
     {
 
     }
