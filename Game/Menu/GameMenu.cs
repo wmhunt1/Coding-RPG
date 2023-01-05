@@ -27,8 +27,12 @@ namespace GameSpace
         }
         public void StoreTest(Character hero)
         {
-            HealingPotion healingPotion = new HealingPotion("Healing Potion", 1, 5);
-            healingPotion.BuyItem(hero);
+            hero.AddGold(5);
+            HealingPotion healingPotion = new HealingPotion("Healing Potion", 2, 5);
+            List<Item> inventory = new List<Item>();
+            inventory.Add(healingPotion);
+            StoreMenu storeTest = new StoreMenu("Test Store", inventory);
+            storeTest.DisplayMenu(hero);
         }
         public override void DisplayMenu(Character hero)
         {

@@ -13,7 +13,7 @@ namespace GameSpace
         {
             Console.WriteLine("Name your character....");
             string? name = Console.ReadLine();
-            if (name == null)
+            if (name == null || name == "")
             {
                 name = "Hero";
                 hero.Name = name;

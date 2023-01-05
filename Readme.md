@@ -1,7 +1,6 @@
 * To-Do
     * Item Use
     * Spells
-    * Ammo
 * Menus
     * CharacterSheetMenu
     * CombatMenu
