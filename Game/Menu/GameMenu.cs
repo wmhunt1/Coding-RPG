@@ -34,6 +34,10 @@ namespace GameSpace
             StoreMenu storeTest = new StoreMenu("Test Store", inventory);
             storeTest.DisplayMenu(hero);
         }
+        public void DungeonTest(Character hero)
+        {
+
+        }
         public override void DisplayMenu(Character hero)
         {
             bool showMenu = true;
@@ -44,6 +48,7 @@ namespace GameSpace
                 Console.WriteLine("[2] Combat Test");
                 Console.WriteLine("[3] Equip Test");
                 Console.WriteLine("[4] Store Test");
+                Console.WriteLine("[5] Dungeon Test");
                 Console.WriteLine("[9] Heal");
                 Console.WriteLine("[0] Main Menu");
                 string? input = Console.ReadLine();
@@ -61,6 +66,9 @@ namespace GameSpace
                         break;
                     case "4":
                         StoreTest(hero);
+                        break;
+                    case "5":
+                        DungeonTest(hero);
                         break;
                     case "9":
                         hero.FullRest();

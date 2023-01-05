@@ -9,6 +9,10 @@ public class Item
         Name = name;
         Cost = cost;
     }
+    public virtual void ConsumeItem(Character hero)
+    {
+
+    }
     public void BuyItem(Character hero)
     {
         if (this.Cost > hero.Gold)

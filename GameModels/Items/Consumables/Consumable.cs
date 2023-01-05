@@ -10,7 +10,7 @@ public class Consumable : Item
     {
 
     }
-    public void Consume(Character hero)
+    public override void ConsumeItem(Character hero)
     {   
         ConsumableEffect(hero);
         hero.RemoveItemFromInventory(this);

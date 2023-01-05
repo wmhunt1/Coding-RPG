@@ -13,6 +13,55 @@ namespace GameSpace
                 showMenu = false;
             }
         }
+        public void AttackOption(Character char1, List<Character> enemies)
+        {
+            Console.WriteLine("Select target");
+            for (int enemy = 0; enemy < enemies.Count; enemy++)
+            {
+                Console.WriteLine($"[{enemy + 1}]{enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
+            }
+            string? targetInput = Console.ReadLine();
+            if (targetInput != null)
+            {
+                int target = Int32.Parse(targetInput);
+                char1.BasicAttack(enemies[target - 1]);
+            }
+            char1.BasicAttack(enemies[0]);
+            AnyKey();
+        }
+        public void UseItemOption(Character char1, List<Character> enemies)
+        {
+            Console.WriteLine("Select Item");
+            if (char1.Inventory.Count > 0)
+            {
+                List<Item> consumables = new List<Item>();
+                for (int item = 0; item < char1.Inventory.Count; item++)
+                {
+                    if (char1.Inventory[item] is Consumable)
+                    {
+                        consumables.Add(char1.Inventory[item]);
+                    }
+                }
+                if (consumables.Count > 0)
+                {
+                    for (int item = 0; item < consumables.Count; item++)
+                    {
+                        Console.WriteLine($"[{item + 1}]{consumables[item].Name}");
+                        string? selectionInput = Console.ReadLine();
+                        if (selectionInput != null)
+                        {
+                            int selection = Int32.Parse(selectionInput);
+                            consumables[selection - 1].ConsumeItem(char1);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("You have no items that can be used in combat!");
+            }
+            AnyKey();
+        }
         public void CombatOptions(Character char1, List<Character> enemies)
         {
             bool showOptions = true;
@@ -27,18 +76,10 @@ namespace GameSpace
                 switch (input)
                 {
                     case "1":
-                        Console.WriteLine("Select target");
-                        for (int enemy = 0; enemy < enemies.Count; enemy++)
-                        {
-                            Console.WriteLine($"[{enemy + 1}]{enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
-                        }
-                        string? targetInput = Console.ReadLine();
-                        if (targetInput != null)
-                        {
-                            int target = Int32.Parse(targetInput);
-                            char1.BasicAttack(enemies[target - 1]);
-                        }
-                        char1.BasicAttack(enemies[0]);
+                        AttackOption(char1, enemies);
+                        break;
+                    case "4":
+                        UseItemOption(char1, enemies);
                         break;
                     default:
                         break;
