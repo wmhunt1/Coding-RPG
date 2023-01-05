@@ -21,6 +21,8 @@ public class Character
     public int Perception = 10;
     public int Luck = 10;
     public int Beauty = 10;
+    public int StrengthBonus = 0;
+    public int StrengthPenalty= 0;
     public bool Ally = false;
     public Weapon Weapon = new Weapon("Fists", 0, 0);
     public Torso Torso = new Torso("Naked", 0, 0, "No");
@@ -33,6 +35,8 @@ public class Character
     public List<DamageType> Immunities = new List<DamageType>();
     public List<DamageType> Resistances = new List<DamageType>();
     public List<DamageType> Weaknesses = new List<DamageType>();
+    public List<Buff> Buffs = new List<Buff>();
+    public List<DeBuff> DeBuffs = new List<DeBuff>();
     public Character(string name)
     {
         Name = name;
@@ -229,7 +233,7 @@ public class Character
     public void BasicAttack(Character target)
     {
         int totalArmor = target.Torso.Protection;
-        int damage = this.Strength + this.Weapon.WeaponDmg - totalArmor - target.Dexterity;
+        int damage = this.Strength + this.Weapon.WeaponDmg + this.StrengthBonus - totalArmor - target.Dexterity - this.StrengthPenalty;
         int calculatedDamage = CalculateDamageWithPossibleCrit(target, damage, this.Weapon.WeaponDmgType);
         target.TakeDamage(calculatedDamage);
         if (calculatedDamage > 0)

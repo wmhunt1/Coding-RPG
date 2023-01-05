@@ -56,7 +56,7 @@ namespace GameSpace
         }
         public void SpellOption(Character char1, List<Character> targets)
         {
-              Console.WriteLine("Select Spell");
+            Console.WriteLine("Select Spell");
             for (int spell = 0; spell < char1.SpellBook.Count; spell++)
             {
                 Console.WriteLine($"[{spell + 1}]{char1.SpellBook[spell].Name} : {char1.SpellBook[spell].ManaCost}");
@@ -110,8 +110,14 @@ namespace GameSpace
             {
                 Console.WriteLine($"{char1.Name} - Combat Options");
                 Console.WriteLine("[1] Basic Attack");
-                Console.WriteLine("[2] Use Ability");
-                Console.WriteLine("[3] Cast Spell");
+                if (char1.Abilities.Count > 0)
+                {
+                    Console.WriteLine("[2] Use Ability");
+                }
+                if (char1.SpellBook.Count > 0)
+                {
+                    Console.WriteLine("[3] Cast Spell");
+                }
                 Console.WriteLine("[4] Use Item");
                 string? input = Console.ReadLine();
                 switch (input)
@@ -120,10 +126,16 @@ namespace GameSpace
                         AttackOption(char1, enemies);
                         break;
                     case "2":
-                        AbilityOption(char1, enemies);
+                        if (char1.Abilities.Count > 0)
+                        {
+                            AbilityOption(char1, enemies);
+                        }
                         break;
                     case "3":
-                        SpellOption(char1, enemies);
+                        if (char1.SpellBook.Count > 0)
+                        {
+                            SpellOption(char1, enemies);
+                        }
                         break;
                     case "4":
                         UseItemOption(char1, enemies);
@@ -164,7 +176,68 @@ namespace GameSpace
                     CombatTurn(enemies[enemy], allies);
                 }
             }
-
+            for (int ally = 0; ally < allies.Count; ally++)
+            {
+                if (allies[ally].Buffs.Count > 0)
+                {
+                    for (int buff = 0; buff < allies[ally].Buffs.Count; buff++)
+                    {
+                        allies[ally].Buffs[buff].RemainingDuration--;
+                    }
+                    for (int buff = 0; buff < allies[ally].Buffs.Count; buff++)
+                    {
+                        if (allies[ally].Buffs[buff].RemainingDuration == 0)
+                        {
+                            allies[ally].Buffs[buff].RemoveBuff(allies[ally]);
+                        }
+                    }
+                }
+                if (allies[ally].DeBuffs.Count > 0)
+                {
+                    for (int deBuff = 0; deBuff < allies[ally].DeBuffs.Count; deBuff++)
+                    {
+                        allies[ally].DeBuffs[deBuff].RemainingDuration--;
+                    }
+                    for (int deBuff = 0; deBuff < allies[ally].DeBuffs.Count; deBuff++)
+                    {
+                        if (allies[ally].DeBuffs[deBuff].RemainingDuration == 0)
+                        {
+                            allies[ally].DeBuffs[deBuff].RemoveDeBuff(allies[ally]);
+                        }
+                    }
+                }
+            }
+            for (int enemy = 0; enemy < enemies.Count; enemy++)
+            {
+                if (enemies[enemy].Buffs.Count > 0)
+                {
+                    for (int buff = 0; buff < enemies[enemy].Buffs.Count; buff++)
+                    {
+                        enemies[enemy].Buffs[buff].RemainingDuration--;
+                    }
+                    for (int buff = 0; buff < enemies[enemy].Buffs.Count; buff++)
+                    {
+                        if (enemies[enemy].Buffs[buff].RemainingDuration == 0)
+                        {
+                            enemies[enemy].Buffs[buff].RemoveBuff(enemies[enemy]);
+                        }
+                    }
+                }
+                if (enemies[enemy].DeBuffs.Count > 0)
+                {
+                    for (int deBuff = 0; deBuff < enemies[enemy].DeBuffs.Count; deBuff++)
+                    {
+                        enemies[enemy].DeBuffs[deBuff].RemainingDuration--;
+                    }
+                    for (int deBuff = 0; deBuff < enemies[enemy].DeBuffs.Count; deBuff++)
+                    {
+                        if (enemies[enemy].DeBuffs[deBuff].RemainingDuration == 0)
+                        {
+                            enemies[enemy].DeBuffs[deBuff].RemoveDeBuff(enemies[enemy]);
+                        }
+                    }
+                }
+            }
             AnyKey();
         }
         public void RunCombat(Character hero, List<Character> enemies)
@@ -213,6 +286,17 @@ namespace GameSpace
                     else
                     {
                         Console.WriteLine($"{hero.Name} is Defeated");
+                    }
+                    for (int ally = 0; ally < allies.Count; ally++)
+                    {
+                        for (int buff = 0; buff < allies[ally].Buffs.Count; buff++)
+                        {
+                            allies[ally].Buffs[buff].RemoveBuff(allies[ally]);
+                        }
+                        for (int deBuff = 0; deBuff < allies[ally].DeBuffs.Count; deBuff++)
+                        {
+                            allies[ally].DeBuffs[deBuff].RemoveDeBuff(allies[ally]);
+                        }
                     }
                     AnyKey();
                     combatOver = true;

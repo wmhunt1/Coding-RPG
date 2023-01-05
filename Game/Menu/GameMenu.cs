@@ -8,10 +8,10 @@ namespace GameSpace
         public void CombatTest(Character hero)
         {
             CombatMenu combatMenu = new CombatMenu();
-            //List<Character> rats = new List<Character>{new Rat(), new Rat(), new Rat()};
-            List<Character> skeletons = new List<Character>{new Skeleton()};
-            //combatMenu.RunCombat(hero, rats);
-            combatMenu.RunCombat(hero, skeletons);
+            List<Character> rats = new List<Character>{new Rat(), new Rat(), new Rat()};
+            //List<Character> skeletons = new List<Character>{new Skeleton()};
+            combatMenu.RunCombat(hero, rats);
+            //combatMenu.RunCombat(hero, skeletons);
         }
         public void EquipmentTest(Character hero)
         {
@@ -21,11 +21,13 @@ namespace GameSpace
             Torso tunic = new Tunic();
             Cleave cleave = new Cleave();
             MagicMissile magicMissile = new MagicMissile();
+            Rage rage = new Rage();
             tunic.EquipItem(hero);
             //club.EquipItem(hero);
             dagger.EquipItem(hero);
             hero.LearnAbility(cleave);
             hero.LearnSpell(magicMissile);
+            hero.LearnAbility(rage);
         }
         public void StoreTest(Character hero)
         {

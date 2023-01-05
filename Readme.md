@@ -1,8 +1,4 @@
 * To-Do
-    * Buffs
-    * DeBuffs
-    * Buff and Debuff duration
-    * Damage resistances, weaknesses, immunities (DamageType)
     * Test Dialogue
     * Test Quest
     * Equiping items from inventory
@@ -17,8 +13,13 @@
         * StoreMenu
 * Models
     * Ability
+    * BuffAndDeBuffs
+        * Buff
+            * Rage
+        * DeBuff
     * Character
         * Beast
+            * Rat
         * Humanoid
             * Goblin
         * Undead
