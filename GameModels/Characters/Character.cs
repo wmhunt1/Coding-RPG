@@ -28,6 +28,8 @@ public class Character
     public List<Character> Companions = new List<Character>();
     public int Gold = 0;
     public List<Item> Inventory = new List<Item>();
+    public List<Ability> Abilities = new List<Ability>();
+    public List<Spell> SpellBook = new List<Spell>();
     public Character(string name)
     {
         Name = name;
@@ -73,11 +75,6 @@ public class Character
         }
         return this.CurrentHP;
     }
-    public void FullRest()
-    {
-        Console.WriteLine($"{this.Name} rests and fully recovers.");
-        HealHP(MaxHP);
-    }
     public int TakeDamage(int damage)
     {
         if (damage >= 0)
@@ -85,6 +82,49 @@ public class Character
             this.CurrentHP -= damage;
         }
         return this.CurrentHP;
+    }
+    public int GainMana(int gain)
+    {
+        this.CurrentMP += gain;
+
+        if (this.CurrentMP > this.MaxMP)
+        {
+            this.CurrentMP = this.MaxMP;
+        }
+        return this.CurrentMP;
+    }
+    public int SpendMana(int cost)
+    {
+        if (cost >= 0)
+        {
+            this.CurrentMP -= cost;
+        }
+        return this.CurrentMP;
+    }
+    public int RecoverStamina(int gain)
+    {
+        this.CurrentSP += gain;
+
+        if (this.CurrentSP > this.MaxSP)
+        {
+            this.CurrentSP = this.MaxSP;
+        }
+        return this.CurrentSP;
+    }
+    public int SpendStamina(int cost)
+    {
+        if (cost >= 0)
+        {
+            this.CurrentSP -= cost;
+        }
+        return this.CurrentSP;
+    }
+    public void FullRest()
+    {
+        Console.WriteLine($"{this.Name} rests and fully recovers.");
+        HealHP(MaxHP);
+        GainMana(MaxMP);
+        RecoverStamina(MaxSP);
     }
     public bool CheckForCrit()
     {
@@ -127,7 +167,7 @@ public class Character
         Gold += gp;
         return Gold;
     }
-      public int RemoveGold(int gp)
+    public int RemoveGold(int gp)
     {
         Gold -= gp;
         return Gold;
@@ -143,5 +183,15 @@ public class Character
         //if quantity is 0 remove item
         Inventory.Remove(item);
         return Inventory;
+    }
+    public List<Ability> LearnAbility(Ability ability)
+    {
+        Abilities.Add(ability);
+        return Abilities;
+    }
+    public List<Spell> LearnSpell(Spell spell)
+    {
+        SpellBook.Add(spell);
+        return SpellBook;
     }
 }

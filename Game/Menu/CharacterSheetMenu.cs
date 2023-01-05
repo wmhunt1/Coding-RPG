@@ -18,8 +18,24 @@ namespace GameSpace
             {
                 if (hero.Inventory[item].Quantity > 0)
                 {
-                     Console.WriteLine($"{hero.Inventory[item].Name} X {hero.Inventory[item].Quantity}");
+                    Console.WriteLine($"{hero.Inventory[item].Name} X {hero.Inventory[item].Quantity}");
                 }
+            }
+            AnyKey();
+        }
+        public void DisplayAbilities(Character hero)
+        {
+            for (int ability = 0; ability < hero.Abilities.Count; ability++)
+            {
+                Console.WriteLine($"{hero.Abilities[ability].Name}");
+            }
+            AnyKey();
+        }
+        public void DisplaySpellBook(Character hero)
+        {
+            for (int spell = 0; spell < hero.SpellBook.Count; spell++)
+            {
+                Console.WriteLine($"{hero.SpellBook[spell].Name}");
             }
             AnyKey();
         }
@@ -34,6 +50,8 @@ namespace GameSpace
                 Console.WriteLine($"HP: {hero.CurrentHP}/{hero.MaxHP} MP: {hero.CurrentMP}/{hero.MaxMP} SP: {hero.CurrentSP}/{hero.MaxSP}");
                 Console.WriteLine("[1] View Equipment");
                 Console.WriteLine("[2] View Inventory");
+                Console.WriteLine("[3] View Abilities");
+                Console.WriteLine("[4] View Spellbook");
                 Console.WriteLine("[0] Leave Sheet");
                 string? input = Console.ReadLine();
                 switch (input)
@@ -43,6 +61,12 @@ namespace GameSpace
                         break;
                     case "2":
                         DisplayInventory(hero);
+                        break;
+                    case "3":
+                        DisplayAbilities(hero);
+                        break;
+                    case "4":
+                        DisplaySpellBook(hero);
                         break;
                     case "0":
                         showMenu = false;

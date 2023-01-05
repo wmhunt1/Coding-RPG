@@ -1,6 +1,12 @@
 * To-Do
-    * Abilities
-    * Spells
+    * Buffs
+    * DeBuffs
+    * Buff and Debuff duration
+    * Damage resistances, weaknesses, immunities (DamageType)
+    * Test Dialogue
+    * Test Quest
+    * Equiping items from inventory
+    * Unequiping items from equipment
 * Menus
     * CharacterSheetMenu
     * CombatMenu
@@ -11,7 +17,6 @@
         * StoreMenu
 * Models
     * Ability
-        * Spell
     * Character
         * Beast
         * Humanoid
@@ -21,6 +26,7 @@
     * DamageType
         * Bludgeoning
         * Piercing
+        * Slashing
     * Item
         * Consumable
             * Drink
@@ -55,3 +61,4 @@
     * Skill
         * CraftingSkill
         * GatheringSKill
+    * Spell

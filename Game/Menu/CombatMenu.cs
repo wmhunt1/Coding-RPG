@@ -13,6 +13,13 @@ namespace GameSpace
                 showMenu = false;
             }
         }
+        public void IterateThroughCharacterList(List<Character> characters)
+        {
+            for (int character = 0; character < characters.Count; character++)
+            {
+                Console.WriteLine($"{characters[character].Name} - HP: {characters[character].CurrentHP}/{characters[character].MaxHP} MP: {characters[character].CurrentMP}/{characters[character].MaxMP} SP: {characters[character].CurrentSP}/{characters[character].MaxSP}");
+            }
+        }
         public void AttackOption(Character char1, List<Character> enemies)
         {
             Console.WriteLine("Select target");
@@ -28,7 +35,37 @@ namespace GameSpace
             }
             else
             {
-                 Console.WriteLine("You chose no target and miss");
+                Console.WriteLine("You choose no target and miss");
+            }
+            AnyKey();
+        }
+        public void AbilityOption(Character char1, List<Character> targets)
+        {
+            Console.WriteLine("Select Ability");
+            for (int ability = 0; ability < char1.Abilities.Count; ability++)
+            {
+                Console.WriteLine($"[{ability + 1}]{char1.Abilities[ability].Name} : {char1.Abilities[ability].StaminaCost}");
+            }
+            string? selectionInput = Console.ReadLine();
+            if (selectionInput != null)
+            {
+                int selection = Int32.Parse(selectionInput);
+                char1.Abilities[selection - 1].UseAbility(char1, targets);
+            }
+            AnyKey();
+        }
+        public void SpellOption(Character char1, List<Character> targets)
+        {
+              Console.WriteLine("Select Spell");
+            for (int spell = 0; spell < char1.SpellBook.Count; spell++)
+            {
+                Console.WriteLine($"[{spell + 1}]{char1.SpellBook[spell].Name} : {char1.SpellBook[spell].ManaCost}");
+            }
+            string? selectionInput = Console.ReadLine();
+            if (selectionInput != null)
+            {
+                int selection = Int32.Parse(selectionInput);
+                char1.SpellBook[selection - 1].CastSpell(char1, targets);
             }
             AnyKey();
         }
@@ -65,6 +102,7 @@ namespace GameSpace
             }
             AnyKey();
         }
+
         public void CombatOptions(Character char1, List<Character> enemies)
         {
             bool showOptions = true;
@@ -80,6 +118,12 @@ namespace GameSpace
                 {
                     case "1":
                         AttackOption(char1, enemies);
+                        break;
+                    case "2":
+                        AbilityOption(char1, enemies);
+                        break;
+                    case "3":
+                        SpellOption(char1, enemies);
                         break;
                     case "4":
                         UseItemOption(char1, enemies);
@@ -148,15 +192,9 @@ namespace GameSpace
                     }
                     if (enemies.Count > 0)
                     {
-                        for (int ally = 0; ally < allies.Count; ally++)
-                        {
-                            Console.WriteLine($"{allies[ally].Name}: {allies[ally].CurrentHP}/{allies[ally].MaxHP}");
-                        }
+                        IterateThroughCharacterList(allies);
                         Console.WriteLine("VS");
-                        for (int enemy = 0; enemy < enemies.Count; enemy++)
-                        {
-                            Console.WriteLine($"{enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
-                        }
+                        IterateThroughCharacterList(enemies);
                         CombatRound(allies, enemies);
                         round++;
                     }

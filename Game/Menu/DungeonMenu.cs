@@ -5,17 +5,12 @@ namespace GameSpace
 {
     public class DungeonMenu : LocationMenu
     {
-        public List<Character> Encounter1;
-        public List<Character> Encounter2;
-        public List<Character> Encounter3;
-        public List<Character> BossEncounter;
-        public DungeonMenu(string name, List<Character> encounter1, List<Character> encounter2, List<Character> encounter3, List<Character> bossEncounter) : base(name)
+        public Dungeon Dungeon;
+
+        public DungeonMenu(string name, Dungeon dungeon) : base(name)
         {
             Name = name;
-            Encounter1 = encounter1;
-            Encounter2 = encounter2;
-            Encounter3 = encounter3;
-            BossEncounter = bossEncounter;
+            Dungeon = dungeon;
         }
         public void RunEncounter(Character hero, List<Character> enemies)
         {
@@ -52,7 +47,7 @@ namespace GameSpace
                         showMenu = false;
                         break;
                     case "1":
-                        RunEncounter(hero, Encounter1);
+                        RunEncounter(hero, Dungeon.Encounter1);
                         if (hero.CurrentHP > 0)
                         {
                             e1 = true;
@@ -65,7 +60,7 @@ namespace GameSpace
                     case "2":
                         if (e1 == true)
                         {
-                            RunEncounter(hero, Encounter2);
+                            RunEncounter(hero, Dungeon.Encounter2);
                             if (hero.CurrentHP > 0)
                             {
                                 e2 = true;
@@ -79,7 +74,7 @@ namespace GameSpace
                     case "3":
                         if (e2 == true)
                         {
-                            RunEncounter(hero, Encounter3);
+                            RunEncounter(hero, Dungeon.Encounter3);
                             if (hero.CurrentHP > 0)
                             {
                                 e3 = true;
@@ -93,7 +88,7 @@ namespace GameSpace
                     case "4":
                         if (e3 == true)
                         {
-                            RunEncounter(hero, BossEncounter);
+                            RunEncounter(hero, Dungeon.BossEncounter);
                             if (hero.CurrentHP > 0)
                             {
                                 Console.WriteLine($"You have defeated the {Name} Dungeon");

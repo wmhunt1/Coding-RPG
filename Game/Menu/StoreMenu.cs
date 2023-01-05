@@ -5,23 +5,24 @@ namespace GameSpace
 {
     public class StoreMenu : LocationMenu
     {
-        public List<Item> StoreInventory = new List<Item>();
-        public StoreMenu(string name, List<Item> storeInventory):base(name)
+        public Store Store;
+      
+        public StoreMenu(string name, Store store):base(name)
         {
             Name = name;
-            StoreInventory = storeInventory;
+            Store = store;
         }
         public void BuyFromStore(Character hero)
         {
-            for (int item = 0; item < StoreInventory.Count; item++)
+            for (int item = 0; item < Store.StoreInventory.Count; item++)
             {
-                Console.WriteLine($"[{item + 1}] {StoreInventory[item].Name} - {StoreInventory[item].Cost} GP");
+                Console.WriteLine($"[{item + 1}] {Store.StoreInventory[item].Name} - {Store.StoreInventory[item].Cost} GP");
             }
             string? choiceInput = Console.ReadLine();
             if (choiceInput != null)
             {
                 int choice = Int32.Parse(choiceInput);
-                StoreInventory[choice - 1].BuyItem(hero);
+                Store.StoreInventory[choice - 1].BuyItem(hero);
             }
             AnyKey();
         }

@@ -8,13 +8,7 @@ namespace GameSpace
         public void CombatTest(Character hero)
         {
             CombatMenu combatMenu = new CombatMenu();
-            List<Character> rats = new List<Character>();
-            Rat rat1 = new Rat();
-            Rat rat2 = new Rat();
-            Rat rat3 = new Rat();
-            rats.Add(rat1);
-            rats.Add(rat2);
-            rats.Add(rat3);
+            List<Character> rats = new List<Character>{new Rat(), new Rat(), new Rat()};
             combatMenu.RunCombat(hero, rats);
         }
         public void EquipmentTest(Character hero)
@@ -22,33 +16,29 @@ namespace GameSpace
 
             Weapon club = new Club();
             Torso tunic = new Tunic();
+            Cleave cleave = new Cleave();
+            MagicMissile magicMissile = new MagicMissile();
             tunic.EquipItem(hero);
             club.EquipItem(hero);
+            hero.LearnAbility(cleave);
+            hero.LearnSpell(magicMissile);
         }
         public void StoreTest(Character hero)
         {
             hero.AddGold(5);
-            HealingPotion healingPotion = new HealingPotion("Healing Potion", 2, 5);
-            List<Item> inventory = new List<Item>();
-            inventory.Add(healingPotion);
-            StoreMenu storeTest = new StoreMenu("Test Store", inventory);
+            Store store = new Store("Test Store", new List<Item>{new HealingPotion("Healing Potion", 2, 5)});
+            StoreMenu storeTest = new StoreMenu(store.Name, store);
             storeTest.DisplayMenu(hero);
         }
         public void DungeonTest(Character hero)
         {
-            List<Character> e1 = new List<Character>();
-            Rat rat1 = new Rat();
-            e1.Add(rat1);
-            List<Character> e2 = new List<Character>();
-            Rat rat2 = new Rat();
-            e2.Add(rat2);
-            List<Character> e3 = new List<Character>();
-            Rat rat3 = new Rat();
-            e3.Add(rat3);
-            List<Character> boss = new List<Character>();
-            Rat bossRat = new Rat();
-            boss.Add(bossRat);
-            DungeonMenu dungeonTest = new DungeonMenu("Test Dungeon", e1, e2, e3, boss);
+
+            List<Character> e1 = new List<Character> { new Rat() };
+            List<Character> e2 = new List<Character> { new Rat() };
+            List<Character> e3 = new List<Character> { new Rat() };
+            List<Character> boss = new List<Character> { new Rat() };
+            Dungeon dungeon = new Dungeon("Test Dungeon", e1, e2, e3, boss);
+            DungeonMenu dungeonTest = new DungeonMenu(dungeon.Name, dungeon);
             dungeonTest.DisplayMenu(hero);
         }
         public override void DisplayMenu(Character hero)
