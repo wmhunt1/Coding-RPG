@@ -5,11 +5,10 @@ namespace GameSpace
 {
     public class StoreMenu : LocationMenu
     {
-        public string StoreName = "Store";
         public List<Item> StoreInventory = new List<Item>();
-        public StoreMenu(string storeName, List<Item> storeInventory)
+        public StoreMenu(string name, List<Item> storeInventory):base(name)
         {
-            StoreName = storeName;
+            Name = name;
             StoreInventory = storeInventory;
         }
         public void BuyFromStore(Character hero)
@@ -53,7 +52,7 @@ namespace GameSpace
             while (showMenu)
             {
                 Console.WriteLine(" ===== Coding RPG ===== ");
-                Console.WriteLine($"===== {StoreName} =====");
+                Console.WriteLine($"===== {Name} =====");
                 Console.WriteLine($"{hero.Name}: {hero.Gold} GP");
                 Console.WriteLine("[1] Buy");
                 Console.WriteLine("[2] Sell");

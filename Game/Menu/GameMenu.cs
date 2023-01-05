@@ -36,7 +36,20 @@ namespace GameSpace
         }
         public void DungeonTest(Character hero)
         {
-
+            List<Character> e1 = new List<Character>();
+            Rat rat1 = new Rat();
+            e1.Add(rat1);
+            List<Character> e2 = new List<Character>();
+            Rat rat2 = new Rat();
+            e2.Add(rat2);
+            List<Character> e3 = new List<Character>();
+            Rat rat3 = new Rat();
+            e3.Add(rat3);
+            List<Character> boss = new List<Character>();
+            Rat bossRat = new Rat();
+            boss.Add(bossRat);
+            DungeonMenu dungeonTest = new DungeonMenu("Test Dungeon", e1, e2, e3, boss);
+            dungeonTest.DisplayMenu(hero);
         }
         public override void DisplayMenu(Character hero)
         {

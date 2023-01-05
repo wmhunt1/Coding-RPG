@@ -26,7 +26,10 @@ namespace GameSpace
                 int target = Int32.Parse(targetInput);
                 char1.BasicAttack(enemies[target - 1]);
             }
-            char1.BasicAttack(enemies[0]);
+            else
+            {
+                 Console.WriteLine("You chose no target and miss");
+            }
             AnyKey();
         }
         public void UseItemOption(Character char1, List<Character> enemies)

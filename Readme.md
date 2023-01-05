@@ -1,6 +1,6 @@
 * To-Do
+    * Abilities
     * Spells
-    * Test Dungeon
 * Menus
     * CharacterSheetMenu
     * CombatMenu
