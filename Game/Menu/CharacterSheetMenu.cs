@@ -5,15 +5,27 @@ namespace GameSpace
 {
     public class CharacterSheetMenu : Menu
     {
-        
-        public void UnEquipFromDisplayEquipment(Character hero)
-        {
 
-        }
         public void DisplayEquipment(Character hero)
         {
-            Console.WriteLine($"Weapon: {hero.Weapon.Name} - {hero.Weapon.WeaponDmg} {hero.Weapon.WeaponDmgType.Name} Damage");
-            Console.WriteLine($"Armor: {hero.Torso.Name} - {hero.Torso.Protection} {hero.Torso.ProtectionType} Protection");
+            Console.WriteLine($"{hero.Name}'s Equipment");
+            Console.WriteLine($"[1] Weapon: {hero.Weapon.Name} - {hero.Weapon.WeaponDmg} {hero.Weapon.WeaponDmgType.Name} Damage");
+            Console.WriteLine($"[2] Armor: {hero.Torso.Name} - {hero.Torso.Protection} {hero.Torso.ProtectionType} Protection");
+            Console.WriteLine("[0] Leave Equipment");
+            string? input = Console.ReadLine();
+            switch (input)
+            {
+                case "1":
+                    hero.Weapon.UnEquipItemFromEquipment(hero);
+                    break;
+                case "2":
+                    hero.Torso.UnEquipItemFromEquipment(hero);
+                    break;
+                case "0":
+                    break;
+                default:
+                    break;
+            }
             AnyKey();
         }
         public void EquipFromDisplayInventory(Character hero, List<Equipable> equipable)

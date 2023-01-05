@@ -1,7 +1,6 @@
 * To-Do
     * Test Dialogue
     * Test Quest
-    * Unequiping items from equipment
 * Menus
     * CharacterSheetMenu
     * CombatMenu
