@@ -22,7 +22,7 @@ public class Character
     public int Luck = 10;
     public int Beauty = 10;
     public bool Ally = false;
-    public Weapon Weapon = new Weapon("Fists", 0, 0, "Bludgeoning");
+    public Weapon Weapon = new Weapon("Fists", 0, 0);
     public Torso Torso = new Torso("Naked", 0, 0, "No");
     public Accessory Accessory = new Accessory("None", 0);
     public List<Character> Companions = new List<Character>();
@@ -30,6 +30,9 @@ public class Character
     public List<Item> Inventory = new List<Item>();
     public List<Ability> Abilities = new List<Ability>();
     public List<Spell> SpellBook = new List<Spell>();
+    public List<DamageType> Immunities = new List<DamageType>();
+    public List<DamageType> Resistances = new List<DamageType>();
+    public List<DamageType> Weaknesses = new List<DamageType>();
     public Character(string name)
     {
         Name = name;
@@ -126,41 +129,122 @@ public class Character
         GainMana(MaxMP);
         RecoverStamina(MaxSP);
     }
-    public bool CheckForCrit()
+    public int CheckForCrit(int damage)
     {
         Random rand = new Random();
         int number = rand.Next(0, 100);
         if (number <= this.Luck)
         {
-            return true;
+            Console.WriteLine("Critical Hit!");
+            damage *= 2;
         }
-        else
-        {
-            return false;
-        }
+        return damage;
     }
-    public void BasicAttack(Character target)
+    public bool CheckForImmunity(Character target, DamageType damageType)
     {
-        bool crit = CheckForCrit();
-        int damage = this.Strength + this.Weapon.WeaponDmg - target.Torso.Protection - target.Dexterity;
-        if (crit == true)
+        bool check = false;
+        if (target.Immunities.Count > 0)
+        {
+            for (int damage = 0; damage < target.Immunities.Count; damage++)
+            {
+                if (damageType.Name == target.Immunities[damage].Name)
+                {
+                    check = true;
+                }
+            }
+        }
+        if (check == true)
+        {
+            Console.WriteLine($"{target.Name} is immune to {damageType.Name}");
+        }
+        return check;
+    }
+    public bool CheckForResistance(Character target, DamageType damageType)
+    {
+        bool check = false;
+        if (target.Resistances.Count > 0)
+        {
+            for (int damage = 0; damage < target.Resistances.Count; damage++)
+            {
+                if (damageType.Name == target.Resistances[damage].Name)
+                {
+                    check = true;
+                }
+            }
+        }
+        if (check == true)
+        {
+            Console.WriteLine($"{target.Name} is resistant to {damageType.Name}");
+        }
+        return check;
+    }
+    public bool CheckForWeakness(Character target, DamageType damageType)
+    {
+        bool check = false;
+        if (target.Weaknesses.Count > 0)
+        {
+            for (int damage = 0; damage < target.Weaknesses.Count; damage++)
+            {
+                if (damageType.Name == target.Weaknesses[damage].Name)
+                {
+                    check = true;
+                }
+            }
+        }
+        if (check == true)
+        {
+            Console.WriteLine($"{target.Name} is weak to {damageType.Name}");
+        }
+        return check;
+    }
+    public int CalculateDamage(Character target, int damage, DamageType damageType)
+    {
+        bool immune = CheckForImmunity(target, damageType);
+        bool resistant = CheckForResistance(target, damageType);
+        bool weak = CheckForWeakness(target, damageType);
+        if (immune == true)
+        {
+            damage = 0;
+        }
+        if (resistant == true)
+        {
+            damage /= 2;
+        }
+        if (weak == true)
         {
             damage *= 2;
         }
-        target.TakeDamage(damage);
-        if (damage > 0)
+        return damage;
+    }
+    public int CalculateDamageWithPossibleCrit(Character target, int damage, DamageType damageType)
+    {
+        int critDamage = CheckForCrit(damage);
+        int calcDamage = CalculateDamage(target, critDamage, damageType);
+        if (critDamage == damage * 2)
         {
-            Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, dealing {damage} {this.Weapon.WeaponDmgType} Damage");
-            if (crit == true)
-            {
-                Console.WriteLine("Critical Hit!");
-
-            }
+            calcDamage = 1;
+        }
+        return calcDamage;
+    }
+    public void BasicAttack(Character target)
+    {
+        int totalArmor = target.Torso.Protection;
+        int damage = this.Strength + this.Weapon.WeaponDmg - totalArmor - target.Dexterity;
+        int calculatedDamage = CalculateDamageWithPossibleCrit(target, damage, this.Weapon.WeaponDmgType);
+        target.TakeDamage(calculatedDamage);
+        if (calculatedDamage > 0)
+        {
+            Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, dealing {calculatedDamage} {this.Weapon.WeaponDmgType.Name} Damage");
         }
         else
         {
             Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, but deals no damage");
         }
+    }
+    public void AttackSpell(Character target, int baseDamage, DamageType damageType)
+    {
+        int damage = CalculateDamage(target, baseDamage, damageType);
+        target.TakeDamage(damage);
     }
     public int AddGold(int gp)
     {

@@ -1,8 +1,8 @@
 namespace GameModels;
 
-public class Bite : Natural
+public class Dagger : OneHMelee
 {
-    public Bite(string name = "Bite", int cost = 0, int weaponDmg = 1) : base(name, cost, weaponDmg)
+    public Dagger(string name = "Dagger", int cost = 1, int weaponDmg = 1) : base(name, cost, weaponDmg)
     {
         Name = name;
         Cost = cost;

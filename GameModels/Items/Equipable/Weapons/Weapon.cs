@@ -2,13 +2,13 @@ namespace GameModels;
 public class Weapon : Equipable
 {   
     public int WeaponDmg;
-    public string WeaponDmgType;
-    public Weapon(string name, int cost, int weaponDmg, string weaponDmgType):base(name, cost)
+    public DamageType WeaponDmgType;
+    public Weapon(string name, int cost, int weaponDmg):base(name, cost)
     {
         Name = name;
         Cost = cost;
         WeaponDmg = weaponDmg;
-        WeaponDmgType = weaponDmgType;
+        WeaponDmgType = new PhysicalDamage();
     }
     public override void EquipItem(Character hero)
     {

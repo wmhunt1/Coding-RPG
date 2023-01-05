@@ -7,6 +7,7 @@ public class MagicMissile : DamageSpell
         SpellSchool = school;
         SpellLevel = level;
         ManaCost = cost;
+        SpellDamageType = new ForceDamage();
     }
     public override void SpellEffect(Character caster, List<Character> enemies)
     {
@@ -19,8 +20,8 @@ public class MagicMissile : DamageSpell
         if (targetInput != null)
         {
             int target = Int32.Parse(targetInput);
-            Console.WriteLine($"{enemies[target-1].Name} is hit with the magic missile.");
-            enemies[target - 1].TakeDamage(5);
+            Console.WriteLine($"{enemies[target - 1].Name} is hit with the magic missile.");
+            caster.AttackSpell(enemies[target - 1], 5, SpellDamageType);
         }
         else
         {

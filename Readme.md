@@ -24,9 +24,12 @@
         * Undead
             * Skeleton
     * DamageType
-        * Bludgeoning
-        * Piercing
-        * Slashing
+        * Energy
+            * Force
+        * Physical
+            * Bludgeoning
+            * Piercing
+            * Slashing
     * Item
         * Consumable
             * Drink
@@ -58,6 +61,7 @@
     * Location
         * Dungeon
         * Store
+    * ProtectionType
     * Skill
         * CraftingSkill
         * GatheringSKill

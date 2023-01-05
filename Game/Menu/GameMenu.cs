@@ -8,18 +8,22 @@ namespace GameSpace
         public void CombatTest(Character hero)
         {
             CombatMenu combatMenu = new CombatMenu();
-            List<Character> rats = new List<Character>{new Rat(), new Rat(), new Rat()};
-            combatMenu.RunCombat(hero, rats);
+            //List<Character> rats = new List<Character>{new Rat(), new Rat(), new Rat()};
+            List<Character> skeletons = new List<Character>{new Skeleton()};
+            //combatMenu.RunCombat(hero, rats);
+            combatMenu.RunCombat(hero, skeletons);
         }
         public void EquipmentTest(Character hero)
         {
 
             Weapon club = new Club();
+            Dagger dagger = new Dagger();
             Torso tunic = new Tunic();
             Cleave cleave = new Cleave();
             MagicMissile magicMissile = new MagicMissile();
             tunic.EquipItem(hero);
-            club.EquipItem(hero);
+            //club.EquipItem(hero);
+            dagger.EquipItem(hero);
             hero.LearnAbility(cleave);
             hero.LearnSpell(magicMissile);
         }
