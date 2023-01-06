@@ -280,8 +280,33 @@ namespace GameSpace
                         for (int enemy = 0; enemy < defeatedEnemies.Count; enemy++)
                         {
                             hero.EarnXP(defeatedEnemies[enemy].CurrentXP);
-                        }
 
+                        }
+                        for (int enemy = 0; enemy < defeatedEnemies.Count; enemy++)
+                        {
+                            List<KillQuest> killQuests = new List<KillQuest>();
+                            if (hero.Journal.Count > 0)
+                            {
+                                for (int quest = 0; quest < hero.Journal.Count; quest++)
+                                {
+                                    if (hero.Journal[quest] is KillQuest)
+                                    {
+                                        var killQuest = (KillQuest)hero.Journal[quest];
+                                        killQuests.Add(killQuest);
+                                    }
+                                    if (killQuests.Count > 0)
+                                    {
+                                        for (int kq = 0; kq < killQuests.Count; kq++)
+                                        {
+                                            if (killQuests[kq].TargetMonster == defeatedEnemies[enemy].Name)
+                                            {
+                                                killQuests[kq].TotalKilled++;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                     else
                     {

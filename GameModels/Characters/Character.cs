@@ -22,7 +22,7 @@ public class Character
     public int Luck = 10;
     public int Beauty = 10;
     public int StrengthBonus = 0;
-    public int StrengthPenalty= 0;
+    public int StrengthPenalty = 0;
     public bool Ally = false;
     public Weapon Weapon = new Fist();
     public Torso Torso = new NakedTorso();
@@ -263,24 +263,80 @@ public class Character
     }
     public List<Item> AddItemToInventory(Item item)
     {
-        //if item in inventory increase quantity
-        Inventory.Add(item);
+        bool alreadyOwned = false;
+        if (Inventory.Count > 0)
+        {
+            for (int itm = 0; itm < Inventory.Count; itm++)
+            {
+                if (Inventory[itm].Name == item.Name)
+                {
+                    alreadyOwned = true;
+                    Inventory[itm].Quantity++;
+                }
+            }
+        }
+        if (alreadyOwned == false)
+        {
+             Inventory.Add(item);
+        }
         return Inventory;
     }
     public List<Item> RemoveItemFromInventory(Item item)
     {
-        //if quantity is 0 remove item
-        Inventory.Remove(item);
+        bool onlyOne = true;
+        if (Inventory.Count > 0)
+        {
+            for (int itm = 0; itm < Inventory.Count; itm++)
+            {
+                if (Inventory[itm].Name == item.Name)
+                {
+                    onlyOne = false;
+                    Inventory[itm].Quantity--;
+                }
+            }
+        }
+        if (onlyOne == true)
+        {
+             Inventory.Remove(item);
+        }
         return Inventory;
     }
     public List<Ability> LearnAbility(Ability ability)
     {
-        Abilities.Add(ability);
+        bool alreadyKnown = false;
+        if (Abilities.Count > 0)
+        {
+            for (int abil = 0; abil < Abilities.Count; abil++)
+            {
+                if (Abilities[abil].Name == ability.Name)
+                {
+                    alreadyKnown = true;
+                }
+            }
+        }
+        if (alreadyKnown == false)
+        {
+            Abilities.Add(ability);
+        }
         return Abilities;
     }
     public List<Spell> LearnSpell(Spell spell)
     {
-        SpellBook.Add(spell);
+        bool alreadyKnown = false;
+        if (SpellBook.Count > 0)
+        {
+            for (int abil = 0; abil < SpellBook.Count; abil++)
+            {
+                if (SpellBook[abil].Name == spell.Name)
+                {
+                    alreadyKnown = true;
+                }
+            }
+        }
+        if (alreadyKnown == false)
+        {
+            SpellBook.Add(spell);
+        }
         return SpellBook;
     }
     public List<Quest> AddQuestToJournal(Quest quest)

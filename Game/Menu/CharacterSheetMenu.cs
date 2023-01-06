@@ -68,7 +68,7 @@ namespace GameSpace
                 {
                     Console.WriteLine($"{hero.Inventory[item].Name} X {hero.Inventory[item].Quantity}");
                 }
-                if (hero.Inventory[item] is Equipable)
+                if (hero.Inventory[item] is Equipable && hero.Inventory[item].Quantity > 0)
                 {
                     var equipableItem = (Equipable)hero.Inventory[item];
                     equipable.Add(equipableItem);

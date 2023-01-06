@@ -25,6 +25,7 @@ namespace GameSpace
             tunic.EquipItem(hero);
             hero.AddItemToInventory(club);
             hero.AddItemToInventory(dagger);
+            dagger.EquipItem(hero);
             hero.LearnAbility(cleave);
             hero.LearnSpell(magicMissile);
             hero.LearnAbility(rage);
@@ -53,9 +54,9 @@ namespace GameSpace
         }
         public void QuestTest(Character hero)
         {
-            KillQuest testKill = new KillQuest("Rat Slayer", "Kill Rats", 3, "Rat");
+            KillQuest testKill = new KillQuest("Rat Slayer", "Kill Rats", 10, 3, "Rat");
             testKill.StartQuest(hero);
-            DungeonQuest testDungeonClear = new DungeonQuest("Clear Test Dungeon", "Defeat the Boss of the Test Dungeon", "Test Dungeon");
+            DungeonQuest testDungeonClear = new DungeonQuest("Clear Test Dungeon", "Defeat the Boss of the Test Dungeon", 10, "Test Dungeon");
             testDungeonClear.StartQuest(hero);   
         }
         public override void DisplayMenu(Character hero)

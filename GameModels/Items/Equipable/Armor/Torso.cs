@@ -24,10 +24,12 @@ public class Torso : Armor
     public override void EquipItemFromInventory(Character hero)
     {
         hero.Torso.UnEquipItem(hero);
+        hero.RemoveItemFromInventory(this);
         this.EquipItem(hero);
     }
     public override void UnEquipItemFromEquipment(Character hero)
     {
         this.UnEquipItem(hero);
+
     }
 }

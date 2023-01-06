@@ -26,7 +26,7 @@ public class Weapon : Equipable
     public override void EquipItemFromInventory(Character hero)
     {
         hero.Weapon.UnEquipItem(hero);
-        hero.Inventory.Remove(this);
+        hero.RemoveItemFromInventory(this);
         this.EquipItem(hero);
     }
     public override void UnEquipItemFromEquipment(Character hero)
