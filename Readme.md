@@ -1,10 +1,10 @@
 * To-Do
-    * Test Dialogue
-    * Test Quest
     * Hit Chance
     * Use for other attributes
     * Skills
     * fix cleave leaving one alive at -1
+    * input validation
+    * Consolidate Code
 * Menus
     * CharacterSheetMenu
     * CombatMenu

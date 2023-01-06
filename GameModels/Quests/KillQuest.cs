@@ -16,6 +16,6 @@ public class KillQuest : Quest
     {
         Console.WriteLine($"{Name} - {QuestStatus}");
         Console.WriteLine($"{QuestDescription}");
-        Console.WriteLine($"{TargetMonster} {TotalKilled/2}/{Quantity}");
+        Console.WriteLine($"{TargetMonster} {TotalKilled}/{Quantity}");
     }
 }

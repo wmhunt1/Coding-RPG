@@ -8,7 +8,7 @@ namespace GameSpace
         public void CombatTest(Character hero)
         {
             CombatMenu combatMenu = new CombatMenu();
-            List<Character> rats = new List<Character>{new Rat(), new Rat(), new Rat()};
+            List<Character> rats = new List<Character> { new Rat(), new Rat(), new Rat() };
             //List<Character> skeletons = new List<Character>{new Skeleton()};
             combatMenu.RunCombat(hero, rats);
             //combatMenu.RunCombat(hero, skeletons);
@@ -33,7 +33,7 @@ namespace GameSpace
         public void StoreTest(Character hero)
         {
             hero.AddGold(5);
-            Store store = new Store("Test Store", new List<Item>{new HealingPotion("Healing Potion", 2, 5)});
+            Store store = new Store("Test Store", new List<Item> { new HealingPotion("Healing Potion", 2, 5) });
             StoreMenu storeTest = new StoreMenu(store.Name, store);
             storeTest.DisplayMenu(hero);
         }
@@ -50,14 +50,16 @@ namespace GameSpace
         }
         public void DialogueTest(Character hero)
         {
-
+            KillQuestDialogue questDialogue = new KillQuestDialogue("Test QuestDialogue", new KillQuest("Rat Slayer", "Kill Rats", 10, 3, "Rat"));
+            DialogueMenu dTest = new DialogueMenu(questDialogue);
+            dTest.DisplayMenu(hero);
         }
         public void QuestTest(Character hero)
         {
             KillQuest testKill = new KillQuest("Rat Slayer", "Kill Rats", 10, 3, "Rat");
             testKill.StartQuest(hero);
             DungeonQuest testDungeonClear = new DungeonQuest("Clear Test Dungeon", "Defeat the Boss of the Test Dungeon", 10, "Test Dungeon");
-            testDungeonClear.StartQuest(hero);   
+            testDungeonClear.StartQuest(hero);
         }
         public override void DisplayMenu(Character hero)
         {

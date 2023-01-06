@@ -47,8 +47,11 @@ public class Character
     {
         this.Level++;
         Console.WriteLine($"{this.Name} Levels Up, reaching Level {this.Level}");
+        this.MaxHP = this.MaxHP + this.Constitution;
+        this.MaxMP = this.MaxMP + this.Intelligence;
+        this.MaxSP = this.MaxSP + this.Dexterity;
         this.MaxXP = this.Level * this.MaxXP;
-        HealHP(this.MaxHP);
+        FullRest();
         return this.Level;
     }
     public bool CheckForLevelUp()

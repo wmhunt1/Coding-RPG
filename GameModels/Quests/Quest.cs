@@ -12,7 +12,7 @@ public class Quest
         QuestDescription = questDescription;
         GoldReward = goldReward;
     }
-    public void StartQuest(Character hero)
+    public bool AlreadyStartedQuest(Character hero)
     {
         bool alreadyStarted = false;
         if (hero.Journal.Count > 0)
@@ -25,6 +25,11 @@ public class Quest
                 }
             }
         }
+        return alreadyStarted;
+    }
+    public void StartQuest(Character hero)
+    {
+        bool alreadyStarted = AlreadyStartedQuest(hero);
         if (alreadyStarted == false)
         {
             hero.AddQuestToJournal(this);
