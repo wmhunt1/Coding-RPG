@@ -23,8 +23,6 @@ namespace GameSpace
             MagicMissile magicMissile = new MagicMissile();
             Rage rage = new Rage();
             tunic.EquipItem(hero);
-            //club.EquipItem(hero);
-            //dagger.EquipItem(hero);
             hero.AddItemToInventory(club);
             hero.AddItemToInventory(dagger);
             hero.LearnAbility(cleave);
@@ -49,6 +47,17 @@ namespace GameSpace
             DungeonMenu dungeonTest = new DungeonMenu(dungeon.Name, dungeon);
             dungeonTest.DisplayMenu(hero);
         }
+        public void DialogueTest(Character hero)
+        {
+
+        }
+        public void QuestTest(Character hero)
+        {
+            KillQuest testKill = new KillQuest("Rat Slayer", "Kill Rats", 3, "Rat");
+            testKill.StartQuest(hero);
+            DungeonQuest testDungeonClear = new DungeonQuest("Clear Test Dungeon", "Defeat the Boss of the Test Dungeon", "Test Dungeon");
+            testDungeonClear.StartQuest(hero);   
+        }
         public override void DisplayMenu(Character hero)
         {
             bool showMenu = true;
@@ -60,6 +69,8 @@ namespace GameSpace
                 Console.WriteLine("[3] Equip Test");
                 Console.WriteLine("[4] Store Test");
                 Console.WriteLine("[5] Dungeon Test");
+                Console.WriteLine("[6] Dialogue Test");
+                Console.WriteLine("[7] Quest Test");
                 Console.WriteLine("[9] Heal");
                 Console.WriteLine("[0] Main Menu");
                 string? input = Console.ReadLine();
@@ -80,6 +91,12 @@ namespace GameSpace
                         break;
                     case "5":
                         DungeonTest(hero);
+                        break;
+                    case "6":
+                        DialogueTest(hero);
+                        break;
+                    case "7":
+                        QuestTest(hero);
                         break;
                     case "9":
                         hero.FullRest();

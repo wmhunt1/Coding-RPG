@@ -1,6 +1,9 @@
 * To-Do
     * Test Dialogue
     * Test Quest
+    * Hit Chance
+    * Use for other attributes
+    * Skills
 * Menus
     * CharacterSheetMenu
     * CombatMenu
@@ -29,6 +32,7 @@
             * Bludgeoning
             * Piercing
             * Slashing
+    * Dialogue
     * Item
         * Consumable
             * Drink
@@ -64,4 +68,9 @@
     * Skill
         * CraftingSkill
         * GatheringSKill
+            * Fishing
     * Spell
+        * BuffSpell
+        * DamageSpell
+            * MagicMissile
+    * Quest

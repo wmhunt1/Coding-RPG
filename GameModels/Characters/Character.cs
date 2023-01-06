@@ -32,6 +32,7 @@ public class Character
     public List<Item> Inventory = new List<Item>();
     public List<Ability> Abilities = new List<Ability>();
     public List<Spell> SpellBook = new List<Spell>();
+    public List<Quest> Journal = new List<Quest>();
     public List<DamageType> Immunities = new List<DamageType>();
     public List<DamageType> Resistances = new List<DamageType>();
     public List<DamageType> Weaknesses = new List<DamageType>();
@@ -281,5 +282,10 @@ public class Character
     {
         SpellBook.Add(spell);
         return SpellBook;
+    }
+    public List<Quest> AddQuestToJournal(Quest quest)
+    {
+        Journal.Add(quest);
+        return Journal;
     }
 }

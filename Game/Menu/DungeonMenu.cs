@@ -92,6 +92,28 @@ namespace GameSpace
                             if (hero.CurrentHP > 0)
                             {
                                 Console.WriteLine($"You have defeated the {Name} Dungeon");
+                                List<DungeonQuest> dungeonQuests = new List<DungeonQuest>();
+                                if (hero.Journal.Count > 0)
+                                {
+                                    for (int quest = 0; quest < hero.Journal.Count; quest++)
+                                    {
+                                        if (hero.Journal[quest] is DungeonQuest)
+                                        {
+                                            var dungeonQuest = (DungeonQuest)hero.Journal[quest];
+                                            dungeonQuests.Add(dungeonQuest);
+                                        }
+                                        if (dungeonQuests.Count > 0)
+                                        {
+                                            for (int dq = 0; dq < dungeonQuests.Count; dq++)
+                                            {
+                                                if (dungeonQuests[dq].TargetDungeon == Dungeon.Name)
+                                                {
+                                                    dungeonQuests[dq].TargetDungeonCleared = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                                 showMenu = false;
                             }
                             else

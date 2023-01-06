@@ -96,6 +96,20 @@ namespace GameSpace
             }
             AnyKey();
         }
+        public void DisplayJournal(Character hero)
+        {
+            if (hero.Journal.Count > 0)
+            {
+                for (int quest = 0; quest < hero.Journal.Count; quest++)
+                {
+                    if (hero.Journal[quest].QuestStatus != "Finished")
+                    {
+                        hero.Journal[quest].JournalEntry(hero);
+                    }
+                }
+            }
+            AnyKey();
+        }
         public override void DisplayMenu(Character hero)
         {
             bool showMenu = true;
@@ -109,6 +123,7 @@ namespace GameSpace
                 Console.WriteLine("[2] View Inventory");
                 Console.WriteLine("[3] View Abilities");
                 Console.WriteLine("[4] View Spellbook");
+                Console.WriteLine("[5] View Journal");
                 Console.WriteLine("[0] Leave Sheet");
                 string? input = Console.ReadLine();
                 switch (input)
@@ -124,6 +139,9 @@ namespace GameSpace
                         break;
                     case "4":
                         DisplaySpellBook(hero);
+                        break;
+                    case "5":
+                        DisplayJournal(hero);
                         break;
                     case "0":
                         showMenu = false;
