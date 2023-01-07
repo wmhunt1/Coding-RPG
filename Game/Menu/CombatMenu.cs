@@ -27,11 +27,12 @@ namespace GameSpace
             {
                 Console.WriteLine($"[{enemy + 1}]{enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
             }
-            string? targetInput = Console.ReadLine();
-            if (targetInput != null)
+            string? selectionInput = Console.ReadLine();
+            int selection;
+            bool parseSucess = Int32.TryParse(selectionInput, out selection);
+            if (parseSucess == true && selection > 0 && selection <= enemies.Count)
             {
-                int target = Int32.Parse(targetInput);
-                char1.BasicAttack(enemies[target - 1]);
+                char1.BasicAttack(enemies[selection - 1]);
             }
             else
             {
@@ -47,9 +48,10 @@ namespace GameSpace
                 Console.WriteLine($"[{ability + 1}]{char1.Abilities[ability].Name} : {char1.Abilities[ability].StaminaCost}");
             }
             string? selectionInput = Console.ReadLine();
-            if (selectionInput != null)
+            int selection;
+            bool parseSucess = Int32.TryParse(selectionInput, out selection);
+            if (parseSucess == true && selection > 0 && selection <= char1.Abilities.Count)
             {
-                int selection = Int32.Parse(selectionInput);
                 char1.Abilities[selection - 1].UseAbility(char1, targets);
             }
             AnyKey();
@@ -62,9 +64,10 @@ namespace GameSpace
                 Console.WriteLine($"[{spell + 1}]{char1.SpellBook[spell].Name} : {char1.SpellBook[spell].ManaCost}");
             }
             string? selectionInput = Console.ReadLine();
-            if (selectionInput != null)
+            int selection;
+            bool parseSucess = Int32.TryParse(selectionInput, out selection);
+            if (parseSucess == true && selection > 0 && selection <= char1.SpellBook.Count)
             {
-                int selection = Int32.Parse(selectionInput);
                 char1.SpellBook[selection - 1].CastSpell(char1, targets);
             }
             AnyKey();
@@ -88,9 +91,10 @@ namespace GameSpace
                     {
                         Console.WriteLine($"[{item + 1}]{consumables[item].Name}");
                         string? selectionInput = Console.ReadLine();
-                        if (selectionInput != null)
+                        int selection;
+                        bool parseSucess = Int32.TryParse(selectionInput, out selection);
+                        if (parseSucess == true && selection > 0 && selection <= consumables.Count)
                         {
-                            int selection = Int32.Parse(selectionInput);
                             consumables[selection - 1].ConsumeItem(char1);
                         }
                     }

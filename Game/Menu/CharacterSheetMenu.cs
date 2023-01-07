@@ -45,9 +45,10 @@ namespace GameSpace
                         Console.WriteLine($"[{equip + 1}] {equipable[equip].Name}");
                     }
                     string? selectionInput = Console.ReadLine();
-                    if (selectionInput != null)
+                    int selection;
+                    bool parseSucess = Int32.TryParse(selectionInput, out selection);
+                    if (parseSucess == true && selection > 0 && selection <= equipable.Count)
                     {
-                        int selection = Int32.Parse(selectionInput);
                         equipable[selection - 1].EquipItemFromInventory(hero);
                     }
                     break;
