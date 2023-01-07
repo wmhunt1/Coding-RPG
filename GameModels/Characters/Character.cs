@@ -38,6 +38,7 @@ public class Character
     public List<DamageType> Weaknesses = new List<DamageType>();
     public List<Buff> Buffs = new List<Buff>();
     public List<DeBuff> DeBuffs = new List<DeBuff>();
+    public List<Condition> Conditions = new List<Condition>();
     public Character(string name)
     {
         Name = name;
@@ -130,12 +131,18 @@ public class Character
         }
         return this.CurrentSP;
     }
+    public List<Condition> RecoverFromConditions(List<Condition> conds)
+    {
+        this.Conditions = new List<Condition>();
+        return this.Conditions;
+    }
     public void FullRest()
     {
         Console.WriteLine($"{this.Name} rests and fully recovers.");
         HealHP(MaxHP);
         GainMana(MaxMP);
         RecoverStamina(MaxSP);
+        RecoverFromConditions(this.Conditions);
     }
     public int CheckForCrit(int damage)
     {

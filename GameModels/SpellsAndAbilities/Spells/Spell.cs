@@ -5,6 +5,7 @@ public class Spell
     public string SpellSchool;
     public int SpellLevel;
     public int ManaCost;
+    public string Description = "";
     public Spell(string name, string school, int level, int cost)
     {
         Name = name;
@@ -23,18 +24,18 @@ public class Spell
             return false;
         }
     }
-    public virtual void SpellEffect(Character caster, List<Character> targets)
+    public virtual void SpellEffect(Character caster, List<Character> allies, List<Character> targets)
     {
 
     }
-    public void CastSpell(Character caster, List<Character> targets)
+    public void CastSpell(Character caster, List<Character> allies, List<Character> enemies)
     {
         bool manaCheck = this.HasEnoughMP(caster);
         Console.WriteLine($"{caster.Name} casts {this.Name}");
         if (manaCheck == true)
         {
             caster.SpendMana(ManaCost);
-            SpellEffect(caster, targets);
+            SpellEffect(caster, allies, enemies);
         }
         else
         {

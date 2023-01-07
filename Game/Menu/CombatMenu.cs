@@ -13,11 +13,52 @@ namespace GameSpace
                 showMenu = false;
             }
         }
+        public void RemoveBuffOrDeBuffIfDurationExpired(List<Character> allies)
+        {
+            for (int ally = 0; ally < allies.Count; ally++)
+            {
+                if (allies[ally].Buffs.Count > 0)
+                {
+                    for (int buff = 0; buff < allies[ally].Buffs.Count; buff++)
+                    {
+                        allies[ally].Buffs[buff].RemainingDuration--;
+                    }
+                    for (int buff = 0; buff < allies[ally].Buffs.Count; buff++)
+                    {
+                        if (allies[ally].Buffs[buff].RemainingDuration == 0)
+                        {
+                            allies[ally].Buffs[buff].RemoveBuff(allies[ally]);
+                        }
+                    }
+                }
+                if (allies[ally].DeBuffs.Count > 0)
+                {
+                    for (int deBuff = 0; deBuff < allies[ally].DeBuffs.Count; deBuff++)
+                    {
+                        allies[ally].DeBuffs[deBuff].RemainingDuration--;
+                    }
+                    for (int deBuff = 0; deBuff < allies[ally].DeBuffs.Count; deBuff++)
+                    {
+                        if (allies[ally].DeBuffs[deBuff].RemainingDuration == 0)
+                        {
+                            allies[ally].DeBuffs[deBuff].RemoveDeBuff(allies[ally]);
+                        }
+                    }
+                }
+            }
+        }
         public void IterateThroughCharacterList(List<Character> characters)
         {
             for (int character = 0; character < characters.Count; character++)
             {
                 Console.WriteLine($"{characters[character].Name} - HP: {characters[character].CurrentHP}/{characters[character].MaxHP} MP: {characters[character].CurrentMP}/{characters[character].MaxMP} SP: {characters[character].CurrentSP}/{characters[character].MaxSP}");
+                if (characters[character].Conditions.Count > 0)
+                {
+                    for (int cond = 0; cond < characters[character].Conditions.Count; cond++)
+                    {
+                        Console.WriteLine($"{characters[character].Conditions[cond].Name}");
+                    }
+                }
             }
         }
         public void AttackOption(Character char1, List<Character> enemies)
@@ -56,7 +97,7 @@ namespace GameSpace
             }
             AnyKey();
         }
-        public void SpellOption(Character char1, List<Character> targets)
+        public void SpellOption(Character char1, List<Character> allies, List<Character> enemies)
         {
             Console.WriteLine("Select Spell");
             for (int spell = 0; spell < char1.SpellBook.Count; spell++)
@@ -68,7 +109,7 @@ namespace GameSpace
             bool parseSucess = Int32.TryParse(selectionInput, out selection);
             if (parseSucess == true && selection > 0 && selection <= char1.SpellBook.Count)
             {
-                char1.SpellBook[selection - 1].CastSpell(char1, targets);
+                char1.SpellBook[selection - 1].CastSpell(char1, allies, enemies);
             }
             AnyKey();
         }
@@ -106,8 +147,7 @@ namespace GameSpace
             }
             AnyKey();
         }
-
-        public void CombatOptions(Character char1, List<Character> enemies)
+        public void CombatOptions(Character char1, List<Character> allies, List<Character> enemies)
         {
             bool showOptions = true;
             while (showOptions)
@@ -138,7 +178,7 @@ namespace GameSpace
                     case "3":
                         if (char1.SpellBook.Count > 0)
                         {
-                            SpellOption(char1, enemies);
+                            SpellOption(char1, allies, enemies);
                         }
                         break;
                     case "4":
@@ -150,11 +190,11 @@ namespace GameSpace
                 showOptions = false;
             }
         }
-        public void CombatTurn(Character char1, List<Character> enemies)
+        public void CombatTurn(Character char1, List<Character> allies, List<Character> enemies)
         {
             if (char1.Ally == true)
             {
-                CombatOptions(char1, enemies);
+                CombatOptions(char1, allies, enemies);
             }
             else
             {
@@ -163,86 +203,114 @@ namespace GameSpace
                 char1.BasicAttack(enemies[target]);
             }
         }
-
-        public void CombatRound(List<Character> allies, List<Character> enemies)
+        public void ChanceForConditionToEnd(Character char1)
+        {
+            if (char1.Conditions.Count > 0)
+            {
+                for (int cond = 0; cond < char1.Conditions.Count; cond++)
+                {
+                    Random random = new Random();
+                    int chance = random.Next(0, 100);
+                    if (chance >= 50)
+                    {
+                        Console.WriteLine($"{char1.Name}'s {char1.Conditions[cond].Name}'s condition ends");
+                        char1.Conditions[cond].RemoveCondition(char1);
+                    }
+                }
+            }
+        }
+        public bool CheckForTurnSkippingConditions(Character char1)
+        {
+            bool turnSkip = false;
+            if (char1.Conditions.Count > 0)
+            {
+                for (int cond = 0; cond < char1.Conditions.Count; cond++)
+                {
+                    if (char1.Conditions[cond].Name == "Asleep")
+                    {
+                        turnSkip = true;
+                    }
+                }
+            }
+            return turnSkip;
+        }
+        public void TakeConditionalDamage(Character char1)
+        {
+            List<DamageCondition> damageConds = new List<DamageCondition>();
+            if (char1.Conditions.Count > 0)
+            {
+                for (int cond = 0; cond < char1.Conditions.Count; cond++)
+                {
+                    if (char1.Conditions[cond] is DamageCondition)
+                    {
+                        var damageCondition = (DamageCondition)char1.Conditions[cond];
+                        damageConds.Add(damageCondition);
+                    }
+                }
+            }
+            if (damageConds.Count > 0)
+            {
+                for (int cond = 0; cond < damageConds.Count; cond++)
+                {
+                    Console.WriteLine($"{char1.Name} takes {damageConds[cond].DamageAmount} {damageConds[cond].DamageType.Name} Damage due to {damageConds[cond].Name}");
+                    damageConds[cond].ApplyConditionDamage(char1);
+                }
+            }
+        }
+        public void GroupTurn(List<Character> allies, List<Character> enemies)
         {
             for (int ally = 0; ally < allies.Count; ally++)
             {
                 if (allies[ally].CurrentHP > 0)
                 {
-                    CombatTurn(allies[ally], enemies);
+                    ChanceForConditionToEnd(allies[ally]);
+                    bool turnSkip = CheckForTurnSkippingConditions(allies[ally]);
+                    if (turnSkip != true)
+                    {
+                        CombatTurn(allies[ally], allies, enemies);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{allies[ally].Name} lost their turn due to sleep");
+                    }
+                    TakeConditionalDamage(allies[ally]);
                 }
             }
-            for (int enemy = 0; enemy < enemies.Count; enemy++)
-            {
-                if (enemies[enemy].CurrentHP > 0)
-                {
-                    CombatTurn(enemies[enemy], allies);
-                }
-            }
+        }
+        public void CombatRound(List<Character> allies, List<Character> enemies)
+        {
+            GroupTurn(allies, enemies);
+            GroupTurn(enemies, allies);
+            RemoveBuffOrDeBuffIfDurationExpired(allies);
+            RemoveBuffOrDeBuffIfDurationExpired(enemies);
+            AnyKey();
+        }
+        public void EndOfCombatBuffAndDeBuffRemoval(List<Character> allies)
+        {
             for (int ally = 0; ally < allies.Count; ally++)
             {
-                if (allies[ally].Buffs.Count > 0)
+                for (int buff = 0; buff < allies[ally].Buffs.Count; buff++)
                 {
-                    for (int buff = 0; buff < allies[ally].Buffs.Count; buff++)
-                    {
-                        allies[ally].Buffs[buff].RemainingDuration--;
-                    }
-                    for (int buff = 0; buff < allies[ally].Buffs.Count; buff++)
-                    {
-                        if (allies[ally].Buffs[buff].RemainingDuration == 0)
-                        {
-                            allies[ally].Buffs[buff].RemoveBuff(allies[ally]);
-                        }
-                    }
+                    allies[ally].Buffs[buff].RemoveBuff(allies[ally]);
                 }
-                if (allies[ally].DeBuffs.Count > 0)
+                for (int deBuff = 0; deBuff < allies[ally].DeBuffs.Count; deBuff++)
                 {
-                    for (int deBuff = 0; deBuff < allies[ally].DeBuffs.Count; deBuff++)
-                    {
-                        allies[ally].DeBuffs[deBuff].RemainingDuration--;
-                    }
-                    for (int deBuff = 0; deBuff < allies[ally].DeBuffs.Count; deBuff++)
-                    {
-                        if (allies[ally].DeBuffs[deBuff].RemainingDuration == 0)
-                        {
-                            allies[ally].DeBuffs[deBuff].RemoveDeBuff(allies[ally]);
-                        }
-                    }
+                    allies[ally].DeBuffs[deBuff].RemoveDeBuff(allies[ally]);
                 }
             }
-            for (int enemy = 0; enemy < enemies.Count; enemy++)
+        }
+        public void EndofCombatConditionRemoval(List<Character> allies)
+        {
+            for (int ally = 0; ally < allies.Count; ally++)
             {
-                if (enemies[enemy].Buffs.Count > 0)
+                if (allies[ally].Conditions.Count > 0)
                 {
-                    for (int buff = 0; buff < enemies[enemy].Buffs.Count; buff++)
+                    for (int cond = 0; cond < allies[ally].Conditions.Count; cond++)
                     {
-                        enemies[enemy].Buffs[buff].RemainingDuration--;
-                    }
-                    for (int buff = 0; buff < enemies[enemy].Buffs.Count; buff++)
-                    {
-                        if (enemies[enemy].Buffs[buff].RemainingDuration == 0)
-                        {
-                            enemies[enemy].Buffs[buff].RemoveBuff(enemies[enemy]);
-                        }
-                    }
-                }
-                if (enemies[enemy].DeBuffs.Count > 0)
-                {
-                    for (int deBuff = 0; deBuff < enemies[enemy].DeBuffs.Count; deBuff++)
-                    {
-                        enemies[enemy].DeBuffs[deBuff].RemainingDuration--;
-                    }
-                    for (int deBuff = 0; deBuff < enemies[enemy].DeBuffs.Count; deBuff++)
-                    {
-                        if (enemies[enemy].DeBuffs[deBuff].RemainingDuration == 0)
-                        {
-                            enemies[enemy].DeBuffs[deBuff].RemoveDeBuff(enemies[enemy]);
-                        }
+                        allies[ally].Conditions[cond].RemoveCondition(allies[ally]);
                     }
                 }
             }
-            AnyKey();
         }
         public void RunCombat(Character hero, List<Character> enemies)
         {
@@ -316,17 +384,10 @@ namespace GameSpace
                     {
                         Console.WriteLine($"{hero.Name} is Defeated");
                     }
-                    for (int ally = 0; ally < allies.Count; ally++)
-                    {
-                        for (int buff = 0; buff < allies[ally].Buffs.Count; buff++)
-                        {
-                            allies[ally].Buffs[buff].RemoveBuff(allies[ally]);
-                        }
-                        for (int deBuff = 0; deBuff < allies[ally].DeBuffs.Count; deBuff++)
-                        {
-                            allies[ally].DeBuffs[deBuff].RemoveDeBuff(allies[ally]);
-                        }
-                    }
+                    EndOfCombatBuffAndDeBuffRemoval(allies);
+                    EndOfCombatBuffAndDeBuffRemoval(hero.Companions);
+                    EndofCombatConditionRemoval(allies);
+                    EndofCombatConditionRemoval(hero.Companions);
                     AnyKey();
                     combatOver = true;
                 }

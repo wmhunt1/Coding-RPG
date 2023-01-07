@@ -22,6 +22,8 @@ namespace GameSpace
             Cleave cleave = new Cleave();
             MagicMissile magicMissile = new MagicMissile();
             Rage rage = new Rage();
+            SleepSpell sleep = new SleepSpell();
+            FireBallSpell fireBall = new FireBallSpell();
             tunic.EquipItem(hero);
             hero.AddItemToInventory(club);
             hero.AddItemToInventory(dagger);
@@ -29,6 +31,8 @@ namespace GameSpace
             hero.LearnAbility(cleave);
             hero.LearnSpell(magicMissile);
             hero.LearnAbility(rage);
+            hero.LearnSpell(sleep);
+            hero.LearnSpell(fireBall);
         }
         public void StoreTest(Character hero)
         {

@@ -1,15 +1,16 @@
 namespace GameModels;
-public class MagicMissile : DamageSpell
+public class SingleTargetDamageSpell : DamageSpell
 {
-    public MagicMissile(string name = "Magic Missile", string school = "Destruction", int level = 1, int cost = 5) : base(name, school, level, cost)
+    public SingleTargetDamageSpell(string name, string school, int level, int cost, int spellDamage) : base(name, school, level, cost, spellDamage)
     {
         Name = name;
         SpellSchool = school;
         SpellLevel = level;
         ManaCost = cost;
+        SpellDamage = spellDamage;
         SpellDamageType = new ForceDamage();
     }
-    public override void SpellEffect(Character caster, List<Character> enemies)
+    public override void SpellEffect(Character caster, List<Character> allies, List<Character> enemies)
     {
         Console.WriteLine("Select target");
         for (int enemy = 0; enemy < enemies.Count; enemy++)
@@ -20,8 +21,8 @@ public class MagicMissile : DamageSpell
         if (targetInput != null)
         {
             int target = Int32.Parse(targetInput);
-            Console.WriteLine($"{enemies[target - 1].Name} is hit with the magic missile.");
-            caster.AttackSpell(enemies[target - 1], 5, SpellDamageType);
+            Console.WriteLine($"{enemies[target - 1].Name} is hit with the {Name}.");
+            caster.AttackSpell(enemies[target - 1], SpellDamage, SpellDamageType);
         }
         else
         {
