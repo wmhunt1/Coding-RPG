@@ -12,18 +12,36 @@ public class Character
     public int CurrentSP = 10;
     public int MaxSP = 10;
     public int Strength = 10;
-    public int Constitution = 10;
-    public int Dexterity = 10;
-    public int Intelligence = 10;
-    public int Wisdom = 10;
-    public int Charisma = 10;
-    public int WillPower = 10;
-    public int Perception = 10;
-    public int Luck = 10;
-    public int Beauty = 10;
     public int StrengthBonus = 0;
     public int StrengthPenalty = 0;
-    public bool Ally = false;
+    public int Constitution = 10;
+    public int ConstitutionBonus = 0;
+    public int ConstitutionPenalty = 0;
+    public int Dexterity = 10;
+    public int DexterityBonus = 0;
+    public int DexterityPenalty = 0;
+    public int Intelligence = 10;
+    public int IntelligenceBonus = 0;
+    public int IntelligencePenalty = 0;
+    public int Wisdom = 10;
+    public int WisdomBonus = 0;
+    public int WisdomPenalty = 0;
+    public int Charisma = 10;
+    public int CharismaBonus = 0;
+    public int CharismaPenalty = 0;
+    public int WillPower = 10;
+    public int WillPowerBonus = 0;
+    public int WillPowerPenalty = 0;
+    public int Perception = 10;
+    public int PerceptionBonus = 0;
+    public int PerceptionPenalty = 0;
+    public int Luck = 10;
+    public int LuckBonus = 0;
+    public int LuckPenalty = 0;
+    public int Beauty = 10;
+    public int BeautyBonus = 0;
+    public int BeautyPenalty = 0;
+    public bool Ally = true;
     public Weapon Weapon = new Fist();
     public Torso Torso = new NakedTorso();
     public Accessory Accessory = new Accessory("None", 0);
@@ -272,5 +290,10 @@ public class Character
     {
         Gold -= gp;
         return Gold;
+    }
+    public List<Character> JoinParty(Character leader)
+    {
+        leader.Companions.Add(this);
+        return leader.Companions;
     }
 }

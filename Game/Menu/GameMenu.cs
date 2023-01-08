@@ -24,15 +24,19 @@ namespace GameSpace
             Rage rage = new Rage();
             SleepSpell sleep = new SleepSpell();
             FireBallSpell fireBall = new FireBallSpell();
+            SummonSkeletonSpell skeleton = new SummonSkeletonSpell();
             tunic.EquipItem(hero);
             club.AddItemToInventory(hero);
             dagger.AddItemToInventory(hero);
             dagger.EquipItem(hero);
-            cleave.LearnAbility(hero);
-            magicMissile.LearnSpell(hero);
-            rage.LearnAbility(hero);
-            sleep.LearnSpell(hero);
-            fireBall.LearnSpell(hero);
+            //cleave.LearnAbility(hero);
+            //magicMissile.LearnSpell(hero);
+            //rage.LearnAbility(hero);
+            //sleep.LearnSpell(hero);
+            //fireBall.LearnSpell(hero);
+            Dog dog = new Dog();
+            dog.JoinParty(hero);
+            skeleton.LearnSpell(hero);
         }
         public void StoreTest(Character hero)
         {
@@ -78,13 +82,8 @@ namespace GameSpace
             {
                 Console.WriteLine("===== Coding RPG =====");
                 Console.WriteLine("[1] Character Sheet");
-                Console.WriteLine("[2] Combat Test");
-                Console.WriteLine("[3] Equip Test");
-                Console.WriteLine("[4] Store Test");
-                Console.WriteLine("[5] Dungeon Test");
-                Console.WriteLine("[6] Dialogue Test");
-                Console.WriteLine("[7] Quest Test");
-                Console.WriteLine("[8] Skill Test");
+                Console.WriteLine("[2] Combat Test [3] Equip Test [4] Store Test [5] Dungeon Test");
+                Console.WriteLine("[6] Dialogue Test [7] Quest Test [8] Skill Test");
                 Console.WriteLine("[9] Heal");
                 Console.WriteLine("[0] Main Menu");
                 string? input = Console.ReadLine();

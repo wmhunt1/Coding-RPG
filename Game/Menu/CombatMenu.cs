@@ -69,7 +69,10 @@ namespace GameSpace
             Console.WriteLine("Select target");
             for (int enemy = 0; enemy < enemies.Count; enemy++)
             {
-                Console.WriteLine($"[{enemy + 1}]{enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
+                if (enemies[enemy].CurrentHP > 0)
+                {
+                    Console.WriteLine($"[{enemy + 1}]{enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
+                }
             }
             string? selectionInput = Console.ReadLine();
             int selection;
@@ -150,47 +153,70 @@ namespace GameSpace
             }
             AnyKey();
         }
+        public bool CheckIfEnemiesLeft(List<Character> enemies)
+        {
+            bool left = false;
+            for (int enemy = 0; enemy < enemies.Count; enemy++)
+            {
+                if (enemies[enemy].CurrentHP > 0)
+                {
+                    left = true;
+                }
+            }
+            return left;
+        }
         public void CombatOptions(Character char1, List<Character> allies, List<Character> enemies)
         {
             bool showOptions = true;
-            while (showOptions)
+            bool check = CheckIfEnemiesLeft(enemies);
+            if (check == true)
             {
-                Console.WriteLine($"{char1.Name} - Combat Options");
-                Console.WriteLine("[1] Basic Attack");
-                if (char1.Abilities.Count > 0)
+                while (showOptions)
                 {
-                    Console.WriteLine("[2] Use Ability");
-                }
-                if (char1.SpellBook.Count > 0)
-                {
-                    Console.WriteLine("[3] Cast Spell");
-                }
-                Console.WriteLine("[4] Use Item");
-                string? input = Console.ReadLine();
-                switch (input)
-                {
-                    case "1":
-                        AttackOption(char1, enemies);
-                        break;
-                    case "2":
-                        if (char1.Abilities.Count > 0)
+                    for (int enemy = 0; enemy < enemies.Count; enemy++)
+                    {
+                        if (enemies[enemy].CurrentHP > 0)
                         {
-                            AbilityOption(char1, enemies);
+                            Console.WriteLine($"[{enemy + 1}]{enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
                         }
-                        break;
-                    case "3":
-                        if (char1.SpellBook.Count > 0)
-                        {
-                            SpellOption(char1, allies, enemies);
-                        }
-                        break;
-                    case "4":
-                        UseItemOption(char1, enemies);
-                        break;
-                    default:
-                        break;
+                    }
+                    Console.WriteLine($"{char1.Name} - Combat Options");
+                    Console.WriteLine("[1] Basic Attack");
+                    if (char1.Abilities.Count > 0)
+                    {
+                        Console.WriteLine("[2] Use Ability");
+                    }
+                    if (char1.SpellBook.Count > 0)
+                    {
+                        Console.WriteLine("[3] Cast Spell");
+                    }
+                    Console.WriteLine("[4] Use Item");
+                    string? input = Console.ReadLine();
+                    switch (input)
+                    {
+                        case "1":
+                            AttackOption(char1, enemies);
+                            break;
+                        case "2":
+                            if (char1.Abilities.Count > 0)
+                            {
+                                AbilityOption(char1, enemies);
+                            }
+                            break;
+                        case "3":
+                            if (char1.SpellBook.Count > 0)
+                            {
+                                SpellOption(char1, allies, enemies);
+                            }
+                            break;
+                        case "4":
+                            UseItemOption(char1, enemies);
+                            break;
+                        default:
+                            break;
+                    }
+                    showOptions = false;
                 }
-                showOptions = false;
             }
         }
         public void CombatTurn(Character char1, List<Character> allies, List<Character> enemies)
@@ -355,6 +381,13 @@ namespace GameSpace
                         for (int enemy = 0; enemy < defeatedEnemies.Count; enemy++)
                         {
                             hero.EarnXP(defeatedEnemies[enemy].CurrentXP);
+                            if (hero.Companions.Count > 0)
+                            {
+                                for (int comp = 0; comp < hero.Companions.Count; comp++)
+                                {
+                                    hero.Companions[comp].EarnXP(defeatedEnemies[enemy].CurrentXP);
+                                }
+                            }
 
                         }
                         for (int enemy = 0; enemy < defeatedEnemies.Count; enemy++)
