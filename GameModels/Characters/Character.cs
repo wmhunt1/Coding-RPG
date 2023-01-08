@@ -44,7 +44,7 @@ public class Character
     public bool Ally = true;
     public Weapon Weapon = new Fist();
     public Torso Torso = new NakedTorso();
-    public Accessory Accessory = new Accessory("None", 0);
+    public Ring Ring = new Ring("No Ring", 0);
     public List<Character> Companions = new List<Character>();
     public int Gold = 0;
     public List<Item> Inventory = new List<Item>();
@@ -264,12 +264,15 @@ public class Character
     public void BasicAttack(Character target)
     {
         int totalArmor = target.Torso.Protection;
-        int damage = this.Strength + this.Weapon.WeaponDmg + this.StrengthBonus - totalArmor - target.Dexterity - this.StrengthPenalty;
+        int totalStrength = this.Strength+this.StrengthBonus-this.StrengthPenalty;
+        int totalDexterity = target.Dexterity + target.DexterityBonus - target.DexterityPenalty;
+        int damage = this.Strength + this.Weapon.WeaponDmg + totalStrength - totalArmor - totalDexterity;
         int calculatedDamage = CalculateDamageWithPossibleCrit(target, damage, this.Weapon.WeaponDmgType);
         target.TakeDamage(calculatedDamage);
         if (calculatedDamage > 0)
         {
             Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, dealing {calculatedDamage} {this.Weapon.WeaponDmgType.Name} Damage");
+            Weapon.EquipmentEnchantment.OnHitEnchantment(this, target);
         }
         else
         {

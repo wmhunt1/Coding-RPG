@@ -26,9 +26,13 @@ namespace GameSpace
             FireBallSpell fireBall = new FireBallSpell();
             SummonSkeletonSpell skeleton = new SummonSkeletonSpell();
             tunic.EquipItem(hero);
-            club.AddItemToInventory(hero);
-            dagger.AddItemToInventory(hero);
-            dagger.EquipItem(hero);
+            //club.AddItemToInventory(hero);
+            //dagger.AddItemToInventory(hero);
+            //dagger.EquipItem(hero);
+            PoisonedDagger poisonedDagger = new PoisonedDagger();
+            poisonedDagger.EquipItem(hero);
+            RingOfStrength ring = new RingOfStrength();
+            ring.EquipItem(hero);
             //cleave.LearnAbility(hero);
             //magicMissile.LearnSpell(hero);
             //rage.LearnAbility(hero);

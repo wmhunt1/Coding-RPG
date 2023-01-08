@@ -10,7 +10,7 @@ public class DamageSpell : Spell
         SpellLevel = level;
         ManaCost = cost;
         SpellDamage = spellDamage;
-        SpellDamageType = new EnergyDamage();
+        SpellDamageType = new ElementalDamage();
     }
     public override void SpellEffect(Character caster, List<Character> allies, List<Character> enemies)
     {

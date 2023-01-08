@@ -11,6 +11,7 @@ namespace GameSpace
             Console.WriteLine($"{hero.Name}'s Equipment");
             Console.WriteLine($"[1] Weapon: {hero.Weapon.Name} - {hero.Weapon.WeaponDmg} {hero.Weapon.WeaponDmgType.Name} Damage");
             Console.WriteLine($"[2] Armor: {hero.Torso.Name} - {hero.Torso.Protection} {hero.Torso.ProtectionType} Protection");
+            Console.WriteLine($"[3] Ring: {hero.Ring}");
             Console.WriteLine("[0] Leave Equipment");
             string? input = Console.ReadLine();
             switch (input)
@@ -20,6 +21,9 @@ namespace GameSpace
                     break;
                 case "2":
                     hero.Torso.UnEquipItemFromEquipment(hero);
+                    break;
+                case "3":
+                    hero.Ring.UnEquipItemFromEquipment(hero);
                     break;
                 case "0":
                     break;
@@ -142,6 +146,7 @@ namespace GameSpace
                 Console.WriteLine($"===== {hero.Name}'s Character Sheet =====");
                 Console.WriteLine($"Level: {hero.Level} EXP {hero.CurrentXP}/{hero.MaxXP}");
                 Console.WriteLine($"HP: {hero.CurrentHP}/{hero.MaxHP} MP: {hero.CurrentMP}/{hero.MaxMP} SP: {hero.CurrentSP}/{hero.MaxSP}");
+                Console.WriteLine ($"STR: {hero.Strength+hero.StrengthBonus-hero.StrengthPenalty}(+{hero.StrengthBonus})(-{hero.StrengthPenalty})");
                 Console.WriteLine("[1] View Equipment");
                 Console.WriteLine("[2] View Inventory");
                 Console.WriteLine("[3] View Abilities");

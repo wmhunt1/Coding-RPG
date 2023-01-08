@@ -17,6 +17,7 @@ public class Weapon : Equipable
     }
     public override void UnEquipItem(Character hero)
     {
+        this.EquipmentEnchantment.RemoveEnchantmentOnUnEquip(hero);
         hero.Weapon = new Fist();
         if (this.Name != "Fist")
         {

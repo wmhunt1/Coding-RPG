@@ -1,5 +1,5 @@
 namespace GameModels;
-public class FireDamage : EnergyDamage
+public class FireDamage : ElementalDamage
 {
     public FireDamage(string name  = "Fire"):base(name)
     {

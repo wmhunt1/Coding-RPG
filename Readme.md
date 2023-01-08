@@ -4,5 +4,5 @@
     * Use for other attributes
     * story
     * Jobs/Classes
-    * Enchantments (Enhancement and On Hit Weapon Enchantments)
     * Factions, Reputation, Relationships
+    * Find item in list without looping

@@ -1,5 +1,5 @@
 namespace GameModels;
-public class ForceDamage : EnergyDamage
+public class ForceDamage : ElementalDamage
 {
     public ForceDamage(string name  = "Force"):base(name)
     {
