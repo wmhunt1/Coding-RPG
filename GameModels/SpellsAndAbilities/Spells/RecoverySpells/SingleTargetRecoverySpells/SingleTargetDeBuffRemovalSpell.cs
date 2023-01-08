@@ -21,16 +21,10 @@ public class SingleTargetDeBuffRemovalSpell : SingleTargetRecoverySpell
         bool parseSucess = Int32.TryParse(selectionInput, out selection);
         if (parseSucess == true && selection > 0 && selection <= enemies.Count)
         {
-            if (allies[selection-1].DeBuffs.Count > 0)
+            if (allies[selection - 1].DeBuffs.Find(x => x.Name == RemovedDeBuff.Name) != null)
             {
-                for (int cond = 0; cond < allies[selection-1].DeBuffs.Count; cond++)
-                {
-                    if (RemovedDeBuff.Name == allies[selection-1].DeBuffs[cond].Name)
-                    {
-                        allies[selection-1].DeBuffs[cond].RemoveDeBuff(allies[selection-1]);
-                    }
-                }
-            }  
+                allies[selection - 1].DeBuffs.Find(x => x.Name == RemovedDeBuff.Name)?.RemoveDeBuff(allies[selection - 1]);
+            }
         }
     }
 }

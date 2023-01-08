@@ -29,10 +29,11 @@ namespace GameSpace
             //club.AddItemToInventory(hero);
             //dagger.AddItemToInventory(hero);
             //dagger.EquipItem(hero);
+            //club.EquipItem(hero);
             PoisonedDagger poisonedDagger = new PoisonedDagger();
             poisonedDagger.EquipItem(hero);
             RingOfStrength ring = new RingOfStrength();
-            ring.EquipItem(hero);
+            //ring.EquipItem(hero);
             //cleave.LearnAbility(hero);
             //magicMissile.LearnSpell(hero);
             //rage.LearnAbility(hero);

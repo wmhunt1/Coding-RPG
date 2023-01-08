@@ -13,12 +13,9 @@ public class GroupDeBuffRemovalSpell : GroupRecoverySpell
     {
         for (int ally = 0; ally < allies.Count; ally++)
         {
-            for (int cond = 0; cond < allies[ally].DeBuffs.Count; cond++)
+            if (allies[ally].DeBuffs.Find(x => x.Name == RemovedDeBuff.Name) != null)
             {
-                if (RemovedDeBuff.Name == allies[ally].DeBuffs[cond].Name)
-                {
-                    allies[ally].DeBuffs[cond].RemoveDeBuff(allies[ally]);
-                }
+                allies[ally].DeBuffs.Find(x => x.Name == RemovedDeBuff.Name)?.RemoveDeBuff(allies[ally]);
             }
         }
     }

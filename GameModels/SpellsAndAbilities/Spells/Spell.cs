@@ -42,23 +42,13 @@ public class Spell
             Console.WriteLine("The spell fizzles");
         }
     }
-      public Character LearnSpell(Character hero)
+    public Character LearnSpell(Character caster)
     {
-        bool alreadyKnown = false;
-        if (hero.SpellBook.Count > 0)
+        if (caster.SpellBook.Find(x => x.Name == Name) == null)
         {
-            for (int abil = 0; abil < hero.SpellBook.Count; abil++)
-            {
-                if (hero.SpellBook[abil].Name == Name)
-                {
-                    alreadyKnown = true;
-                }
-            }
+            Console.WriteLine($"{caster.Name} learns the Spell: {Name}");
+            caster.SpellBook.Add(this);
         }
-        if (alreadyKnown == false)
-        {
-            hero.SpellBook.Add(this);
-        }
-        return hero;
+        return caster;
     }
 }

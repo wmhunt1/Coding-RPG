@@ -11,5 +11,7 @@ public class Skeleton : Undead
         Torso = new Torso("Leather Scraps", 0, 0, "Leather");
         Resistances = new List<DamageType>{new PiercingDamage(), new SlashingDamage()};
         Weaknesses = new List<DamageType>{new BludgeoningDamage()};
+        Immunities = new List<DamageType>{new PoisonDamage()};
+        ConditionImmunities = new List<Condition>{new PoisonCondition(), new SleepCondition()};
     }
 }

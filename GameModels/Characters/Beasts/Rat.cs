@@ -7,8 +7,8 @@ public class Rat : Beast
         Ally = false;
         this.CurrentHP = 5;
         this.MaxHP = 5;
-        this.Strength = 10;
-        this.Dexterity = 5;
+        this.Strength = 5;
+        this.Dexterity = 10;
         this.CurrentXP = 10;
         Weapon = new Bite();
     }

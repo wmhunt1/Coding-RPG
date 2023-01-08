@@ -13,18 +13,7 @@ public class Skill
     }
     public Character LearnSkill(Character char1)
     {
-        bool alreadyKnown = false;
-        if (char1.SkillBook.Count > 0)
-        {
-            for (int skill = 0; skill < char1.SkillBook.Count; skill++)
-            {
-                if (char1.SkillBook[skill].Name == Name)
-                {
-                    alreadyKnown = true;
-                }
-            }
-        }
-        if (alreadyKnown == false)
+        if (char1.SkillBook.Find(x => x.Name == Name) == null)
         {
             Console.WriteLine($"{char1.Name} learns the Skill: {Name}");
             char1.SkillBook.Add(this);

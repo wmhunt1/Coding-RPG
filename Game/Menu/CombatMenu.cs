@@ -17,18 +17,16 @@ namespace GameSpace
         {
             for (int ally = 0; ally < allies.Count; ally++)
             {
+
                 if (allies[ally].Buffs.Count > 0)
                 {
                     for (int buff = 0; buff < allies[ally].Buffs.Count; buff++)
                     {
                         allies[ally].Buffs[buff].RemainingDuration--;
                     }
-                    for (int buff = 0; buff < allies[ally].Buffs.Count; buff++)
+                    if (allies[ally].Buffs.Find(x => x.RemainingDuration == 0) != null)
                     {
-                        if (allies[ally].Buffs[buff].RemainingDuration == 0)
-                        {
-                            allies[ally].Buffs[buff].RemoveBuff(allies[ally]);
-                        }
+                        allies[ally].Buffs.Find(x => x.RemainingDuration == 0)?.RemoveBuff(allies[ally]);
                     }
                 }
                 if (allies[ally].DeBuffs.Count > 0)
@@ -37,12 +35,9 @@ namespace GameSpace
                     {
                         allies[ally].DeBuffs[deBuff].RemainingDuration--;
                     }
-                    for (int deBuff = 0; deBuff < allies[ally].DeBuffs.Count; deBuff++)
+                     if (allies[ally].DeBuffs.Find(x => x.RemainingDuration == 0) != null)
                     {
-                        if (allies[ally].DeBuffs[deBuff].RemainingDuration == 0)
-                        {
-                            allies[ally].DeBuffs[deBuff].RemoveDeBuff(allies[ally]);
-                        }
+                        allies[ally].DeBuffs.Find(x => x.RemainingDuration == 0)?.RemoveDeBuff(allies[ally]);
                     }
                 }
             }

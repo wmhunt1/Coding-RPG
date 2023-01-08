@@ -13,12 +13,9 @@ public class GroupConditionRemovalSpell : GroupRecoverySpell
     {
         for (int ally = 0; ally < allies.Count; ally++)
         {
-            for (int cond = 0; cond < allies[ally].Conditions.Count; cond++)
+            if (allies[ally].Conditions.Find(x => x.Name == RemovedCondition.Name) != null)
             {
-                if (RemovedCondition.Name == allies[ally].Conditions[cond].Name)
-                {
-                    allies[ally].Conditions[cond].RemoveCondition(allies[ally]);
-                }
+                allies[ally].Conditions.Find(x => x.Name == RemovedCondition.Name)?.RemoveCondition(allies[ally]);
             }
         }
     }

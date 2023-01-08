@@ -5,4 +5,4 @@
     * story
     * Jobs/Classes
     * Factions, Reputation, Relationships
-    * Find item in list without looping
+    * BattleAI

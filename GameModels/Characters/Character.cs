@@ -178,18 +178,9 @@ public class Character
     public bool CheckForImmunity(Character target, DamageType damageType)
     {
         bool check = false;
-        if (target.Immunities.Count > 0)
+        if (target.Immunities.Find(x => x.Name == damageType.Name) != null)
         {
-            for (int damage = 0; damage < target.Immunities.Count; damage++)
-            {
-                if (damageType.Name == target.Immunities[damage].Name)
-                {
-                    check = true;
-                }
-            }
-        }
-        if (check == true)
-        {
+            check = true;
             Console.WriteLine($"{target.Name} is immune to {damageType.Name}");
         }
         return check;
@@ -197,18 +188,9 @@ public class Character
     public bool CheckForResistance(Character target, DamageType damageType)
     {
         bool check = false;
-        if (target.Resistances.Count > 0)
+        if (target.Resistances.Find(x => x.Name == damageType.Name) != null)
         {
-            for (int damage = 0; damage < target.Resistances.Count; damage++)
-            {
-                if (damageType.Name == target.Resistances[damage].Name)
-                {
-                    check = true;
-                }
-            }
-        }
-        if (check == true)
-        {
+            check = true;
             Console.WriteLine($"{target.Name} is resistant to {damageType.Name}");
         }
         return check;
@@ -216,18 +198,9 @@ public class Character
     public bool CheckForWeakness(Character target, DamageType damageType)
     {
         bool check = false;
-        if (target.Weaknesses.Count > 0)
+        if (target.Weaknesses.Find(x => x.Name == damageType.Name) != null)
         {
-            for (int damage = 0; damage < target.Weaknesses.Count; damage++)
-            {
-                if (damageType.Name == target.Weaknesses[damage].Name)
-                {
-                    check = true;
-                }
-            }
-        }
-        if (check == true)
-        {
+            check = true;
             Console.WriteLine($"{target.Name} is weak to {damageType.Name}");
         }
         return check;
@@ -264,7 +237,7 @@ public class Character
     public void BasicAttack(Character target)
     {
         int totalArmor = target.Torso.Protection;
-        int totalStrength = this.Strength+this.StrengthBonus-this.StrengthPenalty;
+        int totalStrength = this.Strength + this.StrengthBonus - this.StrengthPenalty;
         int totalDexterity = target.Dexterity + target.DexterityBonus - target.DexterityPenalty;
         int damage = this.Strength + this.Weapon.WeaponDmg + totalStrength - totalArmor - totalDexterity;
         int calculatedDamage = CalculateDamageWithPossibleCrit(target, damage, this.Weapon.WeaponDmgType);
