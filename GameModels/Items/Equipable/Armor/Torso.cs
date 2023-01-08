@@ -18,13 +18,13 @@ public class Torso : Armor
         hero.Torso = new NakedTorso();
         if (this.Name != "Naked")
         {
-            hero.AddItemToInventory(this);
+            this.AddItemToInventory(hero);
         }
     }
     public override void EquipItemFromInventory(Character hero)
     {
         hero.Torso.UnEquipItem(hero);
-        hero.RemoveItemFromInventory(this);
+        this.RemoveItemFromInventory(hero);
         this.EquipItem(hero);
     }
     public override void UnEquipItemFromEquipment(Character hero)

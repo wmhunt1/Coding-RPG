@@ -83,22 +83,31 @@ namespace GameSpace
         }
         public void DisplayAbilities(Character hero)
         {
-            for (int ability = 0; ability < hero.Abilities.Count; ability++)
+            Console.WriteLine("Abilities");
+            if (hero.Abilities.Count > 0)
             {
-                Console.WriteLine($"{hero.Abilities[ability].Name}");
+                for (int ability = 0; ability < hero.Abilities.Count; ability++)
+                {
+                    Console.WriteLine($"{hero.Abilities[ability].Name}");
+                }
             }
             AnyKey();
         }
         public void DisplaySpellBook(Character hero)
         {
-            for (int spell = 0; spell < hero.SpellBook.Count; spell++)
+            Console.WriteLine("SpellBook");
+            if (hero.SpellBook.Count > 0)
             {
-                Console.WriteLine($"{hero.SpellBook[spell].Name}");
+                for (int spell = 0; spell < hero.SpellBook.Count; spell++)
+                {
+                    Console.WriteLine($"{hero.SpellBook[spell].Name}");
+                }
             }
             AnyKey();
         }
         public void DisplayJournal(Character hero)
         {
+            Console.WriteLine("Journal");
             if (hero.Journal.Count > 0)
             {
                 for (int quest = 0; quest < hero.Journal.Count; quest++)
@@ -111,6 +120,19 @@ namespace GameSpace
             }
             AnyKey();
         }
+        public void DisplaySkills(Character hero)
+        {
+            if (hero.SkillBook.Count > 0)
+            {
+                Console.WriteLine("Skills");
+                for (int skill = 0; skill < hero.SkillBook.Count; skill++)
+                {
+                    Console.WriteLine($"{hero.SkillBook[skill].Name} - LV: {hero.SkillBook[skill].SkillLevel} XP:  {hero.SkillBook[skill].CurrentSkillXP}/ {hero.SkillBook[skill].MaxSkillXP}");
+                }
+            }
+            AnyKey();
+        }
+
         public override void DisplayMenu(Character hero)
         {
             bool showMenu = true;

@@ -13,6 +13,6 @@ public class Consumable : Item
     public override void ConsumeItem(Character hero)
     {   
         ConsumableEffect(hero);
-        hero.RemoveItemFromInventory(this);
+        this.RemoveItemFromInventory(hero);
     }
 }

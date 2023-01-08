@@ -20,13 +20,13 @@ public class Weapon : Equipable
         hero.Weapon = new Fist();
         if (this.Name != "Fist")
         {
-            hero.AddItemToInventory(this);
+            this.AddItemToInventory(hero);
         }
     }
     public override void EquipItemFromInventory(Character hero)
     {
         hero.Weapon.UnEquipItem(hero);
-        hero.RemoveItemFromInventory(this);
+        this.RemoveItemFromInventory(hero);
         this.EquipItem(hero);
     }
     public override void UnEquipItemFromEquipment(Character hero)

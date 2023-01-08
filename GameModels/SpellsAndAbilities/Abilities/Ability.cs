@@ -36,4 +36,23 @@ public class Ability
             Console.WriteLine("Not enough Stamina");
         }
     }
+      public Character LearnAbility(Character char1)
+    {
+        bool alreadyKnown = false;
+        if (char1.Abilities.Count > 0)
+        {
+            for (int abil = 0; abil < char1.Abilities.Count; abil++)
+            {
+                if (char1.Abilities[abil].Name == Name)
+                {
+                    alreadyKnown = true;
+                }
+            }
+        }
+        if (alreadyKnown == false)
+        {
+            char1.Abilities.Add(this);
+        }
+        return char1;
+    }
 }

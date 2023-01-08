@@ -27,12 +27,17 @@ public class Quest
         }
         return alreadyStarted;
     }
+    public Character AddQuestToJournal(Character hero)
+    {
+        hero.Journal.Add(this);
+        return hero;
+    }
     public void StartQuest(Character hero)
     {
         bool alreadyStarted = AlreadyStartedQuest(hero);
         if (alreadyStarted == false)
         {
-            hero.AddQuestToJournal(this);
+            this.AddQuestToJournal(hero);
         }
     }
     public void FinishQuest(Character hero)
@@ -41,7 +46,7 @@ public class Quest
         hero.AddGold(GoldReward);
         if (ItemReward.Name != "Optional")
         {
-            hero.AddItemToInventory(ItemReward);
+            ItemReward.AddItemToInventory(hero);
         }
     }
     public virtual void JournalEntry(Character hero)

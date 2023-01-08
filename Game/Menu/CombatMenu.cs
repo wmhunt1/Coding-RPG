@@ -51,12 +51,15 @@ namespace GameSpace
         {
             for (int character = 0; character < characters.Count; character++)
             {
-                Console.WriteLine($"{characters[character].Name} - HP: {characters[character].CurrentHP}/{characters[character].MaxHP} MP: {characters[character].CurrentMP}/{characters[character].MaxMP} SP: {characters[character].CurrentSP}/{characters[character].MaxSP}");
-                if (characters[character].Conditions.Count > 0)
+                if (characters[character].CurrentHP > 0)
                 {
-                    for (int cond = 0; cond < characters[character].Conditions.Count; cond++)
+                    Console.WriteLine($"{characters[character].Name} - HP: {characters[character].CurrentHP}/{characters[character].MaxHP} MP: {characters[character].CurrentMP}/{characters[character].MaxMP} SP: {characters[character].CurrentSP}/{characters[character].MaxSP}");
+                    if (characters[character].Conditions.Count > 0)
                     {
-                        Console.WriteLine($"{characters[character].Conditions[cond].Name}");
+                        for (int cond = 0; cond < characters[character].Conditions.Count; cond++)
+                        {
+                            Console.WriteLine($"{characters[character].Conditions[cond].Name}");
+                        }
                     }
                 }
             }

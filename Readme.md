@@ -1,6 +1,6 @@
 * To-Do
     * Hit Chance
+    * Resist spell
     * Use for other attributes
-    * Skills
-    * fix cleave leaving one alive at -1
-    * ConditionImmunities
+    * story
+    * Jobs/Classes

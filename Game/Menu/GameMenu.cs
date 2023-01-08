@@ -25,14 +25,14 @@ namespace GameSpace
             SleepSpell sleep = new SleepSpell();
             FireBallSpell fireBall = new FireBallSpell();
             tunic.EquipItem(hero);
-            hero.AddItemToInventory(club);
-            hero.AddItemToInventory(dagger);
+            club.AddItemToInventory(hero);
+            dagger.AddItemToInventory(hero);
             dagger.EquipItem(hero);
-            hero.LearnAbility(cleave);
-            hero.LearnSpell(magicMissile);
-            hero.LearnAbility(rage);
-            hero.LearnSpell(sleep);
-            hero.LearnSpell(fireBall);
+            cleave.LearnAbility(hero);
+            magicMissile.LearnSpell(hero);
+            rage.LearnAbility(hero);
+            sleep.LearnSpell(hero);
+            fireBall.LearnSpell(hero);
         }
         public void StoreTest(Character hero)
         {
@@ -65,6 +65,12 @@ namespace GameSpace
             DungeonQuest testDungeonClear = new DungeonQuest("Clear Test Dungeon", "Defeat the Boss of the Test Dungeon", 10, "Test Dungeon");
             testDungeonClear.StartQuest(hero);
         }
+        public void SkillTest(Character hero)
+        {
+            SkillMenu testSkill = new SkillMenu();
+            testSkill.DisplayMenu(hero);
+            AnyKey();
+        }
         public override void DisplayMenu(Character hero)
         {
             bool showMenu = true;
@@ -78,6 +84,7 @@ namespace GameSpace
                 Console.WriteLine("[5] Dungeon Test");
                 Console.WriteLine("[6] Dialogue Test");
                 Console.WriteLine("[7] Quest Test");
+                Console.WriteLine("[8] Skill Test");
                 Console.WriteLine("[9] Heal");
                 Console.WriteLine("[0] Main Menu");
                 string? input = Console.ReadLine();
@@ -104,6 +111,9 @@ namespace GameSpace
                         break;
                     case "7":
                         QuestTest(hero);
+                        break;
+                    case "8":
+                        SkillTest(hero);
                         break;
                     case "9":
                         hero.FullRest();
