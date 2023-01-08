@@ -1,13 +1,10 @@
-using System;
-using GameModels;
-
-namespace GameSpace
+namespace GameModels
 {
     public class DungeonMenu : LocationMenu
     {
         public Dungeon Dungeon;
 
-        public DungeonMenu(string name, Dungeon dungeon) : base(name)
+        public DungeonMenu(string name, Dungeon dungeon) : base(name, dungeon)
         {
             Name = name;
             Dungeon = dungeon;

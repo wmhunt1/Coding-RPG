@@ -1,13 +1,9 @@
-using System;
-using GameModels;
-
-namespace GameSpace
+namespace GameModels
 {
     public class StoreMenu : LocationMenu
     {
         public Store Store;
-      
-        public StoreMenu(string name, Store store):base(name)
+        public StoreMenu(string name, Store store) : base(name, store)
         {
             Name = name;
             Store = store;
@@ -19,10 +15,11 @@ namespace GameSpace
                 Console.WriteLine($"[{item + 1}] {Store.StoreInventory[item].Name} - {Store.StoreInventory[item].Cost} GP");
             }
             string? choiceInput = Console.ReadLine();
-            if (choiceInput != null)
+            int selection;
+            bool parseSucess = Int32.TryParse(choiceInput, out selection);
+            if (parseSucess == true && selection > 0 && selection <= Store.StoreInventory.Count)
             {
-                int choice = Int32.Parse(choiceInput);
-                Store.StoreInventory[choice - 1].BuyItem(hero);
+                Store.StoreInventory[selection - 1].BuyItem(hero);
             }
             AnyKey();
         }
@@ -32,13 +29,17 @@ namespace GameSpace
             {
                 for (int item = 0; item < hero.Inventory.Count; item++)
                 {
-                    Console.WriteLine($"[{item + 1}] {hero.Inventory[item].Name} - {hero.Inventory[item].Cost / 2} GP");
+                    if (hero.Inventory[item].Quantity > 0)
+                    {
+                        Console.WriteLine($"[{item + 1}] {hero.Inventory[item].Name} X {hero.Inventory[item].Quantity} - {hero.Inventory[item].Cost / 2} GP");
+                    }
                 }
                 string? choiceInput = Console.ReadLine();
-                if (choiceInput != null)
+                int selection;
+                bool parseSucess = Int32.TryParse(choiceInput, out selection);
+                if (parseSucess == true && selection > 0 && selection <= Store.StoreInventory.Count)
                 {
-                    int choice = Int32.Parse(choiceInput);
-                    hero.Inventory[choice - 1].SellItem(hero);
+                    hero.Inventory[selection - 1].SellItem(hero);
                 }
             }
             else
@@ -46,6 +47,11 @@ namespace GameSpace
                 Console.WriteLine("You have nothing to sell!");
             }
             AnyKey();
+        }
+        public void TalkToStoreOwner(Character hero)
+        {
+            DialogueMenu storeDialogueMenu = new DialogueMenu(Store.StoreDialogue);
+            storeDialogueMenu.DisplayMenu(hero);
         }
         public override void DisplayMenu(Character hero)
         {
@@ -57,6 +63,10 @@ namespace GameSpace
                 Console.WriteLine($"{hero.Name}: {hero.Gold} GP");
                 Console.WriteLine("[1] Buy");
                 Console.WriteLine("[2] Sell");
+                if (Store.StoreDialogue.Name != "No Associated Dialogue")
+                {
+                    Console.WriteLine("[3] Talk");
+                }
                 Console.WriteLine("[0] Leave Store");
                 string? input = Console.ReadLine();
                 switch (input)
@@ -66,6 +76,12 @@ namespace GameSpace
                         break;
                     case "2":
                         SellToStore(hero);
+                        break;
+                    case "3":
+                        if (Store.StoreDialogue.Name != "No Associated Dialogue")
+                        {
+                            TalkToStoreOwner(hero);
+                        }
                         break;
                     case "0":
                         showMenu = false;

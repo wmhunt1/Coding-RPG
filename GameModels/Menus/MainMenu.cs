@@ -1,7 +1,4 @@
-using System;
-using GameModels;
-
-namespace GameSpace
+namespace GameModels
 {
     public class MainMenu : Menu
     {

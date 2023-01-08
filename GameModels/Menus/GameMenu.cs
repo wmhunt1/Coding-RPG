@@ -1,7 +1,4 @@
-using System;
-using GameModels;
-
-namespace GameSpace
+namespace GameModels
 {
     public class GameMenu : Menu
     {
@@ -25,21 +22,21 @@ namespace GameSpace
             SleepSpell sleep = new SleepSpell();
             FireBallSpell fireBall = new FireBallSpell();
             SummonSkeletonSpell skeleton = new SummonSkeletonSpell();
+            PoisonedDagger poisonedDagger = new PoisonedDagger();
+            RingOfStrength ring = new RingOfStrength();
+            Dog dog = new Dog();
             tunic.EquipItem(hero);
             //club.AddItemToInventory(hero);
             //dagger.AddItemToInventory(hero);
             //dagger.EquipItem(hero);
-            //club.EquipItem(hero);
-            PoisonedDagger poisonedDagger = new PoisonedDagger();
-            poisonedDagger.EquipItem(hero);
-            RingOfStrength ring = new RingOfStrength();
+            club.EquipItem(hero);
+            //poisonedDagger.EquipItem(hero);
             //ring.EquipItem(hero);
             //cleave.LearnAbility(hero);
             //magicMissile.LearnSpell(hero);
             //rage.LearnAbility(hero);
             //sleep.LearnSpell(hero);
             //fireBall.LearnSpell(hero);
-            Dog dog = new Dog();
             dog.JoinParty(hero);
             skeleton.LearnSpell(hero);
         }
@@ -80,6 +77,13 @@ namespace GameSpace
             testSkill.DisplayMenu(hero);
             AnyKey();
         }
+        public void LocationTest(Character hero)
+        {
+            TestTown town = new TestTown();
+            LocationMenu locationMenu = new LocationMenu("Test Town", town);
+            locationMenu.DisplayMenu(hero);
+            AnyKey();
+        }
         public override void DisplayMenu(Character hero)
         {
             bool showMenu = true;
@@ -88,8 +92,8 @@ namespace GameSpace
                 Console.WriteLine("===== Coding RPG =====");
                 Console.WriteLine("[1] Character Sheet");
                 Console.WriteLine("[2] Combat Test [3] Equip Test [4] Store Test [5] Dungeon Test");
-                Console.WriteLine("[6] Dialogue Test [7] Quest Test [8] Skill Test");
-                Console.WriteLine("[9] Heal");
+                Console.WriteLine("[6] Dialogue Test [7] Quest Test [8] Skill Test [9] Test Town");
+                //Console.WriteLine("[9] Heal");
                 Console.WriteLine("[0] Main Menu");
                 string? input = Console.ReadLine();
                 switch (input)
@@ -120,7 +124,8 @@ namespace GameSpace
                         SkillTest(hero);
                         break;
                     case "9":
-                        hero.FullRest();
+                        LocationTest(hero);
+                        //hero.FullRest();
                         break;
                     case "0":
                         showMenu = false;

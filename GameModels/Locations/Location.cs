@@ -6,4 +6,8 @@ public class Location
     {
         Name = name;
     }
+    public virtual void LocationContent(Character hero)
+    {
+        
+    }
 }

@@ -1,20 +1,24 @@
-using System;
-using GameModels;
-
-namespace GameSpace
+namespace GameModels
 {
     public class LocationMenu : Menu
     {
         public string Name;
-        public LocationMenu(string name)
+        Location Location;
+        public LocationMenu(string name, Location location)
         {
             Name = name;
+            Location = location;
+        }
+        public virtual void DisplayLocationContent(Character hero)
+        {
+            Location.LocationContent(hero);
         }
         public override void DisplayMenu(Character hero)
         {
             bool showMenu = true;
             while (showMenu)
             {
+                DisplayLocationContent(hero);
                 showMenu = false;
             }
         }

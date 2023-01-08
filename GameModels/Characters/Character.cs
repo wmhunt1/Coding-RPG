@@ -7,10 +7,25 @@ public class Character
     public int MaxXP = 100;
     public int CurrentHP = 10;
     public int MaxHP = 10;
+    public int HPBonus = 0;
+    public int HPPenalty = 0;
+    public int HPRegen = 0;
+    public int HPRegenBonus = 0;
+    public int HPRegenPenalty = 0;
     public int CurrentMP = 10;
     public int MaxMP = 10;
+    public int MPBonus = 10;
+    public int MPPenalty = 0;
+    public int MPRegen = 0;
+    public int MPRegenBonus = 0;
+    public int MPRegenPenalty = 0;
     public int CurrentSP = 10;
     public int MaxSP = 10;
+    public int SPBonus = 0;
+    public int SPPenalty = 0;
+    public int SPRegen = 0;
+    public int SPRegenBonus = 0;
+    public int SPRegenPenalty = 0;
     public int Strength = 10;
     public int StrengthBonus = 0;
     public int StrengthPenalty = 0;
@@ -59,6 +74,7 @@ public class Character
     public List<DeBuff> DeBuffs = new List<DeBuff>();
     public List<Condition> Conditions = new List<Condition>();
     public List<Condition> ConditionImmunities = new List<Condition>();
+    public Item ItemDrop = new Item("No Drop", 0);
     public Character(string name)
     {
         Name = name;
@@ -150,6 +166,30 @@ public class Character
             this.CurrentSP -= cost;
         }
         return this.CurrentSP;
+    }
+    public int RegenHP()
+    {
+        int regen = this.HPRegen + this.HPRegenBonus - this.HPRegenPenalty;
+        this.CurrentHP += regen;
+        return this.CurrentHP;
+    }
+    public int RegenMP()
+    {
+        int regen = this.MPRegen + this.MPRegenBonus - this.MPRegenPenalty;
+        this.CurrentMP += regen;
+        return this.CurrentMP;
+    }
+    public int RegenSP()
+    {
+        int regen = this.SPRegen + this.SPRegenBonus - this.SPRegenPenalty;
+        this.CurrentSP += regen;
+        return this.CurrentSP;
+    }
+    public void RegenAll()
+    {
+        RegenHP();
+        RegenMP();
+        RegenSP();
     }
     public List<Condition> RecoverFromConditions(List<Condition> conds)
     {

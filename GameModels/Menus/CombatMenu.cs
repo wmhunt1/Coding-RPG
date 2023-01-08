@@ -1,7 +1,4 @@
-using System;
-using GameModels;
-
-namespace GameSpace
+namespace GameModels
 {
     public class CombatMenu : Menu
     {
@@ -48,6 +45,7 @@ namespace GameSpace
             {
                 if (characters[character].CurrentHP > 0)
                 {
+                    characters[character].RegenAll();
                     Console.WriteLine($"{characters[character].Name} - HP: {characters[character].CurrentHP}/{characters[character].MaxHP} MP: {characters[character].CurrentMP}/{characters[character].MaxMP} SP: {characters[character].CurrentSP}/{characters[character].MaxSP}");
                     if (characters[character].Conditions.Count > 0)
                     {
@@ -376,6 +374,11 @@ namespace GameSpace
                         for (int enemy = 0; enemy < defeatedEnemies.Count; enemy++)
                         {
                             hero.EarnXP(defeatedEnemies[enemy].CurrentXP);
+                            hero.AddGold(defeatedEnemies[enemy].Gold);
+                            if (defeatedEnemies[enemy].ItemDrop.Name != "No Drop")
+                            {
+                                defeatedEnemies[enemy].ItemDrop.AddItemToInventory(hero);
+                            }
                             if (hero.Companions.Count > 0)
                             {
                                 for (int comp = 0; comp < hero.Companions.Count; comp++)

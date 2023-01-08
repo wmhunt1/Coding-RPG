@@ -6,3 +6,6 @@
     * Jobs/Classes
     * Factions, Reputation, Relationships
     * BattleAI
+    * TestLocation
+    * change equipment for Companions
+    * Fetch quests for resources

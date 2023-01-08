@@ -11,5 +11,6 @@ public class Rat : Beast
         this.Dexterity = 10;
         this.CurrentXP = 10;
         Weapon = new Bite();
+        ItemDrop = new RatTail();
     }
 }
