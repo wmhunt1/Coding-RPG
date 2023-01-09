@@ -1,3 +1,4 @@
+* Project to keep skills sharp
 * To-Do
     * Hit Chance
         * Damage based on str - prot
@@ -13,3 +14,6 @@
     * sort combat by speed/dex
     * saving via a json file
     * move combat menu stuff to a script file
+    * SkillMenu seperated based on skills
+    * more weapons and stuff
+    * shields

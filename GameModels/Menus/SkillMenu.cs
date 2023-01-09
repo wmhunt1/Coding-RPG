@@ -11,6 +11,7 @@ namespace GameModels
             bool showMenu = true;
             while (showMenu == true)
             {
+                ShowTitle();
                 string? input = Console.ReadLine();
                 Console.WriteLine("[1] Fish");
                 Console.WriteLine("[2] Cook");

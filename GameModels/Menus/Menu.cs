@@ -10,6 +10,10 @@ namespace GameModels
                 showMenu = false;
             }
         }
+        public void ShowTitle()
+        {
+            Console.WriteLine("===== Coding RPG =====");
+        }
         public void AnyKey()
         {
             Console.WriteLine("Press any key to continue");

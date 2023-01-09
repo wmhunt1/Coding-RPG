@@ -12,7 +12,7 @@ namespace GameModels
             bool showMenu = true;
             while (showMenu)
             {
-
+                ShowTitle();
                 Dialogue.HaveDialogue(hero);
                 AnyKey();
                 showMenu = false;

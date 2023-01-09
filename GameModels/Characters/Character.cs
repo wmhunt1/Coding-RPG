@@ -3,6 +3,7 @@ public class Character
 {
     public string Name = "";
     public int Level = 1;
+    public Job Job = new Freelancer();
     public int CurrentXP = 0;
     public int MaxXP = 100;
     public int CurrentHP = 100;

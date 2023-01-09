@@ -58,14 +58,14 @@ namespace GameModels
             bool showMenu = true;
             while (showMenu)
             {
-                Console.WriteLine(" ===== Coding RPG ===== ");
+                ShowTitle();
                 Console.WriteLine($"===== {Name} =====");
                 Console.WriteLine($"{hero.Name}: {hero.Gold} GP");
                 Console.WriteLine("[1] Buy");
                 Console.WriteLine("[2] Sell");
                 if (Store.StoreDialogue.Name != "No Associated Dialogue")
                 {
-                    Console.WriteLine("[3] Talk");
+                    Console.WriteLine("[3] Activities");
                 }
                 Console.WriteLine("[0] Leave Store");
                 string? input = Console.ReadLine();

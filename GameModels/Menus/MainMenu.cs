@@ -38,7 +38,7 @@ namespace GameModels
             GameMenu gameMenu = new GameMenu();
             while (showMenu)
             {
-                Console.WriteLine("===== Coding RPG =====");
+                ShowTitle();
                 Console.WriteLine("[1] Continue");
                 Console.WriteLine("[2] New Game");
                 Console.WriteLine("[3] Load Game");

@@ -6,11 +6,11 @@ namespace GameModels
         {
             CombatMenu combatMenu = new CombatMenu();
             List<Character> rats = new List<Character> { new Rat(), new Rat(), new Rat() };
-            List<Character> skeletons = new List<Character>{new Skeleton()};
-            List<Character> orcs = new List<Character>{new Orc()};
-            List<Character> mages = new List<Character>{new Mage()};
-            List<Character> healers = new List<Character>{new Healer()};
-            List<Character> summoners = new List<Character>{new Summoner()};
+            List<Character> skeletons = new List<Character> { new Skeleton() };
+            List<Character> orcs = new List<Character> { new Orc() };
+            List<Character> mages = new List<Character> { new Mage() };
+            List<Character> healers = new List<Character> { new Healer() };
+            List<Character> summoners = new List<Character> { new Summoner() };
             //combatMenu.RunCombat(hero, rats);
             //combatMenu.RunCombat(hero, skeletons);
             //combatMenu.RunCombat(hero, orcs);
@@ -94,23 +94,22 @@ namespace GameModels
         }
         public void FactionTest(Character hero)
         {
-            Faction testFaction = new Faction("Test Faction", new List<string> {"1", "2", "3"});
+            Faction testFaction = new Faction("Test Faction", new List<string> { "1", "2", "3" });
             testFaction.GetPromotion(hero);
             testFaction.JoinFaction(hero);
             AnyKey();
         }
-        public override void DisplayMenu(Character hero)
+        public void TestingMenu(Character hero)
         {
             bool showMenu = true;
             while (showMenu)
             {
-                Console.WriteLine("===== Coding RPG =====");
+                ShowTitle();
                 Console.WriteLine("[1] Character Sheet");
                 Console.WriteLine("[2] Combat Test [3] Equip Test [4] Store Test [5] Dungeon Test");
                 Console.WriteLine("[6] Dialogue Test [7] Quest Test [8] Skill Test [9] Test Town");
                 Console.WriteLine("[10] Faction Test");
-                //Console.WriteLine("[9] Heal");
-                Console.WriteLine("[0] Main Menu");
+                Console.WriteLine("[0] Back to Game");
                 string? input = Console.ReadLine();
                 switch (input)
                 {
@@ -141,10 +140,42 @@ namespace GameModels
                         break;
                     case "9":
                         LocationTest(hero);
-                        //hero.FullRest();
                         break;
                     case "10":
                         FactionTest(hero);
+                        break;
+                    case "0":
+                        showMenu = false;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        public override void DisplayMenu(Character hero)
+        {
+            bool showMenu = true;
+            while (showMenu)
+            {
+                ShowTitle();
+                Console.WriteLine("[1] Character Sheet");
+                Console.WriteLine("[2] Testing Menu");
+                Console.WriteLine("[3] Enter Dale Valley");
+                Console.WriteLine("[0] Main Menu");
+                string? input = Console.ReadLine();
+                switch (input)
+                {
+                    case "1":
+                        CharacterSheetMenu characterSheetMenu = new CharacterSheetMenu();
+                        characterSheetMenu.DisplayMenu(hero);
+                        break;
+                    case "2":
+                        TestingMenu(hero);
+                        break;
+                    case "3":
+                        DaleValley daleValley = new DaleValley();
+                        LocationMenu daleValleyMenu = new LocationMenu(daleValley.Name, daleValley);
+                        daleValleyMenu.DisplayMenu(hero);
                         break;
                     case "0":
                         showMenu = false;

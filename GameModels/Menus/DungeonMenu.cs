@@ -22,7 +22,7 @@ namespace GameModels
             bool e3 = false;
             while (showMenu)
             {
-                Console.WriteLine(" ===== Coding RPG ===== ");
+                ShowTitle();
                 Console.WriteLine("[1] Encounter 1");
                 if (e1 == true)
                 {

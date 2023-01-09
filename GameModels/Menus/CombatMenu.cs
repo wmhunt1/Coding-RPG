@@ -339,6 +339,7 @@ namespace GameModels
             }
             while (!combatOver)
             {
+                ShowTitle();
                 if (hero.CurrentHP > 0 && enemies.Count > 0)
                 {
                     for (int enemy = 0; enemy < enemies.Count; enemy++)

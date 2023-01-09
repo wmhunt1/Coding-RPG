@@ -161,7 +161,7 @@ namespace GameModels
             bool showMenu = true;
             while (showMenu)
             {
-                Console.WriteLine(" ===== Coding RPG ===== ");
+                ShowTitle();
                 Console.WriteLine($"===== {hero.Name}'s Character Sheet =====");
                 Console.WriteLine($"Level: {hero.Level} EXP {hero.CurrentXP}/{hero.MaxXP}");
                 Console.WriteLine($"HP: {hero.CurrentHP}/{hero.MaxHP}({hero.HPRegen}) MP: {hero.CurrentMP}/{hero.MaxMP}({hero.MPRegen}) SP: {hero.CurrentSP}/{hero.MaxSP}({hero.SPRegen})");

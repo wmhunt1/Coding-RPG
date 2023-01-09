@@ -1,21 +1,21 @@
 namespace GameModels;
 public class InnDialogue : Dialogue
 {
-    Inn Inn;
+    public Inn AssociatedInn;
     public InnDialogue(string name, Inn inn):base(name)
     {
         Name = name;
-        Inn = inn;
+        AssociatedInn = inn;
     }
     public override void HaveDialogue(Character hero)
     {
-        Console.WriteLine($"Would you Like a Room? (Y/N) {Inn.RoomCost} GP");
+        Console.WriteLine($"Would you Like a Room? (Y/N) {AssociatedInn.RoomCost} GP");
         string? input = Console.ReadLine();
         switch(input)
         {
             case "y":
             case "Y":
-                Inn.RestAtInn(hero);
+                AssociatedInn.RestAtInn(hero);
                 break;
             default:
                 break;
