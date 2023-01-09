@@ -134,12 +134,24 @@ namespace GameModels
         }
         public void DisplayParty(Character hero)
         {
-            Console.WriteLine ($"{hero.Name}'s Companions");
+            Console.WriteLine($"{hero.Name}'s Companions");
             if (hero.Companions.Count > 0)
             {
                 for (int comp = 0; comp < hero.Companions.Count; comp++)
                 {
                     Console.WriteLine($"Name : {hero.Companions[comp].Name} - Level: {hero.Companions[comp].Level}");
+                }
+            }
+            AnyKey();
+        }
+        public void DisplayFactions(Character hero)
+        {
+            Console.WriteLine($"{hero.Name}'s Factions");
+            if (hero.Factions.Count > 0)
+            {
+                for (int fact = 0; fact < hero.Factions.Count; fact++)
+                {
+                    Console.WriteLine($"Name : {hero.Factions[fact].Name} - Rank: {hero.Factions[fact].CurrentRankName}");
                 }
             }
             AnyKey();
@@ -154,9 +166,9 @@ namespace GameModels
                 Console.WriteLine($"Level: {hero.Level} EXP {hero.CurrentXP}/{hero.MaxXP}");
                 Console.WriteLine($"HP: {hero.CurrentHP}/{hero.MaxHP}({hero.HPRegen}) MP: {hero.CurrentMP}/{hero.MaxMP}({hero.MPRegen}) SP: {hero.CurrentSP}/{hero.MaxSP}({hero.SPRegen})");
                 Console.WriteLine("==== Attributes =====");
-                Console.WriteLine ($"STR: {hero.Strength+hero.StrengthBonus-hero.StrengthPenalty}(+{hero.StrengthBonus})(-{hero.StrengthPenalty}) CON: {hero.Constitution+hero.ConstitutionBonus-hero.ConstitutionPenalty}(+{hero.ConstitutionBonus})(-{hero.ConstitutionPenalty} DEX: {hero.Dexterity+hero.DexterityBonus-hero.DexterityPenalty}(+{hero.DexterityBonus})(-{hero.DexterityPenalty}) SPD: {hero.Speed+hero.SpeedBonus-hero.SpeedPenalty}(+{hero.SpeedBonus})(-{hero.SpeedPenalty})");
-                Console.WriteLine ($"INT: {hero.Intelligence+hero.IntelligenceBonus-hero.IntelligencePenalty}(+{hero.IntelligenceBonus})(-{hero.IntelligencePenalty}) WIS: {hero.Wisdom+hero.WisdomBonus-hero.WisdomPenalty}(+{hero.WisdomBonus})(-{hero.WisdomPenalty} CHA: {hero.Charisma+hero.CharismaBonus-hero.CharismaPenalty}(+{hero.CharismaBonus})(-{hero.CharismaPenalty})");
-                Console.WriteLine ($"WIL: {hero.WillPower+hero.WillPowerBonus-hero.WillPowerPenalty}(+{hero.WillPowerBonus})(-{hero.WillPowerPenalty}) PER: {hero.Perception+hero.PerceptionBonus-hero.PerceptionPenalty}(+{hero.PerceptionBonus})(-{hero.PerceptionPenalty} LCK: {hero.Luck+hero.LuckBonus-hero.LuckPenalty}(+{hero.LuckBonus})(-{hero.LuckPenalty}) Bea: {hero.Beauty+hero.BeautyBonus-hero.BeautyPenalty}(+{hero.BeautyBonus})(-{hero.BeautyPenalty})");
+                Console.WriteLine($"STR: {hero.Strength + hero.StrengthBonus - hero.StrengthPenalty}(+{hero.StrengthBonus})(-{hero.StrengthPenalty}) CON: {hero.Constitution + hero.ConstitutionBonus - hero.ConstitutionPenalty}(+{hero.ConstitutionBonus})(-{hero.ConstitutionPenalty} DEX: {hero.Dexterity + hero.DexterityBonus - hero.DexterityPenalty}(+{hero.DexterityBonus})(-{hero.DexterityPenalty}) SPD: {hero.Speed + hero.SpeedBonus - hero.SpeedPenalty}(+{hero.SpeedBonus})(-{hero.SpeedPenalty})");
+                Console.WriteLine($"INT: {hero.Intelligence + hero.IntelligenceBonus - hero.IntelligencePenalty}(+{hero.IntelligenceBonus})(-{hero.IntelligencePenalty}) WIS: {hero.Wisdom + hero.WisdomBonus - hero.WisdomPenalty}(+{hero.WisdomBonus})(-{hero.WisdomPenalty} CHA: {hero.Charisma + hero.CharismaBonus - hero.CharismaPenalty}(+{hero.CharismaBonus})(-{hero.CharismaPenalty})");
+                Console.WriteLine($"WIL: {hero.WillPower + hero.WillPowerBonus - hero.WillPowerPenalty}(+{hero.WillPowerBonus})(-{hero.WillPowerPenalty}) PER: {hero.Perception + hero.PerceptionBonus - hero.PerceptionPenalty}(+{hero.PerceptionBonus})(-{hero.PerceptionPenalty} LCK: {hero.Luck + hero.LuckBonus - hero.LuckPenalty}(+{hero.LuckBonus})(-{hero.LuckPenalty}) Bea: {hero.Beauty + hero.BeautyBonus - hero.BeautyPenalty}(+{hero.BeautyBonus})(-{hero.BeautyPenalty})");
                 AnyKey();
                 Console.WriteLine("[1] View Equipment");
                 Console.WriteLine("[2] View Inventory");
@@ -164,6 +176,7 @@ namespace GameModels
                 Console.WriteLine("[4] View Spellbook");
                 Console.WriteLine("[5] View Journal");
                 Console.WriteLine("[6] View Party");
+                Console.WriteLine("[7] View Factions");
                 Console.WriteLine("[0] Leave Sheet");
                 string? input = Console.ReadLine();
                 switch (input)
@@ -185,6 +198,9 @@ namespace GameModels
                         break;
                     case "6":
                         DisplayParty(hero);
+                        break;
+                    case "7":
+                        DisplayFactions(hero);
                         break;
                     case "0":
                         showMenu = false;

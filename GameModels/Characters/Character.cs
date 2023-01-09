@@ -70,6 +70,7 @@ public class Character
     public List<Spell> SpellBook = new List<Spell>();
     public List<Quest> Journal = new List<Quest>();
     public List<Skill> SkillBook = new List<Skill>();
+    public List<Faction> Factions = new List<Faction>();
     public List<DamageType> Immunities = new List<DamageType>();
     public List<DamageType> Resistances = new List<DamageType>();
     public List<DamageType> Weaknesses = new List<DamageType>();

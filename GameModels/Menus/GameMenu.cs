@@ -92,6 +92,13 @@ namespace GameModels
             locationMenu.DisplayMenu(hero);
             AnyKey();
         }
+        public void FactionTest(Character hero)
+        {
+            Faction testFaction = new Faction("Test Faction", new List<string> {"1", "2", "3"});
+            testFaction.GetPromotion(hero);
+            testFaction.JoinFaction(hero);
+            AnyKey();
+        }
         public override void DisplayMenu(Character hero)
         {
             bool showMenu = true;
@@ -101,6 +108,7 @@ namespace GameModels
                 Console.WriteLine("[1] Character Sheet");
                 Console.WriteLine("[2] Combat Test [3] Equip Test [4] Store Test [5] Dungeon Test");
                 Console.WriteLine("[6] Dialogue Test [7] Quest Test [8] Skill Test [9] Test Town");
+                Console.WriteLine("[10] Faction Test");
                 //Console.WriteLine("[9] Heal");
                 Console.WriteLine("[0] Main Menu");
                 string? input = Console.ReadLine();
@@ -134,6 +142,9 @@ namespace GameModels
                     case "9":
                         LocationTest(hero);
                         //hero.FullRest();
+                        break;
+                    case "10":
+                        FactionTest(hero);
                         break;
                     case "0":
                         showMenu = false;
