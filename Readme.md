@@ -6,7 +6,7 @@
     * Use for other attributes
     * story
     * Jobs/Classes
-    * Reputation, Relationships
+    * Reputation
     * TestLocation
     * change equipment for Companions
     * Rebalance

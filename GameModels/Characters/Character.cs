@@ -71,6 +71,8 @@ public class Character
     public List<Quest> Journal = new List<Quest>();
     public List<Skill> SkillBook = new List<Skill>();
     public List<Faction> Factions = new List<Faction>();
+    public List<Relationship> Relationships = new List<Relationship>();
+    public List<Reputation> Reputations = new List<Reputation>();
     public List<DamageType> Immunities = new List<DamageType>();
     public List<DamageType> Resistances = new List<DamageType>();
     public List<DamageType> Weaknesses = new List<DamageType>();
