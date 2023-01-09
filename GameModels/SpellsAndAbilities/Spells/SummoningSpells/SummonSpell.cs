@@ -12,6 +12,10 @@ public class SummoningSpell : Spell
     public override void SpellEffect(Character caster, List<Character> allies, List<Character> enemies)
     {
         Console.WriteLine($"{caster.Name} summons a {Summon.Name}");
+        if (caster.Ally == false)
+        {
+            Summon.Ally = false;
+        }
         allies.Add(Summon);
     }
 }

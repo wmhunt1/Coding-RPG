@@ -6,9 +6,17 @@ namespace GameModels
         {
             CombatMenu combatMenu = new CombatMenu();
             List<Character> rats = new List<Character> { new Rat(), new Rat(), new Rat() };
-            //List<Character> skeletons = new List<Character>{new Skeleton()};
-            combatMenu.RunCombat(hero, rats);
+            List<Character> skeletons = new List<Character>{new Skeleton()};
+            List<Character> orcs = new List<Character>{new Orc()};
+            List<Character> mages = new List<Character>{new Mage()};
+            List<Character> healers = new List<Character>{new Healer()};
+            List<Character> summoners = new List<Character>{new Summoner()};
+            //combatMenu.RunCombat(hero, rats);
             //combatMenu.RunCombat(hero, skeletons);
+            //combatMenu.RunCombat(hero, orcs);
+            //combatMenu.RunCombat(hero, mages);
+            //combatMenu.RunCombat(hero, healers);
+            combatMenu.RunCombat(hero, summoners);
         }
         public void EquipmentTest(Character hero)
         {

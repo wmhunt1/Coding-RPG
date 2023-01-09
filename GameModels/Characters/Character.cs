@@ -5,8 +5,8 @@ public class Character
     public int Level = 1;
     public int CurrentXP = 0;
     public int MaxXP = 100;
-    public int CurrentHP = 10;
-    public int MaxHP = 10;
+    public int CurrentHP = 100;
+    public int MaxHP = 100;
     public int HPBonus = 0;
     public int HPPenalty = 0;
     public int HPRegen = 0;
@@ -56,6 +56,9 @@ public class Character
     public int Beauty = 10;
     public int BeautyBonus = 0;
     public int BeautyPenalty = 0;
+    public int Speed = 10;
+    public int SpeedBonus = 0;
+    public int SpeedPenalty = 0;
     public bool Ally = true;
     public Weapon Weapon = new Fist();
     public Torso Torso = new NakedTorso();
@@ -296,6 +299,12 @@ public class Character
     {
         int damage = CalculateDamage(target, baseDamage, damageType);
         target.TakeDamage(damage);
+    }
+    public virtual void CombatAI(Character char1, List<Character> allies, List<Character> enemies)
+    {
+        Random randomTarget = new Random();
+        int target = randomTarget.Next(0, enemies.Count);
+        char1.BasicAttack(enemies[target]);
     }
     public int AddGold(int gp)
     {

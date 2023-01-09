@@ -5,7 +5,7 @@
     * story
     * Jobs/Classes
     * Factions, Reputation, Relationships
-    * BattleAI
     * TestLocation
     * change equipment for Companions
-    * Fetch quests for resources
+    * Rebalance
+    * sort combat by speed/dex

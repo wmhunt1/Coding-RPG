@@ -220,9 +220,7 @@ namespace GameModels
             }
             else
             {
-                Random randomTarget = new Random();
-                int target = randomTarget.Next(0, enemies.Count);
-                char1.BasicAttack(enemies[target]);
+                char1.CombatAI(char1, allies, enemies);
             }
         }
         public void ChanceForConditionToEnd(Character char1)
