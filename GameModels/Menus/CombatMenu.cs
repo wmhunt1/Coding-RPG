@@ -229,13 +229,7 @@ namespace GameModels
             {
                 for (int cond = 0; cond < char1.Conditions.Count; cond++)
                 {
-                    Random random = new Random();
-                    int chance = random.Next(0, 100);
-                    if (chance >= 50)
-                    {
-                        Console.WriteLine($"{char1.Name}'s {char1.Conditions[cond].Name}'s condition ends");
-                        char1.Conditions[cond].RemoveCondition(char1);
-                    }
+                    char1.Conditions[cond].ResistCondition(char1);
                 }
             }
         }

@@ -1,5 +1,7 @@
 * To-Do
     * Hit Chance
+        * Damage based on str - prot
+        * Hitting based on dex
     * Resist spell
     * Use for other attributes
     * story
@@ -9,3 +11,4 @@
     * change equipment for Companions
     * Rebalance
     * sort combat by speed/dex
+    * saving via a json file

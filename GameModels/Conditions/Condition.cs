@@ -59,4 +59,16 @@ public class Condition
         char1.Conditions.Remove(this);
         return char1;
     }
+    public virtual Character ResistCondition(Character char1)
+    {
+        Random random = new Random();
+        int resistingAttribute = 0;
+        int chance = random.Next(resistingAttribute, 100);
+        if (chance >= 50)
+        {
+            Console.WriteLine($"{char1.Name}'s {Name}'s condition ends");
+            this.RemoveCondition(char1);
+        }
+        return char1;
+    }
 }
