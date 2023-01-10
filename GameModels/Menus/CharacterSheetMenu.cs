@@ -6,8 +6,13 @@ namespace GameModels
         {
             Console.WriteLine($"{hero.Name}'s Equipment");
             Console.WriteLine($"[1] Weapon: {hero.Weapon.Name} - {hero.Weapon.WeaponDmg} {hero.Weapon.WeaponDmgType.Name} Damage");
-            Console.WriteLine($"[2] Armor: {hero.Torso.Name} - {hero.Torso.Protection} {hero.Torso.ProtectionType} Protection");
-            Console.WriteLine($"[3] Ring: {hero.Ring}");
+            if (hero.OffHand is Shield)
+            {
+                var shield = (Shield)hero.OffHand;
+                Console.WriteLine($"[2] OffHand : {hero.OffHand.Name} - Shield Value {shield.ShieldValue}");
+            }
+            Console.WriteLine($"[3] Armor: {hero.Torso.Name} - {hero.Torso.Protection} {hero.Torso.ProtectionType} Protection");
+            Console.WriteLine($"[4] Ring: {hero.Ring}");
             Console.WriteLine("[0] Leave Equipment");
             string? input = Console.ReadLine();
             switch (input)
@@ -16,9 +21,12 @@ namespace GameModels
                     hero.Weapon.UnEquipItemFromEquipment(hero);
                     break;
                 case "2":
-                    hero.Torso.UnEquipItemFromEquipment(hero);
+                    hero.OffHand.UnEquipItemFromEquipment(hero);
                     break;
                 case "3":
+                    hero.Torso.UnEquipItemFromEquipment(hero);
+                    break;
+                case "4":
                     hero.Ring.UnEquipItemFromEquipment(hero);
                     break;
                 case "0":

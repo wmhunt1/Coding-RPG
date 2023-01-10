@@ -16,4 +16,4 @@
     * move combat menu stuff to a script file
     * SkillMenu seperated based on skills
     * more weapons and stuff
-    * shields
+    * equiping 2H weapons unequips offhand

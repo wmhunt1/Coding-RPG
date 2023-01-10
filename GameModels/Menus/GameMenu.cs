@@ -33,6 +33,7 @@ namespace GameModels
             PoisonedDagger poisonedDagger = new PoisonedDagger();
             RingOfStrength ring = new RingOfStrength();
             Dog dog = new Dog();
+            WoodenShield shield = new WoodenShield();
             tunic.EquipItem(hero);
             //club.AddItemToInventory(hero);
             //dagger.AddItemToInventory(hero);
@@ -47,6 +48,7 @@ namespace GameModels
             //fireBall.LearnSpell(hero);
             dog.JoinParty(hero);
             skeleton.LearnSpell(hero);
+            shield.EquipItem(hero);
         }
         public void StoreTest(Character hero)
         {

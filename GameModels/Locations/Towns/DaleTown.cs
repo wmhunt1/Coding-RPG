@@ -12,6 +12,8 @@ public class DaleTown : Town
         {
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Visit the Inn");//Rat quest
+            Console.WriteLine("[3] Blacksmith");
+            Console.WriteLine("[4] General Store");
             //General Store
             //Blacksmith for Goblin Quest
             //church for graveyard quest
@@ -27,6 +29,12 @@ public class DaleTown : Town
                     DaleInn daleInn = new DaleInn("Dale Inn", new List<Item>{new Ale()}, 1);
                     StoreMenu innStore = new StoreMenu(daleInn.Name, daleInn);
                     innStore.DisplayMenu(hero);
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    Store daleStore = new Store("Dale Town General Store", new List<Item>{new HealingPotion("Healing Potion", 5, 5)});
+                    StoreMenu storeMenu = new StoreMenu(daleStore.Name, daleStore);
                     break;
                 case "0":
                     showTown = false;

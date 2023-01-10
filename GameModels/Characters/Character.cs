@@ -60,8 +60,12 @@ public class Character
     public int Speed = 10;
     public int SpeedBonus = 0;
     public int SpeedPenalty = 0;
+    public int Shield = 0;
+    public int ShieldBonus = 0;
+    public int ShieldPenalty = 0;
     public bool Ally = true;
     public Weapon Weapon = new Fist();
+    public OffHand OffHand = new EmptyHand();
     public Torso Torso = new NakedTorso();
     public Ring Ring = new Ring("No Ring", 0);
     public List<Character> Companions = new List<Character>();
@@ -210,6 +214,13 @@ public class Character
         GainMana(MaxMP);
         RecoverStamina(MaxSP);
         RecoverFromConditions(this.Conditions);
+        for (int comp = 0; comp < this.Companions.Count; comp++)
+        {
+            Companions[comp].HealHP(Companions[comp].MaxHP);
+            Companions[comp].GainMana(Companions[comp].MaxMP);
+            Companions[comp].RecoverStamina(Companions[comp].MaxSP);
+            Companions[comp].RecoverFromConditions(Companions[comp].Conditions);
+        }
     }
     public int CheckForCrit(int damage)
     {
@@ -286,7 +297,8 @@ public class Character
         int totalArmor = target.Torso.Protection;
         int totalStrength = this.Strength + this.StrengthBonus - this.StrengthPenalty;
         int totalDexterity = target.Dexterity + target.DexterityBonus - target.DexterityPenalty;
-        int damage = this.Strength + this.Weapon.WeaponDmg + totalStrength - totalArmor - totalDexterity;
+        int totalShield = target.Shield + target.ShieldBonus - target.ShieldPenalty;
+        int damage = this.Strength + this.Weapon.WeaponDmg + totalStrength - totalArmor - totalDexterity - totalShield;
         int calculatedDamage = CalculateDamageWithPossibleCrit(target, damage, this.Weapon.WeaponDmgType);
         target.TakeDamage(calculatedDamage);
         if (calculatedDamage > 0)
@@ -296,7 +308,15 @@ public class Character
         }
         else
         {
-            Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, but deals no damage");
+            if (totalArmor + totalShield > totalDexterity)
+            {
+                Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, but the attack bounces off their armor");
+            }
+            else
+            {
+                 Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, but the attack misses");   
+            }
+            
         }
     }
     public void AttackSpell(Character target, int baseDamage, DamageType damageType)
