@@ -23,7 +23,7 @@ public class DaleInnDialogue : InnDialogue
                     break;
                 case "2":
                     RatKillQuest ratKillQuest = new RatKillQuest();
-                    KillQuestDialogue ratDialogue = new KillQuestDialogue(ratKillQuest.Name, ratKillQuest);
+                    RatKillQuestDialogue ratDialogue = new RatKillQuestDialogue(ratKillQuest.Name, ratKillQuest);
                     ratDialogue.HaveDialogue(hero);
                     break;
                 case "3":

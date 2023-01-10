@@ -8,6 +8,7 @@ public class Orc : Humanoid
         CurrentXP = 20;
         CurrentHP = 15;
         MaxHP = 15;
+        Weapon = new TwoHAxe();
         Abilities.Add(new Rage());
     }
     public override void CombatAI(Character char1, List<Character> allies, List<Character> enemies)

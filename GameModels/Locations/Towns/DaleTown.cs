@@ -11,12 +11,9 @@ public class DaleTown : Town
         while (showTown)
         {
             Console.WriteLine("[1] View Character Sheet");
-            Console.WriteLine("[2] Visit the Inn");//Rat quest
-            Console.WriteLine("[3] Blacksmith");
+            Console.WriteLine("[2] Dreaming Worker Inn");
+            Console.WriteLine("[3] Forgeheart Smithy");
             Console.WriteLine("[4] General Store");
-            //General Store
-            //Blacksmith for Goblin Quest
-            //church for graveyard quest
             Console.WriteLine($"[0] Leave {Name}");
             string? input = Console.ReadLine();
             switch (input)
@@ -31,6 +28,9 @@ public class DaleTown : Town
                     innStore.DisplayMenu(hero);
                     break;
                 case "3":
+                    DaleSmith daleSmith = new DaleSmith("Forgeheart Smithy", new List<Item>{new TwoHAxe(), new Dagger(), new WoodenShield()});
+                    StoreMenu smithStore = new StoreMenu(daleSmith.Name, daleSmith);
+                    smithStore.DisplayMenu(hero);
                     break;
                 case "4":
                     Store daleStore = new Store("Dale Town General Store", new List<Item>{new HealingPotion("Healing Potion", 5, 5)});

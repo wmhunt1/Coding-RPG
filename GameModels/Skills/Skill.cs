@@ -93,5 +93,9 @@ public class Skill
                 }
             }
         }
+        else
+        {
+            Console.WriteLine($"You don't know any {Name} Recipes"); 
+        }
     }
 }

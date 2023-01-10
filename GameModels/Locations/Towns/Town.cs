@@ -13,6 +13,7 @@ public class Town : Location
         {
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Rest at Inn");
+            Console.WriteLine("[3] Smithy");
             Console.WriteLine($"[0] Leave {Name}");
             string? input = Console.ReadLine();
             switch (input)
@@ -22,9 +23,14 @@ public class Town : Location
                     characterSheet.DisplayMenu(hero);
                     break;
                 case "2":
-                    Inn inn = new Inn("Test Inn", new List<Item>{new Ale()}, 0);
+                    Inn inn = new Inn("Inn", new List<Item>{new Ale()}, 0);
                     StoreMenu innStore = new StoreMenu(inn.Name, inn);
                     innStore.DisplayMenu(hero);
+                    break;
+                case "3":
+                    Smith smith = new Smith("Smith", new List<Item>{new Dagger()});
+                    StoreMenu smithStore = new StoreMenu(smith.Name, smith);
+                    smithStore.DisplayMenu(hero);
                     break;
                 case "0":
                     showTown = false;

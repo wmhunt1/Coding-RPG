@@ -65,7 +65,7 @@ namespace GameModels
                 Console.WriteLine("[2] Sell");
                 if (Store.StoreDialogue.Name != "No Associated Dialogue")
                 {
-                    Console.WriteLine("[3] Activities");
+                    Console.WriteLine("[3] Talk to the Owner");
                 }
                 Console.WriteLine("[0] Leave Store");
                 string? input = Console.ReadLine();

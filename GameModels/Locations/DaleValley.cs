@@ -18,6 +18,7 @@ public class DaleValley : Location
             Console.WriteLine("[1] View Character Sheet");
             Console.WriteLine("[2] Visit Dale Town");
             Console.WriteLine("[3] Visit Dale Forest");
+            Console.WriteLine("[4] Visit the Dwarven Mine");
             Console.WriteLine($"[0] Leave {Name}");
             string? input = Console.ReadLine();
             switch (input)
@@ -35,6 +36,10 @@ public class DaleValley : Location
                     DaleForest daleForest = new DaleForest();
                     LocationMenu daleForestMenu = new LocationMenu(daleForest.Name, daleForest);
                     daleForestMenu.DisplayMenu(hero);
+                    break;
+                case "4":
+                    //later add option to mine here
+                    Dungeon dwarvenMine = new Dungeon("Dwarven Mine", new List<Character>{new Goblin(), new Goblin(), new Goblin()}, new List<Character>{new Goblin(), new Goblin(), new Goblin()}, new List<Character>{new Goblin(), new Goblin(), new Goblin()}, new List<Character>{new Goblin(), new Goblin(), new Goblin(), new Orc()});
                     break;
                 case "0":
                     showForest = false;
