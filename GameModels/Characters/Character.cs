@@ -78,6 +78,7 @@ public class Character
     public List<Spell> SpellBook = new List<Spell>();
     public List<Quest> Journal = new List<Quest>();
     public List<Skill> SkillBook = new List<Skill>();
+    public List<CraftingRecipe> CraftingRecipesKnown = new List<CraftingRecipe>();
     public List<Faction> Factions = new List<Faction>();
     public List<Relationship> Relationships = new List<Relationship>();
     public List<Reputation> Reputations = new List<Reputation>();

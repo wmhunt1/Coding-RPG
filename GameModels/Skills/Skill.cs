@@ -59,4 +59,32 @@ public class Skill
     {
         SkillActivity(skiller, xp, input, output);
     }
+    public void FindRecipes(Character skiller)
+    {
+        List<CraftingRecipe> recipes = new List<CraftingRecipe>();
+        for (int recp = 0; recp < skiller.CraftingRecipesKnown.Count; recp++)
+        {
+            if (skiller.CraftingRecipesKnown[recp].AssociatedSkill.Name == Name)
+            {
+                recipes.Add(skiller.CraftingRecipesKnown[recp]);
+            }
+        }
+        if (recipes.Count > 0)
+        {
+            Console.WriteLine($"{Name} Recipes Known");
+            for (int recp = 0; recp < recipes.Count; recp++)
+            {
+                Console.WriteLine($"[{recp + 1}]: {recipes[recp].Name}");
+            }
+            string? targetInput = Console.ReadLine();
+            if (targetInput != null)
+            {
+                int target = Int32.Parse(targetInput);
+                if (target > 0 && target <= recipes.Count)
+                {
+                    skiller.SkillBook.Find(x => x.Name == this.Name)?.TrainSkill(skiller, recipes[target - 1].RecipeXP, recipes[target - 1].RecipeInput, recipes[target - 1].RecipeOutput);
+                }
+            }
+        }
+    }
 }
