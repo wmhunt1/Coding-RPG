@@ -194,6 +194,7 @@ namespace GameModels
                 Console.WriteLine("[5] View Journal");
                 Console.WriteLine("[6] View Party");
                 Console.WriteLine("[7] View Factions");
+                Console.WriteLine("[8] View Skills");
                 Console.WriteLine("[0] Leave Sheet");
                 string? input = Console.ReadLine();
                 switch (input)
@@ -218,6 +219,9 @@ namespace GameModels
                         break;
                     case "7":
                         DisplayFactions(hero);
+                        break;
+                    case "8":
+                        DisplaySkills(hero);
                         break;
                     case "0":
                         showMenu = false;
