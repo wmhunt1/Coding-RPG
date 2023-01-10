@@ -63,6 +63,9 @@ public class Character
     public int Shield = 0;
     public int ShieldBonus = 0;
     public int ShieldPenalty = 0;
+    public int OffHandDamage = 0;
+    public int OffHandDamageBonus = 0;
+    public int OffHandDamagePenalty = 0;
     public bool Ally = true;
     public Weapon Weapon = new Fist();
     public OffHand OffHand = new EmptyHand();
@@ -296,9 +299,10 @@ public class Character
     {
         int totalArmor = target.Torso.Protection;
         int totalStrength = this.Strength + this.StrengthBonus - this.StrengthPenalty;
+        int totalOffHand = this.OffHandDamage + this.OffHandDamageBonus + this.OffHandDamagePenalty;
         int totalDexterity = target.Dexterity + target.DexterityBonus - target.DexterityPenalty;
         int totalShield = target.Shield + target.ShieldBonus - target.ShieldPenalty;
-        int damage = this.Strength + this.Weapon.WeaponDmg + totalStrength - totalArmor - totalDexterity - totalShield;
+        int damage = this.Strength + this.Weapon.WeaponDmg + totalStrength + totalOffHand - totalArmor - totalDexterity - totalShield;
         int calculatedDamage = CalculateDamageWithPossibleCrit(target, damage, this.Weapon.WeaponDmgType);
         target.TakeDamage(calculatedDamage);
         if (calculatedDamage > 0)

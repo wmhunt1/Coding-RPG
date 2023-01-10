@@ -11,6 +11,15 @@ namespace GameModels
                 var shield = (Shield)hero.OffHand;
                 Console.WriteLine($"[2] OffHand : {hero.OffHand.Name} - Shield Value {shield.ShieldValue}");
             }
+            else if (hero.OffHand is OffHandWeapon)
+            {
+                var offHand = (OffHandWeapon)hero.OffHand;
+                Console.WriteLine($"[2] OffHand : {hero.OffHand.Name} - Damage Value {offHand.OffHandDamageValue}");
+            }
+            else
+            {
+                Console.WriteLine($"[2] OffHand : {hero.OffHand.Name}");
+            }
             Console.WriteLine($"[3] Armor: {hero.Torso.Name} - {hero.Torso.Protection} {hero.Torso.ProtectionType} Protection");
             Console.WriteLine($"[4] Ring: {hero.Ring}");
             Console.WriteLine("[0] Leave Equipment");

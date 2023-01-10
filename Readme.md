@@ -16,4 +16,5 @@
     * move combat menu stuff to a script file
     * SkillMenu seperated based on skills
     * more weapons and stuff
-    * equiping 2H weapons unequips offhand
+    * offhand weapon that increases damage
+    * sneak attack (ignores armor)
