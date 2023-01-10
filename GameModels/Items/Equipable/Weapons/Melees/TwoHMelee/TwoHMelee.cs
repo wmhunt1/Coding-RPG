@@ -11,7 +11,7 @@ public class TwoHMelee : Melee
     public override void EquipItem(Character hero)
     {
         hero.Weapon = this;
-        hero.OffHand = new EmptyHand();
+        hero.OffHand.UnEquipItem(hero);
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }
 }

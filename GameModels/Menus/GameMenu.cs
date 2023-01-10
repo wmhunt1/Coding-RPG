@@ -34,6 +34,7 @@ namespace GameModels
             RingOfStrength ring = new RingOfStrength();
             Dog dog = new Dog();
             WoodenShield shield = new WoodenShield();
+            TwoHAxe axe = new TwoHAxe();
             tunic.EquipItem(hero);
             //club.AddItemToInventory(hero);
             //dagger.AddItemToInventory(hero);
@@ -49,6 +50,7 @@ namespace GameModels
             dog.JoinParty(hero);
             skeleton.LearnSpell(hero);
             shield.EquipItem(hero);
+            axe.AddItemToInventory(hero);
         }
         public void StoreTest(Character hero)
         {

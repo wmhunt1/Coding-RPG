@@ -21,7 +21,7 @@ namespace GameModels
                 Console.WriteLine($"[2] OffHand : {hero.OffHand.Name}");
             }
             Console.WriteLine($"[3] Armor: {hero.Torso.Name} - {hero.Torso.Protection} {hero.Torso.ProtectionType} Protection");
-            Console.WriteLine($"[4] Ring: {hero.Ring}");
+            Console.WriteLine($"[4] Ring: {hero.Ring.Name}");
             Console.WriteLine("[0] Leave Equipment");
             string? input = Console.ReadLine();
             switch (input)
