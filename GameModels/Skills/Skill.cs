@@ -51,13 +51,20 @@ public class Skill
         }
         return skiller;
     }
-    public virtual void SkillActivity(Character skiller, int xp, Item input, Item output)
+    public virtual void SkillActivity(Character skiller, CraftingRecipe recipe)
     {
 
     }
-    public void TrainSkill(Character skiller, int xp, Item input, Item output)
+    public void TrainSkill(Character skiller, CraftingRecipe recipe)
     {
-        SkillActivity(skiller, xp, input, output);
+        if (skiller.SkillBook.Find(x => x.Name == this.Name)?.SkillLevel >= recipe.RequiredLevel)
+        {
+            SkillActivity(skiller, recipe);
+        }
+        else
+        {
+            Console.WriteLine($"{skiller.Name}'s level is to low to {recipe.Name}");
+        }
     }
     public void FindRecipes(Character skiller)
     {
@@ -82,7 +89,7 @@ public class Skill
                 int target = Int32.Parse(targetInput);
                 if (target > 0 && target <= recipes.Count)
                 {
-                    skiller.SkillBook.Find(x => x.Name == this.Name)?.TrainSkill(skiller, recipes[target - 1].RecipeXP, recipes[target - 1].RecipeInput, recipes[target - 1].RecipeOutput);
+                    skiller.SkillBook.Find(x => x.Name == this.Name)?.TrainSkill(skiller, recipes[target - 1]);
                 }
             }
         }

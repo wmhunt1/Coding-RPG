@@ -29,6 +29,10 @@ namespace GameModels
             fletchWoodenBow.LearnRecipe(hero);
             smeltOre.LearnRecipe(hero);
             smithDagger.LearnRecipe(hero);
+            FishRawFish fishRawFish = new FishRawFish();
+            MineOre mineOre = new MineOre();
+            CutWood cutWood = new CutWood();
+
             bool showMenu = true;
             while (showMenu == true)
             {
@@ -45,28 +49,25 @@ namespace GameModels
                 switch (input)
                 {
                     case "1":
-                        fish.TrainSkill(hero, 10, new NoInput(), new RawFish());
+                        fish.TrainSkill(hero, fishRawFish);
                         break;
                     case "2":
                         cook.FindRecipes(hero);
                         break;
                     case "3":
-                        mine.TrainSkill(hero, 10, new NoInput(), new Ore());
+                        mine.TrainSkill(hero, mineOre);
                         break;
                     case "4":
                         smith.FindRecipes(hero);
                         break;
                     case "5":
-                        wood.TrainSkill(hero, 10, new NoInput(), new Wood());
+                        wood.TrainSkill(hero, cutWood);
                         break;
                     case "6":
                         fire.FindRecipes(hero);
                         break;
                     case "7":
                         fletch.FindRecipes(hero);
-                        break;
-                    case "8":
-                        smith.TrainSkill(hero, smithDagger.RecipeXP, smithDagger.RecipeInput, smithDagger.RecipeOutput);
                         break;
                     case "0":
                         showMenu = false;

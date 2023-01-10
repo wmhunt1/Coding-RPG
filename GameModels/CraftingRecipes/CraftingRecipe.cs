@@ -2,7 +2,7 @@ namespace GameModels;
 public class CraftingRecipe
 {
     public string Name;
-    public int RequireLevel = 1;
+    public int RequiredLevel = 1;
     public Skill AssociatedSkill = new Skill("Skill");
     public Item RecipeInput = new Item("Item", 0);
     public Item RecipeOutput = new Item("Item", 0);

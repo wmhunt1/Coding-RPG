@@ -13,21 +13,21 @@ public class CraftingSkill : Skill
     {
 
     }
-    public override void SkillActivity(Character skiller, int xp, Item input, Item output)
+    public override void SkillActivity(Character skiller, CraftingRecipe recipe)
     {
-        if (skiller.Inventory.Find(x => x.Name == input.Name) != null)
+        if (skiller.Inventory.Find(x => x.Name == recipe.RecipeInput.Name) != null)
         {
-            if (skiller.Inventory.Find(x => x.Name == input.Name)?.Quantity > 0)
+            if (skiller.Inventory.Find(x => x.Name == recipe.RecipeInput.Name)?.Quantity > 0)
             {
-                skiller.Inventory.Find(x => x.Name == input.Name)?.RemoveItemFromInventory(skiller);
-                CraftingSuccess(skiller, input, output);
-                output.AddItemToInventory(skiller);
-                EarnSkillXP(skiller, xp);
+                skiller.Inventory.Find(x => x.Name == recipe.RecipeInput.Name)?.RemoveItemFromInventory(skiller);
+                CraftingSuccess(skiller, recipe.RecipeInput, recipe.RecipeOutput);
+                recipe.RecipeOutput.AddItemToInventory(skiller);
+                EarnSkillXP(skiller, recipe.RecipeXP);
             }
         }
         else
         {
-            CraftingFailure(skiller, input);
+            CraftingFailure(skiller, recipe.RecipeInput);
         }
     }
 }

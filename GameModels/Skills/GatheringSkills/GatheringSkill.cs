@@ -9,10 +9,10 @@ public class GatheringSkill : Skill
     {
 
     }
-    public override void SkillActivity(Character skiller, int xp, Item input, Item output)
+    public override void SkillActivity(Character skiller, CraftingRecipe recipe)
     {
-        GatheringMessage(skiller, output);
-        output.AddItemToInventory(skiller);
-        EarnSkillXP(skiller, xp);
+        GatheringMessage(skiller, recipe.RecipeOutput);
+        recipe.RecipeOutput.AddItemToInventory(skiller);
+        EarnSkillXP(skiller, recipe.RecipeXP);
     }
 }
