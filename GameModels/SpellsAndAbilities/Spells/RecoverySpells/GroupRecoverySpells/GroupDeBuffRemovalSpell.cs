@@ -1,7 +1,7 @@
 namespace GameModels;
 public class GroupDeBuffRemovalSpell : GroupRecoverySpell
 {
-    public DeBuff RemovedDeBuff = new DeBuff("Name", 1, 1);
+    public DeBuff RemovedDeBuff {get; set;} = new DeBuff("Name", 1, 1);
     public GroupDeBuffRemovalSpell(string name, string school, int level, int cost) : base(name, school, level, cost)
     {
         Name = name;

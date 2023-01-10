@@ -1,8 +1,8 @@
 namespace GameModels;
 public class DamageSpell : Spell
 {
-    public DamageType SpellDamageType;
-    public int SpellDamage;
+    public DamageType SpellDamageType {get; set;}
+    public int SpellDamage {get; set;}
     public DamageSpell(string name, string school, int level, int cost, int spellDamage) : base(name, school, level, cost)
     {
         Name = name;

@@ -1,11 +1,11 @@
 namespace GameModels;
 public class Spell
 {
-    public string Name;
-    public string SpellSchool;
-    public int SpellLevel;
-    public int ManaCost;
-    public string Description = "";
+    public string Name {get; set;}
+    public string SpellSchool {get; set;}
+    public int SpellLevel {get; set;}
+    public int ManaCost {get; set;}
+    public string Description {get; set;} = "";
     public Spell(string name, string school, int level, int cost)
     {
         Name = name;

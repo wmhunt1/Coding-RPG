@@ -1,7 +1,7 @@
 namespace GameModels;
 public class SingleTargetConditionRemovalSpell : SingleTargetRecoverySpell
 {
-    public Condition RemovedCondition = new Condition("Name");
+    public Condition RemovedCondition {get; set;} = new Condition("Name");
     public SingleTargetConditionRemovalSpell(string name, string school, int level, int cost, int healingAmount) : base(name, school, level, cost)
     {
         Name = name;

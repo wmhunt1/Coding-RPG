@@ -1,9 +1,9 @@
 namespace GameModels;
 public class Relationship
 {
-    public Character AssociatedCharacter;
-    public int RelationshipValue = 0;
-    public string RelationshipName = "Acquaintances";
+    public Character AssociatedCharacter {get; set;}
+    public int RelationshipValue {get; set;} = 0;
+    public string RelationshipName {get; set;} = "Acquaintances";
     public Relationship(Character character)
     {
         AssociatedCharacter = character;

@@ -2,10 +2,9 @@ namespace GameModels
 {
     public class StoreMenu : LocationMenu
     {
-        public Store Store;
-        public StoreMenu(string name, Store store) : base(name, store)
+        public Store Store {get; set;}
+        public StoreMenu( Store store) : base(store)
         {
-            Name = name;
             Store = store;
         }
         public void BuyFromStore(Character hero)
@@ -59,7 +58,7 @@ namespace GameModels
             while (showMenu)
             {
                 ShowTitle();
-                Console.WriteLine($"===== {Name} =====");
+                Console.WriteLine($"===== {Store.Name} =====");
                 Console.WriteLine($"{hero.Name}: {hero.Gold} GP");
                 Console.WriteLine("[1] Buy");
                 Console.WriteLine("[2] Sell");

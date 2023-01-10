@@ -20,10 +20,6 @@ namespace GameModels
                 hero.Name = name;
             }
         }
-        public void LoadGame(Character hero)
-        {
-
-        }
         public void Settings(Character hero)
         {
 

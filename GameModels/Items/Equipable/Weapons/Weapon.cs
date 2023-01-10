@@ -1,8 +1,8 @@
 namespace GameModels;
 public class Weapon : Equipable
 {   
-    public int WeaponDmg;
-    public DamageType WeaponDmgType;
+    public int WeaponDmg {get; set;}
+    public DamageType WeaponDmgType {get; set;}
     public Weapon(string name, int cost, int weaponDmg):base(name, cost)
     {
         Name = name;

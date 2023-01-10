@@ -29,12 +29,12 @@ public class DaleValley : Location
                     break;
                 case "2":
                     DaleTown daleTown = new DaleTown();
-                    LocationMenu daleTownMenu = new LocationMenu(daleTown.Name, daleTown);
+                    LocationMenu daleTownMenu = new LocationMenu(daleTown);
                     daleTownMenu.DisplayMenu(hero);
                     break;
                 case "3":
                     DaleForest daleForest = new DaleForest();
-                    LocationMenu daleForestMenu = new LocationMenu(daleForest.Name, daleForest);
+                    LocationMenu daleForestMenu = new LocationMenu(daleForest);
                     daleForestMenu.DisplayMenu(hero);
                     break;
                 case "4":

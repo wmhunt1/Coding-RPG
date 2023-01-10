@@ -1,8 +1,8 @@
 namespace GameModels;
 public class Armor : Equipable
 {   
-    public int Protection;
-    public string ProtectionType;
+    public int Protection {get; set;}
+    public string ProtectionType {get; set;}
     public Armor(string name, int cost, int protection, string protectionType):base(name, cost)
     {
         Name = name;

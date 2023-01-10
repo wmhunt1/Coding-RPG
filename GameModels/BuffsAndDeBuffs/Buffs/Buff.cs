@@ -1,9 +1,9 @@
 namespace GameModels;
 public class Buff
 {
-    public string Name;
-    public int Duration;
-    public int RemainingDuration;
+    public string Name {get; set;}
+    public int Duration {get; set;}
+    public int RemainingDuration {get; set;}
     public Buff(string name, int duration, int remainingDuration)
     {
         Name = name;

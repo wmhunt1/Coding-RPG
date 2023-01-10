@@ -2,11 +2,9 @@ namespace GameModels
 {
     public class LocationMenu : Menu
     {
-        public string Name;
-        Location Location;
-        public LocationMenu(string name, Location location)
+        Location Location {get; set;}
+        public LocationMenu(Location location)
         {
-            Name = name;
             Location = location;
         }
         public virtual void DisplayLocationContent(Character hero)

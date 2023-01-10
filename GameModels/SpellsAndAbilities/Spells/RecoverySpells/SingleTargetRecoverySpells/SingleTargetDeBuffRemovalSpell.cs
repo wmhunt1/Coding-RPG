@@ -1,7 +1,7 @@
 namespace GameModels;
 public class SingleTargetDeBuffRemovalSpell : SingleTargetRecoverySpell
 {
-    public DeBuff RemovedDeBuff = new DeBuff("Name", 1, 1);
+    public DeBuff RemovedDeBuff {get; set;} = new DeBuff("Name", 1, 1);
     public SingleTargetDeBuffRemovalSpell(string name, string school, int level, int cost, int healingAmount) : base(name, school, level, cost)
     {
         Name = name;

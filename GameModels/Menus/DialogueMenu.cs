@@ -2,7 +2,7 @@ namespace GameModels
 {
     public class DialogueMenu : Menu
     {
-        public Dialogue Dialogue;
+        public Dialogue Dialogue  {get; set;}
         public DialogueMenu(Dialogue dialogue)
         {
             Dialogue = dialogue;

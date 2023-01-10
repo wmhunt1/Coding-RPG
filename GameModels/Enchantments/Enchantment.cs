@@ -1,7 +1,7 @@
 namespace GameModels;
 public class Enchantment
 {
-    public string Name;
+    public string Name {get; set;}
     public Enchantment(string name)
     {
         Name = name;

@@ -2,11 +2,10 @@ namespace GameModels
 {
     public class DungeonMenu : LocationMenu
     {
-        public Dungeon Dungeon;
+        public Dungeon Dungeon {get; set;}
 
-        public DungeonMenu(string name, Dungeon dungeon) : base(name, dungeon)
+        public DungeonMenu(Dungeon dungeon) : base(dungeon)
         {
-            Name = name;
             Dungeon = dungeon;
         }
         public void RunEncounter(Character hero, List<Character> enemies)
@@ -88,7 +87,7 @@ namespace GameModels
                             RunEncounter(hero, Dungeon.BossEncounter);
                             if (hero.CurrentHP > 0)
                             {
-                                Console.WriteLine($"You have defeated the {Name} Dungeon");
+                                Console.WriteLine($"You have defeated the {Dungeon.Name} Dungeon");
                                 List<DungeonQuest> dungeonQuests = new List<DungeonQuest>();
                                 if (hero.Journal.Count > 0)
                                 {

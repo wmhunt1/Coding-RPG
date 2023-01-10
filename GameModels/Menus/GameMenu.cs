@@ -58,7 +58,7 @@ namespace GameModels
         {
             hero.AddGold(5);
             Store store = new Store("Test Store", new List<Item> { new HealingPotion("Healing Potion", 2, 5) });
-            StoreMenu storeTest = new StoreMenu(store.Name, store);
+            StoreMenu storeTest = new StoreMenu(store);
             storeTest.DisplayMenu(hero);
         }
         public void DungeonTest(Character hero)
@@ -69,7 +69,7 @@ namespace GameModels
             List<Character> e3 = new List<Character> { new Rat() };
             List<Character> boss = new List<Character> { new Rat() };
             Dungeon dungeon = new Dungeon("Test Dungeon", e1, e2, e3, boss);
-            DungeonMenu dungeonTest = new DungeonMenu(dungeon.Name, dungeon);
+            DungeonMenu dungeonTest = new DungeonMenu(dungeon);
             dungeonTest.DisplayMenu(hero);
         }
         public void DialogueTest(Character hero)
@@ -94,7 +94,7 @@ namespace GameModels
         public void LocationTest(Character hero)
         {
             TestTown town = new TestTown();
-            LocationMenu locationMenu = new LocationMenu("Test Town", town);
+            LocationMenu locationMenu = new LocationMenu(town);
             locationMenu.DisplayMenu(hero);
             AnyKey();
         }
@@ -167,6 +167,7 @@ namespace GameModels
                 Console.WriteLine("[1] Character Sheet");
                 Console.WriteLine("[2] Testing Menu");
                 Console.WriteLine("[3] Enter Dale Valley");
+                Console.WriteLine("[9] Save Game");
                 Console.WriteLine("[0] Main Menu");
                 string? input = Console.ReadLine();
                 switch (input)
@@ -180,8 +181,11 @@ namespace GameModels
                         break;
                     case "3":
                         DaleValley daleValley = new DaleValley();
-                        LocationMenu daleValleyMenu = new LocationMenu(daleValley.Name, daleValley);
+                        LocationMenu daleValleyMenu = new LocationMenu(daleValley);
                         daleValleyMenu.DisplayMenu(hero);
+                        break;
+                    case "9":
+                        SaveGame(hero);
                         break;
                     case "0":
                         showMenu = false;

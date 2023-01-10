@@ -1,8 +1,8 @@
 namespace GameModels;
 public class Ability
 {
-    public string Name;
-    public int StaminaCost;
+    public string Name {get; set;}
+    public int StaminaCost {get; set;}
     public Ability(string name, int cost)
     {
         Name = name;

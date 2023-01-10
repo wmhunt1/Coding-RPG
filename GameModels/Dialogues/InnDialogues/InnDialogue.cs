@@ -1,7 +1,7 @@
 namespace GameModels;
 public class InnDialogue : Dialogue
 {
-    public Inn AssociatedInn;
+    public Inn AssociatedInn  {get; set;}
     public InnDialogue(string name, Inn inn):base(name)
     {
         Name = name;

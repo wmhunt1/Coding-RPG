@@ -1,11 +1,11 @@
 namespace GameModels;
 public class Quest
 {
-    public string Name;
-    public string QuestStatus = "In Progress";
-    public string QuestDescription;
-    public int GoldReward;
-    public Item ItemReward = new Item("Optional", 0);
+    public string Name {get; set;}
+    public string QuestStatus {get; set;} = "In Progress";
+    public string QuestDescription {get; set;}
+    public int GoldReward {get; set;}
+    public Item ItemReward {get; set;} = new Item("Optional", 0);
     public Quest(string name, string questDescription, int goldReward)
     {
         Name = name;

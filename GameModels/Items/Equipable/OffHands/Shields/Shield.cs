@@ -1,7 +1,7 @@
 namespace GameModels;
 public class Shield : OffHand
 {
-    public int ShieldValue = 0;
+    public int ShieldValue {get; set;} = 0;
     public Shield(string name, int cost, int shieldValue) : base(name, cost)
     {
         Name = name;

@@ -1,7 +1,7 @@
 namespace GameModels;
 public class GroupConditionRemovalSpell : GroupRecoverySpell
 {
-    public Condition RemovedCondition = new Condition("Name");
+    public Condition RemovedCondition {get; set;} = new Condition("Name");
     public GroupConditionRemovalSpell(string name, string school, int level, int cost) : base(name, school, level, cost)
     {
         Name = name;

@@ -1,7 +1,7 @@
 namespace GameModels;
 public class Job
 {
-    public string Name;
+    public string Name {get; set;}
     public Job(string name)
     {
         Name = name;

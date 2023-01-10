@@ -1,7 +1,7 @@
 namespace GameModels;
 public class Condition
 {
-    public string Name;
+    public string Name {get; set;}
     public Condition(string name)
     {
         Name = name;

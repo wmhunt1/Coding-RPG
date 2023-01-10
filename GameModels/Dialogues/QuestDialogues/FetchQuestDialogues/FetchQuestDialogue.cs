@@ -1,7 +1,7 @@
 namespace GameModels;
 public class FetchQuestDialogue : QuestDialogue
 {
-    public FetchQuest AssociatedQuest;
+    public FetchQuest AssociatedQuest  {get; set;}
     public FetchQuestDialogue(string name, FetchQuest quest) : base(name)
     {
         Name = name;

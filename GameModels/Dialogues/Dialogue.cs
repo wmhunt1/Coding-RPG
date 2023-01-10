@@ -1,7 +1,7 @@
 namespace GameModels;
 public class Dialogue
 {
-    public string Name;
+    public string Name {get; set;}
     public Dialogue(string name)
     {
         Name = name;

@@ -1,7 +1,7 @@
 namespace GameModels;
 public class HealingPotion : Potion
 {
-    public int HealingAmount;
+    public int HealingAmount {get; set;}
     public HealingPotion(string name, int cost, int healingAmount) : base(name, cost)
     {
         Name = name;

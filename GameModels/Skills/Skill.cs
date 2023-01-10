@@ -1,12 +1,12 @@
 namespace GameModels;
 public class Skill
 {
-    public string Name;
-    public int SkillLevel = 1;
-    public int CurrentSkillXP = 0;
-    public int MaxSkillXP = 100;
-    public Item Input = new Item("item", 0);
-    public Item Output = new Item("item", 0);
+    public string Name {get; set;}
+    public int SkillLevel {get; set;} = 1;
+    public int CurrentSkillXP {get; set;} = 0;
+    public int MaxSkillXP {get; set;} = 100;
+    public Item Input {get; set;} = new Item("item", 0);
+    public Item Output {get; set;} = new Item("item", 0);
     public Skill(string name)
     {
         Name = name;

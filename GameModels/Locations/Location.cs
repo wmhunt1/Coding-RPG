@@ -1,7 +1,7 @@
 namespace GameModels;
 public class Location
 {
-    public string Name;
+    public string Name {get; set;}
     public Location(string name)
     {
         Name = name;

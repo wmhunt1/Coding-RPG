@@ -1,8 +1,8 @@
 namespace GameModels;
 public class OffHandWeapon : OffHand
 {
-    public int OffHandDamageValue;
-    public DamageType OffHandDamageType= new DamageType("Untyped");
+    public int OffHandDamageValue  {get; set;}
+    public DamageType OffHandDamageType {get; set;} = new DamageType("Untyped");
     public OffHandWeapon(string name, int cost, int offhandDmg) : base(name, cost)
     {
         Name = name;

@@ -1,7 +1,7 @@
 namespace GameModels;
 public class DungeonQuestDialogue : QuestDialogue
 {
-    public DungeonQuest AssociatedQuest;
+    public DungeonQuest AssociatedQuest  {get; set;}
     public DungeonQuestDialogue(string name, DungeonQuest quest) : base(name)
     {
         Name = name;

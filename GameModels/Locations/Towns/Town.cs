@@ -24,12 +24,12 @@ public class Town : Location
                     break;
                 case "2":
                     Inn inn = new Inn("Inn", new List<Item>{new Ale()}, 0);
-                    StoreMenu innStore = new StoreMenu(inn.Name, inn);
+                    StoreMenu innStore = new StoreMenu(inn);
                     innStore.DisplayMenu(hero);
                     break;
                 case "3":
                     Smith smith = new Smith("Smith", new List<Item>{new Dagger()});
-                    StoreMenu smithStore = new StoreMenu(smith.Name, smith);
+                    StoreMenu smithStore = new StoreMenu(smith);
                     smithStore.DisplayMenu(hero);
                     break;
                 case "0":

@@ -1,8 +1,8 @@
 namespace GameModels;
 public class DamageCondition : Condition
 {
-    public DamageType DamageType = new DamageType("Typeless");
-    public int DamageAmount;
+    public DamageType DamageType  {get; set;} = new DamageType("Typeless");
+    public int DamageAmount {get; set;}
     public DamageCondition(string name, int damageAmount) : base(name)
     {
         Name = name;

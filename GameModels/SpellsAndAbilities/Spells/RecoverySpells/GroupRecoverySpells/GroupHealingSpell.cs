@@ -1,7 +1,7 @@
 namespace GameModels;
 public class GroupHealingSpell : GroupRecoverySpell
 {
-    public int HealingAmount;
+    public int HealingAmount {get; set;}
     public GroupHealingSpell(string name, string school, int level, int cost, int healingAmount) : base(name, school, level, cost)
     {
         Name = name;

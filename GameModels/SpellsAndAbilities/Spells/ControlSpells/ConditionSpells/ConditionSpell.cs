@@ -1,7 +1,7 @@
 namespace GameModels;
 public class ConditionSpell : ControlSpell
 {
-    public Condition AppliedCondition = new Condition("Condition");
+    public Condition AppliedCondition {get; set;} = new Condition("Condition");
     public ConditionSpell(string name, string school, int level, int cost) : base(name, school, level, cost)
     {
         Name = name;

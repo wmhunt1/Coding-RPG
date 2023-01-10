@@ -1,7 +1,7 @@
 namespace GameModels;
 public class Inn : Store
 {
-    public int RoomCost;
+    public int RoomCost {get; set;}
     public Inn(string name, List<Item> storeInventory, int roomCost) : base(name, storeInventory)
     {
         Name = name;

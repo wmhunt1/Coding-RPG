@@ -1,11 +1,11 @@
 namespace GameModels;
 public class Faction
 {
-    public string Name;
-    public List<Character> Members = new List<Character>();
-    public int Rank = 0;
-    public string CurrentRankName;
-    public List<String> RankNames;
+    public string Name {get; set;}
+    public List<Character> Members {get; set;} = new List<Character>();
+    public int Rank {get; set;} = 0;
+    public string CurrentRankName {get; set;}
+    public List<String> RankNames {get; set;}
     public Faction(string name, List<String> rankNames)
     {
         Name = name;

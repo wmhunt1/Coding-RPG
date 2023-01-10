@@ -1,7 +1,7 @@
 namespace GameModels;
 public class KillQuestDialogue : QuestDialogue
 {
-    public KillQuest AssociatedQuest;
+    public KillQuest AssociatedQuest  {get; set;}
     public KillQuestDialogue(string name, KillQuest quest) : base(name)
     {
         Name = name;
