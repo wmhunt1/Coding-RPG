@@ -16,5 +16,3 @@
     * move combat menu stuff to a script file
     * SkillMenu seperated based on skills
     * more weapons and stuff
-    * offhand weapon that increases damage
-    * sneak attack (ignores armor)

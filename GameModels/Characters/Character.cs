@@ -6,8 +6,8 @@ public class Character
     public Job Job = new Freelancer();
     public int CurrentXP = 0;
     public int MaxXP = 100;
-    public int CurrentHP = 100;
-    public int MaxHP = 100;
+    public int CurrentHP = 10;
+    public int MaxHP = 10;
     public int HPBonus = 0;
     public int HPPenalty = 0;
     public int HPRegen = 0;
@@ -318,9 +318,27 @@ public class Character
             }
             else
             {
-                 Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, but the attack misses");   
+                Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, but the attack misses");
             }
-            
+
+        }
+    }
+    public void ArmorIgnoringAttack(Character target)
+    {
+        int totalStrength = this.Strength + this.StrengthBonus - this.StrengthPenalty;
+        int totalOffHand = this.OffHandDamage + this.OffHandDamageBonus + this.OffHandDamagePenalty;
+        int totalDexterity = target.Dexterity + target.DexterityBonus - target.DexterityPenalty;
+        int damage = this.Strength + this.Weapon.WeaponDmg + totalStrength + totalOffHand - totalDexterity;
+        int calculatedDamage = CalculateDamageWithPossibleCrit(target, damage, this.Weapon.WeaponDmgType);
+        target.TakeDamage(calculatedDamage);
+        if (calculatedDamage > 0)
+        {
+            Console.WriteLine($"{this.Name} sneak attacks {target.Name} with {this.Weapon.Name}, dealing {calculatedDamage} {this.Weapon.WeaponDmgType.Name} Damage");
+            Weapon.EquipmentEnchantment.OnHitEnchantment(this, target);
+        }
+        else
+        {
+            Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, but the attack misses");
         }
     }
     public void AttackSpell(Character target, int baseDamage, DamageType damageType)

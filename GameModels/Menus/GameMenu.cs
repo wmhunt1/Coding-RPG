@@ -11,12 +11,12 @@ namespace GameModels
             List<Character> mages = new List<Character> { new Mage() };
             List<Character> healers = new List<Character> { new Healer() };
             List<Character> summoners = new List<Character> { new Summoner() };
-            //combatMenu.RunCombat(hero, rats);
+            combatMenu.RunCombat(hero, rats);
             //combatMenu.RunCombat(hero, skeletons);
             //combatMenu.RunCombat(hero, orcs);
             //combatMenu.RunCombat(hero, mages);
             //combatMenu.RunCombat(hero, healers);
-            combatMenu.RunCombat(hero, summoners);
+            //combatMenu.RunCombat(hero, summoners);
         }
         public void EquipmentTest(Character hero)
         {
@@ -35,6 +35,7 @@ namespace GameModels
             Dog dog = new Dog();
             WoodenShield shield = new WoodenShield();
             TwoHAxe axe = new TwoHAxe();
+            SneakAttack sneakAttack = new SneakAttack();
             tunic.EquipItem(hero);
             //club.AddItemToInventory(hero);
             //dagger.AddItemToInventory(hero);
@@ -47,6 +48,7 @@ namespace GameModels
             //rage.LearnAbility(hero);
             //sleep.LearnSpell(hero);
             //fireBall.LearnSpell(hero);
+            sneakAttack.LearnAbility(hero);
             dog.JoinParty(hero);
             skeleton.LearnSpell(hero);
             shield.EquipItem(hero);
