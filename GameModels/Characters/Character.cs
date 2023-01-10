@@ -70,7 +70,7 @@ public class Character
     public Weapon Weapon {get; set;} = new Fist();
     public OffHand OffHand {get; set;} = new EmptyHand();
     public Torso Torso {get; set;} = new NakedTorso();
-    public Ring Ring {get; set;} = new Ring("No Ring", 0);
+    public Ring Ring {get; set;} = new EmptyFinger();
     public List<Character> Companions {get; set;} = new List<Character>();
     public int Gold {get; set;} = 0;
     public List<Item> Inventory {get; set;} = new List<Item>();

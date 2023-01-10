@@ -18,4 +18,3 @@
     * Combat skills (increase hit chance)
         * Melee
         * Ranged
-    * get; set; everything

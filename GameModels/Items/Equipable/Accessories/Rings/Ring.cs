@@ -15,8 +15,8 @@ public class Ring : Equipable
     public override void UnEquipItem(Character hero)
     {
         this.EquipmentEnchantment.RemoveEnchantmentOnUnEquip(hero);
-        hero.Ring = new Ring("No Ring", 0);
-        if (this.Name != "Ring")
+        hero.Ring = new EmptyFinger();
+        if (this.Name != "Empty Finger")
         {
             this.AddItemToInventory(hero);
         }
