@@ -16,3 +16,5 @@ C:\Users\wmatt\Desktop\Coding\Coding-RPG\Game\obj\Debug\net6.0\ref\Game.dll
 C:\Users\wmatt\Desktop\Coding\Coding-RPG\Game\bin\Debug\net6.0\GameModels.dll
 C:\Users\wmatt\Desktop\Coding\Coding-RPG\Game\bin\Debug\net6.0\GameModels.pdb
 C:\Users\wmatt\Desktop\Coding\Coding-RPG\Game\obj\Debug\net6.0\Game.csproj.CopyComplete
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\Game\bin\Debug\net6.0\Json.Net.dll
+C:\Users\wmatt\Desktop\Coding\Coding-RPG\Game\bin\Debug\net6.0\Newtonsoft.Json.dll
