@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Condition
 {
+    [JsonPropertyName("Name")]
     public string Name {get; set;}
     public Condition(string name)
     {

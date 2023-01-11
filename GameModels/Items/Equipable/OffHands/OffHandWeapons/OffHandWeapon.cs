@@ -1,8 +1,12 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class OffHandWeapon : OffHand
 {
-    public int OffHandDamageValue  {get; set;}
-    public DamageType OffHandDamageType {get; set;} = new DamageType("Untyped");
+    [JsonPropertyName("OffHandDamageValue")]
+    public int OffHandDamageValue { get; set; }
+    [JsonPropertyName("OffHandDamageType")]
+    public DamageType OffHandDamageType { get; set; } = new DamageType("Untyped");
     public OffHandWeapon(string name, int cost, int offhandDmg) : base(name, cost)
     {
         Name = name;

@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class SingleTargetConditionRemovalSpell : SingleTargetRecoverySpell
 {
-    public Condition RemovedCondition {get; set;} = new Condition("Name");
+    [JsonPropertyName("RemovedCondition")]
+    public Condition RemovedCondition { get; set; } = new Condition("Name");
     public SingleTargetConditionRemovalSpell(string name, string school, int level, int cost, int healingAmount) : base(name, school, level, cost)
     {
         Name = name;
@@ -21,9 +24,9 @@ public class SingleTargetConditionRemovalSpell : SingleTargetRecoverySpell
         bool parseSucess = Int32.TryParse(selectionInput, out selection);
         if (parseSucess == true && selection > 0 && selection <= enemies.Count)
         {
-           if (allies[selection-1].Conditions.Find(x => x.Name == RemovedCondition.Name) != null)
+            if (allies[selection - 1].Conditions.Find(x => x.Name == RemovedCondition.Name) != null)
             {
-                allies[selection-1].Conditions.Find(x => x.Name == RemovedCondition.Name)?.RemoveCondition(allies[selection-1]);
+                allies[selection - 1].Conditions.Find(x => x.Name == RemovedCondition.Name)?.RemoveCondition(allies[selection - 1]);
             }
         }
     }

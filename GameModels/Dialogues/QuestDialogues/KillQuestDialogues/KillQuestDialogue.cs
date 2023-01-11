@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class KillQuestDialogue : QuestDialogue
 {
+    [JsonPropertyName("AssociatedInn")]
     public KillQuest AssociatedQuest  {get; set;}
     public KillQuestDialogue(string name, KillQuest quest) : base(name)
     {

@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Enchantment
 {
+    [JsonPropertyName("Name")]
     public string Name {get; set;}
     public Enchantment(string name)
     {

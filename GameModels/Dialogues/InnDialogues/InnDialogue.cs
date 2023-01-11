@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class InnDialogue : Dialogue
 {
+    [JsonPropertyName("AssociatedInn")]
     public Inn AssociatedInn  {get; set;}
     public InnDialogue(string name, Inn inn):base(name)
     {

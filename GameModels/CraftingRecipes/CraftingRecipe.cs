@@ -1,11 +1,19 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class CraftingRecipe
 {
+    [JsonPropertyName("Name")]
     public string Name  {get; set;}
+    [JsonPropertyName("RequiredLevel")]
     public int RequiredLevel {get; set;} = 1;
-    public Skill AssociatedSkill {get; set;} = new Skill("Skill");
+    [JsonPropertyName("AssociatedSkill")]
+    public string AssociatedSkill {get; set;} = "Skill";
+    [JsonPropertyName("RecipeInput")]
     public Item RecipeInput {get; set;} = new Item("Item", 0);
+    [JsonPropertyName("RecipeOutput")]
     public Item RecipeOutput {get; set;} = new Item("Item", 0);
+    [JsonPropertyName("RecipeXP")]
     public int RecipeXP {get; set;}
     public CraftingRecipe(string name, int xp)
     {

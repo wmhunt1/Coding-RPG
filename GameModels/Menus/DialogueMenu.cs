@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels
 {
     public class DialogueMenu : Menu
     {
+         [JsonPropertyName("Dialogue")]
         public Dialogue Dialogue  {get; set;}
         public DialogueMenu(Dialogue dialogue)
         {

@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class ConditionSpell : ControlSpell
 {
+    [JsonPropertyName("AppliedCondition")]
     public Condition AppliedCondition {get; set;} = new Condition("Condition");
     public ConditionSpell(string name, string school, int level, int cost) : base(name, school, level, cost)
     {

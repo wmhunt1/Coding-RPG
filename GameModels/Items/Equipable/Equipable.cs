@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Equipable : Item
 {
+     [JsonPropertyName("EquipmentEnchantment")]
     public Enchantment EquipmentEnchantment {get; set;} = new Enchantment("Unenchanted");
     public Equipable(string name, int cost) : base(name, cost)
     {

@@ -1,9 +1,13 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Weapon : Equipable
-{   
-    public int WeaponDmg {get; set;}
-    public DamageType WeaponDmgType {get; set;}
-    public Weapon(string name, int cost, int weaponDmg):base(name, cost)
+{
+    [JsonPropertyName("WeaponDmg")]
+    public int WeaponDmg { get; set; }
+    [JsonPropertyName("WeaponDmgType")]
+    public DamageType WeaponDmgType { get; set; }
+    public Weapon(string name, int cost, int weaponDmg) : base(name, cost)
     {
         Name = name;
         Cost = cost;

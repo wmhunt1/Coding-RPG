@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class CutWood : CraftingRecipe
 {
@@ -6,7 +8,7 @@ public class CutWood : CraftingRecipe
     {
         Name = name;
         RecipeXP = xp;
-        AssociatedSkill = new WoodcuttingSkill();
+        AssociatedSkill = "Woodcutting";
         RecipeInput = new NoInput();
         RecipeOutput = new Wood();
     }

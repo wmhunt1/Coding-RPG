@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Inn : Store
 {
+    [JsonPropertyName("RoomCost")]
     public int RoomCost {get; set;}
     public Inn(string name, List<Item> storeInventory, int roomCost) : base(name, storeInventory)
     {

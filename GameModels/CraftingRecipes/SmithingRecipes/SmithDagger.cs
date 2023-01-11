@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class SmithDagger : CraftingRecipe
 {
@@ -6,7 +8,7 @@ public class SmithDagger : CraftingRecipe
     {
         Name = name;
         RecipeXP = xp;
-        AssociatedSkill = new SmithingSkill();
+        AssociatedSkill = "Smithing";
         RecipeInput = new MetalBar();
         RecipeOutput = new Dagger();
     }

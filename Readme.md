@@ -13,6 +13,8 @@
     * Rebalance
     * sort combat by speed/dex
     * saving/loading via a json file (works but need to add the rest of paramaters)
+        * Doesn't work if you have an ability, spell, crafting recipe, skill (list that refers to anything else)
+        * prevent crash if loading is wrong
     * move combat menu stuff to a script file
     * more weapons and stuff
     * Combat skills (increase hit chance)

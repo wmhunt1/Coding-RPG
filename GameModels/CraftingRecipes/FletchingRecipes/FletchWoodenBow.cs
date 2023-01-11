@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class FletchWoodenBow : CraftingRecipe
 {
@@ -6,7 +8,7 @@ public class FletchWoodenBow : CraftingRecipe
     {
         Name = name;
         RecipeXP = xp;
-        AssociatedSkill = new FletchingSkill();
+        AssociatedSkill = "Fletching";
         RecipeInput = new Wood();
         RecipeOutput = new WoodenBow();
     }

@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class SingleTargetHealingSpell : SingleTargetRecoverySpell
 {
-    public int HealingAmount {get; set;}
+    [JsonPropertyName("HealingAmount")]
+    public int HealingAmount { get; set; }
     public SingleTargetHealingSpell(string name, string school, int level, int cost, int healingAmount) : base(name, school, level, cost)
     {
         Name = name;

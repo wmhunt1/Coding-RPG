@@ -1,9 +1,14 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class KillQuest : Quest
 {
-    public int Quantity {get; set;}
-    public int TotalKilled {get; set;} = 0;
-    public string TargetMonster {get; set;}
+    [JsonPropertyName("Quantity")]
+    public int Quantity { get; set; }
+    [JsonPropertyName("TotalKilled")]
+    public int TotalKilled { get; set; } = 0;
+    [JsonPropertyName("TargetMonster")]
+    public string TargetMonster { get; set; }
     public KillQuest(string name, string questDescription, int goldReward, int quantity, string target) : base(name, questDescription, goldReward)
     {
         Name = name;

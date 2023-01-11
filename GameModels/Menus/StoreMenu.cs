@@ -1,9 +1,12 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels
 {
     public class StoreMenu : LocationMenu
     {
-        public Store Store {get; set;}
-        public StoreMenu( Store store) : base(store)
+        [JsonPropertyName("Store")]
+        public Store Store { get; set; }
+        public StoreMenu(Store store) : base(store)
         {
             Store = store;
         }

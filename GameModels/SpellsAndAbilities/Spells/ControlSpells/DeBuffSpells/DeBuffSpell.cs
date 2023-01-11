@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
-public class DeBuffSpell :  ControlSpell
+public class DeBuffSpell : ControlSpell
 {
-    public DeBuff AppliedDeBuff {get; set;} = new DeBuff("DeBuff", 1, 1);
+    [JsonPropertyName("AppliedDeBuff")]
+    public DeBuff AppliedDeBuff { get; set; } = new DeBuff("DeBuff", 1, 1);
     public DeBuffSpell(string name, string school, int level, int cost) : base(name, school, level, cost)
     {
         Name = name;

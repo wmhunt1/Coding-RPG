@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Shield : OffHand
 {
-    public int ShieldValue {get; set;} = 0;
+    [JsonPropertyName("ShieldValue")]
+    public int ShieldValue { get; set; } = 0;
     public Shield(string name, int cost, int shieldValue) : base(name, cost)
     {
         Name = name;

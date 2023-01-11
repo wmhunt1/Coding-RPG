@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class FishRawFish : CraftingRecipe
 {
@@ -6,7 +8,7 @@ public class FishRawFish : CraftingRecipe
     {
         Name = name;
         RecipeXP = xp;
-        AssociatedSkill = new FishingSkill();
+        AssociatedSkill = "Fishing";
         RecipeInput = new NoInput();
         RecipeOutput = new RawFish();
     }

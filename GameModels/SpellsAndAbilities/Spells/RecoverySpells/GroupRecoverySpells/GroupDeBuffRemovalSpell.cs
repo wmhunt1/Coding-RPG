@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class GroupDeBuffRemovalSpell : GroupRecoverySpell
 {
-    public DeBuff RemovedDeBuff {get; set;} = new DeBuff("Name", 1, 1);
+    [JsonPropertyName("RemovedDeBuff")]
+    public DeBuff RemovedDeBuff { get; set; } = new DeBuff("Name", 1, 1);
     public GroupDeBuffRemovalSpell(string name, string school, int level, int cost) : base(name, school, level, cost)
     {
         Name = name;

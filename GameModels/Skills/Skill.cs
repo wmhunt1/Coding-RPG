@@ -1,12 +1,20 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Skill
 {
-    public string Name {get; set;}
-    public int SkillLevel {get; set;} = 1;
-    public int CurrentSkillXP {get; set;} = 0;
-    public int MaxSkillXP {get; set;} = 100;
-    public Item Input {get; set;} = new Item("item", 0);
-    public Item Output {get; set;} = new Item("item", 0);
+    [JsonPropertyName("Name")]
+    public string Name { get; set; }
+    [JsonPropertyName("SkillLevel")]
+    public int SkillLevel { get; set; } = 1;
+    [JsonPropertyName("CurrentSkillXP")]
+    public int CurrentSkillXP { get; set; } = 0;
+    [JsonPropertyName("MaxSkillXP")]
+    public int MaxSkillXP { get; set; } = 100;
+    [JsonPropertyName("Input")]
+    public Item Input { get; set; } = new Item("item", 0);
+    [JsonPropertyName("Output")]
+    public Item Output { get; set; } = new Item("item", 0);
     public Skill(string name)
     {
         Name = name;
@@ -71,7 +79,7 @@ public class Skill
         List<CraftingRecipe> recipes = new List<CraftingRecipe>();
         for (int recp = 0; recp < skiller.CraftingRecipesKnown.Count; recp++)
         {
-            if (skiller.CraftingRecipesKnown[recp].AssociatedSkill.Name == Name)
+            if (skiller.CraftingRecipesKnown[recp].AssociatedSkill == Name)
             {
                 recipes.Add(skiller.CraftingRecipesKnown[recp]);
             }
@@ -95,7 +103,7 @@ public class Skill
         }
         else
         {
-            Console.WriteLine($"You don't know any {Name} Recipes"); 
+            Console.WriteLine($"You don't know any {Name} Recipes");
         }
     }
 }

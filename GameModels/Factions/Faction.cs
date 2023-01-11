@@ -1,11 +1,18 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Faction
 {
-    public string Name {get; set;}
-    public List<Character> Members {get; set;} = new List<Character>();
-    public int Rank {get; set;} = 0;
-    public string CurrentRankName {get; set;}
-    public List<String> RankNames {get; set;}
+    [JsonPropertyName("Name")]
+    public string Name { get; set; }
+    [JsonPropertyName("Members")]
+    public List<Character> Members { get; set; } = new List<Character>();
+    [JsonPropertyName("Rank")]
+    public int Rank { get; set; } = 0;
+    [JsonPropertyName("CurrentRankName")]
+    public string CurrentRankName { get; set; }
+    [JsonPropertyName("RankNames")]
+    public List<String> RankNames { get; set; }
     public Faction(string name, List<String> rankNames)
     {
         Name = name;
@@ -38,7 +45,7 @@ public class Faction
     {
         if (member.Factions.Find(x => x.Name == Name) != null)
         {
-            if (member.Factions.Find(x => x.Name == Name)!.CurrentRankName != RankNames[RankNames.Count-1])
+            if (member.Factions.Find(x => x.Name == Name)!.CurrentRankName != RankNames[RankNames.Count - 1])
             {
                 member.Factions.Find(x => x.Name == Name)?.IncreaseFactionRank(member);
                 member.Factions.Find(x => x.Name == Name)?.FindNewRankName(member);
@@ -46,7 +53,7 @@ public class Faction
             }
             else
             {
-                Console.WriteLine($"{member.Name} cannot be promoted any further");    
+                Console.WriteLine($"{member.Name} cannot be promoted any further");
             }
         }
         return member;

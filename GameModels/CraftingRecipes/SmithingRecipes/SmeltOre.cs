@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class SmeltOre : CraftingRecipe
 {
@@ -6,7 +8,7 @@ public class SmeltOre : CraftingRecipe
     {
         Name = name;
         RecipeXP = xp;
-        AssociatedSkill = new SmithingSkill();
+        AssociatedSkill = "Smithing";
         RecipeInput = new Ore();
         RecipeOutput = new MetalBar();
     }

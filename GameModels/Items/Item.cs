@@ -1,8 +1,13 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Item
 {
+    [JsonPropertyName("Name")]
     public string Name {get; set;}
+    [JsonPropertyName("Cost")]
     public int Cost {get; set;}
+    [JsonPropertyName("Quantity")]
     public int Quantity {get; set;} = 1;
     public Item(string name, int cost)
     {

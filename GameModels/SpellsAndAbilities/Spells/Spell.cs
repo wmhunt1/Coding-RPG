@@ -1,11 +1,18 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Spell
 {
-    public string Name {get; set;}
-    public string SpellSchool {get; set;}
-    public int SpellLevel {get; set;}
-    public int ManaCost {get; set;}
-    public string Description {get; set;} = "";
+    [JsonPropertyName("Name")]
+    public string Name { get; set; }
+    [JsonPropertyName("SpellSchool")]
+    public string SpellSchool { get; set; }
+    [JsonPropertyName("SpellLevel")]
+    public int SpellLevel { get; set; }
+    [JsonPropertyName("ManaCost")]
+    public int ManaCost { get; set; }
+    [JsonPropertyName("Description")]
+    public string Description { get; set; } = "";
     public Spell(string name, string school, int level, int cost)
     {
         Name = name;

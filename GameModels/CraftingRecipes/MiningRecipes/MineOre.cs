@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class MineOre : CraftingRecipe
 {
@@ -6,7 +8,7 @@ public class MineOre : CraftingRecipe
     {
         Name = name;
         RecipeXP = xp;
-        AssociatedSkill = new MiningSkill();
+        AssociatedSkill = "Mining";
         RecipeInput = new NoInput();
         RecipeOutput = new Ore();
     }

@@ -1,8 +1,11 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels
 {
     public class LocationMenu : Menu
     {
-        Location Location {get; set;}
+        [JsonPropertyName("Location")]
+        Location Location { get; set; }
         public LocationMenu(Location location)
         {
             Location = location;

@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class DungeonQuestDialogue : QuestDialogue
 {
+    [JsonPropertyName("AssociatedQuest")]
     public DungeonQuest AssociatedQuest  {get; set;}
     public DungeonQuestDialogue(string name, DungeonQuest quest) : base(name)
     {

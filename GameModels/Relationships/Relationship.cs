@@ -1,9 +1,14 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Relationship
 {
-    public Character AssociatedCharacter {get; set;}
-    public int RelationshipValue {get; set;} = 0;
-    public string RelationshipName {get; set;} = "Acquaintances";
+    [JsonPropertyName("AssociatedCharacter")]
+    public Character AssociatedCharacter { get; set; }
+    [JsonPropertyName("RelationshipValue")]
+    public int RelationshipValue { get; set; } = 0;
+    [JsonPropertyName("RelationshipName")]
+    public string RelationshipName { get; set; } = "Acquaintances";
     public Relationship(Character character)
     {
         AssociatedCharacter = character;

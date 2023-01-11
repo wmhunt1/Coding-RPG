@@ -1,8 +1,13 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Buff
 {
+    [JsonPropertyName("Name")]
     public string Name {get; set;}
+    [JsonPropertyName("Duration")]
     public int Duration {get; set;}
+    [JsonPropertyName("RemainingDuration")]
     public int RemainingDuration {get; set;}
     public Buff(string name, int duration, int remainingDuration)
     {

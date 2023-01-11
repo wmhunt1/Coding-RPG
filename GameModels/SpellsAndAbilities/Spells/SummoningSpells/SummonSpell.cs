@@ -1,8 +1,11 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class SummoningSpell : Spell
 {
-    public Character Summon {get; set;} = new Character("Summon");
-    public SummoningSpell(string name, string school, int level, int cost):base(name, school, level, cost)
+    [JsonPropertyName("Summon")]
+    public Character Summon { get; set; } = new Character("Summon");
+    public SummoningSpell(string name, string school, int level, int cost) : base(name, school, level, cost)
     {
         Name = name;
         SpellSchool = school;

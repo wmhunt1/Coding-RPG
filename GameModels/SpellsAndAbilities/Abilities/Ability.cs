@@ -1,7 +1,11 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Ability
 {
+    [JsonPropertyName("Name")]
     public string Name {get; set;}
+    [JsonPropertyName("StaminaCost")]
     public int StaminaCost {get; set;}
     public Ability(string name, int cost)
     {

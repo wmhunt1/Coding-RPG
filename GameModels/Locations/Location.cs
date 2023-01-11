@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Location
 {
-    public string Name {get; set;}
+    [JsonPropertyName("Name")]
+    public string Name { get; set; }
     public Location(string name)
     {
         Name = name;

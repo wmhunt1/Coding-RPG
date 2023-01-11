@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 namespace GameModels
 {
     public class GameMenu : Menu
@@ -20,7 +21,6 @@ namespace GameModels
         }
         public void EquipmentTest(Character hero)
         {
-
             Weapon club = new Club();
             Dagger dagger = new Dagger();
             Torso tunic = new Tunic();
@@ -36,13 +36,14 @@ namespace GameModels
             WoodenShield shield = new WoodenShield();
             TwoHAxe axe = new TwoHAxe();
             SneakAttack sneakAttack = new SneakAttack();
+            CookRawFish cookRawFish = new CookRawFish();
             tunic.EquipItem(hero);
-            //club.AddItemToInventory(hero);
+            club.AddItemToInventory(hero);
             //dagger.AddItemToInventory(hero);
             //dagger.EquipItem(hero);
-            club.EquipItem(hero);
-            //poisonedDagger.EquipItem(hero);
-            //ring.EquipItem(hero);
+            //club.EquipItem(hero);
+            poisonedDagger.EquipItem(hero);
+            ring.EquipItem(hero);
             //cleave.LearnAbility(hero);
             //magicMissile.LearnSpell(hero);
             //rage.LearnAbility(hero);
@@ -50,9 +51,10 @@ namespace GameModels
             //fireBall.LearnSpell(hero);
             sneakAttack.LearnAbility(hero);
             dog.JoinParty(hero);
-            skeleton.LearnSpell(hero);
+            //skeleton.LearnSpell(hero);
             shield.EquipItem(hero);
             axe.AddItemToInventory(hero);
+            //cookRawFish.LearnRecipe(hero);
         }
         public void StoreTest(Character hero)
         {

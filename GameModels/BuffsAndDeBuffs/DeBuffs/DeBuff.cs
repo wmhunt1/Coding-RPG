@@ -1,8 +1,13 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class DeBuff
 {
+    [JsonPropertyName("Name")]
     public string Name;
+    [JsonPropertyName("Duration")]
     public int Duration;
+    [JsonPropertyName("RemainingDuration")]
     public int RemainingDuration;
     public DeBuff(string name, int duration, int remainingDuration)
     {

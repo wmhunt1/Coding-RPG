@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class FetchQuestDialogue : QuestDialogue
 {
+    [JsonPropertyName("AssociatedInn")]
     public FetchQuest AssociatedQuest  {get; set;}
     public FetchQuestDialogue(string name, FetchQuest quest) : base(name)
     {

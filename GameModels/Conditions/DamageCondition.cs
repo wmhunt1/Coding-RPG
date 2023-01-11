@@ -1,7 +1,11 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class DamageCondition : Condition
 {
+    [JsonPropertyName("DamageType")]
     public DamageType DamageType  {get; set;} = new DamageType("Typeless");
+    [JsonPropertyName("DamageAmount")]
     public int DamageAmount {get; set;}
     public DamageCondition(string name, int damageAmount) : base(name)
     {

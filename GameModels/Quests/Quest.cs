@@ -1,11 +1,18 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Quest
 {
-    public string Name {get; set;}
-    public string QuestStatus {get; set;} = "In Progress";
-    public string QuestDescription {get; set;}
-    public int GoldReward {get; set;}
-    public Item ItemReward {get; set;} = new Item("Optional", 0);
+    [JsonPropertyName("Name")]
+    public string Name { get; set; }
+    [JsonPropertyName("QuestStatus")]
+    public string QuestStatus { get; set; } = "In Progress";
+    [JsonPropertyName("QuestDescription")]
+    public string QuestDescription { get; set; }
+    [JsonPropertyName("GoldReward")]
+    public int GoldReward { get; set; }
+    [JsonPropertyName("ItemReward")]
+    public Item ItemReward { get; set; } = new Item("Optional", 0);
     public Quest(string name, string questDescription, int goldReward)
     {
         Name = name;

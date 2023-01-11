@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 namespace GameModels;
 public class DaleSmith : Smith
 {

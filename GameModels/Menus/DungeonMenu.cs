@@ -1,7 +1,9 @@
+using System.Text.Json.Serialization;
 namespace GameModels
 {
     public class DungeonMenu : LocationMenu
     {
+        [JsonPropertyName("Dungeon")]
         public Dungeon Dungeon {get; set;}
 
         public DungeonMenu(Dungeon dungeon) : base(dungeon)

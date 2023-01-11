@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class Job
 {
-    public string Name {get; set;}
+    [JsonPropertyName("Name")]
+    public string Name { get; set; }
     public Job(string name)
     {
         Name = name;
@@ -15,5 +18,5 @@ public class Job
         hero.Job = this;
         this.AddJobPackage(hero);
         return hero;
-    }   
+    }
 }

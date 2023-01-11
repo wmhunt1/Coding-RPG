@@ -1,7 +1,8 @@
+using System.Text.Json.Serialization;
 namespace GameModels;
 public class SmithingSkill : CraftingSkill
 {
-    public SmithingSkill(string name = "Smiths") : base(name)
+    public SmithingSkill(string name = "Smithing") : base(name)
     {
         Name = name;
     }

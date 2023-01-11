@@ -1,8 +1,12 @@
+using System.Text.Json.Serialization;
+
 namespace GameModels;
 public class FetchQuest : Quest
 {
-    public int Quantity {get; set;}
-    public Item FetchedItem {get; set;}
+    [JsonPropertyName("Quantity")]
+    public int Quantity { get; set; }
+    [JsonPropertyName("FetchedItem")]
+    public Item FetchedItem { get; set; }
     public FetchQuest(string name, string questDescription, int goldReward, int quantity, Item fetchedItem) : base(name, questDescription, goldReward)
     {
         Name = name;
