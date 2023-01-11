@@ -3,7 +3,7 @@ namespace GameModels
 {
     public class SkillMenu : Menu
     {
-        public override void DisplayMenu(Character hero)
+        public override void DisplayMenu(Character hero, Character inventory)
         {
             //add recipes to list and find recipe dependant on skill
             CookingSkill cook = new CookingSkill();

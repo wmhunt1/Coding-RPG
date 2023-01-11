@@ -7,7 +7,7 @@ namespace GameModels
 {
     public class Menu
     {
-        public virtual void DisplayMenu(Character hero)
+        public virtual void DisplayMenu(Character hero, Character inventory)
         {
             bool showMenu = true;
             while (showMenu)

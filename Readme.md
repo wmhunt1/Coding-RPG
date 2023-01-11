@@ -9,7 +9,6 @@
     * Jobs/Classes
     * Reputation
     * TestLocation
-    * change equipment for Companions
     * Rebalance
     * sort combat by speed/dex
     * move combat menu stuff to a script file

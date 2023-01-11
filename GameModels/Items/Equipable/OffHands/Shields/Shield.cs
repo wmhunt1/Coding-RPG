@@ -11,20 +11,20 @@ public class Shield : OffHand
         Cost = cost;
         ShieldValue = shieldValue;
     }
-    public override void EquipItem(Character hero)
+    public override void EquipItem(Character hero, Character inventory)
     {
         hero.OffHand = this;
         hero.Shield += ShieldValue;
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }
-    public override void UnEquipItem(Character hero)
+    public override void UnEquipItem(Character hero, Character inventory)
     {
         this.EquipmentEnchantment.RemoveEnchantmentOnUnEquip(hero);
         hero.OffHand = new EmptyHand();
         hero.Shield -= ShieldValue;
         if (this.Name != "Empty Hand")
         {
-            this.AddItemToInventory(hero);
+            this.AddItemToInventory(inventory);
         }
     }
 }

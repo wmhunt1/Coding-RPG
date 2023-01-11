@@ -14,7 +14,7 @@ public class Armor : Equipable
         Protection = protection;
         ProtectionType = protectionType;
     }
-    public override void EquipItem(Character hero)
+    public override void EquipItem(Character hero, Character inventory)
     {
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }

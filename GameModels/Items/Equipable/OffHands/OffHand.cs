@@ -8,28 +8,28 @@ public class OffHand : Equipable
         Name = name;
         Cost = cost;
     }
-     public override void EquipItem(Character hero)
+     public override void EquipItem(Character hero, Character inventory)
     {
         hero.OffHand = this;
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }
-    public override void UnEquipItem(Character hero)
+    public override void UnEquipItem(Character hero, Character inventory)
     {
         this.EquipmentEnchantment.RemoveEnchantmentOnUnEquip(hero);
         hero.OffHand = new EmptyHand();
         if (this.Name != "Empty Hand")
         {
-            this.AddItemToInventory(hero);
+            this.AddItemToInventory(inventory);
         }
     }
-    public override void EquipItemFromInventory(Character hero)
+    public override void EquipItemFromInventory(Character hero, Character inventory)
     {
-        hero.OffHand.UnEquipItem(hero);
-        this.RemoveItemFromInventory(hero);
-        this.EquipItem(hero);
+        hero.OffHand.UnEquipItem(hero, inventory);
+        this.RemoveItemFromInventory(inventory);
+        this.EquipItem(hero, inventory);
     }
-    public override void UnEquipItemFromEquipment(Character hero)
+    public override void UnEquipItemFromEquipment(Character hero, Character inventory)
     {
-        this.UnEquipItem(hero);
+        this.UnEquipItem(hero, inventory);
     }
 }

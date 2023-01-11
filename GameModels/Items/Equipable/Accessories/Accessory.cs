@@ -8,7 +8,7 @@ public class Accessory : Equipable
         Name = name;
         Cost = cost;
     }
-    public override void EquipItem(Character hero)
+    public override void EquipItem(Character hero, Character inventory)
     {
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }

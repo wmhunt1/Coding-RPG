@@ -21,17 +21,17 @@ public class DaleTown : Town
             {
                 case "1":
                     CharacterSheetMenu characterSheet = new CharacterSheetMenu();
-                    characterSheet.DisplayMenu(hero);
+                    characterSheet.DisplayMenu(hero, hero);
                     break;
                 case "2":
                     DaleInn daleInn = new DaleInn("Dale Inn", new List<Item>{new Ale()}, 1);
                     StoreMenu innStore = new StoreMenu(daleInn);
-                    innStore.DisplayMenu(hero);
+                    innStore.DisplayMenu(hero, hero);
                     break;
                 case "3":
                     DaleSmith daleSmith = new DaleSmith("Forgeheart Smithy", new List<Item>{new TwoHAxe(), new Dagger(), new WoodenShield()});
                     StoreMenu smithStore = new StoreMenu(daleSmith);
-                    smithStore.DisplayMenu(hero);
+                    smithStore.DisplayMenu(hero, hero);
                     break;
                 case "4":
                     Store daleStore = new Store("Dale Town General Store", new List<Item>{new HealingPotion("Healing Potion", 5, 5)});

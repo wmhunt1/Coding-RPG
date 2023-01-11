@@ -9,10 +9,10 @@ public class TwoHMelee : Melee
         WeaponDmg = weaponDmg;
         WeaponDmgType = new PhysicalDamage();
     }
-    public override void EquipItem(Character hero)
+    public override void EquipItem(Character hero, Character inventory)
     {
         hero.Weapon = this;
-        hero.OffHand.UnEquipItem(hero);
+        hero.OffHand.UnEquipItem(hero, inventory);
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }
 }

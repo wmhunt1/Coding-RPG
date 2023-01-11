@@ -12,7 +12,7 @@ namespace GameSpace
             {
                 Character hero = new Character("Hero"); 
                 MainMenu mainMenu = new MainMenu();
-                mainMenu.DisplayMenu(hero);
+                mainMenu.DisplayMenu(hero, hero);
                 runGame = false;
             }
         }

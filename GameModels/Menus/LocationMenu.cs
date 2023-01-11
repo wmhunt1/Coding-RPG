@@ -14,7 +14,7 @@ namespace GameModels
         {
             Location.VisitLocation(hero);
         }
-        public override void DisplayMenu(Character hero)
+        public override void DisplayMenu(Character hero, Character inventory)
         {
             bool showMenu = true;
             while (showMenu)

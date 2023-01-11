@@ -29,7 +29,7 @@ namespace GameModels
         {
 
         }
-        public override void DisplayMenu(Character hero)
+        public override void DisplayMenu(Character hero, Character inventory)
         {
             bool showMenu = true;
             GameMenu gameMenu = new GameMenu();
@@ -46,15 +46,15 @@ namespace GameModels
                 {
                     case "1":
                         Continue(hero);
-                        gameMenu.DisplayMenu(hero);
+                        gameMenu.DisplayMenu(hero, hero);
                         break;
                     case "2":
                         NewGame(hero);
-                        gameMenu.DisplayMenu(hero);
+                        gameMenu.DisplayMenu(hero, hero);
                         break;
                     case "3":
                         LoadGame(hero);
-                        gameMenu.DisplayMenu(hero);
+                        gameMenu.DisplayMenu(hero, hero);
                         break;
                     case "4":
                         Settings(hero);

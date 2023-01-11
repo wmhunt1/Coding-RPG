@@ -15,7 +15,7 @@ namespace GameModels
             CombatMenu combatMenu = new CombatMenu();
             combatMenu.RunCombat(hero, enemies);
         }
-        public override void DisplayMenu(Character hero)
+        public override void DisplayMenu(Character hero, Character inventory)
         {
             bool showMenu = true;
             bool e1 = false;

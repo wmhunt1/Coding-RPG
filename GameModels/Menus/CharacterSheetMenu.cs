@@ -3,7 +3,7 @@ namespace GameModels
 {
     public class CharacterSheetMenu : Menu
     {
-        public void DisplayEquipment(Character hero)
+        public void DisplayEquipment(Character hero, Character inventory)
         {
             Console.WriteLine($"{hero.Name}'s Equipment");
             Console.WriteLine($"[1] Weapon: {hero.Weapon.Name} - {hero.Weapon.WeaponDmg} {hero.Weapon.WeaponDmgType.Name} Damage");
@@ -28,16 +28,16 @@ namespace GameModels
             switch (input)
             {
                 case "1":
-                    hero.Weapon.UnEquipItemFromEquipment(hero);
+                    hero.Weapon.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "2":
-                    hero.OffHand.UnEquipItemFromEquipment(hero);
+                    hero.OffHand.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "3":
-                    hero.Torso.UnEquipItemFromEquipment(hero);
+                    hero.Torso.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "4":
-                    hero.Ring.UnEquipItemFromEquipment(hero);
+                    hero.Ring.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "0":
                     break;
@@ -46,7 +46,7 @@ namespace GameModels
             }
             AnyKey();
         }
-        public void EquipFromDisplayInventory(Character hero, List<Equipable> equipable)
+        public void EquipFromDisplayInventory(Character hero, List<Equipable> equipable, Character inventory)
         {
             for (int equip = 0; equip < equipable.Count; equip++)
             {
@@ -67,7 +67,7 @@ namespace GameModels
                     bool parseSucess = Int32.TryParse(selectionInput, out selection);
                     if (parseSucess == true && selection > 0 && selection <= equipable.Count)
                     {
-                        equipable[selection - 1].EquipItemFromInventory(hero);
+                        equipable[selection - 1].EquipItemFromInventory(hero, inventory);
                     }
                     break;
                 case "N":
@@ -77,25 +77,25 @@ namespace GameModels
                     break;
             }
         }
-        public void DisplayInventory(Character hero)
+        public void DisplayInventory(Character hero, Character inventory)
         {
             List<Equipable> equipable = new List<Equipable>();
-            Console.WriteLine($"{hero.Gold} GP");
-            for (int item = 0; item < hero.Inventory.Count; item++)
+            Console.WriteLine($"{inventory.Name}'s {inventory.Gold} GP");
+            for (int item = 0; item < inventory.Inventory.Count; item++)
             {
-                if (hero.Inventory[item].Quantity > 0)
+                if (inventory.Inventory[item].Quantity > 0)
                 {
-                    Console.WriteLine($"{hero.Inventory[item].Name} X {hero.Inventory[item].Quantity}");
+                    Console.WriteLine($"{inventory.Inventory[item].Name} X {inventory.Inventory[item].Quantity}");
                 }
-                if (hero.Inventory[item] is Equipable && hero.Inventory[item].Quantity > 0)
+                if (inventory.Inventory[item] is Equipable && inventory.Inventory[item].Quantity > 0)
                 {
-                    var equipableItem = (Equipable)hero.Inventory[item];
+                    var equipableItem = (Equipable)inventory.Inventory[item];
                     equipable.Add(equipableItem);
                 }
             }
             if (equipable.Count > 0)
             {
-                EquipFromDisplayInventory(hero, equipable);
+                EquipFromDisplayInventory(hero, equipable, inventory);
             }
             AnyKey();
         }
@@ -150,14 +150,25 @@ namespace GameModels
             }
             AnyKey();
         }
-        public void DisplayParty(Character hero)
+        public void DisplayParty(Character hero, Character inventory)
         {
             Console.WriteLine($"{hero.Name}'s Companions");
             if (hero.Companions.Count > 0)
             {
+                Console.WriteLine("View Companion Information");
                 for (int comp = 0; comp < hero.Companions.Count; comp++)
                 {
-                    Console.WriteLine($"Name : {hero.Companions[comp].Name} - Level: {hero.Companions[comp].Level}");
+                    Console.WriteLine($"[{comp + 1}] Name : {hero.Companions[comp].Name} - Level: {hero.Companions[comp].Level}");
+                }
+                string? targetInput = Console.ReadLine();
+                if (targetInput != null)
+                {
+                    int target = Int32.Parse(targetInput);
+                    if (target > 0 && target <= hero.Companions.Count)
+                    {
+                        CharacterSheetMenu companionMenu = new CharacterSheetMenu();
+                        companionMenu.DisplayMenu(hero.Companions[target - 1], inventory);
+                    }
                 }
             }
             AnyKey();
@@ -174,7 +185,7 @@ namespace GameModels
             }
             AnyKey();
         }
-        public override void DisplayMenu(Character hero)
+        public override void DisplayMenu(Character hero, Character inventory)
         {
             bool showMenu = true;
             while (showMenu)
@@ -188,41 +199,69 @@ namespace GameModels
                 Console.WriteLine($"INT: {hero.Intelligence + hero.IntelligenceBonus - hero.IntelligencePenalty}(+{hero.IntelligenceBonus})(-{hero.IntelligencePenalty}) WIS: {hero.Wisdom + hero.WisdomBonus - hero.WisdomPenalty}(+{hero.WisdomBonus})(-{hero.WisdomPenalty} CHA: {hero.Charisma + hero.CharismaBonus - hero.CharismaPenalty}(+{hero.CharismaBonus})(-{hero.CharismaPenalty})");
                 Console.WriteLine($"WIL: {hero.WillPower + hero.WillPowerBonus - hero.WillPowerPenalty}(+{hero.WillPowerBonus})(-{hero.WillPowerPenalty}) PER: {hero.Perception + hero.PerceptionBonus - hero.PerceptionPenalty}(+{hero.PerceptionBonus})(-{hero.PerceptionPenalty} LCK: {hero.Luck + hero.LuckBonus - hero.LuckPenalty}(+{hero.LuckBonus})(-{hero.LuckPenalty}) Bea: {hero.Beauty + hero.BeautyBonus - hero.BeautyPenalty}(+{hero.BeautyBonus})(-{hero.BeautyPenalty})");
                 AnyKey();
-                Console.WriteLine("[1] View Equipment");
-                Console.WriteLine("[2] View Inventory");
+                if (hero.Job is not Pet)
+                {
+                    Console.WriteLine("[1] View Equipment");
+                    Console.WriteLine("[2] View Inventory");
+                }
                 Console.WriteLine("[3] View Abilities");
-                Console.WriteLine("[4] View Spellbook");
-                Console.WriteLine("[5] View Journal");
-                Console.WriteLine("[6] View Party");
-                Console.WriteLine("[7] View Factions");
-                Console.WriteLine("[8] View Skills");
+                if (hero.Job is not Pet)
+                {
+                    Console.WriteLine("[4] View Spellbook");
+                    Console.WriteLine("[5] View Journal");
+                    Console.WriteLine("[6] View Party");
+                    Console.WriteLine("[7] View Factions");
+                    Console.WriteLine("[8] View Skills");
+                }
                 Console.WriteLine("[0] Leave Sheet");
                 string? input = Console.ReadLine();
                 switch (input)
                 {
                     case "1":
-                        DisplayEquipment(hero);
+                        if (hero.Job is not Pet)
+                        {
+                            DisplayEquipment(hero, inventory);
+                        }
                         break;
                     case "2":
-                        DisplayInventory(hero);
+                        if (hero.Job is not Pet)
+                        {
+                            DisplayInventory(hero, inventory);
+                        }
                         break;
                     case "3":
+
                         DisplayAbilities(hero);
                         break;
                     case "4":
-                        DisplaySpellBook(hero);
+                        if (hero.Job is not Pet)
+                        {
+                            DisplaySpellBook(hero);
+                        }
                         break;
                     case "5":
-                        DisplayJournal(hero);
+                        if (hero.Job is not Pet)
+                        {
+                            DisplayJournal(hero);
+                        }
                         break;
                     case "6":
-                        DisplayParty(hero);
+                        if (hero.Job is not Pet)
+                        {
+                            DisplayParty(hero, inventory);
+                        }
                         break;
                     case "7":
-                        DisplayFactions(hero);
+                        if (hero.Job is not Pet)
+                        {
+                            DisplayFactions(hero);
+                        }
                         break;
                     case "8":
-                        DisplaySkills(hero);
+                        if (hero.Job is not Pet)
+                        {
+                            DisplaySkills(hero);
+                        }
                         break;
                     case "0":
                         showMenu = false;

@@ -18,7 +18,7 @@ public class DaleForest : Location
             {
                 case "1":
                     CharacterSheetMenu characterSheet = new CharacterSheetMenu();
-                    characterSheet.DisplayMenu(hero);
+                    characterSheet.DisplayMenu(hero, hero);
                     break;
                 case "0":
                     showForest = false;

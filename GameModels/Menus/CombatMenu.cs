@@ -3,7 +3,7 @@ namespace GameModels
 {
     public class CombatMenu : Menu
     {
-        public override void DisplayMenu(Character hero)
+        public override void DisplayMenu(Character hero, Character inventory)
         {
             bool showMenu = true;
             while (showMenu)

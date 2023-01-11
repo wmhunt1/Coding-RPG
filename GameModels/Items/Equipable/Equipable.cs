@@ -10,19 +10,19 @@ public class Equipable : Item
         Name = name;
         Cost = cost;
     }
-    public virtual void EquipItem(Character hero)
+    public virtual void EquipItem(Character hero, Character inventory)
     {
 
     }
-    public virtual void EquipItemFromInventory(Character hero)
+    public virtual void EquipItemFromInventory(Character hero, Character inventory)
     {
 
     }
-    public virtual void UnEquipItem(Character hero)
+    public virtual void UnEquipItem(Character hero, Character inventory)
     {
 
     }
-    public virtual void UnEquipItemFromEquipment(Character hero)
+    public virtual void UnEquipItemFromEquipment(Character hero, Character inventory)
     {
 
     }

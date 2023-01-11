@@ -14,28 +14,28 @@ public class Weapon : Equipable
         WeaponDmg = weaponDmg;
         WeaponDmgType = new PhysicalDamage();
     }
-    public override void EquipItem(Character hero)
+    public override void EquipItem(Character hero, Character inventory)
     {
         hero.Weapon = this;
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }
-    public override void UnEquipItem(Character hero)
+    public override void UnEquipItem(Character hero, Character inventory)
     {
         this.EquipmentEnchantment.RemoveEnchantmentOnUnEquip(hero);
         hero.Weapon = new Fist();
         if (this.Name != "Fist")
         {
-            this.AddItemToInventory(hero);
+            this.AddItemToInventory(inventory);
         }
     }
-    public override void EquipItemFromInventory(Character hero)
+    public override void EquipItemFromInventory(Character hero, Character inventory)
     {
-        hero.Weapon.UnEquipItem(hero);
-        this.RemoveItemFromInventory(hero);
-        this.EquipItem(hero);
+        hero.Weapon.UnEquipItem(hero, inventory);
+        this.RemoveItemFromInventory(inventory);
+        this.EquipItem(hero, inventory);
     }
-    public override void UnEquipItemFromEquipment(Character hero)
+    public override void UnEquipItemFromEquipment(Character hero, Character inventory)
     {
-        this.UnEquipItem(hero);
+        this.UnEquipItem(hero, inventory);
     }
 }

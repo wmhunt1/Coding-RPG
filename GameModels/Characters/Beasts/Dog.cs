@@ -7,5 +7,6 @@ public class Dog : Beast
     {
         Name = name;
         Weapon = new Bite();
+        Job = new Pet();
     }
 }

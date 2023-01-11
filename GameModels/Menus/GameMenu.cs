@@ -37,13 +37,14 @@ namespace GameModels
             TwoHAxe axe = new TwoHAxe();
             SneakAttack sneakAttack = new SneakAttack();
             CookRawFish cookRawFish = new CookRawFish();
-            tunic.EquipItem(hero);
+            FerraForgeheart ferra = new FerraForgeheart();
+            tunic.EquipItem(hero, hero);
             club.AddItemToInventory(hero);
             //dagger.AddItemToInventory(hero);
             //dagger.EquipItem(hero);
             //club.EquipItem(hero);
-            poisonedDagger.EquipItem(hero);
-            ring.EquipItem(hero);
+            poisonedDagger.EquipItem(hero, hero);
+            ring.EquipItem(hero, hero);
             //cleave.LearnAbility(hero);
             //magicMissile.LearnSpell(hero);
             //rage.LearnAbility(hero);
@@ -52,16 +53,17 @@ namespace GameModels
             sneakAttack.LearnAbility(hero);
             dog.JoinParty(hero);
             //skeleton.LearnSpell(hero);
-            shield.EquipItem(hero);
+            shield.EquipItem(hero, hero);
             axe.AddItemToInventory(hero);
             //cookRawFish.LearnRecipe(hero);
+            ferra.JoinParty(hero);
         }
         public void StoreTest(Character hero)
         {
             hero.AddGold(5);
             Store store = new Store("Test Store", new List<Item> { new HealingPotion("Healing Potion", 2, 5) });
             StoreMenu storeTest = new StoreMenu(store);
-            storeTest.DisplayMenu(hero);
+            storeTest.DisplayMenu(hero, hero);
         }
         public void DungeonTest(Character hero)
         {
@@ -72,13 +74,13 @@ namespace GameModels
             List<Character> boss = new List<Character> { new Rat() };
             Dungeon dungeon = new Dungeon("Test Dungeon", e1, e2, e3, boss);
             DungeonMenu dungeonTest = new DungeonMenu(dungeon);
-            dungeonTest.DisplayMenu(hero);
+            dungeonTest.DisplayMenu(hero, hero);
         }
         public void DialogueTest(Character hero)
         {
             KillQuestDialogue questDialogue = new KillQuestDialogue("Test QuestDialogue", new KillQuest("Rat Slayer", "Kill Rats", 10, 3, "Rat"));
             DialogueMenu dTest = new DialogueMenu(questDialogue);
-            dTest.DisplayMenu(hero);
+            dTest.DisplayMenu(hero, hero);
         }
         public void QuestTest(Character hero)
         {
@@ -90,14 +92,14 @@ namespace GameModels
         public void SkillTest(Character hero)
         {
             SkillMenu testSkill = new SkillMenu();
-            testSkill.DisplayMenu(hero);
+            testSkill.DisplayMenu(hero, hero);
             AnyKey();
         }
         public void LocationTest(Character hero)
         {
             TestTown town = new TestTown();
             LocationMenu locationMenu = new LocationMenu(town);
-            locationMenu.DisplayMenu(hero);
+            locationMenu.DisplayMenu(hero, hero);
             AnyKey();
         }
         public void FactionTest(Character hero)
@@ -123,7 +125,7 @@ namespace GameModels
                 {
                     case "1":
                         CharacterSheetMenu characterSheetMenu = new CharacterSheetMenu();
-                        characterSheetMenu.DisplayMenu(hero);
+                        characterSheetMenu.DisplayMenu(hero, hero);
                         break;
                     case "2":
                         CombatTest(hero);
@@ -160,7 +162,7 @@ namespace GameModels
                 }
             }
         }
-        public override void DisplayMenu(Character hero)
+        public override void DisplayMenu(Character hero, Character inventory)
         {
             bool showMenu = true;
             while (showMenu)
@@ -176,7 +178,7 @@ namespace GameModels
                 {
                     case "1":
                         CharacterSheetMenu characterSheetMenu = new CharacterSheetMenu();
-                        characterSheetMenu.DisplayMenu(hero);
+                        characterSheetMenu.DisplayMenu(hero, hero);
                         break;
                     case "2":
                         TestingMenu(hero);
@@ -184,7 +186,7 @@ namespace GameModels
                     case "3":
                         DaleValley daleValley = new DaleValley();
                         LocationMenu daleValleyMenu = new LocationMenu(daleValley);
-                        daleValleyMenu.DisplayMenu(hero);
+                        daleValleyMenu.DisplayMenu(hero, hero);
                         break;
                     case "9":
                         SaveGame(hero);

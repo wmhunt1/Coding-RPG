@@ -10,7 +10,7 @@ namespace GameModels
         {
             Dialogue = dialogue;
         }
-        public override void DisplayMenu(Character hero)
+        public override void DisplayMenu(Character hero, Character inventory)
         {
             bool showMenu = true;
             while (showMenu)
