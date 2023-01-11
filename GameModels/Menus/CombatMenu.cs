@@ -33,7 +33,7 @@ namespace GameModels
                     {
                         allies[ally].DeBuffs[deBuff].RemainingDuration--;
                     }
-                     if (allies[ally].DeBuffs.Find(x => x.RemainingDuration == 0) != null)
+                    if (allies[ally].DeBuffs.Find(x => x.RemainingDuration == 0) != null)
                     {
                         allies[ally].DeBuffs.Find(x => x.RemainingDuration == 0)?.RemoveDeBuff(allies[ally]);
                     }
@@ -272,32 +272,33 @@ namespace GameModels
                 }
             }
         }
-        public void GroupTurn(List<Character> allies, List<Character> enemies)
+        public void CombatRound(List<Character> allies, List<Character> enemies, List<Character> sortedTurnOrder)
         {
-            for (int ally = 0; ally < allies.Count; ally++)
+            for (int sort = 0; sort < sortedTurnOrder.Count; sort++)
             {
-                if (allies[ally].CurrentHP > 0)
+                if (sortedTurnOrder[sort].CurrentHP > 0)
                 {
-                    ChanceForConditionToEnd(allies[ally]);
-                    bool turnSkip = CheckForTurnSkippingConditions(allies[ally]);
+                    ChanceForConditionToEnd(sortedTurnOrder[sort]);
+                    bool turnSkip = CheckForTurnSkippingConditions(sortedTurnOrder[sort]);
                     if (turnSkip != true)
                     {
-                        CombatTurn(allies[ally], allies, enemies);
+                        if (sortedTurnOrder[sort].Ally == true)
+                        {
+                        CombatTurn(sortedTurnOrder[sort], allies, enemies);
+                        }
+                        else
+                        {
+                           CombatTurn(sortedTurnOrder[sort], enemies, allies); 
+                        }
                     }
                     else
                     {
-                        Console.WriteLine($"{allies[ally].Name} lost their turn due to sleep");
+                        Console.WriteLine($"{allies[sort].Name} lost their turn due to sleep");
                     }
-                    TakeConditionalDamage(allies[ally]);
+                    TakeConditionalDamage(sortedTurnOrder[sort]);
                 }
             }
-        }
-        public void CombatRound(List<Character> allies, List<Character> enemies)
-        {
-            GroupTurn(allies, enemies);
-            GroupTurn(enemies, allies);
-            RemoveBuffOrDeBuffIfDurationExpired(allies);
-            RemoveBuffOrDeBuffIfDurationExpired(enemies);
+            RemoveBuffOrDeBuffIfDurationExpired(sortedTurnOrder);
             AnyKey();
         }
         public void EndOfCombatBuffAndDeBuffRemoval(List<Character> allies)
@@ -338,6 +339,16 @@ namespace GameModels
             {
                 allies.Add(hero.Companions[ally]);
             }
+            List<Character> unsortedTurnOrder = new List<Character>();
+            for (int ally = 0; ally < allies.Count; ally++)
+            {
+                unsortedTurnOrder.Add(allies[ally]);
+            }
+            for (int enemy = 0; enemy < enemies.Count; enemy++)
+            {
+                unsortedTurnOrder.Add(enemies[enemy]);
+            }
+            List<Character> sortedTurnOrder = unsortedTurnOrder.OrderByDescending(o => o.Speed).ToList();
             while (!combatOver)
             {
                 ShowTitle();
@@ -356,7 +367,7 @@ namespace GameModels
                         IterateThroughCharacterList(allies);
                         Console.WriteLine("VS");
                         IterateThroughCharacterList(enemies);
-                        CombatRound(allies, enemies);
+                        CombatRound(allies, enemies, sortedTurnOrder);
                         round++;
                     }
                 }
@@ -364,7 +375,7 @@ namespace GameModels
                 {
                     if (hero.CurrentHP > 0)
                     {
-                        Console.WriteLine($"{hero.Name} is Victorious");
+                        Console.WriteLine($"{hero.Name}'s Party is Victorious");
                         for (int enemy = 0; enemy < defeatedEnemies.Count; enemy++)
                         {
                             hero.EarnXP(defeatedEnemies[enemy].CurrentXP);
