@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 namespace GameModels
 {
     public class GameMenu : Menu
@@ -23,7 +22,11 @@ namespace GameModels
         {
             Weapon club = new Club();
             Dagger dagger = new Dagger();
-            Torso tunic = new Tunic();
+            Hat hat = new Hat();
+            Tunic tunic = new Tunic();
+            Trousers trousers = new Trousers();
+            Gloves gloves = new Gloves();
+            Boots boots = new Boots();
             Cleave cleave = new Cleave();
             MagicMissile magicMissile = new MagicMissile();
             Rage rage = new Rage();
@@ -38,7 +41,11 @@ namespace GameModels
             SneakAttack sneakAttack = new SneakAttack();
             CookRawFish cookRawFish = new CookRawFish();
             FerraForgeheart ferra = new FerraForgeheart();
+            hat.EquipItem(hero, hero);
             tunic.EquipItem(hero, hero);
+            trousers.EquipItem(hero, hero);
+            gloves.EquipItem(hero, hero);
+            boots.EquipItem(hero, hero);
             club.AddItemToInventory(hero);
             //dagger.AddItemToInventory(hero);
             //dagger.EquipItem(hero);

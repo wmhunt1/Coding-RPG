@@ -299,6 +299,10 @@ namespace GameModels
                 }
             }
             RemoveBuffOrDeBuffIfDurationExpired(sortedTurnOrder);
+            for (int sort = 0; sort < sortedTurnOrder.Count; sort++)
+            {
+                sortedTurnOrder[sort].RegenAll();
+            }
             AnyKey();
         }
         public void EndOfCombatBuffAndDeBuffRemoval(List<Character> allies)

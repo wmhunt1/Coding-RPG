@@ -21,8 +21,14 @@ namespace GameModels
             {
                 Console.WriteLine($"[2] OffHand : {hero.OffHand.Name}");
             }
-            Console.WriteLine($"[3] Armor: {hero.Torso.Name} - {hero.Torso.Protection} {hero.Torso.ProtectionType} Protection");
-            Console.WriteLine($"[4] Ring: {hero.Ring.Name}");
+            Console.WriteLine($"[3] Head: {hero.Head.Name} - {hero.Head.Protection} {hero.Head.ProtectionType} Protection");
+            Console.WriteLine($"[4] Torso: {hero.Torso.Name} - {hero.Torso.Protection} {hero.Torso.ProtectionType} Protection");
+            Console.WriteLine($"[5] Legs: {hero.Legs.Name} - {hero.Legs.Protection} {hero.Legs.ProtectionType} Protection");
+            Console.WriteLine($"[6] Hands: {hero.Hands.Name} - {hero.Hands.Protection} {hero.Hands.ProtectionType} Protection");
+            Console.WriteLine($"[7] Feet: {hero.Feet.Name} - {hero.Feet.Protection} {hero.Feet.ProtectionType} Protection");
+            Console.WriteLine($"[8] Neck: {hero.Ring.Name}");
+            Console.WriteLine($"[9] Ring: {hero.Ring.Name}");
+            Console.WriteLine($"[10] Back: {hero.Ring.Name}");
             Console.WriteLine("[0] Leave Equipment");
             string? input = Console.ReadLine();
             switch (input)
@@ -34,10 +40,28 @@ namespace GameModels
                     hero.OffHand.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "3":
-                    hero.Torso.UnEquipItemFromEquipment(hero, inventory);
+                    hero.Head.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "4":
+                    hero.Torso.UnEquipItemFromEquipment(hero, inventory);
+                    break;
+                case "5":
+                    hero.Legs.UnEquipItemFromEquipment(hero, inventory);
+                    break;
+                case "6":
+                    hero.Hands.UnEquipItemFromEquipment(hero, inventory);
+                    break;
+                case "7":
+                    hero.Feet.UnEquipItemFromEquipment(hero, inventory);
+                    break;
+                case "8":
+                    hero.Neck.UnEquipItemFromEquipment(hero, inventory);
+                    break;
+                case "9":
                     hero.Ring.UnEquipItemFromEquipment(hero, inventory);
+                    break;
+                case "10":
+                    hero.Back.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "0":
                     break;
@@ -143,9 +167,10 @@ namespace GameModels
             if (hero.SkillBook.Count > 0)
             {
                 Console.WriteLine("Skills");
-                for (int skill = 0; skill < hero.SkillBook.Count; skill++)
+                List<Skill> sortedSkills = hero.SkillBook.OrderBy(x => x.Name).ToList();
+                for (int skill = 0; skill < sortedSkills.Count; skill++)
                 {
-                    Console.WriteLine($"{hero.SkillBook[skill].Name} - LV: {hero.SkillBook[skill].SkillLevel} XP:  {hero.SkillBook[skill].CurrentSkillXP}/ {hero.SkillBook[skill].MaxSkillXP}");
+                    Console.WriteLine($"{sortedSkills[skill].Name} - LV: {sortedSkills[skill].SkillLevel} XP:  {sortedSkills[skill].CurrentSkillXP}/ {sortedSkills[skill].MaxSkillXP}");
                 }
             }
             AnyKey();
@@ -155,20 +180,33 @@ namespace GameModels
             Console.WriteLine($"{hero.Name}'s Companions");
             if (hero.Companions.Count > 0)
             {
+                List<Character> sortedCompanions = hero.Companions.OrderBy(x => x.Name).ToList();
                 Console.WriteLine("View Companion Information");
-                for (int comp = 0; comp < hero.Companions.Count; comp++)
+                for (int comp = 0; comp < sortedCompanions.Count; comp++)
                 {
-                    Console.WriteLine($"[{comp + 1}] Name : {hero.Companions[comp].Name} - Level: {hero.Companions[comp].Level}");
+                    Console.WriteLine($"[{comp + 1}] Name : {sortedCompanions[comp].Name} - Level: {sortedCompanions[comp].Level}");
                 }
+                Console.WriteLine("[0] Leave");
                 string? targetInput = Console.ReadLine();
-                if (targetInput != null)
+                try
                 {
-                    int target = Int32.Parse(targetInput);
-                    if (target > 0 && target <= hero.Companions.Count)
+                    if (targetInput != null || targetInput != "")
                     {
-                        CharacterSheetMenu companionMenu = new CharacterSheetMenu();
-                        companionMenu.DisplayMenu(hero.Companions[target - 1], inventory);
+                        int target = Int32.Parse(targetInput);
+                        if (target > 0 && target <= hero.Companions.Count)
+                        {
+                            CharacterSheetMenu companionMenu = new CharacterSheetMenu();
+                            companionMenu.DisplayMenu(sortedCompanions[target - 1], inventory);
+                        }
                     }
+                    else
+                    {
+
+                    }
+                }
+                catch (Exception e)
+                {
+
                 }
             }
             AnyKey();

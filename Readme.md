@@ -19,3 +19,4 @@
         * Melee
         * Ranged
     * ferra joins for goblin stuff
+    * protection types

@@ -1,34 +1,36 @@
 namespace GameModels;
-public class Ring : Accessory
+public class Head : Armor
 {
-    public Ring(string name, int cost) : base(name, cost)
+    public Head(string name, int cost, int protection, string protectionType) : base(name, cost, protection, protectionType)
     {
         Name = name;
         Cost = cost;
+        Protection = protection;
+        ProtectionType = protectionType;
     }
     public override void EquipItem(Character hero, Character inventory)
     {
-        hero.Ring = this;
-        this.EquipmentEnchantment.ApplyEnchantmentOnEquip(hero);
+        hero.Head = this;
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }
     public override void UnEquipItem(Character hero, Character inventory)
     {
-        this.EquipmentEnchantment.RemoveEnchantmentOnUnEquip(hero);
-        hero.Ring = new EmptyFinger();
-        if (this.Name != "Empty Finger")
+        hero.Head = new BareHead();
+        if (this.Name != "Bare")
         {
             this.AddItemToInventory(inventory);
         }
     }
     public override void EquipItemFromInventory(Character hero, Character inventory)
     {
-        hero.Ring.UnEquipItem(hero, inventory);
+        this.EquipmentEnchantment.RemoveEnchantmentOnUnEquip(hero);
+        hero.Head.UnEquipItem(hero, inventory);
         this.RemoveItemFromInventory(inventory);
         this.EquipItem(hero, inventory);
     }
     public override void UnEquipItemFromEquipment(Character hero, Character inventory)
     {
         this.UnEquipItem(hero, inventory);
+
     }
 }
