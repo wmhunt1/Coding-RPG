@@ -6,13 +6,13 @@ public class Armor : Equipable
     [JsonPropertyName("Protection")]
     public int Protection {get; set;}
     [JsonPropertyName("ProtectionType")]
-    public string ProtectionType {get; set;}
-    public Armor(string name, int cost, int protection, string protectionType):base(name, cost)
+    public ProtectionType ProtectionType {get; set;}
+    public Armor(string name, int cost, int protection):base(name, cost)
     {
         Name = name;
         Cost = cost;
         Protection = protection;
-        ProtectionType = protectionType;
+        ProtectionType = new UnTypedProtection();
     }
     public override void EquipItem(Character hero, Character inventory)
     {

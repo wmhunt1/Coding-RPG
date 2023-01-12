@@ -1,12 +1,12 @@
 namespace GameModels;
 public class Legs : Armor
 {
-    public Legs(string name, int cost, int protection, string protectionType) : base(name, cost, protection, protectionType)
+    public Legs(string name, int cost, int protection) : base(name, cost, protection)
     {
         Name = name;
         Cost = cost;
         Protection = protection;
-        ProtectionType = protectionType;
+        ProtectionType = new UnTypedProtection();
     }
     public override void EquipItem(Character hero, Character inventory)
     {

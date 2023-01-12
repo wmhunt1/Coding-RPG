@@ -3,12 +3,12 @@ using System.Text.Json.Serialization;
 namespace GameModels;
 public class Torso : Armor
 {
-    public Torso(string name, int cost, int protection, string protectionType) : base(name, cost, protection, protectionType)
+    public Torso(string name, int cost, int protection) : base(name, cost, protection)
     {
         Name = name;
         Cost = cost;
         Protection = protection;
-        ProtectionType = protectionType;
+        ProtectionType = new UnTypedProtection();
     }
     public override void EquipItem(Character hero, Character inventory)
     {

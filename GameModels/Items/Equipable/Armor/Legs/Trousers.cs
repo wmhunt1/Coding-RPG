@@ -1,11 +1,11 @@
 namespace GameModels;
 public class Trousers : Legs 
 {   
-    public Trousers(string name = "Trousers", int cost = 0, int protection = 0, string protectionType = "None"):base(name, cost, protection, protectionType)
+    public Trousers(string name = "Trousers", int cost = 0, int protection = 0):base(name, cost, protection)
     {
         Name = name;
         Cost = cost;
         Protection = protection;
-        ProtectionType = protectionType;
+        ProtectionType = new ClothProtection();
     }
 }

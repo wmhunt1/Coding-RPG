@@ -10,7 +10,7 @@ public class Skeleton : Undead
         this.CurrentXP = 10;
         this.Dexterity = 8;
         Weapon = new Club();
-        Torso = new Torso("Leather Scraps", 0, 0, "Leather");
+        Torso = new Torso("Leather Scraps", 0, 0);
         Resistances = new List<DamageType>{new PiercingDamage(), new SlashingDamage()};
         Weaknesses = new List<DamageType>{new BludgeoningDamage()};
         Immunities = new List<DamageType>{new PoisonDamage()};

@@ -21,11 +21,11 @@ namespace GameModels
             {
                 Console.WriteLine($"[2] OffHand : {hero.OffHand.Name}");
             }
-            Console.WriteLine($"[3] Head: {hero.Head.Name} - {hero.Head.Protection} {hero.Head.ProtectionType} Protection");
-            Console.WriteLine($"[4] Torso: {hero.Torso.Name} - {hero.Torso.Protection} {hero.Torso.ProtectionType} Protection");
-            Console.WriteLine($"[5] Legs: {hero.Legs.Name} - {hero.Legs.Protection} {hero.Legs.ProtectionType} Protection");
-            Console.WriteLine($"[6] Hands: {hero.Hands.Name} - {hero.Hands.Protection} {hero.Hands.ProtectionType} Protection");
-            Console.WriteLine($"[7] Feet: {hero.Feet.Name} - {hero.Feet.Protection} {hero.Feet.ProtectionType} Protection");
+            Console.WriteLine($"[3] Head: {hero.Head.Name} - {hero.Head.Protection} {hero.Head.ProtectionType.Name} Protection");
+            Console.WriteLine($"[4] Torso: {hero.Torso.Name} - {hero.Torso.Protection} {hero.Torso.ProtectionType.Name} Protection");
+            Console.WriteLine($"[5] Legs: {hero.Legs.Name} - {hero.Legs.Protection} {hero.Legs.ProtectionType.Name} Protection");
+            Console.WriteLine($"[6] Hands: {hero.Hands.Name} - {hero.Hands.Protection} {hero.Hands.ProtectionType.Name} Protection");
+            Console.WriteLine($"[7] Feet: {hero.Feet.Name} - {hero.Feet.Protection} {hero.Feet.ProtectionType.Name} Protection");
             Console.WriteLine($"[8] Neck: {hero.Ring.Name}");
             Console.WriteLine($"[9] Ring: {hero.Ring.Name}");
             Console.WriteLine($"[10] Back: {hero.Ring.Name}");

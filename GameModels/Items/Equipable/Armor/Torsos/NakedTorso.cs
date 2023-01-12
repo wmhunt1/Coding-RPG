@@ -3,11 +3,11 @@ using System.Text.Json.Serialization;
 namespace GameModels;
 public class NakedTorso : Torso 
 {   
-    public NakedTorso(string name = "Naked", int cost = 0, int protection = 0, string protectionType = "None"):base(name, cost, protection, protectionType)
+    public NakedTorso(string name = "Naked", int cost = 0, int protection = 0):base(name, cost, protection)
     {
         Name = name;
         Cost = cost;
         Protection = protection;
-        ProtectionType = protectionType;
+        ProtectionType = new UnTypedProtection();
     }
 }
