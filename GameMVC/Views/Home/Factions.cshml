@@ -1,0 +1,7 @@
+@{
+    ViewData["Title"] = "Factions";
+}
+
+<div class="text-center">
+    <h2 class>Factions</h2>
+</div>
