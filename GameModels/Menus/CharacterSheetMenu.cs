@@ -3,6 +3,18 @@ namespace GameModels
 {
     public class CharacterSheetMenu : Menu
     {
+        public void DisplayCharacterInfo(Character hero, Character inventory)
+        {
+            Console.WriteLine("==== Character Info ====");
+            Console.WriteLine($"{hero.Name} - {hero.Job.Name}");
+            Console.WriteLine($"Level: {hero.Level} EXP {hero.CurrentXP}/{hero.MaxXP}");
+            Console.WriteLine($"HP: {hero.CurrentHP}/{hero.MaxHP}({hero.HPRegen}) MP: {hero.CurrentMP}/{hero.MaxMP}({hero.MPRegen}) SP: {hero.CurrentSP}/{hero.MaxSP}({hero.SPRegen})");
+            Console.WriteLine("==== Attributes =====");
+            Console.WriteLine($"STR: {hero.Strength + hero.StrengthBonus - hero.StrengthPenalty}(+{hero.StrengthBonus})(-{hero.StrengthPenalty}) CON: {hero.Constitution + hero.ConstitutionBonus - hero.ConstitutionPenalty}(+{hero.ConstitutionBonus})(-{hero.ConstitutionPenalty} DEX: {hero.Dexterity + hero.DexterityBonus - hero.DexterityPenalty}(+{hero.DexterityBonus})(-{hero.DexterityPenalty}) SPD: {hero.Speed + hero.SpeedBonus - hero.SpeedPenalty}(+{hero.SpeedBonus})(-{hero.SpeedPenalty})");
+            Console.WriteLine($"INT: {hero.Intelligence + hero.IntelligenceBonus - hero.IntelligencePenalty}(+{hero.IntelligenceBonus})(-{hero.IntelligencePenalty}) WIS: {hero.Wisdom + hero.WisdomBonus - hero.WisdomPenalty}(+{hero.WisdomBonus})(-{hero.WisdomPenalty} CHA: {hero.Charisma + hero.CharismaBonus - hero.CharismaPenalty}(+{hero.CharismaBonus})(-{hero.CharismaPenalty})");
+            Console.WriteLine($"WIL: {hero.WillPower + hero.WillPowerBonus - hero.WillPowerPenalty}(+{hero.WillPowerBonus})(-{hero.WillPowerPenalty}) PER: {hero.Perception + hero.PerceptionBonus - hero.PerceptionPenalty}(+{hero.PerceptionBonus})(-{hero.PerceptionPenalty} LCK: {hero.Luck + hero.LuckBonus - hero.LuckPenalty}(+{hero.LuckBonus})(-{hero.LuckPenalty}) Bea: {hero.Beauty + hero.BeautyBonus - hero.BeautyPenalty}(+{hero.BeautyBonus})(-{hero.BeautyPenalty})");
+            AnyKey();
+        }
         public void DisplayEquipment(Character hero, Character inventory)
         {
             Console.WriteLine($"{hero.Name}'s Equipment");
@@ -26,9 +38,9 @@ namespace GameModels
             Console.WriteLine($"[5] Legs: {hero.Legs.Name} - {hero.Legs.Protection} {hero.Legs.ProtectionType.Name} Protection");
             Console.WriteLine($"[6] Hands: {hero.Hands.Name} - {hero.Hands.Protection} {hero.Hands.ProtectionType.Name} Protection");
             Console.WriteLine($"[7] Feet: {hero.Feet.Name} - {hero.Feet.Protection} {hero.Feet.ProtectionType.Name} Protection");
-            Console.WriteLine($"[8] Neck: {hero.Ring.Name}");
+            Console.WriteLine($"[8] Neck: {hero.Neck.Name}");
             Console.WriteLine($"[9] Ring: {hero.Ring.Name}");
-            Console.WriteLine($"[10] Back: {hero.Ring.Name}");
+            Console.WriteLine($"[10] Back: {hero.Back.Name}");
             Console.WriteLine("[0] Leave Equipment");
             string? input = Console.ReadLine();
             switch (input)
@@ -192,7 +204,8 @@ namespace GameModels
                 {
                     if (targetInput != null || targetInput != "")
                     {
-                        int target = Int32.Parse(targetInput);
+                        int target;
+                        int.TryParse(targetInput, out target);
                         if (target > 0 && target <= hero.Companions.Count)
                         {
                             CharacterSheetMenu companionMenu = new CharacterSheetMenu();
@@ -206,7 +219,7 @@ namespace GameModels
                 }
                 catch (Exception e)
                 {
-
+                    Console.WriteLine(e);
                 }
             }
             AnyKey();
@@ -230,72 +243,68 @@ namespace GameModels
             {
                 ShowTitle();
                 Console.WriteLine($"===== {hero.Name}'s Character Sheet =====");
-                Console.WriteLine($"Level: {hero.Level} EXP {hero.CurrentXP}/{hero.MaxXP}");
-                Console.WriteLine($"HP: {hero.CurrentHP}/{hero.MaxHP}({hero.HPRegen}) MP: {hero.CurrentMP}/{hero.MaxMP}({hero.MPRegen}) SP: {hero.CurrentSP}/{hero.MaxSP}({hero.SPRegen})");
-                Console.WriteLine("==== Attributes =====");
-                Console.WriteLine($"STR: {hero.Strength + hero.StrengthBonus - hero.StrengthPenalty}(+{hero.StrengthBonus})(-{hero.StrengthPenalty}) CON: {hero.Constitution + hero.ConstitutionBonus - hero.ConstitutionPenalty}(+{hero.ConstitutionBonus})(-{hero.ConstitutionPenalty} DEX: {hero.Dexterity + hero.DexterityBonus - hero.DexterityPenalty}(+{hero.DexterityBonus})(-{hero.DexterityPenalty}) SPD: {hero.Speed + hero.SpeedBonus - hero.SpeedPenalty}(+{hero.SpeedBonus})(-{hero.SpeedPenalty})");
-                Console.WriteLine($"INT: {hero.Intelligence + hero.IntelligenceBonus - hero.IntelligencePenalty}(+{hero.IntelligenceBonus})(-{hero.IntelligencePenalty}) WIS: {hero.Wisdom + hero.WisdomBonus - hero.WisdomPenalty}(+{hero.WisdomBonus})(-{hero.WisdomPenalty} CHA: {hero.Charisma + hero.CharismaBonus - hero.CharismaPenalty}(+{hero.CharismaBonus})(-{hero.CharismaPenalty})");
-                Console.WriteLine($"WIL: {hero.WillPower + hero.WillPowerBonus - hero.WillPowerPenalty}(+{hero.WillPowerBonus})(-{hero.WillPowerPenalty}) PER: {hero.Perception + hero.PerceptionBonus - hero.PerceptionPenalty}(+{hero.PerceptionBonus})(-{hero.PerceptionPenalty} LCK: {hero.Luck + hero.LuckBonus - hero.LuckPenalty}(+{hero.LuckBonus})(-{hero.LuckPenalty}) Bea: {hero.Beauty + hero.BeautyBonus - hero.BeautyPenalty}(+{hero.BeautyBonus})(-{hero.BeautyPenalty})");
-                AnyKey();
+                Console.WriteLine("[1] View Character Info");
                 if (hero.Job is not Pet)
                 {
-                    Console.WriteLine("[1] View Equipment");
-                    Console.WriteLine("[2] View Inventory");
+                    Console.WriteLine("[2] View Equipment");
+                    Console.WriteLine("[3] View Inventory");
                 }
-                Console.WriteLine("[3] View Abilities");
+                Console.WriteLine("[4] View Abilities");
                 if (hero.Job is not Pet)
                 {
-                    Console.WriteLine("[4] View Spellbook");
-                    Console.WriteLine("[5] View Journal");
-                    Console.WriteLine("[6] View Party");
-                    Console.WriteLine("[7] View Factions");
-                    Console.WriteLine("[8] View Skills");
+                    Console.WriteLine("[5] View Spellbook");
+                    Console.WriteLine("[6] View Journal");
+                    Console.WriteLine("[7] View Party");
+                    Console.WriteLine("[8] View Factions");
+                    Console.WriteLine("[9] View Skills");
                 }
                 Console.WriteLine("[0] Leave Sheet");
                 string? input = Console.ReadLine();
                 switch (input)
                 {
                     case "1":
+                        DisplayCharacterInfo(hero, inventory);
+                        break;
+                    case "2":
                         if (hero.Job is not Pet)
                         {
                             DisplayEquipment(hero, inventory);
                         }
                         break;
-                    case "2":
+                    case "3":
                         if (hero.Job is not Pet)
                         {
                             DisplayInventory(hero, inventory);
                         }
                         break;
-                    case "3":
-
+                    case "4":
                         DisplayAbilities(hero);
                         break;
-                    case "4":
+                    case "5":
                         if (hero.Job is not Pet)
                         {
                             DisplaySpellBook(hero);
                         }
                         break;
-                    case "5":
+                    case "6":
                         if (hero.Job is not Pet)
                         {
                             DisplayJournal(hero);
                         }
                         break;
-                    case "6":
+                    case "7":
                         if (hero.Job is not Pet)
                         {
                             DisplayParty(hero, inventory);
                         }
                         break;
-                    case "7":
+                    case "8":
                         if (hero.Job is not Pet)
                         {
                             DisplayFactions(hero);
                         }
                         break;
-                    case "8":
+                    case "9":
                         if (hero.Job is not Pet)
                         {
                             DisplaySkills(hero);

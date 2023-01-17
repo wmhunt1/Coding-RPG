@@ -12,7 +12,6 @@
     * Reputation
     * TestLocation
     * Rebalance
-    * sort combat by speed/dex
     * move combat menu stuff to a script file
     * more weapons and stuff
     * Combat skills (increase hit chance)

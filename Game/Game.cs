@@ -10,7 +10,7 @@ namespace GameSpace
             bool runGame = true;
             while (runGame)
             {
-                Character hero = new Character("Hero"); 
+                Hero hero = new Hero("Hero"); 
                 MainMenu mainMenu = new MainMenu();
                 mainMenu.DisplayMenu(hero, hero);
                 runGame = false;

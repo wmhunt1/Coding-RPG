@@ -20,50 +20,7 @@ namespace GameModels
         }
         public void EquipmentTest(Character hero)
         {
-            Weapon club = new Club();
-            Dagger dagger = new Dagger();
-            Hat hat = new Hat();
-            Tunic tunic = new Tunic();
-            Trousers trousers = new Trousers();
-            Gloves gloves = new Gloves();
-            Boots boots = new Boots();
-            Cleave cleave = new Cleave();
-            MagicMissile magicMissile = new MagicMissile();
-            Rage rage = new Rage();
-            SleepSpell sleep = new SleepSpell();
-            FireBallSpell fireBall = new FireBallSpell();
-            SummonSkeletonSpell skeleton = new SummonSkeletonSpell();
-            PoisonedDagger poisonedDagger = new PoisonedDagger();
-            RingOfStrength ring = new RingOfStrength();
-            Dog dog = new Dog();
-            WoodenShield shield = new WoodenShield();
-            TwoHAxe axe = new TwoHAxe();
-            SneakAttack sneakAttack = new SneakAttack();
-            CookRawFish cookRawFish = new CookRawFish();
-            FerraForgeheart ferra = new FerraForgeheart();
-            hat.EquipItem(hero, hero);
-            tunic.EquipItem(hero, hero);
-            trousers.EquipItem(hero, hero);
-            gloves.EquipItem(hero, hero);
-            boots.EquipItem(hero, hero);
-            club.AddItemToInventory(hero);
-            //dagger.AddItemToInventory(hero);
-            //dagger.EquipItem(hero);
-            //club.EquipItem(hero);
-            poisonedDagger.EquipItem(hero, hero);
-            ring.EquipItem(hero, hero);
-            //cleave.LearnAbility(hero);
-            //magicMissile.LearnSpell(hero);
-            //rage.LearnAbility(hero);
-            //sleep.LearnSpell(hero);
-            //fireBall.LearnSpell(hero);
-            sneakAttack.LearnAbility(hero);
-            dog.JoinParty(hero);
-            //skeleton.LearnSpell(hero);
-            shield.EquipItem(hero, hero);
-            axe.AddItemToInventory(hero);
-            //cookRawFish.LearnRecipe(hero);
-            ferra.JoinParty(hero);
+           
         }
         public void StoreTest(Character hero)
         {

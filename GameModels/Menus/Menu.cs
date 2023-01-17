@@ -17,7 +17,7 @@ namespace GameModels
         }
         public void ShowTitle()
         {
-            Console.WriteLine("===== Coding RPG =====");
+            Console.WriteLine("========== Coding RPG ==========");
         }
         public void AnyKey()
         {

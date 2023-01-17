@@ -393,10 +393,10 @@ public class Character
     {
         int critDamage = CheckForCrit(damage);
         int calcDamage = CalculateDamage(target, critDamage, damageType);
-        if (critDamage == damage * 2)
-        {
-            calcDamage = 1;
-        }
+        // if (critDamage == damage * 2)
+        // {
+        //     calcDamage = 1;
+        // }
         return calcDamage;
     }
     public void BasicAttack(Character target)
