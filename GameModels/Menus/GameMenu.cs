@@ -25,7 +25,7 @@ namespace GameModels
         public void StoreTest(Character hero)
         {
             hero.AddGold(5);
-            Store store = new Store("Test Store", new List<Item> { new HealingPotion("Healing Potion", 2, 5) });
+            Store store = new Store("Test Store", new List<Item> { new HealthPotion("Healing Potion", 2, 5) });
             StoreMenu storeTest = new StoreMenu(store);
             storeTest.DisplayMenu(hero, hero);
         }

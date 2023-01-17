@@ -8,7 +8,6 @@
     * Use for other attributes
         * Int spell damage
     * story
-    * Jobs/Classes
     * Reputation
     * TestLocation
     * Rebalance
@@ -17,4 +16,3 @@
     * Combat skills (increase hit chance)
         * Melee
         * Ranged
-    * ferra joins for goblin stuff

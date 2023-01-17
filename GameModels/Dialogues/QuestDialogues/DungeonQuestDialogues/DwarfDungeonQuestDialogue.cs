@@ -14,6 +14,8 @@ public class DwarfDungeonQuestDialogue : DungeonQuestDialogue
         {
             Console.WriteLine($"Go {AssociatedQuest.QuestDescription}");
             AssociatedQuest.StartQuest(hero);
+            FerraForgeheart ferra = new FerraForgeheart();
+            ferra.JoinParty(hero);
         }
         else
         {

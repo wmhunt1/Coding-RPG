@@ -6,6 +6,6 @@ public class Smith : Store
     {
         Name = name;
         StoreInventory = storeInventory;
-        StoreDialogue = new DaleSmithStoreDialogue(Name, this);
+        StoreDialogue = new SmithStoreDialogue(Name, this);
     }
 }

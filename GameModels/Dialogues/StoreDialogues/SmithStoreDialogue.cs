@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace GameModels;
 public class SmithStoreDialogue : StoreDialogue
 {
-    public SmithStoreDialogue(string name, Store store):base(name, store)
+    public SmithStoreDialogue(string name, Store store) : base(name, store)
     {
         Name = name;
         AssociatedStore = store;
@@ -12,10 +12,16 @@ public class SmithStoreDialogue : StoreDialogue
     {
         Console.WriteLine($"[1] Train Smithing (Y/N)?");
         string? input = Console.ReadLine();
-        switch(input)
+        switch (input)
         {
             case "y":
             case "Y":
+                SmithingSkill smith = new SmithingSkill();
+                smith.LearnSkill(hero);
+                SmeltOre smeltOre = new SmeltOre();
+                SmithDagger smithDagger = new SmithDagger();
+                smeltOre.LearnRecipe(hero);
+                smithDagger.LearnRecipe(hero);
                 hero.SkillBook.Find(x => x.Name == "Smithing")?.FindRecipes(hero);
                 break;
             default:

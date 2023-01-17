@@ -29,12 +29,12 @@ public class DaleTown : Town
                     innStore.DisplayMenu(hero, hero);
                     break;
                 case "3":
-                    DaleSmith daleSmith = new DaleSmith("Forgeheart Smithy", new List<Item>{new TwoHAxe(), new Dagger(), new WoodenShield()});
+                    DaleSmith daleSmith = new DaleSmith("Forgeheart Smithy", new List<Item>{new TwoHAxe(), new Dagger(), new WoodenShield(), new Club(), new LeatherTorso()});
                     StoreMenu smithStore = new StoreMenu(daleSmith);
                     smithStore.DisplayMenu(hero, hero);
                     break;
                 case "4":
-                    Store daleStore = new Store("Dale Town General Store", new List<Item>{new HealingPotion("Healing Potion", 5, 5)});
+                    Store daleStore = new Store("Dale Town General Store", new List<Item>{new HealthPotion("Health Potion", 5, 5)});
                     StoreMenu storeMenu = new StoreMenu(daleStore);
                     break;
                 case "0":

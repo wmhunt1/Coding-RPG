@@ -10,7 +10,7 @@ namespace GameModels
             FiremakingSkill fire = new FiremakingSkill();
             FishingSkill fish = new FishingSkill();
             FletchingSkill fletch = new FletchingSkill();
-            MiningSkill mine = new MiningSkill();
+            //MiningSkill mine = new MiningSkill();
             SmithingSkill smith = new SmithingSkill();
             WoodcuttingSkill wood = new WoodcuttingSkill();
             CookRawFish cookFish = new CookRawFish();
@@ -23,7 +23,7 @@ namespace GameModels
             fire.LearnSkill(hero);
             fish.LearnSkill(hero);
             fletch.LearnSkill(hero);
-            mine.LearnSkill(hero);
+            //mine.LearnSkill(hero);
             smith.LearnSkill(hero);
             cookFish.LearnRecipe(hero);
             burnWood.LearnRecipe(hero);
@@ -31,7 +31,7 @@ namespace GameModels
             smeltOre.LearnRecipe(hero);
             smithDagger.LearnRecipe(hero);
             FishRawFish fishRawFish = new FishRawFish();
-            MineOre mineOre = new MineOre();
+            //MineOre mineOre = new MineOre();
             CutWood cutWood = new CutWood();
 
             bool showMenu = true;
@@ -40,7 +40,7 @@ namespace GameModels
                 ShowTitle();
                 Console.WriteLine("[1] Fish");
                 Console.WriteLine("[2] Cook");
-                Console.WriteLine("[3] Mining");
+                //Console.WriteLine("[3] Mining");
                 Console.WriteLine("[4] Smithing");
                 Console.WriteLine("[5] Woodcutting");
                 Console.WriteLine("[6] Firemaking");
@@ -56,7 +56,7 @@ namespace GameModels
                         cook.FindRecipes(hero);
                         break;
                     case "3":
-                        mine.TrainSkill(hero, mineOre);
+                        //mine.TrainSkill(hero, mineOre);
                         break;
                     case "4":
                         smith.FindRecipes(hero);

@@ -12,16 +12,17 @@ namespace GameModels
         }
         public void BuyFromStore(Character hero)
         {
-            for (int item = 0; item < Store.StoreInventory.Count; item++)
+            List<Item> sortedInventory = Store.StoreInventory.OrderBy(x => x.Name).ToList();
+            for (int item = 0; item < sortedInventory.Count; item++)
             {
-                Console.WriteLine($"[{item + 1}] {Store.StoreInventory[item].Name} - {Store.StoreInventory[item].Cost} GP");
+                Console.WriteLine($"[{item + 1}] {sortedInventory[item].Name} - {sortedInventory[item].Cost} GP");
             }
             string? choiceInput = Console.ReadLine();
             int selection;
             bool parseSucess = Int32.TryParse(choiceInput, out selection);
-            if (parseSucess == true && selection > 0 && selection <= Store.StoreInventory.Count)
+            if (parseSucess == true && selection > 0 && selection <= sortedInventory.Count)
             {
-                Store.StoreInventory[selection - 1].BuyItem(hero);
+                sortedInventory[selection - 1].BuyItem(hero);
             }
             AnyKey();
         }

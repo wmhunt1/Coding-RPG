@@ -39,8 +39,9 @@ public class DaleValley : Location
                     daleForestMenu.DisplayMenu(hero, hero);
                     break;
                 case "4":
-                    //later add option to mine here
-                    Dungeon dwarvenMine = new Dungeon("Dwarven Mine", new List<Character>{new Goblin(), new Goblin(), new Goblin()}, new List<Character>{new Goblin(), new Goblin(), new Goblin()}, new List<Character>{new Goblin(), new Goblin(), new Goblin()}, new List<Character>{new Goblin(), new Goblin(), new Goblin(), new Orc()});
+                    DwarvenMine mine = new DwarvenMine();
+                    LocationMenu mineMenu = new LocationMenu(mine);
+                    mineMenu.DisplayMenu(hero, hero);
                     break;
                 case "0":
                     showForest = false;

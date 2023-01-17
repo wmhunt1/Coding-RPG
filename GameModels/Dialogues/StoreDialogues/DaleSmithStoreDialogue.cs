@@ -3,14 +3,14 @@ using System.Text.Json.Serialization;
 namespace GameModels;
 public class DaleSmithStoreDialogue : SmithStoreDialogue
 {
-    public DaleSmithStoreDialogue(string name, Store store):base(name, store)
+    public DaleSmithStoreDialogue(string name, Store store) : base(name, store)
     {
         Name = name;
         AssociatedStore = store;
     }
     public override void HaveDialogue(Character hero)
     {
-          bool left = false;
+        bool left = false;
         while (left == false)
         {
             Console.WriteLine($"[1] Train Smithing");
@@ -20,7 +20,13 @@ public class DaleSmithStoreDialogue : SmithStoreDialogue
             switch (input)
             {
                 case "1":
-                     hero.SkillBook.Find(x => x.Name == "Smithing")?.FindRecipes(hero);
+                    SmithingSkill smith = new SmithingSkill();
+                    smith.LearnSkill(hero);
+                    SmeltOre smeltOre = new SmeltOre();
+                    SmithDagger smithDagger = new SmithDagger();
+                    smeltOre.LearnRecipe(hero);
+                    smithDagger.LearnRecipe(hero);
+                    hero.SkillBook.Find(x => x.Name == "Smithing")?.FindRecipes(hero);
                     break;
                 case "2":
                     DwarfDungeonQuest dwarfDungeonQuest = new DwarfDungeonQuest();
