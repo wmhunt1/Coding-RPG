@@ -1,16 +1,29 @@
-import logo from './logo.svg';
+import { useState } from "react";
+import Game from "./Components/Game";
+import MainMenu from "./Components/MainMenu";
 import './App.css';
 
+var Hero = { Name: "Hero", Level: 1, CurrentXP: 0, MaxXP: 100, CurrentHP: 10, MaxHP: 10, Strength: 10}
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-      <h1>Coding RPG</h1>
-        <p>
-        </p>
-      </header>
-    </div>
-  );
+  const [active, setActive] = useState("MainMenu");
+  const [hero, setHero] = useState(Hero);
+  if (active == "MainMenu") {
+    return (
+      <div className="App">
+        <h1>Coding RPG</h1>
+        <MainMenu NewGame={() => setActive("Game")}></MainMenu>
+      </div>
+    );
+  }
+  else {
+    return (
+      <div className="App">
+        <h1>Coding RPG</h1>
+        <Game Hero={hero} Back={() => setActive("MainMenu")}></Game>
+      </div>
+    );
+  }
+
 }
 
 export default App;
