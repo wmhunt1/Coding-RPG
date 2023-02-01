@@ -15,7 +15,7 @@ export function LevelUp(char) {
     char.Level++;
     char.MaxXP *= char.Level;
     char.MaxHP += 10;
-    //AddToCharacterLog(char, char.Name + " has reached level " + char.Level);
+    AddToCharacterLog(char, char.Name + " has reached level " + char.Level);
 }
 export function CheckForLevelUp(char) {
     if (char.CurrentXP >= char.MaxXP) {
@@ -42,27 +42,52 @@ export function TakeDamage(char, damage) {
         char.CurrentHP = 0;
     }
 }
+export function AddGold(char, gold)
+{
+    char.Gold += gold;
+    AddToCharacterLog(char, char.Name + " earned " + gold + " GP")
+    return char;
+}
+export function RemoveGold(char, gold)
+{
+    char.Gold -= gold;
+    AddToCharacterLog(char, char.Name + " lost " + gold + " GP")
+}
 export function AddItemToInventory(char, inventory, item) {
-    inventory.push(item);
+    if (inventory.find(x => x.Name === item.Name)) {
+        var findItem = inventory.findIndex(x => x.Name === item.Name);
+        var newItem = inventory[findItem];
+        newItem.Quantity++;
+        inventory[findItem] = newItem;
+        AddToCharacterLog(char, "Adding " + item.Name + " to inventory");
+    }
+    else
+    {
+        inventory.push(item);
+        AddToCharacterLog(char, "Adding " + item.Name + " to inventory");
+    }
     char.Inventory = inventory;
 }
 export function RemoveItemFromInventory(char, inventory, item) {
     inventory.remove(item);
     char.Inventory = inventory;
 }
-export function UnEquipWeapon(char, inventory, weapon) {
+export function UnEquipWeapon(char, inventory, item) {
     if (char.Weapon.Name !== "Bare Fist") {
-        AddItemToInventory(char, inventory, weapon);
+        AddToCharacterLog(char, "Enequipping " + item.Name);
+        console.log("Not bare fist")
+        AddItemToInventory(char, inventory, item);
     }
-    var item = { Name: "Bare Fist", Damage: 0, DamageType: "Bludgeoning",Cost: 0, Quantity: 0}
-    char.Weapon = item;
+    var fist = { Name: "Bare Fist", Damage: 0, DamageType: "Bludgeoning", Cost: 0, Quantity: 0 }
+    char.Weapon = fist;
     char.Inventory = inventory;
 }
-export function EquipItem(char, inventory, weapon) {
-    if (weapon.Type === "Weapon") {
-        UnEquipWeapon(char, inventory, weapon);
-        char.Weapon = weapon;
+export function EquipItem(char, inventory, item) {
+    if (item.Type === "Weapon") {
+        UnEquipWeapon(char, inventory, item);
+        char.Weapon = item;
     }
+    AddToCharacterLog(char, "Equipping " + item.Name);
     char.Inventory = inventory;
 }
 export function EquipItemFromInventory(char, inventory, weapon) {

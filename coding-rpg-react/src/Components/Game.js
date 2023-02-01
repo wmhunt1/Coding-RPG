@@ -5,6 +5,10 @@ import CharacterSheet from './CharacterSheet';
 import Inventory from './Inventory';
 import Combat from './Combat';
 import Equipment from './Equipment';
+import Shop from './Shop';
+import {rat} from'../Database/Characters'
+import '../Database/Items'
+import { club, dagger } from '../Database/Items';
 
 function Game(props) {
   const messagesEndRef = useRef(null)
@@ -43,7 +47,12 @@ function Game(props) {
   }
   else if (active === "Combat") {
     return (<div>
-      <Combat hero={hero} Enemies={[{ Id: 1, Name: "Rat 1", Log: [], Level: 1, CurrentXP: 10, MaxXP: 100, CurrentHP: 5, MaxHP: 5, Strength: 1, Weapon: { Name: "Bite", Damage: 1, DamageType: "Piercing" } }, { Id: 2, Name: "Rat 2", Log: [], Level: 1, CurrentXP: 10, MaxXP: 100, CurrentHP: 5, MaxHP: 5, Strength: 1, Weapon: { Name: "Dagger", Damage: 1, DamageType: "Piercing" } }]} Back={() => setActive("Game")}></Combat>
+      <Combat hero={hero} enemies={[{ Id: 1, Enemy: rat()},{ Id: 2, Enemy: rat()}]} Back={() => setActive("Game")}></Combat>
+    </div>)
+  }
+  else if (active === "Shop") {
+    return (<div>
+      <Shop shopName = "Test Shop" hero={hero} Back={() => setActive("Game")} shopInventory={[club(), dagger()]}></Shop>
     </div>)
   }
   else {
@@ -73,6 +82,7 @@ function Game(props) {
           <h2>Tests</h2>
           <button onClick={() => setActive("Combat")}><h3>Test Combat</h3></button>
           <button onClick={() => Heal(props.hero, log)}><h3>Test Heal</h3></button>
+          <button onClick={() => setActive("Shop")}><h3>Test Shop</h3></button>
         </div>
 
       </div>

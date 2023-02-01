@@ -18,6 +18,7 @@ function Inventory(props) {
     return (
       <div>
         <h2>{hero.Name}'s Inventory</h2>
+        <h3>{hero.Gold} GP</h3>
         {itemList}
         <button onClick={props.Back}><h3>Back</h3></button>
       </div>
@@ -27,6 +28,7 @@ function Inventory(props) {
     return (
       <div>
         <h2>{hero.Name}'s Inventory</h2>
+        <h3>{hero.Gold} GP</h3>
         <h4>Inventory is Empty</h4>
         <button onClick={props.Back}><h3>Back</h3></button>
       </div>

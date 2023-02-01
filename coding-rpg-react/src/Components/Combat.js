@@ -5,23 +5,23 @@ import { CombatRound } from '../Scripts/CombatScripts';
 
 function Combat(props) {
     const [hero, setHero] = useState(props.hero)
-    const [enemies, setEnemies] = useState(props.Enemies);
-    const [enemiesOverZero, setEnemiesOverZero] = useState(props.Enemies.length)
+    const [enemies, setEnemies] = useState(props.enemies);
+    const [enemiesOverZero, setEnemiesOverZero] = useState(props.enemies.length)
     const [combatLog, setCombatLog] = useState(["Combat Started"]);
     function RunCombat(hero, enemies, target, combatLog) {
-        CombatRound(hero, enemies, target, combatLog);
+        CombatRound(hero, enemies, target.Enemy, combatLog);
         setHero(hero)
         setEnemies(enemies);
         var overZero = 0;
         for (let e = 0; e < enemies.length; e++) {
-            if (enemies[e].CurrentHP) {
+            if (enemies[e].Enemy.CurrentHP) {
                 overZero++;
             }
         }
         setEnemiesOverZero(overZero)
         setCombatLog(combatLog)
     }
-    const enemiesList = enemies.map((enemy) => <h4 key={enemy.Id}>{enemy.Name} - {enemy.CurrentHP}/{enemy.MaxHP} <button onClick={() => RunCombat(hero, enemies, enemy, combatLog)}>Attack</button></h4>)
+    const enemiesList = enemies.map((enemy) => <h4 key={enemy.Id}>{enemy.Enemy.Name} - {enemy.Enemy.CurrentHP}/{enemy.Enemy.MaxHP} <button onClick={() => RunCombat(hero, enemies, enemy, combatLog)}>Attack</button></h4>)
     const combatLogList = combatLog.map((message, index) => <h5 key={index}>{message}</h5>)
     if (hero.CurrentHP > 0 && enemiesOverZero > 0) {
         return (
