@@ -6,6 +6,12 @@ function MainMenu(props) {
   const [active, setActive] = useState("MainMenu");
   const [name, setName] = useState('');
   const [hero, setHero] = useState(props.hero)
+  const exitGame = () => {
+    window.opener = null;
+    window.open("", "_self");
+    window.close();
+    navigator.app.exitApp();
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     hero.Name = name;
@@ -40,6 +46,7 @@ function MainMenu(props) {
         <button onClick={props.NewGame}><h3>Load Game (Hero)</h3></button>
         <button hero={hero} onClick={() => setActive("NewGame")}><h3>New Game</h3></button>
         <button><h3>Settings</h3></button>
+        <button onClick={() => exitGame()}><h3>End Game</h3></button>
       </div>
     );
   }
