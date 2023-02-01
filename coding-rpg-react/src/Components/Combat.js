@@ -4,24 +4,25 @@ import { CombatRound } from '../Scripts/CombatScripts';
 //import { EarnXP } from '../Scripts/CharacterScripts';
 
 function Combat(props) {
-    const [hero, setHero] = useState(props.Hero)
+    const [hero, setHero] = useState(props.hero)
     const [enemies, setEnemies] = useState(props.Enemies);
     const [enemiesOverZero, setEnemiesOverZero] = useState(props.Enemies.length)
-    function RunCombat(hero, enemies, target) {
-        CombatRound(hero, enemies, target);
+    const [combatLog, setCombatLog] = useState(["Combat Started"]);
+    function RunCombat(hero, enemies, target, combatLog) {
+        CombatRound(hero, enemies, target, combatLog);
         setHero(hero)
         setEnemies(enemies);
         var overZero = 0;
-        for (let e = 0; e < enemies.length; e++)
-        {
-            if (enemies[e].CurrentHP)
-            {
+        for (let e = 0; e < enemies.length; e++) {
+            if (enemies[e].CurrentHP) {
                 overZero++;
             }
         }
         setEnemiesOverZero(overZero)
+        setCombatLog(combatLog)
     }
-    const enemiesList = enemies.map((enemy) => <h4 key={enemy.Id}>{enemy.Name} - {enemy.CurrentHP}/{enemy.MaxHP} <button onClick={() => RunCombat(hero, enemies, enemy)}>Attack</button></h4>)
+    const enemiesList = enemies.map((enemy) => <h4 key={enemy.Id}>{enemy.Name} - {enemy.CurrentHP}/{enemy.MaxHP} <button onClick={() => RunCombat(hero, enemies, enemy, combatLog)}>Attack</button></h4>)
+    const combatLogList = combatLog.map((message, index) => <h5 key={index}>{message}</h5>)
     if (hero.CurrentHP > 0 && enemiesOverZero > 0) {
         return (
             <div>
@@ -29,6 +30,10 @@ function Combat(props) {
                 <h4>{hero.Name} - HP {hero.CurrentHP}/{hero.MaxHP}</h4>
                 <h3>Enemies</h3>
                 {enemiesList}
+                <div>
+                    <h2>Combat Log</h2>
+                    {combatLogList}
+                </div>
                 <button onClick={props.Back}><h3>Back</h3></button>
             </div>
         );
