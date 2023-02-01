@@ -9,7 +9,8 @@ function Inventory(props) {
   function handleEquip(char, inventory, weapon) {
     EquipItemFromInventory(char, inventory, weapon)
     setHero(char);
-    setInventory(char.Inventory);
+    var newInventory = [...char.Inventory];
+    setInventory(newInventory);
     
   }
   const itemList = inventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} <button onClick={() => { handleEquip(hero, hero.Inventory, item) }}>Equip</button></h4>)
