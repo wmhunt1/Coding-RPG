@@ -2,7 +2,7 @@ import '../App.css';
 function CharacterSheet(props) {
   const hero = props.hero;
   return (
-    <div>
+    <div >
         <h2>{hero.Name}'s Character Sheet</h2>
         <h3>Base Stats</h3>
         <h4>Level: {hero.Level}, XP: {hero.CurrentXP}/{hero.MaxXP}</h4>

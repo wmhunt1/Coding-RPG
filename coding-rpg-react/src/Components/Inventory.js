@@ -6,8 +6,8 @@ function Inventory(props) {
   const [hero, setHero] = useState(props.hero);
   const [inventory, setInventory] = useState(props.hero.Inventory)
 
-  function handleEquip(char, inventory, weapon) {
-    EquipItemFromInventory(char, inventory, weapon)
+  function handleEquip(char, inventory, item) {
+    EquipItemFromInventory(char, inventory, item)
     setHero(char);
     var newInventory = [...char.Inventory];
     setInventory(newInventory);

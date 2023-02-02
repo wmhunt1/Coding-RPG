@@ -7,8 +7,7 @@ import Combat from './Combat';
 import Equipment from './Equipment';
 import Shop from './Shop';
 import {rat} from'../Database/Characters'
-import '../Database/Items'
-import { club, dagger } from '../Database/Items';
+import { club, dagger, healingPotion } from '../Database/Items';
 
 function Game(props) {
   const messagesEndRef = useRef(null)
@@ -19,7 +18,7 @@ function Game(props) {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
   useEffect(() => {
-    scrollToBottom()
+    //scrollToBottom()
   }, [log]);
 
   function Heal(char) {
@@ -52,14 +51,14 @@ function Game(props) {
   }
   else if (active === "Shop") {
     return (<div>
-      <Shop shopName = "Test Shop" hero={hero} Back={() => setActive("Game")} shopInventory={[club(), dagger()]}></Shop>
+      <Shop shopName = "Test Shop" hero={hero} Back={() => setActive("Game")} shopInventory={[club(), dagger(), healingPotion()]}></Shop>
     </div>)
   }
   else {
     return (
-      <div style={{ border: "solid", marginLeft: "10%", marginRight: "10%" }}>
-        <div style={{ border: "solid", paddingBottom: "1%" }}>
-          <h2>Toolbar</h2>
+      <div>
+        <div>
+          <h2>Game Menu</h2>
           <div>
             <button onClick={() => setActive("CharacterSheet")}><h3>Character Sheet</h3></button>
             <button onClick={() => setActive("Equipment")}><h3>Equipment</h3></button>
@@ -67,18 +66,18 @@ function Game(props) {
             <button onClick={props.Back}><h3>Main Menu</h3></button>
           </div>
         </div>
-        <div style={{ border: "solid" }}>
+        <div>
           <h2>Actions</h2>
           <div></div>
         </div>
-        <div style={{ border: "solid" }}>
+        <div>
           <h2>Game Log</h2>
-          <div id="log" style={{ overflowAnchor: "none", marginLeft: "25%", marginRight: "25%", marginBottom: "5%", height: `200px`, overflow: "scroll", border: "solid", textAlign: "center" }}>
+          <div style={{ overflowAnchor: "none", marginLeft: "25%", marginRight: "25%", marginBottom: "5%", height: `200px`, overflow: "scroll", border: "solid", textAlign: "center" }}>
             {logList}
             <div ref={messagesEndRef}></div>
           </div>
         </div>
-        <div style={{ border: "solid", paddingBottom: "10px" }}>
+        <div>
           <h2>Tests</h2>
           <button onClick={() => setActive("Combat")}><h3>Test Combat</h3></button>
           <button onClick={() => Heal(props.hero, log)}><h3>Test Heal</h3></button>

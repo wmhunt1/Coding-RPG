@@ -1,5 +1,5 @@
 export function rat()
 {
-    var rat = {Name: "Rat", Log: [], Level: 1, CurrentXP: 10, MaxXP: 100, CurrentHP: 5, MaxHP: 5, Strength: 1, Weapon: { Name: "Bite", Damage: 1, DamageType: "Piercing" }, Inventory: [], Gold: 5}
+    var rat = {Name: "Rat", Log: [], Level: 1, CurrentXP: 10, MaxXP: 100, CurrentHP: 5, MaxHP: 5, CurrentMP: 5, MaxMP: 5, CurrentSP: 5, MaxSP: 5, Strength: 1, Weapon: { Name: "Bite", Damage: 1, DamageType: "Piercing" }, Inventory: [], Gold: 5}
     return rat;
 }
