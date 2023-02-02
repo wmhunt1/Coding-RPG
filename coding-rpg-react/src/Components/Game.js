@@ -1,22 +1,24 @@
 import '../App.css';
 import { useState, useRef, useEffect} from "react";
 import { HealHP } from '../Scripts/CharacterScripts';
+import Menu from './Menu';
 import CharacterSheet from './CharacterSheet';
 import Inventory from './Inventory';
 import Combat from './Combat';
 import Equipment from './Equipment';
 import Shop from './Shop';
 import {rat} from'../Database/Characters'
-import { club, dagger, healingPotion } from '../Database/Items';
+//import { club, dagger, healingPotion } from '../Database/Items';
+import {testShop} from '../Database/Shops'
 
 function Game(props) {
   const messagesEndRef = useRef(null)
   const [active, setActive] = useState("Game");
   const [hero, setHero] = useState(props.hero)
   const [log, setLog] = useState([props.hero.Log]);
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+  // const scrollToBottom = () => {
+  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  // }
   useEffect(() => {
     //scrollToBottom()
   }, [log]);
@@ -29,7 +31,13 @@ function Game(props) {
   }
 
   const logList = hero.Log.map((message, index) => <h5 key={index}>{message}</h5>)
-  if (active === "CharacterSheet") {
+  if (active === "Menu")
+  {
+    return (<div>
+      <Menu hero={hero} Back={() => setActive("Game")}></Menu>
+    </div>)
+  }
+  else if (active === "CharacterSheet") {
     return (<div>
       <CharacterSheet hero={hero} Back={() => setActive("Game")}></CharacterSheet>
     </div>)
@@ -51,7 +59,7 @@ function Game(props) {
   }
   else if (active === "Shop") {
     return (<div>
-      <Shop shopName = "Test Shop" hero={hero} Back={() => setActive("Game")} shopInventory={[club(), dagger(), healingPotion()]}></Shop>
+      <Shop shopName = {testShop().Name} shopInventory={testShop().Inventory} hero={hero} Back={() => setActive("Game")}></Shop>
     </div>)
   }
   else {
@@ -63,7 +71,7 @@ function Game(props) {
             <button onClick={() => setActive("CharacterSheet")}><h3>Character Sheet</h3></button>
             <button onClick={() => setActive("Equipment")}><h3>Equipment</h3></button>
             <button onClick={() => setActive("Inventory")}><h3>Inventory</h3></button>
-            <button onClick={props.Back}><h3>Main Menu</h3></button>
+            <button onClick={() => setActive("Menu")}><h3>Menu</h3></button>
           </div>
         </div>
         <div>

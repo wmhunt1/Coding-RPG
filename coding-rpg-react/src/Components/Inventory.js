@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { EquipItemFromInventory } from '../Scripts/CharacterScripts';
+import { EquipItemFromInventory, RemoveItemFromInventory} from '../Scripts/CharacterScripts';
 import '../App.css';
 
 function Inventory(props) {
@@ -11,9 +11,25 @@ function Inventory(props) {
     setHero(char);
     var newInventory = [...char.Inventory];
     setInventory(newInventory);
-    
   }
-  const itemList = inventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} <button onClick={() => { handleEquip(hero, hero.Inventory, item) }}>Equip</button></h4>)
+  function handleUse(char, inventory, item) {
+    item.ConsumeEffect(char)
+    RemoveItemFromInventory(char, inventory, item)
+    var newInventory = [...char.Inventory];
+    setInventory(newInventory);
+  }
+  function handleItem(char, inventory, item)
+  {
+    if (item.Type === "Consumable")
+    {
+      handleUse(char, inventory, item)
+    }
+    else
+    {
+      handleEquip(char, inventory, item)
+    }
+  }
+  const itemList = inventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} <button onClick={() => { handleItem(hero, hero.Inventory, item) }}>Equip/Use</button></h4>)
   if (inventory.length > 0) {
     return (
       <div>

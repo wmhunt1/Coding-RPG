@@ -21,8 +21,10 @@ function Combat(props) {
 
     function RunCombat(hero, enemies, target, combatLog, action) {
         CombatRound(hero, enemies, target.Enemy, combatLog, action);
-        setHero(hero)
-        setEnemies(enemies);
+        var newHero = hero;
+        setHero(newHero)
+        var newEnemies = [...enemies]
+        setEnemies(newEnemies);
         var overZero = 0;
         for (let e = 0; e < enemies.length; e++) {
             if (enemies[e].Enemy.CurrentHP) {
@@ -49,25 +51,31 @@ function Combat(props) {
     if (hero.CurrentHP > 0 && enemiesOverZero > 0) {
         return (
             <div>
-                <div style={{ display: "inline-block", verticalAlign: "text-top" ,border: "solid", paddingLeft: "1%", paddingRight: "1%", margin: "auto"}}>
-                    <h3>{hero.Name}'s Party</h3>
-                    <h4>{hero.Name} - HP {hero.CurrentHP}/{hero.MaxHP}, MP {hero.CurrentMP}/{hero.MaxMP}, SP HP {hero.CurrentSP}/{hero.MaxSP}</h4>
-                </div>
-                <div style={{ display: "inline-block", verticalAlign: "text-top", paddingLeft: "1%", paddingRight: "1%", margin: "auto"}}>
-                    <h3> VS </h3>
-                </div>
-                <div style={{ display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", margin: "auto"}}>
-                    <h3>Enemies</h3>
-                    {enemiesList}
+                <div>
+                    <div style={{ height: "250px", width: "400px", display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", margin: "auto", overflow: "scroll"}}>
+                        <h3>{hero.Name}'s Party</h3>
+                        <h4>{hero.Name} - HP {hero.CurrentHP}/{hero.MaxHP}, MP {hero.CurrentMP}/{hero.MaxMP}, SP HP {hero.CurrentSP}/{hero.MaxSP}</h4>
+                    </div>
+                    <div style={{ display: "inline-block", verticalAlign: "text-top", paddingLeft: "1%", paddingRight: "1%", margin: "auto" }}>
+                        <h3> VS </h3>
+                    </div>
+                    <div style={{ height: "250px", width: "400px", display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", margin: "auto", overflow: "scroll"}}>
+                        <h3>Enemies</h3>
+                        {enemiesList}
+                    </div>
                 </div>
                 <div>
-                    <h3>Action Selection</h3>
-                    <button onClick={() => setAction("Attack")}><h4>Basic Attack</h4></button>
-                    <button onClick={props.Back}><h4>Run Away</h4></button>
-                </div>
-                <div>
-                    <h3>Inventory</h3>
-                    {itemList}
+                    <div style={{height: "200px", width: "400px", display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", marginRight: "1%", marginLeft: "1%", marginTop: "1%", overflow: "scroll"}}>
+                        <h3>Action Selection</h3>
+                        <button onClick={() => setAction("Attack")}><h4>Basic Attack</h4></button>
+                        <button onClick={props.Back}><h4>Run Away</h4></button>
+                    </div>
+                    <div style={{ display: "inline-block", verticalAlign: "text-top", paddingLeft: "1%", paddingRight: "1%", margin: "auto" }}>
+                    </div>
+                    <div style={{height: "200px", width: "400px", display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", marginRight: "1%", marginLeft: "1%", marginTop: "1%", overflow: "scroll"}}>
+                        <h3>Inventory</h3>
+                        {itemList}
+                    </div>
                 </div>
                 <div>
                     <h3>Combat Log</h3>
