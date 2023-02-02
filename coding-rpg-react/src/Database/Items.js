@@ -1,4 +1,10 @@
 import { HealHP } from "../Scripts/CharacterScripts";
+//consumables
+export function healingPotion()
+{
+    var potion = {Name: "Healing Potion", Type: "Consumable", Cost: 5, Quantity: 1, ConsumeEffect(hero){HealHP(hero, 5)}}
+    return potion;
+}
 //equipables
 //armor
 export function fur()
@@ -27,9 +33,14 @@ export function dagger()
     var dagger = {Name: "Dagger", Type: "Weapon", Damage: 1, DamageType:"Piercing", Cost: 2, Quantity: 1}
     return dagger;
 }
-//consumables
-export function healingPotion()
+export function sword()
 {
-    var potion = {Name: "Healing Potion", Type: "Consumable", Cost: 5, Quantity: 1, ConsumeEffect(hero){HealHP(hero, 5)}}
-    return potion;
+    var sword = {Name: "Sword", Type: "Weapon", Damage: 5, DamageType:"Slashing", Cost: 10, Quantity: 1}
+    return sword;
+}
+//resources
+export function rawRatMeat()
+{
+    var rawRatMeat = {Name: "Raw Rat Meat", Type: "Raw Food", Cost: 0, Quantity: 1}
+    return rawRatMeat;
 }

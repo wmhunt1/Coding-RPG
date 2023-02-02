@@ -75,8 +75,19 @@ export function AddItemToInventory(char, inventory, item) {
     char.Inventory = inventory;
 }
 export function RemoveItemFromInventory(char, inventory, item) {
-    inventory.remove(item);
+    var findItem = inventory.findIndex(x => x.Name === item.Name);
+    if (inventory[findItem].Quantity > 1)
+    {
+        var newItem = inventory[findItem];
+        newItem.Quantity--;
+        inventory[findItem] = newItem;
+    }
+    else
+    {
+        inventory.remove(item);
+    }
     char.Inventory = inventory;
+    AddToCharacterLog(char, "Selling " + item.Name);
 }
 export function UnEquip(char, inventory, item) {
     if (item.Type === "Weapon") {

@@ -1,4 +1,4 @@
-import { AddGold, EarnXP, TakeDamage } from "./CharacterScripts";
+import { AddGold, AddItemToInventory, EarnXP, TakeDamage } from "./CharacterScripts";
 export function Attack(char1, char2, combatLog) {
     //console.log(char1.Name + " attacker")
     combatLog.push(char1.Name + " attacks " + char2.Name + " with their " + char1.Weapon.Name);
@@ -15,39 +15,35 @@ export function Attack(char1, char2, combatLog) {
     //console.log(totalDamage + " total damage")
     var critChance = Math.floor(Math.random() * 100) + 1 + char1.Luck;
     //console.log(critChance + " critchance %")
-    if (critChance >= 75)
-    {
+    if (critChance >= 75) {
         crit = true;
     }
-    if (crit === true)
-    {
+    if (crit === true) {
         totalDamage *= 2;
     }
     //console.log(totalDamage + " total damage")
     TakeDamage(char2, totalDamage)
-    if (totalDamage <= 0)
-    {
-        if (char2Armor > char2.Dexterity)
-        {
+    if (totalDamage <= 0) {
+        if (char2Armor > char2.Dexterity) {
             combatLog.push(char2.Name + "'s Armor deflects " + char2.Name + "'s attack")
         }
-        else
-        {
+        else {
             combatLog.push(char2.Name + " dodges " + char2.Name + "'s attack")
         }
     }
-    else if (totalDamage > baseDamage)
-    {
+    else if (totalDamage > baseDamage) {
         combatLog.push(char1.Name + " deals " + totalDamage + " critical damage to " + char2.Name)
     }
-    else
-    {
+    else {
         combatLog.push(char1.Name + " deals " + totalDamage + " damage to " + char2.Name)
     }
     //console.log(char2.Name + " " + char2.CurrentHP + " HP ")
     if (char2.CurrentHP <= 0) {
         EarnXP(char1, char2.CurrentXP)
         AddGold(char1, char2.Gold)
+        if (char2.ItemDrop.Name !== "None") {
+            AddItemToInventory(char1, char1.Inventory, char2.ItemDrop)
+        }
     }
 }
 export function CombatRound(char1, enemies, target, combatLog, option) {
