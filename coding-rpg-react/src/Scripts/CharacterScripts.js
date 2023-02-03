@@ -87,7 +87,6 @@ export function RemoveItemFromInventory(char, inventory, item) {
         inventory.remove(item);
     }
     char.Inventory = inventory;
-    AddToCharacterLog(char, "Selling " + item.Name);
 }
 export function UnEquip(char, inventory, item) {
     if (item.Type === "Weapon") {

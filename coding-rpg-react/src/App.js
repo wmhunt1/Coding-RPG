@@ -2,10 +2,10 @@ import { useState } from "react";
 import Game from "./Components/Game";
 import MainMenu from "./Components/MainMenu";
 import './App.css';
-import { dog, rat } from "./Database/Characters";
-import { sword, tunic } from "./Database/Items";
+import { dog} from "./Database/Characters";
+import { healingPotion, sword, tunic } from "./Database/Items";
 
-var newHero = { Name: "Hero", Log: ["Entering World"], Level: 1, CurrentXP: 0, MaxXP: 100, CurrentHP: 10, MaxHP: 10, CurrentMP: 10, MaxMP: 10, CurrentSP: 10, MaxSP: 10, Strength: 10, Constitution: 10, Dexterity: 10, Intelligence: 10, Wisdom: 10, Charisma: 10, WillPower: 10, Perception: 10, Luck: 10, Beauty: 10, Speed: 10, Weapon: sword(), Torso: tunic(), Inventory: [], Gold: 5, Companions: [dog()], ItemDrop: { Name: "None" } }
+var newHero = { Name: "Hero", Log: ["Entering World"], Level: 1, CurrentXP: 0, MaxXP: 100, CurrentHP: 10, MaxHP: 10, CurrentMP: 10, MaxMP: 10, CurrentSP: 10, MaxSP: 10, Strength: 10, Constitution: 10, Dexterity: 10, Intelligence: 10, Wisdom: 10, Charisma: 10, WillPower: 10, Perception: 10, Luck: 10, Beauty: 10, Speed: 10, Weapon: sword(), Torso: tunic(), Inventory: [healingPotion()], Gold: 5, Companions: [dog()], ItemDrop: { Name: "None" } }
 function App() {
   const [active, setActive] = useState("MainMenu");
   const hero = newHero;

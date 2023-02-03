@@ -6,17 +6,19 @@ function Equipment(props) {
     const [hero, setHero] = useState(props.hero);
     const [weapon, setWeapon] = useState(props.hero.Weapon)
     const [torso, setTorso] = useState(props.hero.Torso)
-    function handleUnEquipWeapon(char, inventory, weapon)
-    {
-        UnEquip(char, inventory, weapon)
-        setHero(char);
-        setWeapon(char.Weapon)
+    function handleUnEquipWeapon(char, inventory, weapon) {
+        if (weapon.Name !== "Bite") {
+            UnEquip(char, inventory, weapon)
+            setHero(char);
+            setWeapon(char.Weapon)
+        }
     }
-    function handleUnEquipTorso(char, inventory, torso)
-    {
-        UnEquip(char, inventory, torso)
-        setHero(char);
-        setTorso(char.Torso)
+    function handleUnEquipTorso(char, inventory, torso) {
+        if (torso.Name !== "Fur") {
+            UnEquip(char, inventory, torso)
+            setHero(char);
+            setTorso(char.Torso)
+        }
     }
     return (
         <div>
