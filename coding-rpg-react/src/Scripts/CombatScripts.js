@@ -1,27 +1,19 @@
 import { AddGold, AddItemToInventory, EarnXP, TakeDamage } from "./CharacterScripts";
 export function Attack(char1, char2, combatLog) {
-    //console.log(char1.Name + " attacker")
     combatLog.push(char1.Name + " attacks " + char2.Name + " with their " + char1.Weapon.Name);
     var crit = false;
     var char1Damage = char1.Strength + char1.Weapon.Damage
-    //console.log(char1Damage + " char1 damage")
     var char2Armor = char2.Torso.Protection;
-    //console.log(char2Armor + " char2 armor")
     var char2Defense = char2Armor + char2.Dexterity
-    //console.log(char2Defense + " char2 defense")
     var baseDamage = char1Damage - char2Defense;
-    //console.log(baseDamage + " base damage")
     var totalDamage = baseDamage;
-    //console.log(totalDamage + " total damage")
     var critChance = Math.floor(Math.random() * 100) + 1 + char1.Luck;
-    //console.log(critChance + " critchance %")
     if (critChance >= 75) {
         crit = true;
     }
     if (crit === true) {
         totalDamage *= 2;
     }
-    //console.log(totalDamage + " total damage")
     TakeDamage(char2, totalDamage)
     if (totalDamage <= 0) {
         if (char2Armor > char2.Dexterity) {
@@ -37,7 +29,6 @@ export function Attack(char1, char2, combatLog) {
     else {
         combatLog.push(char1.Name + " deals " + totalDamage + " damage to " + char2.Name)
     }
-    //console.log(char2.Name + " " + char2.CurrentHP + " HP ")
     if (char2.CurrentHP <= 0) {
         EarnXP(char1, char2.CurrentXP)
         AddGold(char1, char2.Gold)
@@ -52,9 +43,32 @@ export function CombatRound(char1, allies, enemies, target, combatLog, option) {
             Attack(char1, target, combatLog)
         }
     }
+    for (let a = 1; a < allies.length; a++) {
+        if (allies[a].CurrentHP > 0) {
+            var enemyOverZero = []
+            for (let e = 0; e < enemies.length; e++) {
+                if (enemies[e].CurrentHP > 0) {
+                    enemyOverZero.push(enemies[e])
+                }
+            }
+            if (enemyOverZero.length > 0) {
+                const randomEnemy = Math.floor(Math.random() * enemyOverZero.length);
+                Attack(allies[a], enemyOverZero[randomEnemy], combatLog)
+            }
+        }
+    }
     for (let e = 0; e < enemies.length; e++) {
-        if (enemies[e].Enemy.CurrentHP > 0) {
-            Attack(enemies[e].Enemy, char1, combatLog)
+        if (enemies[e].CurrentHP > 0) {
+            var allyOverZero = []
+            for (let a = 0; a < allies.length; a++) {
+                if (allies[a].CurrentHP > 0) {
+                    allyOverZero.push(allies[a])
+                }
+            }
+            if (allyOverZero.length > 0) {
+                const randomAlly = Math.floor(Math.random() * allyOverZero.length);
+                Attack(enemies[e], allyOverZero[randomAlly], combatLog)
+            }
         }
     }
 }

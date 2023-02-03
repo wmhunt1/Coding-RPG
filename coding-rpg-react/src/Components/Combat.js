@@ -21,7 +21,7 @@ function Combat(props) {
     }, [combatLog]);
 
     function RunCombat(hero, allies, enemies, target, combatLog, action) {
-        CombatRound(hero, allies, enemies, target.Enemy, combatLog, action);
+        CombatRound(hero, allies, enemies, target, combatLog, action);
         var newHero = hero;
         setHero(newHero)
         var newAllies = [...allies]
@@ -30,7 +30,7 @@ function Combat(props) {
         setEnemies(newEnemies);
         var overZero = 0;
         for (let e = 0; e < enemies.length; e++) {
-            if (enemies[e].Enemy.CurrentHP) {
+            if (enemies[e].CurrentHP) {
                 overZero++;
             }
         }
@@ -48,7 +48,7 @@ function Combat(props) {
         setAction("Attack")
     }
     const alliesList = allies.map((ally, index) => <h4 key={index}>{ally.Name} - HP {ally.CurrentHP}/{ally.MaxHP}, MP {ally.CurrentMP}/{ally.MaxMP}, SP {ally.CurrentSP}/{ally.MaxSP}</h4>)
-    const enemiesList = enemies.map((enemy) => <h4 key={enemy.Id}>{enemy.Enemy.Name} - HP: {enemy.Enemy.CurrentHP}/{enemy.Enemy.MaxHP}, MP: {enemy.Enemy.CurrentMP}/{enemy.Enemy.MaxMP}, SP: {enemy.Enemy.CurrentSP}/{enemy.Enemy.MaxSP}  <button onClick={() => RunCombat(hero, allies, enemies, enemy, combatLog, action)}><h4>Target</h4></button></h4>)
+    const enemiesList = enemies.map((enemy, index) => <h4 key={index}>{enemy.Name} - HP: {enemy.CurrentHP}/{enemy.MaxHP}, MP: {enemy.CurrentMP}/{enemy.MaxMP}, SP: {enemy.CurrentSP}/{enemy.MaxSP}  <button onClick={() => RunCombat(hero, allies, enemies, enemy, combatLog, action)}><h4>Target</h4></button></h4>)
     const combatLogList = combatLog.map((message, index) => <h5 key={index}>{message}</h5>)
     const consumableItemList = inventory.filter(item => item.Type === "Consumable");
     const itemList = consumableItemList.map((item, index) => <h4 key={index}>{item.Name} - QTY: {item.Quantity} <button onClick={() => { handleConsumable(hero, allies, enemies, enemies[0], combatLog, "Use", inventory, item) }}><h4>Use</h4></button></h4>)

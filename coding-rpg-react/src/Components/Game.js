@@ -45,7 +45,7 @@ function Game(props) {
   }
   else if (active === "Combat") {
     return (<div>
-      <Combat hero={hero} enemies={[{ Id: 1, Enemy: rat() }, { Id: 2, Enemy: rat() }]} Back={() => setActive("Test")}></Combat>
+      <Combat hero={hero} enemies={[rat(), rat(), rat(), rat()]} Back={() => setActive("Test")}></Combat>
     </div>)
   }
   else if (active === "Equipment") {
