@@ -46,7 +46,7 @@ export function Attack(char1, char2, combatLog) {
         }
     }
 }
-export function CombatRound(char1, enemies, target, combatLog, option) {
+export function CombatRound(char1, allies, enemies, target, combatLog, option) {
     if (char1.CurrentHP > 0) {
         if (option === "Attack") {
             Attack(char1, target, combatLog)

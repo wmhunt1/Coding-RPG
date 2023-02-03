@@ -22,9 +22,9 @@ function Equipment(props) {
         <div>
             <h2>{hero.Name}'s Equipment</h2>
             <h3>Weapon</h3>
-            <h4>Main Weapon - Name: {weapon.Name}, Damage: {weapon.Damage}, Damage Type: {weapon.DamageType} <button onClick={() => handleUnEquipWeapon(hero, hero.Inventory, hero.Weapon)}>UnEquip</button></h4>
+            <h4>Main Weapon - Name: {weapon.Name}, Damage: {weapon.Damage}, Damage Type: {weapon.DamageType} <button onClick={() => handleUnEquipWeapon(hero, hero.Inventory, hero.Weapon)}><h3>UnEquip</h3></button></h4>
             <h3>Armor</h3>
-            <h4>Torso - Name: {torso.Name}, Protection: {torso.Protection}, Protection Type: {torso.ProtectionType} <button onClick={() => handleUnEquipTorso(hero, hero.Inventory, hero.Torso)}>UnEquip</button></h4>
+            <h4>Torso - Name: {torso.Name}, Protection: {torso.Protection}, Protection Type: {torso.ProtectionType} <button onClick={() => handleUnEquipTorso(hero, hero.Inventory, hero.Torso)}><h3>UnEquip</h3></button></h4>
             <button onClick={props.Back}><h3>Back</h3></button>
         </div>
     );

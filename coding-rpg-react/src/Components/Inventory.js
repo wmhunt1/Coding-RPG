@@ -29,7 +29,7 @@ function Inventory(props) {
       handleEquip(char, inventory, item)
     }
   }
-  const itemList = inventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} <button onClick={() => { handleItem(hero, hero.Inventory, item) }}>Equip/Use</button></h4>)
+  const itemList = inventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} <button onClick={() => { handleItem(hero, hero.Inventory, item) }}><h4>Equip/Use</h4></button></h4>)
   if (inventory.length > 0) {
     return (
       <div>
