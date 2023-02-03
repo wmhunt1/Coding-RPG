@@ -10,7 +10,7 @@ function Combat(props) {
     const [allies, setAllies] = useState([props.hero, props.hero.Companions[0]]);
     const [enemies, setEnemies] = useState(props.enemies);
     const [enemiesOverZero, setEnemiesOverZero] = useState(props.enemies.length)
-    const [combatLog, setCombatLog] = useState(["Combat Started, "]);
+    const [combatLog, setCombatLog] = useState(["Combat Started"]);
     const [action, setAction] = useState("Attack");
 
     function RunCombat(hero, allies, enemies, target, combatLog, action) {
@@ -38,7 +38,7 @@ function Combat(props) {
         var newInventory = [...hero.Inventory];
         setInventory(newInventory);
         RunCombat(hero, allies, enemies, target, combatLog, action)
-        combatLog.push(hero.Name + " uses a(n) " + item.Name + ", ")
+        combatLog.push(hero.Name + " uses a(n) " + item.Name)
         setAction("Attack")
     }
     const alliesList = allies.filter(ally => ally.CurrentHP > 0).map((ally, index) => <h4 key={index}>{ally.Name} - HP {ally.CurrentHP}/{ally.MaxHP}, MP {ally.CurrentMP}/{ally.MaxMP}, SP {ally.CurrentSP}/{ally.MaxSP}</h4>)

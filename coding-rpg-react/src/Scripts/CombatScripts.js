@@ -1,6 +1,6 @@
 import { AddGold, AddItemToInventory, EarnXP, TakeDamage } from "./CharacterScripts";
 export function Attack(char1, char2, combatLog) {
-    combatLog.push(", " + char1.Name + " attacks " + char2.Name + " with their " + char1.Weapon.Name);
+    setTimeout(combatLog.push(char1.Name + " attacks " + char2.Name + " with their " + char1.Weapon.Name), 5000);
     var crit = false;
     var char1Damage = char1.Strength + char1.Weapon.Damage
     var char2Armor = char2.Torso.Protection;
@@ -17,23 +17,23 @@ export function Attack(char1, char2, combatLog) {
     TakeDamage(char2, totalDamage)
     if (totalDamage <= 0) {
         if (char2Armor > char2.Dexterity) {
-            combatLog.push(", " + char2.Name + "'s Armor deflects " + char2.Name + "'s attack")
+            combatLog.push(char2.Name + "'s Armor deflects " + char2.Name + "'s attack")
         }
         else {
-            combatLog.push(", " + char2.Name + " dodges " + char2.Name + "'s attack")
+            combatLog.push(char2.Name + " dodges " + char2.Name + "'s attack")
         }
     }
     else if (totalDamage > baseDamage) {
-        combatLog.push(", " + char1.Name + " deals " + totalDamage + " critical damage to " + char2.Name)
+        combatLog.push(char1.Name + " deals " + totalDamage + " critical damage to " + char2.Name)
     }
     else {
-        combatLog.push(", " + char1.Name + " deals " + totalDamage + " damage to " + char2.Name)
+        combatLog.push(char1.Name + " deals " + totalDamage + " damage to " + char2.Name)
     }
 }
 export function CombatRound(char1, allies, enemies, target, combatLog, option) {
     if (char1.CurrentHP > 0) {
         if (option === "Attack") {
-            Attack(char1, target, combatLog)
+            Attack(char1, target, combatLog);
         }
     }
     for (let a = 1; a < allies.length; a++) {
@@ -74,8 +74,9 @@ export function CombatRewards(hero, allies, enemies)
             EarnXP(allies[a], enemies[e].CurrentXP);
         }
         AddGold(hero, enemies[e].Gold)
-        if (enemies[e].ItemDrop.Name !== "None") {
-            AddItemToInventory(hero, hero.Inventory, enemies[e].ItemDrop)
+        if (enemies[e].ItemDrops.length > 0) {
+            const randomDrop = Math.floor(Math.random() * enemies[e].ItemDrops.length);
+            AddItemToInventory(hero, hero.Inventory, enemies[e].ItemDrops[randomDrop])
         }
     }
 }

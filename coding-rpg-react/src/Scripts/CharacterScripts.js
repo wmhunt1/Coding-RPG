@@ -9,11 +9,11 @@ Array.prototype.remove = function () {
     return this;
 };
 export function AddToCharacterLog(char, message) {
-    char.Log.push(", " + message);
+    char.Log.push(message);
 }
 export function LevelUp(char) {
     char.Level++;
-    char.MaxXP *= char.Level;
+    char.MaxXP = (char.Level*(char.Level-1))*100;
     char.MaxHP += 10;
     char.CurrentHP = char.MaxHP;
     char.MaxMP += 10;
@@ -30,7 +30,7 @@ export function CheckForLevelUp(char) {
 }
 export function EarnXP(char, xp) {
     char.CurrentXP += xp;
-    AddToCharacterLog(char, char.Name + " gains " + xp + " XP");
+    AddToCharacterLog(char, char.Name + " earns " + xp + " XP");
     CheckForLevelUp(char);
 }
 export function HealHP(char, hp) {
@@ -50,6 +50,17 @@ export function TakeDamage(char, damage) {
     if (char.CurrentHP < 0) {
         char.CurrentHP = 0;
     }
+}
+export function RecoverSP(char, sp) {
+    char.CurrentSP += sp;
+    if (char.CurrentSP > char.MaxSP) {
+        char.CurrentSP = char.MaxSP;
+    }
+    AddToCharacterLog(char, char.Name + " recovers " + sp + " MP");
+}
+export function UseSP(char, sp) {
+    char.CurrentSP -= sp;
+    AddToCharacterLog(char, char.Name + " uses " + sp + " SP");
 }
 export function AddGold(char, gold) {
     char.Gold += gold;
