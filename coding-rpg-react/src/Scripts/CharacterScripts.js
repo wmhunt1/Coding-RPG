@@ -9,7 +9,7 @@ Array.prototype.remove = function () {
     return this;
 };
 export function AddToCharacterLog(char, message) {
-    char.Log.push(message);
+    char.Log.push(", " + message);
 }
 export function LevelUp(char) {
     char.Level++;

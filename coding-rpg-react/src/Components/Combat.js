@@ -1,24 +1,17 @@
 import '../App.css';
-import { useState, useRef, useEffect } from "react";
-import { CombatRound } from '../Scripts/CombatScripts';
+import { useState } from "react";
+import { CombatRewards, CombatRound } from '../Scripts/CombatScripts';
 import { RemoveItemFromInventory } from '../Scripts/CharacterScripts';
+import Log from './Log';
 
 function Combat(props) {
-    const messagesEndRef = useRef(null)
     const [hero, setHero] = useState(props.hero)
     const [inventory, setInventory] = useState(props.hero.Inventory)
     const [allies, setAllies] = useState([props.hero, props.hero.Companions[0]]);
     const [enemies, setEnemies] = useState(props.enemies);
     const [enemiesOverZero, setEnemiesOverZero] = useState(props.enemies.length)
-    const [combatLog, setCombatLog] = useState(["Combat Started"]);
+    const [combatLog, setCombatLog] = useState(["Combat Started, "]);
     const [action, setAction] = useState("Attack");
-
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-    }
-    useEffect(() => {
-        //scrollToBottom()
-    }, [combatLog]);
 
     function RunCombat(hero, allies, enemies, target, combatLog, action) {
         CombatRound(hero, allies, enemies, target, combatLog, action);
@@ -35,7 +28,9 @@ function Combat(props) {
             }
         }
         setEnemiesOverZero(overZero)
-        setCombatLog(combatLog)
+        if (overZero === 0) {
+            CombatRewards(hero, allies, enemies)
+        }
     }
     function handleConsumable(hero, allies, enemies, target, combatLog, action, inventory, item) {
         item.ConsumeEffect(hero)
@@ -43,28 +38,26 @@ function Combat(props) {
         var newInventory = [...hero.Inventory];
         setInventory(newInventory);
         RunCombat(hero, allies, enemies, target, combatLog, action)
-        combatLog.push(hero.Name + " uses a(n) " + item.Name)
-        setCombatLog(combatLog)
+        combatLog.push(hero.Name + " uses a(n) " + item.Name + ", ")
         setAction("Attack")
     }
-    const alliesList = allies.map((ally, index) => <h4 key={index}>{ally.Name} - HP {ally.CurrentHP}/{ally.MaxHP}, MP {ally.CurrentMP}/{ally.MaxMP}, SP {ally.CurrentSP}/{ally.MaxSP}</h4>)
-    const enemiesList = enemies.map((enemy, index) => <h4 key={index}>{enemy.Name} - HP: {enemy.CurrentHP}/{enemy.MaxHP}, MP: {enemy.CurrentMP}/{enemy.MaxMP}, SP: {enemy.CurrentSP}/{enemy.MaxSP}  <button onClick={() => RunCombat(hero, allies, enemies, enemy, combatLog, action)}><h4>Target</h4></button></h4>)
-    const combatLogList = combatLog.map((message, index) => <h5 key={index}>{message}</h5>)
+    const alliesList = allies.filter(ally => ally.CurrentHP > 0).map((ally, index) => <h4 key={index}>{ally.Name} - HP {ally.CurrentHP}/{ally.MaxHP}, MP {ally.CurrentMP}/{ally.MaxMP}, SP {ally.CurrentSP}/{ally.MaxSP}</h4>)
+    const enemiesList = enemies.filter(enemy => enemy.CurrentHP > 0).map((enemy, index) => <h4 key={index}>{enemy.Name} - HP: {enemy.CurrentHP}/{enemy.MaxHP}, MP: {enemy.CurrentMP}/{enemy.MaxMP}, SP: {enemy.CurrentSP}/{enemy.MaxSP}  <button onClick={() => RunCombat(hero, allies, enemies, enemy, combatLog, action)}><h4>Target</h4></button></h4>)
     const consumableItemList = inventory.filter(item => item.Type === "Consumable");
     const itemList = consumableItemList.map((item, index) => <h4 key={index}>{item.Name} - QTY: {item.Quantity} <button onClick={() => { handleConsumable(hero, allies, enemies, enemies[0], combatLog, "Use", inventory, item) }}><h4>Use</h4></button></h4>)
     if (hero.CurrentHP > 0 && enemiesOverZero > 0) {
         return (
             <div>
                 <div>
-                    <div style={{ height: "250px", width: "400px", display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", margin: "auto", overflow: "scroll" }}>
+                    <div style={{ height: "250px", width: "400px", display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", overflow: "scroll" }}>
                         <h3>{hero.Name}'s Party</h3>
                         {alliesList}
                     </div>
-                    <div style={{ display: "inline-block", verticalAlign: "text-top", paddingLeft: "1%", paddingRight: "1%", margin: "auto" }}>
-                        <h3> VS </h3>
+                    <div style={{ display: "inline-block", verticalAlign: "text-top", paddingLeft: "1%", paddingRight: "1%", width: "200px"}}>
+                        <Log log={combatLog} logName={"Combat"}></Log>
                     </div>
-                    <div style={{ height: "250px", width: "400px", display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", margin: "auto", overflow: "scroll" }}>
-                        <h3>Enemies</h3>
+                    <div style={{ height: "250px", width: "400px", display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", overflow: "scroll" }}>
+                        <h3>Enemies' Party</h3>
                         {enemiesList}
                     </div>
                 </div>
@@ -81,14 +74,6 @@ function Combat(props) {
                         {itemList}
                     </div>
                 </div>
-                <div>
-                    <h3>Combat Log</h3>
-                    <div style={{ overflowAnchor: "none", marginLeft: "25%", marginRight: "25%", marginBottom: "1%", height: `200px`, overflow: "scroll", border: "solid", textAlign: "center" }}>
-                        {combatLogList}
-                        <div ref={messagesEndRef}></div>
-                    </div>
-                </div>
-
             </div>
         );
 

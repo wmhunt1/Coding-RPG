@@ -1,6 +1,6 @@
 import { AddGold, AddItemToInventory, EarnXP, TakeDamage } from "./CharacterScripts";
 export function Attack(char1, char2, combatLog) {
-    combatLog.push(char1.Name + " attacks " + char2.Name + " with their " + char1.Weapon.Name);
+    combatLog.push(", " + char1.Name + " attacks " + char2.Name + " with their " + char1.Weapon.Name);
     var crit = false;
     var char1Damage = char1.Strength + char1.Weapon.Damage
     var char2Armor = char2.Torso.Protection;
@@ -17,24 +17,17 @@ export function Attack(char1, char2, combatLog) {
     TakeDamage(char2, totalDamage)
     if (totalDamage <= 0) {
         if (char2Armor > char2.Dexterity) {
-            combatLog.push(char2.Name + "'s Armor deflects " + char2.Name + "'s attack")
+            combatLog.push(", " + char2.Name + "'s Armor deflects " + char2.Name + "'s attack")
         }
         else {
-            combatLog.push(char2.Name + " dodges " + char2.Name + "'s attack")
+            combatLog.push(", " + char2.Name + " dodges " + char2.Name + "'s attack")
         }
     }
     else if (totalDamage > baseDamage) {
-        combatLog.push(char1.Name + " deals " + totalDamage + " critical damage to " + char2.Name)
+        combatLog.push(", " + char1.Name + " deals " + totalDamage + " critical damage to " + char2.Name)
     }
     else {
-        combatLog.push(char1.Name + " deals " + totalDamage + " damage to " + char2.Name)
-    }
-    if (char2.CurrentHP <= 0) {
-        EarnXP(char1, char2.CurrentXP)
-        AddGold(char1, char2.Gold)
-        if (char2.ItemDrop.Name !== "None") {
-            AddItemToInventory(char1, char1.Inventory, char2.ItemDrop)
-        }
+        combatLog.push(", " + char1.Name + " deals " + totalDamage + " damage to " + char2.Name)
     }
 }
 export function CombatRound(char1, allies, enemies, target, combatLog, option) {
@@ -69,6 +62,20 @@ export function CombatRound(char1, allies, enemies, target, combatLog, option) {
                 const randomAlly = Math.floor(Math.random() * allyOverZero.length);
                 Attack(enemies[e], allyOverZero[randomAlly], combatLog)
             }
+        }
+    }
+}
+export function CombatRewards(hero, allies, enemies)
+{
+    for (var e = 0; e < enemies.length; e++)
+    {
+        for (var a = 0; a < allies.length; a++)
+        {
+            EarnXP(allies[a], enemies[e].CurrentXP);
+        }
+        AddGold(hero, enemies[e].Gold)
+        if (enemies[e].ItemDrop.Name !== "None") {
+            AddItemToInventory(hero, hero.Inventory, enemies[e].ItemDrop)
         }
     }
 }
