@@ -1,5 +1,5 @@
 export function curse()
 {
-    var curse = {Name: "Curse", Icon: "Cu", ApplyDeBuff(target){target.StrPenalty -= 2; target.DexPenalty -= 2}, RemoveDeBuff(target){target.StrPenalty += 2; target.DexPenalty += 2}}
+    var curse = {Name: "Curse", ApplyDeBuff(target){target.StrPenalty -= 2; target.DexPenalty -= 2; target.DeBuffs.push(this)}, RemoveDeBuff(target){target.StrPenalty += 2; target.DexPenalty += 2}}
     return curse
 }

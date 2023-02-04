@@ -174,6 +174,26 @@ export function EquipItemFromInventory(char, inventory, item) {
     RemoveItemFromInventory(char, inventory, item)
     char.Inventory = inventory;
 }
+export function CheckIfBuffApplied(char, buff, combatLog)
+{
+    if(char.Buffs.find(x => x.Name !== buff.Name)) {
+        buff.ApplyBuff(char)
+    }
+    else
+    {
+        combatLog.push(char.Name + " already has a " + buff.Name + " Buff")
+    }
+}
+export function CheckIfDeBuffApplied(char, deBuff, combatLog)
+{
+    if(char.DeBuffs.find(x => x.Name !== deBuff.Name)) {
+        deBuff.ApplyDeBuff(char)
+    }
+    else
+    {
+        combatLog.push(char.Name + " already has a " + deBuff.Name + " DeBuff")
+    }
+}
 export function RemoveAllBuffs(char)
 {
     for (var b = 0; b < char.Buffs.length; b++)
