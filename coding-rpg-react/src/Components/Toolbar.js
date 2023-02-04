@@ -1,5 +1,6 @@
 export function Toolbar(props) {
     return (<div>
+        <button onClick={props.abil}><h3>Abilities</h3></button>
         <button onClick={props.cSheet}><h3>Character Sheet</h3></button>
         <button onClick={props.equip}><h3>Equipment</h3></button>
         <button onClick={props.inv}><h3>Inventory</h3></button>

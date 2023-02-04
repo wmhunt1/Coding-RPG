@@ -12,7 +12,7 @@ function CharacterSheet(props) {
         <h3>Attributes</h3>
         <div style={{ display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", margin: "auto" }}>
           <h4>Phsyical Attributes</h4>
-          <h4>STR: {hero.Strength} CON: {hero.Constitution} DEX: {hero.Dexterity} SPD: {hero.Speed}</h4>
+          <h4>STR: {hero.Strength}({hero.StrBonus})({hero.StrPenalty}) CON: {hero.Constitution} DEX: {hero.Dexterity} SPD: {hero.Speed}</h4>
         </div>
         <div style={{ display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", margin: "auto" }}>
           <h4>Mental Attributes</h4>

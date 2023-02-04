@@ -83,6 +83,17 @@ export function UseSP(char, sp) {
     char.CurrentSP -= sp;
     AddToCharacterLog(char, char.Name + " uses " + sp + " SP");
 }
+export function HasEnoughSP(char, sp)
+{
+    if (char.CurrentSP >= sp)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 export function AddGold(char, gold) {
     char.Gold += gold;
     AddToCharacterLog(char, char.Name + " earned " + gold + " GP")
@@ -162,4 +173,22 @@ export function EquipItemFromInventory(char, inventory, item) {
     EquipItem(char, inventory, item)
     RemoveItemFromInventory(char, inventory, item)
     char.Inventory = inventory;
+}
+export function RemoveAllBuffs(char)
+{
+    for (var b = 0; b < char.Buffs.length; b++)
+    {
+        AddToCharacterLog(char, char.Name + "'s " + char.Buffs[b].Name + " wears off");
+        char.Buffs[b].RemoveBuff(char);
+    }
+    char.Buffs = []
+}
+export function RemoveAllDeBuffs(char)
+{
+    for (var d = 0; d < char.DeBuffs.length; d++)
+    {
+        AddToCharacterLog(char, char.Name + "'s " + char.DeBuffs[d].Name + " wears off");
+        char.DeBuffs[d].RemoveDeBuff(char);
+    }
+    char.DeBuffs = []
 }

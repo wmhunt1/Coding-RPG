@@ -1,9 +1,9 @@
-import { AddGold, AddItemToInventory, EarnXP, TakeDamage, UseMP } from "./CharacterScripts";
-import { CastSpell } from "./SpellScripts";
+import { AddGold, AddItemToInventory, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, TakeDamage, UseMP } from "./CharacterScripts";
+import { CastSpell, UseAbility } from "./SpellScripts";
 export function Attack(char1, char2, combatLog) {
     combatLog.push(char1.Name + " attacks " + char2.Name + " with their " + char1.Weapon.Name)
     var crit = false;
-    var char1Damage = char1.Strength + char1.Weapon.Damage
+    var char1Damage = char1.Strength + char1.Weapon.Damage + char1.StrBonus - char1.StrPenalty
     var char2Armor = char2.Torso.Protection;
     var char2Defense = char2Armor + char2.Dexterity
     var baseDamage = char1Damage - char2Defense;
@@ -31,30 +31,31 @@ export function Attack(char1, char2, combatLog) {
         combatLog.push(char1.Name + " deals " + totalDamage + " damage to " + char2.Name)
     }
 }
-export function CombatRound(char1, allies, enemies, target, combatLog, option, spell) {
+export function CombatRound(char1, allies, enemies, target, combatLog, option, spell, abil) {
     if (char1.CurrentHP > 0) {
-        if (option === "Attack") {
+        if (option === "Basic Attack") {
             Attack(char1, target, combatLog);
         }
-        if (option !== "Attack" && spell !== null) {
+        if (option !== "Basic Attack" && abil != null) {
+            if (abil.Type === "Self") {
+                UseAbility(char1, abil, char1, combatLog);
+            }
+        }
+        if (option !== "Basic Attack" && spell !== null) {
             if (spell.Target === "Single Enemy") {
                 CastSpell(char1, spell, target, combatLog);
             }
             if (spell.Target === "Single Ally") {
                 CastSpell(char1, spell, target, combatLog);
             }
-            if (spell.Target === "Allies")
-            {
-                for (let a = 0; a < allies.length; a++)
-                {
+            if (spell.Target === "Allies") {
+                for (let a = 0; a < allies.length; a++) {
                     CastSpell(char1, spell, allies[a], combatLog);
                 }
                 UseMP(char1, spell.ManaCost)
             }
-            if (spell.Target === "Enemies")
-            {
-                for (let e = 0; e < enemies.length; e++)
-                {
+            if (spell.Target === "Enemies") {
+                for (let e = 0; e < enemies.length; e++) {
                     CastSpell(char1, spell, enemies[e], combatLog);
                 }
                 UseMP(char1, spell.ManaCost)
@@ -94,11 +95,16 @@ export function CombatRewards(hero, allies, enemies) {
     for (var e = 0; e < enemies.length; e++) {
         for (var a = 0; a < allies.length; a++) {
             EarnXP(allies[a], enemies[e].CurrentXP);
+            RemoveAllBuffs(allies[a])
         }
         AddGold(hero, enemies[e].Gold)
         if (enemies[e].ItemDrops.length > 0) {
             const randomDrop = Math.floor(Math.random() * enemies[e].ItemDrops.length);
             AddItemToInventory(hero, hero.Inventory, enemies[e].ItemDrops[randomDrop])
         }
+    }
+    for (var a2 = 0; a2 < allies.length; a2++) {
+        RemoveAllBuffs(allies[a2])
+        RemoveAllDeBuffs(allies[a2])
     }
 }

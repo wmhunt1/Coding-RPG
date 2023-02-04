@@ -1,5 +1,4 @@
-import { HasEnoughMP, UseMP } from "./CharacterScripts";
-
+import { HasEnoughMP, UseMP, HasEnoughSP, UseSP } from "./CharacterScripts";
 export function CastSpell(char, spell, target, combatLog) {
     if (HasEnoughMP(char, spell.ManaCost) === true) {
         if (spell.Target === "Single Ally" || spell.Target === "Single Enemy") {
@@ -15,5 +14,17 @@ export function CastSpell(char, spell, target, combatLog) {
     }
     else {
         combatLog.push(char.Name + "didn't have enough MP and  " + spell.Name + " fizzled.")
+    }
+}
+export function UseAbility(char, abil, target, combatLog) {
+    if (HasEnoughSP(char, abil.StaminaCost) === true) {
+        if (abil.Target === "Single Ally" || abil.Target === "Single Enemy") {
+            UseSP(char, abil.StaminaCost)
+        }
+        abil.AbilityEffect(target)
+        combatLog.push(char.Name + " uses " + abil.Name)
+    }
+    else {
+        combatLog.push(char.Name + "didn't have enough SP")
     }
 }

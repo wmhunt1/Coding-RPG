@@ -4,6 +4,7 @@ import { HealHP } from '../Scripts/CharacterScripts';
 import Menu from './Menu';
 import Log from './Log';
 import Toolbar from './Toolbar';
+import Abilities from './Abilities';
 import CharacterSheet from './CharacterSheet';
 import Combat from './Combat';
 import Dungeon from './Dungeon';
@@ -29,6 +30,11 @@ function Game(props) {
   if (active === "Menu") {
     return (<div>
       <Menu hero={hero} Back={() => setActive("Game")}></Menu>
+    </div>)
+  }
+  else if (active === "Abilities") {
+    return (<div>
+      <Abilities hero={hero} Back={() => setActive("Game")}></Abilities>
     </div>)
   }
   else if (active === "CharacterSheet") {
@@ -87,7 +93,7 @@ function Game(props) {
     return (
       <div>
         <div>
-          <Toolbar cSheet={() => setActive("CharacterSheet")} equip={() => setActive("Equipment")} inv={() => setActive("Inventory")} party={() => setActive("Party")} spells={() => setActive("Spells")} skill={() => setActive("Skills")} menu={() => setActive("Menu")} test={() => setActive("Test")}></Toolbar>
+          <Toolbar abil={() => setActive("Abilities")}cSheet={() => setActive("CharacterSheet")} equip={() => setActive("Equipment")} inv={() => setActive("Inventory")} party={() => setActive("Party")} spells={() => setActive("Spells")} skill={() => setActive("Skills")} menu={() => setActive("Menu")} test={() => setActive("Test")}></Toolbar>
         </div>
         <div>
           <h2>Game Map</h2>
