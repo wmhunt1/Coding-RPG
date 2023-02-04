@@ -1,6 +1,7 @@
-import { AddGold, AddItemToInventory, EarnXP, TakeDamage } from "./CharacterScripts";
+import { AddGold, AddItemToInventory, EarnXP, TakeDamage, UseMP } from "./CharacterScripts";
+import { CastSpell } from "./SpellScripts";
 export function Attack(char1, char2, combatLog) {
-    setTimeout(combatLog.push(char1.Name + " attacks " + char2.Name + " with their " + char1.Weapon.Name), 5000);
+    combatLog.push(char1.Name + " attacks " + char2.Name + " with their " + char1.Weapon.Name)
     var crit = false;
     var char1Damage = char1.Strength + char1.Weapon.Damage
     var char2Armor = char2.Torso.Protection;
@@ -30,10 +31,34 @@ export function Attack(char1, char2, combatLog) {
         combatLog.push(char1.Name + " deals " + totalDamage + " damage to " + char2.Name)
     }
 }
-export function CombatRound(char1, allies, enemies, target, combatLog, option) {
+export function CombatRound(char1, allies, enemies, target, combatLog, option, spell) {
     if (char1.CurrentHP > 0) {
         if (option === "Attack") {
             Attack(char1, target, combatLog);
+        }
+        if (option !== "Attack" && spell !== null) {
+            if (spell.Target === "Single Enemy") {
+                CastSpell(char1, spell, target, combatLog);
+            }
+            if (spell.Target === "Single Ally") {
+                CastSpell(char1, spell, target, combatLog);
+            }
+            if (spell.Target === "Allies")
+            {
+                for (let a = 0; a < allies.length; a++)
+                {
+                    CastSpell(char1, spell, allies[a], combatLog);
+                }
+                UseMP(char1, spell.ManaCost)
+            }
+            if (spell.Target === "Enemies")
+            {
+                for (let e = 0; e < enemies.length; e++)
+                {
+                    CastSpell(char1, spell, enemies[e], combatLog);
+                }
+                UseMP(char1, spell.ManaCost)
+            }
         }
     }
     for (let a = 1; a < allies.length; a++) {
@@ -65,12 +90,9 @@ export function CombatRound(char1, allies, enemies, target, combatLog, option) {
         }
     }
 }
-export function CombatRewards(hero, allies, enemies)
-{
-    for (var e = 0; e < enemies.length; e++)
-    {
-        for (var a = 0; a < allies.length; a++)
-        {
+export function CombatRewards(hero, allies, enemies) {
+    for (var e = 0; e < enemies.length; e++) {
+        for (var a = 0; a < allies.length; a++) {
             EarnXP(allies[a], enemies[e].CurrentXP);
         }
         AddGold(hero, enemies[e].Gold)

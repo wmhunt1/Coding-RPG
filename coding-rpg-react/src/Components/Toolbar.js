@@ -4,7 +4,7 @@ export function Toolbar(props) {
         <button onClick={props.equip}><h3>Equipment</h3></button>
         <button onClick={props.inv}><h3>Inventory</h3></button>
         <button onClick={props.party}><h3>Party</h3></button>
-        <button onClick={props.spell}><h3>Spells and Abilities</h3></button>
+        <button onClick={props.spells}><h3>Spells</h3></button>
         <button onClick={props.skill}><h3>Skills</h3></button>
         <button onClick={props.menu}><h3>Menu</h3></button>
         <button onClick={props.test}><h3>Tests</h3></button>

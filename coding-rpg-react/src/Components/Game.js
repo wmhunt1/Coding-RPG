@@ -1,6 +1,6 @@
 import '../App.css';
-import { useState, useRef, useEffect } from "react";
-import { AddToCharacterLog, HealHP } from '../Scripts/CharacterScripts';
+import { useState} from "react";
+import { HealHP } from '../Scripts/CharacterScripts';
 import Menu from './Menu';
 import Log from './Log';
 import Toolbar from './Toolbar';
@@ -10,6 +10,7 @@ import Dungeon from './Dungeon';
 import Equipment from './Equipment';
 import Inventory from './Inventory';
 import Party from './Party';
+import SpellBook from './SpellBook';
 import Shop from './Shop';
 import { rat } from '../Database/Characters'
 //import { club, dagger, healingPotion } from '../Database/Items';
@@ -58,6 +59,11 @@ function Game(props) {
   else if (active === "Party") {
     return (<div>
       <Party hero={hero} Back={() => setActive("Game")}></Party>
+    </div>)
+  }
+  else if (active === "Spells") {
+    return (<div>
+      <SpellBook hero={hero} Back={() => setActive("Game")}></SpellBook>
     </div>)
   }
   else if (active === "Shop") {

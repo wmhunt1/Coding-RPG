@@ -1,4 +1,4 @@
-Array.prototype.remove = function () {
+Array.prototype.remove = function() {
     var what, a = arguments, L = a.length, ax;
     while (L && this.length) {
         what = a[--L];
@@ -13,7 +13,7 @@ export function AddToCharacterLog(char, message) {
 }
 export function LevelUp(char) {
     char.Level++;
-    char.MaxXP = (char.Level*(char.Level-1))*100;
+    char.MaxXP = (char.Level * (char.Level - 1)) * 100;
     char.MaxHP += 10;
     char.CurrentHP = char.MaxHP;
     char.MaxMP += 10;
@@ -41,8 +41,7 @@ export function HealHP(char, hp) {
     AddToCharacterLog(char, char.Name + " heals " + hp + " HP");
 }
 export function TakeDamage(char, damage) {
-    if (damage < 0)
-    {
+    if (damage < 0) {
         damage = 0;
     }
     char.CurrentHP -= damage;
@@ -51,12 +50,34 @@ export function TakeDamage(char, damage) {
         char.CurrentHP = 0;
     }
 }
+export function RecoverMP(char, mp) {
+    char.CurrentMP += mp;
+    if (char.CurrentMP > char.MaxMP) {
+        char.CurrentMP = char.MaxMP;
+    }
+    AddToCharacterLog(char, char.Name + " recovers " + mp + " MP");
+}
+export function UseMP(char, mp) {
+    char.CurrentMP -= mp;
+    AddToCharacterLog(char, char.Name + " uses " + mp + " MP");
+}
+export function HasEnoughMP(char, mp)
+{
+    if (char.CurrentMP >= mp)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 export function RecoverSP(char, sp) {
     char.CurrentSP += sp;
     if (char.CurrentSP > char.MaxSP) {
         char.CurrentSP = char.MaxSP;
     }
-    AddToCharacterLog(char, char.Name + " recovers " + sp + " MP");
+    AddToCharacterLog(char, char.Name + " recovers " + sp + " SP");
 }
 export function UseSP(char, sp) {
     char.CurrentSP -= sp;
@@ -87,14 +108,12 @@ export function AddItemToInventory(char, inventory, item) {
 }
 export function RemoveItemFromInventory(char, inventory, item) {
     var findItem = inventory.findIndex(x => x.Name === item.Name);
-    if (inventory[findItem].Quantity > 1)
-    {
+    if (inventory[findItem].Quantity > 1) {
         var newItem = inventory[findItem];
         newItem.Quantity--;
         inventory[findItem] = newItem;
     }
-    else
-    {
+    else {
         inventory.remove(item);
     }
     char.Inventory = inventory;
@@ -116,8 +135,7 @@ export function UnEquip(char, inventory, item) {
         var torso = { Name: "Naked", Type: "Torso", Protection: 0, ProtectionType: "Natural", Cost: 0, Quantity: 0 }
         char.Torso = torso;
     }
-    else
-    {
+    else {
 
     }
     char.Inventory = inventory;
@@ -135,12 +153,10 @@ export function EquipItem(char, inventory, item) {
     char.Inventory = inventory;
 }
 export function EquipItemFromInventory(char, inventory, item) {
-    if (item.Type === "Weapon")
-    {
+    if (item.Type === "Weapon") {
         UnEquip(char, inventory, char.Weapon)
     }
-    else if (item.Type === "Torso")
-    {
+    else if (item.Type === "Torso") {
         UnEquip(char, inventory, char.Torso)
     }
     EquipItem(char, inventory, item)

@@ -6,6 +6,7 @@ function Log(props) {
     const [log, setLog] = useState(props.log);
     const logList = log.map((message, index) => <li key={index}><h5>{message}</h5></li>)
     useEffect(() => {
+
         if(logRef && logRef.current) {
           const element = logRef.current;
           element.scroll({

@@ -4,8 +4,9 @@ import MainMenu from "./Components/MainMenu";
 import './App.css';
 import { dog} from "./Database/Characters";
 import { healingPotion, sword, tunic } from "./Database/Items";
+import {basicHeal, fireBall, magicMissile } from "./Database/Spells";
 
-var newHero = { Name: "Hero", Log: [], Level: 1, CurrentXP: 0, MaxXP: 100, CurrentHP: 10, MaxHP: 10, CurrentMP: 10, MaxMP: 10, CurrentSP: 10, MaxSP: 10, Strength: 10, Constitution: 10, Dexterity: 10, Intelligence: 10, Wisdom: 10, Charisma: 10, WillPower: 10, Perception: 10, Luck: 10, Beauty: 10, Speed: 10, Weapon: sword(), Torso: tunic(), Inventory: [healingPotion()], Gold: 5, Companions: [dog()], ItemDrops: [] }
+var newHero = { Name: "Hero", Log: [], Level: 1, CurrentXP: 0, MaxXP: 100, CurrentHP: 10, MaxHP: 10, CurrentMP: 10, MaxMP: 10, CurrentSP: 10, MaxSP: 10, Strength: 10, Constitution: 10, Dexterity: 10, Intelligence: 10, Wisdom: 10, Charisma: 10, WillPower: 10, Perception: 10, Luck: 10, Beauty: 10, Speed: 10, Weapon: sword(), Torso: tunic(), Inventory: [healingPotion()], Gold: 5, Companions: [dog()], Abilities: [], SpellBook:[basicHeal(), fireBall(), magicMissile()], ItemDrops: [] }
 function App() {
   const [active, setActive] = useState("MainMenu");
   const hero = newHero;
