@@ -1,4 +1,4 @@
-import { AddGold, AddItemToInventory, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, TakeDamage, UseMP, UseSP } from "./CharacterScripts";
+import { AddGold, AddItemToInventory, AddToCharacterLog, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, TakeDamage, UseMP, UseSP } from "./CharacterScripts";
 import { CastSpell, UseAbility } from "./SpellScripts";
 export function CalculateCharDamage(char) {
     var damage = char.Strength + char.Weapon.Damage + char.StrBonus - char.StrPenalty;
@@ -176,6 +176,7 @@ export function CombatRound(char1, allies, enemies, target, combatLog, option, s
 
 }
 export function CombatRewards(hero, allies, enemies) {
+    AddToCharacterLog(hero, "Recieving Combat Rewards")
     for (var e = 0; e < enemies.length; e++) {
         for (var a = 0; a < allies.length; a++) {
             EarnXP(allies[a], enemies[e].CurrentXP);

@@ -37,7 +37,7 @@ function MainMenu(props) {
           <button onClick={() => setActive("MainMenu")}><h3>Back</h3></button>
         </div>
       </div> : <div></div>}
-      {active === "Game" ? <div><Game hero={hero}></Game></div> : <div></div>}
+      {active === "Game" ? <div><Game hero={hero} log={hero.Log}></Game></div> : <div></div>}
     </div>
   </div>)
 }

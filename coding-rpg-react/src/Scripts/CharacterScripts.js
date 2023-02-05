@@ -24,43 +24,45 @@ export function LevelUp(char) {
 }
 export function CheckForLevelUp(char) {
     if (char.CurrentXP >= char.MaxXP) {
+        AddToCharacterLog(char, char.Name + " has enough XP to Level Up");
         return true;
     }
     else {
+        AddToCharacterLog(char, char.Name + " doesn't have enough XP to Level Up");
         return false;
     }
 }
 export function EarnXP(char, xp) {
     char.CurrentXP += xp;
-    AddToCharacterLog(char, char.Name + " earns " + xp + " XP");
+    AddToCharacterLog(char, char.Name + " earned " + xp + " XP");
 }
 export function HealHP(char, hp) {
     char.CurrentHP += hp;
     if (char.CurrentHP > char.MaxHP) {
         char.CurrentHP = char.MaxHP;
     }
-    AddToCharacterLog(char, char.Name + " heals " + hp + " HP");
+    //AddToCharacterLog(char, char.Name + " heals " + hp + " HP");
 }
 export function TakeDamage(char, damage) {
     if (damage < 0) {
         damage = 0;
     }
     char.CurrentHP -= damage;
-    AddToCharacterLog(char, char.Name + " takes " + damage + " damage");
     if (char.CurrentHP < 0) {
         char.CurrentHP = 0;
     }
+    //AddToCharacterLog(char, char.Name + " takes " + damage + " damage");
 }
 export function RecoverMP(char, mp) {
     char.CurrentMP += mp;
     if (char.CurrentMP > char.MaxMP) {
         char.CurrentMP = char.MaxMP;
     }
-    AddToCharacterLog(char, char.Name + " recovers " + mp + " MP");
+    //AddToCharacterLog(char, char.Name + " recovers " + mp + " MP");
 }
 export function UseMP(char, mp) {
     char.CurrentMP -= mp;
-    AddToCharacterLog(char, char.Name + " uses " + mp + " MP");
+    //AddToCharacterLog(char, char.Name + " uses " + mp + " MP");
 }
 export function HasEnoughMP(char, mp) {
     if (char.CurrentMP >= mp) {
@@ -75,7 +77,7 @@ export function RecoverSP(char, sp) {
     if (char.CurrentSP > char.MaxSP) {
         char.CurrentSP = char.MaxSP;
     }
-    AddToCharacterLog(char, char.Name + " recovers " + sp + " SP");
+    //AddToCharacterLog(char, char.Name + " recovers " + sp + " SP");
 }
 export function UseSP(char, sp) {
     char.CurrentSP -= sp;
@@ -93,15 +95,15 @@ export function FullyRecover(char) {
     HealHP(char, char.MaxHP)
     RecoverMP(char, char.MaxMP)
     RecoverSP(char, char.CurrentSP)
+    AddToCharacterLog(char, char.Name + " Fully Recovered")
 }
 export function AddGold(char, gold) {
     char.Gold += gold;
     AddToCharacterLog(char, char.Name + " earned " + gold + " GP")
-    return char;
 }
 export function RemoveGold(char, gold) {
     char.Gold -= gold;
-    AddToCharacterLog(char, char.Name + " lost " + gold + " GP")
+    AddToCharacterLog(char, char.Name + " paid " + gold + " GP")
 }
 export function AddItemToInventory(char, inventory, item) {
     if (inventory.find(x => x.Name === item.Name)) {
@@ -109,12 +111,11 @@ export function AddItemToInventory(char, inventory, item) {
         var newItem = inventory[findItem];
         newItem.Quantity++;
         inventory[findItem] = newItem;
-        AddToCharacterLog(char, "Adding " + item.Name + " to inventory");
     }
     else {
         inventory.push(item);
-        AddToCharacterLog(char, "Adding " + item.Name + " to inventory");
     }
+    AddToCharacterLog(char, "Adding " + item.Name + " to " + char.Name + "'s Inventory");
     char.Inventory = inventory;
 }
 export function RemoveItemFromInventory(char, inventory, item) {
@@ -127,12 +128,13 @@ export function RemoveItemFromInventory(char, inventory, item) {
     else {
         inventory.remove(item);
     }
+    AddToCharacterLog(char, "Removing " + item.Name + " from " + char.Name + "'s Inventory");
     char.Inventory = inventory;
 }
 export function UnEquip(char, inventory, item) {
     if (item.Type === "Weapon") {
         if (char.Weapon.Name !== "Bare Fist") {
-            AddToCharacterLog(char, "Enequipping " + item.Name);
+            AddToCharacterLog(char, char.Name + " Unequipped" + item.Name);
             AddItemToInventory(char, inventory, item);
         }
         var fist = { Name: "Bare Fist", Type: "Weapon", Damage: 0, DamageType: "Bludgeoning", Cost: 0, Quantity: 0 }
@@ -140,7 +142,7 @@ export function UnEquip(char, inventory, item) {
     }
     else if (item.Type === "Torso") {
         if (char.Weapon.Torso !== "Naked") {
-            AddToCharacterLog(char, "Enequipping " + item.Name);
+            AddToCharacterLog(char, char.Name + " Unequipped " + item.Name);
             AddItemToInventory(char, inventory, item);
         }
         var torso = { Name: "Naked", Type: "Torso", Protection: 0, ProtectionType: "Natural", Cost: 0, Quantity: 0 }
@@ -160,7 +162,7 @@ export function EquipItem(char, inventory, item) {
         UnEquip(char, inventory, item);
         char.Torso = item;
     }
-    AddToCharacterLog(char, "Equipping " + item.Name);
+    AddToCharacterLog(char, char.Name + " Equipping " + item.Name);
     char.Inventory = inventory;
 }
 export function EquipItemFromInventory(char, inventory, item) {

@@ -51,13 +51,15 @@ export function LevelUpScreen(props) {
         }
         setHero(hero);
     }
-    function handleLevelUp(hero, a1, a2, a3) {
-        LevelUp(hero);
-        IncreaseAttribute(hero, a1)
-        IncreaseAttribute(hero, a2)
-        IncreaseAttribute(hero, a3)
-        setHero(hero);
-        if (hero.CurrentXP < hero.MaxXP) {
+    function handleLevelUp(char, a1, a2, a3) {
+        LevelUp(char);
+        IncreaseAttribute(char, a1)
+        IncreaseAttribute(char, a2)
+        IncreaseAttribute(char, a3)
+        var newChar = char;
+        setHero(newChar);
+        props.parentCallback(newChar);
+        if (char.CurrentXP < char.MaxXP) {
             setActive("Leveled");
         }
     }

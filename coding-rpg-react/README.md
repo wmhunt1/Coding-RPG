@@ -1,5 +1,4 @@
 feats/perks
-update gamelog from other windows
 save/load via json
 conditions
 craftingrecipes

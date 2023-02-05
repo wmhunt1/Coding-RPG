@@ -16,21 +16,31 @@ import SpellBook from './SpellBook';
 import Shop from './Shop';
 import { rat } from '../Database/Characters'
 import { testShop } from '../Database/Shops'
-import { healingPotion } from '../Database/Items';
 
 function Game(props) {
   const [active, setActive] = useState("Game");
   const [hero, setHero] = useState(props.hero)
-
+  const [log, setLog] = useState(props.log)
+  const handleCallback = (childData) => {
+    var newLog = [...childData.Log]
+    setLog(newLog)
+  }
   function Heal(char) {
     FullyRecover(char)
-    setHero(char);
     for (var c = 0; c < char.Companions.length; c++) {
       FullyRecover(char.Companions[c])
     }
+    var newChar = char;
+    setHero(newChar);
+    var newLog = [...char.Log]
+    setLog(newLog)
   }
   function TestXP(char) {
     EarnXP(char, char.MaxXP)
+    var newChar = char;
+    setHero(newChar);
+    var newLog = [...char.Log]
+    setLog(newLog)
   }
 
   return (
@@ -41,13 +51,13 @@ function Game(props) {
       <div>
         {active === "Menu" ? <Menu hero={hero} Back={() => setActive("Game")}></Menu> : <div></div>}
         {active === "Abilities" ? <Abilities hero={hero} Back={() => setActive("Game")}></Abilities> : <div></div>}
-        {active === "CharacterSheet" ? <CharacterSheet hero={hero} Back={() => setActive("Game")}></CharacterSheet> : <div></div>}
-        {active === "Combat" ? <Combat hero={hero} enemies={[rat(), rat(), rat()]} Back={() => setActive("Test")}></Combat> : <div></div>}
-        {active === "Dungeon" ? <Dungeon hero={hero} dungeonName={"Test Dungeon"} encounters={[[rat()], [rat(), rat()]]} boss={[rat(), rat(), rat()]} Back={() => setActive("Test")}></Dungeon> : <div></div>}
-        {active === "Equipment" ? <Equipment hero={hero} Back={() => setActive("Game")}></Equipment> : <div></div>}
-        {active === "Inventory" ? <Inventory hero={hero} Back={() => setActive("Game")}></Inventory> : <div></div>}
+        {active === "CharacterSheet" ? <CharacterSheet parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></CharacterSheet> : <div></div>}
+        {active === "Combat" ? <Combat parentCallback={handleCallback} hero={hero} enemies={[rat(), rat(), rat()]} Back={() => setActive("Test")}></Combat> : <div></div>}
+        {active === "Dungeon" ? <Dungeon parentCallback={handleCallback} hero={hero} dungeonName={"Test Dungeon"} encounters={[[rat()], [rat(), rat()]]} boss={[rat(), rat(), rat()]} Back={() => setActive("Test")}></Dungeon> : <div></div>}
+        {active === "Equipment" ? <Equipment parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></Equipment> : <div></div>}
+        {active === "Inventory" ? <Inventory parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></Inventory> : <div></div>}
         {active === "Party" ? <Party hero={hero} Back={() => setActive("Game")}></Party> : <div></div>}
-        {active === "Shop" ? <Shop shopName="Test Shop" hero={hero} shopInventory={[healingPotion()]} Back={() => setActive("Test")}></Shop> : <div></div>}
+        {active === "Shop" ? <Shop parentCallback={handleCallback} shopName={testShop().Name} hero={hero} shopInventory={testShop().Inventory} Back={() => setActive("Test")}></Shop> : <div></div>}
         {active === "Skills" ? <div></div> : <div></div>}
         {active === "Spells" ? <SpellBook hero={hero} Back={() => setActive("Game")}></SpellBook> : <div></div>}
         {active === "Test" ? <div className='menu-box'>
@@ -60,7 +70,7 @@ function Game(props) {
         </div> : <div></div>}
       </div>
       <div style={{ marginLeft: "25%", marginRight: "25%", width: "auto" }}>
-        <Log log={hero.Log} logName={"Game"}></Log>
+        <Log log={log} logName={"Game"}></Log>
       </div>
     </div>
   );

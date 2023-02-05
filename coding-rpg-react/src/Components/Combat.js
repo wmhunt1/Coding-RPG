@@ -51,7 +51,9 @@ function Combat(props) {
         if (overZero === 0) {
             CombatRewards(hero, allies, enemies)
             setHero(hero)
+            props.parentCallback(hero);
         }
+        props.parentCallback(hero);
     }
     function handleConsumable(hero, allies, enemies, target, combatLog, action, spell, abil, inventory, item) {
         item.ConsumeEffect(hero)

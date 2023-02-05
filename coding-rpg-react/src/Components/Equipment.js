@@ -12,6 +12,7 @@ function Equipment(props) {
             setHero(char);
             setWeapon(char.Weapon)
         }
+        props.parentCallback(char);
     }
     function handleUnEquipTorso(char, inventory, torso) {
         if (torso.Name !== "Fur") {
@@ -19,6 +20,7 @@ function Equipment(props) {
             setHero(char);
             setTorso(char.Torso)
         }
+        props.parentCallback(char);
     }
     return (
         <div>

@@ -9,12 +9,19 @@ function CharacterSheet(props) {
   const [active, setActive] = useState("charSheet")
   const [currentXP, setCurrentXP] = useState(props.hero.CurrentXP)
   const [maxXP, setMaxXP] = useState(props.hero.MaxXP)
-  function handleCheckForLevelUp(hero) {
-    var check = CheckForLevelUp(hero)
+  function handleCheckForLevelUp(char) {
+    var check = CheckForLevelUp(char)
     if (check === true) {
       setActive("levelUp")
     }
-    setHero(hero)
+    var newChar = char;
+    setHero(newChar)
+    props.parentCallback(newChar);
+  }
+  const handleCallback = (childData) => {
+    var newChar = childData
+    setHero(newChar)
+    props.parentCallback(newChar);
   }
   return (
     <div>
@@ -39,7 +46,7 @@ function CharacterSheet(props) {
         </div>
       </div> : <div></div>}
       {active === "levelUp" ? <div>
-        <LevelUpScreen hero={hero}></LevelUpScreen>
+        <LevelUpScreen parentCallback={handleCallback} hero={hero}></LevelUpScreen>
       </div> : <div></div>}
     </div>
   )

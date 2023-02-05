@@ -26,6 +26,7 @@ function Shop(props) {
             var newInventory = [...hero.Inventory];
             setHeroInventory(newInventory);
         }
+        props.parentCallback(hero);
 
     }
     function handleSell(hero, heroInventory, shopInventory, item) {
@@ -49,6 +50,7 @@ function Shop(props) {
         setHeroInventory(newHeroInventory);
         var newShopInventory = [...shopInventory];
         setShopInventory(newShopInventory);
+        props.parentCallback(hero);
     }
     return (<div>
         <h2>{props.shopName}</h2>
