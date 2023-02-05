@@ -5,7 +5,7 @@ export function Attack(char1, char2, combatLog) {
     var crit = false;
     var char1Damage = char1.Strength + char1.Weapon.Damage + char1.StrBonus - char1.StrPenalty
     var char2Armor = char2.Torso.Protection;
-    var char2Defense = char2Armor + char2.Dexterity
+    var char2Defense = char2Armor + char2.Dexterity + char2.DexBonus - char2.DexPenalty
     var baseDamage = char1Damage - char2Defense;
     var totalDamage = baseDamage;
     var critChance = Math.floor(Math.random() * 100) + 1 + char1.Luck;
@@ -31,7 +31,7 @@ export function Attack(char1, char2, combatLog) {
         combatLog.push(char1.Name + " deals " + totalDamage + " damage to " + char2.Name)
     }
 }
-export function CombatRound(char1, allies, enemies, target, combatLog, option, spell, abil) {
+export function AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil) {
     if (char1.CurrentHP > 0) {
         if (option === "Basic Attack") {
             Attack(char1, target, combatLog);
@@ -76,6 +76,8 @@ export function CombatRound(char1, allies, enemies, target, combatLog, option, s
             }
         }
     }
+}
+export function EnemyTurn(allies, enemies, combatLog) {
     for (let e = 0; e < enemies.length; e++) {
         if (enemies[e].CurrentHP > 0) {
             var allyOverZero = []
@@ -90,6 +92,25 @@ export function CombatRound(char1, allies, enemies, target, combatLog, option, s
             }
         }
     }
+}
+export function CombatRound(char1, allies, enemies, target, combatLog, option, spell, abil) {
+    var AllySpeed = allies.reduce((a, b) => a.Speed + b.Speed) / allies.length
+    var EnemySpeed = 0;
+    for (let e = 0; e < enemies.length; e++) {
+        EnemySpeed += enemies[e].Speed
+    }
+    console.log(EnemySpeed)
+    EnemySpeed /= enemies.length
+    console.log(EnemySpeed)
+    if (AllySpeed >= EnemySpeed) {
+        AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil)
+        EnemyTurn(allies, enemies, combatLog)
+    }
+    else {
+        EnemyTurn(allies, enemies, combatLog)
+        AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil)
+    }
+
 }
 export function CombatRewards(hero, allies, enemies) {
     for (var e = 0; e < enemies.length; e++) {

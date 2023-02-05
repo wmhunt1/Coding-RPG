@@ -1,6 +1,6 @@
 import '../App.css';
-import { useState} from "react";
-import { HealHP } from '../Scripts/CharacterScripts';
+import { useState } from "react";
+import { EarnXP, FullyRecover } from '../Scripts/CharacterScripts';
 import Menu from './Menu';
 import Log from './Log';
 import Toolbar from './Toolbar';
@@ -14,7 +14,6 @@ import Party from './Party';
 import SpellBook from './SpellBook';
 import Shop from './Shop';
 import { rat } from '../Database/Characters'
-//import { club, dagger, healingPotion } from '../Database/Items';
 import { testShop } from '../Database/Shops'
 
 function Game(props) {
@@ -22,9 +21,15 @@ function Game(props) {
   const [hero, setHero] = useState(props.hero)
 
   function Heal(char) {
-    HealHP(char, char.MaxHP)
+    FullyRecover(char)
     setHero(char);
-    HealHP(char.Companions[0], char.Companions[0].MaxHP)
+    for (var c = 0; c < char.Companions.length; c++) {
+      FullyRecover(char.Companions[c])
+    }
+  }
+  function TestXP(char)
+  {
+    EarnXP(char, char.MaxXP)
   }
 
   if (active === "Menu") {
@@ -83,8 +88,9 @@ function Game(props) {
         <h2>Tests</h2>
         <button onClick={() => setActive("Combat")}><h3>Test Combat</h3></button>
         <button onClick={() => setActive("Dungeon")}><h3>Test Dungeon</h3></button>
-        <button onClick={() => Heal(props.hero)}><h3>Test Heal</h3></button>
+        <button onClick={() => Heal(hero)}><h3>Test Heal</h3></button>
         <button onClick={() => setActive("Shop")}><h3>Test Shop</h3></button>
+        <button onClick={() => TestXP(hero)}><h3>Test XP</h3></button>
         <button onClick={() => setActive("Game")}><h3>Back</h3></button>
       </div></div>
     );
@@ -93,7 +99,7 @@ function Game(props) {
     return (
       <div>
         <div>
-          <Toolbar abil={() => setActive("Abilities")}cSheet={() => setActive("CharacterSheet")} equip={() => setActive("Equipment")} inv={() => setActive("Inventory")} party={() => setActive("Party")} spells={() => setActive("Spells")} skill={() => setActive("Skills")} menu={() => setActive("Menu")} test={() => setActive("Test")}></Toolbar>
+          <Toolbar abil={() => setActive("Abilities")} cSheet={() => setActive("CharacterSheet")} equip={() => setActive("Equipment")} inv={() => setActive("Inventory")} party={() => setActive("Party")} spells={() => setActive("Spells")} skill={() => setActive("Skills")} menu={() => setActive("Menu")} test={() => setActive("Test")}></Toolbar>
         </div>
         <div>
           <h2>Game Map</h2>

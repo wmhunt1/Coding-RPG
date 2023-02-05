@@ -42,7 +42,7 @@ function MainMenu(props) {
     return (
       <div>
         <h2>Main Menu</h2>
-        <button onClick={props.NewGame}><h3>Continue (Hero)</h3></button>
+        {/* <button onClick={props.NewGame}><h3>Continue (Hero)</h3></button> */}
         <button onClick={props.NewGame}><h3>Load Game (Hero)</h3></button>
         <button hero={hero} onClick={() => setActive("NewGame")}><h3>New Game</h3></button>
         <button><h3>Settings</h3></button>

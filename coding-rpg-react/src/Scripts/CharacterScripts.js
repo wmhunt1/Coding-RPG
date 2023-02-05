@@ -1,4 +1,4 @@
-Array.prototype.remove = function() {
+Array.prototype.remove = function () {
     var what, a = arguments, L = a.length, ax;
     while (L && this.length) {
         what = a[--L];
@@ -14,24 +14,26 @@ export function AddToCharacterLog(char, message) {
 export function LevelUp(char) {
     char.Level++;
     char.MaxXP = (char.Level * (char.Level - 1)) * 100;
-    char.MaxHP += 10;
+    char.MaxHP += char.Constitution;
     char.CurrentHP = char.MaxHP;
     char.MaxMP += 10;
-    char.CurrentMP = char.MaxMP;
+    char.CurrentMP = char.Intelligence;
     char.MaxSP += 10;
-    char.CurrentSP = char.MaxSP;
+    char.CurrentSP = char.Constitution;
     AddToCharacterLog(char, char.Name + " has reached level " + char.Level);
 }
 export function CheckForLevelUp(char) {
     if (char.CurrentXP >= char.MaxXP) {
-        console.log("Enough XP to Level")
-        LevelUp(char)
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 export function EarnXP(char, xp) {
     char.CurrentXP += xp;
     AddToCharacterLog(char, char.Name + " earns " + xp + " XP");
-    CheckForLevelUp(char);
 }
 export function HealHP(char, hp) {
     char.CurrentHP += hp;
@@ -61,14 +63,11 @@ export function UseMP(char, mp) {
     char.CurrentMP -= mp;
     AddToCharacterLog(char, char.Name + " uses " + mp + " MP");
 }
-export function HasEnoughMP(char, mp)
-{
-    if (char.CurrentMP >= mp)
-    {
+export function HasEnoughMP(char, mp) {
+    if (char.CurrentMP >= mp) {
         return true;
     }
-    else
-    {
+    else {
         return false;
     }
 }
@@ -83,16 +82,19 @@ export function UseSP(char, sp) {
     char.CurrentSP -= sp;
     AddToCharacterLog(char, char.Name + " uses " + sp + " SP");
 }
-export function HasEnoughSP(char, sp)
-{
-    if (char.CurrentSP >= sp)
-    {
+export function HasEnoughSP(char, sp) {
+    if (char.CurrentSP >= sp) {
         return true;
     }
-    else
-    {
+    else {
         return false;
     }
+}
+export function FullyRecover(char)
+{
+    HealHP(char, char.MaxHP)
+    RecoverMP(char, char.MaxMP)
+    RecoverSP(char, char.CurrentSP)
 }
 export function AddGold(char, gold) {
     char.Gold += gold;
@@ -174,39 +176,31 @@ export function EquipItemFromInventory(char, inventory, item) {
     RemoveItemFromInventory(char, inventory, item)
     char.Inventory = inventory;
 }
-export function CheckIfBuffApplied(char, buff, combatLog)
-{
-    if(char.Buffs.find(x => x.Name !== buff.Name)) {
+export function CheckIfBuffApplied(char, buff, combatLog) {
+    if (char.Buffs.find(x => x.Name !== buff.Name)) {
         buff.ApplyBuff(char)
     }
-    else
-    {
+    else {
         combatLog.push(char.Name + " already has a " + buff.Name + " Buff")
     }
 }
-export function CheckIfDeBuffApplied(char, deBuff, combatLog)
-{
-    if(char.DeBuffs.find(x => x.Name !== deBuff.Name)) {
+export function CheckIfDeBuffApplied(char, deBuff, combatLog) {
+    if (char.DeBuffs.find(x => x.Name !== deBuff.Name)) {
         deBuff.ApplyDeBuff(char)
     }
-    else
-    {
+    else {
         combatLog.push(char.Name + " already has a " + deBuff.Name + " DeBuff")
     }
 }
-export function RemoveAllBuffs(char)
-{
-    for (var b = 0; b < char.Buffs.length; b++)
-    {
+export function RemoveAllBuffs(char) {
+    for (var b = 0; b < char.Buffs.length; b++) {
         AddToCharacterLog(char, char.Name + "'s " + char.Buffs[b].Name + " wears off");
         char.Buffs[b].RemoveBuff(char);
     }
     char.Buffs = []
 }
-export function RemoveAllDeBuffs(char)
-{
-    for (var d = 0; d < char.DeBuffs.length; d++)
-    {
+export function RemoveAllDeBuffs(char) {
+    for (var d = 0; d < char.DeBuffs.length; d++) {
         AddToCharacterLog(char, char.Name + "'s " + char.DeBuffs[d].Name + " wears off");
         char.DeBuffs[d].RemoveDeBuff(char);
     }
