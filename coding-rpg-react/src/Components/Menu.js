@@ -10,23 +10,15 @@ function Menu(props) {
         window.close();
         navigator.app.exitApp();
     };
-    if (active === "MainMenu") {
-        return (
-            <div>
-                <MainMenu NewGame={() => setActive("Game")} hero={hero}></MainMenu>
-            </div>
-        )
-    }
-    else {
-        return (
-            <div className="menu-box">
-                <div><button className="menu-button"><h3>Save Game</h3></button></div>
-                <div><button className="menu-button"><h3>Load Game</h3></button></div>
-                <div><button className="menu-button" onClick={() => setActive("MainMenu")}><h3>Main Menu</h3></button></div>
-                <div><button className="menu-button" onClick={() => exitGame()}><h3>Exit Game</h3></button></div>
-
-            </div>
-        )
-    }
+    return (<div>
+        {active === "MainMenu" ? <div>
+            <MainMenu NewGame={() => setActive("Game")} hero={hero}></MainMenu>
+        </div> : <div className="menu-box">
+            <div><button className="menu-button"><h3>Save Game</h3></button></div>
+            <div><button className="menu-button"><h3>Load Game</h3></button></div>
+            <div><button className="menu-button" onClick={() => setActive("MainMenu")}><h3>Main Menu</h3></button></div>
+            <div><button className="menu-button" onClick={() => exitGame()}><h3>Exit Game</h3></button></div>
+        </div>}
+    </div>)
 }
 export default Menu;

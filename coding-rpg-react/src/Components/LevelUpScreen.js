@@ -61,33 +61,24 @@ export function LevelUpScreen(props) {
             setActive("Leveled");
         }
     }
-    if (active === "Leveling") {
-        return (<div>
-            <div>
-                <h3>Select Attributes To Increase</h3>
-                <div className="attribute-selection"><AttributeIncrease parentCallback={handleCallbackOne}></AttributeIncrease></div>
-                <div className="attribute-selection"><AttributeIncrease parentCallback={handleCallbackTwo}></AttributeIncrease></div>
-                <div className="attribute-selection"><AttributeIncrease parentCallback={handleCallbackThree}></AttributeIncrease></div>
-            </div>
-            <div style={{ paddingBottom: "1%" }}>
-                <button onClick={() => handleLevelUp(hero, aOne, aTwo, aThree)}><h3>Level {hero.Name} to Level {hero.Level + 1}</h3></button>
-            </div>
-            <div>
-                <button onClick={props.Back}><h3>Back to Character Sheet</h3></button>
-            </div>
-        </div>)
-    }
-    else if (active === "Leveled") {
-        return (<div>
-            <h2>{hero.Name} is now Level {hero.Level}</h2>
-            <button onClick={props.Back}><h3>Back to Character Sheet</h3></button>
-        </div>)
-    }
-    else {
-        return (<div>
-            <button onClick={props.Back(hero)}><h3>Back to Character Sheet</h3></button>
-        </div>)
-    }
-
+    return (
+        <div>
+            {active === "Leveling" ? <div>
+                <div style={{ marginBottom: "1%" }}>
+                    <h3>Select Attributes To Increase</h3>
+                    <div className="attribute-selection"><AttributeIncrease parentCallback={handleCallbackOne}></AttributeIncrease></div>
+                    <div className="attribute-selection"><AttributeIncrease parentCallback={handleCallbackTwo}></AttributeIncrease></div>
+                    <div className="attribute-selection"><AttributeIncrease parentCallback={handleCallbackThree}></AttributeIncrease></div>
+                </div>
+                <div style={{ paddingBottom: "1%" }}>
+                    <button onClick={() => handleLevelUp(hero, aOne, aTwo, aThree)}><h3>Level {hero.Name} to Level {hero.Level + 1}</h3></button>
+                </div>
+                <div>
+                </div>
+            </div> : <div>
+                <h2>{hero.Name} is now Level {hero.Level}</h2>
+            </div>}
+        </div>
+    )
 }
 export default LevelUpScreen

@@ -16,15 +16,9 @@ function CharacterSheet(props) {
     }
     setHero(hero)
   }
-  function handleBackToCharacterSheet(hero) {
-    setActive("charSheet")
-    setHero(hero)
-    setCurrentXP(hero.CurrentXP)
-    setMaxXP(hero.maxXP)
-  }
-  if (active === "charSheet") {
-    return (
-      <div >
+  return (
+    <div>
+      {active === "charSheet" ? <div>
         <h2>{hero.Name}'s Character Sheet</h2>
         <h3>Base Stats</h3>
         <div style={{ display: "inline-block" }}>
@@ -43,14 +37,12 @@ function CharacterSheet(props) {
             <h4>INT: {hero.Intelligence} WIS: {hero.Wisdom} CHA: {hero.Charisma} WLP: {hero.WillPower} PRC: {hero.Perception} LCK: {hero.Luck}</h4>
           </div>
         </div>
-      </div>
-    );
-  }
-  else {
-    return (<div>
-      <LevelUpScreen hero={hero} Back={() => handleBackToCharacterSheet(props.hero)}></LevelUpScreen>
-    </div>)
-  }
+      </div> : <div></div>}
+      {active === "levelUp" ? <div>
+        <LevelUpScreen hero={hero}></LevelUpScreen>
+      </div> : <div></div>}
+    </div>
+  )
 }
 
 export default CharacterSheet;

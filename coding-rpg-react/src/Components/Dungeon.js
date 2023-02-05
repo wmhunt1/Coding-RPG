@@ -46,53 +46,44 @@ function Dungeon(props) {
         }
     }
     const encounterList = encounters.map((encounter, index) => <h3 key={index}>Encounter {index + 1}: {encounter[0].Name}(s)<button onClick={() => handleEncounter(encounter)}><h3>Start Encounter</h3></button></h3>)
-    if (hero.CurrentHP > 0) {
-        if (active === "Dungeon" && defeated !== encounters.length) {
-            return (
-                <div>
-                    <h2>{props.dungeonName}</h2>
-                    <h4>Encounters Defeated: {defeated}/{encounters.length}</h4>
-                    <h4>Dungeon Cleared: {bossDefeated}/{1}</h4>
-                    {encounterList}
-                    <button onClick={props.Back}><h3>Back</h3></button>
-                </div>
-            )
-        }
-        else if (active === "Dungeon" && defeated === encounters.length) {
-            return (
-                <div>
-                    <h2>{props.dungeonName}</h2>
-                    <h4>Encounters Defeated: {defeated}/{encounters.length}</h4>
-                    <h4>Dungeon Cleared: {bossDefeated}/{1}</h4>
-                    <h3>Boss: {boss[0].Name}(s) <button onClick={() => handleEncounter(boss)}><h3>Start Boss Fight</h3></button></h3>
-                    <button style={{marginBottom: "1%"}}onClick={props.Back}><h3>Run</h3></button>
-                </div>
-            )
-        }
-        else if (active === "Cleared") {
-            return (
-                <div>
-                    <h2>{props.dungeonName}</h2>
-                    <h3>Dungeon Cleared</h3>
-                    <button style={{marginBottom: "1%"}}onClick={props.Back}><h3>Back</h3></button>
-                </div>
-            )
-        }
-        else {
-            return (
-                <div>
-                    <h2>{props.dungeonName}</h2>
-                    <Combat hero={hero} enemies={activeEncounter} Back={() => calculateDefeatedEncounters()}></Combat>
-                </div>
-            )
-        }
-    }
-    else {
-        return (<div>
+    return (<div>
+        <div>
             <h2>{props.dungeonName}</h2>
-            <h3>You cannot continue</h3>
-            <button style={{marginBottom: "1%"}}onClick={props.Back}><h3>Back</h3></button>
-        </div>)
-    }
+            {hero.CurrentHP > 0 ?
+                <div>
+                    {active === "Dungeon" ?
+                        <div>
+                            {defeated !== encounters.length ?
+                                <div>
+                                    <h4>Encounters Defeated: {defeated}/{encounters.length}</h4>
+                                    <h4>Dungeon Cleared: {bossDefeated}/{1}</h4>
+                                    {encounterList}
+                                </div>
+                                : <div>
+                                    <h4>Encounters Defeated: {defeated}/{encounters.length}</h4>
+                                    <h4>Dungeon Cleared: {bossDefeated}/{1}</h4>
+                                    <h3>Boss: {boss[0].Name}(s) <button onClick={() => handleEncounter(boss)}><h3>Start Boss Fight</h3></button></h3>
+                                </div>
+                            }
+                        </div>
+                        : <div></div>}
+                    {
+                        active === "Cleared" ?
+                            <div>
+                                <h3>Dungeon Cleared</h3>
+                            </div> : <div></div>
+                    }
+                    {active === "Encounter" ? <div> <Combat hero={hero} enemies={activeEncounter} Back={() => calculateDefeatedEncounters()}></Combat></div> : <div></div>}
+                </div>
+                :
+                <div>
+                    <h3>You cannot continue</h3>
+                </div>
+            }
+            {active !== "Encounter" ? <div>
+                <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave Dungeon</h3></button>
+            </div> : <div></div>}
+        </div>
+    </div>)
 }
 export default Dungeon;

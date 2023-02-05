@@ -80,64 +80,53 @@ function Combat(props) {
     const itemList = consumableItemList.map((item, index) => <h5 key={index}>{item.Name} - QTY: {item.Quantity} <button onClick={() => { handleConsumable(hero, allies, enemies, enemies[0], combatLog, "Use", inventory, item) }}><h6>Use</h6></button></h5>)
     const abilList = abilities.map((abil, index) => <h5 key={index}>{abil.Name} ({abil.StaminaCost} SP) <button onClick={() => handleAbility(abil)}><h6>Use Ability</h6></button></h5>)
     const spellList = spells.map((spell, index) => <h5 key={index}>{spell.Name} ({spell.ManaCost} MP) <button onClick={() => handleSpell(spell)}><h6>Cast Spell</h6></button></h5>)
-    if (hero.CurrentHP > 0 && enemiesOverZero > 0) {
-        return (
+    return (<div>
+        <div>{hero.CurrentHP > 0 ?
             <div>
-                <div>
-                    <div className='team-box'>
-                        <h3>{hero.Name}'s Party</h3>
-                        <h5>Currently Selected Action: {action}</h5>
-                        {alliesList}
-                        <ul>{alliesBuffList}</ul>
-                        <ul>{alliesDeBuffList}</ul>
+                {enemiesOverZero > 0 ? <div>           <div>
+                    <div>
+                        <div className='team-box'>
+                            <h3>{hero.Name}'s Party</h3>
+                            <h5>Currently Selected Action: {action}</h5>
+                            {alliesList}
+                            <ul>{alliesBuffList}</ul>
+                            <ul>{alliesDeBuffList}</ul>
+                        </div>
+                        <div style={{ display: "inline-block", verticalAlign: "text-top", paddingLeft: "1%", paddingRight: "1%", width: "200px" }}>
+                            <Log log={combatLog} logName={"Combat"}></Log>
+                        </div>
+                        <div className='team-box'>
+                            <h3>Enemies' Party</h3>
+                            {enemiesList}
+                            <ul>{enemiesBuffList}</ul>
+                            <ul>{enemiesDeBuffList}</ul>
+                        </div>
                     </div>
-                    <div style={{ display: "inline-block", verticalAlign: "text-top", paddingLeft: "1%", paddingRight: "1%", width: "200px" }}>
-                        <Log log={combatLog} logName={"Combat"}></Log>
+                    <div>
+                        <div className='combat-options'>
+                            <h3>Abilities</h3>
+                            {abilList}
+                        </div>
+                        <div className='combat-options'>
+                            <h3>Spells</h3>
+                            {spellList}
+                        </div>
+                        <div className='combat-options'>
+                            <h3>Inventory</h3>
+                            {itemList}
+                        </div>
                     </div>
-                    <div className='team-box'>
-                        <h3>Enemies' Party</h3>
-                        {enemiesList}
-                        <ul>{enemiesBuffList}</ul>
-                        <ul>{enemiesDeBuffList}</ul>
+                    <div style={{ paddingTop: "1%" }}>
+                        <button style={{ marginBottom: "1%" }} onClick={props.Back}><h4>Run Away</h4></button>
                     </div>
-                </div>
-                <div>
-                    <div className='combat-options'>
-                        <h3>Abilities</h3>
-                        {abilList}
-                    </div>
-                    <div className='combat-options'>
-                        <h3>Spells</h3>
-                        {spellList}
-                    </div>
-                    <div className='combat-options'>
-                        <h3>Inventory</h3>
-                        {itemList}
-                    </div>
-                </div>
-                <div style={{ paddingTop: "1%" }}>
-                    <button style={{marginBottom: "1%"}} onClick={props.Back}><h4>Run Away</h4></button>
-                </div>
-            </div>
-        );
+                </div></div> : <div> <div>
+                    <h4>{hero.Name}'s Party is victorious!</h4>
+                    <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button>
+                </div></div>}
+            </div> : <div><h4>Name: {hero.Name} cannot Fight</h4>
+                <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button></div>}</div>
 
-    }
-    else if (hero.CurrentHP > 0) {
-        return (
-            <div>
-                <h4>{hero.Name}'s Party is victorious!</h4>
-                <button style={{marginBottom: "1%"}} onClick={props.Back}><h3>Back</h3></button>
-            </div>
-        );
-    }
-    else {
-        return (
-            <div>
-                <h4>Name: {hero.Name} cannot Fight</h4>
-                <button style={{marginBottom: "1%"}} onClick={props.Back}><h3>Back</h3></button>
-            </div>
-        );
-    }
+    </div>)
 }
 
 export default Combat;

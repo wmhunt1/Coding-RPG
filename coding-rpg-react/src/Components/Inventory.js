@@ -31,33 +31,20 @@ function Inventory(props) {
   }
   const charList = allies.map((ally, index) => <h4 key={index}>{ally.Name} <button onClick={() => setActiveUser(ally)}><h4>Set Active Character</h4></button></h4>)
   const itemList = inventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}><h4>Equip/Use</h4></button></h4>)
-  if (inventory.length > 0) {
-    return (
-      <div>
-        <div>
-          <h2>{hero.Name}'s Inventory</h2>
-          <h3>{hero.Gold} GP</h3>
-          <div className='inv-box'>
-            <h4>Active User: {activeUser.Name}</h4>
-            {charList}
-          </div>
-          <div className='inv-box'>
-            <h4>Items</h4>
-            {itemList}
-          </div>
-        </div>
+  return (<div>
+    <div>
+      <h2>{hero.Name}'s Inventory</h2>
+      <h3>{hero.Gold} GP</h3>
+      <div className='inv-box'>
+        <h4>Active User: {activeUser.Name}</h4>
+        {charList}
       </div>
-    );
-  }
-  else {
-    return (
-      <div>
-        <h2>{hero.Name}'s Inventory</h2>
-        <h3>{hero.Gold} GP</h3>
-        <h4>Inventory is Empty</h4>
+      <div className='inv-box'>
+        <h4>Items</h4>
+        {inventory.length > 0 ? <div>{itemList}</div> : <div><h4>Inventory is Empty</h4></div>}
       </div>
-    );
-  }
+    </div>
+  </div>)
 }
 
 export default Inventory;

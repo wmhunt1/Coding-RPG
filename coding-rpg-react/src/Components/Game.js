@@ -16,6 +16,7 @@ import SpellBook from './SpellBook';
 import Shop from './Shop';
 import { rat } from '../Database/Characters'
 import { testShop } from '../Database/Shops'
+import { healingPotion } from '../Database/Items';
 
 function Game(props) {
   const [active, setActive] = useState("Game");
@@ -46,6 +47,7 @@ function Game(props) {
         {active === "Equipment" ? <Equipment hero={hero} Back={() => setActive("Game")}></Equipment> : <div></div>}
         {active === "Inventory" ? <Inventory hero={hero} Back={() => setActive("Game")}></Inventory> : <div></div>}
         {active === "Party" ? <Party hero={hero} Back={() => setActive("Game")}></Party> : <div></div>}
+        {active === "Shop" ? <Shop shopName="Test Shop" hero={hero} shopInventory={[healingPotion()]} Back={() => setActive("Test")}></Shop> : <div></div>}
         {active === "Skills" ? <div></div> : <div></div>}
         {active === "Spells" ? <SpellBook hero={hero} Back={() => setActive("Game")}></SpellBook> : <div></div>}
         {active === "Test" ? <div className='menu-box'>
