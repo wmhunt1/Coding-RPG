@@ -1,4 +1,5 @@
-import { HealHP, RecoverSP } from "../Scripts/CharacterScripts";
+import { HealHP, LearnSpell, RecoverSP } from "../Scripts/CharacterScripts";
+import { magicMissile } from "./Spells";
 //consumables
 //food
 export function cookedRatMeat() {
@@ -9,6 +10,13 @@ export function cookedRatMeat() {
 export function healingPotion() {
     var potion = { Name: "Healing Potion", Type: "Consumable", Cost: 5, Quantity: 1, ConsumeEffect(hero) { HealHP(hero, 5) } }
     return potion;
+}
+//scrolls
+//abilityscroll
+//spellscroll
+export function magicMissileScroll() {
+    var magicMissileScroll = { Name: "Scroll of Magic Missile", Type: "Consumable", Cost: 10, Quantity: 1, ConsumeEffect(hero) { LearnSpell(hero, magicMissile()) } }
+    return magicMissileScroll;
 }
 //equipables
 //armor

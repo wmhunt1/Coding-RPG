@@ -65,7 +65,7 @@ function Dungeon(props) {
                     <h4>Encounters Defeated: {defeated}/{encounters.length}</h4>
                     <h4>Dungeon Cleared: {bossDefeated}/{1}</h4>
                     <h3>Boss: {boss[0].Name}(s) <button onClick={() => handleEncounter(boss)}><h3>Start Boss Fight</h3></button></h3>
-                    <button onClick={props.Back}><h3>Back</h3></button>
+                    <button style={{marginBottom: "1%"}}onClick={props.Back}><h3>Run</h3></button>
                 </div>
             )
         }
@@ -74,7 +74,7 @@ function Dungeon(props) {
                 <div>
                     <h2>{props.dungeonName}</h2>
                     <h3>Dungeon Cleared</h3>
-                    <button onClick={props.Back}><h3>Back</h3></button>
+                    <button style={{marginBottom: "1%"}}onClick={props.Back}><h3>Back</h3></button>
                 </div>
             )
         }
@@ -91,7 +91,7 @@ function Dungeon(props) {
         return (<div>
             <h2>{props.dungeonName}</h2>
             <h3>You cannot continue</h3>
-            <button onClick={props.Back}><h3>Back</h3></button>
+            <button style={{marginBottom: "1%"}}onClick={props.Back}><h3>Back</h3></button>
         </div>)
     }
 }

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { LevelUp } from "../Scripts/CharacterScripts"
 import { AttributeIncrease } from "./AttributeIncrease"
+import './Game.css'
 
 export function LevelUpScreen(props) {
     const [hero, setHero] = useState(props.hero)
@@ -64,9 +65,9 @@ export function LevelUpScreen(props) {
         return (<div>
             <div>
                 <h3>Select Attributes To Increase</h3>
-                <div style={{ display: "inline-block", paddingBottom: "1%", paddingRight: "1%", paddingLeft: "1%" }}><AttributeIncrease parentCallback={handleCallbackOne}></AttributeIncrease></div>
-                <div style={{ display: "inline-block", paddingBottom: "1%", paddingRight: "1%", paddingLeft: "1%" }}><AttributeIncrease parentCallback={handleCallbackTwo}></AttributeIncrease></div>
-                <div style={{ display: "inline-block", paddingBottom: "1%", paddingRight: "1%", paddingLeft: "1%" }}><AttributeIncrease parentCallback={handleCallbackThree}></AttributeIncrease></div>
+                <div className="attribute-selection"><AttributeIncrease parentCallback={handleCallbackOne}></AttributeIncrease></div>
+                <div className="attribute-selection"><AttributeIncrease parentCallback={handleCallbackTwo}></AttributeIncrease></div>
+                <div className="attribute-selection"><AttributeIncrease parentCallback={handleCallbackThree}></AttributeIncrease></div>
             </div>
             <div style={{ paddingBottom: "1%" }}>
                 <button onClick={() => handleLevelUp(hero, aOne, aTwo, aThree)}><h3>Level {hero.Name} to Level {hero.Level + 1}</h3></button>

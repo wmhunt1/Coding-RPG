@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../App.css';
+import './Game.css'
 import { CheckForLevelUp } from '../Scripts/CharacterScripts';
 import LevelUpButton from './LevelUpButton';
 import LevelUpScreen from './LevelUpScreen';
@@ -33,16 +34,15 @@ function CharacterSheet(props) {
         <h4>HP {hero.CurrentHP}/{hero.MaxHP}, MP {hero.CurrentMP}/{hero.MaxMP}, SP {hero.CurrentSP}/{hero.MaxSP}</h4>
         <div style={{ paddingBottom: "1%" }}>
           <h3>Attributes</h3>
-          <div style={{ display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", margin: "auto" }}>
+          <div className='attribute'>
             <h4>Phsyical Attributes</h4>
             <h4>STR: {hero.Strength}({hero.StrBonus})({hero.StrPenalty}) CON: {hero.Constitution}({hero.ConBonus})({hero.ConPenalty}) DEX: {hero.Dexterity}({hero.DexBonus})({hero.DexPenalty}) SPD: {hero.Speed} BTY: {hero.Beauty}</h4>
           </div>
-          <div style={{ display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", margin: "auto" }}>
+          <div className='attribute'>
             <h4>Mental Attributes</h4>
             <h4>INT: {hero.Intelligence} WIS: {hero.Wisdom} CHA: {hero.Charisma} WLP: {hero.WillPower} PRC: {hero.Perception} LCK: {hero.Luck}</h4>
           </div>
         </div>
-        <button onClick={props.Back}><h3>Back</h3></button>
       </div>
     );
   }

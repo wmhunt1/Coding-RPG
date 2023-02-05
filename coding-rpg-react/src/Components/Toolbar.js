@@ -1,5 +1,5 @@
 export function Toolbar(props) {
-    return (<div>
+    return (<div style={{marginBottom: "1%"}}>
         <button onClick={props.abil}><h3>Abilities</h3></button>
         <button onClick={props.cSheet}><h3>Character Sheet</h3></button>
         <button onClick={props.equip}><h3>Equipment</h3></button>

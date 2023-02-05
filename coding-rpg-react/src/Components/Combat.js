@@ -1,4 +1,5 @@
 import '../App.css';
+import './Game.css';
 import { useState } from "react";
 import { CombatRewards, CombatRound } from '../Scripts/CombatScripts';
 import { RemoveItemFromInventory } from '../Scripts/CharacterScripts';
@@ -69,12 +70,12 @@ function Combat(props) {
         setPreparedAbility(abil)
         setAction(abil.Name)
     }
-    const alliesList = allies.filter(ally => ally.CurrentHP > 0).map((ally, index) => <h4 key={index}>{ally.Name} - HP {ally.CurrentHP}/{ally.MaxHP}, MP {ally.CurrentMP}/{ally.MaxMP}, SP {ally.CurrentSP}/{ally.MaxSP} <button onClick={() => RunCombat(hero, allies, enemies, ally, combatLog, action, preparedSpell, preparedAbility)}><h4>Target</h4></button></h4>)
-    const alliesBuffList = allyBuffs.filter(ally => ally.CurrentHP > 0 && ally.Buffs.length > 0).map((ally, index) => <h5 style={{display: "inline"}}key={index}>{ally.Name}'s Buffs: {ally.Buffs.map((buff, index) => <li style={{display: "inline"}}key={index}>{buff.Name}</li>)} </h5>)
-    const alliesDeBuffList = allyDeBuffs.filter(ally => ally.CurrentHP > 0 && ally.DeBuffs.length > 0).map((ally, index) => <h5 style={{display: "inline"}}key={index}>{ally.Name}'s DeBuffs: {ally.DeBuffs.map((deBuff, index) => <li style={{display: "inline"}}key={index}>{deBuff.Name}</li>)} </h5>)
-    const enemiesList = enemies.filter(enemy => enemy.CurrentHP > 0).map((enemy, index) => <h4 key={index}>{enemy.Name} - HP: {enemy.CurrentHP}/{enemy.MaxHP}, MP {enemy.CurrentMP}/{enemy.MaxMP}, SP: {enemy.CurrentSP}/{enemy.MaxSP}<button onClick={() => RunCombat(hero, allies, enemies, enemy, combatLog, action, preparedSpell, preparedAbility)}><h4>Target</h4></button></h4>)
-    const enemiesBuffList = enemyBuffs.filter(enemy => enemy.CurrentHP > 0 && enemy.Buffs.length > 0).map((enemy, index) => <h5 style={{display: "inline"}}key={index}>{enemy.Name}'s Buffs {enemy.Buffs.map((buff, index) => <li style={{display: "inline"}}key={index}>{buff.Name}</li>)} </h5>)
-    const enemiesDeBuffList = enemyDeBuffs.filter(enemy => enemy.CurrentHP > 0 && enemy.DeBuffs.length > 0).map((enemy, index) => <h5 style={{display: "inline"}}key={index}>{enemy.Name}'s DeBuffs {enemy.DeBuffs.map((deBuff, index) => <li style={{display: "inline"}}key={index}>{deBuff.Name}</li>)} </h5>)
+    const alliesList = allies.filter(ally => ally.CurrentHP > 0).map((ally, index) => <h4 key={index}>{ally.Name} - HP {ally.CurrentHP}/{ally.MaxHP}, MP {ally.CurrentMP}/{ally.MaxMP}, SP {ally.CurrentSP}/{ally.MaxSP}, SPD: {ally.Speed}<button onClick={() => RunCombat(hero, allies, enemies, ally, combatLog, action, preparedSpell, preparedAbility)}><h4>Target</h4></button></h4>)
+    const alliesBuffList = allyBuffs.filter(ally => ally.CurrentHP > 0 && ally.Buffs.length > 0).map((ally, index) => <h5 style={{ display: "inline" }} key={index}>{ally.Name}'s Buffs: {ally.Buffs.map((buff, index) => <li style={{ display: "inline" }} key={index}>{buff.Name}</li>)} </h5>)
+    const alliesDeBuffList = allyDeBuffs.filter(ally => ally.CurrentHP > 0 && ally.DeBuffs.length > 0).map((ally, index) => <h5 style={{ display: "inline" }} key={index}>{ally.Name}'s DeBuffs: {ally.DeBuffs.map((deBuff, index) => <li style={{ display: "inline" }} key={index}>{deBuff.Name}</li>)} </h5>)
+    const enemiesList = enemies.filter(enemy => enemy.CurrentHP > 0).map((enemy, index) => <h4 key={index}>{enemy.Name} - HP: {enemy.CurrentHP}/{enemy.MaxHP}, MP {enemy.CurrentMP}/{enemy.MaxMP}, SP: {enemy.CurrentSP}/{enemy.MaxSP}, SPD: {enemy.Speed}<button onClick={() => RunCombat(hero, allies, enemies, enemy, combatLog, action, preparedSpell, preparedAbility)}><h4>Target</h4></button></h4>)
+    const enemiesBuffList = enemyBuffs.filter(enemy => enemy.CurrentHP > 0 && enemy.Buffs.length > 0).map((enemy, index) => <h5 style={{ display: "inline" }} key={index}>{enemy.Name}'s Buffs {enemy.Buffs.map((buff, index) => <li style={{ display: "inline" }} key={index}>{buff.Name}</li>)} </h5>)
+    const enemiesDeBuffList = enemyDeBuffs.filter(enemy => enemy.CurrentHP > 0 && enemy.DeBuffs.length > 0).map((enemy, index) => <h5 style={{ display: "inline" }} key={index}>{enemy.Name}'s DeBuffs {enemy.DeBuffs.map((deBuff, index) => <li style={{ display: "inline" }} key={index}>{deBuff.Name}</li>)} </h5>)
     const consumableItemList = inventory.filter(item => item.Type === "Consumable");
     const itemList = consumableItemList.map((item, index) => <h5 key={index}>{item.Name} - QTY: {item.Quantity} <button onClick={() => { handleConsumable(hero, allies, enemies, enemies[0], combatLog, "Use", inventory, item) }}><h6>Use</h6></button></h5>)
     const abilList = abilities.map((abil, index) => <h5 key={index}>{abil.Name} ({abil.StaminaCost} SP) <button onClick={() => handleAbility(abil)}><h6>Use Ability</h6></button></h5>)
@@ -83,39 +84,39 @@ function Combat(props) {
         return (
             <div>
                 <div>
-                    <div style={{ height: "250px", width: "400px", display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", overflow: "scroll" }}>
+                    <div className='team-box'>
                         <h3>{hero.Name}'s Party</h3>
                         <h5>Currently Selected Action: {action}</h5>
                         {alliesList}
-                        <ul style={{listStyle: "none", paddingLeft: "0"}}>{alliesBuffList}</ul>
-                        <ul style={{listStyle: "none", paddingLeft: "0"}}>{alliesDeBuffList}</ul>
+                        <ul>{alliesBuffList}</ul>
+                        <ul>{alliesDeBuffList}</ul>
                     </div>
                     <div style={{ display: "inline-block", verticalAlign: "text-top", paddingLeft: "1%", paddingRight: "1%", width: "200px" }}>
                         <Log log={combatLog} logName={"Combat"}></Log>
                     </div>
-                    <div style={{ height: "250px", width: "400px", display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", overflow: "scroll" }}>
+                    <div className='team-box'>
                         <h3>Enemies' Party</h3>
                         {enemiesList}
-                        <ul style={{listStyle: "none", paddingLeft: "0"}}>{enemiesBuffList}</ul>
-                        <ul style={{listStyle: "none", paddingLeft: "0"}}>{enemiesDeBuffList}</ul>
+                        <ul>{enemiesBuffList}</ul>
+                        <ul>{enemiesDeBuffList}</ul>
                     </div>
                 </div>
                 <div>
-                    <div style={{ height: "200px", width: "300px", display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", marginRight: "1%", marginLeft: "1%", marginTop: "1%", overflow: "scroll" }}>
+                    <div className='combat-options'>
                         <h3>Abilities</h3>
                         {abilList}
                     </div>
-                    <div style={{ height: "200px", width: "300px", display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", marginRight: "1%", marginLeft: "1%", marginTop: "1%", overflow: "scroll" }}>
+                    <div className='combat-options'>
                         <h3>Spells</h3>
                         {spellList}
                     </div>
-                    <div style={{ height: "200px", width: "300px", display: "inline-block", verticalAlign: "text-top", border: "solid", paddingLeft: "1%", paddingRight: "1%", marginRight: "1%", marginLeft: "1%", marginTop: "1%", overflow: "scroll" }}>
+                    <div className='combat-options'>
                         <h3>Inventory</h3>
                         {itemList}
                     </div>
                 </div>
                 <div style={{ paddingTop: "1%" }}>
-                    <button onClick={props.Back}><h4>Run Away</h4></button>
+                    <button style={{marginBottom: "1%"}} onClick={props.Back}><h4>Run Away</h4></button>
                 </div>
             </div>
         );
@@ -125,7 +126,7 @@ function Combat(props) {
         return (
             <div>
                 <h4>{hero.Name}'s Party is victorious!</h4>
-                <button onClick={props.Back}><h3>Back</h3></button>
+                <button style={{marginBottom: "1%"}} onClick={props.Back}><h3>Back</h3></button>
             </div>
         );
     }
@@ -133,7 +134,7 @@ function Combat(props) {
         return (
             <div>
                 <h4>Name: {hero.Name} cannot Fight</h4>
-                <button onClick={props.Back}><h3>Back</h3></button>
+                <button style={{marginBottom: "1%"}} onClick={props.Back}><h3>Back</h3></button>
             </div>
         );
     }

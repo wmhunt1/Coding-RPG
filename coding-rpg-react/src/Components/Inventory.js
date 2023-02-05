@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { EquipItemFromInventory, RemoveItemFromInventory } from '../Scripts/CharacterScripts';
 import '../App.css';
+import './Game.css'
 
 function Inventory(props) {
   const [hero, setHero] = useState(props.hero);
@@ -36,16 +37,15 @@ function Inventory(props) {
         <div>
           <h2>{hero.Name}'s Inventory</h2>
           <h3>{hero.Gold} GP</h3>
-          <div style={{ verticalAlign: "text-top", height: "250px", display: "inline-block", border: "solid", paddingLeft: "1%", paddingRight: "1%", marginLeft: "1%", marginRight: "1%", overflow: "scroll"}}>
+          <div className='inv-box'>
             <h4>Active User: {activeUser.Name}</h4>
             {charList}
           </div>
-          <div style={{ verticalAlign: "text-top", height: "250px", display: "inline-block", border: "solid", paddingLeft: "1%", paddingRight: "1%", marginLeft: "1%", marginRight: "1%", overflow: "scroll"}}>
+          <div className='inv-box'>
             <h4>Items</h4>
             {itemList}
           </div>
         </div>
-        <button onClick={props.Back}><h3>Back</h3></button>
       </div>
     );
   }
@@ -55,7 +55,6 @@ function Inventory(props) {
         <h2>{hero.Name}'s Inventory</h2>
         <h3>{hero.Gold} GP</h3>
         <h4>Inventory is Empty</h4>
-        <button onClick={props.Back}><h3>Back</h3></button>
       </div>
     );
   }

@@ -1,21 +1,37 @@
-import { AddGold, AddItemToInventory, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, TakeDamage, UseMP } from "./CharacterScripts";
+import { AddGold, AddItemToInventory, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, TakeDamage, UseMP, UseSP } from "./CharacterScripts";
 import { CastSpell, UseAbility } from "./SpellScripts";
-export function Attack(char1, char2, combatLog) {
-    combatLog.push(char1.Name + " attacks " + char2.Name + " with their " + char1.Weapon.Name)
+export function CalculateCharDamage(char) {
+    var damage = char.Strength + char.Weapon.Damage + char.StrBonus - char.StrPenalty;
+    return damage;
+}
+export function CalculateCharArmor(char) {
+    var armor = char.Torso.Protection;
+    return armor;
+}
+export function CalculateCharDefenseWithArmor(char, armor) {
+    var defense = armor + char.Dexterity + char.DexBonus - char.DexPenalty
+    return defense;
+}
+export function CalculateCharDefenseWithoutArmor(char) {
+    var defense = char.Dexterity + char.DexBonus - char.DexPenalty
+    return defense;
+}
+export function CalculateBaseDamage(damage, defense) {
+    //later include conditions and immunities etc
+    return damage - defense
+}
+export function CalculateCritDamage(char1, damage) {
     var crit = false;
-    var char1Damage = char1.Strength + char1.Weapon.Damage + char1.StrBonus - char1.StrPenalty
-    var char2Armor = char2.Torso.Protection;
-    var char2Defense = char2Armor + char2.Dexterity + char2.DexBonus - char2.DexPenalty
-    var baseDamage = char1Damage - char2Defense;
-    var totalDamage = baseDamage;
     var critChance = Math.floor(Math.random() * 100) + 1 + char1.Luck;
     if (critChance >= 75) {
         crit = true;
     }
     if (crit === true) {
-        totalDamage *= 2;
+        damage *= 2;
     }
-    TakeDamage(char2, totalDamage)
+    return damage;
+}
+export function BasicAttackResults(char1, char2, combatLog, baseDamage, totalDamage, char2Armor) {
     if (totalDamage <= 0) {
         if (char2Armor > char2.Dexterity) {
             combatLog.push(char2.Name + "'s Armor deflects " + char2.Name + "'s attack")
@@ -31,14 +47,57 @@ export function Attack(char1, char2, combatLog) {
         combatLog.push(char1.Name + " deals " + totalDamage + " damage to " + char2.Name)
     }
 }
+export function BasicAttack(char1, char2, combatLog) {
+    combatLog.push(char1.Name + " attacks " + char2.Name + " with their " + char1.Weapon.Name)
+    var char1Damage = CalculateCharDamage(char1)
+    var char2Armor = CalculateCharArmor(char2)
+    var char2Defense = CalculateCharDefenseWithArmor(char2, char2Armor)
+    var baseDamage = CalculateBaseDamage(char1Damage, char2Defense);
+    var totalDamage = CalculateCritDamage(char1, baseDamage)
+    TakeDamage(char2, totalDamage)
+    BasicAttackResults(char1, char2, combatLog, baseDamage, totalDamage, char2Armor)
+}
+export function SneakAttackResults(char1, char2, combatLog, baseDamage, totalDamage) {
+    if (totalDamage <= 0) {
+
+        combatLog.push(char2.Name + " dodges " + char2.Name + "'s attack")
+    }
+    else if (totalDamage > baseDamage) {
+        combatLog.push(char1.Name + " deals " + totalDamage + " critical damage to " + char2.Name)
+    }
+    else {
+        combatLog.push(char1.Name + " deals " + totalDamage + " damage to " + char2.Name)
+    }
+}
+export function SneakAttack(char1, char2, combatLog) {
+    combatLog.push(char1.Name + " sneak attacks " + char2.Name + " with their " + char1.Weapon.Name)
+    var char1Damage = CalculateCharDamage(char1)
+    var char2Defense = CalculateCharDefenseWithoutArmor(char2)
+    var baseDamage = CalculateBaseDamage(char1Damage, char2Defense);
+    var totalDamage = CalculateCritDamage(char1, baseDamage)
+    TakeDamage(char2, totalDamage)
+    SneakAttackResults(char1, char2, combatLog, baseDamage, totalDamage)
+
+}
 export function AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil) {
     if (char1.CurrentHP > 0) {
         if (option === "Basic Attack") {
-            Attack(char1, target, combatLog);
+            BasicAttack(char1, target, combatLog);
         }
         if (option !== "Basic Attack" && abil != null) {
             if (abil.Type === "Self") {
                 UseAbility(char1, abil, char1, combatLog);
+            }
+            else if (abil.Type === "Attack") {
+                if (abil.Target === "Single Enemy") {
+                    UseAbility(char1, abil, target, combatLog)
+                }
+                if (abil.Target === "Enemies") {
+                    for (let e = 0; e < enemies.length; e++) {
+                        UseAbility(char1, abil, enemies[e], combatLog);
+                    }
+                    UseSP(char1, abil.StaminaCost)
+                }
             }
         }
         if (option !== "Basic Attack" && spell !== null) {
@@ -72,7 +131,7 @@ export function AllyTurn(char1, allies, enemies, target, combatLog, option, spel
             }
             if (enemyOverZero.length > 0) {
                 const randomEnemy = Math.floor(Math.random() * enemyOverZero.length);
-                Attack(allies[a], enemyOverZero[randomEnemy], combatLog)
+                BasicAttack(allies[a], enemyOverZero[randomEnemy], combatLog)
             }
         }
     }
@@ -88,20 +147,24 @@ export function EnemyTurn(allies, enemies, combatLog) {
             }
             if (allyOverZero.length > 0) {
                 const randomAlly = Math.floor(Math.random() * allyOverZero.length);
-                Attack(enemies[e], allyOverZero[randomAlly], combatLog)
+                BasicAttack(enemies[e], allyOverZero[randomAlly], combatLog)
             }
         }
     }
 }
-export function CombatRound(char1, allies, enemies, target, combatLog, option, spell, abil) {
-    var AllySpeed = allies.reduce((a, b) => a.Speed + b.Speed) / allies.length
-    var EnemySpeed = 0;
-    for (let e = 0; e < enemies.length; e++) {
-        EnemySpeed += enemies[e].Speed
+export function CalculateAverageSpeed(team) {
+    var speed = 0;
+    for (let t = 0; t < team.length; t++) {
+        if (team[t].CurrentHP > 0) {
+            speed += team[t].Speed;
+        }
     }
-    console.log(EnemySpeed)
-    EnemySpeed /= enemies.length
-    console.log(EnemySpeed)
+    speed /= team.length;
+    return speed;
+}
+export function CombatRound(char1, allies, enemies, target, combatLog, option, spell, abil) {
+    var AllySpeed = CalculateAverageSpeed(allies);
+    var EnemySpeed = CalculateAverageSpeed(enemies);
     if (AllySpeed >= EnemySpeed) {
         AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil)
         EnemyTurn(allies, enemies, combatLog)

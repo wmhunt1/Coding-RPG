@@ -37,14 +37,12 @@ function Party(props) {
             return (<div>
                 <h2>{props.hero.Name}'s Party</h2>
                 {partyList}
-                <button onClick={props.Back}><h3>Back</h3></button>
             </div>)
         }
         else {
             return (<div>
                 <h2>{props.hero.Name}'s Party</h2>
                 <h3>No Companions</h3>
-                <button onClick={props.Back}><h3>Back</h3></button>
             </div>)
         }
     }

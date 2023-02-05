@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MainMenu from "./MainMenu";
-function Menu(props)
-{
+import './Game.css'
+function Menu(props) {
     const hero = props.hero
     const [active, setActive] = useState("Menu")
     const exitGame = () => {
@@ -9,24 +9,22 @@ function Menu(props)
         window.open("", "_self");
         window.close();
         navigator.app.exitApp();
-      };
-    if (active === "MainMenu")
-    {
-        return(
+    };
+    if (active === "MainMenu") {
+        return (
             <div>
-                <MainMenu NewGame={() => setActive("Game")} hero = {hero}></MainMenu>
+                <MainMenu NewGame={() => setActive("Game")} hero={hero}></MainMenu>
             </div>
         )
     }
-    else
-    {
-        return(
-            <div>
-                <button onClick={props.Back}><h3>Back</h3></button>
-                <button><h3>Save Game</h3></button>
-                <button><h3>Load Game</h3></button>
-                <button onClick={() => setActive("MainMenu")}><h3>Main Menu</h3></button>
-                <button onClick={() => exitGame()}><h3>Exit Game</h3></button>
+    else {
+        return (
+            <div className="menu-box">
+                <div><button className="menu-button"><h3>Save Game</h3></button></div>
+                <div><button className="menu-button"><h3>Load Game</h3></button></div>
+                <div><button className="menu-button" onClick={() => setActive("MainMenu")}><h3>Main Menu</h3></button></div>
+                <div><button className="menu-button" onClick={() => exitGame()}><h3>Exit Game</h3></button></div>
+
             </div>
         )
     }

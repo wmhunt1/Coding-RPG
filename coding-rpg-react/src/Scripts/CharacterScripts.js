@@ -26,8 +26,7 @@ export function CheckForLevelUp(char) {
     if (char.CurrentXP >= char.MaxXP) {
         return true;
     }
-    else
-    {
+    else {
         return false;
     }
 }
@@ -90,8 +89,7 @@ export function HasEnoughSP(char, sp) {
         return false;
     }
 }
-export function FullyRecover(char)
-{
+export function FullyRecover(char) {
     HealHP(char, char.MaxHP)
     RecoverMP(char, char.MaxMP)
     RecoverSP(char, char.CurrentSP)
@@ -175,6 +173,24 @@ export function EquipItemFromInventory(char, inventory, item) {
     EquipItem(char, inventory, item)
     RemoveItemFromInventory(char, inventory, item)
     char.Inventory = inventory;
+}
+export function LearnAbility(char, abil) {
+    if (char.Abilites.find(x => x.Name === abil.Name)) {
+        char.Log.push(char.Name + " already knows " + abil.Name)
+    }
+    else {
+        char.Abilites.push(abil);
+        char.Log.push(char.Name + " learns " + abil.Name)
+    }
+}
+export function LearnSpell(char, spell) {
+    if (char.SpellBook.find(x => x.Name === spell.Name)) {
+        char.Log.push(char.Name + " already knows " + spell.Name)
+    }
+    else {
+        char.SpellBook.push(spell);
+        char.Log.push(char.Name + " learns " + spell.Name)
+    }
 }
 export function CheckIfBuffApplied(char, buff, combatLog) {
     if (char.Buffs.find(x => x.Name !== buff.Name)) {

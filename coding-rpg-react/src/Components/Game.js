@@ -1,4 +1,5 @@
 import '../App.css';
+import './Game.css'
 import { useState } from "react";
 import { EarnXP, FullyRecover } from '../Scripts/CharacterScripts';
 import Menu from './Menu';
@@ -27,91 +28,40 @@ function Game(props) {
       FullyRecover(char.Companions[c])
     }
   }
-  function TestXP(char)
-  {
+  function TestXP(char) {
     EarnXP(char, char.MaxXP)
   }
 
-  if (active === "Menu") {
-    return (<div>
-      <Menu hero={hero} Back={() => setActive("Game")}></Menu>
-    </div>)
-  }
-  else if (active === "Abilities") {
-    return (<div>
-      <Abilities hero={hero} Back={() => setActive("Game")}></Abilities>
-    </div>)
-  }
-  else if (active === "CharacterSheet") {
-    return (<div>
-      <CharacterSheet hero={hero} Back={() => setActive("Game")}></CharacterSheet>
-    </div>)
-  }
-  else if (active === "Combat") {
-    return (<div>
-      <Combat hero={hero} enemies={[rat(), rat(), rat()]} Back={() => setActive("Test")}></Combat>
-    </div>)
-  }
-  else if (active === "Dungeon") {
-    return (<div>
-      <Dungeon hero={hero} dungeonName={"Test Dungeon"} encounters={[[rat()], [rat(), rat()]]} boss={[rat(), rat(), rat()]} Back={() => setActive("Test")}></Dungeon>
-    </div>)
-  }
-  else if (active === "Equipment") {
-    return (<div>
-      <Equipment hero={hero} Back={() => setActive("Game")}></Equipment>
-    </div>)
-  }
-  else if (active === "Inventory") {
-    return (<div>
-      <Inventory hero={hero} Back={() => setActive("Game")}></Inventory>
-    </div>)
-  }
-  else if (active === "Party") {
-    return (<div>
-      <Party hero={hero} Back={() => setActive("Game")}></Party>
-    </div>)
-  }
-  else if (active === "Spells") {
-    return (<div>
-      <SpellBook hero={hero} Back={() => setActive("Game")}></SpellBook>
-    </div>)
-  }
-  else if (active === "Shop") {
-    return (<div>
-      <Shop shopName={testShop().Name} shopInventory={testShop().Inventory} hero={hero} Back={() => setActive("Game")}></Shop>
-    </div>)
-  }
-  else if (active === "Test") {
-    return (
-      <div>  <div>
-        <h2>Tests</h2>
-        <button onClick={() => setActive("Combat")}><h3>Test Combat</h3></button>
-        <button onClick={() => setActive("Dungeon")}><h3>Test Dungeon</h3></button>
-        <button onClick={() => Heal(hero)}><h3>Test Heal</h3></button>
-        <button onClick={() => setActive("Shop")}><h3>Test Shop</h3></button>
-        <button onClick={() => TestXP(hero)}><h3>Test XP</h3></button>
-        <button onClick={() => setActive("Game")}><h3>Back</h3></button>
-      </div></div>
-    );
-  }
-  else {
-    return (
+  return (
+    <div>
       <div>
-        <div>
-          <Toolbar abil={() => setActive("Abilities")} cSheet={() => setActive("CharacterSheet")} equip={() => setActive("Equipment")} inv={() => setActive("Inventory")} party={() => setActive("Party")} spells={() => setActive("Spells")} skill={() => setActive("Skills")} menu={() => setActive("Menu")} test={() => setActive("Test")}></Toolbar>
-        </div>
-        <div>
-          <h2>Game Map</h2>
-          <div>
-          </div>
-        </div>
-        <div style={{ marginLeft: "25%", marginRight: "25%", width: "auto" }}>
-          <Log log={hero.Log} logName={"Game"}></Log>
-        </div>
+        {active !== "Combat" && active !== "Dungeon" ? <Toolbar abil={() => setActive("Abilities")} cSheet={() => setActive("CharacterSheet")} equip={() => setActive("Equipment")} inv={() => setActive("Inventory")} party={() => setActive("Party")} spells={() => setActive("Spells")} skill={() => setActive("Skills")} menu={() => setActive("Menu")} test={() => setActive("Test")}></Toolbar> : <div></div>}
       </div>
-    );
-  }
+      <div>
+        {active === "Menu" ? <Menu hero={hero} Back={() => setActive("Game")}></Menu> : <div></div>}
+        {active === "Abilities" ? <Abilities hero={hero} Back={() => setActive("Game")}></Abilities> : <div></div>}
+        {active === "CharacterSheet" ? <CharacterSheet hero={hero} Back={() => setActive("Game")}></CharacterSheet> : <div></div>}
+        {active === "Combat" ? <Combat hero={hero} enemies={[rat(), rat(), rat()]} Back={() => setActive("Test")}></Combat> : <div></div>}
+        {active === "Dungeon" ? <Dungeon hero={hero} dungeonName={"Test Dungeon"} encounters={[[rat()], [rat(), rat()]]} boss={[rat(), rat(), rat()]} Back={() => setActive("Test")}></Dungeon> : <div></div>}
+        {active === "Equipment" ? <Equipment hero={hero} Back={() => setActive("Game")}></Equipment> : <div></div>}
+        {active === "Inventory" ? <Inventory hero={hero} Back={() => setActive("Game")}></Inventory> : <div></div>}
+        {active === "Party" ? <Party hero={hero} Back={() => setActive("Game")}></Party> : <div></div>}
+        {active === "Skills" ? <div></div> : <div></div>}
+        {active === "Spells" ? <SpellBook hero={hero} Back={() => setActive("Game")}></SpellBook> : <div></div>}
+        {active === "Test" ? <div className='menu-box'>
+          <h2>Tests</h2>
+          <div><button className='menu-button' onClick={() => setActive("Combat")}><h3>Test Combat</h3></button></div>
+          <div><button className='menu-button' onClick={() => setActive("Dungeon")}><h3>Test Dungeon</h3></button></div>
+          <div><button className='menu-button' onClick={() => Heal(hero)}><h3>Test Heal</h3></button></div>
+          <div><button className='menu-button' onClick={() => setActive("Shop")}><h3>Test Shop</h3></button></div>
+          <div><button className='menu-button' onClick={() => TestXP(hero)}><h3>Test XP</h3></button></div>
+        </div> : <div></div>}
+      </div>
+      <div style={{ marginLeft: "25%", marginRight: "25%", width: "auto" }}>
+        <Log log={hero.Log} logName={"Game"}></Log>
+      </div>
+    </div>
+  );
 }
 
 export default Game;
