@@ -3,14 +3,14 @@ import { BasicAttack, SneakAttack } from "../Scripts/CombatScripts";
 import { rageBuff } from "./Buffs";
 
 export function cleave() {
-    var cleave = { Name: "Cleave", Description: "Attack all enemies with a Basic Attack", Type: "Attack", StaminaCost: 10, Target: "Enemies", AbilityEffect(user, target, combatLog) {BasicAttack(user, target, combatLog)} }
+    var cleave = { Name: "Cleave", StaminaCost: 10, Description: "Cleaves through all foes with a weapon", AbilityEffect(char, allies, enemies, target, combatLog) {combatLog.push(char.Name + " cleaves through all foes with their weapon"); for (var e = 0; e < enemies.length; e++) { BasicAttack(char, enemies[e], combatLog) } } }
     return cleave;
 }
 export function rage() {
-    var rage = { Name: "Rage", Description: "User goes into a rage, gaining a +2 Str Bonus", Type: "Self", StaminaCost: 5, Target: "Single Ally", AbilityEffect(user, target, combatLog) { CheckIfBuffApplied(user, rageBuff(), combatLog) } }
+    var rage = { Name: "Rage", StaminaCost: 5, Description: "Temporarily gain a +2 bonus to Strength", AbilityEffect(char, allies, enemies, target, combatLog) {combatLog.push(char.Name + " Enters a rage");CheckIfBuffApplied(char, rageBuff(), combatLog) } }
     return rage;
 }
 export function sneakAttack() {
-    var sneakAttack = { Name: "Sneak Attack", Description: "An attack that ignores armor", Type: "Attack", StaminaCost: 5, Target: "Single Enemy", AbilityEffect(user, target, combatLog) {SneakAttack(user, target, combatLog)} }
+    var sneakAttack = { Name: "Sneak Attack", StaminaCost: 5, Description: "An attack that ignores target's armor", AbilityEffect(char, allies, enemies, target, combatLog) { SneakAttack(char, target, combatLog) } }
     return sneakAttack;
 }

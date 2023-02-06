@@ -1,5 +1,6 @@
 import { HealHP, LearnSpell, RecoverSP } from "../Scripts/CharacterScripts";
 import { bludeoningDamage, piercingDamage, slashingDamage } from "./DamageTypes";
+import { clothProtection, naturalProtection } from "./ProtectionTypes";
 import { magicMissile } from "./Spells";
 //consumables
 //food
@@ -27,11 +28,11 @@ export function magicMissileScroll() {
 //equipables
 //armor
 export function fur() {
-    var fur = { Name: "Fur", Type: "Torso", Protection: 0, ProtectionType: "Natural", Cost: 0, Quantity: 1 }
+    var fur = { Name: "Fur", Type: "Torso", Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1 }
     return fur;
 }
 export function tunic() {
-    var tunic = { Name: "Tunic", Type: "Torso", Protection: 0, ProtectionType: "Cloth", Cost: 2, Quantity: 1 }
+    var tunic = { Name: "Tunic", Type: "Torso", Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1 }
     return tunic;
 }
 //weapons

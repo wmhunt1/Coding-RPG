@@ -47,7 +47,7 @@ function Game(props) {
   return (
     <div>
       <div>
-        {active !== "Combat" && active !== "Dungeon" ? <Toolbar abil={() => setActive("Abilities")} cSheet={() => setActive("CharacterSheet")} equip={() => setActive("Equipment")} inv={() => setActive("Inventory")} party={() => setActive("Party")} spells={() => setActive("Spells")} skill={() => setActive("Skills")} menu={() => setActive("Menu")} test={() => setActive("Test")}></Toolbar> : <div></div>}
+        {active !== "Combat" && active !== "Dungeon" ? <Toolbar home={() =>setActive("Home")} abil={() => setActive("Abilities")} cSheet={() => setActive("CharacterSheet")} equip={() => setActive("Equipment")} inv={() => setActive("Inventory")} party={() => setActive("Party")} spells={() => setActive("Spells")} skill={() => setActive("Skills")} menu={() => setActive("Menu")} test={() => setActive("Test")}></Toolbar> : <div></div>}
       </div>
       <div>
         {active === "Menu" ? <Menu hero={hero} Back={() => setActive("Game")}></Menu> : <div></div>}
@@ -70,6 +70,7 @@ function Game(props) {
           <div><button className='menu-button' onClick={() => TestXP(hero)}><h3>Test XP</h3></button></div>
         </div> : <div></div>}
       </div>
+      {active !== "Combat" && active !== "Dungeon" && active !=="Shop" && active === "Home"? <div><h2>Map</h2></div> : <div></div>}
       <div style={{ marginLeft: "25%", marginRight: "25%", width: "auto" }}>
         <Log log={log} logName={"Game"}></Log>
       </div>

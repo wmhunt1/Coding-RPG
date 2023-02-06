@@ -1,4 +1,4 @@
-import { AddGold, AddItemToInventory, AddToCharacterLog, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage, UseMP, UseSP } from "./CharacterScripts";
+import { AddGold, AddItemToInventory, AddToCharacterLog, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage} from "./CharacterScripts";
 import { CastSpell, UseAbility } from "./SpellScripts";
 export function CalculateCharWeaponDamage(char) {
     var damage = char.Strength + char.Weapon.Damage + char.StrBonus - char.StrPenalty;
@@ -91,7 +91,7 @@ export function MagicAttackResults(char1, char2, combatLog, baseDamage, modified
         else {
             miss = " dodges "
         }
-        result = char2.Name + miss + char1.Name + "'s Attack"
+        result = char2.Name + miss + char1.Name + "'s Spell"
     }
     else {
         if (modifiedDamage === baseDamage * 2) {
@@ -112,7 +112,7 @@ export function MagicAttackResults(char1, char2, combatLog, baseDamage, modified
 }
 export function ProjectileMagicAttack(char1, char2, combatLog, spell) {
     var char1Damage = char1.Intelligence + char1.IntBonus - char1.IntPenalty + spell.Amount;
-    var char2Defense = (char2.WillPower + char2.WlpBonus - char2.WlpPenalty) / 2 + (char2.Dexterity + char2.DexBonus - char2.DexPenalty) / 2;
+    var char2Defense = (char2.WillPower + char2.WlpBonus - char2.WlpPenalty)/2 + (char2.Dexterity + char2.DexBonus - char2.DexPenalty)/2;
     var baseDamage = CalculateBaseDamage(char1Damage, char2Defense)
     var modifiedDamage = CalculateDamageModifiers(char2, baseDamage, spell.DamageType)
     var totalDamage = CalculateCritDamage(char1, modifiedDamage)
@@ -178,40 +178,11 @@ export function HeroTurn(char1, allies, enemies, target, combatLog, option, spel
                 BasicAttack(char1, target, combatLog);
             }
             if (abil !== null) {
-                if (abil.Type === "Self") {
-                    UseAbility(char1, abil, char1, combatLog);
-                }
-                else if (abil.Type === "Attack") {
-                    if (abil.Target === "Single Enemy") {
-                        UseAbility(char1, abil, target, combatLog)
-                    }
-                    if (abil.Target === "Enemies") {
-                        for (let e = 0; e < enemies.length; e++) {
-                            UseAbility(char1, abil, enemies[e], combatLog);
-                        }
-                        UseSP(char1, abil.StaminaCost)
-                    }
-                }
+                UseAbility(char1, allies, enemies, target, combatLog, abil)
             }
-            if (spell !== null) {
-                if (spell.Target === "Single Enemy") {
-                    CastSpell(char1, spell, target, combatLog);
-                }
-                if (spell.Target === "Single Ally") {
-                    CastSpell(char1, spell, target, combatLog);
-                }
-                if (spell.Target === "Allies") {
-                    for (let a = 0; a < allies.length; a++) {
-                        CastSpell(char1, spell, allies[a], combatLog);
-                    }
-                    UseMP(char1, spell.ManaCost)
-                }
-                if (spell.Target === "Enemies") {
-                    for (let e = 0; e < enemies.length; e++) {
-                        CastSpell(char1, spell, enemies[e], combatLog);
-                    }
-                    UseMP(char1, spell.ManaCost)
-                }
+            if (spell !== null)
+            {
+                CastSpell(char1, allies, enemies, target, combatLog, spell); 
             }
         }
         else {
@@ -263,6 +234,7 @@ export function CombatRound(char1, allies, enemies, target, combatLog, option, s
 
 }
 export function CombatRewards(hero, allies, enemies) {
+    AddToCharacterLog(hero, "Defeated all Foes")
     AddToCharacterLog(hero, "Recieving Combat Rewards")
     for (var e = 0; e < enemies.length; e++) {
         for (var a = 0; a < allies.length; a++) {
