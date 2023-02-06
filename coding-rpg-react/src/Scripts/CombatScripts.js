@@ -1,6 +1,6 @@
 import { AddGold, AddItemToInventory, AddToCharacterLog, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, TakeDamage, UseMP, UseSP } from "./CharacterScripts";
 import { CastSpell, UseAbility } from "./SpellScripts";
-export function CalculateCharDamage(char) {
+export function CalculateCharWeaponDamage(char) {
     var damage = char.Strength + char.Weapon.Damage + char.StrBonus - char.StrPenalty;
     return damage;
 }
@@ -31,9 +31,9 @@ export function CalculateCritDamage(char1, damage) {
     }
     return damage;
 }
-export function BasicAttackResults(char1, char2, combatLog, baseDamage, totalDamage, char2Armor) {
+export function BasicAttackResults(char1, char2, combatLog, baseDamage, totalDamage, char2Armor, damageType) {
     if (totalDamage <= 0) {
-        if (char2Armor > char2.Dexterity) {
+        if (char2Armor > char2.Dexterity + char2.DexBonus - char2.DexPenalty) {
             combatLog.push(char2.Name + "'s Armor deflects " + char2.Name + "'s attack")
         }
         else {
@@ -41,43 +41,68 @@ export function BasicAttackResults(char1, char2, combatLog, baseDamage, totalDam
         }
     }
     else if (totalDamage > baseDamage) {
-        combatLog.push(char1.Name + " deals " + totalDamage + " critical damage to " + char2.Name)
+        combatLog.push(char1.Name + " deals " + totalDamage + " critical " + damageType + " damage to " + char2.Name)
     }
     else {
-        combatLog.push(char1.Name + " deals " + totalDamage + " damage to " + char2.Name)
+        combatLog.push(char1.Name + " deals " + totalDamage + " " + damageType + " damage to " + char2.Name)
     }
 }
 export function BasicAttack(char1, char2, combatLog) {
     combatLog.push(char1.Name + " attacks " + char2.Name + " with their " + char1.Weapon.Name)
-    var char1Damage = CalculateCharDamage(char1)
+    var char1Damage = CalculateCharWeaponDamage(char1)
     var char2Armor = CalculateCharArmor(char2)
     var char2Defense = CalculateCharDefenseWithArmor(char2, char2Armor)
     var baseDamage = CalculateBaseDamage(char1Damage, char2Defense);
     var totalDamage = CalculateCritDamage(char1, baseDamage)
     TakeDamage(char2, totalDamage)
-    BasicAttackResults(char1, char2, combatLog, baseDamage, totalDamage, char2Armor)
+    BasicAttackResults(char1, char2, combatLog, baseDamage, totalDamage, char2Armor, char1.Weapon.DamageType)
 }
-export function SneakAttackResults(char1, char2, combatLog, baseDamage, totalDamage) {
+export function MagicAttackResults(char1, char2, combatLog, baseDamage, totalDamage, spell)
+{
+    if (totalDamage <= 0) {
+        if (char2.WillPower > char2.Dexterity) {
+            combatLog.push(char2.Name + "'s Willpower resists " + char2.Name + "'s " + spell.Name)
+        }
+        else {
+            combatLog.push(char2.Name + " dodges " + char2.Name + "'s " + spell.Name)
+        }
+    }
+    else if (totalDamage > baseDamage) {
+        combatLog.push(char1.Name + " deals " + totalDamage + " critical " + spell.DamageType + " damage to " + char2.Name + " with " + spell.Name)
+    }
+    else {
+        combatLog.push(char1.Name + " deals " + totalDamage + " " + spell.DamageType + " damage to " + char2.Name + " with " + spell.Name)
+    }
+}
+export function ProjectileMagicAttack(char1, char2, combatLog, spell)
+{
+    var char1Damage = char1.Intelligence + char1.IntBonus - char1.IntPenalty + spell.Amount;
+    var char2Defense = (char2.WillPower + char2.WlpBonus - char2.WlpPenalty)/2 + (char2.Dexterity + char2.DexBonus - char2.DexPenalty)/2;
+    var baseDamage = CalculateBaseDamage(char1Damage, char2Defense)
+    var totalDamage = CalculateCritDamage(char1, baseDamage)
+    TakeDamage(char2, totalDamage)
+    MagicAttackResults(char1, char2, combatLog, baseDamage, totalDamage, spell)
+}
+export function SneakAttackResults(char1, char2, combatLog, baseDamage, totalDamage, damageType) {
     if (totalDamage <= 0) {
 
         combatLog.push(char2.Name + " dodges " + char2.Name + "'s attack")
     }
     else if (totalDamage > baseDamage) {
-        combatLog.push(char1.Name + " deals " + totalDamage + " critical damage to " + char2.Name)
+        combatLog.push(char1.Name + " deals " + totalDamage + " critical " + damageType + " damage to " + char2.Name)
     }
     else {
-        combatLog.push(char1.Name + " deals " + totalDamage + " damage to " + char2.Name)
+        combatLog.push(char1.Name + " deals " + totalDamage + " "+ damageType + " damage to " + char2.Name)
     }
 }
 export function SneakAttack(char1, char2, combatLog) {
     combatLog.push(char1.Name + " sneak attacks " + char2.Name + " with their " + char1.Weapon.Name)
-    var char1Damage = CalculateCharDamage(char1)
+    var char1Damage = CalculateCharWeaponDamage(char1)
     var char2Defense = CalculateCharDefenseWithoutArmor(char2)
     var baseDamage = CalculateBaseDamage(char1Damage, char2Defense);
     var totalDamage = CalculateCritDamage(char1, baseDamage)
     TakeDamage(char2, totalDamage)
-    SneakAttackResults(char1, char2, combatLog, baseDamage, totalDamage)
-
+    SneakAttackResults(char1, char2, combatLog, baseDamage, totalDamage, char1.Weapon.DamageType)
 }
 export function AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil) {
     if (char1.CurrentHP > 0) {

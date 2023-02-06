@@ -8,11 +8,8 @@ enchancments
 factions
 items
     more armor and weapon types
-    spell scrolls
 jobs
 locations
-    dungeons
-    shops
 protection types
 quiests
 relationships

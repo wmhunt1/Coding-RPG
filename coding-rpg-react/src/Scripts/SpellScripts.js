@@ -4,12 +4,11 @@ export function CastSpell(char, spell, target, combatLog) {
         if (spell.Target === "Single Ally" || spell.Target === "Single Enemy") {
             UseMP(char, spell.ManaCost)
         }
-        spell.SpellEffect(target)
+        spell.SpellEffect(char, target, combatLog)
         if (spell.Type === "Damage") {
-            combatLog.push(char.Name + " fires a " + spell.Name + " at " + target.Name + ", dealing " + spell.SpellDamage + " " + spell.DamageType)
         }
         if (spell.Type === "Heal") {
-            combatLog.push(char.Name + " casts a " + spell.Name + " on " + target.Name + ", healing " + spell.HealingAmount + " HP")
+            combatLog.push(char.Name + " casts a " + spell.Name + " on " + target.Name + ", healing " + spell.Amount + " HP")
         }
     }
     else {

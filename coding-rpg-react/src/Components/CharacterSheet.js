@@ -41,7 +41,7 @@ function CharacterSheet(props) {
           </div>
           <div className='attribute'>
             <h4>Mental Attributes</h4>
-            <h4>INT: {hero.Intelligence} WIS: {hero.Wisdom} CHA: {hero.Charisma} WLP: {hero.WillPower} PRC: {hero.Perception} LCK: {hero.Luck}</h4>
+            <h4>INT: {hero.Intelligence}({hero.IntBonus})({hero.IntPenalty})WIS: {hero.Wisdom} CHA: {hero.Charisma} WLP: {hero.WillPower}({hero.WlpBonus})({hero.WlpPenalty}) PRC: {hero.Perception} LCK: {hero.Luck}</h4>
           </div>
         </div>
       </div> : <div></div>}
