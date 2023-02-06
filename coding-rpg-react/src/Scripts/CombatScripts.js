@@ -104,7 +104,7 @@ export function SneakAttack(char1, char2, combatLog) {
     TakeDamage(char2, totalDamage)
     SneakAttackResults(char1, char2, combatLog, baseDamage, totalDamage, char1.Weapon.DamageType)
 }
-export function AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil) {
+export function AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil, round) {
     if (char1.CurrentHP > 0) {
         if (option === "Basic Attack") {
             BasicAttack(char1, target, combatLog);
@@ -148,32 +148,14 @@ export function AllyTurn(char1, allies, enemies, target, combatLog, option, spel
     }
     for (let a = 1; a < allies.length; a++) {
         if (allies[a].CurrentHP > 0) {
-            var enemyOverZero = []
-            for (let e = 0; e < enemies.length; e++) {
-                if (enemies[e].CurrentHP > 0) {
-                    enemyOverZero.push(enemies[e])
-                }
-            }
-            if (enemyOverZero.length > 0) {
-                const randomEnemy = Math.floor(Math.random() * enemyOverZero.length);
-                BasicAttack(allies[a], enemyOverZero[randomEnemy], combatLog)
-            }
+            allies[a].Tactics(allies[a], allies, enemies, combatLog, round)
         }
     }
 }
-export function EnemyTurn(allies, enemies, combatLog) {
+export function EnemyTurn(allies, enemies, combatLog, round) {
     for (let e = 0; e < enemies.length; e++) {
         if (enemies[e].CurrentHP > 0) {
-            var allyOverZero = []
-            for (let a = 0; a < allies.length; a++) {
-                if (allies[a].CurrentHP > 0) {
-                    allyOverZero.push(allies[a])
-                }
-            }
-            if (allyOverZero.length > 0) {
-                const randomAlly = Math.floor(Math.random() * allyOverZero.length);
-                BasicAttack(enemies[e], allyOverZero[randomAlly], combatLog)
-            }
+            enemies[e].Tactics(enemies[e], enemies, allies, combatLog, round)
         }
     }
 }
@@ -187,16 +169,16 @@ export function CalculateAverageSpeed(team) {
     speed /= team.length;
     return speed;
 }
-export function CombatRound(char1, allies, enemies, target, combatLog, option, spell, abil) {
+export function CombatRound(char1, allies, enemies, target, combatLog, option, spell, abil, round) {
     var AllySpeed = CalculateAverageSpeed(allies);
     var EnemySpeed = CalculateAverageSpeed(enemies);
     if (AllySpeed >= EnemySpeed) {
-        AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil)
+        AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil, round)
         EnemyTurn(allies, enemies, combatLog)
     }
     else {
         EnemyTurn(allies, enemies, combatLog)
-        AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil)
+        AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil, round)
     }
 
 }

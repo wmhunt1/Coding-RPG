@@ -7,7 +7,7 @@ export function cleave() {
     return cleave;
 }
 export function rage() {
-    var rage = { Name: "Rage", Description: "User goes into a rage, gaining a +2 Str Bonus", Type: "Self", StaminaCost: 5, Target: "Single Ally", AbilityEffect(user, target, combatLog) { CheckIfBuffApplied(target, rageBuff(), combatLog) } }
+    var rage = { Name: "Rage", Description: "User goes into a rage, gaining a +2 Str Bonus", Type: "Self", StaminaCost: 5, Target: "Single Ally", AbilityEffect(user, target, combatLog) { CheckIfBuffApplied(user, rageBuff(), combatLog) } }
     return rage;
 }
 export function sneakAttack() {

@@ -1,5 +1,6 @@
 feats/perks
 save/load via json
+immunities, resistances, vulnerabilites
 conditions
 craftingrecipes
 damagetypes

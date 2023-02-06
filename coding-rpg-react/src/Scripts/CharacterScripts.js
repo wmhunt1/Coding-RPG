@@ -176,13 +176,11 @@ export function EquipItemFromInventory(char, inventory, item) {
     RemoveItemFromInventory(char, inventory, item)
     char.Inventory = inventory;
 }
-export function JoinParty(char1, char2, party)
-{
+export function JoinParty(char1, char2, party) {
     party.push(char2)
     AddToCharacterLog(char1, char2.Name + " has joined the party.")
 }
-export function LeaveParty(char1, char2, party)
-{
+export function LeaveParty(char1, char2, party) {
     party.remove(char2)
     AddToCharacterLog(char1, char2.Name + " has left the party.")
 }
@@ -205,12 +203,19 @@ export function LearnSpell(char, spell) {
     }
 }
 export function CheckIfBuffApplied(char, buff, combatLog) {
-    if (char.Buffs.find(x => x.Name !== buff.Name)) {
+    if (char.Buffs.length > 0) {
+        if (char.Buffs.find(x => x.Name !== buff.Name)) {
+            buff.ApplyBuff(char)
+        }
+        else {
+            combatLog.push(char.Name + " already has a " + buff.Name + " Buff")
+        }
+    }
+    else
+    {
         buff.ApplyBuff(char)
     }
-    else {
-        combatLog.push(char.Name + " already has a " + buff.Name + " Buff")
-    }
+
 }
 export function CheckIfDeBuffApplied(char, deBuff, combatLog) {
     if (char.DeBuffs.find(x => x.Name !== deBuff.Name)) {

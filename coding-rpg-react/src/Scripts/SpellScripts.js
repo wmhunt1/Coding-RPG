@@ -20,8 +20,8 @@ export function UseAbility(char, abil, target, combatLog) {
         if (abil.Target === "Single Ally" || abil.Target === "Single Enemy") {
             UseSP(char, abil.StaminaCost)
         }
-        abil.AbilityEffect(char, target, combatLog)
         combatLog.push(char.Name + " uses " + abil.Name)
+        abil.AbilityEffect(char, target, combatLog)
     }
     else {
         combatLog.push(char.Name + "didn't have enough SP")
