@@ -1,4 +1,4 @@
-import { AddGold, AddItemToInventory, AddToCharacterLog, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, TakeDamage, UseMP, UseSP } from "./CharacterScripts";
+import { AddGold, AddItemToInventory, AddToCharacterLog, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage, UseMP, UseSP } from "./CharacterScripts";
 import { CastSpell, UseAbility } from "./SpellScripts";
 export function CalculateCharWeaponDamage(char) {
     var damage = char.Strength + char.Weapon.Damage + char.StrBonus - char.StrPenalty;
@@ -164,58 +164,83 @@ export function SneakAttack(char1, char2, combatLog) {
     TakeDamage(char2, totalDamage)
     SneakAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, char1.Weapon.DamageType)
 }
-export function AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil, round) {
-    if (char1.CurrentHP > 0) {
-        if (option === "Basic Attack") {
-            BasicAttack(char1, target, combatLog);
-        }
-        if (option !== "Basic Attack" && abil != null) {
-            if (abil.Type === "Self") {
-                UseAbility(char1, abil, char1, combatLog);
-            }
-            else if (abil.Type === "Attack") {
-                if (abil.Target === "Single Enemy") {
-                    UseAbility(char1, abil, target, combatLog)
-                }
-                if (abil.Target === "Enemies") {
-                    for (let e = 0; e < enemies.length; e++) {
-                        UseAbility(char1, abil, enemies[e], combatLog);
-                    }
-                    UseSP(char1, abil.StaminaCost)
-                }
-            }
-        }
-        if (option !== "Basic Attack" && spell !== null) {
-            if (spell.Target === "Single Enemy") {
-                CastSpell(char1, spell, target, combatLog);
-            }
-            if (spell.Target === "Single Ally") {
-                CastSpell(char1, spell, target, combatLog);
-            }
-            if (spell.Target === "Allies") {
-                for (let a = 0; a < allies.length; a++) {
-                    CastSpell(char1, spell, allies[a], combatLog);
-                }
-                UseMP(char1, spell.ManaCost)
-            }
-            if (spell.Target === "Enemies") {
-                for (let e = 0; e < enemies.length; e++) {
-                    CastSpell(char1, spell, enemies[e], combatLog);
-                }
-                UseMP(char1, spell.ManaCost)
-            }
-        }
-    }
-    for (let a = 1; a < allies.length; a++) {
-        if (allies[a].CurrentHP > 0) {
-            allies[a].Tactics(allies[a], allies, enemies, combatLog, round)
-        }
+export function DamageConditionCheck(char, combatLog) {
+    ResistCondition(char, combatLog)
+    if (char.Condition.Type === "Damage") {
+        var damage = CalculateDamageModifiers(char, char.Condition.Damage, char.Condition.DamageType)
+        TakeDamage(char, damage)
+        combatLog.push(char.Name + " takes " + char.Condition.Damage + " " + char.Condition.DamageType + " damage from " + char.Condition.Name)
     }
 }
-export function EnemyTurn(allies, enemies, combatLog, round) {
-    for (let e = 0; e < enemies.length; e++) {
-        if (enemies[e].CurrentHP > 0) {
-            enemies[e].Tactics(enemies[e], enemies, allies, combatLog, round)
+export function SkipConditionCheck(char, combatLog) {
+    var skip = false;
+    ResistCondition(char, combatLog)
+    if (char.Condition.Type === "Skip") {
+        skip = true;
+    }
+    return skip;
+}
+export function HeroTurn(char1, allies, enemies, target, combatLog, option, spell, abil) {
+    if (char1.CurrentHP > 0) {
+        var skip = SkipConditionCheck(char1, combatLog)
+        if (skip === false) {
+            if (option === "Basic Attack") {
+                BasicAttack(char1, target, combatLog);
+            }
+            if (option !== "Basic Attack" && abil != null) {
+                if (abil.Type === "Self") {
+                    UseAbility(char1, abil, char1, combatLog);
+                }
+                else if (abil.Type === "Attack") {
+                    if (abil.Target === "Single Enemy") {
+                        UseAbility(char1, abil, target, combatLog)
+                    }
+                    if (abil.Target === "Enemies") {
+                        for (let e = 0; e < enemies.length; e++) {
+                            UseAbility(char1, abil, enemies[e], combatLog);
+                        }
+                        UseSP(char1, abil.StaminaCost)
+                    }
+                }
+            }
+            if (option !== "Basic Attack" && spell !== null) {
+                if (spell.Target === "Single Enemy") {
+                    CastSpell(char1, spell, target, combatLog);
+                }
+                if (spell.Target === "Single Ally") {
+                    CastSpell(char1, spell, target, combatLog);
+                }
+                if (spell.Target === "Allies") {
+                    for (let a = 0; a < allies.length; a++) {
+                        CastSpell(char1, spell, allies[a], combatLog);
+                    }
+                    UseMP(char1, spell.ManaCost)
+                }
+                if (spell.Target === "Enemies") {
+                    for (let e = 0; e < enemies.length; e++) {
+                        CastSpell(char1, spell, enemies[e], combatLog);
+                    }
+                    UseMP(char1, spell.ManaCost)
+                }
+            }
+        }
+        else {
+            combatLog.push(char1.Name + " lost turn due to " + char1.Condition.Name)
+        }
+        DamageConditionCheck(char1, combatLog)
+    }
+}
+export function NPCTurn(allies, enemies, combatLog, round, hero) {
+    for (let a = hero; a < allies.length; a++) {
+        if (allies[a].CurrentHP > 0) {
+            var skip = SkipConditionCheck(allies[a], combatLog)
+            if (skip === true) {
+                allies[a].Tactics(allies[a], allies, enemies, combatLog, round)
+            }
+            else {
+                combatLog.push(allies[a].Name + " lost turn due to " + allies[a].Condition.Name)
+            }
+            DamageConditionCheck(allies[a], combatLog)
         }
     }
 }
@@ -233,12 +258,18 @@ export function CombatRound(char1, allies, enemies, target, combatLog, option, s
     var AllySpeed = CalculateAverageSpeed(allies);
     var EnemySpeed = CalculateAverageSpeed(enemies);
     if (AllySpeed >= EnemySpeed) {
-        AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil, round)
-        EnemyTurn(allies, enemies, combatLog)
+        HeroTurn(char1, allies, enemies, target, combatLog, option, spell, abil)
+        //allies
+        NPCTurn(allies, enemies, combatLog, round, 1)
+        //enemies
+        NPCTurn(enemies, allies, combatLog, round, 0)
     }
     else {
-        EnemyTurn(allies, enemies, combatLog)
-        AllyTurn(char1, allies, enemies, target, combatLog, option, spell, abil, round)
+        //enemies
+        NPCTurn(enemies, allies, combatLog, round, 0)
+        HeroTurn(char1, allies, enemies, target, combatLog, option, spell, abil)
+        //allies
+        NPCTurn(allies, enemies, combatLog, round, 1)
     }
 
 }
@@ -258,5 +289,6 @@ export function CombatRewards(hero, allies, enemies) {
     for (var a2 = 0; a2 < allies.length; a2++) {
         RemoveAllBuffs(allies[a2])
         RemoveAllDeBuffs(allies[a2])
+        RemoveCondition(allies[a2])
     }
 }

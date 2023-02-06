@@ -18,6 +18,11 @@ export function piercingDamage()
     var piercing = "Piercing"
     return piercing;
 }
+export function poisonDamage()
+{
+    var poison = "Poison"
+    return poison;
+}
 export function slashingDamage()
 {
     var slashing = "Slashing"

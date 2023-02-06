@@ -1,6 +1,7 @@
 feats/perks
 save/load via json
-conditions: one a a time, damage condition such as poison can be resisted with con. turn skip condition such as sleep can be resisted with wlp
+code clean up and refactoring
+clean up combat abil/spell conditions
 craftingrecipes
 damagetypes
 dialogues

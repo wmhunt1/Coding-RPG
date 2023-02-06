@@ -1,3 +1,5 @@
+import { noCondition } from "../Database/Conditions";
+
 Array.prototype.remove = function () {
     var what, a = arguments, L = a.length, ax;
     while (L && this.length) {
@@ -237,4 +239,46 @@ export function RemoveAllDeBuffs(char) {
         char.DeBuffs[d].RemoveDeBuff(char);
     }
     char.DeBuffs = []
+}
+export function ApplyCondition(char, condition, log) {
+    if (condition.Name !== "None") {
+        char.Condition = condition
+        log.push(char.Name + " afflicted with " + condition.Name)
+    }
+    else {
+        log.push(char.Name + " already afflicted with " + char.Condition.Name)
+    }
+}
+export function RemoveCondition(char, log) {
+    var condition = char.Condition.Name
+    char.Condition = noCondition()
+    if (condition !== "None") {
+        log.push(char.Name + " is no longer afflicted with " + condition.Name)
+    }
+}
+export function ResistCondition(char, log) {
+    var resistingAttribute = 0;
+    if (char.Condition.Type === "Damage") {
+        resistingAttribute = char.Constitution + char.ConBonus - char.ConPenalty;
+    }
+    if (char.Condition.Type === "Skip") {
+        resistingAttribute = char.WillPower + char.WlpBonus - char.WlpPenalty;
+    }
+    var resistChance = Math.floor(Math.random() * 50) + 1 + resistingAttribute;
+    if (char.ConditionImmunities.find(x => x.Name === char.Conditon.Name) === true)
+    {
+        resistChance += 100;
+    }
+    if (char.ConditionResistances.find(x => x.Name === char.Conditon.Name) === true)
+    {
+        resistChance += 50;
+    }
+    if (char.ConditionWeaknesses.find(x => x.Name === char.Conditon.Name) === true)
+    {
+        resistChance -= 50
+    }
+    if (resistChance >= 50) {
+        log.push(char.Name + " resisted " + char.Condition.Name)
+        RemoveCondition(char, log)
+    }
 }
