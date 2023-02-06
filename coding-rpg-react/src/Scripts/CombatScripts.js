@@ -20,37 +20,29 @@ export function CalculateBaseDamage(damage, defense) {
     return damage - defense;
 }
 export function CalculateDamageModifiers(char, damage, type) {
-    var immune = char.Immunities.includes(type)
-    var resist = char.Resistances.includes(type)
-    var weak = char.Weaknesses.includes(type)
-    if (immune === true) {
+    if (char.Immunities.includes(type) === true) {
         damage = 0;
     }
-    if (resist === true) {
+    if (char.Resistances.includes(type) === true) {
         damage /= 2;
     }
-    if (weak === true) {
+    if (char.Weaknesses.includes(type) === true) {
         damage *= 2;
     }
     return damage;
 }
 export function CalculateCritDamage(char1, damage) {
-    var crit = false;
-    var critChance = Math.floor(Math.random() * 100) + 1 + char1.Luck;
-    if (critChance >= 75) {
-        crit = true;
-    }
-    if (crit === true) {
+    if (Math.floor(Math.random() * 100) + 1 + char1.Luck >= 75) {
         damage *= 2;
     }
     return damage;
 }
 export function BasicAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, char2Armor, damageType) {
     var result = "";
-    var miss = "";
     var mod = "";
     var crit = " ";
     if (baseDamage === 0) {
+        var miss = ""
         if (char2Armor > char2.Dexterity + char2.DexBonus - char2.DexPenalty) {
             miss = "'s armor deflects "
         }
@@ -129,22 +121,20 @@ export function ProjectileMagicAttack(char1, char2, combatLog, spell) {
 }
 export function SneakAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, damageType) {
     var result = "";
-    var miss = "";
     var mod = "";
     var crit = " ";
     if (baseDamage === 0) {
-        miss = " dodges "
-        result = char2.Name + miss + char1.Name + "'s Attack"
+        result = char2.Name + " dodges " + char1.Name + "'s Attack"
     }
     else {
         if (modifiedDamage === baseDamage * 2) {
-            mod = " (Weak) "
+            mod = " (Weak)"
         }
         if (modifiedDamage === baseDamage / 2) {
-            mod = " (Resisted) "
+            mod = " (Resisted)"
         }
         if (modifiedDamage === 0) {
-            mod = " (Immune) "
+            mod = " (Immune)"
         }
         if (totalDamage === baseDamage * 2) {
             crit = " Critical "
@@ -173,21 +163,21 @@ export function DamageConditionCheck(char, combatLog) {
     }
 }
 export function SkipConditionCheck(char, combatLog) {
-    var skip = false;
     ResistCondition(char, combatLog)
     if (char.Condition.Type === "Skip") {
-        skip = true;
+        return true;
     }
-    return skip;
+    if (char.Condition.Type === "None") {
+        return false
+    }
 }
 export function HeroTurn(char1, allies, enemies, target, combatLog, option, spell, abil) {
     if (char1.CurrentHP > 0) {
-        var skip = SkipConditionCheck(char1, combatLog)
-        if (skip === false) {
+        if (SkipConditionCheck(char1, combatLog) === false) {
             if (option === "Basic Attack") {
                 BasicAttack(char1, target, combatLog);
             }
-            if (option !== "Basic Attack" && abil != null) {
+            if (abil !== null) {
                 if (abil.Type === "Self") {
                     UseAbility(char1, abil, char1, combatLog);
                 }
@@ -203,7 +193,7 @@ export function HeroTurn(char1, allies, enemies, target, combatLog, option, spel
                     }
                 }
             }
-            if (option !== "Basic Attack" && spell !== null) {
+            if (spell !== null) {
                 if (spell.Target === "Single Enemy") {
                     CastSpell(char1, spell, target, combatLog);
                 }
@@ -233,8 +223,7 @@ export function HeroTurn(char1, allies, enemies, target, combatLog, option, spel
 export function NPCTurn(allies, enemies, combatLog, round, hero) {
     for (let a = hero; a < allies.length; a++) {
         if (allies[a].CurrentHP > 0) {
-            var skip = SkipConditionCheck(allies[a], combatLog)
-            if (skip === true) {
+            if (SkipConditionCheck(allies[a], combatLog) === false) {
                 allies[a].Tactics(allies[a], allies, enemies, combatLog, round)
             }
             else {

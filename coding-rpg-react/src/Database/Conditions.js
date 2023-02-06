@@ -1,7 +1,7 @@
 import { poisonDamage } from "./DamageTypes";
 
 export function noCondition() {
-    var noCondition = { Name: "None", Symbol: "", Type: "", Damage: 0 }
+    var noCondition = { Name: "None", Symbol: "", Type: "None", Damage: 0 }
     return noCondition
 }
 export function poisonCondition(damage) {

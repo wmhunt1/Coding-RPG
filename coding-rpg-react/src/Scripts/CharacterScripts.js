@@ -265,16 +265,13 @@ export function ResistCondition(char, log) {
         resistingAttribute = char.WillPower + char.WlpBonus - char.WlpPenalty;
     }
     var resistChance = Math.floor(Math.random() * 50) + 1 + resistingAttribute;
-    if (char.ConditionImmunities.find(x => x.Name === char.Conditon.Name) === true)
-    {
+    if (char.ConditionImmunities.find(x => x.Name === char.Conditon.Name) === true) {
         resistChance += 100;
     }
-    if (char.ConditionResistances.find(x => x.Name === char.Conditon.Name) === true)
-    {
+    if (char.ConditionResistances.find(x => x.Name === char.Conditon.Name) === true) {
         resistChance += 50;
     }
-    if (char.ConditionWeaknesses.find(x => x.Name === char.Conditon.Name) === true)
-    {
+    if (char.ConditionWeaknesses.find(x => x.Name === char.Conditon.Name) === true) {
         resistChance -= 50
     }
     if (resistChance >= 50) {
