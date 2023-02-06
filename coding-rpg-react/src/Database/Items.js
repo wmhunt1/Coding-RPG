@@ -2,6 +2,11 @@ import { HealHP, LearnSpell, RecoverSP } from "../Scripts/CharacterScripts";
 import { magicMissile } from "./Spells";
 //consumables
 //food
+export function cheese()
+{
+    var cheese = {Name: "Cheese", Type: "Consumable", Cost: 4, Quantity: 1, ConsumeEffect(hero) { RecoverSP(hero, 5) }}
+    return cheese
+}
 export function cookedRatMeat() {
     var cookedRatMeat = { Name: "CookedRat Meat", Type: "Consumable", Cost: 4, Quantity: 1, ConsumeEffect(hero) { RecoverSP(hero, 5) } }
     return cookedRatMeat;

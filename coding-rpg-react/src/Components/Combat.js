@@ -10,7 +10,7 @@ function Combat(props) {
     const [abilities, setAbilities] = useState(props.hero.Abilities)
     const [inventory, setInventory] = useState(props.hero.Inventory)
     const [spells, setSpells] = useState(props.hero.SpellBook)
-    const [allies, setAllies] = useState([props.hero, props.hero.Companions[0]])
+    const [allies, setAllies] = useState([props.hero, ...props.hero.Companions])
     const [allyBuffs, setAllyBuffs] = useState(allies)
     const [allyDeBuffs, setAllyDeBuffs] = useState(allies)
     const [enemies, setEnemies] = useState(props.enemies);

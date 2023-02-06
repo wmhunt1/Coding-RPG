@@ -15,6 +15,7 @@ import Party from './Party';
 import SpellBook from './SpellBook';
 import Shop from './Shop';
 import { rat } from '../Database/Characters'
+import { testDungeon } from '../Database/Dungeons';
 import { testShop } from '../Database/Shops'
 
 function Game(props) {
@@ -53,11 +54,11 @@ function Game(props) {
         {active === "Abilities" ? <Abilities hero={hero} Back={() => setActive("Game")}></Abilities> : <div></div>}
         {active === "CharacterSheet" ? <CharacterSheet parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></CharacterSheet> : <div></div>}
         {active === "Combat" ? <Combat parentCallback={handleCallback} hero={hero} enemies={[rat(), rat(), rat()]} Back={() => setActive("Test")}></Combat> : <div></div>}
-        {active === "Dungeon" ? <Dungeon parentCallback={handleCallback} hero={hero} dungeonName={"Test Dungeon"} encounters={[[rat()], [rat(), rat()]]} boss={[rat(), rat(), rat()]} Back={() => setActive("Test")}></Dungeon> : <div></div>}
+        {active === "Dungeon" ? <Dungeon parentCallback={handleCallback} hero={hero} dungeon={testDungeon()} Back={() => setActive("Test")}></Dungeon> : <div></div>}
         {active === "Equipment" ? <Equipment parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></Equipment> : <div></div>}
         {active === "Inventory" ? <Inventory parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></Inventory> : <div></div>}
         {active === "Party" ? <Party hero={hero} Back={() => setActive("Game")}></Party> : <div></div>}
-        {active === "Shop" ? <Shop parentCallback={handleCallback} shopName={testShop().Name} hero={hero} shopInventory={testShop().Inventory} Back={() => setActive("Test")}></Shop> : <div></div>}
+        {active === "Shop" ? <Shop parentCallback={handleCallback} shop={testShop()} hero={hero} Back={() => setActive("Test")}></Shop> : <div></div>}
         {active === "Skills" ? <div></div> : <div></div>}
         {active === "Spells" ? <SpellBook hero={hero} Back={() => setActive("Game")}></SpellBook> : <div></div>}
         {active === "Test" ? <div className='menu-box'>

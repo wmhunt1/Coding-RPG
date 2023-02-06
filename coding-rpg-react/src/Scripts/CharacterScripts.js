@@ -134,7 +134,7 @@ export function RemoveItemFromInventory(char, inventory, item) {
 export function UnEquip(char, inventory, item) {
     if (item.Type === "Weapon") {
         if (char.Weapon.Name !== "Bare Fist") {
-            AddToCharacterLog(char, char.Name + " Unequipped" + item.Name);
+            AddToCharacterLog(char, char.Name + " Unequipped " + item.Name);
             AddItemToInventory(char, inventory, item);
         }
         var fist = { Name: "Bare Fist", Type: "Weapon", Damage: 0, DamageType: "Bludgeoning", Cost: 0, Quantity: 0 }
@@ -162,7 +162,7 @@ export function EquipItem(char, inventory, item) {
         UnEquip(char, inventory, item);
         char.Torso = item;
     }
-    AddToCharacterLog(char, char.Name + " Equipping " + item.Name);
+    AddToCharacterLog(char, char.Name + " Equipped " + item.Name);
     char.Inventory = inventory;
 }
 export function EquipItemFromInventory(char, inventory, item) {
@@ -175,6 +175,16 @@ export function EquipItemFromInventory(char, inventory, item) {
     EquipItem(char, inventory, item)
     RemoveItemFromInventory(char, inventory, item)
     char.Inventory = inventory;
+}
+export function JoinParty(char1, char2, party)
+{
+    party.push(char2)
+    AddToCharacterLog(char1, char2.Name + " has joined the party.")
+}
+export function LeaveParty(char1, char2, party)
+{
+    party.remove(char2)
+    AddToCharacterLog(char1, char2.Name + " has left the party.")
 }
 export function LearnAbility(char, abil) {
     if (char.Abilites.find(x => x.Name === abil.Name)) {

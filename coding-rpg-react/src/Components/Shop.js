@@ -7,7 +7,7 @@ function Shop(props) {
     const [active, setActive] = useState("shopping")
     const [hero, setHero] = useState(props.hero);
     const [gold, setGold] = useState(props.hero.Gold)
-    const [shopInventory, setShopInventory] = useState(props.shopInventory)
+    const [shopInventory, setShopInventory] = useState(props.shop.Inventory)
     const [heroInventory, setHeroInventory] = useState(props.hero.Inventory)
     const shopInventoryList = shopInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP <button onClick={() => { handleBuy(hero, heroInventory, item) }}><h4>Buy</h4></button></h4>)
     const heroInventoryList = heroInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost / 2} GP, QTY: {item.Quantity} <button onClick={() => { handleSell(hero, heroInventory, shopInventory, item) }}><h4>Sell</h4></button></h4>)
@@ -53,7 +53,7 @@ function Shop(props) {
         props.parentCallback(hero);
     }
     return (<div>
-        <h2>{props.shopName}</h2>
+        <h2>{props.shop.Name}</h2>
         <h3>{hero.Name}'s Gold: {gold}</h3>
         <div>
             <div><button className='menu-button' onClick={() => setActive("buy")}><h3>Buy</h3></button></div>
