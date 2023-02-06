@@ -1,7 +1,6 @@
 feats/perks
 save/load via json
-immunities, resistances, vulnerabilites
-conditions
+conditions: one a a time, damage condition such as poison can be resisted with con. turn skip condition such as sleep can be resisted with wlp
 craftingrecipes
 damagetypes
 dialogues

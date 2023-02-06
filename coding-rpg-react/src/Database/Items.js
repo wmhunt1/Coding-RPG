@@ -1,4 +1,5 @@
 import { HealHP, LearnSpell, RecoverSP } from "../Scripts/CharacterScripts";
+import { bludeoningDamage, piercingDamage, slashingDamage } from "./DamageTypes";
 import { magicMissile } from "./Spells";
 //consumables
 //food
@@ -35,19 +36,19 @@ export function tunic() {
 }
 //weapons
 export function bite() {
-    var bite = { Name: "Bite", Type: "Weapon", Damage: 1, DamageType: "Piercing", Cost: 0, Quantity: 1 }
+    var bite = { Name: "Bite", Type: "Weapon", Damage: 1, DamageType: piercingDamage(), Cost: 0, Quantity: 1 }
     return bite;
 }
 export function club() {
-    var club = { Name: "Club", Type: "Weapon", Damage: 1, DamageType: "Bludgeoning", Cost: 2, Quantity: 1 }
+    var club = { Name: "Club", Type: "Weapon", Damage: 1, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1 }
     return club;
 }
 export function dagger() {
-    var dagger = { Name: "Dagger", Type: "Weapon", Damage: 1, DamageType: "Piercing", Cost: 2, Quantity: 1 }
+    var dagger = { Name: "Dagger", Type: "Weapon", Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1 }
     return dagger;
 }
 export function sword() {
-    var sword = { Name: "Sword", Type: "Weapon", Damage: 5, DamageType: "Slashing", Cost: 10, Quantity: 1 }
+    var sword = { Name: "Sword", Type: "Weapon", Damage: 5, DamageType: slashingDamage(), Cost: 10, Quantity: 1 }
     return sword;
 }
 //junk

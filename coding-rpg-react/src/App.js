@@ -8,7 +8,7 @@ import { healingPotion, magicMissileScroll, sword, tunic } from "./Database/Item
 import { BasicAttacker } from "./Database/Tactics";
 import { magicMissile } from "./Database/Spells";
 
-var newHero = { Name: "Hero", Log: ["Starting Game"], Level: 1, CurrentXP: 50, MaxXP: 50, CurrentHP: 10, MaxHP: 10, CurrentMP: 10, MaxMP: 10, CurrentSP: 10, MaxSP: 10, Strength: 10, StrBonus: 0, StrPenalty: 0, Constitution: 10, ConBonus: 0, ConPenalty: 0, Dexterity: 10, DexBonus: 0, DexPenalty: 0, Intelligence: 10, IntBonus: 0, IntPenalty: 0, Wisdom: 10, Charisma: 10, WillPower: 10, WlpBonus: 0, WlpPenalty: 0, Perception: 10, Luck: 10, Beauty: 10, Speed: 10, Weapon: sword(), Torso: tunic(), Inventory: [], Gold: 5, Companions: [dog()], Abilities: [rage()], SpellBook: [magicMissile()], Buffs: [], DeBuffs: [], ItemDrops: [], Tactics(char, allies, enemies, combatLog){BasicAttacker(char, allies, enemies, combatLog)}}
+var newHero = { Name: "Hero", Log: ["Starting Game"], Level: 1, CurrentXP: 50, MaxXP: 50, CurrentHP: 10, MaxHP: 10, CurrentMP: 10, MaxMP: 10, CurrentSP: 10, MaxSP: 10, Strength: 10, StrBonus: 0, StrPenalty: 0, Constitution: 10, ConBonus: 0, ConPenalty: 0, Dexterity: 10, DexBonus: 0, DexPenalty: 0, Intelligence: 10, IntBonus: 0, IntPenalty: 0, Wisdom: 10, Charisma: 10, WillPower: 10, WlpBonus: 0, WlpPenalty: 0, Perception: 10, Luck: 10, Beauty: 10, Speed: 10, Weapon: sword(), Torso: tunic(), Inventory: [], Gold: 5, Companions: [dog()], Abilities: [rage()], SpellBook: [magicMissile()], Buffs: [], DeBuffs: [], ItemDrops: [], Immunities:[], Resistances:[], Weaknesses: [], Tactics(char, allies, enemies, combatLog){BasicAttacker(char, allies, enemies, combatLog)}}
 function App() {
   const [active, setActive] = useState("MainMenu");
   const hero = newHero;

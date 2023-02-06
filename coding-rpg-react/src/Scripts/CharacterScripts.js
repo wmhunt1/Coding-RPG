@@ -211,8 +211,7 @@ export function CheckIfBuffApplied(char, buff, combatLog) {
             combatLog.push(char.Name + " already has a " + buff.Name + " Buff")
         }
     }
-    else
-    {
+    else {
         buff.ApplyBuff(char)
     }
 
