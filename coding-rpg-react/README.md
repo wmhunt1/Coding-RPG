@@ -1,10 +1,11 @@
 feats/perks
 save/load via json
-craftingrecipes
+weapon and other non crafting/gathering skills
+multiple inputs and outputs for recipe
 dialogues
 factions
 jobs
 locations
 quests
 relationships
-skills
+merge spells and abilities?

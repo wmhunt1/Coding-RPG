@@ -11,7 +11,10 @@ export function BasicAttacker(char, allies, enemies, combatLog, round) {
     }
     if (enemyOverZero.length > 0) {
         const randomEnemy = Math.floor(Math.random() * enemyOverZero.length);
-        BasicAttack(char, enemyOverZero[randomEnemy], combatLog)
+        BasicAttack(char, enemyOverZero[randomEnemy], combatLog, char.Weapon)
+        if (char.OffHand.Type === "Weapon" && char.OffHand.Name !== "Empty") {
+            BasicAttack(char, enemyOverZero[randomEnemy], combatLog, char.OffHand)
+        }
     }
 }
 export function Rager(char, allies, enemies, combatLog, round) {

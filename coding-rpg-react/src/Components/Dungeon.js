@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { AddGold, AddItemToInventory } from "../Scripts/CharacterScripts";
+import { AddGold } from "../Scripts/CharacterScripts";
+import { AddItemToInventory } from "../Scripts/ItemScripts";
 import Combat from "./Combat";
 
 function Dungeon(props) {

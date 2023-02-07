@@ -6,7 +6,7 @@ export function unEnchanted() {
     return UnEnchanted
 }
 export function fireEnchantment() {
-    var fireEnchantment = { Name: "Fire Enchantment", Damage: 5, DamageType: fireDamage(), OnHitEffect(char1, char2, combatLog) { var damage = CalculateDamageModifiers(char2, this.Damage, this.DamageType); TakeDamage(char2, damage); combatLog.push(char1.Name + " deals an extra " + damage + " " + this.DamageType + " damage due to " + this.Name) }, OnEquipEffect(char) { }, OnUnEquipEffect(char) { } }
+    var fireEnchantment = { Name: "Fire Enchantment", Damage: 5, DamageType: fireDamage(), OnHitEffect(char1, char2, combatLog) { var damage = CalculateDamageModifiers(char2, this.Damage, this.DamageType); TakeDamage(char2, damage); combatLog.push(char1.Name + " deals an extra " + damage[0] + " " + this.DamageType + " damage " + damage[1] + " due to " + this.Name) }, OnEquipEffect(char) { }, OnUnEquipEffect(char) { } }
     return fireEnchantment
 }
 export function strengthEnchantment() {

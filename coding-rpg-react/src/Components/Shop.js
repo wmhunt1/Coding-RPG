@@ -1,7 +1,8 @@
 import '../App.css';
 import './Game.css';
 import { useState } from "react";
-import { AddGold, AddItemToInventory, AddToCharacterLog, RemoveGold, RemoveItemFromInventory } from '../Scripts/CharacterScripts';
+import { AddGold, AddToCharacterLog, RemoveGold } from '../Scripts/CharacterScripts';
+import {AddItemToInventory, RemoveItemFromInventory} from '../Scripts/ItemScripts';
 
 function Shop(props) {
     const [active, setActive] = useState("shopping")

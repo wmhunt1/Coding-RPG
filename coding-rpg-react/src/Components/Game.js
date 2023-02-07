@@ -12,6 +12,7 @@ import Dungeon from './Dungeon';
 import Equipment from './Equipment';
 import Inventory from './Inventory';
 import Party from './Party';
+import SkillBook from './SkillBook';
 import SpellBook from './SpellBook';
 import Shop from './Shop';
 import { rat } from '../Database/Characters'
@@ -47,7 +48,7 @@ function Game(props) {
   return (
     <div>
       <div>
-        {active !== "Combat" && active !== "Dungeon" ? <Toolbar home={() =>setActive("Home")} abil={() => setActive("Abilities")} cSheet={() => setActive("CharacterSheet")} equip={() => setActive("Equipment")} inv={() => setActive("Inventory")} party={() => setActive("Party")} spells={() => setActive("Spells")} skill={() => setActive("Skills")} menu={() => setActive("Menu")} test={() => setActive("Test")}></Toolbar> : <div></div>}
+        {active !== "Combat" && active !== "Dungeon" ? <Toolbar home={() => setActive("Home")} abil={() => setActive("Abilities")} cSheet={() => setActive("CharacterSheet")} equip={() => setActive("Equipment")} inv={() => setActive("Inventory")} party={() => setActive("Party")} spells={() => setActive("Spells")} skill={() => setActive("Skills")} menu={() => setActive("Menu")} test={() => setActive("Test")}></Toolbar> : <div></div>}
       </div>
       <div>
         {active === "Menu" ? <Menu hero={hero} Back={() => setActive("Game")}></Menu> : <div></div>}
@@ -59,7 +60,7 @@ function Game(props) {
         {active === "Inventory" ? <Inventory parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></Inventory> : <div></div>}
         {active === "Party" ? <Party hero={hero} Back={() => setActive("Game")}></Party> : <div></div>}
         {active === "Shop" ? <Shop parentCallback={handleCallback} shop={testShop()} hero={hero} Back={() => setActive("Test")}></Shop> : <div></div>}
-        {active === "Skills" ? <div></div> : <div></div>}
+        {active === "Skills" ? <SkillBook parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></SkillBook> : <div></div>}
         {active === "Spells" ? <SpellBook hero={hero} Back={() => setActive("Game")}></SpellBook> : <div></div>}
         {active === "Test" ? <div className='menu-box'>
           <h2>Tests</h2>
@@ -68,9 +69,10 @@ function Game(props) {
           <div><button className='menu-button' onClick={() => Heal(hero)}><h3>Test Heal</h3></button></div>
           <div><button className='menu-button' onClick={() => setActive("Shop")}><h3>Test Shop</h3></button></div>
           <div><button className='menu-button' onClick={() => TestXP(hero)}><h3>Test XP</h3></button></div>
+          <div><button className='menu-button' onClick={() => setActive("Game")}><h3>Leave</h3></button></div>
         </div> : <div></div>}
       </div>
-      {active !== "Combat" && active !== "Dungeon" && active !=="Shop" && active === "Home"? <div><h2>Map</h2></div> : <div></div>}
+      {active !== "Combat" && active !== "Dungeon" && active !== "Shop" ? <div><h2>Map</h2></div> : <div></div>}
       <div style={{ marginLeft: "25%", marginRight: "25%", width: "auto" }}>
         <Log log={log} logName={"Game"}></Log>
       </div>

@@ -1,11 +1,8 @@
-import { AddGold, AddItemToInventory, AddToCharacterLog, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage } from "./CharacterScripts";
+import { AddGold, AddToCharacterLog, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage } from "./CharacterScripts";
+import { AddItemToInventory } from "./ItemScripts";
 import { CastSpell, UseAbility } from "./SpellScripts";
-export function CalculateCharWeaponDamage(char) {
-    var offHand = 0;
-    if (char.OffHand.Type === "OffHandWeapon") {
-        offHand = char.OffHand.Damage;
-    }
-    var damage = char.Strength + char.Weapon.Damage + char.StrBonus - char.StrPenalty + offHand;
+export function CalculateCharWeaponDamage(char, weapon) {
+    var damage = char.Strength + weapon.Damage + char.StrBonus - char.StrPenalty;
     return damage;
 }
 export function CalculateCharArmor(char) {
@@ -28,27 +25,31 @@ export function CalculateBaseDamage(damage, defense) {
     return damage - defense;
 }
 export function CalculateDamageModifiers(char, damage, type) {
+    var mod = ""
     if (char.Immunities.includes(type) === true) {
         damage = 0;
+        mod = " (Immune) "
     }
     if (char.Resistances.includes(type) === true) {
         damage /= 2;
+        mod = " (Resistant) "
     }
     if (char.Weaknesses.includes(type) === true) {
         damage *= 2;
+        mod = " (Weak) "
     }
-    return damage;
+    return [damage, mod];
 }
 export function CalculateCritDamage(char1, damage) {
+    var crit = " "
     if (Math.floor(Math.random() * 100) + 1 + char1.Luck >= 75) {
         damage *= 2;
+        crit = " Critical "
     }
-    return damage;
+    return [damage, crit];
 }
 export function BasicAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, char2Armor, damageType) {
     var result = "";
-    var mod = "";
-    var crit = " ";
     if (baseDamage === 0) {
         var miss = ""
         if (char2Armor > char2.Dexterity + char2.DexBonus - char2.DexPenalty) {
@@ -60,39 +61,25 @@ export function BasicAttackResults(char1, char2, combatLog, baseDamage, modified
         result = char2.Name + miss + char1.Name + "'s Attack"
     }
     else {
-        if (modifiedDamage === baseDamage * 2) {
-            mod = " (Weak) "
-        }
-        if (modifiedDamage === baseDamage / 2) {
-            mod = " (Resisted) "
-        }
-        if (modifiedDamage === 0) {
-            mod = " (Immune) "
-        }
-        if (totalDamage === modifiedDamage * 2) {
-            crit = " Critical "
-        }
-        result = char1.Name + " deals " + totalDamage + crit + damageType + " damage to " + char2.Name + mod
+        result = char1.Name + " deals " + totalDamage[0] + totalDamage[1] + damageType + " damage to " + char2.Name + modifiedDamage[1]
     }
     combatLog.push(result)
 }
-export function BasicAttack(char1, char2, combatLog) {
-    combatLog.push(char1.Name + " attacks " + char2.Name + " with their " + char1.Weapon.Name)
-    var char1Damage = CalculateCharWeaponDamage(char1)
+export function BasicAttack(char1, char2, combatLog, weapon) {
+    combatLog.push(char1.Name + " attacks " + char2.Name + " with their " + weapon.Name)
+    var char1Damage = CalculateCharWeaponDamage(char1, weapon)
     var char2Armor = CalculateCharArmor(char2)
     var char2Defense = CalculateCharDefenseWithArmor(char2, char2Armor)
     var baseDamage = CalculateBaseDamage(char1Damage, char2Defense);
-    var modifiedDamage = CalculateDamageModifiers(char2, baseDamage, char1.Weapon.DamageType)
-    var totalDamage = CalculateCritDamage(char1, modifiedDamage)
-    TakeDamage(char2, totalDamage)
-    BasicAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, char2Armor, char1.Weapon.DamageType)
+    var modifiedDamage = CalculateDamageModifiers(char2, baseDamage, weapon.DamageType)
+    var totalDamage = CalculateCritDamage(char1, modifiedDamage[0])
+    TakeDamage(char2, totalDamage[0])
+    BasicAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, char2Armor, weapon.DamageType)
     char1.Weapon.Enchantment.OnHitEffect(char1, char2, combatLog)
 }
 export function MagicAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, spell) {
     var result = "";
     var miss = "";
-    var mod = "";
-    var crit = " ";
     if (baseDamage === 0) {
         if (char2.WillPower + char2.WlpBonus - char2.WlpPenalty > char2.Dexterity + char2.DexBonus - char2.DexPenalty) {
             miss = "'s resists with their Willpower "
@@ -103,19 +90,7 @@ export function MagicAttackResults(char1, char2, combatLog, baseDamage, modified
         result = char2.Name + miss + char1.Name + "'s Spell"
     }
     else {
-        if (modifiedDamage === baseDamage * 2) {
-            mod = " (Weak) "
-        }
-        if (modifiedDamage === baseDamage / 2) {
-            mod = " (Resisted) "
-        }
-        if (modifiedDamage === 0) {
-            mod = " (Immune) "
-        }
-        if (totalDamage === baseDamage * 2) {
-            crit = " Critical "
-        }
-        result = char1.Name + " deals " + totalDamage + crit + spell.DamageType + " damage to " + char2.Name + " with " + spell.Name + mod
+        result = char1.Name + " deals " + totalDamage[0] + totalDamage[1] + spell.DamageType + " damage to " + char2.Name + " with " + spell.Name + modifiedDamage[1]
     }
     combatLog.push(result)
 }
@@ -124,44 +99,29 @@ export function ProjectileMagicAttack(char1, char2, combatLog, spell) {
     var char2Defense = (char2.WillPower + char2.WlpBonus - char2.WlpPenalty) / 2 + (char2.Dexterity + char2.DexBonus - char2.DexPenalty) / 2;
     var baseDamage = CalculateBaseDamage(char1Damage, char2Defense)
     var modifiedDamage = CalculateDamageModifiers(char2, baseDamage, spell.DamageType)
-    var totalDamage = CalculateCritDamage(char1, modifiedDamage)
-    TakeDamage(char2, totalDamage)
+    var totalDamage = CalculateCritDamage(char1, modifiedDamage[0])
+    TakeDamage(char2, totalDamage[0])
     MagicAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, spell)
 }
 export function SneakAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, damageType) {
     var result = "";
-    var mod = "";
-    var crit = " ";
     if (baseDamage === 0) {
         result = char2.Name + " dodges " + char1.Name + "'s Attack"
     }
     else {
-        if (modifiedDamage === baseDamage * 2) {
-            mod = " (Weak)"
-        }
-        if (modifiedDamage === baseDamage / 2) {
-            mod = " (Resisted)"
-        }
-        if (modifiedDamage === 0) {
-            mod = " (Immune)"
-        }
-        if (totalDamage === baseDamage * 2) {
-            crit = " Critical "
-        }
-        result = char1.Name + " deals " + totalDamage + crit + damageType + " damage to " + char2.Name + mod
+        result = char1.Name + " deals " + totalDamage[0] + totalDamage[1] + damageType + " damage to " + char2.Name + modifiedDamage[1]
     }
-    result = char1.Name + " deals " + totalDamage + " " + damageType + " damage to " + char2.Name
     combatLog.push(result)
 }
-export function SneakAttack(char1, char2, combatLog) {
-    combatLog.push(char1.Name + " sneak attacks " + char2.Name + " with their " + char1.Weapon.Name)
+export function SneakAttack(char1, char2, combatLog, weapon) {
+    combatLog.push(char1.Name + " sneak attacks " + char2.Name + " with their " + weapon.Name)
     var char1Damage = CalculateCharWeaponDamage(char1)
     var char2Defense = CalculateCharDefenseWithoutArmor(char2)
     var baseDamage = CalculateBaseDamage(char1Damage, char2Defense);
-    var modifiedDamage = CalculateDamageModifiers(char2, baseDamage, char1.Weapon.DamageType)
-    var totalDamage = CalculateCritDamage(char1, modifiedDamage)
-    TakeDamage(char2, totalDamage)
-    SneakAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, char1.Weapon.DamageType)
+    var modifiedDamage = CalculateDamageModifiers(char2, baseDamage, weapon.DamageType)
+    var totalDamage = CalculateCritDamage(char1, modifiedDamage[0])
+    TakeDamage(char2, totalDamage[0])
+    SneakAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, weapon.DamageType)
     char1.Weapon.Enchantment.OnHitEffect(char1, char2, combatLog)
 }
 export function DamageConditionCheck(char, combatLog) {
@@ -185,7 +145,11 @@ export function HeroTurn(char1, allies, enemies, target, combatLog, option, spel
     if (char1.CurrentHP > 0) {
         if (SkipConditionCheck(char1, combatLog) === false) {
             if (option === "Basic Attack") {
-                BasicAttack(char1, target, combatLog);
+                BasicAttack(char1, target, combatLog, char1.Weapon)
+                if (char1.OffHand.Type === "Weapon" && char1.OffHand.Name !== "Empty")
+                {
+                    BasicAttack(char1, target, combatLog, char1.OffHand)
+                }
             }
             if (abil !== null) {
                 UseAbility(char1, allies, enemies, target, combatLog, abil)

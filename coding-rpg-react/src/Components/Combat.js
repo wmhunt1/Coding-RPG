@@ -2,7 +2,7 @@ import '../App.css';
 import './Game.css';
 import { useState } from "react";
 import { CombatRewards, CombatRound } from '../Scripts/CombatScripts';
-import { RemoveItemFromInventory } from '../Scripts/CharacterScripts';
+import { RemoveItemFromInventory } from '../Scripts/ItemScripts';
 import Log from './Log';
 
 function Combat(props) {

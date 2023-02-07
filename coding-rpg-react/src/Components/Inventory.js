@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { EquipItemFromInventory, RemoveItemFromInventory } from '../Scripts/CharacterScripts';
+import {EquipItemFromInventory, RemoveItemFromInventory} from '../Scripts/ItemScripts';
 import '../App.css';
 import './Game.css'
 
@@ -19,16 +19,21 @@ function Inventory(props) {
   }
   function handleUse(char, inventory, item) {
     item.ConsumeEffect(char)
-    RemoveItemFromInventory(char, inventory, item)
+    RemoveItemFromInventory(char, inventory, item, item.Quantity)
     var newInventory = [...char.Inventory];
     setInventory(newInventory);
   }
   function handleItem(char, inventory, item) {
     if (item.Type === "Consumable") {
-      handleUse(char, inventory, item)
+      handleUse(char, inventory, item, item.Quantity)
     }
-    else {
-      handleEquip(char, inventory, item)
+    else if (item.Type === "")
+    {
+      handleEquip(char, inventory, item, item.Quantity)
+    }
+    else
+    {
+      char.Log.push(item.Name + " cannot be equipped or consumed")
     }
     setHero(char)
     props.parentCallback(hero);
@@ -48,6 +53,7 @@ function Inventory(props) {
         {inventory.length > 0 ? <div>{itemList}</div> : <div><h4>Inventory is Empty</h4></div>}
       </div>
     </div>
+    <button style={{ marginTop: "1%", marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button>
   </div>)
 }
 
