@@ -10,10 +10,12 @@ function Inventory(props) {
   const [activeUser, setActiveUser] = useState(props.hero)
 
   function handleEquip(char, inventory, item) {
-    EquipItemFromInventory(char, inventory, item)
-    setHero(char);
-    var newInventory = [...char.Inventory];
-    setInventory(newInventory);
+    if (char.Name !== "Dog") {
+      EquipItemFromInventory(char, inventory, item)
+      setHero(char);
+      var newInventory = [...char.Inventory];
+      setInventory(newInventory);
+    }
   }
   function handleUse(char, inventory, item) {
     item.ConsumeEffect(char)

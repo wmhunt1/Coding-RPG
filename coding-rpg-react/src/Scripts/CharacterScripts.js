@@ -1,4 +1,5 @@
 import { noCondition } from "../Database/Conditions";
+import { bareBack, bareFeet, bareFinger, bareFist, bareHands, bareHead, bareLegs, bareNeck, bareTorso, emptyOffHand } from "../Database/Items"
 
 Array.prototype.remove = function () {
     var what, a = arguments, L = a.length, ax;
@@ -134,46 +135,91 @@ export function RemoveItemFromInventory(char, inventory, item) {
     char.Inventory = inventory;
 }
 export function UnEquip(char, inventory, item) {
-    if (item.Type === "Weapon") {
-        if (char.Weapon.Name !== "Bare Fist") {
-            AddToCharacterLog(char, char.Name + " Unequipped " + item.Name);
-            AddItemToInventory(char, inventory, item);
-        }
-        var fist = { Name: "Bare Fist", Type: "Weapon", Damage: 0, DamageType: "Bludgeoning", Cost: 0, Quantity: 0 }
-        char.Weapon = fist;
+    if (item.Name !== "Bare" && item.Name !== "Empty" && item.Name !== "Fist") {
+        AddItemToInventory(char, inventory, item)
     }
-    else if (item.Type === "Torso") {
-        if (char.Weapon.Torso !== "Naked") {
-            AddToCharacterLog(char, char.Name + " Unequipped " + item.Name);
-            AddItemToInventory(char, inventory, item);
-        }
-        var torso = { Name: "Naked", Type: "Torso", Protection: 0, ProtectionType: "Natural", Cost: 0, Quantity: 0 }
-        char.Torso = torso;
+    if (item.Slot === "Weapon") {
+        char.Weapon = bareFist()
     }
-    else {
-
+    if (item.Slot === "OffHand") {
+        char.OffHand = emptyOffHand()
     }
+    if (item.Slot === "Head") {
+        char.Head = bareHead()
+    }
+    if (item.Slot === "Torso") {
+        char.Torso = bareTorso()
+    }
+    if (item.Slot === "Legs") {
+        char.Legs = bareLegs()
+    }
+    if (item.Slot === "Hands") {
+        char.Hands = bareHands()
+    }
+    if (item.Slot === "Feet") {
+        char.Feet = bareFeet()
+    }
+    if (item.Slot === "Back") {
+        char.Back = bareBack()
+    }
+    if (item.Slot === "Neck") {
+        char.Neck = bareNeck()
+    }
+    if (item.Slot === "Ring") {
+        char.Ring = bareFinger()
+    }
+    item.Enchantment.OnUnEquipEffect(char)
     char.Inventory = inventory;
 }
 export function EquipItem(char, inventory, item) {
-    if (item.Type === "Weapon") {
-        UnEquip(char, inventory, item);
-        char.Weapon = item;
-    }
-    if (item.Type === "Torso") {
-        UnEquip(char, inventory, item);
-        char.Torso = item;
-    }
     AddToCharacterLog(char, char.Name + " Equipped " + item.Name);
+    if (item.Slot === "Weapon") {
+        UnEquip(char, inventory, char.Weapon)
+        char.Weapon = item;
+        if (item.Type === "TwoHands") {
+            EquipItem(char, inventory, char.OffHand)
+        }
+    }
+    if (item.Slot === "OffHand") {
+        UnEquip(char, inventory, char.OffHand)
+        char.OffHand = item
+    }
+    if (item.Slot === "Head") {
+        UnEquip(char, inventory, char.Head)
+        char.Head = item
+    }
+    if (item.Slot === "Torso") {
+        UnEquip(char, inventory, char.Torso)
+        char.Torso = item
+    }
+    if (item.Slot === "Legs") {
+        UnEquip(char, inventory, char.Legs)
+        char.Legs = item
+    }
+    if (item.Slot === "Hands") {
+        UnEquip(char, inventory, char.Hands)
+        char.Hands = item
+    }
+    if (item.Slot === "Feet") {
+        UnEquip(char, inventory, char.Feet)
+        char.Feet = item
+    }
+    if (item.Slot === "Back") {
+        UnEquip(char, inventory, char.Back)
+        char.Back = item
+    }
+    if (item.Slot === "Neck") {
+        UnEquip(char, inventory, char.Neck)
+        char.Neck = item
+    }
+    if (item.Slot === "Ring") {
+        UnEquip(char, inventory, char.Ring)
+        char.Ring = item
+    }
+    item.Enchantment.OnEquipEffect(char)
     char.Inventory = inventory;
 }
 export function EquipItemFromInventory(char, inventory, item) {
-    if (item.Type === "Weapon") {
-        UnEquip(char, inventory, char.Weapon)
-    }
-    else if (item.Type === "Torso") {
-        UnEquip(char, inventory, char.Torso)
-    }
     EquipItem(char, inventory, item)
     RemoveItemFromInventory(char, inventory, item)
     char.Inventory = inventory;
@@ -246,14 +292,14 @@ export function ApplyCondition(char, condition, log) {
         log.push(char.Name + " afflicted with " + condition.Name)
     }
     else {
-        log.push(char.Name + " already afflicted with " + char.Condition.Name)
+        log.push(char.Name + " already afflicted with a condition")
     }
 }
 export function RemoveCondition(char, log) {
     var condition = char.Condition.Name
     char.Condition = noCondition()
     if (condition !== "None") {
-        log.push(char.Name + " is no longer afflicted with " + condition.Name)
+        log.push(char.Name + " is no longer afflicted with " + condition)
     }
 }
 export function ResistCondition(char, log) {

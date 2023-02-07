@@ -1,11 +1,19 @@
-import { AddGold, AddItemToInventory, AddToCharacterLog, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage} from "./CharacterScripts";
+import { AddGold, AddItemToInventory, AddToCharacterLog, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage } from "./CharacterScripts";
 import { CastSpell, UseAbility } from "./SpellScripts";
 export function CalculateCharWeaponDamage(char) {
-    var damage = char.Strength + char.Weapon.Damage + char.StrBonus - char.StrPenalty;
+    var offHand = 0;
+    if (char.OffHand.Type === "OffHandWeapon") {
+        offHand = char.OffHand.Damage;
+    }
+    var damage = char.Strength + char.Weapon.Damage + char.StrBonus - char.StrPenalty + offHand;
     return damage;
 }
 export function CalculateCharArmor(char) {
-    var armor = char.Torso.Protection;
+    var shield = 0;
+    if (char.OffHand.Type === "Shield") {
+        shield = char.OffHand.Protection
+    }
+    var armor = char.Head.Protection + char.Torso.Protection + char.Legs.Protection + char.Hands.Protection + char.Feet.Protection + shield;
     return armor;
 }
 export function CalculateCharDefenseWithArmor(char, armor) {
@@ -78,6 +86,7 @@ export function BasicAttack(char1, char2, combatLog) {
     var totalDamage = CalculateCritDamage(char1, modifiedDamage)
     TakeDamage(char2, totalDamage)
     BasicAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, char2Armor, char1.Weapon.DamageType)
+    char1.Weapon.Enchantment.OnHitEffect(char1, char2, combatLog)
 }
 export function MagicAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, spell) {
     var result = "";
@@ -112,7 +121,7 @@ export function MagicAttackResults(char1, char2, combatLog, baseDamage, modified
 }
 export function ProjectileMagicAttack(char1, char2, combatLog, spell) {
     var char1Damage = char1.Intelligence + char1.IntBonus - char1.IntPenalty + spell.Amount;
-    var char2Defense = (char2.WillPower + char2.WlpBonus - char2.WlpPenalty)/2 + (char2.Dexterity + char2.DexBonus - char2.DexPenalty)/2;
+    var char2Defense = (char2.WillPower + char2.WlpBonus - char2.WlpPenalty) / 2 + (char2.Dexterity + char2.DexBonus - char2.DexPenalty) / 2;
     var baseDamage = CalculateBaseDamage(char1Damage, char2Defense)
     var modifiedDamage = CalculateDamageModifiers(char2, baseDamage, spell.DamageType)
     var totalDamage = CalculateCritDamage(char1, modifiedDamage)
@@ -153,6 +162,7 @@ export function SneakAttack(char1, char2, combatLog) {
     var totalDamage = CalculateCritDamage(char1, modifiedDamage)
     TakeDamage(char2, totalDamage)
     SneakAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, char1.Weapon.DamageType)
+    char1.Weapon.Enchantment.OnHitEffect(char1, char2, combatLog)
 }
 export function DamageConditionCheck(char, combatLog) {
     ResistCondition(char, combatLog)
@@ -180,9 +190,8 @@ export function HeroTurn(char1, allies, enemies, target, combatLog, option, spel
             if (abil !== null) {
                 UseAbility(char1, allies, enemies, target, combatLog, abil)
             }
-            if (spell !== null)
-            {
-                CastSpell(char1, allies, enemies, target, combatLog, spell); 
+            if (spell !== null) {
+                CastSpell(char1, allies, enemies, target, combatLog, spell);
             }
         }
         else {
