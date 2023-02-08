@@ -16,45 +16,63 @@ export function LevelUpSkill(char, skill) {
     skill.MaxXP = (skill.Level * (skill.Level - 1)) * 100;
     AddToCharacterLog(char, char.Name + " has reached " + skill.Name + " level " + skill.Level);
 }
-export function CheckForSkillLevelUp(char, skill) {
+export function CheckForSkillLevelUp(skill) {
+    
     if (skill.CurrentXP >= skill.MaxXP) {
-        LevelUpSkill(char, skill)
+        return true
+    }
+    else
+    {
+        return false;
     }
 }
 export function EarnSkillXP(char, skill, xp) {
     skill.CurrentXP += xp;
-    CheckForSkillLevelUp(char, skill)
+    if (CheckForSkillLevelUp(skill) === true)
+    {
+        LevelUpSkill(char, skill)
+    }
 }
 export function UseSkillRecipe(char, skill, recipe) {
     AddToCharacterLog(char, char.Name + " tries to  " + recipe.Name)
     var quantity = recipe.Output.Quantity
     var sucess = false;
+    var foundItems = 0;
     if (recipe.LevelRequirement >= skill.Level) {
-        if (recipe.Input.Item.Name !== "") {
-            var index = FindItemInInventory(char.Inventory, recipe.Input.Item)
-            if (index !== null) {
-                if (char.Inventory[index].Quantity >= recipe.Input.Quantity) {
-                    RemoveItemFromInventory(char, char.Inventory, recipe.Input.Item, recipe.Input.Quantity)
-                    sucess = true
+        if (recipe.Input.length > 0) {
+            for (var r = 0; r < recipe.Input.length; r++) {
+                var index = FindItemInInventory(char.Inventory, recipe.Input[r].Item)
+                if (index !== null) {
+                    if (char.Inventory[index].Quantity >= recipe.Input[r].Quantity) {
+                        foundItems++
+                    }
+                    else {
+                        AddToCharacterLog(char, char.Name + " doesn't have enough " + recipe.Input[r].Item.Name + " to " + recipe.Name)
+                    }
                 }
                 else {
-                    AddToCharacterLog(char, char.Name + " doesn't have enough " + recipe.Input.Item.Name + " to " + recipe.Name)
+                    AddToCharacterLog(char, char.Name + " doesn't have any " + recipe.Input[r].Item.Name)
                 }
-            }
-            else {
-                AddToCharacterLog(char, char.Name + " doesn't have any " + recipe.Input.Item.Name)
+                if (recipe.Input.length === foundItems) {
+                    sucess = true
+                }
             }
         }
         else {
             sucess = true;
         }
         if (sucess === true) {
-            AddItemToInventory(char, char.Inventory, recipe.Output.Item, recipe.Output.Quantity)
-            EarnSkillXP(char, skill, recipe.Exp)
+            for (var r2 = 0; r2 < recipe.Input.length; r2++) {
+                RemoveItemFromInventory(char, char.Inventory, recipe.Input[r2].Item, recipe.Input[r2].Quantity)
+            }
+                AddItemToInventory(char, char.Inventory, recipe.Output.Item, recipe.Output.Quantity)
             AddToCharacterLog(char, char.Name + " has " + recipe.Verb + "ed " + recipe.Output.Item.Name + " X " + quantity + ", earning " + recipe.Exp + " " + skill.Name + " XP")
         }
     }
+
     else {
         AddToCharacterLog(char, char.Name + " requires " + recipe.LevelRequirement + " in " + skill.Name + " to " + recipe.Name)
     }
+    EarnSkillXP(char, skill, recipe.Exp)
 }
+

@@ -6,185 +6,225 @@ import { magicMissile } from "./Spells";
 //consumables
 //food
 export function cheese() {
-    var cheese = { Name: "Cheese", Type: "Consumable", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
+    var cheese = { Name: "Cheese", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
     return cheese
 }
 export function cookedFish() {
-    var cook = { Name: "Cooked Fish", Type: "Consumable", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
+    var cook = { Name: "Cooked Fish", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
     return cook;
 }
 export function cookedRatMeat() {
-    var cookedRatMeat = { Name: "Cooked Rat Meat", Type: "Consumable", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
+    var cookedRatMeat = { Name: "Cooked Rat Meat", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
     return cookedRatMeat;
 }
 //potions
 export function antidote() {
-    var antidote = { Name: "Antidote", Type: "Consumable", Cost: 5, Quantity: 1, ConsumeEffect(hero) { if (hero.Conidtion.Name === "Poison") { hero.Log.push(hero.Name + " drinks " + this.Name); RemoveCondition(hero, hero.Log) } } }
+    var antidote = { Name: "Antidote", Type: "Consumable", SubType: "Potion", Cost: 5, Quantity: 1, ConsumeEffect(hero) { if (hero.Conidtion.Name === "Poison") { hero.Log.push(hero.Name + " drinks " + this.Name); RemoveCondition(hero, hero.Log) } } }
     return antidote;
 }
 export function healingPotion() {
-    var healingPotion = { Name: "Healing Potion", Type: "Consumable", Cost: 5, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks " + this.Name); HealHP(hero, 5) } }
+    var healingPotion = { Name: "Healing Potion", Type: "Consumable", SubType: "Potion", Cost: 5, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks " + this.Name); HealHP(hero, 5) } }
     return healingPotion;
 }
 export function manaPotion() {
-    var manaPotion = { Name: "Mana Potion", Type: "Consumable", Cost: 5, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks " + this.Name); RecoverMP(hero, 5) } }
+    var manaPotion = { Name: "Mana Potion", Type: "Consumable", SubType: "Potion", Cost: 5, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks " + this.Name); RecoverMP(hero, 5) } }
     return manaPotion;
 }
 export function staminaPotion() {
-    var staminaPotion = { Name: "Stamina Potion", Type: "Consumable", Cost: 5, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks " + this.Name); RecoverSP(hero, 5) } }
+    var staminaPotion = { Name: "Stamina Potion", Type: "Consumable", SubType: "Potion", Cost: 5, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks " + this.Name); RecoverSP(hero, 5) } }
     return staminaPotion;
 }
 //scrolls
 //abilityscroll
 //spellscroll
 export function magicMissileScroll() {
-    var magicMissileScroll = { Name: "Scroll of Magic Missile", Type: "Consumable", Cost: 10, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " studies " + this.Name); LearnSpell(hero, magicMissile()) } }
+    var magicMissileScroll = { Name: "Scroll of Magic Missile", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " studies " + this.Name); LearnSpell(hero, magicMissile()) } }
     return magicMissileScroll;
 }
 //equipables
 //accessories
 //back
 export function bareBack() {
-    var bare = { Name: "Bare", Slot: "Back", Type: "", Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var bare = { Name: "Bare", Slot: "Back", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bare;
 }
 //neck
 export function bareNeck() {
-    var bare = { Name: "Bare", Slot: "Neck", Type: "",Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var bare = { Name: "Bare", Slot: "Neck", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bare;
 }
 //ring
 export function bareFinger() {
-    var bare = { Name: "Bare", Slot: "Ring", Type: "",Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var bare = { Name: "Bare", Slot: "Ring", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bare;
 }
 export function ringOfStr() {
-    var ring = { Name: "Ring of Strength", Slot: "Ring", Type: "",Cost: 10, Quantity: 1, Enchantment: strengthEnchantment() }
+    var ring = { Name: "Ring of Strength", Slot: "Ring", Type: "Equipable", SubType: "", Cost: 10, Quantity: 1, Enchantment: strengthEnchantment() }
     return ring;
 }
 //armor
 //feet
 export function bareFeet() {
-    var bare = { Name: "Bare", Slot: "Feet", Type: "",Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var bare = { Name: "Bare", Slot: "Feet", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bare;
 }
 export function furFeet() {
-    var fur = { Name: "Fur", Slot: "Feet", Type: "",Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var fur = { Name: "Fur", Slot: "Feet", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return fur;
 }
 export function shoes() {
-    var shoes = { Name: "Shoes", Slot: "Feet", Type: "",Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var shoes = { Name: "Shoes", Slot: "Feet", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return shoes;
 }
 //hands
 export function furHands() {
-    var fur = { Name: "Fur", Slot: "Hands", Type: "",Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var fur = { Name: "Fur", Slot: "Hands", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return fur;
 }
 export function gloves() {
-    var gloves = { Name: "Trousers", Slot: "Hands", Type: "",Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var gloves = { Name: "Trousers", Slot: "Hands", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return gloves;
 }
 export function bareHands() {
-    var bare = { Name: "Bare", Slot: "Hands", Type: "",Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var bare = { Name: "Bare", Slot: "Hands", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bare;
 }
 //head
 export function bareHead() {
-    var bare = { Name: "Bare", Slot: "Head", Type: "",Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var bare = { Name: "Bare", Slot: "Head", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bare;
 }
 export function furHead() {
-    var fur = { Name: "Fur", Slot: "Head", Type: "",Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var fur = { Name: "Fur", Slot: "Head", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return fur;
 }
 export function hat() {
-    var hat = { Name: "Hat", Slot: "Head", Type: "",Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var hat = { Name: "Hat", Slot: "Head", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return hat;
 }
 //legs
 export function bareLegs() {
-    var bare = { Name: "Bare", Slot: "Legs", Type: "",Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var bare = { Name: "Bare", Slot: "Legs", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bare;
 }
 export function furLegs() {
-    var fur = { Name: "Fur", Slot: "Legs", Type: "",Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var fur = { Name: "Fur", Slot: "Legs", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return fur;
 }
 export function trousers() {
-    var trousers = { Name: "Trousers", Slot: "Legs", Type: "",Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var trousers = { Name: "Trousers", Slot: "Legs", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return trousers;
 }
 //torso
 export function bareTorso() {
-    var bare = { Name: "Bare", Slot: "Torso", Type: "",Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var bare = { Name: "Bare", Slot: "Torso", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bare;
 }
 export function furTorso() {
-    var fur = { Name: "Fur", Slot: "Torso", Type: "",Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var fur = { Name: "Fur", Slot: "Torso", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return fur;
 }
 export function tunic() {
-    var tunic = { Name: "Tunic", Slot: "Torso", Type: "",Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var tunic = { Name: "Tunic", Slot: "Torso", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return tunic;
 }
 //offhands
 //offhand weapoms
 export function emptyOffHand() {
-    var empty = { Name: "Empty", Slot: "OffHand", Type: "Weapon", Damage: 0, DamageType: bludeoningDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var empty = { Name: "Empty", Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Damage: 0, DamageType: bludeoningDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return empty;
 }
 //shields
 export function woodenShield() {
-    var woodenShield = { Name: "Wooden Shield", Slot: "OffHand", type: "Shield", Protection: 1, ProtectionType: woodProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var woodenShield = { Name: "Wooden Shield", Slot: "OffHand", Type: "Equipable", SubType: "Shield", Protection: 1, ProtectionType: woodProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return woodenShield;
 }
 //weapons
+//magic weapons
+//melee weapons
+//natural weapons
+//clubs
+export function club() {
+    var club = { Name: "Club", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Damage: 1, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return club;
+}
+//daggers
+export function bronzeDagger() {
+    var dagger = { Name: "Bronze Dagger", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return dagger;
+}
+export function dagger() {
+    var dagger = { Name: "Dagger", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return dagger;
+}
+//natural weapons
 export function bareFist() {
-    var bare = { Name: "Fist", Slot: "Weapon", Type: "OneHand", Damage: 0, DamageType: bludeoningDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var bare = { Name: "Fist", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Damage: 0, DamageType: bludeoningDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bare;
 }
 export function bite() {
-    var bite = { Name: "Bite", Slot: "Weapon", Type: "OneHand", Damage: 1, DamageType: piercingDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var bite = { Name: "Bite", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Damage: 1, DamageType: piercingDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bite;
 }
-export function club() {
-    var club = { Name: "Club", Slot: "Weapon", Type: "OneHand", Damage: 1, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
-    return club;
-}
-export function dagger() {
-    var dagger = { Name: "Dagger", Slot: "Weapon", Type: "OneHand", Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
-    return dagger;
-}
+//swords
 export function flamingsword() {
-    var sword = { Name: "Flaming Sword", Slot: "Weapon", Type: "OneHand", Damage: 5, DamageType: slashingDamage(), Cost: 50, Quantity: 1, Enchantment: fireEnchantment() }
+    var sword = { Name: "Flaming Sword", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Damage: 5, DamageType: slashingDamage(), Cost: 50, Quantity: 1, Enchantment: fireEnchantment() }
     return sword;
 }
 export function sword() {
-    var sword = { Name: "Sword", Slot: "Weapon", Type: "OneHand", Damage: 5, DamageType: slashingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
+    var sword = { Name: "Sword", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Damage: 5, DamageType: slashingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
     return sword;
 }
+//ranged weapon
+export function woodBow() {
+    var bow = { Name: "Wood Bow", Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Damage: 1, DamageType: piercingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
+    return bow;
+}
 //junk
-export function noInput()
-{
-    var no = { Name: "", Type: "Junk", Cost: 0, Quantity: 0 }
-    return no;
-}
-export function noOutput()
-{
-    var no = { Name: "", Type: "Junk", Cost: 0, Quantity: 0 }
-    return no;
-}
 export function ratTail() {
-    var ratTail = { Name: "Rat Tail", Type: "Junk", Cost: 1, Quantity: 1 }
+    var ratTail = { Name: "Rat Tail", Type: "Junk", SubType: "", Cost: 1, Quantity: 1 }
     return ratTail;
 }
 //resources
+export function ashes() {
+    var ashes = { Name: "Ashes", Type: "Resource", SubType: "Ashes", Cost: 1, Quantity: 1 }
+    return ashes
+}
+//metal bars
+export function bronzeBar() {
+    var bar = { Name: "Bronze Bar", Type: "Resource", SubType: "Bar", Cost: 2, Quantity: 1 }
+    return bar
+}
+export function ironBar() {
+    var bar = { Name: "Iron Bar", Type: "Resource", SubType: "Bar", Cost: 4, Quantity: 1 }
+    return bar
+}
+//ore
+export function copperOre() {
+    var ore = { Name: "Copper Ore", Type: "Resource", SubType: "Ore", Cost: 1, Quantity: 1 }
+    return ore
+}
+export function ironOre() {
+    var ore = { Name: "Iron Ore", Type: "Resource", SubType: "Ore", Cost: 2, Quantity: 1 }
+    return ore
+}
+export function tinOre() {
+    var ore = { Name: "Tin Ore", Type: "Resource", SubType: "Ore", Cost: 1, Quantity: 1 }
+    return ore
+}
+//raw food
+//fish
 export function rawFish() {
-    var raw = { Name: "Raw Fish", Type: "Raw Food", Cost: 2, Quantity: 1 }
+    var raw = { Name: "Raw Fish", Type: "Resource", SubType: "Raw Fish", Cost: 2, Quantity: 1 }
     return raw;
 }
+//meat
 export function rawRatMeat() {
-    var rawRatMeat = { Name: "Raw Rat Meat", Type: "Raw Food", Cost: 2, Quantity: 1 }
+    var rawRatMeat = { Name: "Raw Rat Meat", Type: "Resource", SubType: "Raw Meat", Cost: 2, Quantity: 1 }
     return rawRatMeat;
+}
+//wood
+export function woodLogs() {
+    var wood = { Name: "Wood Logs", Type: "Resource", SubType: "Logs", Cost: 2, Quantity: 1 }
+    return wood;
 }

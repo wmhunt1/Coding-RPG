@@ -1,13 +1,17 @@
 import { AddGold, AddToCharacterLog, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage } from "./CharacterScripts";
 import { AddItemToInventory } from "./ItemScripts";
 import { CastSpell, UseAbility } from "./SpellScripts";
+export function AddToCombatLog(log, message)
+{
+    log.push(message)
+}
 export function CalculateCharWeaponDamage(char, weapon) {
     var damage = char.Strength + weapon.Damage + char.StrBonus - char.StrPenalty;
     return damage;
 }
 export function CalculateCharArmor(char) {
     var shield = 0;
-    if (char.OffHand.Type === "Shield") {
+    if (char.OffHand.SubType === "Shield") {
         shield = char.OffHand.Protection
     }
     var armor = char.Head.Protection + char.Torso.Protection + char.Legs.Protection + char.Hands.Protection + char.Feet.Protection + shield;
@@ -63,10 +67,10 @@ export function BasicAttackResults(char1, char2, combatLog, baseDamage, modified
     else {
         result = char1.Name + " deals " + totalDamage[0] + totalDamage[1] + damageType + " damage to " + char2.Name + modifiedDamage[1]
     }
-    combatLog.push(result)
+    AddToCombatLog(combatLog, result)
 }
 export function BasicAttack(char1, char2, combatLog, weapon) {
-    combatLog.push(char1.Name + " attacks " + char2.Name + " with their " + weapon.Name)
+    AddToCombatLog(combatLog, char1.Name + " attacks " + char2.Name + " with their " + weapon.Name)
     var char1Damage = CalculateCharWeaponDamage(char1, weapon)
     var char2Armor = CalculateCharArmor(char2)
     var char2Defense = CalculateCharDefenseWithArmor(char2, char2Armor)
@@ -92,7 +96,7 @@ export function MagicAttackResults(char1, char2, combatLog, baseDamage, modified
     else {
         result = char1.Name + " deals " + totalDamage[0] + totalDamage[1] + spell.DamageType + " damage to " + char2.Name + " with " + spell.Name + modifiedDamage[1]
     }
-    combatLog.push(result)
+    AddToCombatLog(combatLog, result)
 }
 export function ProjectileMagicAttack(char1, char2, combatLog, spell) {
     var char1Damage = char1.Intelligence + char1.IntBonus - char1.IntPenalty + spell.Amount;
@@ -111,10 +115,10 @@ export function SneakAttackResults(char1, char2, combatLog, baseDamage, modified
     else {
         result = char1.Name + " deals " + totalDamage[0] + totalDamage[1] + damageType + " damage to " + char2.Name + modifiedDamage[1]
     }
-    combatLog.push(result)
+    AddToCombatLog(combatLog, result)
 }
 export function SneakAttack(char1, char2, combatLog, weapon) {
-    combatLog.push(char1.Name + " sneak attacks " + char2.Name + " with their " + weapon.Name)
+    AddToCombatLog(combatLog, char1.Name + " sneak attacks " + char2.Name + " with their " + weapon.Name)
     var char1Damage = CalculateCharWeaponDamage(char1)
     var char2Defense = CalculateCharDefenseWithoutArmor(char2)
     var baseDamage = CalculateBaseDamage(char1Damage, char2Defense);
@@ -129,7 +133,7 @@ export function DamageConditionCheck(char, combatLog) {
     if (char.Condition.Type === "Damage") {
         var damage = CalculateDamageModifiers(char, char.Condition.Damage, char.Condition.DamageType)
         TakeDamage(char, damage)
-        combatLog.push(char.Name + " takes " + char.Condition.Damage + " " + char.Condition.DamageType + " damage from " + char.Condition.Name)
+        AddToCombatLog(combatLog, char.Name + " takes " + char.Condition.Damage + " " + char.Condition.DamageType + " damage from " + char.Condition.Name)
     }
 }
 export function SkipConditionCheck(char, combatLog) {
@@ -146,8 +150,7 @@ export function HeroTurn(char1, allies, enemies, target, combatLog, option, spel
         if (SkipConditionCheck(char1, combatLog) === false) {
             if (option === "Basic Attack") {
                 BasicAttack(char1, target, combatLog, char1.Weapon)
-                if (char1.OffHand.Type === "Weapon" && char1.OffHand.Name !== "Empty")
-                {
+                if (char1.OffHand.SubType === "Weapon" && char1.OffHand.Name !== "Empty") {
                     BasicAttack(char1, target, combatLog, char1.OffHand)
                 }
             }
@@ -159,7 +162,7 @@ export function HeroTurn(char1, allies, enemies, target, combatLog, option, spel
             }
         }
         else {
-            combatLog.push(char1.Name + " lost turn due to " + char1.Condition.Name)
+            AddToCombatLog(combatLog, char1.Name + " lost turn due to " + char1.Condition.Name)
         }
         DamageConditionCheck(char1, combatLog)
     }
@@ -171,7 +174,7 @@ export function NPCTurn(allies, enemies, combatLog, round, hero) {
                 allies[a].Tactics(allies[a], allies, enemies, combatLog, round)
             }
             else {
-                combatLog.push(allies[a].Name + " lost turn due to " + allies[a].Condition.Name)
+                AddToCombatLog(combatLog, allies[a].Name + " lost turn due to " + allies[a].Condition.Name)
             }
             DamageConditionCheck(allies[a], combatLog)
         }

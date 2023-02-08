@@ -27,7 +27,7 @@ function Inventory(props) {
     if (item.Type === "Consumable") {
       handleUse(char, inventory, item, item.Quantity)
     }
-    else if (item.Type === "")
+    else if (item.Type === "Equipable")
     {
       handleEquip(char, inventory, item, item.Quantity)
     }
@@ -39,7 +39,7 @@ function Inventory(props) {
     props.parentCallback(hero);
   }
   const charList = allies.map((ally, index) => <h4 key={index}>{ally.Name} <button onClick={() => setActiveUser(ally)}><h4>Set Active Character</h4></button></h4>)
-  const itemList = inventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}><h4>Equip/Use</h4></button></h4>)
+  const itemList = inventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}>{item.Type === "Equipable"? <h4>Equip</h4>:<h4></h4>}{item.Type ==="Consumable"?<h4>Use</h4>:<h4></h4>}</button></h4>)
   return (<div>
     <div>
       <h2>{hero.Name}'s Inventory</h2>

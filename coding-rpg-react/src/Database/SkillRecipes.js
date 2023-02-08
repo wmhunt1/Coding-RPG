@@ -1,15 +1,62 @@
-import { cookedFish, cookedRatMeat, noInput, rawFish, rawRatMeat, } from "./Items"
+import { ashes, bronzeBar, bronzeDagger, cookedFish, cookedRatMeat, copperOre, ironBar, ironOre, rawFish, rawRatMeat, tinOre, woodBow, woodLogs, } from "./Items"
+export function skillRecipes() {
+    var skillRecipes = [burnWoodLogs(), cookRawFish(), cookRawRatMeat(), cutWood(), fishFish(), fletchWoodBow(), mineCopperOre(), mineIronOre(), mineTinOre(), smeltBronzeBar(), smeltIronBar(), smithBronzeDagger()]
+    return skillRecipes;
+}
+//crafting
 //cooking
 export function cookRawFish() {
-    var cookRaw = { Name: "Cook Raw Fish", Skill: "Cooking", Verb: "Cook", LevelRequirement: 1, Exp: 10, Input: {Item: rawFish(), Quantity : 1}, Output: {Item: cookedFish(), Quantity:1} }
-    return cookRaw
+    var cook = { Name: "Cook Raw Fish", Skill: "Cooking", Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawFish(), Quantity: 1 }], Output: { Item: cookedFish(), Quantity: 1 } }
+    return cook
 }
 export function cookRawRatMeat() {
-    var cookRaw = { Name: "Cook Raw Rat Meat", Skill: "Cooking", Verb: "Cook", LevelRequirement: 1, Exp: 10, Input: {Item: rawRatMeat(), Quantity : 1}, Output: {Item: cookedRatMeat(), Quantity:1} }
-    return cookRaw
+    var cook = { Name: "Cook Raw Rat Meat", Skill: "Cooking", Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawRatMeat(), Quantity: 1 }], Output: { Item: cookedRatMeat(), Quantity: 1 } }
+    return cook
 }
+//firemaking
+export function burnWoodLogs() {
+    var burn = { Name: "Burn Wood Logs", Skill: "Firemaking", Verb: "Burn", LevelRequirement: 1, Exp: 25, Input: [{ Item: woodLogs(), Quantity: 1 }], Output: { Item: ashes(), Quantity: 1 } }
+    return burn;
+}
+//fletching
+export function fletchWoodBow() {
+    var fletch = { Name: "Fletch Wood Bow", Skill: "Fletching", Verb: "Fletched", LevelRequirement: 1, Exp: 25, Input: [{ Item: woodLogs(), Quantity: 1 }], Output: { Item: woodBow(), Quantity: 1 } }
+    return fletch;
+}
+//smith
+export function smeltBronzeBar() {
+    var smelt = { Name: "Smelt Bronze Bar", Skill: "Smithing", Verb: "Smelt", LevelRequirement: 1, Exp: 25, Input: [{ Item: copperOre(), Quantity: 1 }, { Item: tinOre(), Quantity: 1 }], Output: { Item: bronzeBar(), Quantity: 1 } }
+    return smelt;
+}
+export function smeltIronBar() {
+    var smelt = { Name: "Smelt Iron Bar", Skill: "Smithing", Verb: "Smelt", LevelRequirement: 5, Exp: 50, Input: [{ Item: ironOre(), Quantity: 2 }], Output: { Item: ironBar(), Quantity: 1 } }
+    return smelt;
+}
+export function smithBronzeDagger() {
+    var smith = { Name: "Smith Bronze Dagger", Skill: "Smithing", Verb: "Smith", LevelRequirement: 1, Exp: 25, Input: [{ Item: bronzeBar(), Quantity: 1 }], Output: { Item: bronzeDagger(), Quantity: 1 } }
+    return smith;
+}
+//gathering
 //fishing
 export function fishFish() {
-    var cookRaw = { Name: "Fish Fish", Skill: "Fishing", Verb: "Fish", LevelRequirement: 1, Exp: 10, Input: {Item: noInput(), Quantity : 0}, Output: {Item: rawFish(), Quantity:1} }
-    return cookRaw
+    var fish = { Name: "Fish Fish", Skill: "Fishing", Verb: "Fish", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: rawFish(), Quantity: 1 } }
+    return fish
+}
+//mining
+export function mineCopperOre() {
+    var mine = { Name: "Mine Copper Ore", Skill: "Mining", Verb: "Mine", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: copperOre(), Quantity: 1 } }
+    return mine;
+}
+export function mineIronOre() {
+    var mine = { Name: "Mine Iron Ore", Skill: "Mining", Verb: "Mine", LevelRequirement: 5, Exp: 50, Input: [], Output: { Item: ironOre(), Quantity: 1 } }
+    return mine;
+}
+export function mineTinOre() {
+    var mine = { Name: "Mine Tin Ore", Skill: "Mining", Verb: "Mine", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: tinOre(), Quantity: 1 } }
+    return mine;
+}
+//woodcutting
+export function cutWood() {
+    var cut = { Name: "Cut Wood", Skill: "Woodcutting", Verb: "Chop", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: woodLogs(), Quantity: 1 } }
+    return cut;
 }

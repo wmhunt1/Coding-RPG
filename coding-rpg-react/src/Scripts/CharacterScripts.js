@@ -1,4 +1,5 @@
 import { noCondition } from "../Database/Conditions";
+import { AddToCombatLog } from "./CombatScripts";
 
 Array.prototype.remove = function () {
     var what, a = arguments, L = a.length, ax;
@@ -134,7 +135,7 @@ export function CheckIfBuffApplied(char, buff, combatLog) {
             buff.ApplyBuff(char)
         }
         else {
-            combatLog.push(char.Name + " already has a " + buff.Name + " Buff")
+            AddToCombatLog(combatLog, char.Name + " already has a " + buff.Name + " Buff")
         }
     }
     else {
@@ -147,7 +148,7 @@ export function CheckIfDeBuffApplied(char, deBuff, combatLog) {
         deBuff.ApplyDeBuff(char)
     }
     else {
-        combatLog.push(char.Name + " already has a " + deBuff.Name + " DeBuff")
+        AddToCombatLog(combatLog, char.Name + " already has a " + deBuff.Name + " DeBuff")
     }
 }
 export function RemoveAllBuffs(char) {

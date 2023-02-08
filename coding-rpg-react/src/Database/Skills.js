@@ -28,3 +28,5 @@ export function woodcuttingSkill() {
     var wood = { Name: "Woodcutting", Type: "Gathering", Level: 1, CurrentXP: 0, MaxXP: 50 }
     return wood;
 }
+//magic skills
+//weapon skills
