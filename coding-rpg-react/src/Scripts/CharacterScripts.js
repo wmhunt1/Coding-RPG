@@ -96,8 +96,10 @@ export function FullyRecover(char) {
     AddToCharacterLog(char, char.Name + " Fully Recovered")
 }
 export function AddGold(char, gold) {
-    char.Gold += gold;
-    AddToCharacterLog(char, char.Name + " earned " + gold + " GP")
+    if (gold > 0) {
+        char.Gold += gold;
+        AddToCharacterLog(char, char.Name + " earned " + gold + " GP")
+    }
 }
 export function RemoveGold(char, gold) {
     char.Gold -= gold;
