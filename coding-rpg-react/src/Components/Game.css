@@ -29,6 +29,7 @@
 .inv-box {
     vertical-align: text-top;
     height: 250px;
+    width: 400px;
     display: inline-block;
     border: solid;
     padding-left: 1;
