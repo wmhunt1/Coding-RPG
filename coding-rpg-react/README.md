@@ -5,11 +5,10 @@ log filter with message types
 weapon and other non crafting/gathering skills
 spell schools
 armor weight
-protection properies (metal increases lightning damage etc)
-dialogues
+protection properies (metal increases lightning damage etc just torso?)
 factions
 jobs
 locations
-quests
 relationships
 merge spells and abilities?
+add time delay

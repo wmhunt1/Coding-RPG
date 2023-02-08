@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AddGold } from "../Scripts/CharacterScripts";
 import { AddItemToInventory } from "../Scripts/ItemScripts";
+import { CheckIfDungeonQuestObjective } from "../Scripts/QuestScripts";
 import Combat from "./Combat";
 
 function Dungeon(props) {
@@ -56,6 +57,7 @@ function Dungeon(props) {
 
             AddItemToInventory(char, char.Inventory, itemReward)
         }
+        CheckIfDungeonQuestObjective(char, props.dungeon)
         setHero(char)
         props.parentCallback(char);
         setRewardClaimed(true)

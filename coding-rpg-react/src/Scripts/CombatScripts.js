@@ -1,5 +1,6 @@
 import { AddGold, AddToCharacterLog, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage } from "./CharacterScripts";
 import { AddItemToInventory } from "./ItemScripts";
+import { CheckIfKillQuestObjective } from "./QuestScripts";
 import { CastSpell, UseAbility } from "./SpellScripts";
 export function AddToCombatLog(log, message)
 {
@@ -218,9 +219,10 @@ export function CombatRewards(hero, allies, enemies) {
             RemoveAllBuffs(allies[a])
         }
         AddGold(hero, enemies[e].Gold)
+        CheckIfKillQuestObjective(hero, enemies[e])
         if (enemies[e].ItemDrops.length > 0) {
             const randomDrop = Math.floor(Math.random() * enemies[e].ItemDrops.length);
-            AddItemToInventory(hero, hero.Inventory, enemies[e].ItemDrops[randomDrop])
+            AddItemToInventory(hero, hero.Inventory, enemies[e].ItemDrops[randomDrop], enemies[e].ItemDrops[randomDrop].Quantity)
         }
     }
     for (var a2 = 0; a2 < allies.length; a2++) {

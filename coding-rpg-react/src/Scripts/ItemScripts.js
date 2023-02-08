@@ -21,9 +21,9 @@ export function AddItemToInventory(char, inventory, item, quantity) {
     if (inventory.find(x => x.Name === item.Name)) {
         var itemIndex = FindItemInInventory(inventory, item)
         if (itemIndex !== null) {
-            var newItem = inventory[itemIndex]
-            newItem.Quantity += quantity
-            inventory[itemIndex] = newItem;
+            var updateItem = inventory[itemIndex]
+            updateItem.Quantity += quantity
+            inventory[itemIndex] = updateItem;
         }
     }
     else {
