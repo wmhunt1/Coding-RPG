@@ -28,11 +28,11 @@ function Map(props) {
     }
     function handleEnterLocation(hero, location)
     {
-        var location = location.enterLocation(hero)
-        props.parentCallback(hero, location);
+        var updateLocation = location.enterLocation(hero)
+        props.parentCallback(hero, updateLocation);
     }
     const subLocationsList = subLocations.sort((a, b) => a.Name.localeCompare(b.Name)).map((location, index) => <div key={index}><div style = {{display: "inline-block", lineHeight: "0pt"}}><h5>{location.Name}</h5></div> <div style = {{display: "inline-block", lineHeight: "0pt"}}><button onClick={() => handleEnterLocation(hero, location)}>Enter</button></div></div>)
-    const knownLocationsList = knownLocations.sort((a , b) => a.XCoord - b.XCoord && a.YCoord - b.YCoord).map((location, index) => <div key={index}><div style = {{display: "inline-block", lineHeight: "0pt"}}><h5>{location.LocationName}: ({location.XCoord}, {location.YCoord})</h5></div> <div style = {{display: "inline-block", lineHeight: "0pt"}}><button onClick={() => goToKnownLocation(hero, map, location.XCoord, location.YCoord)}>Enter</button></div></div>)
+    const knownLocationsList = knownLocations.sort((a , b) => a.XCoord - b.XCoord && a.YCoord - b.YCoord).map((location, index) => <div key={index}><div style = {{display: "inline-block", lineHeight: "0pt"}}><h5>{location.LocationName}: ({location.XCoord}, {location.YCoord})</h5></div> <div style = {{display: "inline-block", lineHeight: "0pt"}}><button onClick={() => goToKnownLocation(hero, map, location.XCoord, location.YCoord)}>Travel</button></div></div>)
     return (<div>
 
         <div style={{ border: "solid", height: 300 }}>

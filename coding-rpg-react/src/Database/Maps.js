@@ -1,7 +1,7 @@
-import { startingLocation, testLocation2 } from "./Locations"
+import { daleTown} from "./Locations"
 
-export function worldMap()
+export function worldMap(hero)
 {
-    var worldMap = {Name: "World", Locations: [startingLocation(), testLocation2()]}
+    var worldMap = {Name: "World", Locations: [daleTown(hero)]}
     return worldMap
 }

@@ -95,6 +95,12 @@ export function FullyRecover(char) {
     RecoverSP(char, char.CurrentSP)
     AddToCharacterLog(char, char.Name + " Fully Recovered")
 }
+export function PartyRecovery(char) {
+    FullyRecover(char)
+    for (var c = 0; c < char.Companions.length; c++) {
+        FullyRecover(char.Companions[c])
+    }
+}
 export function AddGold(char, gold) {
     if (gold > 0) {
         char.Gold += gold;

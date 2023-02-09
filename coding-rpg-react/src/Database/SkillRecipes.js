@@ -5,6 +5,11 @@ export function skillRecipes() {
 }
 //crafting
 //cooking
+export function cookingRecipes()
+{
+    var cookingRecipes = [cookRawFish(), cookRawRatMeat()]
+    return cookingRecipes;
+}
 export function cookRawFish() {
     var cook = { Name: "Cook Raw Fish", Skill: "Cooking", Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawFish(), Quantity: 1 }], Output: { Item: cookedFish(), Quantity: 1 } }
     return cook
@@ -14,16 +19,31 @@ export function cookRawRatMeat() {
     return cook
 }
 //firemaking
+export function firemakingRecipes()
+{
+    var firemakingRecipes = [burnWoodLogs]
+    return firemakingRecipes
+}
 export function burnWoodLogs() {
     var burn = { Name: "Burn Wood Logs", Skill: "Firemaking", Verb: "Burn", LevelRequirement: 1, Exp: 25, Input: [{ Item: woodLogs(), Quantity: 1 }], Output: { Item: ashes(), Quantity: 1 } }
     return burn;
 }
 //fletching
+export function fletchingRecipes()
+{
+    var fletchingRecipes = [fletchWoodBow()]
+    return fletchingRecipes
+}
 export function fletchWoodBow() {
     var fletch = { Name: "Fletch Wood Bow", Skill: "Fletching", Verb: "Fletched", LevelRequirement: 1, Exp: 25, Input: [{ Item: woodLogs(), Quantity: 1 }], Output: { Item: woodBow(), Quantity: 1 } }
     return fletch;
 }
 //smith
+export function smithingRecipes()
+{
+    var smithingRecipes = [smeltBronzeBar, smeltIronBar, smithBronzeDagger]
+    return smithingRecipes
+}
 export function smeltBronzeBar() {
     var smelt = { Name: "Smelt Bronze Bar", Skill: "Smithing", Verb: "Smelt", LevelRequirement: 1, Exp: 25, Input: [{ Item: copperOre(), Quantity: 1 }, { Item: tinOre(), Quantity: 1 }], Output: { Item: bronzeBar(), Quantity: 1 } }
     return smelt;
@@ -38,11 +58,21 @@ export function smithBronzeDagger() {
 }
 //gathering
 //fishing
+export function fishingRecipes()
+{
+    var fish = [fishFish()]
+    return fish;
+}
 export function fishFish() {
     var fish = { Name: "Fish Fish", Skill: "Fishing", Verb: "Fish", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: rawFish(), Quantity: 1 } }
     return fish
 }
 //mining
+export function miningRecipes()
+{
+    var mine = [mineCopperOre(), mineTinOre(), mineIronOre()]
+    return mine;
+}
 export function mineCopperOre() {
     var mine = { Name: "Mine Copper Ore", Skill: "Mining", Verb: "Mine", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: copperOre(), Quantity: 1 } }
     return mine;
@@ -56,6 +86,11 @@ export function mineTinOre() {
     return mine;
 }
 //woodcutting
+export function woodcuttingRecipes()
+{
+    var wood = [cutWood]
+    return wood;
+}
 export function cutWood() {
     var cut = { Name: "Cut Wood", Skill: "Woodcutting", Verb: "Chop", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: woodLogs(), Quantity: 1 } }
     return cut;

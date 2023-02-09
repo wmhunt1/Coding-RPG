@@ -7,7 +7,7 @@ export function updateLocation(hero, map, x, y) {
         hero.CurrentLocation.XCoord = map.Locations[mapIndex].XCoord;
         hero.CurrentLocation.YCoord = map.Locations[mapIndex].YCoord;
         hero.CurrentLocation.SubLocations = map.Locations[mapIndex].SubLocations;
-        AddToCharacterLog(hero, hero.Name + " moves to " + hero.CurrentLocation.LocationName)
+        AddToCharacterLog(hero, hero.Name + " travels to " + hero.CurrentLocation.LocationName)
         var knownIndex = null;
         if (hero.Map.find(x => x.LocationName === map.Locations[mapIndex].LocationName)) {
             knownIndex = hero.Map.findIndex(x => x.LocationName === map.Locations[mapIndex].LocationName);

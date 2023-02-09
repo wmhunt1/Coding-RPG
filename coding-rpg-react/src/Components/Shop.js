@@ -55,13 +55,14 @@ function Shop(props) {
         setShopInventory(newShopInventory);
         props.parentCallback(hero);
     }
-    function startShopDialogue()
-    {
+    function startShopDialogue(hero) {
         setActive("Dialogue")
     }
-    function finishShopDialogue()
-    {
+    function finishShopDialogue(hero) {
         setActive("Shopping")
+        setHero(hero)
+        setGold(hero.Gold)
+
     }
     const handleCallback = (childData) => {
         var newChar = childData
@@ -70,23 +71,23 @@ function Shop(props) {
     }
     return (<div>
         <h2>{props.shop.Name}</h2>
-        <h3>{hero.Name}'s Gold: {gold}</h3>
-        {dialogue !== null && active !== "Dialogue" && active !== "buy" && active !=="sell" ? <div><button onClick={()=> startShopDialogue()}><h3>Talk To {dialogue.Char}</h3></button></div> : <div></div>}
+        {active !== "Dialogue" ? <h3>{hero.Name}'s Gold: {gold}</h3> : <div></div>}
+        {dialogue !== null && active !== "Dialogue" && active !== "buy" && active !== "sell" ? <div><button onClick={() => startShopDialogue(hero)}><h3>Talk To {dialogue.Char}</h3></button></div> : <div></div>}
         {active === "Shopping" ?
-        <div>
-            <div><button className='menu-button' onClick={() => setActive("buy")}><h3>Buy</h3></button></div>
-            <div><button className='menu-button' onClick={() => setActive("sell")}><h3>Sell</h3></button></div>
-        </div>:<div></div>}
-        {active === "buy" ? <div style={{overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%"}}>
+            <div>
+                <div><button className='menu-button' onClick={() => setActive("buy")}><h3>Buy</h3></button></div>
+                <div><button className='menu-button' onClick={() => setActive("sell")}><h3>Sell</h3></button></div>
+            </div> : <div></div>}
+        {active === "buy" ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%" }}>
             {shopInventoryList}
         </div> : <div></div>}
         {active === "sell" ? <div>
-            {heroInventoryList.length > 0 ? <div style={{overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%"}}>{heroInventoryList}</div> : <h3>Nothing to sell</h3>}
+            {heroInventoryList.length > 0 ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%" }}>{heroInventoryList}</div> : <h3>Nothing to sell</h3>}
         </div> : <div></div>}
-        {active !== "Shopping" && active!== "Dialogue" ? <div><button onClick={() => setActive("Shopping")}><h4>Back to {props.shop.Name}</h4></button></div>: <div></div>}
-        {active === "Dialogue" ? <Dialogue parentCallback={handleCallback} hero={hero} talk={dialogue} Back={() => finishShopDialogue()}></Dialogue> : <div></div>
+        {active !== "Shopping" && active !== "Dialogue" ? <div><button onClick={() => setActive("Shopping")}><h4>Back to {props.shop.Name}</h4></button></div> : <div></div>}
+        {active === "Dialogue" ? <Dialogue parentCallback={handleCallback} hero={hero} talk={dialogue} Back={() => finishShopDialogue(hero)}></Dialogue> : <div></div>
         }
-        {active !== "Dialogue" ? <button className='menu-button' onClick={props.Back}><h3>Leave Store</h3></button>: <div></div>}
+        {active !== "Dialogue" ? <button className='menu-button' onClick={props.Back}><h3>Leave Store</h3></button> : <div></div>}
     </div>)
 }
 

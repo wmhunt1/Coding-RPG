@@ -4,6 +4,11 @@ import { fireEnchantment, strengthEnchantment, unEnchanted } from "./Enchantment
 import { clothProtection, naturalProtection, woodProtection } from "./ProtectionTypes";
 import { magicMissile } from "./Spells";
 //consumables
+//drinks
+export function ale() {
+    var ale = { Name: "Ale", Type: "Consumable", SubType: "Drink", Cost: 2, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks an " + this.Name); RecoverSP(hero, 5) } }
+    return ale
+}
 //food
 export function cheese() {
     var cheese = { Name: "Cheese", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
@@ -111,6 +116,11 @@ export function furLegs() {
     var fur = { Name: "Fur", Slot: "Legs", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return fur;
 }
+export function loinCloth()
+{
+    var loinCloth  = { Name: "Loincloth", Slot: "Legs", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return loinCloth
+}
 export function trousers() {
     var trousers = { Name: "Trousers", Slot: "Legs", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return trousers;
@@ -146,6 +156,10 @@ export function woodenShield() {
 //clubs
 export function club() {
     var club = { Name: "Club", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Damage: 1, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return club;
+}
+export function woodenclub() {
+    var club = { Name: "Wooden Club", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Damage: 1, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return club;
 }
 //daggers

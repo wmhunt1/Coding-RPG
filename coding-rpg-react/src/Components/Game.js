@@ -1,7 +1,7 @@
 import '../App.css';
 import './Game.css'
 import { useState } from "react";
-import { EarnXP, FullyRecover } from '../Scripts/CharacterScripts';
+import { EarnXP, PartyRecovery } from '../Scripts/CharacterScripts';
 import Abilities from './Abilities';
 import CharacterSheet from './CharacterSheet';
 import Combat from './Combat';
@@ -23,15 +23,17 @@ import { testDungeon } from '../Database/Dungeons';
 import { testEncounter } from '../Database/Encounters';
 import { worldMap } from '../Database/Maps';
 import { testShop } from '../Database/Shops'
+import SkillNode from './SkillNode';
 
 function Game(props) {
   const [active, setActive] = useState("Game");
   const [hero, setHero] = useState(props.hero)
   const [log, setLog] = useState(props.log)
-  const [combat, setCombat] = useState(testEncounter())
-  const [dialogue, setDialogue] = useState(testDialogue(hero))
-  const [dungeon, setDungeon] = useState(testDungeon(hero))
-  const [shop, setShop] = useState(testShop(hero))
+  const [combat, setCombat] = useState()
+  const [dialogue, setDialogue] = useState()
+  const [dungeon, setDungeon] = useState()
+  const [shop, setShop] = useState()
+  const [skill, setSkill] = useState()
   const handleCallback = (childData, location) => {
     var newLog = [...childData.Log]
     setLog(newLog)
@@ -53,13 +55,14 @@ function Game(props) {
       {
         setShop(location.shop)
       }
+      if (location.skill !== null)
+      {
+        setSkill(location.skill)
+      }
     }
   }
   function Heal(char) {
-    FullyRecover(char)
-    for (var c = 0; c < char.Companions.length; c++) {
-      FullyRecover(char.Companions[c])
-    }
+    PartyRecovery(char)
     var newChar = char;
     setHero(newChar);
     var newLog = [...char.Log]
@@ -87,8 +90,9 @@ function Game(props) {
         {active === "Dungeon" ? <Dungeon parentCallback={handleCallback} hero={hero} dungeon={dungeon} Back={() => setActive("Game")}></Dungeon> : <div></div>}
         {active === "Equipment" ? <Equipment parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></Equipment> : <div></div>}
         {active === "Inventory" ? <Inventory parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></Inventory> : <div></div>}
-        {active === "Journal" ? <Journal hero={hero} Back={() => setActive("Game")}></Journal> : <div></div>}
+        {active === "Journal" ? <Journal hero={hero} skill={skill}Back={() => setActive("Game")}></Journal> : <div></div>}
         {active === "Party" ? <Party hero={hero} Back={() => setActive("Game")}></Party> : <div></div>}
+        {active === "Skill" ? <SkillNode hero={hero} node={skill} Back={() => setActive("Game")} parentCallback={handleCallback}></SkillNode> : <div></div>}
         {active === "Shop" ? <Shop parentCallback={handleCallback} shop={shop} hero={hero} Back={() => setActive("Game")}></Shop> : <div></div>}
         {active === "Skills" ? <SkillBook parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></SkillBook> : <div></div>}
         {active === "Spells" ? <SpellBook hero={hero} Back={() => setActive("Game")}></SpellBook> : <div></div>}

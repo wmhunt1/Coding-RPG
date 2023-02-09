@@ -10,3 +10,5 @@ factions
 jobs
 relationships
 add time delay
+tools for skills
+put skills elsewhere at hubs
