@@ -30,8 +30,8 @@ function Game(props) {
   const [log, setLog] = useState(props.log)
   const [combat, setCombat] = useState(testEncounter())
   const [dialogue, setDialogue] = useState(testDialogue(hero))
-  const [dungeon, setDungeon] = useState(testDungeon())
-  const [shop, setShop] = useState(testShop())
+  const [dungeon, setDungeon] = useState(testDungeon(hero))
+  const [shop, setShop] = useState(testShop(hero))
   const handleCallback = (childData, location) => {
     var newLog = [...childData.Log]
     setLog(newLog)

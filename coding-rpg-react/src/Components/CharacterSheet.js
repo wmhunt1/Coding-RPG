@@ -9,6 +9,8 @@ function CharacterSheet(props) {
   const [active, setActive] = useState("charSheet")
   const [currentXP, setCurrentXP] = useState(props.hero.CurrentXP)
   const [maxXP, setMaxXP] = useState(props.hero.MaxXP)
+  const [title, setTitle] = useState(hero.Title)
+  const [showTitles, setShowTitles] = useState(false)
   function handleCheckForLevelUp(char) {
     var check = CheckForLevelUp(char)
     if (check === true) {
@@ -16,17 +18,37 @@ function CharacterSheet(props) {
     }
     var newChar = char;
     setHero(newChar)
+    setCurrentXP(newChar)
+    setMaxXP(newChar)
     props.parentCallback(newChar);
+  }
+  function handleChangeTitle(hero, title) {
+    hero.Title.titleRemoveEffect(hero)
+    title.titleApplyEffect(hero)
+    hero.Title = title;
+    setTitle(title)
+    setHero(hero)
+  }
+  function handleShowTitles(show) {
+    setShowTitles(show)
   }
   const handleCallback = (childData) => {
     var newChar = childData
     setHero(newChar)
+    setCurrentXP(newChar.CurrentXP)
+    setMaxXP(newChar.MaxXP)
     props.parentCallback(newChar);
   }
+
+  const titleList = hero.TitleList.sort((a, b) => a.Name.localeCompare(b.Name)).map((title, index) => <div key={index}>{title.Name} <button onClick={() => handleChangeTitle(hero, title)}>Select Title</button></div>)
   return (
     <div>
       {active === "charSheet" ? <div>
-        <h2>{hero.Name}'s Character Sheet</h2>
+        {title.Name === "No Title" ? <h2>{hero.Name}'s Character Sheet</h2> : <h2>{title} {hero.Name}'s Character Sheet</h2>}
+        {hero.TitleList.length > 1 ? 
+        <div>
+          {showTitles === false ? <div><button onClick={() => handleShowTitles(true)}>Show Titles</button></div> : <div><button onClick={() => handleShowTitles(false)}>Hide Titles</button><div>{titleList}</div></div>}
+          </div>: <div></div>}
         <h3>Base Stats</h3>
         <div style={{ display: "inline-block" }}>
           <h4>Level: {hero.Level}, XP: {hero.CurrentXP}/{hero.MaxXP}</h4>
@@ -47,7 +69,7 @@ function CharacterSheet(props) {
         {/* <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button> */}
       </div> : <div></div>}
       {active === "levelUp" ? <div>
-        <LevelUpScreen parentCallback={handleCallback} hero={hero}></LevelUpScreen>
+        <LevelUpScreen parentCallback={handleCallback} hero={hero} Back={() => setActive("charSheet")}></LevelUpScreen>
       </div> : <div></div>}
     </div>
   )

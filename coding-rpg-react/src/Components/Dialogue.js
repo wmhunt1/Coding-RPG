@@ -19,7 +19,6 @@ export function Dialogue(props) {
         props.parentCallback(char1);
     }
     return (<div>
-        <h2>{hero.Name}</h2>
         <div><h3>{char}</h3></div>
 
         <div>

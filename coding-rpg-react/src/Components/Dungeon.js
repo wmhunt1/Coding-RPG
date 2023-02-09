@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { testDialogue } from "../Database/Dialogues";
 import { AddGold } from "../Scripts/CharacterScripts";
 import { AddItemToInventory } from "../Scripts/ItemScripts";
 import { CheckIfDungeonQuestObjective } from "../Scripts/QuestScripts";
 import Combat from "./Combat";
+import Dialogue from "./Dialogue"
 
 function Dungeon(props) {
     const [hero, setHero] = useState(props.hero);
@@ -10,6 +12,7 @@ function Dungeon(props) {
     const [boss, setBoss] = useState(props.dungeon.Boss)
     const [goldReward, setGoldReward] = useState(props.dungeon.GoldReward)
     const [itemReward, setItemReward] = useState(props.dungeon.ItemReward)
+    const [dialogue, setDialogue] = useState(props.dungeon.Dialogue)
     const [activeEncounter, setActiveEncounter] = useState(props.dungeon.Encounters[0]);
     const [active, setActive] = useState("Dungeon");
     const [defeated, setDefeated] = useState(0)
@@ -62,6 +65,14 @@ function Dungeon(props) {
         props.parentCallback(char);
         setRewardClaimed(true)
     }
+    function startDungeonDialogue()
+    {
+        setActive("Dialogue")
+    }
+    function finishDungeonDialogue()
+    {
+        setActive("Dungeon")
+    }
     const handleCallback = (childData) => {
         var newChar = childData
         setHero(newChar)
@@ -71,6 +82,7 @@ function Dungeon(props) {
     return (<div>
         <div>
             <h2>{props.dungeon.Name}</h2>
+            {dialogue !== null && active !== "Dialogue"? <div><button onClick={()=> startDungeonDialogue()}><h3>Talk To {dialogue.Char}</h3></button></div> : <div></div>}
             {hero.CurrentHP > 0 ?
                 <div>
                     {active === "Dungeon" ?
@@ -97,13 +109,14 @@ function Dungeon(props) {
                             </div> : <div></div>
                     }
                     {active === "Encounter" ? <div> <Combat parentCallback={handleCallback} hero={hero} enemies={activeEncounter} Back={() => calculateDefeatedEncounters()}></Combat></div> : <div></div>}
+                    {active === "Dialogue" ? <div> <Dialogue parentCallback={handleCallback} hero={hero} talk={dialogue} Back={() => finishDungeonDialogue()}></Dialogue></div> : <div></div>}
                 </div>
                 :
                 <div>
                     <h3>You cannot continue</h3>
                 </div>
             }
-            {active !== "Encounter" ? <div>
+            {active !== "Encounter" && active !== "Dialogue"? <div>
                 <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave Dungeon</h3></button>
             </div> : <div></div>}
         </div>

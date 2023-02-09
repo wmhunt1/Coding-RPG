@@ -80,6 +80,7 @@ export function LevelUpScreen(props) {
             </div> : <div>
                 <h2>{hero.Name} is now Level {hero.Level}</h2>
             </div>}
+            <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button>
         </div>
     )
 }

@@ -108,7 +108,7 @@ export function ProjectileMagicAttack(char1, char2, combatLog, spell) {
     TakeDamage(char2, totalDamage[0])
     MagicAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, spell)
 }
-export function SneakAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, damageType) {
+export function ArmorIgnoringAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, damageType) {
     var result = "";
     if (baseDamage === 0) {
         result = char2.Name + " dodges " + char1.Name + "'s Attack"
@@ -118,15 +118,15 @@ export function SneakAttackResults(char1, char2, combatLog, baseDamage, modified
     }
     AddToCombatLog(combatLog, result)
 }
-export function SneakAttack(char1, char2, combatLog, weapon) {
-    AddToCombatLog(combatLog, char1.Name + " sneak attacks " + char2.Name + " with their " + weapon.Name)
+export function ArmorIgnoringAttack(char1, char2, combatLog, weapon) {
+    AddToCombatLog(combatLog, char1.Name + " attacks " + char2.Name + " with their " + weapon.Name + ", ignoring their armor")
     var char1Damage = CalculateCharWeaponDamage(char1)
     var char2Defense = CalculateCharDefenseWithoutArmor(char2)
     var baseDamage = CalculateBaseDamage(char1Damage, char2Defense);
     var modifiedDamage = CalculateDamageModifiers(char2, baseDamage, weapon.DamageType)
     var totalDamage = CalculateCritDamage(char1, modifiedDamage[0])
     TakeDamage(char2, totalDamage[0])
-    SneakAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, weapon.DamageType)
+    ArmorIgnoringAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, weapon.DamageType)
     char1.Weapon.Enchantment.OnHitEffect(char1, char2, combatLog)
 }
 export function DamageConditionCheck(char, combatLog) {
