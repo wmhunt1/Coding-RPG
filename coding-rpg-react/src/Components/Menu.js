@@ -17,7 +17,7 @@ function Menu(props) {
         <div><button className="menu-button" onClick={props.Back}><h3>Back</h3></button></div>
             <div><button className="menu-button"><h3>Save Game</h3></button></div>
             <div><button className="menu-button"><h3>Load Game</h3></button></div>
-            <div><button className="menu-button" onClick={() => setActive("MainMenu")}><h3>Main Menu</h3></button></div>
+            {/* <div><button className="menu-button" onClick={() => setActive("MainMenu")}><h3>Main Menu</h3></button></div> */}
             <div><button className="menu-button" onClick={() => exitGame()}><h3>Exit Game</h3></button></div>
         </div>}
     </div>)

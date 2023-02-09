@@ -6,16 +6,21 @@ function MainMenu(props) {
   const [active, setActive] = useState("MainMenu");
   const [name, setName] = useState('');
   const [hero, setHero] = useState(props.hero)
+  const [title, setTitle] = useState(props.hero.Title)
   const exitGame = () => {
     window.opener = null;
     window.open("", "_self");
     window.close();
     navigator.app.exitApp();
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleChange = (event) => {
+    const name = event.target.name;
     hero.Name = name;
     setHero(hero)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
     setActive("Game");
   }
   return (<div>
@@ -29,13 +34,23 @@ function MainMenu(props) {
         <button onClick={() => exitGame()}><h3>Exit</h3></button>
       </div> : <div></div>}
       {active === "NewGame" ? <div>
-        <form onSubmit={handleSubmit}>
-          <h3><label>Name Your Character: <input type="text" value={name}
-            onChange={(e) => setName(e.target.value)} /></label></h3>
-        </form>
-        <div>
-          <button onClick={() => setActive("MainMenu")}><h3>Back</h3></button>
+        <div style={{ border: "solid", marginRight: "25%", marginLeft: "25%", marginBottom: "1%", paddingBottom: "1%" }}>
+          <h2>Character Creation</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <h4>
+              <label>Name Your Character: </label>
+              <input style={{ width: "100px" }}
+                type="text"
+                name="name"
+                value={hero.Name || ""}
+                onChange={handleChange}
+              /></h4>
+            </div>
+            <input type="submit" />
+          </form>
         </div>
+        <button onClick={() => setActive("MainMenu")}><h3>Back</h3></button>
       </div> : <div></div>}
       {active === "Game" ? <div><Game hero={hero} log={hero.Log}></Game></div> : <div></div>}
     </div>
