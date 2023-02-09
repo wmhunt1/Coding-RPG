@@ -22,8 +22,8 @@ function Combat(props) {
     const [preparedSpell, setPreparedSpell] = useState(null)
     const [preparedAbility, setPreparedAbility] = useState(null)
     const [round, setRound] = useState(1)
-    const [activeSpellList, setActiveSpellList] = useState("Default")
-    const [activeAbilList, setActiveAbilList] = useState("Default")
+    //const [activeSpellList, setActiveSpellList] = useState("Default")
+    //const [activeAbilList, setActiveAbilList] = useState("Default")
 
     function RunCombat(hero, allies, enemies, target, combatLog, action, spell, abil, round) {
         CombatRound(hero, allies, enemies, target, combatLog, action, spell, abil, round);
@@ -84,10 +84,10 @@ function Combat(props) {
     const enemiesBuffList = enemyBuffs.filter(enemy => enemy.CurrentHP > 0 && enemy.Buffs.length > 0).map((enemy, index) => <h5 style={{ display: "inline" }} key={index}>{enemy.Name}'s Buffs {enemy.Buffs.map((buff, index) => <li style={{ display: "inline" }} key={index}>{buff.Name}</li>)} </h5>)
     const enemiesDeBuffList = enemyDeBuffs.filter(enemy => enemy.CurrentHP > 0 && enemy.DeBuffs.length > 0).map((enemy, index) => <h5 style={{ display: "inline" }} key={index}>{enemy.Name}'s DeBuffs {enemy.DeBuffs.map((deBuff, index) => <li style={{ display: "inline" }} key={index}>{deBuff.Name}</li>)} </h5>)
     const itemList = inventory.filter(item => item.Type === "Consumable").map((item, index) => <h5 key={index}>{item.Name} - QTY: {item.Quantity} <button onClick={() => { handleConsumable(hero, allies, enemies, enemies[0], combatLog, "Use", inventory, item) }}>Use</button></h5>)
-    const abilList = abilities.sort((a, b) => a.Name.localeCompare(b.Name)).map((abil, index) => <h5 key={index}>{abil.Name} ({abil.StaminaCost} SP) <button onClick={() => handleAbility(abil)}>Use</button></h5>)
-    const abilListSP = abilities.sort((a, b) => a.Name.localeCompare(b.Name)).map((abil, index) => <h5 key={index}>{abil.Name} ({abil.StaminaCost} SP) <button onClick={() => handleAbility(abil)}>Use</button></h5>)
-    const spellList = spells.sort((a, b) => a.Name.localeCompare(b.Name)).map((spell, index) => <h5 key={index}>{spell.Name} ({spell.ManaCost} MP) <button onClick={() => handleSpell(spell)}>Spell</button></h5>)
-    const spellListMP = spells.sort((a, b) => a.Name.localeCompare(b.Name)).map((spell, index) => <h5 key={index}>{spell.Name} ({spell.ManaCost} MP) <button onClick={() => handleSpell(spell)}>Spell</button></h5>)
+    const abilList = abilities.map((abil, index) => <h5 key={index}>{abil.Name} ({abil.StaminaCost} SP) <button onClick={() => handleAbility(abil)}>Use</button></h5>)
+    //const abilListSP = abilities.sort((a, b) => a.Name.localeCompare(b.Name)).map((abil, index) => <h5 key={index}>{abil.Name} ({abil.StaminaCost} SP) <button onClick={() => handleAbility(abil)}>Use</button></h5>)
+    const spellList = spells.map((spell, index) => <h5 key={index}>{spell.Name} ({spell.ManaCost} MP) <button onClick={() => handleSpell(spell)}>Spell</button></h5>)
+    //const spellListMP = spells.sort((a, b) => a.Name.localeCompare(b.Name)).map((spell, index) => <h5 key={index}>{spell.Name} ({spell.ManaCost} MP) <button onClick={() => handleSpell(spell)}>Spell</button></h5>)
     return (<div>
         <div>{hero.CurrentHP > 0 ?
             <div>
@@ -113,13 +113,15 @@ function Combat(props) {
                     <div>
                         <div className='combat-options'>
                             <h3>Abilities</h3>
-                            <h4>Filter <button onClick={() => setActiveAbilList("SP")}>Can Use</button> <button onClick={() => setActiveAbilList("Default")}>Clear</button></h4>
-                            {activeAbilList === "Default" ? <div>{abilList}</div>:<div>{abilListSP}</div>}
+                            {/* <h4>Filter <button onClick={() => setActiveAbilList("SP")}>Can Use</button> <button onClick={() => setActiveAbilList("Default")}>Clear</button></h4>
+                            {activeAbilList === "Default" ? <div>{abilList}</div>:<div>{abilListSP}</div>} */}
+                            <div>{abilList}</div>
                         </div>
                         <div className='combat-options'>
                             <h3>Spells</h3>
-                            <h4>Filter <button onClick={() => setActiveSpellList("MP")}>Can Cast</button> <button onClick={() => setActiveSpellList("Default")}>Clear</button></h4>
-                            {activeSpellList === "Default" ? <div>{spellList}</div>:<div>{spellListMP}</div>}
+                            {/* <h4>Filter <button onClick={() => setActiveSpellList("MP")}>Can Cast</button> <button onClick={() => setActiveSpellList("Default")}>Clear</button></h4>
+                            {activeSpellList === "Default" ? <div>{spellList}</div>:<div>{spellListMP}</div>} */}
+                            <div>{spellList}</div>
                         </div>
                         <div className='combat-options'>
                             <h3>Inventory</h3>

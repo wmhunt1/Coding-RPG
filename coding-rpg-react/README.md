@@ -10,3 +10,4 @@ factions
 jobs
 relationships
 add time delay
+put locations in each direction on map

@@ -13,7 +13,7 @@ export function character(name) {
 }
 export function hero() {
     var hero = character("Hero")
-    hero.Log = ["Starting Game"]; hero.Weapon = sword(); hero.OffHand = woodenShield(); hero.Head = hat(); hero.Torso = tunic(); hero.Legs = trousers(); hero.Hands = gloves(); hero.Feet = shoes(); hero.Inventory = [healingPotion(), bronzeDagger()]; hero.Gold = 5; hero.Companions = [dog()]; hero.Abilities = [cleave(),pierceArmor, rage()]; hero.SpellBook = [basicHeal(), curePoison(), fireBall(), magicMissile(), poisonSpray(), sleepSpell(), summonRat()];
+    hero.Log = ["Starting Game"]; hero.Weapon = sword(); hero.OffHand = woodenShield(); hero.Head = hat(); hero.Torso = tunic(); hero.Legs = trousers(); hero.Hands = gloves(); hero.Feet = shoes(); hero.Inventory = [healingPotion(), bronzeDagger()]; hero.Gold = 5; hero.Companions = [dog()]; hero.Abilities = [cleave(), pierceArmor, rage()]; hero.SpellBook = [basicHeal(), curePoison(), fireBall(), magicMissile(), poisonSpray(), sleepSpell(), summonRat()];
     return hero
 }
 //beast

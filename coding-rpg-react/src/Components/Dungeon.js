@@ -49,7 +49,7 @@ function Dungeon(props) {
         setDefeated(defeat)
         setBossDefeated(bossDefeat)
         if (bossDefeat === 1) {
-            setActive("Cleared")
+            setActive("Dungeon")
         }
     }
     function claimRewards(char) {
@@ -58,15 +58,17 @@ function Dungeon(props) {
         }
         if (itemReward !== null) {
 
-            AddItemToInventory(char, char.Inventory, itemReward)
+            AddItemToInventory(char, char.Inventory, itemReward, itemReward.Quantity)
         }
         CheckIfDungeonQuestObjective(char, props.dungeon)
         setHero(char)
         props.parentCallback(char);
         setRewardClaimed(true)
     }
-    function startDungeonDialogue()
+    function startDungeonDialogue(hero,encounters, defeated, bossDefeated)
     {
+        props.dungeon.haveDungeonDialogue(hero, encounters, defeated, bossDefeated)
+        setDialogue(props.dungeon.Dialogue)
         setActive("Dialogue")
     }
     function finishDungeonDialogue()
@@ -82,10 +84,10 @@ function Dungeon(props) {
     return (<div>
         <div>
             <h2>{props.dungeon.Name}</h2>
-            {dialogue !== null && active !== "Dialogue"? <div><button onClick={()=> startDungeonDialogue()}><h3>Talk To {dialogue.Char}</h3></button></div> : <div></div>}
+            {dialogue !== null && active !== "Dialogue" && active !== "Encounter"? <div><button onClick={()=> startDungeonDialogue(hero, encounters, defeated, bossDefeated, dialogue)}><h3>Talk To {dialogue.Char}</h3></button></div> : <div></div>}
             {hero.CurrentHP > 0 ?
                 <div>
-                    {active === "Dungeon" ?
+                    {active === "Dungeon" && bossDefeated === 0?
                         <div>
                             {defeated !== encounters.length ?
                                 <div>
@@ -102,7 +104,7 @@ function Dungeon(props) {
                         </div>
                         : <div></div>}
                     {
-                        active === "Cleared" ?
+                        bossDefeated === 1 && active !== "Dialogue" && active === "Dungeon" ?
                             <div>
                                 <h3>Dungeon Cleared</h3>
                                 {rewardClaimed === false ? <div><button onClick={() => claimRewards(hero)}><h3>Claim Rewards</h3></button></div> : <div><h3>Rewards Claimed</h3></div>}
