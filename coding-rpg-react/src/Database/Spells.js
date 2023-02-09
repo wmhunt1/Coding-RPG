@@ -2,12 +2,12 @@ import { ApplyCondition, HealHP, RemoveCondition } from "../Scripts/CharacterScr
 import { AddToCombatLog, ProjectileMagicAttack } from "../Scripts/CombatScripts";
 import { rat } from "./Characters";
 import { poisonCondition, sleepCondition } from "./Conditions";
-import { fireDamage, forceDamage, poisonDamage } from "./DamageTypes";
+import { fireDamage, forceDamage, noDamage, poisonDamage } from "./DamageTypes";
 
 //control spells
 export function sleepSpell()
 {
-    var sleep = { Name: "Sleep", ManaCost: 10, Description: "Puts all foes to sleep", Amount: 0, DamageType: "None", SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " puts all foes to sleep"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], sleepCondition(), combatLog) } } }
+    var sleep = { Name: "Sleep", ManaCost: 10, Description: "Puts all foes to sleep", Amount: 0, DamageType: noDamage(), SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " puts all foes to sleep"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], sleepCondition(), combatLog) } } }
     return sleep;
 }
 //condition spell

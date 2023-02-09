@@ -32,7 +32,7 @@ function SkillBook(props) {
         {active === "Skills" ? <div>
             {skills.length > 0 ? <div className='power-book'> {skillList}</div> : <h3>No Skills</h3>}</div> :
             <div><h3>{activeSkill.Name} - Level: {activeSkill.Level} {activeSkill.CurrentXP}/{activeSkill.MaxXP}</h3>{recipeList.length > 0 ? <div className='power-book'>{recipeList}</div> : <h3>No {activeSkill.Name} Recipes</h3>}<button onClick={() => setActive("Skills")}>Back To Skills</button></div>}
-        <button style={{ marginTop: "1%", marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button>
+        {/* <button style={{ marginTop: "1%", marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button> */}
     </div>)
 }
 export default SkillBook;

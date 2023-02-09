@@ -8,7 +8,7 @@ armor weight
 protection properies (metal increases lightning damage etc just torso?)
 factions
 jobs
-locations
 relationships
 merge spells and abilities?
 add time delay
+map

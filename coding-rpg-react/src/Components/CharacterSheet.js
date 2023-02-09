@@ -44,7 +44,7 @@ function CharacterSheet(props) {
             <h4>INT: {hero.Intelligence}({hero.IntBonus})({hero.IntPenalty})WIS: {hero.Wisdom} CHA: {hero.Charisma} WLP: {hero.WillPower}({hero.WlpBonus})({hero.WlpPenalty}) PRC: {hero.Perception} LCK: {hero.Luck}</h4>
           </div>
         </div>
-        <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button>
+        {/* <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button> */}
       </div> : <div></div>}
       {active === "levelUp" ? <div>
         <LevelUpScreen parentCallback={handleCallback} hero={hero}></LevelUpScreen>

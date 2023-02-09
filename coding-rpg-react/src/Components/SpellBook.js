@@ -8,7 +8,7 @@ function SpellBook(props) {
     return (<div>
         <h2>{props.hero.Name}'s SpellBook</h2>
         {spells.length > 0 ? <div className='power-book'> {spellList}</div> : <h3>No Spells</h3>}
-        <button style={{ marginTop: "1%", marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button>
+        {/* <button style={{ marginTop: "1%", marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button> */}
     </div>)
 }
 export default SpellBook;

@@ -66,7 +66,7 @@ export function UseSkillRecipe(char, skill, recipe) {
                 RemoveItemFromInventory(char, char.Inventory, recipe.Input[r2].Item, recipe.Input[r2].Quantity)
             }
                 AddItemToInventory(char, char.Inventory, recipe.Output.Item, recipe.Output.Quantity)
-            AddToCharacterLog(char, char.Name + " has " + recipe.Verb + "ed " + recipe.Output.Item.Name + " X " + quantity + ", earning " + recipe.Exp + " " + skill.Name + " XP")
+            AddToCharacterLog(char, char.Name + " has " + recipe.Verb + " " + recipe.Output.Item.Name + " X " + quantity + ", earning " + recipe.Exp + " " + skill.Name + " XP")
         }
     }
 

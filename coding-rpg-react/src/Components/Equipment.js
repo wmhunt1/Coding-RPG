@@ -34,20 +34,25 @@ function Equipment(props) {
     return (
         <div>
             <h2>{hero.Name}'s Equipment</h2>
+            <div style={{display : "inline-block", verticalAlign: "text-top", marginRight: "1%", border: "solid", paddingLeft: "1%", paddingRight: "1%", height: "350px"}}>
             <h3>Weapons</h3>
-            <h4>Weapon - Name: {weapon.Name}, Damage: {weapon.Damage}, Damage Type: {weapon.DamageType} <button onClick={() => handleUnEquip(hero, hero.Inventory, weapon)}>UnEquip</button></h4>
-            <h4><div style={{ display: "inline-block" }}>OffHand - Name: {offHand.Name}, </div>{offHand.SubType === "Weapon" ? <div style={{ display: "inline-block" }}> Damage: {offHand.Damage}, Damage Type: {offHand.DamageType}</div> : <div style={{ marginLeft: ".5%", display: "inline-block" }}> Protection: {offHand.Protection}, Protection Type: {offHand.ProtectionType.Name}</div>} <div style={{ display: "inline-block" }}><button onClick={() => handleUnEquip(hero, hero.Inventory, offHand)}>UnEquip</button></div></h4>
-            <h3>Armor</h3>
-            <h4>Head - Name: {head.Name}, Protection: {head.Protection}, Protection Type: {head.ProtectionType.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, head)}>UnEquip</button></h4>
-            <h4>Torso - Name: {torso.Name}, Protection: {torso.Protection}, Protection Type: {torso.ProtectionType.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, torso)}>UnEquip</button></h4>
-            <h4>Legs - Name: {legs.Name}, Protection: {legs.Protection}, Protection Type: {legs.ProtectionType.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, legs)}>UnEquip</button></h4>
-            <h4>Hands - Name: {hands.Name}, Protection: {hands.Protection}, Protection Type: {hands.ProtectionType.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, hands)}>UnEquip</button></h4>
-            <h4>Feet - Name: {feet.Name}, Protection: {feet.Protection}, Protection Type: {feet.ProtectionType.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, feet)}>UnEquip</button></h4>
+            <h5>Weapon - Name: {weapon.Name}, Damage: {weapon.Damage}, Damage Type: {weapon.DamageType.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, weapon)}>UnEquip</button></h5>
+            <h5><div style={{ display: "inline-block" }}>OffHand - Name: {offHand.Name}, </div>{offHand.SubType === "Weapon" ? <div style={{ display: "inline-block" }}> Damage: {offHand.Damage}, Damage Type: {offHand.DamageType.Name}</div> : <div style={{ marginLeft: ".5%", display: "inline-block" }}> Protection: {offHand.Protection}, Protection Type: {offHand.ProtectionType.Name}</div>} <div style={{ display: "inline-block" }}><button onClick={() => handleUnEquip(hero, hero.Inventory, offHand)}>UnEquip</button></div></h5>
             <h3>Accessories</h3>
-            <h4>Neck - Name: {neck.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, neck)}>UnEquip</button></h4>
-            <h4>Back - Name: {back.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, back)}>UnEquip</button></h4>
-            <h4>Ring - Name: {ring.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, ring)}>UnEquip</button></h4>
-            <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button>
+            <h5>Neck - Name: {neck.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, neck)}>UnEquip</button></h5>
+            <h5>Back - Name: {back.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, back)}>UnEquip</button></h5>
+            <h5>Ring - Name: {ring.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, ring)}>UnEquip</button></h5>
+            </div>
+            <div style={{display : "inline-block", verticalAlign: "text-top", marginLeft: "1%", border: "solid", paddingLeft: "1%", paddingRight: "1%", height:"350px"}}>
+            <h3>Armor</h3>
+            <h5>Head - Name: {head.Name}, Protection: {head.Protection}, Protection Type: {head.ProtectionType.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, head)}>UnEquip</button></h5>
+            <h5>Torso - Name: {torso.Name}, Protection: {torso.Protection}, Protection Type: {torso.ProtectionType.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, torso)}>UnEquip</button></h5>
+            <h5>Legs - Name: {legs.Name}, Protection: {legs.Protection}, Protection Type: {legs.ProtectionType.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, legs)}>UnEquip</button></h5>
+            <h5>Hands - Name: {hands.Name}, Protection: {hands.Protection}, Protection Type: {hands.ProtectionType.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, hands)}>UnEquip</button></h5>
+            <h5>Feet - Name: {feet.Name}, Protection: {feet.Protection}, Protection Type: {feet.ProtectionType.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, feet)}>UnEquip</button></h5>
+            </div>
+            
+            {/* <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button> */}
         </div>
     );
 }

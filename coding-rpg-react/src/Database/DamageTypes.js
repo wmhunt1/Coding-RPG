@@ -1,30 +1,29 @@
-export function bludeoningDamage()
+export function noDamage()
 {
-    var bludgeoning = "Bludgeoning"
+    var noDamage = {Name: "No Damage"}
+    return noDamage
+}
+export function bludeoningDamage() {
+    var bludgeoning = { Name: "Bludgeoning" }
     return bludgeoning;
 }
-export function fireDamage()
-{
-    var fire = "Fire"
+export function fireDamage() {
+    var fire = { Name: "Fire" }
     return fire;
 }
-export function forceDamage()
-{
-    var force = "Force"
+export function forceDamage() {
+    var force = { Name: "Force" }
     return force;
 }
-export function piercingDamage()
-{
-    var piercing = "Piercing"
+export function piercingDamage() {
+    var piercing = { Name: "Piercing" }
     return piercing;
 }
-export function poisonDamage()
-{
-    var poison = "Poison"
+export function poisonDamage() {
+    var poison = { Name: "Poison" }
     return poison;
 }
-export function slashingDamage()
-{
-    var slashing = "Slashing"
+export function slashingDamage() {
+    var slashing = { Name: "Slashing" }
     return slashing;
 }

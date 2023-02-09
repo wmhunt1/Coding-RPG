@@ -39,7 +39,7 @@ function Party(props) {
             {active === "ViewCS" ? <div><CharacterSheet hero={activeHero}></CharacterSheet></div> : <div></div>}
             {active === "ViewEquip" ? <div><Equipment hero={activeHero}></Equipment></div> : <div></div>}
             {active === "ViewSpell" ? <div><SpellBook hero={activeHero}></SpellBook></div> : <div></div>}
-            <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button>
+            {/* <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button> */}
         </div>
     )
 }

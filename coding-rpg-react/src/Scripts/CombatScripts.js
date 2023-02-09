@@ -66,7 +66,7 @@ export function BasicAttackResults(char1, char2, combatLog, baseDamage, modified
         result = char2.Name + miss + char1.Name + "'s Attack"
     }
     else {
-        result = char1.Name + " deals " + totalDamage[0] + totalDamage[1] + damageType + " damage to " + char2.Name + modifiedDamage[1]
+        result = char1.Name + " deals " + totalDamage[0] + totalDamage[1] + damageType.Name + " damage to " + char2.Name + modifiedDamage[1]
     }
     AddToCombatLog(combatLog, result)
 }
@@ -95,7 +95,7 @@ export function MagicAttackResults(char1, char2, combatLog, baseDamage, modified
         result = char2.Name + miss + char1.Name + "'s Spell"
     }
     else {
-        result = char1.Name + " deals " + totalDamage[0] + totalDamage[1] + spell.DamageType + " damage to " + char2.Name + " with " + spell.Name + modifiedDamage[1]
+        result = char1.Name + " deals " + totalDamage[0] + totalDamage[1] + spell.DamageType.Name + " damage to " + char2.Name + " with " + spell.Name + modifiedDamage[1]
     }
     AddToCombatLog(combatLog, result)
 }
@@ -114,7 +114,7 @@ export function SneakAttackResults(char1, char2, combatLog, baseDamage, modified
         result = char2.Name + " dodges " + char1.Name + "'s Attack"
     }
     else {
-        result = char1.Name + " deals " + totalDamage[0] + totalDamage[1] + damageType + " damage to " + char2.Name + modifiedDamage[1]
+        result = char1.Name + " deals " + totalDamage[0] + totalDamage[1] + damageType.Name + " damage to " + char2.Name + modifiedDamage[1]
     }
     AddToCombatLog(combatLog, result)
 }
@@ -134,7 +134,7 @@ export function DamageConditionCheck(char, combatLog) {
     if (char.Condition.Type === "Damage") {
         var damage = CalculateDamageModifiers(char, char.Condition.Damage, char.Condition.DamageType)
         TakeDamage(char, damage)
-        AddToCombatLog(combatLog, char.Name + " takes " + char.Condition.Damage + " " + char.Condition.DamageType + " damage from " + char.Condition.Name)
+        AddToCombatLog(combatLog, char.Name + " takes " + char.Condition.Damage + " " + char.Condition.DamageType.Name + " damage from " + char.Condition.Name)
     }
 }
 export function SkipConditionCheck(char, combatLog) {
