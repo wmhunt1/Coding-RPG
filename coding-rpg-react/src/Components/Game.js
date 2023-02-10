@@ -39,24 +39,19 @@ function Game(props) {
     setLog(newLog)
     if (location !== undefined) {
       setActive(location.active)
-      if (location.combat !== null)
-      {
+      if (location.combat !== null) {
         setCombat(location.combat)
       }
-      if (location.dialogue !== null)
-      {
+      if (location.dialogue !== null) {
         setDialogue(location.dialogue)
       }
-      if (location.dungeon !== null)
-      {
+      if (location.dungeon !== null) {
         setDungeon(location.dungeon)
       }
-      if (location.shop !== null)
-      {
+      if (location.shop !== null) {
         setShop(location.shop)
       }
-      if (location.skill !== null)
-      {
+      if (location.skill !== null) {
         setSkill(location.skill)
       }
     }
@@ -90,9 +85,9 @@ function Game(props) {
         {active === "Dungeon" ? <Dungeon parentCallback={handleCallback} hero={hero} dungeon={dungeon} Back={() => setActive("Game")}></Dungeon> : <div></div>}
         {active === "Equipment" ? <Equipment parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></Equipment> : <div></div>}
         {active === "Inventory" ? <Inventory parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></Inventory> : <div></div>}
-        {active === "Journal" ? <Journal hero={hero} skill={skill}Back={() => setActive("Game")}></Journal> : <div></div>}
+        {active === "Journal" ? <Journal hero={hero} skill={skill} Back={() => setActive("Game")}></Journal> : <div></div>}
         {active === "Party" ? <Party hero={hero} Back={() => setActive("Game")} parentCallback={handleCallback}></Party> : <div></div>}
-        {active === "Skill" ? <SkillNode hero={hero} node={skill} Back={() => setActive("Game")} parentCallback={handleCallback}></SkillNode> : <div></div>}
+        {active === "Skill" ? <SkillNode parentCallback={handleCallback} hero={hero} node={skill} Back={() => setActive("Game")} ></SkillNode> : <div></div>}
         {active === "Shop" ? <Shop parentCallback={handleCallback} shop={shop} hero={hero} Back={() => setActive("Game")}></Shop> : <div></div>}
         {active === "Skills" ? <SkillBook parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></SkillBook> : <div></div>}
         {active === "Spells" ? <SpellBook hero={hero} Back={() => setActive("Game")} parentCallback={handleCallback}></SpellBook> : <div></div>}
@@ -107,9 +102,10 @@ function Game(props) {
           <div><button className='menu-button' onClick={() => setActive("Game")}><h3>Leave</h3></button></div>
         </div> : <div></div>}
       </div>
-      {active === "Game" ? <div><div style={{ marginLeft: "20%", marginRight: "20%" }}><Map parentCallback={handleCallback} hero={hero} map={worldMap()}></Map></div>  <div style={{ marginLeft: "25%", marginRight: "25%", width: "auto", height: "200px" }}>
+      {active === "Game" ? <div><div style={{ marginLeft: "20%", marginRight: "20%" }}><Map parentCallback={handleCallback} hero={hero} map={worldMap()}></Map></div> </div> : <div> </div>}
+      {active !== "Dungeon" && active !== "Dialogue" && active !== "Combat" ? <div style={{ marginLeft: "25%", marginRight: "25%", width: "auto", height: "200px" }}>
         <Log log={log} logName={"Game"}></Log>
-      </div></div> : <div style={{ marginLeft: "20%", marginRight: "20%", height: "200px" }}>{active !== "Dungeon" && active !== "Dialogue" && active !== "Combat" ?<Log log={log} logName={"Game"}></Log>:<div></div>}</div>}
+      </div> : <div></div>}
     </div>
   );
 }

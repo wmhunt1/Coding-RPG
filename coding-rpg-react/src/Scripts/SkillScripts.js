@@ -11,6 +11,17 @@ Array.prototype.remove = function () {
     }
     return this;
 };
+export function SkillCheck(skill, sucess)
+{
+    if (skill.Level >= sucess)
+    {
+        return true
+    }
+    else
+    {
+        return false;
+    }
+}
 export function FindSkillInSkillBook(char, skill)
 {
     var skillIndex = char.SkillBook.findIndex(x => x.Name === skill.Name);
@@ -43,7 +54,7 @@ export function UseSkillRecipe(char, skill, recipe) {
     var quantity = recipe.Output.Quantity
     var sucess = false;
     var foundItems = 0;
-    if (recipe.LevelRequirement >= skill.Level) {
+    if (recipe.LevelRequirement <= skill.Level) {
         if (recipe.Input.length > 0) {
             for (var r = 0; r < recipe.Input.length; r++) {
                 var index = FindItemInInventory(char.Inventory, recipe.Input[r].Item)
@@ -72,12 +83,12 @@ export function UseSkillRecipe(char, skill, recipe) {
             }
             AddItemToInventory(char, char.Inventory, recipe.Output.Item, recipe.Output.Quantity)
             AddToCharacterLog(char, char.Name + " has " + recipe.Verb + " " + recipe.Output.Item.Name + " X " + quantity + ", earning " + recipe.Exp + " " + skill.Name + " XP")
+            EarnSkillXP(char, skill, recipe.Exp)
         }
     }
 
     else {
         AddToCharacterLog(char, char.Name + " requires " + recipe.LevelRequirement + " in " + skill.Name + " to " + recipe.Name)
     }
-    EarnSkillXP(char, skill, recipe.Exp)
 }
 

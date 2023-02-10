@@ -14,8 +14,7 @@ export function daleTown(hero) {
 //sublocations
 //enter shops
 //inns
-export function enterDreamingWorkerInn(hero)
-{
+export function enterDreamingWorkerInn(hero) {
     var inn = { Name: "Dreaming Worker Inn", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: dreamingWorkerInn(hero), skill: null }; return content } }
     return inn
 }

@@ -8,7 +8,6 @@ export function AddToCombatLog(log, message) {
     log.push(message)
 }
 export function CalculateCharWeaponDamage(char, weapon) {
-    //var combatSkillIndex = char.SkillBook.findIndex(x => x.Name === weapon.Class.Name);
     var damage = FindSkillInSkillBook(char, weapon.Class).Level
     if (weapon.Class.Name === "Short Blade") {
         damage += char.Dexterity + weapon.Damage + char.DexBonus - char.DexPenalty;
@@ -19,7 +18,6 @@ export function CalculateCharWeaponDamage(char, weapon) {
     return damage;
 }
 export function CalculateCharArmor(char) {
-    //var armorSkillIndex = char.SkillBook.findIndex(x => x.Name === char.Torso.Class.Name);
     var armorSkill = FindSkillInSkillBook(char, char.Torso.Class).Level
     var shield = 0;
     if (char.OffHand.SubType === "Shield") {

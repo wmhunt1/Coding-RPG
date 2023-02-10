@@ -16,7 +16,6 @@ Attributes for spell schools/skills
 Time for travel and activies?
 Days?
 Skill required for abilities or spells
-Skill checks with failure conditions 
 Property
 Objective items too for less redundancy
 random encounter that forces combat
