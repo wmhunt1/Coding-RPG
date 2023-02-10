@@ -1,9 +1,15 @@
-import { ashes, bronzeBar, bronzeDagger, cookedFish, cookedRatMeat, copperOre, ironBar, ironOre, rawFish, rawRatMeat, tinOre, woodBow, woodLogs, } from "./ItemsDB"
+import { ashes, bronzeBar, bronzeDagger, cookedFish, cookedRatMeat, copperOre, ironBar, ironOre, milk, rawFish, rawRatMeat, tinOre, woodBow, woodLogs, } from "./ItemsDB"
 export function skillRecipes() {
     var skillRecipes = [burnWoodLogs(), cookRawFish(), cookRawRatMeat(), cutWood(), fishFish(), fletchWoodBow(), mineCopperOre(), mineIronOre(), mineTinOre(), smeltBronzeBar(), smeltIronBar(), smithBronzeArmor(), smithBronzeDagger()]
     return skillRecipes;
 }
 //crafting
+//alchemy
+export function alchemyRecipes()
+{
+    var alchemyRecipes = []
+    return alchemyRecipes
+}
 //cooking
 export function cookingRecipes() {
     var cookingRecipes = [cookRawFish(), cookRawRatMeat()]
@@ -57,6 +63,15 @@ export function smithBronzeDagger() {
     return smith;
 }
 //gathering
+//farming
+export function farmingRecipes(){
+    var farm = []
+    return farm;
+}
+export function milkCow(){
+    var milkCow = { Name: "Milk Cow", Skill: "Farming", Verb: "Milk", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: milk(), Quantity: 1 } }
+    return milkCow
+}
 //fishing
 export function fishingRecipes() {
     var fish = [fishFish()]

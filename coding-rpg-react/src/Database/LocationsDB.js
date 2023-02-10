@@ -2,10 +2,11 @@ import { testDialogue } from "./DialoguesDB"
 import { testDungeon2 } from "./DungeonsDB"
 import { testEncounter } from "./EncountersDB"
 import { dreamingWorkerInn, forgeHeartSmithy, innShop, testShop } from "./ShopsDB"
-import { cookNode, fireNode, fishNode, fletchNode, mineNode, woodNode } from "./SkillNodesDB"
+import { alchemyNode, cookNode, farmNode, fireNode, fishNode, fletchNode, mineNode, woodNode } from "./SkillNodesDB"
 
 
 //locations
+//towns
 export function daleTown(hero) {
     var daleTown = { LocationName: "Dale Town", XCoord: 0, YCoord: 0, CanTravel: true, SubLocations: [enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero)] }
     return daleTown;
@@ -28,9 +29,17 @@ export function enterForgeHeartSmithy(hero) {
     return forge
 }
 //enter skillnode
+export function enterAlchemyNode(hero) {
+    var alchemy = { Name: "Alchemy Station", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: alchemyNode(hero) }; return content } }
+    return alchemy
+}
 export function enterCookNode(hero) {
     var cook = { Name: "Stove", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: cookNode(hero) }; return content } }
     return cook
+}
+export function enterFarmNode(hero) {
+    var farm = { Name: "Farm", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: farmNode(hero) }; return content } }
+    return farm
 }
 export function enterFireNode(hero) {
     var fire = { Name: "Fire Pit", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: fireNode(hero) }; return content } }

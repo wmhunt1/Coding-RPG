@@ -59,11 +59,11 @@ function CharacterSheet(props) {
           <h3>Attributes</h3>
           <div className='attribute'>
             <h4>Phsyical Attributes</h4>
-            <h4>STR: {hero.Strength}({hero.StrBonus})({hero.StrPenalty}) CON: {hero.Constitution}({hero.ConBonus})({hero.ConPenalty}) DEX: {hero.Dexterity}({hero.DexBonus})({hero.DexPenalty}) SPD: {hero.Speed} BTY: {hero.Beauty}</h4>
+            <h4>STR: {hero.Strength}({hero.StrBonus})({hero.StrPenalty}) CON: {hero.Constitution}({hero.ConBonus})({hero.ConPenalty}) DEX: {hero.Dexterity}({hero.DexBonus})({hero.DexPenalty}) SPD: {hero.Speed}({hero.SpdBonus})({hero.SpdPenalty}) BTY: {hero.Beauty}({hero.BtyBonus})({hero.BtyPenalty})</h4>
           </div>
           <div className='attribute'>
             <h4>Mental Attributes</h4>
-            <h4>INT: {hero.Intelligence}({hero.IntBonus})({hero.IntPenalty})WIS: {hero.Wisdom} CHA: {hero.Charisma} WLP: {hero.WillPower}({hero.WlpBonus})({hero.WlpPenalty}) PRC: {hero.Perception} LCK: {hero.Luck}</h4>
+            <h4>INT: {hero.Intelligence}({hero.IntBonus})({hero.IntPenalty})WIS: {hero.Wisdom}({hero.WisBonus})({hero.WisPenalty}) CHA: {hero.Charisma}({hero.ChaBonus})({hero.ChaPenalty}) WLP: {hero.WillPower}({hero.WlpBonus})({hero.WlpPenalty}) PRC: {hero.Perception}({hero.PrcBonus})({hero.PrcPenalty}) LCK: {hero.Luck}({hero.LckBonus})({hero.LckPenalty})</h4>
           </div>
         </div>
         {/* <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button> */}

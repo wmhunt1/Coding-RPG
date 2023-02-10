@@ -9,6 +9,10 @@ export function ale() {
     var ale = { Name: "Ale", Type: "Consumable", SubType: "Drink", Cost: 2, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks an " + this.Name); RecoverSP(hero, 5) } }
     return ale
 }
+export function milk() {
+    var milk = { Name: "Milk", Type: "Consumable", SubType: "Drink", Cost: 2, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks a " + this.Name); RecoverSP(hero, 5) } }
+    return milk
+}
 //food
 export function bread() {
     var bread = { Name: "Bread", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
@@ -66,6 +70,10 @@ export function bareBack() {
 export function bareNeck() {
     var bare = { Name: "Bare", Slot: "Neck", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bare;
+}
+export function dogCollar() {
+    var dog = { Name: "Dog Collar", Slot: "Neck", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    return dog;
 }
 //ring
 export function bareFinger() {
@@ -154,7 +162,7 @@ export function tunic() {
 //offhands
 //offhand weapoms
 export function emptyOffHand() {
-    var empty = { Name: "Empty", Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Damage: 0, DamageType: bludeoningDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var empty = { Name: "None", Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Damage: 0, DamageType: bludeoningDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return empty;
 }
 //shields

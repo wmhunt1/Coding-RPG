@@ -10,7 +10,7 @@ export function Toolbar(props) {
         <button onClick={props.spells}><h3>Spells</h3></button>
         <button onClick={props.skill}><h3>Skills</h3></button>
         <button onClick={props.menu}><h3>Menu</h3></button>
-        {/* <button onClick={props.test}><h3>Tests</h3></button> */}
+        <button onClick={props.test}><h3>Tests</h3></button>
     </div>)
 }
 export default Toolbar

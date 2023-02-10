@@ -1,8 +1,12 @@
 import { HasEnoughMP, UseMP, HasEnoughSP, UseSP } from "./CharacterScripts";
+import { EarnSkillXP } from "./SkillScripts";
 export function CastSpell(char, allies, enemies, target, combatLog, spell) {
     if (HasEnoughMP(char, spell.ManaCost) === true) {
         UseMP(char, spell.ManaCost)
         spell.SpellEffect(char, allies, enemies, target, combatLog)
+        var skillIndex = char.SkillBook.findIndex(x => x.Name === spell.School.Name);
+        EarnSkillXP(char, char.SkillBook[skillIndex], spell.ManaCost)
+        
     }
     else {
         combatLog.push(char.Name + "didn't have enough MP and  " + spell.Name + " fizzled.")

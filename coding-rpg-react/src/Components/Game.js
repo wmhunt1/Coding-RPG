@@ -29,9 +29,9 @@ function Game(props) {
   const [active, setActive] = useState("Game");
   const [hero, setHero] = useState(props.hero)
   const [log, setLog] = useState(props.log)
-  const [combat, setCombat] = useState()
-  const [dialogue, setDialogue] = useState()
-  const [dungeon, setDungeon] = useState()
+  const [combat, setCombat] = useState(testEncounter())
+  const [dialogue, setDialogue] = useState(testDialogue(hero))
+  const [dungeon, setDungeon] = useState(testDungeon(hero))
   const [shop, setShop] = useState()
   const [skill, setSkill] = useState()
   const handleCallback = (childData, location) => {
