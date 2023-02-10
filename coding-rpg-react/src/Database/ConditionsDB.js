@@ -1,4 +1,4 @@
-import { poisonDamage } from "./DamageTypes";
+import { poisonDamage } from "./DamageTypesDB";
 
 export function noCondition() {
     var noCondition = { Name: "None", Symbol: "", Type: "None", Damage: 0 }

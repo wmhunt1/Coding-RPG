@@ -14,6 +14,7 @@ function Menu(props) {
         {active === "MainMenu" ? <div>
             <MainMenu NewGame={() => setActive("Game")} hero={hero}></MainMenu>
         </div> : <div className="menu-box">
+            <h2>Menu</h2>
         <div><button className="menu-button" onClick={props.Back}><h3>Back</h3></button></div>
             <div><button className="menu-button"><h3>Save Game</h3></button></div>
             <div><button className="menu-button"><h3>Load Game</h3></button></div>

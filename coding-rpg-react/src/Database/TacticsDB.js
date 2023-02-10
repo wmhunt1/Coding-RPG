@@ -1,4 +1,4 @@
-import { rage } from "./Abilities";
+import { rage } from "./AbilitiesDB";
 import { BasicAttack } from "../Scripts/CombatScripts"
 import { UseAbility } from "../Scripts/SpellScripts";
 

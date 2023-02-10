@@ -1,6 +1,6 @@
 import { PartyRecovery, RemoveGold } from "../Scripts/CharacterScripts";
 import { CheckForQuest, CompleteQuest, StartQuest } from "../Scripts/QuestScripts"
-import { testQuest } from "./Quests"
+import { testQuest } from "./QuestsDB"
 
 //shop dialogues
 //inn dialogues

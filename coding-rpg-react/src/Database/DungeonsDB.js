@@ -1,6 +1,6 @@
-import { rat } from "./Characters"
-import { testDungeonDialogue} from "./Dialogues"
-import { cheese } from "./Items"
+import { rat } from "./CharactersDB"
+import { testDungeonDialogue} from "./DialoguesDB"
+import { cheese } from "./ItemsDB"
 
 export function testDungeon(hero)
 {

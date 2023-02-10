@@ -16,8 +16,10 @@ export function updateLocation(hero, map, x, y) {
         console.log(knownIndex)
         if (knownIndex === null) {
             console.log(hero.Map)
-            hero.Map.push(map.Locations[mapIndex])
-            AddToCharacterLog(hero, hero.Name + " discovers " + map.Locations[mapIndex].LocationName)
+            if (map.Locations[mapIndex].CanTravel === true) {
+                hero.Map.push(map.Locations[mapIndex])
+                AddToCharacterLog(hero, hero.Name + " discovers " + map.Locations[mapIndex].LocationName)
+            }
         }
         console.log(hero.Map)
     }

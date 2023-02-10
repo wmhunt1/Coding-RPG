@@ -1,5 +1,5 @@
-import {rat} from "./Characters"
-import { cheese } from "./Items"
+import {rat} from "./CharactersDB"
+import { cheese } from "./ItemsDB"
 
 export function testQuest()
 {

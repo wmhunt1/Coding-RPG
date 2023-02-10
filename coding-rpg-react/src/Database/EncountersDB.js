@@ -1,4 +1,4 @@
-import { rat } from "./Characters";
+import { rat } from "./CharactersDB";
 
 export function testEncounter()
 {

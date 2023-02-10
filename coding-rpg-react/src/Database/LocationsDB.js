@@ -1,13 +1,13 @@
-import { testDialogue } from "./Dialogues"
-import { testDungeon2 } from "./Dungeons"
-import { testEncounter } from "./Encounters"
-import { dreamingWorkerInn, forgeHeartSmithy, innShop, testShop } from "./Shops"
-import { cookNode, fireNode, fishNode, fletchNode, mineNode, woodNode } from "./SkillNodes"
+import { testDialogue } from "./DialoguesDB"
+import { testDungeon2 } from "./DungeonsDB"
+import { testEncounter } from "./EncountersDB"
+import { dreamingWorkerInn, forgeHeartSmithy, innShop, testShop } from "./ShopsDB"
+import { cookNode, fireNode, fishNode, fletchNode, mineNode, woodNode } from "./SkillNodesDB"
 
 
 //locations
 export function daleTown(hero) {
-    var daleTown = { LocationName: "Dale Town", XCoord: 0, YCoord: 0, SubLocations: [enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero)] }
+    var daleTown = { LocationName: "Dale Town", XCoord: 0, YCoord: 0, CanTravel: true, SubLocations: [enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero)] }
     return daleTown;
 }
 //sublocations

@@ -1,8 +1,8 @@
 import { HealHP, LearnSpell, RecoverMP, RecoverSP, RemoveCondition } from "../Scripts/CharacterScripts";
-import { bludeoningDamage, piercingDamage, slashingDamage } from "./DamageTypes";
-import { fireEnchantment, strengthEnchantment, unEnchanted } from "./Enchantments";
-import { clothProtection, naturalProtection, woodProtection } from "./ProtectionTypes";
-import { magicMissile } from "./Spells";
+import { bludeoningDamage, piercingDamage, slashingDamage } from "./DamageTypesDB";
+import { fireEnchantment, strengthEnchantment, unEnchanted } from "./EnchantmentsDB";
+import { clothProtection, metalProtection, naturalProtection, woodProtection } from "./ProtectionTypesDB";
+import { magicMissile } from "./SpellsDB";
 //consumables
 //drinks
 export function ale() {
@@ -10,6 +10,10 @@ export function ale() {
     return ale
 }
 //food
+export function bread() {
+    var bread = { Name: "Bread", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
+    return bread
+}
 export function cheese() {
     var cheese = { Name: "Cheese", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
     return cheese
@@ -21,6 +25,11 @@ export function cookedFish() {
 export function cookedRatMeat() {
     var cookedRatMeat = { Name: "Cooked Rat Meat", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
     return cookedRatMeat;
+}
+export function stew()
+{
+    var stew = { Name: "Stew", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
+    return stew;
 }
 //potions
 export function antidote() {
@@ -129,6 +138,10 @@ export function trousers() {
 export function bareTorso() {
     var bare = { Name: "Bare", Slot: "Torso", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bare;
+}
+export function bronzeTorso() {
+    var torso = { Name: "Bronze Armor", Slot: "Torso", Type: "Equipable", SubType: "", Protection: 1, ProtectionType: metalProtection(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
+    return torso;
 }
 export function furTorso() {
     var fur = { Name: "Fur", Slot: "Torso", Type: "Equipable", SubType: "", Protection: 0, ProtectionType: naturalProtection(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }

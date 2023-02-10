@@ -1,12 +1,11 @@
-import { ashes, bronzeBar, bronzeDagger, cookedFish, cookedRatMeat, copperOre, ironBar, ironOre, rawFish, rawRatMeat, tinOre, woodBow, woodLogs, } from "./Items"
+import { ashes, bronzeBar, bronzeDagger, cookedFish, cookedRatMeat, copperOre, ironBar, ironOre, rawFish, rawRatMeat, tinOre, woodBow, woodLogs, } from "./ItemsDB"
 export function skillRecipes() {
-    var skillRecipes = [burnWoodLogs(), cookRawFish(), cookRawRatMeat(), cutWood(), fishFish(), fletchWoodBow(), mineCopperOre(), mineIronOre(), mineTinOre(), smeltBronzeBar(), smeltIronBar(), smithBronzeDagger()]
+    var skillRecipes = [burnWoodLogs(), cookRawFish(), cookRawRatMeat(), cutWood(), fishFish(), fletchWoodBow(), mineCopperOre(), mineIronOre(), mineTinOre(), smeltBronzeBar(), smeltIronBar(), smithBronzeArmor(), smithBronzeDagger()]
     return skillRecipes;
 }
 //crafting
 //cooking
-export function cookingRecipes()
-{
+export function cookingRecipes() {
     var cookingRecipes = [cookRawFish(), cookRawRatMeat()]
     return cookingRecipes;
 }
@@ -19,9 +18,8 @@ export function cookRawRatMeat() {
     return cook
 }
 //firemaking
-export function firemakingRecipes()
-{
-    var firemakingRecipes = [burnWoodLogs]
+export function firemakingRecipes() {
+    var firemakingRecipes = [burnWoodLogs()]
     return firemakingRecipes
 }
 export function burnWoodLogs() {
@@ -29,8 +27,7 @@ export function burnWoodLogs() {
     return burn;
 }
 //fletching
-export function fletchingRecipes()
-{
+export function fletchingRecipes() {
     var fletchingRecipes = [fletchWoodBow()]
     return fletchingRecipes
 }
@@ -39,9 +36,8 @@ export function fletchWoodBow() {
     return fletch;
 }
 //smith
-export function smithingRecipes()
-{
-    var smithingRecipes = [smeltBronzeBar, smeltIronBar, smithBronzeDagger]
+export function smithingRecipes() {
+    var smithingRecipes = [smeltBronzeBar(), smeltIronBar(), smithBronzeArmor(), smithBronzeDagger()]
     return smithingRecipes
 }
 export function smeltBronzeBar() {
@@ -52,14 +48,17 @@ export function smeltIronBar() {
     var smelt = { Name: "Smelt Iron Bar", Skill: "Smithing", Verb: "Smelt", LevelRequirement: 5, Exp: 50, Input: [{ Item: ironOre(), Quantity: 2 }], Output: { Item: ironBar(), Quantity: 1 } }
     return smelt;
 }
+export function smithBronzeArmor() {
+    var smith = { Name: "Smith Bronze Armor", Skill: "Smithing", Verb: "Smith", LevelRequirement: 5, Exp: 125, Input: [{ Item: bronzeBar(), Quantity: 5 }], Output: { Item: bronzeDagger(), Quantity: 1 } }
+    return smith;
+}
 export function smithBronzeDagger() {
     var smith = { Name: "Smith Bronze Dagger", Skill: "Smithing", Verb: "Smith", LevelRequirement: 1, Exp: 25, Input: [{ Item: bronzeBar(), Quantity: 1 }], Output: { Item: bronzeDagger(), Quantity: 1 } }
     return smith;
 }
 //gathering
 //fishing
-export function fishingRecipes()
-{
+export function fishingRecipes() {
     var fish = [fishFish()]
     return fish;
 }
@@ -68,8 +67,7 @@ export function fishFish() {
     return fish
 }
 //mining
-export function miningRecipes()
-{
+export function miningRecipes() {
     var mine = [mineCopperOre(), mineTinOre(), mineIronOre()]
     return mine;
 }
@@ -86,9 +84,8 @@ export function mineTinOre() {
     return mine;
 }
 //woodcutting
-export function woodcuttingRecipes()
-{
-    var wood = [cutWood]
+export function woodcuttingRecipes() {
+    var wood = [cutWood()]
     return wood;
 }
 export function cutWood() {

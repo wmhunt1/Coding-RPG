@@ -1,4 +1,4 @@
-import { noCondition } from "../Database/Conditions";
+import { noCondition } from "../Database/ConditionsDB";
 import { AddToCombatLog } from "./CombatScripts";
 
 Array.prototype.remove = function () {

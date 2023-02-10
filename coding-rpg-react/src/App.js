@@ -2,7 +2,7 @@ import { useState } from "react";
 import Game from "./Components/Game";
 import MainMenu from "./Components/MainMenu";
 import './App.css';
-import { hero } from "./Database/Characters";
+import { hero } from "./Database/CharactersDB";
 
 var newHero = hero()
 function App() {

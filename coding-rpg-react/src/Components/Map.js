@@ -35,7 +35,7 @@ function Map(props) {
     const knownLocationsList = knownLocations.sort((a , b) => a.XCoord - b.XCoord && a.YCoord - b.YCoord).map((location, index) => <div key={index}><div style = {{display: "inline-block", lineHeight: "0pt"}}><h5>{location.LocationName}: ({location.XCoord}, {location.YCoord})</h5></div> <div style = {{display: "inline-block", lineHeight: "0pt"}}><button onClick={() => goToKnownLocation(hero, map, location.XCoord, location.YCoord)}>Travel</button></div></div>)
     return (<div>
 
-        <div style={{ border: "solid", height: 300 }}>
+        <div style={{ border: "solid", height: "300px" }}>
             <h2>{map.Name} Map - {hero.Name}</h2>
             <div><h3>Current Location: {location} - ({coordinateX},{coordinateY})</h3></div>
             <div>
@@ -51,7 +51,7 @@ function Map(props) {
                         <button onClick={() => handleMove(hero, map, coordinateX - 1, coordinateY - 1)}>SW</button><button onClick={() => handleMove(hero, map, coordinateX, coordinateY - 1)}>S</button><button onClick={() => handleMove(hero, map, coordinateX + 1, coordinateY - 1)}>SE</button>
                     </div>
                 </div>
-                <div style={{ display: "inline-block", verticalAlign: "text-top", marginRight: "1%", border: "solid", paddingLeft: "1%", paddingRight: "1%", height: "150px", overflow: "scroll", width: "200px" }}>{subLocations.length > 0 ? <div><h4 style = {{lineHeight: "0pt"}}>Sub Locations</h4>{subLocationsList}</div> : <div><h4 style = {{lineHeight: "0pt"}}>Sub Locations</h4></div>}</div>
+                <div style={{ display: "inline-block", verticalAlign: "text-top", marginRight: "1%", border: "solid", paddingLeft: "1%", paddingRight: "1%", height: "150px", overflow: "scroll", width: "300px" }}>{subLocations.length > 0 ? <div><h4 style = {{lineHeight: "0pt"}}>Sub Locations</h4>{subLocationsList}</div> : <div><h4 style = {{lineHeight: "0pt"}}>Sub Locations</h4></div>}</div>
                 <div style={{ display: "inline-block", verticalAlign: "text-top", marginRight: "1%", border: "solid", paddingLeft: "1%", paddingRight: "1%", height: "150px", overflow: "scroll", width: "200px" }}>{knownLocations.length > 0 ? <div><h4 style = {{lineHeight: "0pt"}}>Known Locations</h4>{knownLocationsList}</div> : <div><h4 style = {{lineHeight: "0pt"}}>Known Locations</h4></div>}</div>
             </div>
         </div>

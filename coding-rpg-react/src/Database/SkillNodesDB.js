@@ -1,4 +1,4 @@
-import {cookingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, miningRecipes, woodcuttingRecipes} from "./SkillRecipes"
+import {cookingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, miningRecipes, woodcuttingRecipes} from "./SkillRecipesDB"
 
 export function cookNode(hero)
 {

@@ -15,15 +15,15 @@ import Map from './Map';
 import Menu from './Menu';
 import Party from './Party';
 import SkillBook from './SkillBook';
+import SkillNode from './SkillNode';
 import SpellBook from './SpellBook';
 import Shop from './Shop';
 import Toolbar from './Toolbar';
-import { testDialogue } from '../Database/Dialogues';
-import { testDungeon } from '../Database/Dungeons';
-import { testEncounter } from '../Database/Encounters';
-import { worldMap } from '../Database/Maps';
-import { testShop } from '../Database/Shops'
-import SkillNode from './SkillNode';
+import { testDialogue } from '../Database/DialoguesDB';
+import { testDungeon } from '../Database/DungeonsDB';
+import { testEncounter } from '../Database/EncountersDB';
+import { worldMap } from '../Database/MapsDB';
+import { testShop } from '../Database/ShopsDB'
 
 function Game(props) {
   const [active, setActive] = useState("Game");
@@ -107,7 +107,7 @@ function Game(props) {
           <div><button className='menu-button' onClick={() => setActive("Game")}><h3>Leave</h3></button></div>
         </div> : <div></div>}
       </div>
-      {active === "Game" ? <div><div style={{ marginLeft: "25%", marginRight: "25%" }}><Map parentCallback={handleCallback} hero={hero} map={worldMap()}></Map></div>  <div style={{ marginLeft: "25%", marginRight: "25%", width: "auto" }}>
+      {active === "Game" ? <div><div style={{ marginLeft: "20%", marginRight: "20%" }}><Map parentCallback={handleCallback} hero={hero} map={worldMap()}></Map></div>  <div style={{ marginLeft: "25%", marginRight: "25%", width: "auto" }}>
         <Log log={log} logName={"Game"}></Log>
       </div></div> : <div></div>}
     </div>

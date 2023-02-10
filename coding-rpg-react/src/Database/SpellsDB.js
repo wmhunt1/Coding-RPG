@@ -1,8 +1,8 @@
 import { ApplyCondition, HealHP, RemoveCondition } from "../Scripts/CharacterScripts";
 import { AddToCombatLog, ProjectileMagicAttack } from "../Scripts/CombatScripts";
-import { rat } from "./Characters";
-import { poisonCondition, sleepCondition } from "./Conditions";
-import { fireDamage, forceDamage, noDamage, poisonDamage } from "./DamageTypes";
+import { rat } from "./CharactersDB";
+import { poisonCondition, sleepCondition } from "./ConditionsDB";
+import { fireDamage, forceDamage, noDamage, poisonDamage } from "./DamageTypesDB";
 
 //control spells
 export function sleepSpell()

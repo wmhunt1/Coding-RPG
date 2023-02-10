@@ -1,6 +1,6 @@
 import { TakeDamage } from "../Scripts/CharacterScripts";
 import { AddToCombatLog, CalculateDamageModifiers } from "../Scripts/CombatScripts";
-import { fireDamage, noDamage } from "./DamageTypes";
+import { fireDamage, noDamage } from "./DamageTypesDB";
 export function unEnchanted() {
     var UnEnchanted = { Name: "UnEnchanted", Damage: 0, DamageType: noDamage(), OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char) { }, OnUnEquipEffect(chaar) { } }
     return UnEnchanted

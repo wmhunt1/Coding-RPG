@@ -11,4 +11,4 @@ jobs
 relationships
 add time delay
 tools for skills
-put skills elsewhere at hubs
+filter items you can sell in a shop depending on shop type
