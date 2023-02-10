@@ -190,25 +190,27 @@ export function RemoveCondition(char, log) {
     }
 }
 export function ResistCondition(char, log) {
-    var resistingAttribute = 0;
-    if (char.Condition.Type === "Damage") {
-        resistingAttribute = char.Constitution + char.ConBonus - char.ConPenalty;
-    }
-    if (char.Condition.Type === "Skip") {
-        resistingAttribute = char.WillPower + char.WlpBonus - char.WlpPenalty;
-    }
-    var resistChance = Math.floor(Math.random() * 50) + 1 + resistingAttribute;
-    if (char.ConditionImmunities.find(x => x.Name === char.Conditon.Name) === true) {
-        resistChance += 100;
-    }
-    if (char.ConditionResistances.find(x => x.Name === char.Conditon.Name) === true) {
-        resistChance += 50;
-    }
-    if (char.ConditionWeaknesses.find(x => x.Name === char.Conditon.Name) === true) {
-        resistChance -= 50
-    }
-    if (resistChance >= 50) {
-        log.push(char.Name + " resisted " + char.Condition.Name)
-        RemoveCondition(char, log)
+    if (char.Condition.Name !== "None") {
+        var resistingAttribute = 0;
+        if (char.Condition.Type === "Damage") {
+            resistingAttribute = char.Constitution + char.ConBonus - char.ConPenalty;
+        }
+        if (char.Condition.Type === "Skip") {
+            resistingAttribute = char.WillPower + char.WlpBonus - char.WlpPenalty;
+        }
+        var resistChance = Math.floor(Math.random() * 50) + 1 + resistingAttribute;
+        if (char.ConditionImmunities.find(x => x.Name === char.Conditon.Name) === true) {
+            resistChance += 100;
+        }
+        if (char.ConditionResistances.find(x => x.Name === char.Conditon.Name) === true) {
+            resistChance += 50;
+        }
+        if (char.ConditionWeaknesses.find(x => x.Name === char.Conditon.Name) === true) {
+            resistChance -= 50
+        }
+        if (resistChance >= 50) {
+            log.push(char.Name + " resisted " + char.Condition.Name)
+            RemoveCondition(char, log)
+        }
     }
 }

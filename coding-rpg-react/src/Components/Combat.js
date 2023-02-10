@@ -86,7 +86,7 @@ function Combat(props) {
     const itemList = inventory.filter(item => item.Type === "Consumable").map((item, index) => <h5 key={index}>{item.Name} - QTY: {item.Quantity} <button onClick={() => { handleConsumable(hero, allies, enemies, enemies[0], combatLog, "Use", inventory, item) }}>Use</button></h5>)
     const abilList = abilities.map((abil, index) => <h5 key={index}>{abil.Name} ({abil.StaminaCost} SP) <button onClick={() => handleAbility(abil)}>Use</button></h5>)
     //const abilListSP = abilities.sort((a, b) => a.Name.localeCompare(b.Name)).map((abil, index) => <h5 key={index}>{abil.Name} ({abil.StaminaCost} SP) <button onClick={() => handleAbility(abil)}>Use</button></h5>)
-    const spellList = spells.map((spell, index) => <h5 key={index}>{spell.Name} ({spell.ManaCost} MP) <button onClick={() => handleSpell(spell)}>Spell</button></h5>)
+    const spellList = spells.filter(spell => spell.Use !== "Utility").map((spell, index) => <h5 key={index}>{spell.Name} ({spell.ManaCost} MP) <button onClick={() => handleSpell(spell)}>Spell</button></h5>)
     //const spellListMP = spells.sort((a, b) => a.Name.localeCompare(b.Name)).map((spell, index) => <h5 key={index}>{spell.Name} ({spell.ManaCost} MP) <button onClick={() => handleSpell(spell)}>Spell</button></h5>)
     return (<div>
         <div>{hero.CurrentHP > 0 ?

@@ -11,25 +11,30 @@ Array.prototype.remove = function () {
     }
     return this;
 };
+export function FindSkillInSkillBook(char, skill)
+{
+    var skillIndex = char.SkillBook.findIndex(x => x.Name === skill.Name);
+    return char.SkillBook[skillIndex]
+}
 export function LevelUpSkill(char, skill) {
     skill.Level++;
     skill.MaxXP = (skill.Level * (skill.Level - 1)) * 100;
     AddToCharacterLog(char, char.Name + " has reached " + skill.Name + " level " + skill.Level);
 }
 export function CheckForSkillLevelUp(skill) {
-    
+
     if (skill.CurrentXP >= skill.MaxXP) {
         return true
     }
-    else
-    {
+    else {
         return false;
     }
 }
 export function EarnSkillXP(char, skill, xp) {
-    skill.CurrentXP += xp;
-    if (CheckForSkillLevelUp(skill) === true)
-    {
+    if (xp > 0) {
+        skill.CurrentXP += xp;
+    }
+    if (CheckForSkillLevelUp(skill) === true) {
         LevelUpSkill(char, skill)
     }
 }
@@ -65,7 +70,7 @@ export function UseSkillRecipe(char, skill, recipe) {
             for (var r2 = 0; r2 < recipe.Input.length; r2++) {
                 RemoveItemFromInventory(char, char.Inventory, recipe.Input[r2].Item, recipe.Input[r2].Quantity)
             }
-                AddItemToInventory(char, char.Inventory, recipe.Output.Item, recipe.Output.Quantity)
+            AddItemToInventory(char, char.Inventory, recipe.Output.Item, recipe.Output.Quantity)
             AddToCharacterLog(char, char.Name + " has " + recipe.Verb + " " + recipe.Output.Item.Name + " X " + quantity + ", earning " + recipe.Exp + " " + skill.Name + " XP")
         }
     }

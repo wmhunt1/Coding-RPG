@@ -13,7 +13,7 @@ function SkillBook(props) {
     const magicSkillList = skills.sort((a, b) => a.Name.localeCompare(b.Name)).filter(skill => skill.Type === "Magic").map((skill, index) => <h4 key={index}>{skill.Name} - Level: {skill.Level}: {skill.CurrentXP}/{skill.MaxXP}</h4>)
     const utilitySkillList = skills.sort((a, b) => a.Name.localeCompare(b.Name)).filter(skill => skill.Type === "Utility").map((skill, index) => <h4 key={index}>{skill.Name} - Level: {skill.Level}: {skill.CurrentXP}/{skill.MaxXP}</h4>)
     const weaponSkillList = skills.sort((a, b) => a.Name.localeCompare(b.Name)).filter(skill => skill.Type === "Weapon").map((skill, index) => <h4 key={index}>{skill.Name} - Level: {skill.Level}: {skill.CurrentXP}/{skill.MaxXP}</h4>)
-    return (<div>
+    return (<div style={{  marginLeft: "25%", marginRight: "25%"}}>
         <h2>{hero.Name}'s Skills</h2>
         <h5>Skill Filters: <button onClick={() => setList("Armor")}>Armor</button> <button onClick={() => setList("Craft")}>Crafting</button> <button onClick={() => setList("Gather")}>Gathering</button> <button onClick={() => setList("Magic")}>Magic</button> <button onClick={() => setList("Utility")}>Utility</button> <button onClick={() => setList("Weapon")}>Weapon</button> <button onClick={() => setList("Default")}>Clear</button></h5>
         {list === "Default" ? <div className='power-book'> {skillList}</div> : <div></div>}

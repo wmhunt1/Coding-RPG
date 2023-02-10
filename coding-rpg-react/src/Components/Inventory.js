@@ -6,7 +6,7 @@ import './Game.css'
 function Inventory(props) {
   const [hero, setHero] = useState(props.hero);
   const [inventory, setInventory] = useState(props.hero.Inventory);
-  const [allies, setAllies] = useState([props.hero, props.hero.Companions[0]]);
+  const [allies, setAllies] = useState([props.hero, ...props.hero.Companions]);
   const [activeUser, setActiveUser] = useState(props.hero)
   const [activeList, setActiveList] = useState("Default")
 

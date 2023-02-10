@@ -108,6 +108,10 @@ export function persuationSkill() {
     var pers = { Name: "Persuation", Type: "Utility", Level: 1, CurrentXP: 0, MaxXP: 50 }
     return pers;
 }
+export function senseSkill(){
+    var sense = {Name: "Sense", Type: "Utility", Level: 1, CurrentXP: 0, MaxXP: 50}
+    return sense;
+}
 export function stealthSkill() {
     var stealth = { Name: "Stealth", Type: "Utility", Level: 1, CurrentXP: 0, MaxXP: 50 }
     return stealth;

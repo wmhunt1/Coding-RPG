@@ -1,5 +1,12 @@
+import { restorationSkill } from "../Database/SkillsDB";
 import { HasEnoughMP, UseMP, HasEnoughSP, UseSP } from "./CharacterScripts";
-import { EarnSkillXP } from "./SkillScripts";
+import { EarnSkillXP, FindSkillInSkillBook } from "./SkillScripts";
+export function CalculateHealAmount(char, baseHeal)
+{
+    var extraHeal = FindSkillInSkillBook(char, restorationSkill()).Level
+    var heal = baseHeal + extraHeal;
+    return heal;
+}
 export function CastSpell(char, allies, enemies, target, combatLog, spell) {
     if (HasEnoughMP(char, spell.ManaCost) === true) {
         UseMP(char, spell.ManaCost)

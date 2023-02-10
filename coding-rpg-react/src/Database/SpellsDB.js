@@ -1,5 +1,6 @@
 import { ApplyCondition, HealHP, RemoveCondition } from "../Scripts/CharacterScripts";
 import { AddToCombatLog, ProjectileMagicAttack } from "../Scripts/CombatScripts";
+import { CalculateHealAmount } from "../Scripts/SpellScripts";
 import { rat } from "./CharactersDB";
 import { poisonCondition, sleepCondition } from "./ConditionsDB";
 import { fireDamage, forceDamage, noDamage, poisonDamage } from "./DamageTypesDB";
@@ -34,11 +35,11 @@ export function curePoison()
 }
 //health spells
 export function basicHeal() {
-    var basicHeal = { Name: "Basic Heal", School: restorationSkill(), Use: "Hybrid", Amount: 5, ManaCost: 5, Description: "Heals One Ally for 5HP", SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on " + target.Name + ", healing them for" + this.Amount + " Health"); HealHP(target, this.Amount) } }
+    var basicHeal = { Name: "Basic Heal", School: restorationSkill(), Use: "Hybrid", Amount: 5, ManaCost: 5, Description: "Heals One Ally for 5HP", SpellEffect(char, allies, enemies, target, combatLog) {var totalHeal = CalculateHealAmount(char, this.Amount); AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on " + target.Name + ", healing them for " + totalHeal +  " Health"); HealHP(target, totalHeal) } }
     return basicHeal;
 }
 export function basicMassHeal() {
-    var basicHeal = { Name: "Basic Mass Heal", School: restorationSkill(), Use: "Hybrid", Amount: 5, ManaCost: 5, Description: "Heals All Allies for 5HP", SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on the party, healing them for" + this.Amount + " Health"); for (var a = 0; a < allies.length; a++){HealHP(allies[a], this.Amount)} } }
+    var basicHeal = { Name: "Basic Mass Heal", School: restorationSkill(), Use: "Hybrid", Amount: 5, ManaCost: 5, Description: "Heals All Allies for 5HP", SpellEffect(char, allies, enemies, target, combatLog) {var totalHeal = CalculateHealAmount(char, this.Amount); AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on the party, healing them for " + totalHeal + " Health"); for (var a = 0; a < allies.length; a++){HealHP(allies[a], totalHeal)} } }
     return basicHeal;
 }
 //summoning spells

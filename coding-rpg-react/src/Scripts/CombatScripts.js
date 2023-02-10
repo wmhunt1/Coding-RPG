@@ -1,21 +1,33 @@
+import { destructionSkill } from "../Database/SkillsDB";
 import { AddGold, AddToCharacterLog, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage } from "./CharacterScripts";
 import { AddItemToInventory } from "./ItemScripts";
 import { CheckIfKillQuestObjective } from "./QuestScripts";
+import { EarnSkillXP, FindSkillInSkillBook } from "./SkillScripts";
 import { CastSpell, UseAbility } from "./SpellScripts";
-export function AddToCombatLog(log, message)
-{
+export function AddToCombatLog(log, message) {
     log.push(message)
 }
 export function CalculateCharWeaponDamage(char, weapon) {
-    var damage = char.Strength + weapon.Damage + char.StrBonus - char.StrPenalty;
+    //var combatSkillIndex = char.SkillBook.findIndex(x => x.Name === weapon.Class.Name);
+    var damage = FindSkillInSkillBook(char, weapon.Class).Level
+    if (weapon.Class.Name === "Short Blade") {
+        damage += char.Dexterity + weapon.Damage + char.DexBonus - char.DexPenalty;
+    }
+    else {
+        damage += char.Strength + weapon.Damage + char.StrBonus - char.StrPenalty;
+    }
     return damage;
 }
 export function CalculateCharArmor(char) {
+    //var armorSkillIndex = char.SkillBook.findIndex(x => x.Name === char.Torso.Class.Name);
+    var armorSkill = FindSkillInSkillBook(char, char.Torso.Class).Level
     var shield = 0;
     if (char.OffHand.SubType === "Shield") {
-        shield = char.OffHand.Protection
+        var blockSkillIndex = char.SkillBook.findIndex(x => x.Name === "Block");
+        var blockSkill = char.SkillBook[blockSkillIndex].Level
+        shield = char.OffHand.Protection + blockSkill
     }
-    var armor = char.Head.Protection + char.Torso.Protection + char.Legs.Protection + char.Hands.Protection + char.Feet.Protection + shield;
+    var armor = char.Head.Protection + char.Torso.Protection + char.Legs.Protection + char.Hands.Protection + char.Feet.Protection + shield + armorSkill;
     return armor;
 }
 export function CalculateCharDefenseWithArmor(char, armor) {
@@ -27,7 +39,14 @@ export function CalculateCharDefenseWithoutArmor(char) {
     return defense;
 }
 export function CalculateBaseDamage(damage, defense) {
-    return damage - defense;
+    if (damage - defense >= 0)
+    {
+        return damage - defense;
+    }
+    else
+    {
+        return 0
+    }
 }
 export function CalculateDamageModifiers(char, damage, type) {
     var mod = ""
@@ -79,6 +98,14 @@ export function BasicAttack(char1, char2, combatLog, weapon) {
     var modifiedDamage = CalculateDamageModifiers(char2, baseDamage, weapon.DamageType)
     var totalDamage = CalculateCritDamage(char1, modifiedDamage[0])
     TakeDamage(char2, totalDamage[0])
+    var combatSkillIndex = char1.SkillBook.findIndex(x => x.Name === weapon.Class.Name);
+    EarnSkillXP(char1, char1.SkillBook[combatSkillIndex], totalDamage[0])
+    var armorSkillIndex = char2.SkillBook.findIndex(x => x.Name === char2.Torso.Class.Name);
+    EarnSkillXP(char2, char2.SkillBook[armorSkillIndex], totalDamage[0])
+    if (char2.OffHand.SubType === "Shield") {
+        var blockSkillIndex = char1.SkillBook.findIndex(x => x.Name === "Block");
+        EarnSkillXP(char2, char2.SkillBook[blockSkillIndex], totalDamage[0])
+    }
     BasicAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, char2Armor, weapon.DamageType)
     char1.Weapon.Enchantment.OnHitEffect(char1, char2, combatLog)
 }
@@ -100,7 +127,8 @@ export function MagicAttackResults(char1, char2, combatLog, baseDamage, modified
     AddToCombatLog(combatLog, result)
 }
 export function ProjectileMagicAttack(char1, char2, combatLog, spell) {
-    var char1Damage = char1.Intelligence + char1.IntBonus - char1.IntPenalty + spell.Amount;
+    var skillDamage = FindSkillInSkillBook(char1, destructionSkill()).Level
+    var char1Damage = char1.Intelligence + char1.IntBonus - char1.IntPenalty + spell.Amount + skillDamage;
     var char2Defense = (char2.WillPower + char2.WlpBonus - char2.WlpPenalty) / 2 + (char2.Dexterity + char2.DexBonus - char2.DexPenalty) / 2;
     var baseDamage = CalculateBaseDamage(char1Damage, char2Defense)
     var modifiedDamage = CalculateDamageModifiers(char2, baseDamage, spell.DamageType)
@@ -126,6 +154,8 @@ export function ArmorIgnoringAttack(char1, char2, combatLog, weapon) {
     var modifiedDamage = CalculateDamageModifiers(char2, baseDamage, weapon.DamageType)
     var totalDamage = CalculateCritDamage(char1, modifiedDamage[0])
     TakeDamage(char2, totalDamage[0])
+    var skillIndex = char1.SkillBook.findIndex(x => x.Name === weapon.Class.Name);
+    EarnSkillXP(char1, char1.SkillBook[skillIndex], totalDamage[0])
     ArmorIgnoringAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, weapon.DamageType)
     char1.Weapon.Enchantment.OnHitEffect(char1, char2, combatLog)
 }
@@ -142,8 +172,11 @@ export function SkipConditionCheck(char, combatLog) {
     if (char.Condition.Type === "Skip") {
         return true;
     }
-    if (char.Condition.Type === "None") {
+    else if (char.Condition.Name === "None") {
         return false
+    }
+    else {
+        return false;
     }
 }
 export function HeroTurn(char1, allies, enemies, target, combatLog, option, spell, abil) {
