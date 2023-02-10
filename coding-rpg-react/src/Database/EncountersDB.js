@@ -1,8 +1,13 @@
-import { rat } from "./CharactersDB";
+import { giantRat, rat } from "./CharactersDB";
 
-export function ratEncounter()
+export function threeRatsEncounter()
 {
     var ratEncounter = [rat(), rat(), rat()]
+    return ratEncounter
+}
+export function threeRatsAndGiantRatEncounter()
+{
+    var ratEncounter = [giantRat(), rat(), rat(), rat()]
     return ratEncounter
 }
 //tests

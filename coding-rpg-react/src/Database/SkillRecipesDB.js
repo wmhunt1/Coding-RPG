@@ -1,4 +1,4 @@
-import { ashes, bronzeBar, bronzeDagger, cookedFish, cookedRatMeat, copperOre, ironBar, ironOre, milk, rawFish, rawRatMeat, tinOre, woodBow, woodLogs, } from "./ItemsDB"
+import { ashes, bronzeBar, bronzeDagger, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, ironBar, ironOre, milk, rawFish, rawRabbitMeat, rawRatMeat, tinOre, woodBow, woodLogs, } from "./ItemsDB"
 export function skillRecipes() {
     var skillRecipes = [burnWoodLogs(), cookRawFish(), cookRawRatMeat(), cutWood(), fishFish(), fletchWoodBow(), mineCopperOre(), mineIronOre(), mineTinOre(), smeltBronzeBar(), smeltIronBar(), smithBronzeArmor(), smithBronzeDagger()]
     return skillRecipes;
@@ -12,11 +12,15 @@ export function alchemyRecipes()
 }
 //cooking
 export function cookingRecipes() {
-    var cookingRecipes = [cookRawFish(), cookRawRatMeat()]
+    var cookingRecipes = [cookRawFish(),cookRawRabbitMeat(), cookRawRatMeat()]
     return cookingRecipes;
 }
 export function cookRawFish() {
     var cook = { Name: "Cook Raw Fish", Skill: "Cooking", Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawFish(), Quantity: 1 }], Output: { Item: cookedFish(), Quantity: 1 } }
+    return cook
+}
+export function cookRawRabbitMeat() {
+    var cook = { Name: "Cook Raw Rabbit Meat", Skill: "Cooking", Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawRabbitMeat(), Quantity: 1 }], Output: { Item: cookedRabbitMeat(), Quantity: 1 } }
     return cook
 }
 export function cookRawRatMeat() {
@@ -65,7 +69,7 @@ export function smithBronzeDagger() {
 //gathering
 //farming
 export function farmingRecipes(){
-    var farm = []
+    var farm = [milkCow()]
     return farm;
 }
 export function milkCow(){
@@ -80,6 +84,16 @@ export function fishingRecipes() {
 export function fishFish() {
     var fish = { Name: "Fish Fish", Skill: "Fishing", Verb: "Fish", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: rawFish(), Quantity: 1 } }
     return fish
+}
+//hunting
+export function huntingRecipes()
+{
+    var hunt = [huntRabbit()]
+    return hunt;
+}
+export function huntRabbit() {
+    var hunt = { Name: "Hunt Rabbit", Skill: "Hunting", Verb: "Rabbit", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: rawRabbitMeat(), Quantity: 1 } }
+    return hunt
 }
 //mining
 export function miningRecipes() {

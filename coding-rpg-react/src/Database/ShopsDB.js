@@ -1,4 +1,5 @@
 import { dreamingWorkerInnDialogue, innDialogue, testDialogue } from "./DialoguesDB";
+import { ratCellar } from "./DungeonsDB";
 import { ale, antidote, bread, bronzeDagger, club, dagger, healingPotion, magicMissileScroll, manaPotion, staminaPotion, stew } from "./ItemsDB"
 import { cookNode, smithNode } from "./SkillNodesDB";
 
@@ -9,7 +10,7 @@ export function alchemyShop() {
 }
 //inns
 export function dreamingWorkerInn(hero) {
-    var inn = { Name: "Dreaming Worker Inn", Dialogue: dreamingWorkerInnDialogue(hero), Dungeon: null, Node: cookNode(hero), Inventory: [ale(), bread(), stew()] };
+    var inn = { Name: "Dreaming Worker Inn", Dialogue: dreamingWorkerInnDialogue(hero), Dungeon: ratCellar(hero), Node: cookNode(hero), Inventory: [ale(), bread(), stew()] };
     return inn;
 }
 export function innShop(hero) {

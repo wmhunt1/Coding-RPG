@@ -1,7 +1,13 @@
 import { rat } from "./CharactersDB"
 import { testDungeonDialogue} from "./DialoguesDB"
-import { cheese } from "./ItemsDB"
+import { threeRatsAndGiantRatEncounter, threeRatsEncounter } from "./EncountersDB";
+import { ale, cheese } from "./ItemsDB"
 
+export function ratCellar(hero)
+{
+    var ratCellar = {Name: "Cellar", Dialogue: null, Encounters:[threeRatsEncounter(), threeRatsEncounter(), threeRatsEncounter()], Boss: threeRatsAndGiantRatEncounter(), GoldReward: 0, ItemReward: ale()}
+    return ratCellar;
+}
 //tests
 export function testDungeon(hero)
 {

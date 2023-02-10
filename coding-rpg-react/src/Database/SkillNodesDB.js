@@ -1,4 +1,4 @@
-import {alchemyRecipes, cookingRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, miningRecipes, smithingRecipes, woodcuttingRecipes} from "./SkillRecipesDB"
+import {alchemyRecipes, cookingRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, huntingRecipes, miningRecipes, smithingRecipes, woodcuttingRecipes} from "./SkillRecipesDB"
 
 export function alchemyNode(hero)
 {
@@ -35,6 +35,12 @@ export function fletchNode(hero)
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Fletching");
     var fletchNode = {Name: "Fletcher", Skill: hero.SkillBook[skillIndex], Recipes: fletchingRecipes()}
     return fletchNode
+}
+export function huntNode(hero)
+{
+    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Hunting");
+    var huntNode = {Name: "Hunting Ground", Skill: hero.SkillBook[skillIndex], Recipes: huntingRecipes()}
+    return huntNode;
 }
 export function mineNode(hero)
 {

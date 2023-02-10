@@ -28,9 +28,15 @@ export function dog() {
     dog.Neck = dogCollar();
     return dog;
 }
+export function giantRat()
+{
+    var rat = beast("Giant Rat")
+    rat.CurrentXP = 10;rat.Strength = 14;  rat.ItemDrops = [rawRatMeat(), ratTail()]
+    return rat;
+}
 export function rat() {
     var rat = beast("Rat")
-    rat.CurrentXP = 5; rat.CurrentHP = 5; rat.MaxHP = 5; rat.CurrentMP = 5; rat.MaxMP = 5; rat.CurrentSP = 5; rat.MaxSP = 5; rawRatMeat.ItemDrops = [rawRatMeat(), ratTail()]
+    rat.CurrentXP = 5; rat.CurrentHP = 5; rat.MaxHP = 5; rat.CurrentMP = 5; rat.MaxMP = 5; rat.CurrentSP = 5; rat.MaxSP = 5; rat.ItemDrops = [rawRatMeat(), ratTail()]
     return rat;
 }
 //humanoid

@@ -2,14 +2,39 @@ import { testDialogue } from "./DialoguesDB"
 import { testDungeon2 } from "./DungeonsDB"
 import { testEncounter } from "./EncountersDB"
 import { dreamingWorkerInn, forgeHeartSmithy, innShop, testShop } from "./ShopsDB"
-import { alchemyNode, cookNode, farmNode, fireNode, fishNode, fletchNode, mineNode, woodNode } from "./SkillNodesDB"
-
+import { alchemyNode, cookNode, farmNode, fireNode, fishNode, fletchNode, huntNode, mineNode, woodNode } from "./SkillNodesDB"
 
 //locations
+//mine
+export function dwarvenMine(hero, x, y) {
+    var dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterMineNode(hero)] }
+    return dwarvenMine;
+}
 //towns
 export function daleTown(hero) {
     var daleTown = { LocationName: "Dale Town", XCoord: 0, YCoord: 0, CanTravel: true, SubLocations: [enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero)] }
     return daleTown;
+}
+//reusable locations
+export function bridgeOverRiver(hero, x, y) {
+    var river = { LocationName: "Bridge Over River", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero)] }
+    return river;
+}
+export function farm(hero, x, y) {
+    var farm = { LocationName: "Farm", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFarmNode(hero)] }
+    return farm;
+}
+export function forest(hero, x, y) {
+    var forest = { LocationName: "Forest", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFireNode(hero), enterFletchNode(hero), enterHuntNode(hero), enterWoodNode(hero)] }
+    return forest;
+}
+export function river(hero, x, y) {
+    var river = { LocationName: "River", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero)] }
+    return river;
+}
+export function road(hero, x, y) {
+    var road = { LocationName: "Road", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [] }
+    return road;
 }
 //sublocations
 //enter shops
@@ -51,6 +76,10 @@ export function enterFishNode(hero) {
 export function enterFletchNode(hero) {
     var fletch = { Name: "Fletcher", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: fletchNode(hero) }; return content } }
     return fletch
+}
+export function enterHuntNode(hero) {
+    var hunt = { Name: "Hunting Ground", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: huntNode(hero) }; return content } }
+    return hunt;
 }
 export function enterMineNode(hero) {
     var mine = { Name: "Mine", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: mineNode(hero) }; return content } }

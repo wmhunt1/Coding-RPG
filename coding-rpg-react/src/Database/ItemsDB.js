@@ -27,6 +27,10 @@ export function cookedFish() {
     var cook = { Name: "Cooked Fish", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
     return cook;
 }
+export function cookedRabbitMeat() {
+    var cookedRabbitMeat = { Name: "Cooked Rabbit Meat", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
+    return cookedRabbitMeat;
+}
 export function cookedRatMeat() {
     var cookedRatMeat = { Name: "Cooked Rat Meat", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
     return cookedRatMeat;
@@ -253,6 +257,10 @@ export function rawFish() {
     return raw;
 }
 //meat
+export function rawRabbitMeat() {
+    var rawRabbitMeat = { Name: "Raw Rabbit Meat", Type: "Resource", SubType: "Raw Meat", Cost: 2, Quantity: 1 }
+    return rawRabbitMeat;
+}
 export function rawRatMeat() {
     var rawRatMeat = { Name: "Raw Rat Meat", Type: "Resource", SubType: "Raw Meat", Cost: 2, Quantity: 1 }
     return rawRatMeat;

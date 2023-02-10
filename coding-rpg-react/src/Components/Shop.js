@@ -97,7 +97,7 @@ function Shop(props) {
         <h2>{props.shop.Name}</h2>
         {active !== "Dialogue" && active !== "Dungeon" && active !== "Node" ? <h3>{hero.Name}'s Gold: {gold}</h3> : <div></div>}
         {active === "Shopping" ?
-            <div>
+            <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%" }}>
                 {dialogue !== null ? <div><button className='menu-button' onClick={() => startShopDialogue(hero)}><h3>Talk To {dialogue.Char}</h3></button></div> : <div></div>}
                 <div><button className='menu-button' onClick={() => setActive("buy")}><h3>Buy</h3></button></div>
                 <div><button className='menu-button' onClick={() => setActive("sell")}><h3>Sell</h3></button></div>

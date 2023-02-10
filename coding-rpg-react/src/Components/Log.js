@@ -19,7 +19,6 @@ function Log(props) {
       }, [logRef, logList])
     return (<div>
         <div style={{border: "solid", marginTop: "1%"}}>
-            <h3>{props.logName} Log</h3>
             <div ref = {logRef }style={{height: `185px`, overflow: "scroll", textAlign: "center" }}>
                 <ul style={{listStyle: "none", paddingLeft: "0"}}>{logList}</ul>
             </div>
