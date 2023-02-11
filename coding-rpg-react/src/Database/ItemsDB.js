@@ -241,7 +241,7 @@ export function bite() {
 }
 //swords
 export function bronzeSword() {
-    var sword = { Name: "Sword", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 2, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var sword = { Name: "Bronze Sword", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 2, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return sword;
 }
 export function flamingsword() {
@@ -249,11 +249,11 @@ export function flamingsword() {
     return sword;
 }
 export function ironSword() {
-    var sword = { Name: "Sword", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 3, DamageType: slashingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
+    var sword = { Name: "Iron Sword", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 3, DamageType: slashingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
     return sword;
 }
 export function steelSword() {
-    var sword = { Name: "Sword", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 4, DamageType: slashingDamage(), Cost: 15, Quantity: 1, Enchantment: unEnchanted() }
+    var sword = { Name: "Steel Sword", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 4, DamageType: slashingDamage(), Cost: 15, Quantity: 1, Enchantment: unEnchanted() }
     return sword;
 }
 export function sword() {

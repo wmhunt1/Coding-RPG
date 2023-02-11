@@ -8,9 +8,7 @@ way to know what's adjacent on map
 factions
 jobs
 relationships
-add time delay
-Time for travel and activies?
-Days?
+add time delay for log
 Property
 Objective items too for less redundancy
 random encounter that forces combat

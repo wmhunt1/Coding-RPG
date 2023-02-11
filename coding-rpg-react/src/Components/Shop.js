@@ -6,27 +6,32 @@ import { AddItemToInventory, RemoveItemFromInventory } from '../Scripts/ItemScri
 import Dialogue from './Dialogue';
 import Dungeon from "./Dungeon"
 import SkillNode from "./SkillNode"
+import { barterSkill } from '../Database/SkillsDB';
+import { EarnSkillXP, FindSkillInSkillBook } from '../Scripts/SkillScripts';
 
 function Shop(props) {
     const [active, setActive] = useState("Shopping")
     const [hero, setHero] = useState(props.hero);
     const [gold, setGold] = useState(props.hero.Gold)
+    const [barter, setBarter] = useState(FindSkillInSkillBook(hero, barterSkill()))
     const [shopInventory, setShopInventory] = useState(props.shop.Inventory)
     const [heroInventory, setHeroInventory] = useState(props.shop.buyFilter(hero))
     const [dialogue, setDialogue] = useState(props.shop.Dialogue)
     const [dungeon, setDungeon] = useState(props.shop.Dungeon)
     const [node, setNode] = useState(props.shop.Node)
-    const shopInventoryList = shopInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP <button onClick={() => { handleBuy(hero, heroInventory, item) }}><h4>Buy</h4></button></h4>)
-    const heroInventoryList = heroInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {Math.floor(item.Cost/2)} GP, QTY: {item.Quantity} <button onClick={() => { handleSell(hero, heroInventory, shopInventory, item) }}><h4>Sell</h4></button></h4>)
+    const shopInventoryList = shopInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {Math.round(item.Cost - item.Cost * (FindSkillInSkillBook(hero, barterSkill()).Level / 10))} GP <button onClick={() => { handleBuy(hero, heroInventory, item) }}><h4>Buy</h4></button></h4>)
+    const heroInventoryList = heroInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {Math.floor(item.Cost / 2 + (item.Cost / 2) * (FindSkillInSkillBook(hero, barterSkill()).Level / 10))} GP, QTY: {item.Quantity} <button onClick={() => { handleSell(hero, heroInventory, shopInventory, item) }}><h4>Sell</h4></button></h4>)
     function handleBuy(hero, inventory, item) {
         if (item.Cost > hero.Gold) {
             AddToCharacterLog(hero, "Cannot afford " + item.Name)
         }
         else {
-            RemoveGold(hero, item.Cost)
+            RemoveGold(hero, Math.round(item.Cost - item.Cost * (FindSkillInSkillBook(hero, barterSkill()).Level / 10)))
+            EarnSkillXP(hero, FindSkillInSkillBook(hero, barterSkill()), Math.round(item.Cost - item.Cost * (FindSkillInSkillBook(hero, barterSkill()).Level / 10)))
             AddItemToInventory(hero, inventory, item, item.Quantity)
             var newHero = hero;
             setHero(newHero);
+            setBarter(FindSkillInSkillBook(hero, barterSkill()))
             var newGold = hero.Gold;
             setGold(newGold)
             setHeroInventory(hero.Inventory)
@@ -37,10 +42,12 @@ function Shop(props) {
 
     }
     function handleSell(hero, heroInventory, shopInventory, item) {
-        AddGold(hero, Math.floor(item.Cost/2))
+        AddGold(hero, Math.floor(item.Cost / 2 + (item.Cost / 2) * (FindSkillInSkillBook(hero, barterSkill()).Level / 10)))
         RemoveItemFromInventory(hero, heroInventory, item, item.Quantity)
+        EarnSkillXP(hero, FindSkillInSkillBook(hero, barterSkill()), Math.floor(item.Cost / 2 + (item.Cost / 2) * (FindSkillInSkillBook(hero, barterSkill()).Level / 10)))
         var newHero = hero;
         setHero(newHero);
+        setBarter(FindSkillInSkillBook(hero, barterSkill()))
         var newGold = hero.Gold;
         setGold(newGold)
         if (shopInventory.find(x => x.Name === item.Name)) {
@@ -95,7 +102,7 @@ function Shop(props) {
     }
     return (<div>
         <h2>{props.shop.Name}</h2>
-        {active !== "Dialogue" && active !== "Dungeon" && active !== "Node" ? <h3>{hero.Name}'s Gold: {gold}</h3> : <div></div>}
+        {active !== "Dialogue" && active !== "Dungeon" && active !== "Node" ? <h3>{hero.Name}'s Gold: {gold} - Barter: Level {barter.Level}({barter.CurrentXP}/{barter.MaxXP})</h3> : <div></div>}
         {active === "Shopping" ?
             <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%" }}>
                 {dialogue !== null ? <div><button className='menu-button' onClick={() => startShopDialogue(hero)}><h3>Talk To {dialogue.Char}</h3></button></div> : <div></div>}
@@ -105,11 +112,11 @@ function Shop(props) {
                 {dungeon !== null ? <div><button className='menu-button' onClick={() => startShopDungeon(hero)}><h3>Enter {dungeon.Name}</h3></button></div> : <div></div>}
                 <div><button className='menu-button' onClick={props.Back}><h3>Leave Store</h3></button></div>
             </div> : <div></div>}
-        {active === "buy" ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%" , height:"200px"}}>
+        {active === "buy" ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%", height: "200px" }}>
             {shopInventoryList}
         </div> : <div></div>}
         {active === "sell" ? <div>
-            {heroInventoryList.length > 0 ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%",height:"200px" }}>{heroInventoryList}</div> : <h3>Nothing to sell</h3>}
+            {heroInventoryList.length > 0 ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%", height: "200px" }}>{heroInventoryList}</div> : <h3>Nothing to sell</h3>}
         </div> : <div></div>}
         {active !== "Shopping" && active !== "Dialogue" && active !== "Node" && active !== "Dungeon" ? <div><button onClick={() => setActive("Shopping")}><h4>Back to {props.shop.Name}</h4></button></div> : <div></div>}
         {active === "Dialogue" ? <Dialogue parentCallback={handleCallback} hero={hero} talk={dialogue} Back={() => finishShopDialogue(hero)}></Dialogue> : <div></div>

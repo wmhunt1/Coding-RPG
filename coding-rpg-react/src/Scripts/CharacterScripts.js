@@ -256,3 +256,29 @@ export function ResistCondition(char, log) {
         }
     }
 }
+export function CalculateTime(char, hours) {
+    char.Time.Hour += hours;
+    if (char.Time.Hour >= 6 && char.Time.Hour < 12) {
+        char.Time.TimeOfDay = "Morning"
+    }
+    else if (char.Time.Hour === 12) {
+        char.Time.TimeOfDay = "Noon"
+    }
+    else if (char.Time.Hour > 12 && char.Time.Hour < 18) {
+        char.Time.TimeOfDay = "Afternoon"
+    }
+    else if (char.Time.Hour >= 18 && char.Time.Hour < 21) {
+        char.Time.TimeOfDay = "Evening"
+    }
+    else if (char.Time.Hour === 0)
+    {
+        char.Time.TimeOfDay = "Midnight"
+    }
+    else {
+        char.Time.TimeOfDay = "Night"
+    }
+    if (char.Time.Hour >= 24) {
+        char.Time.Day++;
+        char.Time.Hour = 0
+    }
+}

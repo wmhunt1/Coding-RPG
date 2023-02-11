@@ -1,7 +1,8 @@
-import { AddToCharacterLog } from "./CharacterScripts";
+import { AddToCharacterLog, CalculateTime } from "./CharacterScripts";
 
-export function updateLocation(hero, map, x, y) {
+export function updateLocation(hero, map, x, y, hour) {
     if (map.Locations.find(m => m.XCoord === x && m.YCoord === y)) {
+        CalculateTime(hero, hour)
         var mapIndex = map.Locations.findIndex(m => m.XCoord === x && m.YCoord === y);
         hero.CurrentLocation.LocationName = map.Locations[mapIndex].LocationName;
         hero.CurrentLocation.XCoord = map.Locations[mapIndex].XCoord;
@@ -18,7 +19,6 @@ export function updateLocation(hero, map, x, y) {
                 AddToCharacterLog(hero, hero.Name + " discovers " + map.Locations[mapIndex].LocationName)
             }
         }
-        console.log(hero.Map)
     }
     else {
         AddToCharacterLog(hero, "Location is out of bounds")

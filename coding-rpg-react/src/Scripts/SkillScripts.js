@@ -1,4 +1,4 @@
-import { AddToCharacterLog } from "./CharacterScripts";
+import { AddToCharacterLog, CalculateTime } from "./CharacterScripts";
 import { AddItemToInventory, FindItemInInventory, RemoveItemFromInventory } from "./ItemScripts"
 
 Array.prototype.remove = function () {
@@ -83,6 +83,7 @@ export function UseSkillRecipe(char, skill, recipe) {
             AddItemToInventory(char, char.Inventory, recipe.Output.Item, recipe.Output.Quantity)
             AddToCharacterLog(char, char.Name + " has " + recipe.Verb + "ed " + recipe.Output.Item.Name + " X " + quantity + ", earning " + recipe.Exp + " " + skill.Name + " XP")
             EarnSkillXP(char, skill, recipe.Exp)
+            CalculateTime(char, 1)
         }
     }
 
