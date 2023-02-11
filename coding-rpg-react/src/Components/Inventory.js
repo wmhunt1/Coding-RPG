@@ -1,14 +1,18 @@
 import { useState } from 'react';
-import { EquipItemFromInventory, RemoveItemFromInventory } from '../Scripts/ItemScripts';
 import '../App.css';
 import './Game.css'
+import SkillNode from "./SkillNode"
+import { EquipItemFromInventory, RemoveItemFromInventory } from '../Scripts/ItemScripts';
+import { alchemyNode, fireNode, fletchNode } from '../Database/SkillNodesDB'
 
 function Inventory(props) {
   const [hero, setHero] = useState(props.hero);
   const [inventory, setInventory] = useState(props.hero.Inventory);
+  const [active, setActive] = useState("Inventory")
   const [allies, setAllies] = useState([props.hero, ...props.hero.Companions]);
   const [activeUser, setActiveUser] = useState(props.hero)
   const [activeList, setActiveList] = useState("Default")
+  const [node, setNode] = useState(alchemyNode(hero))
 
   function handleEquip(char, inventory, item) {
     if (char.Name !== "Dog") {
@@ -41,8 +45,24 @@ function Inventory(props) {
   const itemList = inventory.sort((a, b) => a.Name.localeCompare(b.Name)).map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} {item.Type === "Equipable" ? <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}> Equip </button> : <div></div>}{item.Type === "Consumable" ? <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}> Consume </button> : <div></div>}</h4>)
   const consumeList = inventory.sort((a, b) => a.Name.localeCompare(b.Name)).filter(item => item.Type === "Consumable").map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}><h4>Consume</h4></button></h4>)
   const equipList = inventory.sort((a, b) => a.Name.localeCompare(b.Name)).filter(item => item.Type === "Equipable").map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}><h4>Equip</h4></button></h4>)
+  function enterSkill(node) {
+    setNode(node)
+    setActive("Node")
+  }
+  function leaveSkill(hero) {
+    setActive("Inventory")
+    setHero(hero)
+    var newInventory = [...hero.Inventory];
+    setInventory(newInventory);
+    props.parentCallback(hero);
+  }
+  const handleCallback = (childData) => {
+    var newChar = childData
+    setHero(newChar)
+    props.parentCallback(newChar);
+  }
   return (<div>
-    <div>
+    {active === "Inventory" ? <div>
       <h2>{hero.Name}'s Inventory</h2>
       <h3>{hero.Name} has {hero.Gold} GP</h3>
       <div className='inv-box'>
@@ -56,7 +76,9 @@ function Inventory(props) {
         {activeList === "Consumable" ? <div>{consumeList.length > 0 ? <div>{consumeList}</div> : <div><h4>No Consumables Items</h4></div>}</div> : <div></div>}
         {activeList === "Equipable" ? <div>{equipList.length > 0 ? <div>{equipList}</div> : <div><h4>No Equipable Items</h4></div>}</div> : <div></div>}
       </div>
-    </div>
+      <div><button onClick={() => (enterSkill(alchemyNode(hero)))}>Train Alchemy</button><button onClick={() => (enterSkill(fireNode(hero)))}>Train Firemaking</button><button onClick={(() => enterSkill(fletchNode(hero)))}>Train Fletching</button></div>
+    </div> : <div></div>}
+    {active === "Node" ? <SkillNode parentCallback={handleCallback} hero={hero} node={node} Back={() => leaveSkill(hero)}></SkillNode> : <div></div>}
     {/* <button style={{ marginTop: "1%", marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button> */}
   </div>)
 }

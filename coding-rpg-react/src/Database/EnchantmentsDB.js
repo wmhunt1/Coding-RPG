@@ -11,11 +11,11 @@ export function fireEnchantment() {
     return fireEnchantment
 }
 export function fireImmuneEnchantment() {
-    var fireEnchantment = { Name: "Immunity to Fire", Immunities: [fireDamage()], Resistances: [], Weaknesses: [], OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, item) }, OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, item) } }
+    var fireEnchantment = { Name: "Immunity to Fire", Immunities: [fireDamage()], Resistances: [], Weaknesses: [], ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionImmunities, this.ConditionResistances, this.ConditionWeaknesses, item) }, OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, char.ConditionImmunities, char.ConditionResistances, char.ConditionWeaknesses, item) } }
     return fireEnchantment
 }
 export function iceResistEnchantment() {
-    var iceResist = { Name: "Resistance to Ice", Immunities: [], Resistances: [iceDamage()], Weaknesses: [], OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, item) }, OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, item) } }
+    var iceResist = { Name: "Resistance to Ice", Immunities: [], Resistances: [iceDamage()], Weaknesses: [], ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionImmunities, this.ConditionResistances, this.ConditionWeaknesses, item) }, OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, char.ConditionImmunities, char.ConditionResistances, char.ConditionWeaknesses, item) } }
     return iceResist
 }
 export function strengthEnchantment() {

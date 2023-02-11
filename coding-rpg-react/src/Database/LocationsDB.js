@@ -30,7 +30,7 @@ export function farm(hero, x, y) {
     return farm;
 }
 export function forest(hero, x, y) {
-    var forest = { LocationName: "Forest", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterCookNodeCampFire(hero), enterFireNode(hero), enterFletchNode(hero), enterHuntNode(hero), enterWoodNode(hero)] }
+    var forest = { LocationName: "Forest", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterCookNodeCampFire(hero), enterHuntNode(hero), enterWoodNode(hero)] }
     return forest;
 }
 export function river(hero, x, y) {

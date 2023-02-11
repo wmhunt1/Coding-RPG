@@ -12,7 +12,7 @@ function Shop(props) {
     const [hero, setHero] = useState(props.hero);
     const [gold, setGold] = useState(props.hero.Gold)
     const [shopInventory, setShopInventory] = useState(props.shop.Inventory)
-    const [heroInventory, setHeroInventory] = useState(props.hero.Inventory)
+    const [heroInventory, setHeroInventory] = useState(props.shop.buyFilter(hero))
     const [dialogue, setDialogue] = useState(props.shop.Dialogue)
     const [dungeon, setDungeon] = useState(props.shop.Dungeon)
     const [node, setNode] = useState(props.shop.Node)

@@ -1,6 +1,5 @@
 import { AddToCharacterLog } from "./CharacterScripts";
 import { bareBack, bareFeet, bareFinger, bareFist, bareHands, bareHead, bareLegs, bareNeck, bareTorso, emptyOffHand } from "../Database/ItemsDB"
-import { heavyArmorSkill } from "../Database/SkillsDB";
 Array.prototype.remove = function () {
     var what, a = arguments, L = a.length, ax;
     while (L && this.length) {
@@ -160,24 +159,39 @@ export function EquipItemFromInventory(char, inventory, item) {
     RemoveItemFromInventory(char, inventory, item, item.Quantity)
     char.Inventory = inventory;
 }
-export function ApplyOnEquipEffect(hero, immune, resist, weak, item) {
+export function ApplyOnEquipEffect(hero, immune, resist, weak, cImmune, cResist, cWeak, item) {
     for (var i = 0; i < immune.length; i++) {
         var immunity = immune[i]
         immunity.Source = item;
         hero.Immunities.push(immunity)
     }
     for (var r = 0; r < resist.length; r++) {
-        var resistance = resist[i]
+        var resistance = resist[r]
         resistance.Source = item;
         hero.Resistances.push(resistance)
     }
     for (var w = 0; w < weak.length; w++) {
-        var weakness = weak[i]
+        var weakness = weak[w]
         weakness.Source = item;
         hero.Weaknesses.push(weakness)
     }
+    for (var i2 = 0; i2 < cImmune.length; i2++) {
+        var cImmunity = cImmune[i2]
+        cImmunity.Source = item;
+        hero.ConditionImmunities.push(immunity)
+    }
+    for (var r2 = 0; r2 < cResist.length; r2++) {
+        var cResistance = cResist[r2]
+        cResistance.Source = item;
+        hero.ConditionResistances.push(cResistance)
+    }
+    for (var w2 = 0; w < cWeak.length; w2++) {
+        var cWeakness = cWeak[w2]
+        cWeakness.Source = item;
+        hero.ConditionWeaknesses.push(cWeakness)
+    }
 }
-export function ApplyOnUnEquipEffect(hero, immune, resist, weak, item) {
+export function ApplyOnUnEquipEffect(hero, immune, resist, weak, cImmune, cResist, cWeak, item) {
     for (var i = 0; i < immune.length; i++) {
         var immunity = immune[i]
         if (immunity.Source === item) {
@@ -185,15 +199,33 @@ export function ApplyOnUnEquipEffect(hero, immune, resist, weak, item) {
         }
     }
     for (var r = 0; r < resist.length; r++) {
-        var resistance = resist[i]
+        var resistance = resist[r]
         if (resistance.Source === item) {
             hero.Resistances.remove(resistance)
         }
     }
     for (var w = 0; w < weak.length; w++) {
-        var weakness = weak[i]
+        var weakness = weak[w]
         if (weakness.Source === item) {
             hero.Weaknesses.remove(weakness)
+        }
+    }
+    for (var i2 = 0; i2 < cImmune.length; i2++) {
+        var cImmunity = cImmune[i2]
+        if (cImmunity.Source === item) {
+            hero.ConditionImmunities.remove(immunity)
+        }
+    }
+    for (var r2 = 0; r2 < cResist.length; r2++) {
+        var cResistance = cResist[r2]
+        if (cResistance.Source === item) {
+            hero.ConditionResistances.remove(cResistance)
+        }
+    }
+    for (var w2 = 0; w < cWeak.length; w2++) {
+        var cWeakness = cWeak[w2]
+        if (cWeakness.Source === item) {
+            hero.ConditionWeaknesses.remove(cWeakness)
         }
     }
 }

@@ -3,7 +3,7 @@ import {alchemyRecipes, cookingRecipes, farmingRecipes, firemakingRecipes, fishi
 export function alchemyNode(hero)
 {
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Alchemy");
-    var alchemyNode = {Name: "Alchemy Station", Skill: hero.SkillBook[skillIndex], Recipes: alchemyRecipes()}
+    var alchemyNode = {Name: "Mortar and Pestle", Skill: hero.SkillBook[skillIndex], Recipes: alchemyRecipes()}
     return alchemyNode;
 }
 export function cookNode(hero)
@@ -21,7 +21,7 @@ export function farmNode(hero)
 export function fireNode(hero)
 {
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Firemaking");
-    var fireNode = {Name: "Fire Pit", Skill: hero.SkillBook[skillIndex], Recipes: firemakingRecipes()}
+    var fireNode = {Name: "Tinderbox", Skill: hero.SkillBook[skillIndex], Recipes: firemakingRecipes()}
     return fireNode
 }
 export function fishNode(hero)
@@ -33,7 +33,7 @@ export function fishNode(hero)
 export function fletchNode(hero)
 {
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Fletching");
-    var fletchNode = {Name: "Fletcher", Skill: hero.SkillBook[skillIndex], Recipes: fletchingRecipes()}
+    var fletchNode = {Name: "Knife", Skill: hero.SkillBook[skillIndex], Recipes: fletchingRecipes()}
     return fletchNode
 }
 export function huntNode(hero)
