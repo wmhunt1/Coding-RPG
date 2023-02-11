@@ -1,7 +1,7 @@
 import { testDialogue } from "./DialoguesDB"
 import { testDungeon2 } from "./DungeonsDB"
 import { testEncounter } from "./EncountersDB"
-import { dreamingWorkerInn, forgeHeartSmithy, innShop, testShop } from "./ShopsDB"
+import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, testShop, witchHutShop } from "./ShopsDB"
 import { alchemyNode, cookNode, farmNode, fireNode, fishNode, fletchNode, huntNode, mineNode, woodNode } from "./SkillNodesDB"
 
 //locations
@@ -10,9 +10,14 @@ export function dwarvenMine(hero, x, y) {
     var dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterMineNode(hero)] }
     return dwarvenMine;
 }
+//shop
+export function witchHut(hero, x, y) {
+    var witchHut = { LocationName: "Witch's Hut", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterWitchHut(hero)] }
+    return witchHut;
+}
 //towns
 export function daleTown(hero) {
-    var daleTown = { LocationName: "Dale Town", XCoord: 0, YCoord: 0, CanTravel: true, SubLocations: [enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero)] }
+    var daleTown = { LocationName: "Dale Town", XCoord: 0, YCoord: 0, CanTravel: true, SubLocations: [enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterGeneralStore(hero)] }
     return daleTown;
 }
 //reusable locations
@@ -25,7 +30,7 @@ export function farm(hero, x, y) {
     return farm;
 }
 export function forest(hero, x, y) {
-    var forest = { LocationName: "Forest", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFireNode(hero), enterFletchNode(hero), enterHuntNode(hero), enterWoodNode(hero)] }
+    var forest = { LocationName: "Forest", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterCookNodeCampFire(hero), enterFireNode(hero), enterFletchNode(hero), enterHuntNode(hero), enterWoodNode(hero)] }
     return forest;
 }
 export function river(hero, x, y) {
@@ -38,6 +43,11 @@ export function road(hero, x, y) {
 }
 //sublocations
 //enter shops
+//general store
+export function enterGeneralStore(hero) {
+    var generalStore = { Name: "General Store", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: generalShop(hero), skill: null }; return content } }
+    return generalStore
+}
 //inns
 export function enterDreamingWorkerInn(hero) {
     var inn = { Name: "Dreaming Worker Inn", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: dreamingWorkerInn(hero), skill: null }; return content } }
@@ -52,6 +62,12 @@ export function enterForgeHeartSmithy(hero) {
     var forge = { Name: "Forgeheart Smithy", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: forgeHeartSmithy(hero), skill: null }; return content } }
     return forge
 }
+//hybrid
+//alchemt and magic
+export function enterWitchHut(hero) {
+    var shop = { Name: "Witch's Hut", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: witchHutShop(hero), skill: null }; return content } }
+    return shop;
+}
 //enter skillnode
 export function enterAlchemyNode(hero) {
     var alchemy = { Name: "Alchemy Station", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: alchemyNode(hero) }; return content } }
@@ -59,6 +75,10 @@ export function enterAlchemyNode(hero) {
 }
 export function enterCookNode(hero) {
     var cook = { Name: "Stove", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: cookNode(hero) }; return content } }
+    return cook
+}
+export function enterCookNodeCampFire(hero) {
+    var cook = { Name: "Camp Fire (Cook)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: cookNode(hero) }; return content } }
     return cook
 }
 export function enterFarmNode(hero) {

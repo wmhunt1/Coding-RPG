@@ -16,7 +16,7 @@ function SkillNode(props) {
         setActiveSkill(skill)
         props.parentCallback(char);
     }
-    const recipeList = recipes.sort((a, b) => a.Name.localeCompare(b.Name) && a.LevelRequirement - b.LevelRequirement).filter(recipe => recipe.LevelRequirement <= activeSkill.Level).map((recipe, index) => <h4 key={index}>{recipe.Name}({recipe.LevelRequirement}) {recipe.Exp} XP<button onClick={() => handleTrainSkill(hero, activeSkill, recipe)}>{recipe.Verb}</button></h4>)
+    const recipeList = recipes.sort((a, b) => a.Name.localeCompare(b.Name) && a.LevelRequirement - b.LevelRequirement).filter(recipe => recipe.LevelRequirement <= activeSkill.Level).map((recipe, index) => <h4 key={index}>{recipe.Name}({recipe.LevelRequirement}) {recipe.Exp} XP <button onClick={() => handleTrainSkill(hero, activeSkill, recipe)}>{recipe.Verb}</button></h4>)
     return (<div style ={{marginLeft:"25%", marginRight:"25%"}}>
         <h2>{node.Name}</h2>
         <h3>{activeSkill.Name} - Level: {activeSkill.Level} {activeSkill.CurrentXP}/{activeSkill.MaxXP}</h3>

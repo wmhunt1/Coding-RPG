@@ -11,19 +11,15 @@ Array.prototype.remove = function () {
     }
     return this;
 };
-export function SkillCheck(skill, sucess)
-{
-    if (skill.Level >= sucess)
-    {
+export function SkillCheck(skill, sucess) {
+    if (skill.Level >= sucess) {
         return true
     }
-    else
-    {
+    else {
         return false;
     }
 }
-export function FindSkillInSkillBook(char, skill)
-{
+export function FindSkillInSkillBook(char, skill) {
     var skillIndex = char.SkillBook.findIndex(x => x.Name === skill.Name);
     return char.SkillBook[skillIndex]
 }
@@ -54,7 +50,10 @@ export function UseSkillRecipe(char, skill, recipe) {
     var quantity = recipe.Output.Quantity
     var sucess = false;
     var foundItems = 0;
-    if (recipe.LevelRequirement <= skill.Level) {
+    if (recipe.Tool !== null) {
+        var toolIndex = FindItemInInventory(char.Inventory, recipe.Tool)
+    }
+    if (recipe.LevelRequirement <= skill.Level && toolIndex !== null) {
         if (recipe.Input.length > 0) {
             for (var r = 0; r < recipe.Input.length; r++) {
                 var index = FindItemInInventory(char.Inventory, recipe.Input[r].Item)
@@ -82,12 +81,15 @@ export function UseSkillRecipe(char, skill, recipe) {
                 RemoveItemFromInventory(char, char.Inventory, recipe.Input[r2].Item, recipe.Input[r2].Quantity)
             }
             AddItemToInventory(char, char.Inventory, recipe.Output.Item, recipe.Output.Quantity)
-            AddToCharacterLog(char, char.Name + " has " + recipe.Verb + " " + recipe.Output.Item.Name + " X " + quantity + ", earning " + recipe.Exp + " " + skill.Name + " XP")
+            AddToCharacterLog(char, char.Name + " has " + recipe.Verb + "ed " + recipe.Output.Item.Name + " X " + quantity + ", earning " + recipe.Exp + " " + skill.Name + " XP")
             EarnSkillXP(char, skill, recipe.Exp)
         }
     }
 
     else {
+        if (toolIndex === null) {
+            AddToCharacterLog(char, char.Name + " requires " + recipe.Tool.Name + " to " + recipe.Name)
+        }
         AddToCharacterLog(char, char.Name + " requires " + recipe.LevelRequirement + " in " + skill.Name + " to " + recipe.Name)
     }
 }

@@ -1,6 +1,6 @@
 import { HealHP, LearnSpell, RecoverMP, RecoverSP, RemoveCondition } from "../Scripts/CharacterScripts";
 import { bludeoningDamage, piercingDamage, slashingDamage } from "./DamageTypesDB";
-import { fireEnchantment, strengthEnchantment, unEnchanted } from "./EnchantmentsDB";
+import { fireEnchantment, fireImmuneEnchantment, iceResistEnchantment, strengthEnchantment, unEnchanted } from "./EnchantmentsDB";
 import { clothProtection, metalProtection, naturalProtection, woodProtection } from "./ProtectionTypesDB";
 import { blockSkill, bluntSKill, heavyArmorSkill, longBladeSkill, rangedSkill, shortBladeSkill, unArmedSkill, unArmoredSkill } from "./SkillsDB";
 import { magicMissile } from "./SpellsDB";
@@ -69,6 +69,16 @@ export function magicMissileScroll() {
 export function bareBack() {
     var bare = { Name: "Bare", Slot: "Back", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bare;
+}
+export function capeOfFireImmunity()
+{
+    var cape = { Name: "Cape of Fire Immunity", Slot: "Back", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: fireImmuneEnchantment() }
+    return cape;
+}
+export function cloak()
+{
+    var cloak = { Name: "Cloak", Slot: "Back", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: iceResistEnchantment() }
+    return cloak;
 }
 //neck
 export function bareNeck() {
@@ -165,8 +175,25 @@ export function tunic() {
 //offhands
 //offhand weapoms
 export function emptyOffHand() {
-    var empty = { Name: "None", Slot: "OffHand", Type: "Equipable", SubType: "", Class: unArmedSkill(), Damage: 0, DamageType: bludeoningDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    var empty = { Name: "None", Slot: "OffHand", Type: "Equipable", SubType: "None", Class: unArmedSkill(), Damage: 0, DamageType: bludeoningDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return empty;
+}
+//daggers
+export function bronzeDaggerOffHand() {
+    var dagger = { Name: "Bronze Dagger (OffHand)", Slot: "OffHand", Type: "Equipable", SubType: "OneHand", Class: shortBladeSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return dagger;
+}
+export function daggerOffHand() {
+    var dagger = { Name: "Dagger (OffHand)", Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Class: shortBladeSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return dagger;
+}
+export function ironDaggerOffHand() {
+    var dagger = { Name: "Iron Dagger (OffHand)", Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Class: shortBladeSkill(), Damage: 2, DamageType: piercingDamage(), Cost: 4, Quantity: 1, Enchantment: unEnchanted() }
+    return dagger;
+}
+export function steelDaggerOffHand() {
+    var dagger = { Name: "Steel Dagger (OffHand)", Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Class: shortBladeSkill(), Damage: 3, DamageType: piercingDamage(), Cost: 6, Quantity: 1, Enchantment: unEnchanted() }
+    return dagger;
 }
 //shields
 export function woodenShield() {
@@ -195,6 +222,14 @@ export function dagger() {
     var dagger = { Name: "Dagger", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: shortBladeSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return dagger;
 }
+export function ironDagger() {
+    var dagger = { Name: "Iron Dagger", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: shortBladeSkill(), Damage: 2, DamageType: piercingDamage(), Cost: 4, Quantity: 1, Enchantment: unEnchanted() }
+    return dagger;
+}
+export function steelDagger() {
+    var dagger = { Name: "Steel Dagger", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: shortBladeSkill(), Damage: 3, DamageType: piercingDamage(), Cost: 6, Quantity: 1, Enchantment: unEnchanted() }
+    return dagger;
+}
 //natural weapons
 export function bareFist() {
     var bare = { Name: "Fist", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: unArmedSkill(), Damage: 0, DamageType: bludeoningDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
@@ -205,8 +240,20 @@ export function bite() {
     return bite;
 }
 //swords
+export function bronzeSword() {
+    var sword = { Name: "Sword", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 2, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    return sword;
+}
 export function flamingsword() {
     var sword = { Name: "Flaming Sword", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 5, DamageType: slashingDamage(), Cost: 50, Quantity: 1, Enchantment: fireEnchantment() }
+    return sword;
+}
+export function ironSword() {
+    var sword = { Name: "Sword", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 3, DamageType: slashingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
+    return sword;
+}
+export function steelSword() {
+    var sword = { Name: "Sword", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 4, DamageType: slashingDamage(), Cost: 15, Quantity: 1, Enchantment: unEnchanted() }
     return sword;
 }
 export function sword() {
@@ -237,7 +284,15 @@ export function ironBar() {
     var bar = { Name: "Iron Bar", Type: "Resource", SubType: "Bar", Cost: 4, Quantity: 1 }
     return bar
 }
+export function steelBar() {
+    var bar = { Name: "Steel Bar", Type: "Resource", SubType: "Bar", Cost: 8, Quantity: 1 }
+    return bar
+}
 //ore
+export function coalOre() {
+    var ore = { Name: "Coal", Type: "Resource", SubType: "Ore", Cost: 4, Quantity: 1 }
+    return ore
+}
 export function copperOre() {
     var ore = { Name: "Copper Ore", Type: "Resource", SubType: "Ore", Cost: 1, Quantity: 1 }
     return ore
@@ -269,4 +324,35 @@ export function rawRatMeat() {
 export function woodLogs() {
     var wood = { Name: "Wood Logs", Type: "Resource", SubType: "Logs", Cost: 2, Quantity: 1 }
     return wood;
+}
+//tools
+//fishing
+export function fishingRod()
+{
+    var fishingRod = { Name: "Fishing Rod", Type: "Tool", SubType: "Fishing Rod", Cost: 1, Quantity: 1 }
+    return fishingRod
+}
+//hatchets
+export function hatchet()
+{
+    var hatchet = { Name: "Pickaxe", Type: "Tool", SubType: "Hatchet", Cost: 1, Quantity: 1 }
+    return hatchet
+}
+//knife
+export function knife()
+{
+    var knife = { Name: "Knife", Type: "Tool", SubType: "Knife", Cost: 1, Quantity: 1 }
+    return knife
+}
+//pickaxes
+export function pickAxe()
+{
+    var pickAxe = { Name: "Pickaxe", Type: "Tool", SubType: "Pickaxe", Cost: 1, Quantity: 1 }
+    return pickAxe
+}
+//tinderboxes
+export function tinderBox()
+{
+    var tinderBox = { Name: "Tinderbox", Type: "Tool", SubType: "Tinder Box", Cost: 1, Quantity: 1 }
+    return tinderBox
 }

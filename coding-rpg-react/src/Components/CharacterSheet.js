@@ -45,16 +45,20 @@ function CharacterSheet(props) {
     <div>
       {active === "charSheet" ? <div>
         {title.Name === "No Title" ? <h2>{hero.Name}'s Character Sheet</h2> : <h2>{title} {hero.Name}'s Character Sheet</h2>}
-        {hero.TitleList.length > 1 ? 
-        <div>
-          {showTitles === false ? <div><button onClick={() => handleShowTitles(true)}>Show Titles</button></div> : <div><button onClick={() => handleShowTitles(false)}>Hide Titles</button><div>{titleList}</div></div>}
-          </div>: <div></div>}
-        <h3>Base Stats</h3>
+        {hero.TitleList.length > 1 ?
+          <div>
+            {showTitles === false ? <div><button onClick={() => handleShowTitles(true)}>Show Titles</button></div> : <div><button onClick={() => handleShowTitles(false)}>Hide Titles</button><div>{titleList}</div></div>}
+          </div> : <div></div>}
+           <h3>Base Stats</h3>
+          <div className='attribute'>
         <div style={{ display: "inline-block" }}>
           <h4>Level: {hero.Level}, XP: {hero.CurrentXP}/{hero.MaxXP}</h4>
         </div>
+      
         {currentXP >= maxXP ? <LevelUpButton click={() => handleCheckForLevelUp(hero)} ></LevelUpButton> : <div></div>}
-        <h4>HP {hero.CurrentHP}/{hero.MaxHP}, MP {hero.CurrentMP}/{hero.MaxMP}, SP {hero.CurrentSP}/{hero.MaxSP}</h4>
+        <h4>HP {hero.CurrentHP}/{hero.MaxHP}({hero.HPBonus})({hero.HPPenalty}), MP {hero.CurrentMP}/{hero.MaxMP}({hero.MPBonus})({hero.MPPenalty}), SP {hero.CurrentSP}/{hero.MaxSP}({hero.SPBonus})({hero.SPPenalty})</h4>
+        <h4>HPRegen {hero.HPRegen}({hero.HPRegenBonus})({hero.HPRegenPenalty}), MPRegen {hero.MPRegen}({hero.MPRegenBonus})({hero.MPRegenPenalty}), SPRegen {hero.SPRegen}({hero.SPRegenBonus})({hero.SPRegenPenalty})</h4>
+        </div>
         <div style={{ paddingBottom: "1%" }}>
           <h3>Attributes</h3>
           <div className='attribute'>
@@ -63,7 +67,7 @@ function CharacterSheet(props) {
           </div>
           <div className='attribute'>
             <h4>Mental Attributes</h4>
-            <h4>INT: {hero.Intelligence}({hero.IntBonus})({hero.IntPenalty})WIS: {hero.Wisdom}({hero.WisBonus})({hero.WisPenalty}) CHA: {hero.Charisma}({hero.ChaBonus})({hero.ChaPenalty}) WLP: {hero.WillPower}({hero.WlpBonus})({hero.WlpPenalty}) PRC: {hero.Perception}({hero.PrcBonus})({hero.PrcPenalty}) LCK: {hero.Luck}({hero.LckBonus})({hero.LckPenalty})</h4>
+            <h4>INT: {hero.Intelligence}({hero.IntBonus})({hero.IntPenalty}) WIS: {hero.Wisdom}({hero.WisBonus})({hero.WisPenalty}) CHA: {hero.Charisma}({hero.ChaBonus})({hero.ChaPenalty}) WLP: {hero.WillPower}({hero.WlpBonus})({hero.WlpPenalty}) PRC: {hero.Perception}({hero.PrcBonus})({hero.PrcPenalty}) LCK: {hero.Luck}({hero.LckBonus})({hero.LckPenalty})</h4>
           </div>
         </div>
         {/* <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button> */}

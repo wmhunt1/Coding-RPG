@@ -24,7 +24,7 @@ function Shop(props) {
         }
         else {
             RemoveGold(hero, item.Cost)
-            AddItemToInventory(hero, inventory, item)
+            AddItemToInventory(hero, inventory, item, item.Quantity)
             var newHero = hero;
             setHero(newHero);
             var newGold = hero.Gold;
@@ -38,7 +38,7 @@ function Shop(props) {
     }
     function handleSell(hero, heroInventory, shopInventory, item) {
         AddGold(hero, item.Cost / 2)
-        RemoveItemFromInventory(hero, heroInventory, item)
+        RemoveItemFromInventory(hero, heroInventory, item, item.Quantity)
         var newHero = hero;
         setHero(newHero);
         var newGold = hero.Gold;
@@ -105,11 +105,11 @@ function Shop(props) {
                 {dungeon !== null ? <div><button className='menu-button' onClick={() => startShopDungeon(hero)}><h3>Enter {dungeon.Name}</h3></button></div> : <div></div>}
                 <div><button className='menu-button' onClick={props.Back}><h3>Leave Store</h3></button></div>
             </div> : <div></div>}
-        {active === "buy" ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%" }}>
+        {active === "buy" ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%" , height:"200px"}}>
             {shopInventoryList}
         </div> : <div></div>}
         {active === "sell" ? <div>
-            {heroInventoryList.length > 0 ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%" }}>{heroInventoryList}</div> : <h3>Nothing to sell</h3>}
+            {heroInventoryList.length > 0 ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%",height:"200px" }}>{heroInventoryList}</div> : <h3>Nothing to sell</h3>}
         </div> : <div></div>}
         {active !== "Shopping" && active !== "Dialogue" && active !== "Node" && active !== "Dungeon" ? <div><button onClick={() => setActive("Shopping")}><h4>Back to {props.shop.Name}</h4></button></div> : <div></div>}
         {active === "Dialogue" ? <Dialogue parentCallback={handleCallback} hero={hero} talk={dialogue} Back={() => finishShopDialogue(hero)}></Dialogue> : <div></div>

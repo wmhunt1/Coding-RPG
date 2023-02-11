@@ -11,11 +11,8 @@ export function updateLocation(hero, map, x, y) {
         var knownIndex = null;
         if (hero.Map.find(x => x.LocationName === map.Locations[mapIndex].LocationName)) {
             knownIndex = hero.Map.findIndex(x => x.LocationName === map.Locations[mapIndex].LocationName);
-            console.log(knownIndex)
         }
-        console.log(knownIndex)
         if (knownIndex === null) {
-            console.log(hero.Map)
             if (map.Locations[mapIndex].CanTravel === true) {
                 hero.Map.push(map.Locations[mapIndex])
                 AddToCharacterLog(hero, hero.Name + " discovers " + map.Locations[mapIndex].LocationName)

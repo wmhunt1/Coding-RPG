@@ -1,5 +1,6 @@
 import { AddToCharacterLog } from "./CharacterScripts";
 import { bareBack, bareFeet, bareFinger, bareFist, bareHands, bareHead, bareLegs, bareNeck, bareTorso, emptyOffHand } from "../Database/ItemsDB"
+import { heavyArmorSkill } from "../Database/SkillsDB";
 Array.prototype.remove = function () {
     var what, a = arguments, L = a.length, ax;
     while (L && this.length) {
@@ -57,6 +58,19 @@ export function UnEquip(char, inventory, item) {
         char.Head = bareHead()
     }
     if (item.Slot === "Torso") {
+        char.Torso.ProtectionType.onUnEquip(char, char.Torso)
+        if (char.Torso.Class.Name === "Heavy Armor") {
+            char.DexPenalty += 3;
+            char.SpdPenalty += 3;
+        }
+        if (char.Torso.Class.Name === "Medium Armor") {
+            char.DexPenalty += 2;
+            char.SpdPenalty += 2;
+        }
+        if (char.Torso.Class.Name === "Light Armor") {
+            char.DexPenalty += 1;
+            char.SpdPenalty += 1;
+        }
         char.Torso = bareTorso()
     }
     if (item.Slot === "Legs") {
@@ -77,7 +91,7 @@ export function UnEquip(char, inventory, item) {
     if (item.Slot === "Ring") {
         char.Ring = bareFinger()
     }
-    item.Enchantment.OnUnEquipEffect(char)
+    item.Enchantment.OnUnEquipEffect(char, item)
     char.Inventory = inventory;
 }
 export function EquipItem(char, inventory, item) {
@@ -99,7 +113,20 @@ export function EquipItem(char, inventory, item) {
     }
     if (item.Slot === "Torso") {
         UnEquip(char, inventory, char.Torso)
+        item.ProtectionType.onEquip(char, item)
         char.Torso = item
+        if (char.Torso.Class.Name === "Heavy Armor") {
+            char.DexPenalty -= 3;
+            char.SpdPenalty -= 3;
+        }
+        if (char.Torso.Class.Name === "Medium Armor") {
+            char.DexPenalty -= 2;
+            char.SpdPenalty -= 3;
+        }
+        if (char.Torso.Class.Name === "Light Armor") {
+            char.DexPenalty -= 1;
+            char.SpdPenalty -= 3;
+        }
     }
     if (item.Slot === "Legs") {
         UnEquip(char, inventory, char.Legs)
@@ -125,11 +152,48 @@ export function EquipItem(char, inventory, item) {
         UnEquip(char, inventory, char.Ring)
         char.Ring = item
     }
-    item.Enchantment.OnEquipEffect(char)
+    item.Enchantment.OnEquipEffect(char, item)
     char.Inventory = inventory;
 }
 export function EquipItemFromInventory(char, inventory, item) {
     EquipItem(char, inventory, item)
     RemoveItemFromInventory(char, inventory, item, item.Quantity)
     char.Inventory = inventory;
+}
+export function ApplyOnEquipEffect(hero, immune, resist, weak, item) {
+    for (var i = 0; i < immune.length; i++) {
+        var immunity = immune[i]
+        immunity.Source = item;
+        hero.Immunities.push(immunity)
+    }
+    for (var r = 0; r < resist.length; r++) {
+        var resistance = resist[i]
+        resistance.Source = item;
+        hero.Resistances.push(resistance)
+    }
+    for (var w = 0; w < weak.length; w++) {
+        var weakness = weak[i]
+        weakness.Source = item;
+        hero.Weaknesses.push(weakness)
+    }
+}
+export function ApplyOnUnEquipEffect(hero, immune, resist, weak, item) {
+    for (var i = 0; i < immune.length; i++) {
+        var immunity = immune[i]
+        if (immunity.Source === item) {
+            hero.Immunities.remove(immunity)
+        }
+    }
+    for (var r = 0; r < resist.length; r++) {
+        var resistance = resist[i]
+        if (resistance.Source === item) {
+            hero.Resistances.remove(resistance)
+        }
+    }
+    for (var w = 0; w < weak.length; w++) {
+        var weakness = weak[i]
+        if (weakness.Source === item) {
+            hero.Weaknesses.remove(weakness)
+        }
+    }
 }

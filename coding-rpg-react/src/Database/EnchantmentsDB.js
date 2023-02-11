@@ -1,15 +1,24 @@
 import { TakeDamage } from "../Scripts/CharacterScripts";
 import { AddToCombatLog, CalculateDamageModifiers } from "../Scripts/CombatScripts";
-import { fireDamage, noDamage } from "./DamageTypesDB";
+import { ApplyOnEquipEffect, ApplyOnUnEquipEffect } from "../Scripts/ItemScripts";
+import { fireDamage, iceDamage, noDamage } from "./DamageTypesDB";
 export function unEnchanted() {
-    var UnEnchanted = { Name: "UnEnchanted", Damage: 0, DamageType: noDamage(), OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char) { }, OnUnEquipEffect(chaar) { } }
+    var UnEnchanted = { Name: "UnEnchanted", Damage: 0, DamageType: noDamage(), OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { }, OnUnEquipEffect(char, item) { } }
     return UnEnchanted
 }
 export function fireEnchantment() {
-    var fireEnchantment = { Name: "Fire Enchantment", Damage: 5, DamageType: fireDamage(), OnHitEffect(char1, char2, combatLog) { var damage = CalculateDamageModifiers(char2, this.Damage, this.DamageType); TakeDamage(char2, damage); AddToCombatLog(combatLog, char1.Name + " deals an extra " + damage[0] + " " + this.DamageType.Name + " damage " + damage[1] + " due to " + this.Name) }, OnEquipEffect(char) { }, OnUnEquipEffect(char) { } }
+    var fireEnchantment = { Name: "Fire Enchantment", Damage: 5, DamageType: fireDamage(), OnHitEffect(char1, char2, combatLog) { var damage = CalculateDamageModifiers(char2, this.Damage, this.DamageType); TakeDamage(char2, damage); AddToCombatLog(combatLog, char1.Name + " deals an extra " + damage[0] + " " + this.DamageType.Name + " damage " + damage[1] + " due to " + this.Name) }, OnEquipEffect(char, item) { }, OnUnEquipEffect(char, item) { } }
     return fireEnchantment
 }
+export function fireImmuneEnchantment() {
+    var fireEnchantment = { Name: "Immunity to Fire", Immunities: [fireDamage()], Resistances: [], Weaknesses: [], OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, item) }, OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, item) } }
+    return fireEnchantment
+}
+export function iceResistEnchantment() {
+    var iceResist = { Name: "Resistance to Ice", Immunities: [], Resistances: [iceDamage()], Weaknesses: [], OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, item) }, OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, item) } }
+    return iceResist
+}
 export function strengthEnchantment() {
-    var strengthEnchantment = { Name: "Strength Enchantment", OnHitEffect() { }, OnEquipEffect(char) { char.StrBonus += 2; char.Log.push(char.Name + " gains a +2 Strength Bonus due to enchantment") }, OnUnEquipEffect(char) { char.StrBonus -= 2 } }
+    var strengthEnchantment = { Name: "Strength Enchantment", OnHitEffect() { }, OnEquipEffect(char, item) { char.StrBonus += 2; char.Log.push(char.Name + " gains a +2 Strength Bonus due to enchantment") }, OnUnEquipEffect(char, item) { char.StrBonus -= 2 } }
     return strengthEnchantment;
 }

@@ -1,5 +1,5 @@
 import { destructionSkill } from "../Database/SkillsDB";
-import { AddGold, AddToCharacterLog, EarnXP, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage } from "./CharacterScripts";
+import { AddGold, AddToCharacterLog, EarnXP, Regen, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage } from "./CharacterScripts";
 import { AddItemToInventory } from "./ItemScripts";
 import { CheckIfKillQuestObjective } from "./QuestScripts";
 import { EarnSkillXP, FindSkillInSkillBook } from "./SkillScripts";
@@ -8,8 +8,8 @@ export function AddToCombatLog(log, message) {
     log.push(message)
 }
 export function CalculateCharWeaponDamage(char, weapon) {
-    var damage = FindSkillInSkillBook(char, weapon.Class).Level
-    if (weapon.Class.Name === "Short Blade") {
+    var damage = Math.round((FindSkillInSkillBook(char, weapon.Class).Level)/10)
+    if (weapon.Class.Name === "Short Blade" || weapon.Class.Name === "Ranged") {
         damage += char.Dexterity + weapon.Damage + char.DexBonus - char.DexPenalty;
     }
     else {
@@ -18,11 +18,11 @@ export function CalculateCharWeaponDamage(char, weapon) {
     return damage;
 }
 export function CalculateCharArmor(char) {
-    var armorSkill = FindSkillInSkillBook(char, char.Torso.Class).Level
+    var armorSkill = Math.round((FindSkillInSkillBook(char, char.Torso.Class).Level)/10)
     var shield = 0;
     if (char.OffHand.SubType === "Shield") {
         var blockSkillIndex = char.SkillBook.findIndex(x => x.Name === "Block");
-        var blockSkill = char.SkillBook[blockSkillIndex].Level
+        var blockSkill = Math.round((char.SkillBook[blockSkillIndex].Level/10))
         shield = char.OffHand.Protection + blockSkill
     }
     var armor = char.Head.Protection + char.Torso.Protection + char.Legs.Protection + char.Hands.Protection + char.Feet.Protection + shield + armorSkill;
@@ -37,12 +37,10 @@ export function CalculateCharDefenseWithoutArmor(char) {
     return defense;
 }
 export function CalculateBaseDamage(damage, defense) {
-    if (damage - defense >= 0)
-    {
+    if (damage - defense >= 0) {
         return damage - defense;
     }
-    else
-    {
+    else {
         return 0
     }
 }
@@ -125,7 +123,7 @@ export function MagicAttackResults(char1, char2, combatLog, baseDamage, modified
     AddToCombatLog(combatLog, result)
 }
 export function ProjectileMagicAttack(char1, char2, combatLog, spell) {
-    var skillDamage = FindSkillInSkillBook(char1, destructionSkill()).Level
+    var skillDamage = Math.round((FindSkillInSkillBook(char1, destructionSkill()).Level)/10)
     var char1Damage = char1.Intelligence + char1.IntBonus - char1.IntPenalty + spell.Amount + skillDamage;
     var char2Defense = (char2.WillPower + char2.WlpBonus - char2.WlpPenalty) / 2 + (char2.Dexterity + char2.DexBonus - char2.DexPenalty) / 2;
     var baseDamage = CalculateBaseDamage(char1Damage, char2Defense)
@@ -178,7 +176,8 @@ export function SkipConditionCheck(char, combatLog) {
     }
 }
 export function HeroTurn(char1, allies, enemies, target, combatLog, option, spell, abil) {
-    if (char1.CurrentHP > 0) {
+    if (char1.CurrentHP + char1.TempHP > 0) {
+        Regen(char1, combatLog)
         if (SkipConditionCheck(char1, combatLog) === false) {
             if (option === "Basic Attack") {
                 BasicAttack(char1, target, combatLog, char1.Weapon)
@@ -201,7 +200,8 @@ export function HeroTurn(char1, allies, enemies, target, combatLog, option, spel
 }
 export function NPCTurn(allies, enemies, combatLog, round, hero) {
     for (let a = hero; a < allies.length; a++) {
-        if (allies[a].CurrentHP > 0) {
+        if (allies[a].CurrentHP + allies[a].TempHP > 0) {
+            Regen(allies[a], combatLog)
             if (SkipConditionCheck(allies[a], combatLog) === false) {
                 allies[a].Tactics(allies[a], allies, enemies, combatLog, round)
             }
@@ -215,7 +215,7 @@ export function NPCTurn(allies, enemies, combatLog, round, hero) {
 export function CalculateAverageSpeed(team) {
     var speed = 0;
     for (let t = 0; t < team.length; t++) {
-        if (team[t].CurrentHP > 0) {
+        if (team[t].CurrentHP + team[t].TempHP > 0) {
             speed += team[t].Speed;
         }
     }
@@ -241,6 +241,11 @@ export function CombatRound(char1, allies, enemies, target, combatLog, option, s
     }
 
 }
+export function CombatPenalties(hero) {
+    AddToCharacterLog(hero, hero.Name + " was Defeated")
+    AddToCharacterLog(hero, hero.Name + " lost " + hero.Gold / 2 + " GP")
+    hero.Gold /= 2;
+}
 export function CombatRewards(hero, allies, enemies) {
     AddToCharacterLog(hero, "Defeated all Foes")
     AddToCharacterLog(hero, "Recieving Combat Rewards")
@@ -260,5 +265,6 @@ export function CombatRewards(hero, allies, enemies) {
         RemoveAllBuffs(allies[a2])
         RemoveAllDeBuffs(allies[a2])
         RemoveCondition(allies[a2])
+        allies[a2].TempHP = 0;
     }
 }

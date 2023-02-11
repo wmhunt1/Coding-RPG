@@ -41,23 +41,29 @@ export function EarnXP(char, xp) {
 }
 export function HealHP(char, hp) {
     char.CurrentHP += hp;
-    if (char.CurrentHP > char.MaxHP) {
-        char.CurrentHP = char.MaxHP;
+    if (char.CurrentHP > char.MaxHP + char.HPBonus - char.HPPenalty) {
+        char.CurrentHP = char.MaxHP + char.HPBonus - char.HPPenalty;
     }
 }
 export function TakeDamage(char, damage) {
     if (damage < 0) {
         damage = 0;
     }
+    var updateTempHP = damage - char.TempHP;
+    damage -= char.TempHP
     char.CurrentHP -= damage;
+    char.TempHP = updateTempHP;
     if (char.CurrentHP < 0) {
         char.CurrentHP = 0;
+    }
+    if (char.TempHP < 0) {
+        char.TempHP = 0
     }
 }
 export function RecoverMP(char, mp) {
     char.CurrentMP += mp;
-    if (char.CurrentMP > char.MaxMP) {
-        char.CurrentMP = char.MaxMP;
+    if (char.CurrentMP > char.MaxMP + char.MPBonus - char.MPPenalty) {
+        char.CurrentMP = char.MaxMP + char.MPBonus - char.MPPenalty;
     }
 }
 export function UseMP(char, mp) {
@@ -73,8 +79,8 @@ export function HasEnoughMP(char, mp) {
 }
 export function RecoverSP(char, sp) {
     char.CurrentSP += sp;
-    if (char.CurrentSP > char.MaxSP) {
-        char.CurrentSP = char.MaxSP;
+    if (char.CurrentSP > char.MaxSP + char.SPBonus - char.SPPenalty) {
+        char.CurrentSP = char.MaxSP + char.SPBonus - char.SPPenalty;
     }
 }
 export function UseSP(char, sp) {
@@ -89,10 +95,24 @@ export function HasEnoughSP(char, sp) {
         return false;
     }
 }
+export function Regen(char, log) {
+    HealHP(char, char.HPRegen + char.HPRegenBonus - char.HPRegenPenalty)
+    if (char.HPRegen + char.HPRegenBonus - char.HPRegenPenalty > 0) {
+        AddToCharacterLog(log, char.Name + " Regenerates " + char.HPRegenBonus - char.HPRegenPenalty + " HP")
+    }
+    RecoverMP(char, char.MPRegen + char.MPRegenBonus - char.MPRegenPenalty)
+    if (char.MPRegen + char.MPRegenBonus - char.MPRegenPenalty > 0) {
+        AddToCharacterLog(log, char.Name + " Regenerates " + char.MPRegen + char.MPRegenBonus - char.MPRegenPenalty + " MP")
+    }
+    RecoverSP(char, char.SPRegen + char.SPRegenBonus - char.SPRegenPenalty)
+    if (char.SPRegen + char.SPRegenBonus - char.SPRegenPenalty > 0) {
+        AddToCharacterLog(log, char.Name + " Regenerates " + char.SPRegen + char.SPRegenBonus - char.SPRegenPenalty + " SP")
+    }
+}
 export function FullyRecover(char) {
-    HealHP(char, char.MaxHP)
-    RecoverMP(char, char.MaxMP)
-    RecoverSP(char, char.CurrentSP)
+    HealHP(char, char.MaxHP + char.HPBonus - char.HPPenalty)
+    RecoverMP(char, char.MaxMP + char.MPBonus - char.MPPenalty)
+    RecoverSP(char, char.CurrentSP + char.SPBonus - char.SPPenalty)
     AddToCharacterLog(char, char.Name + " Fully Recovered")
 }
 export function PartyRecovery(char) {
