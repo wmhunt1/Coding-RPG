@@ -6,7 +6,7 @@ export function Dialogue(props) {
     const [hero, setHero] = useState(props.hero)
     const [char, setChar] = useState(props.talk.Char)
     const [dialogue, setDialogue] = useState(props.talk)
-    const [conversationLog, setConversationLog] = useState(["Starting Conversation with " + props.talk.Char, props.talk.Char + props.talk.Conversation[0].Dialogue[0]])
+    const [conversationLog, setConversationLog] = useState(["Starting Conversation with " + props.talk.Char, props.talk.Char + ": " +props.talk.Conversation[0].Dialogue[0]])
     const [responses, setReponses] = useState(props.talk.Conversation[0].Responses)
     const [progress, setProgress] = useState(0)
     const responseOptions = responses.map((option, index) => <h4 style={{ display: "inline-block", marginLeft: ".5%", marginRight: ".5%" }} key={index}><button onClick={() => handleResponse(hero, char, dialogue, conversationLog, option, progress)}>{option[0]}</button></h4>)
