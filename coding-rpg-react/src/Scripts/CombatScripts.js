@@ -1,5 +1,5 @@
 import { destructionSkill } from "../Database/SkillsDB";
-import { AddGold, AddToCharacterLog, EarnXP, Regen, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage } from "./CharacterScripts";
+import { AddGold, AddToCharacterLog, BuffAndDeBuffDuration, EarnXP, Regen, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage } from "./CharacterScripts";
 import { AddItemToInventory } from "./ItemScripts";
 import { CheckIfKillQuestObjective } from "./QuestScripts";
 import { EarnSkillXP, FindSkillInSkillBook } from "./SkillScripts";
@@ -8,7 +8,7 @@ export function AddToCombatLog(log, message) {
     log.push(message)
 }
 export function CalculateCharWeaponDamage(char, weapon) {
-    var damage = Math.round((FindSkillInSkillBook(char, weapon.Class).Level)/10)
+    var damage = Math.round((FindSkillInSkillBook(char, weapon.Class).Level) / 10)
     if (weapon.Class.Name === "Short Blade" || weapon.Class.Name === "Ranged") {
         damage += char.Dexterity + weapon.Damage + char.DexBonus - char.DexPenalty;
     }
@@ -18,11 +18,11 @@ export function CalculateCharWeaponDamage(char, weapon) {
     return damage;
 }
 export function CalculateCharArmor(char) {
-    var armorSkill = Math.round((FindSkillInSkillBook(char, char.Torso.Class).Level)/10)
+    var armorSkill = Math.round((FindSkillInSkillBook(char, char.Torso.Class).Level) / 10)
     var shield = 0;
     if (char.OffHand.SubType === "Shield") {
         var blockSkillIndex = char.SkillBook.findIndex(x => x.Name === "Block");
-        var blockSkill = Math.round((char.SkillBook[blockSkillIndex].Level/10))
+        var blockSkill = Math.round((char.SkillBook[blockSkillIndex].Level / 10))
         shield = char.OffHand.Protection + blockSkill
     }
     var armor = char.Head.Protection + char.Torso.Protection + char.Legs.Protection + char.Hands.Protection + char.Feet.Protection + shield + armorSkill;
@@ -123,7 +123,7 @@ export function MagicAttackResults(char1, char2, combatLog, baseDamage, modified
     AddToCombatLog(combatLog, result)
 }
 export function ProjectileMagicAttack(char1, char2, combatLog, spell) {
-    var skillDamage = Math.round((FindSkillInSkillBook(char1, destructionSkill()).Level)/10)
+    var skillDamage = Math.round((FindSkillInSkillBook(char1, destructionSkill()).Level) / 10)
     var char1Damage = char1.Intelligence + char1.IntBonus - char1.IntPenalty + spell.Amount + skillDamage;
     var char2Defense = (char2.WillPower + char2.WlpBonus - char2.WlpPenalty) / 2 + (char2.Dexterity + char2.DexBonus - char2.DexPenalty) / 2;
     var baseDamage = CalculateBaseDamage(char1Damage, char2Defense)
@@ -196,6 +196,7 @@ export function HeroTurn(char1, allies, enemies, target, combatLog, option, spel
             AddToCombatLog(combatLog, char1.Name + " lost turn due to " + char1.Condition.Name)
         }
         DamageConditionCheck(char1, combatLog)
+        BuffAndDeBuffDuration(char1, combatLog)
     }
 }
 export function NPCTurn(allies, enemies, combatLog, round, hero) {
@@ -209,6 +210,7 @@ export function NPCTurn(allies, enemies, combatLog, round, hero) {
                 AddToCombatLog(combatLog, allies[a].Name + " lost turn due to " + allies[a].Condition.Name)
             }
             DamageConditionCheck(allies[a], combatLog)
+            BuffAndDeBuffDuration(allies[a], combatLog)
         }
     }
 }
@@ -243,8 +245,8 @@ export function CombatRound(char1, allies, enemies, target, combatLog, option, s
 }
 export function CombatPenalties(hero) {
     AddToCharacterLog(hero, hero.Name + " was Defeated")
-    AddToCharacterLog(hero, hero.Name + " lost " + hero.Gold / 2 + " GP")
-    hero.Gold /= 2;
+    AddToCharacterLog(hero, hero.Name + " lost " + Math.floor(hero.Gold / 2) + " GP")
+    hero.Gold = Math.floor(hero.Gold / 2);
 }
 export function CombatRewards(hero, allies, enemies) {
     AddToCharacterLog(hero, "Defeated all Foes")

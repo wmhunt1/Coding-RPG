@@ -67,6 +67,10 @@ export function woodcuttingSkill() {
 }
 //knowledge skills
 //magic skills
+export function alterationSkill(level) {
+    var alt = { Name: "Alteration", Type: "Magic", Level: level, CurrentXP: 0, MaxXP: 50 }
+    return alt;
+}
 export function conjurationSkill(level) {
     var conj = { Name: "Conjuration", Type: "Magic", Level: level, CurrentXP: 0, MaxXP: 50 }
     return conj;

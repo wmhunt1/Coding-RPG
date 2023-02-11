@@ -1,10 +1,18 @@
-import { conjurationSkill, restorationSkill } from "../Database/SkillsDB";
+import { alterationSkill, conjurationSkill, illusionSkill, restorationSkill } from "../Database/SkillsDB";
 import { HasEnoughMP, UseMP, HasEnoughSP, UseSP } from "./CharacterScripts";
 import { EarnSkillXP, FindSkillInSkillBook } from "./SkillScripts";
 export function CalculateHealAmount(char, baseHeal) {
     var extraHeal = Math.round((FindSkillInSkillBook(char, restorationSkill()).Level + char.Wisdom + char.WisBonus - char.WisPenalty) / 10)
     var heal = baseHeal + extraHeal
     return heal;
+}
+export function CalculateAlterationDuration(char, defaultDuration) {
+    var mod = Math.round((FindSkillInSkillBook(char, alterationSkill()).Level + char.WillPower + char.WlpBonus - char.WlpPenalty) / 10)
+    return defaultDuration + mod;
+}
+export function CalculateIllusionDuration(char, defaultDuration) {
+    var mod = Math.round((FindSkillInSkillBook(char, illusionSkill()).Level + char.Charisma + char.ChaBonus - char.ChaPenalty) / 10)
+    return defaultDuration + mod;
 }
 export function ModifySummon(char, allies, summon) {
     var mod = Math.round((FindSkillInSkillBook(char, conjurationSkill()).Level + char.Charisma + char.ChaBonus - char.ChaPenalty) / 10)

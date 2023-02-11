@@ -11,7 +11,6 @@ relationships
 add time delay
 Time for travel and activies?
 Days?
-spell/condition duration?
 Property
 Objective items too for less redundancy
 random encounter that forces combat

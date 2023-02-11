@@ -17,7 +17,7 @@ function Shop(props) {
     const [dungeon, setDungeon] = useState(props.shop.Dungeon)
     const [node, setNode] = useState(props.shop.Node)
     const shopInventoryList = shopInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP <button onClick={() => { handleBuy(hero, heroInventory, item) }}><h4>Buy</h4></button></h4>)
-    const heroInventoryList = heroInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost / 2} GP, QTY: {item.Quantity} <button onClick={() => { handleSell(hero, heroInventory, shopInventory, item) }}><h4>Sell</h4></button></h4>)
+    const heroInventoryList = heroInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {Math.floor(item.Cost/2)} GP, QTY: {item.Quantity} <button onClick={() => { handleSell(hero, heroInventory, shopInventory, item) }}><h4>Sell</h4></button></h4>)
     function handleBuy(hero, inventory, item) {
         if (item.Cost > hero.Gold) {
             AddToCharacterLog(hero, "Cannot afford " + item.Name)
@@ -37,7 +37,7 @@ function Shop(props) {
 
     }
     function handleSell(hero, heroInventory, shopInventory, item) {
-        AddGold(hero, item.Cost / 2)
+        AddGold(hero, Math.floor(item.Cost/2))
         RemoveItemFromInventory(hero, heroInventory, item, item.Quantity)
         var newHero = hero;
         setHero(newHero);

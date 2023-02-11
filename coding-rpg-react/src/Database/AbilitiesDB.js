@@ -1,5 +1,5 @@
 import { CheckIfBuffApplied } from "../Scripts/CharacterScripts";
-import {ArmorIgnoringAttack, BasicAttack } from "../Scripts/CombatScripts";
+import { ArmorIgnoringAttack, BasicAttack } from "../Scripts/CombatScripts";
 import { rageBuff } from "./BuffsDB";
 
 export function cleave() {
@@ -17,6 +17,6 @@ export function pierceArmor() {
     return pierceArmor;
 }
 export function rage() {
-    var rage = { Name: "Rage", StaminaCost: 5, Description: "Temporarily gain a +2 bonus to Strength", AbilityEffect(char, allies, enemies, target, combatLog) { combatLog.push(char.Name + " Enters a rage"); CheckIfBuffApplied(char, rageBuff(), combatLog) } }
+    var rage = { Name: "Rage", StaminaCost: 5, Description: "Temporarily gain a +2 bonus to Strength", AbilityEffect(char, allies, enemies, target, combatLog) { combatLog.push(char.Name + " Enters a rage"); CheckIfBuffApplied(char, rageBuff(3), combatLog) } }
     return rage;
 }

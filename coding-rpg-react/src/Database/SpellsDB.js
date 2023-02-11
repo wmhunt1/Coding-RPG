@@ -1,19 +1,19 @@
 import { ApplyCondition, HealHP, RemoveCondition } from "../Scripts/CharacterScripts";
 import { AddToCombatLog, ProjectileMagicAttack } from "../Scripts/CombatScripts";
-import { CalculateHealAmount, ModifySummon } from "../Scripts/SpellScripts";
+import { CalculateAlterationDuration, CalculateHealAmount, CalculateIllusionDuration, ModifySummon } from "../Scripts/SpellScripts";
 import { rat } from "./CharactersDB";
 import { poisonCondition, sleepCondition } from "./ConditionsDB";
 import { fireDamage, forceDamage, noDamage, poisonDamage } from "./DamageTypesDB";
-import { conjurationSkill, destructionSkill, illusionSkill, restorationSkill } from "./SkillsDB";
+import { alterationSkill, conjurationSkill, destructionSkill, illusionSkill, restorationSkill } from "./SkillsDB";
 
 //control spells
 export function sleepSpell() {
-    var sleep = { Name: "Sleep", School: illusionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Puts all foes to sleep", Amount: 0, DamageType: noDamage(), SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " puts all foes to sleep"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], sleepCondition(), combatLog) } } }
+    var sleep = { Name: "Sleep", School: illusionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Puts all foes to sleep", Amount: 0, DamageType: noDamage(), SpellEffect(char, allies, enemies, target, combatLog) {var calcDuration = CalculateIllusionDuration(char, 1); AddToCombatLog(combatLog, char.Name + " puts all foes to sleep"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], sleepCondition(0, calcDuration), combatLog) } } }
     return sleep;
 }
 //condition spell
 export function poisonSpray() {
-    var poisonSpray = { Name: "Poison Spray", School: destructionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "A Spray of Poison that Poisons all Foes", Amount: 5, DamageType: poisonDamage(), SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " sprays all foes with poison"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], poisonCondition(this.Amount), combatLog) } } }
+    var poisonSpray = { Name: "Poison Spray", School: alterationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "A Spray of Poison that Poisons all Foes", Amount: 5, DamageType: poisonDamage(), SpellEffect(char, allies, enemies, target, combatLog) { var calcDuration = CalculateAlterationDuration(char, 1); AddToCombatLog(combatLog, char.Name + " sprays all foes with poison"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], poisonCondition(this.Amount, calcDuration), combatLog) } } }
     return poisonSpray;
 }
 //damage spells

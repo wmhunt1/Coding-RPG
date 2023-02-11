@@ -157,6 +157,22 @@ export function LearnSpell(char, spell) {
         char.Log.push(char.Name + " learns " + spell.Name)
     }
 }
+export function BuffAndDeBuffDuration(char, log) {
+    for (var b = 0; b < char.Buffs.length; b++) {
+        char.Buffs[b].RemainingDuration--;
+        if (char.Buffs[b].RemainingDuration === 0) {
+            char.Buffs.RemoveBuff(char)
+            AddToCombatLog(char, char.Buffs[b].Name + " expires")
+        }
+    }
+    for (var d = 0; d < char.DeBuffs.length; d++) {
+        char.DeBuffs[d].RemainingDuration--;
+        if (char.DeBuffs[d].RemainingDuration === 0) {
+            char.DeBuffs.RemoveDeBuff(char)
+            AddToCombatLog(char, char.DeBuffs[d].Name + " expires")
+        }
+    }
+}
 export function CheckIfBuffApplied(char, buff, combatLog) {
     if (char.Buffs.length > 0) {
         if (char.Buffs.find(x => x.Name !== buff.Name)) {
@@ -211,6 +227,7 @@ export function RemoveCondition(char, log) {
 }
 export function ResistCondition(char, log) {
     if (char.Condition.Name !== "None") {
+        char.Condition.RemainingDuration--;
         var resistingAttribute = 0;
         if (char.Condition.Type === "Damage") {
             resistingAttribute = char.Constitution + char.ConBonus - char.ConPenalty;
@@ -228,8 +245,13 @@ export function ResistCondition(char, log) {
         if (char.ConditionWeaknesses.find(x => x.Name === char.Conditon.Name) === true) {
             resistChance -= 50
         }
-        if (resistChance >= 50) {
-            log.push(char.Name + " resisted " + char.Condition.Name)
+        if (resistChance >= 50 || char.Condition.RemainingDuration === 0) {
+            if (resistChance >= 50) {
+                log.push(char.Name + " resisted " + char.Condition.Name)
+            }
+            else {
+                log.push(char.Name + "'s " + char.Condition.Name + " expired")
+            }
             RemoveCondition(char, log)
         }
     }
