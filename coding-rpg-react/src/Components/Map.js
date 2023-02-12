@@ -42,7 +42,7 @@ function Map(props) {
         }
     }
     const subLocationsList = subLocations.sort((a, b) => a.Name.localeCompare(b.Name)).map((location, index) => <div key={index}><div style={{ display: "inline-block", lineHeight: "0pt" }}><h5>{location.Name}</h5></div> <div style={{ display: "inline-block", lineHeight: "0pt" }}><button onClick={() => handleEnterLocation(hero, location)}>Enter</button></div></div>)
-    const knownLocationsList = knownLocations.sort((a, b) => a.XCoord - b.XCoord && a.YCoord - b.YCoord).map((location, index) => <div key={index}><div style={{ display: "inline-block", lineHeight: "0pt" }}><h5>{location.LocationName}: ({location.XCoord}, {location.YCoord})</h5></div> <div style={{ display: "inline-block", lineHeight: "0pt" }}><button onClick={() => goToKnownLocation(hero, map, location.XCoord, location.YCoord, coordinateX, coordinateY)}>Travel</button></div></div>)
+    const knownLocationsList = knownLocations.sort((a, b) => a.LocationName.localeCompare(b.LocationName)).map((location, index) => <div key={index}><div style={{ display: "inline-block", lineHeight: "0pt" }}><h5>{location.LocationName}: ({location.XCoord}, {location.YCoord})</h5></div> <div style={{ display: "inline-block", lineHeight: "0pt" }}><button onClick={() => goToKnownLocation(hero, map, location.XCoord, location.YCoord, coordinateX, coordinateY)}>Travel</button></div></div>)
     const adjacentLocationList = adjacentLocations.map((location, index) => <p key={index}>{location}</p>)
     return (<div>
 
@@ -63,8 +63,8 @@ function Map(props) {
                     </div>
                 </div>
                 <div style={{ display: "inline-block", verticalAlign: "text-top", marginRight: ".1%", border: "solid", paddingLeft: "1%", paddingRight: "1%", height: "150px", overflow: "scroll", width: "250px" }}>{subLocations.length > 0 ? <div><h4 style={{ lineHeight: "0pt" }}>Sub Locations</h4>{subLocationsList}</div> : <div><h4 style={{ lineHeight: "0pt" }}>Sub Locations</h4></div>}</div>
-                <div style={{ display: "inline-block", verticalAlign: "text-top", marginRight: ".1%", border: "solid", paddingLeft: "1%", paddingRight: "1%", height: "150px", overflow: "scroll", width: "150px" }}>{knownLocations.length > 0 ? <div><h4 style={{ lineHeight: "0pt" }}>Known Locations</h4>{knownLocationsList}</div> : <div><h4 style={{ lineHeight: "0pt" }}>Known Locations</h4></div>}</div>
-                <div style={{ display: "inline-block", verticalAlign: "text-top", marginRight: ".1%", border: "solid", paddingLeft: "1%", paddingRight: "1%", height: "150px", overflow: "scroll", width: "100px" }}>{adjacentLocations.length > 0 ? <div><h4 style={{ lineHeight: "0pt" }}>Adjacent</h4>{adjacentLocationList}</div> : <div></div>}</div>
+                <div style={{ display: "inline-block", verticalAlign: "text-top", marginRight: ".1%", border: "solid", paddingLeft: "1%", paddingRight: "1%", height: "150px", overflow: "scroll", width: "170px" }}>{knownLocations.length > 0 ? <div><h4 style={{ lineHeight: "0pt" }}>Known Locations</h4>{knownLocationsList}</div> : <div><h4 style={{ lineHeight: "0pt" }}>Known Locations</h4></div>}</div>
+                <div style={{ display: "inline-block", verticalAlign: "text-top", marginRight: ".1%", border: "solid", paddingLeft: "1%", paddingRight: "1%", height: "150px", overflow: "scroll", width: "80px" }}>{adjacentLocations.length > 0 ? <div><h4 style={{ lineHeight: "0pt" }}>Adjacent</h4>{adjacentLocationList}</div> : <div></div>}</div>
             </div>
         </div>
     </div>)

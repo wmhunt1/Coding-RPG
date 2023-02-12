@@ -1,18 +1,21 @@
-import { bridgeOverRiver, daleTown, farm, forest, river, road, witchHut } from "./LocationsDB"
+import { bridgeOverRiver, daleTown, dwarvenMine, farm, forest, river, road, witchHut } from "./LocationsDB"
 
 export function worldMap(hero) {
     var worldMap = {
-        Name: "World", Locations: [daleTown(hero),
+        Name: "World", Locations: [daleTown(hero), dwarvenMine(hero, 3, -3),
         farm(hero, 1, 0), farm(hero, 1, -1), farm(hero, -1, -1),
         bridgeOverRiver(hero, 0, 1),
         forest(hero, -1, 2),
         river(hero, 1, 1), river(hero, -1, 0), river(hero, -1, 1),
-        road(hero, 0, -1), road(hero, 0, 2),
+        road(hero, 0, -1), road(hero, 0, 2), road(hero, 0, -2), road(hero, 1, -2), road(hero, 1, -3), road(hero, 2, - 3),
         witchHut(hero, 1, 2)]
     }
     return worldMap
 }
 //map sketch
+//|- (-3,4) -|- (-2,4)-|-(-1, 4)-|- (0,4)  -|- (1, 4) -|- (2, 4) -|- (3, 4) -|
+//|          |         |         |          |          |          |          |
+//|----------|---------|---------|----------|----------|----------|----------|
 //|- (-3,3) -|- (-2,3)-|-(-1, 3)-|- (0,3)  -|- (1, 3) -|- (2, 3) -|- (3, 3) -|
 //|          |         |         |          |          |          |          |
 //|----------|---------|---------|----------|----------|----------|----------|
@@ -29,8 +32,8 @@ export function worldMap(hero) {
 //|          |         |farm     |road      |farm      |          |          |
 //|----------|---------|---------|----------|----------|----------|----------|
 //|- (-3,-2)-|-(-2,-2)-|-(-1,-2)-|- (0,-2)- |- (1,-2) -|- (2,-2) -|- (3,-2) -|
-//|          |         |         |          |          |          |          |
+//|          |         |         |road      |road      |          |          |
 //|----------|---------|---------|----------|----------|----------|----------|
 //|- (-3,-3)-|-(-2,-3)-|-(-1,-3)-|- (0,-3)- |- (1,-3) -|- (2,-3) -|- (3,-3) -|
-//|          |         |         |          |          |          |          |
+//|          |         |         |          |road      |road      |mine      |
 //|----------|---------|---------|----------|----------|----------|----------|

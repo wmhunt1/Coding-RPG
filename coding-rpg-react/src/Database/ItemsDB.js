@@ -1,8 +1,9 @@
 import { HealHP, LearnSpell, RecoverMP, RecoverSP, RemoveCondition } from "../Scripts/CharacterScripts";
+import { EarnSkillXP, FindSkillInSkillBook } from "../Scripts/SkillScripts";
 import { bludeoningDamage, piercingDamage, slashingDamage } from "./DamageTypesDB";
 import { fireEnchantment, fireImmuneEnchantment, iceResistEnchantment, strengthEnchantment, unEnchanted } from "./EnchantmentsDB";
 import { clothProtection, metalProtection, naturalProtection, woodProtection } from "./ProtectionTypesDB";
-import { blockSkill, bluntSKill, heavyArmorSkill, longBladeSkill, rangedSkill, shortBladeSkill, unArmedSkill, unArmoredSkill } from "./SkillsDB";
+import { blockSkill, bluntSKill, heavyArmorSkill, longBladeSkill, rangedSkill, shortBladeSkill, smithingSkill, unArmedSkill, unArmoredSkill } from "./SkillsDB";
 import { magicMissile } from "./SpellsDB";
 //consumables
 //drinks
@@ -63,6 +64,11 @@ export function magicMissileScroll() {
     var magicMissileScroll = { Name: "Scroll of Magic Missile", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " studies " + this.Name); LearnSpell(hero, magicMissile()) } }
     return magicMissileScroll;
 }
+//xp lamps
+export function lessonsFromFaldan() {
+    var lessonsFromFaldan = { Name: "Lessons from Faldan", Type: "Consumable", SubType: "Lamp", Cost: 10, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " studies " + this.Name); EarnSkillXP(hero, FindSkillInSkillBook(hero, smithingSkill()), 500) } }
+    return lessonsFromFaldan
+}
 //equipables
 //accessories
 //back
@@ -70,13 +76,11 @@ export function bareBack() {
     var bare = { Name: "Bare", Slot: "Back", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bare;
 }
-export function capeOfFireImmunity()
-{
+export function capeOfFireImmunity() {
     var cape = { Name: "Cape of Fire Immunity", Slot: "Back", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: fireImmuneEnchantment() }
     return cape;
 }
-export function cloak()
-{
+export function cloak() {
     var cloak = { Name: "Cloak", Slot: "Back", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: iceResistEnchantment() }
     return cloak;
 }
@@ -327,32 +331,27 @@ export function woodLogs() {
 }
 //tools
 //fishing
-export function fishingRod()
-{
+export function fishingRod() {
     var fishingRod = { Name: "Fishing Rod", Type: "Tool", SubType: "Fishing Rod", Cost: 1, Quantity: 1 }
     return fishingRod
 }
 //hatchets
-export function hatchet()
-{
+export function hatchet() {
     var hatchet = { Name: "Pickaxe", Type: "Tool", SubType: "Hatchet", Cost: 1, Quantity: 1 }
     return hatchet
 }
 //knife
-export function knife()
-{
+export function knife() {
     var knife = { Name: "Knife", Type: "Tool", SubType: "Knife", Cost: 1, Quantity: 1 }
     return knife
 }
 //pickaxes
-export function pickAxe()
-{
+export function pickAxe() {
     var pickAxe = { Name: "Pickaxe", Type: "Tool", SubType: "Pickaxe", Cost: 1, Quantity: 1 }
     return pickAxe
 }
 //tinderboxes
-export function tinderBox()
-{
+export function tinderBox() {
     var tinderBox = { Name: "Tinderbox", Type: "Tool", SubType: "Tinder Box", Cost: 1, Quantity: 1 }
     return tinderBox
 }

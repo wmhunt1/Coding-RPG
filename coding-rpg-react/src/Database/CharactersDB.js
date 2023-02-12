@@ -38,10 +38,20 @@ export function rat() {
     rat.CurrentXP = 5; rat.CurrentHP = 5; rat.MaxHP = 5; rat.CurrentMP = 5; rat.MaxMP = 5; rat.CurrentSP = 5; rat.MaxSP = 5; rat.ItemDrops = [rawRatMeat(), ratTail()]
     return rat;
 }
+export function worg() {
+    var worg = beast("Worg")
+    worg.CurrentXP = 10; worg.Strength = 14; worg.CurrentHP = 20; worg.MaxHP = 20;
+    return worg;
+}
 //humanoid
 export function goblin() {
     var goblin = character("Goblin")
     goblin.CurrentXP = 10; goblin.Weapon = woodenclub(); goblin.OffHand = woodenShield(); goblin.Legs = loinCloth();
+    return goblin
+}
+export function goblinBoss() {
+    var goblin = character("Goblin Boss")
+    goblin.CurrentHP = 15; goblin.MaxHP = 15; goblin.CurrentXP = 20; goblin.Weapon = woodenclub(); goblin.OffHand = woodenShield(); goblin.Legs = loinCloth();
     return goblin
 }
 //undead
