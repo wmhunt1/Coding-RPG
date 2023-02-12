@@ -23,10 +23,6 @@ Skill success chance or more success for higher tiers of tool
 Skill failure 50 + level - levelreq + tool if relevant 
 Failure output (burnt food)
 Can lose some inputs such as thread
-Type encounters as combat
-Have non combat encounters 
-Only see one dungeon encounter at a time
-Replace dungeon dialogue with dialogue encounter
 That way can include kobolds in goblin dungeon
 Wizard tower with dungeon 
 Ferra joins for goblinmine

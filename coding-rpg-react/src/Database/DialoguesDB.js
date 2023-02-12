@@ -57,19 +57,7 @@ export function testDialogue(hero) {
     }
     return testDialogue
 }
-export function testDungeonDialogue(hero, encounters, defeated, boss) {
-    var testDungeonDialogue = ""
-    if (encounters.length > defeated) {
-        testDungeonDialogue = { Name: "Test Dialogue", Char: "Test NPC", Conversation: [{ Dialogue: [": You have not defeated all of the encounters"], Responses: [], responseEffect(hero, option) { } },] }
-    }
-    else if (encounters.length === defeated && boss === 0) {
-        testDungeonDialogue = { Name: "Test Dialogue", Char: "Test NPC", Conversation: [{ Dialogue: [": Only the boss remains"], Responses: [], responseEffect(hero, option) { } },] }
-    }
-    else if (encounters.length === defeated && boss === 1) {
-        testDungeonDialogue = { Name: "Test Dialogue 4", Char: "Test NPC", Conversation: [{ Dialogue: [": you have defeated the boss"], Responses: [], responseEffect(hero, option) { } },] }
-    }
-    else {
-        testDungeonDialogue = { Name: "Test Dialogue 4", Char: "Test NPC", Conversation: [{ Dialogue: [": placeholder"], Responses: [], responseEffect(hero, option) { } },] }
-    }
+export function testDungeonDialogue(hero) {
+    var testDungeonDialogue = testDungeonDialogue = { Name: "Test Dialogue", Char: "Test NPC", Conversation: [{ Dialogue: [": You have not defeated all of the encounters"], Responses: [], responseEffect(hero, option) { } },] }
     return testDungeonDialogue;
 }

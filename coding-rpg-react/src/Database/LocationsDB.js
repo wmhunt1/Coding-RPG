@@ -1,5 +1,5 @@
 import { testDialogue } from "./DialoguesDB"
-import { goblinMine, testDungeon2 } from "./DungeonsDB"
+import { goblinMine} from "./DungeonsDB"
 import { cowEncounter, testEncounter } from "./EncountersDB"
 import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, testShop, witchHutShop } from "./ShopsDB"
 import { alchemyNode, cookNode, farmNode, fireNode, fishNode, fletchNode, huntNode, mineNode, woodNode } from "./SkillNodesDB"
@@ -125,7 +125,7 @@ export function startingLocation(hero) {
     return startingLocation
 }
 export function testLocation2(hero) {
-    var testLocation2 = { LocationName: "Location 2", XCoord: 1, YCoord: 0, SubLocations: [testCombatEnter(), testDialogueEnter(), testDungeonEnter(hero), testShopEnter()] }
+    var testLocation2 = { LocationName: "Location 2", XCoord: 1, YCoord: 0, SubLocations: [testCombatEnter(), testDialogueEnter(), testShopEnter()] }
     return testLocation2
 }
 //test sublocations
@@ -135,10 +135,6 @@ export function testCombatEnter() {
 }
 export function testDialogueEnter() {
     var test = { Name: "TestDialogue", enterLocation(hero) { var content = { active: "Dialogue", combat: null, dialogue: testDialogue(hero), dungeon: null, shop: null, skill: null }; return content } }
-    return test
-}
-export function testDungeonEnter(hero) {
-    var test = { Name: "TestDungeon", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: testDungeon2(hero), shop: null, skill: null }; return content } }
     return test
 }
 export function testShopEnter() {
