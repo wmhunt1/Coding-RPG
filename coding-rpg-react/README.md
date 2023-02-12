@@ -13,4 +13,24 @@ quest failure if took to long
 journal doesn't update until after leaving shop or dialogoue
 break dialogue up into sub dialogues?
 dungeon exploration and/or puzzles
-consumable to give skill xp
+Weight or inventory slots?
+Bank?
+Magic penalties for heavier armor? MP penalty?
+Magic resistance?
+Map for dungeon with leaving like world map
+Or town maps
+Skill success chance or more success for higher tiers of tool
+Skill failure 50 + level - levelreq + tool if relevant 
+Failure output (burnt food)
+Can lose some inputs such as thread
+Type encounters as combat
+Have non combat encounters 
+Only see one dungeon encounter at a time
+Replace dungeon dialogue with dialogue encounter
+That way can include kobolds in goblin dungeon
+Wizard tower with dungeon 
+Ferra joins for goblinmine
+Skill trainers 
+Healer tactics 
+
+

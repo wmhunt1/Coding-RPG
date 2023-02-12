@@ -17,6 +17,13 @@ export function FindItemInInventory(inventory, item) {
     }
     return index
 }
+export function FindItemInInventoryBySubType(inventory, item) {
+    var index = null
+    if (inventory.find(x => x.SubType === item.SubType)) {
+        index = inventory.findIndex(x => x.SubType === item.SubType);
+    }
+    return index
+}
 export function AddItemToInventory(char, inventory, item, quantity) {
     if (inventory.find(x => x.Name === item.Name)) {
         var itemIndex = FindItemInInventory(inventory, item)

@@ -1,5 +1,20 @@
-import { giantRat, goblin, goblinBoss, rat, worg } from "./CharactersDB";
+import {cow, giantRat, goblin, goblinBoss, rat, worg } from "./CharactersDB";
 
+//beasts
+export function cowEncounter(){
+    var cowEncounter = [cow()]
+    return cowEncounter;
+}
+//rat
+export function giantRatEncounter() {
+    var ratEncounter = [giantRat(), rat(), rat(), rat()]
+    return ratEncounter
+}
+export function ratEncounter() {
+    var ratEncounter = [rat(), rat(), rat()]
+    return ratEncounter
+}
+//humanoids
 //goblins
 export function bossGoblinEncounter() {
     var bossGoblinEncounter = [goblinBoss(), goblin(), goblin(), goblin()]
@@ -13,15 +28,6 @@ export function goblinWithWorgEncounter()
 {
     var goblinWithWorgEncounter = [goblin(), worg()]
     return goblinWithWorgEncounter
-}
-//rats
-export function giantRatEncounter() {
-    var ratEncounter = [giantRat(), rat(), rat(), rat()]
-    return ratEncounter
-}
-export function ratEncounter() {
-    var ratEncounter = [rat(), rat(), rat()]
-    return ratEncounter
 }
 //tests
 export function testEncounter() {

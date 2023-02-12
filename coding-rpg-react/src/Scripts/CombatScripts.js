@@ -25,7 +25,7 @@ export function CalculateCharArmor(char) {
         var blockSkill = Math.round((char.SkillBook[blockSkillIndex].Level / 10))
         shield = char.OffHand.Protection + blockSkill
     }
-    var armor = char.Head.Protection + char.Torso.Protection + char.Legs.Protection + char.Hands.Protection + char.Feet.Protection + shield + armorSkill;
+    var armor = Math.round((char.Head.Protection + char.Torso.Protection + char.Legs.Protection + char.Hands.Protection + char.Feet.Protection)/5) + shield + armorSkill;
     return armor;
 }
 export function CalculateCharDefenseWithArmor(char, armor) {

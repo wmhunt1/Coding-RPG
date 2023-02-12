@@ -3,7 +3,7 @@ import '../App.css';
 import './Game.css'
 import SkillNode from "./SkillNode"
 import { EquipItemFromInventory, RemoveItemFromInventory } from '../Scripts/ItemScripts';
-import { alchemyNode, fireNode, fletchNode } from '../Database/SkillNodesDB'
+import { alchemyNode, craftNode, fireNode, fletchNode } from '../Database/SkillNodesDB'
 
 function Inventory(props) {
   const [hero, setHero] = useState(props.hero);
@@ -76,7 +76,7 @@ function Inventory(props) {
         {activeList === "Consumable" ? <div>{consumeList.length > 0 ? <div>{consumeList}</div> : <div><h4>No Consumables Items</h4></div>}</div> : <div></div>}
         {activeList === "Equipable" ? <div>{equipList.length > 0 ? <div>{equipList}</div> : <div><h4>No Equipable Items</h4></div>}</div> : <div></div>}
       </div>
-      <div><button onClick={() => (enterSkill(alchemyNode(hero)))}>Train Alchemy</button><button onClick={() => (enterSkill(fireNode(hero)))}>Train Firemaking</button><button onClick={(() => enterSkill(fletchNode(hero)))}>Train Fletching</button></div>
+      <div><button onClick={() => (enterSkill(alchemyNode(hero)))}>Train Alchemy</button><button onClick={() => (enterSkill(craftNode(hero)))}>Train Crafting</button><button onClick={() => (enterSkill(fireNode(hero)))}>Train Firemaking</button><button onClick={(() => enterSkill(fletchNode(hero)))}>Train Fletching</button></div>
     </div> : <div></div>}
     {active === "Node" ? <SkillNode parentCallback={handleCallback} hero={hero} node={node} Back={() => leaveSkill(hero)}></SkillNode> : <div></div>}
     {/* <button style={{ marginTop: "1%", marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button> */}

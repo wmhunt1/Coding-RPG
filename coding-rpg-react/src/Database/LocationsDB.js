@@ -1,6 +1,6 @@
 import { testDialogue } from "./DialoguesDB"
 import { goblinMine, testDungeon2 } from "./DungeonsDB"
-import { testEncounter } from "./EncountersDB"
+import { cowEncounter, testEncounter } from "./EncountersDB"
 import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, testShop, witchHutShop } from "./ShopsDB"
 import { alchemyNode, cookNode, farmNode, fireNode, fishNode, fletchNode, huntNode, mineNode, woodNode } from "./SkillNodesDB"
 
@@ -26,7 +26,7 @@ export function bridgeOverRiver(hero, x, y) {
     return river;
 }
 export function farm(hero, x, y) {
-    var farm = { LocationName: "Farm", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFarmNode(hero)] }
+    var farm = { LocationName: "Farm", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterCowEncounter(hero), enterFarmNode(hero)] }
     return farm;
 }
 export function forest(hero, x, y) {
@@ -46,6 +46,11 @@ export function road(hero, x, y) {
 export function enterDwarvenMine(hero) {
     var enterDwarvenMine = { Name: "Dwarven Mine (Goblins)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: goblinMine(hero), shop: null, skill: null }; return content } }
     return enterDwarvenMine
+}
+//enter encounters
+export function enterCowEncounter(hero) {
+    var enterCowEncounter = { Name: "Kill Cows", enterLocation(hero) { var content = { active: "Combat", combat: cowEncounter(hero), dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    return enterCowEncounter
 }
 //enter shops
 //general store

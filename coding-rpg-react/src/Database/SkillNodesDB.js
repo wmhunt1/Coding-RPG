@@ -1,9 +1,9 @@
-import {alchemyRecipes, cookingRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, huntingRecipes, miningRecipes, smithingRecipes, woodcuttingRecipes} from "./SkillRecipesDB"
+import {alchemyRecipes, cookingRecipes, craftingRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, huntingRecipes, miningRecipes, smithingRecipes, woodcuttingRecipes} from "./SkillRecipesDB"
 
 export function alchemyNode(hero)
 {
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Alchemy");
-    var alchemyNode = {Name: "Mortar and Pestle", Skill: hero.SkillBook[skillIndex], Recipes: alchemyRecipes()}
+    var alchemyNode = {Name: "Alchemy", Skill: hero.SkillBook[skillIndex], Recipes: alchemyRecipes()}
     return alchemyNode;
 }
 export function cookNode(hero)
@@ -11,6 +11,12 @@ export function cookNode(hero)
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Cooking");
     var cookNode = {Name: "Stove", Skill: hero.SkillBook[skillIndex], Recipes: cookingRecipes()}
     return cookNode;
+}
+export function craftNode(hero)
+{
+    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Crafting");
+    var craftNode = {Name: "Crafting", Skill: hero.SkillBook[skillIndex], Recipes: craftingRecipes()}
+    return craftNode;
 }
 export function farmNode(hero)
 {
@@ -21,7 +27,7 @@ export function farmNode(hero)
 export function fireNode(hero)
 {
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Firemaking");
-    var fireNode = {Name: "Tinderbox", Skill: hero.SkillBook[skillIndex], Recipes: firemakingRecipes()}
+    var fireNode = {Name: "Firemaking", Skill: hero.SkillBook[skillIndex], Recipes: firemakingRecipes()}
     return fireNode
 }
 export function fishNode(hero)
@@ -33,7 +39,7 @@ export function fishNode(hero)
 export function fletchNode(hero)
 {
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Fletching");
-    var fletchNode = {Name: "Knife", Skill: hero.SkillBook[skillIndex], Recipes: fletchingRecipes()}
+    var fletchNode = {Name: "Fletching", Skill: hero.SkillBook[skillIndex], Recipes: fletchingRecipes()}
     return fletchNode
 }
 export function huntNode(hero)

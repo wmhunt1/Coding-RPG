@@ -1,6 +1,6 @@
 import { noCondition, poisonCondition, sleepCondition } from "./ConditionsDB";
 import { cleave, pierceArmor, rage } from "./AbilitiesDB";
-import { bareBack, bareFinger, bareNeck, bite, emptyOffHand, furFeet, furHands, furHead, furLegs, furTorso, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, healingPotion, bronzeDagger, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword } from "./ItemsDB";
+import { bareBack, bareFinger, bareNeck, bite, emptyOffHand, furFeet, furHands, furHead, furLegs, furTorso, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, healingPotion, bronzeDagger, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
 import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell, summonRat } from "./SpellsDB"
 import { BasicAttacker } from "./TacticsDB";
@@ -22,6 +22,12 @@ export function beast(name) {
     var beast = character(name)
     beast.Weapon = bite(); beast.Head = furHead(); beast.Torso = furTorso(); beast.Legs = furLegs(); beast.Hands = furHands(); beast.Feet = furFeet();
     return beast
+}
+export function cow()
+{
+    var cow = beast("Cow")
+    cow.Weapon = slam(); cow.ItemDrops=[cowLeather(), rawBeef()]
+    return cow;
 }
 export function dog() {
     var dog = beast("Dog")
@@ -46,12 +52,12 @@ export function worg() {
 //humanoid
 export function goblin() {
     var goblin = character("Goblin")
-    goblin.CurrentXP = 10; goblin.Weapon = woodenclub(); goblin.OffHand = woodenShield(); goblin.Legs = loinCloth();
+    goblin.CurrentXP = 10; goblin.Weapon = woodenclub(); goblin.OffHand = woodenShield(); goblin.Legs = loinCloth();goblin.ItemDrops=[woodenclub(), woodenShield()]
     return goblin
 }
 export function goblinBoss() {
     var goblin = character("Goblin Boss")
-    goblin.CurrentHP = 15; goblin.MaxHP = 15; goblin.CurrentXP = 20; goblin.Weapon = woodenclub(); goblin.OffHand = woodenShield(); goblin.Legs = loinCloth();
+    goblin.CurrentHP = 15; goblin.MaxHP = 15; goblin.CurrentXP = 20; goblin.Weapon = woodenclub(); goblin.OffHand = woodenShield(); goblin.Legs = loinCloth();goblin.ItemDrops=[woodenclub(), woodenShield()]
     return goblin
 }
 //undead
@@ -62,7 +68,7 @@ export function undead(name) {
 }
 export function skeleton() {
     var skeleton = undead("Skeleton")
-    skeleton.Resistances.push(piercingDamage()); skeleton.Resistances.push(slashingDamage()); skeleton.Weaknesses.push(bludeoningDamage())
+    skeleton.Resistances.push(piercingDamage()); skeleton.Resistances.push(slashingDamage()); skeleton.Weaknesses.push(bludeoningDamage());skeleton.ItemDrops=[woodenclub()]
     skeleton.Weapon = woodenclub()
     return skeleton;
 }

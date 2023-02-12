@@ -1,5 +1,5 @@
 import { AddToCharacterLog, CalculateTime } from "./CharacterScripts";
-import { AddItemToInventory, FindItemInInventory, RemoveItemFromInventory } from "./ItemScripts"
+import { AddItemToInventory, FindItemInInventory, FindItemInInventoryBySubType, RemoveItemFromInventory } from "./ItemScripts"
 
 Array.prototype.remove = function () {
     var what, a = arguments, L = a.length, ax;
@@ -51,7 +51,7 @@ export function UseSkillRecipe(char, skill, recipe) {
     var sucess = false;
     var foundItems = 0;
     if (recipe.Tool !== null) {
-        var toolIndex = FindItemInInventory(char.Inventory, recipe.Tool)
+        var toolIndex = FindItemInInventoryBySubType(char.Inventory, recipe.Tool)
     }
     if (recipe.LevelRequirement <= skill.Level && toolIndex !== null) {
         if (recipe.Input.length > 0) {
