@@ -501,6 +501,31 @@ export function woodBow() {
     return bow;
 }
 //junk
+//burnt food
+export function burntBread() {
+    var bread = { Name: "Burnt Bread", Type: "Junk", SubType: "Burnt Food", Cost: 0, Quantity: 1, ConsumeEffect(hero) { } }
+    return bread
+}
+export function burntBeef() {
+    var cook = { Name: "Burned Beef", Type: "Junk", SubType: "Burnt Food", Cost: 0, Quantity: 1, ConsumeEffect(hero) { } }
+    return cook;
+}
+export function burntFish() {
+    var cook = { Name: "Burned Fish", Type: "Junk", SubType: "Burnt Food", Cost: 0, Quantity: 1, ConsumeEffect(hero) { } }
+    return cook;
+}
+export function burntRabbitMeat() {
+    var cookedRabbitMeat = { Name: "Burned Rabbit Meat", Type: "Junk", SubType: "Burnt Food", Cost: 0, Quantity: 1, ConsumeEffect(hero) { } }
+    return cookedRabbitMeat;
+}
+export function burntRatMeat() {
+    var cookedRatMeat = { Name: "Burned Rat Meat", Type: "Junk", SubType: "Burnt Food", Cost: 0, Quantity: 1, ConsumeEffect(hero) { } }
+    return cookedRatMeat;
+}
+export function burntStew() {
+    var stew = { Name: "Burned Stew", Type: "Junk", SubType: "Burnt Food", Cost: 0, Quantity: 1, ConsumeEffect(hero) { } }
+    return stew;
+}
 export function ratTail() {
     var ratTail = { Name: "Rat Tail", Type: "Junk", SubType: "", Cost: 1, Quantity: 1 }
     return ratTail;

@@ -1,4 +1,4 @@
-import { ashes, bronzeAxe, bronzeAxe2H, bronzeBar, bronzeDagger, bronzeDaggerOffHand, bronzeGauntlets, bronzeHatchet, bronzeHelmet, bronzeLegs, bronzeMace, bronzePickAxe, bronzeShield, bronzeSword, bronzeSword2H, bronzeTorso, bronzeWarHammer, bronzeWarHammer2H, bucket, coalOre, cookedBeef, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, cowLeather, fishingRod, hatchet, ironAxe, ironAxe2H, ironBar, ironBoots, ironDagger, ironDaggerOffHand, ironGauntlets, ironHatchet, ironHelmet, ironLegs, ironMace, ironOre, ironPickAxe, ironShield, ironSword, ironSword2H, ironTorso, ironWarHammer, ironWarHammer2H, knife, leatherBoots, leatherCowl, leatherGloves, leatherLegs, leatherTorso, milk, needle, pickAxe, rawBeef, rawFish, rawRabbitMeat, rawRatMeat, shears, steelAxe, steelAxe2H, steelBar, steelBoots, steelDagger, steelDaggerOffHand, steelGauntlets, steelHatchet, steelHelmet, steelLegs, steelMace, steelPickAxe, steelShield, steelSword, steelSword2H, steelTorso, steelWarHammer, steelWarHammer2H, thread, tinderBox, tinOre, woodBow, woodLogs, woolBoots, woolCloth, woolGloves, woolHat, woolRobeBottom, woolRobeTop, woolTrousers, woolTunic, woolWizardHat, } from "./ItemsDB"
+import { ashes, bronzeAxe, bronzeAxe2H, bronzeBar, bronzeDagger, bronzeDaggerOffHand, bronzeGauntlets, bronzeHatchet, bronzeHelmet, bronzeLegs, bronzeMace, bronzePickAxe, bronzeShield, bronzeSword, bronzeSword2H, bronzeTorso, bronzeWarHammer, bronzeWarHammer2H, bucket, burntBeef, burntFish, burntRabbitMeat, burntRatMeat, coalOre, cookedBeef, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, cowLeather, fishingRod, hatchet, ironAxe, ironAxe2H, ironBar, ironBoots, ironDagger, ironDaggerOffHand, ironGauntlets, ironHatchet, ironHelmet, ironLegs, ironMace, ironOre, ironPickAxe, ironShield, ironSword, ironSword2H, ironTorso, ironWarHammer, ironWarHammer2H, knife, leatherBoots, leatherCowl, leatherGloves, leatherLegs, leatherTorso, milk, needle, pickAxe, rawBeef, rawFish, rawRabbitMeat, rawRatMeat, shears, steelAxe, steelAxe2H, steelBar, steelBoots, steelDagger, steelDaggerOffHand, steelGauntlets, steelHatchet, steelHelmet, steelLegs, steelMace, steelPickAxe, steelShield, steelSword, steelSword2H, steelTorso, steelWarHammer, steelWarHammer2H, thread, tinderBox, tinOre, woodBow, woodLogs, woolBoots, woolCloth, woolGloves, woolHat, woolRobeBottom, woolRobeTop, woolTrousers, woolTunic, woolWizardHat, } from "./ItemsDB"
 //crafting
 //alchemy
 export function alchemyRecipes() {
@@ -11,19 +11,19 @@ export function cookingRecipes() {
     return cookingRecipes;
 }
 export function cookRawBeef() {
-    var cook = { Name: "Cook Raw Beef", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawBeef(), Quantity: 1 }], Output: { Item: cookedBeef(), Quantity: 1 } }
+    var cook = { Name: "Cook Raw Beef", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawBeef(), Quantity: 1 }], Output: { Item: cookedBeef(), Quantity: 1 }, FailureOutput: { Item: burntBeef(), Quantity: 1 } }
     return cook
 }
 export function cookRawFish() {
-    var cook = { Name: "Cook Raw Fish", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawFish(), Quantity: 1 }], Output: { Item: cookedFish(), Quantity: 1 } }
+    var cook = { Name: "Cook Raw Fish", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawFish(), Quantity: 1 }], Output: { Item: cookedFish(), Quantity: 1 }, FailureOutput: { Item: burntFish(), Quantity: 1 } }
     return cook
 }
 export function cookRawRabbitMeat() {
-    var cook = { Name: "Cook Raw Rabbit Meat", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawRabbitMeat(), Quantity: 1 }], Output: { Item: cookedRabbitMeat(), Quantity: 1 } }
+    var cook = { Name: "Cook Raw Rabbit Meat", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawRabbitMeat(), Quantity: 1 }], Output: { Item: cookedRabbitMeat(), Quantity: 1 }, FailureOutput: { Item: burntRabbitMeat(), Quantity: 1 } }
     return cook
 }
 export function cookRawRatMeat() {
-    var cook = { Name: "Cook Raw Rat Meat", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawRatMeat(), Quantity: 1 }], Output: { Item: cookedRatMeat(), Quantity: 1 } }
+    var cook = { Name: "Cook Raw Rat Meat", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawRatMeat(), Quantity: 1 }], Output: { Item: cookedRatMeat(), Quantity: 1 }, FailureOutput: { Item: burntRatMeat(), Quantity: 1 } }
     return cook
 }
 //crafting
@@ -32,55 +32,55 @@ export function craftingRecipes() {
     return craft;
 }
 export function craftLeatherBoots() {
-    var craft = { Name: "Craft Leather Boots", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25, Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherBoots(), Quantity: 1 } }
+    var craft = { Name: "Craft Leather Boots", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25, Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherBoots(), Quantity: 1 }, FailureOutput: { Item: cowLeather(), Quantity: 1 } }
     return craft;
 }
 export function craftLeatherCowl() {
-    var craft = { Name: "Craft Leather Cowl", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25, Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherCowl(), Quantity: 1 } }
+    var craft = { Name: "Craft Leather Cowl", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25, Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherCowl(), Quantity: 1 }, FailureOutput: { Item: cowLeather(), Quantity: 1 } }
     return craft;
 }
 export function craftLeatherGloves() {
-    var craft = { Name: "Craft Leather Gloves", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25, Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherGloves(), Quantity: 1 } }
+    var craft = { Name: "Craft Leather Gloves", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25, Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherGloves(), Quantity: 1 }, FailureOutput: { Item: cowLeather(), Quantity: 1 } }
     return craft;
 }
 export function craftLeatherLegs() {
-    var craft = { Name: "Craft Leather Legs", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25, Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherLegs(), Quantity: 1 } }
+    var craft = { Name: "Craft Leather Legs", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25, Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherLegs(), Quantity: 1 }, FailureOutput: { Item: cowLeather(), Quantity: 1 } }
     return craft;
 }
 export function craftLeatherTorso() {
-    var craft = { Name: "Craft Leather Armor", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25, Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherTorso(), Quantity: 1 } }
+    var craft = { Name: "Craft Leather Armor", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25, Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherTorso(), Quantity: 1 }, FailureOutput: { Item: cowLeather(), Quantity: 1 } }
     return craft;
 }
 export function weaveWoolBoots() {
-    var weave = { Name: "Weave Wool Boots", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolBoots(), Quantity: 1 } }
+    var weave = { Name: "Weave Wool Boots", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolBoots(), Quantity: 1 }, FailureOutput: { Item: woolCloth(), Quantity: 1 } }
     return weave;
 }
 export function weaveWoolGloves() {
-    var weave = { Name: "Weave Wool Gloves", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolGloves(), Quantity: 1 } }
+    var weave = { Name: "Weave Wool Gloves", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolGloves(), Quantity: 1 }, FailureOutput: { Item: woolCloth(), Quantity: 1 } }
     return weave;
 }
 export function weaveWoolHat() {
-    var weave = { Name: "Weave Wool Hat", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolHat(), Quantity: 1 } }
+    var weave = { Name: "Weave Wool Hat", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolHat(), Quantity: 1 }, FailureOutput: { Item: woolCloth(), Quantity: 1 } }
     return weave;
 }
 export function weaveWoolRobeBottom() {
-    var weave = { Name: "Weave Wool Robe Bottom", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolRobeBottom(), Quantity: 1 } }
+    var weave = { Name: "Weave Wool Robe Bottom", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolRobeBottom(), Quantity: 1 }, FailureOutput: { Item: woolCloth(), Quantity: 1 } }
     return weave;
 }
 export function weaveWoolRobeTop() {
-    var weave = { Name: "Weave Wool Robe Top", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolRobeTop(), Quantity: 1 } }
+    var weave = { Name: "Weave Wool Robe Top", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolRobeTop(), Quantity: 1 }, FailureOutput: { Item: woolCloth(), Quantity: 1 } }
     return weave;
 }
 export function weaveWoolTrousers() {
-    var weave = { Name: "Weave Wool Trousers", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolTrousers(), Quantity: 1 } }
+    var weave = { Name: "Weave Wool Trousers", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolTrousers(), Quantity: 1 }, FailureOutput: { Item: woolCloth(), Quantity: 1 } }
     return weave;
 }
 export function weaveWoolTunic() {
-    var weave = { Name: "Weave Wool Tunic", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolTunic(), Quantity: 1 } }
+    var weave = { Name: "Weave Wool Tunic", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolTunic(), Quantity: 1 }, FailureOutput: { Item: woolCloth(), Quantity: 1 } }
     return weave;
 }
 export function weaveWoolWizardHat() {
-    var weave = { Name: "Weave Wool Wizard Hat", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolWizardHat(), Quantity: 1 } }
+    var weave = { Name: "Weave Wool Wizard Hat", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 1, Exp: 25, Input: [{ Item: woolCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolWizardHat(), Quantity: 1 }, FailureOutput: { Item: woolCloth(), Quantity: 1 } }
     return weave;
 }
 //firemaking

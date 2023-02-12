@@ -77,12 +77,31 @@ export function UseSkillRecipe(char, skill, recipe) {
             sucess = true;
         }
         if (sucess === true) {
+            var fail;
+            if (recipe.Skill === "Cooking" || recipe.Skill === "Crafting") {
+                var failChance = Math.floor(Math.random() * 100) + 1 + skill.Level - recipe.LevelRequirement;
+                if (failChance >= 50) {
+                    fail = false
+                }
+                else {
+                    fail = true
+                }
+            }
+            else {
+                fail = false;
+            }
             for (var r2 = 0; r2 < recipe.Input.length; r2++) {
                 RemoveItemFromInventory(char, char.Inventory, recipe.Input[r2].Item, recipe.Input[r2].Quantity)
             }
-            AddItemToInventory(char, char.Inventory, recipe.Output.Item, recipe.Output.Quantity)
-            AddToCharacterLog(char, char.Name + " has " + recipe.Verb + "ed " + recipe.Output.Item.Name + " X " + quantity + ", earning " + recipe.Exp + " " + skill.Name + " XP")
-            EarnSkillXP(char, skill, recipe.Exp)
+            if (fail === false) {
+                AddToCharacterLog(char, char.Name + " has " + recipe.Verb + "ed " + recipe.Output.Item.Name + " X " + quantity + ", earning " + recipe.Exp + " " + skill.Name + " XP")
+                AddItemToInventory(char, char.Inventory, recipe.Output.Item, recipe.Output.Quantity)
+                EarnSkillXP(char, skill, recipe.Exp)
+            }
+            else {
+                AddToCharacterLog(char, char.Name + " has failed to " + recipe.Verb + " " + recipe.Output.Item.Name)
+                AddItemToInventory(char, char.Inventory, recipe.FailureOutput.Item, recipe.FailureOutput.Quantity)
+            }
             CalculateTime(char, 1)
         }
     }

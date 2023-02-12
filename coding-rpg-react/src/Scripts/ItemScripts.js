@@ -19,15 +19,12 @@ export function FindItemInInventory(inventory, item) {
 }
 export function FindItemInInventoryBySubType(inventory, item) {
     var index = null
-    console.log(inventory)
     if (inventory.find(x => x.SubType === item.SubType)) {
         index = inventory.findIndex(x => x.SubType === item.SubType);
     }
     return index
 }
 export function AddItemToInventory(char, inventory, item, quantity) {
-    console.log("inventory add")
-    console.log(inventory)
     if (inventory.find(x => x.Name === item.Name)) {
         var itemIndex = FindItemInInventory(inventory, item)
         if (itemIndex !== null) {
@@ -42,11 +39,8 @@ export function AddItemToInventory(char, inventory, item, quantity) {
     }
     AddToCharacterLog(char, "Adding " + item.Name + " X " + quantity + " to " + char.Name + "'s Inventory");
     char.Inventory = inventory;
-    console.log(char.Inventory)
 }
 export function AddItemToBank(char, inventory, item, quantity) {
-    console.log("bank add")
-    console.log(inventory)
     if (inventory.find(x => x.Name === item.Name)) {
         var itemIndex = FindItemInInventory(inventory, item)
         if (itemIndex !== null) {
@@ -61,12 +55,9 @@ export function AddItemToBank(char, inventory, item, quantity) {
     }
     AddToCharacterLog(char, "Adding " + item.Name + " X " + quantity + " to " + char.Name + "'s Bank");
     char.Bank = inventory;
-    console.log(char.Bank)
 }
 export function RemoveItemFromInventory(char, inventory, item, quantity) {
-    console.log("inventory remove")
     var findItem = inventory.findIndex(x => x.Name === item.Name);
-    console.log(inventory)
     var newItem = inventory[findItem];
     newItem.Quantity -= quantity
     inventory[findItem] = newItem;
@@ -75,12 +66,9 @@ export function RemoveItemFromInventory(char, inventory, item, quantity) {
     }
     AddToCharacterLog(char, "Removing " + item.Name + " X " + quantity + " from " + char.Name + "'s Inventory");
     char.Inventory = inventory;
-    console.log(char.Inventory)
 }
 export function RemoveItemFromBank(char, inventory, item, quantity) {
-    console.log("bank remove")
     var findItem = inventory.findIndex(x => x.Name === item.Name);
-    console.log(inventory)
     var newItem = inventory[findItem];
     newItem.Quantity -= quantity
     inventory[findItem] = newItem;
@@ -89,7 +77,6 @@ export function RemoveItemFromBank(char, inventory, item, quantity) {
     }
     AddToCharacterLog(char, "Withdrawing " + item.Name + " X " + quantity + " from " + char.Name + "'s Bank");
     char.Bank = inventory;
-    console.log(char.Bank)
 }
 export function UnEquip(char, inventory, item) {
     if (item.Name !== "Bare" && item.Name !== "Empty" && item.Name !== "Fist") {

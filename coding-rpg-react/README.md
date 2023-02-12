@@ -17,16 +17,12 @@ Magic penalties for heavier armor? MP penalty?
 Magic resistance?
 Map for dungeon with leaving like world map
 Or town maps
-Skill success chance or more success for higher tiers of tool
-Skill failure 50 + level - levelreq + tool if relevant 
-Failure output (burnt food)
-Can lose some inputs such as thread
+Skill success increases with higher tiers of tool
 That way can include kobolds in goblin dungeon
 Wizard tower with dungeon 
 Ferra joins for goblinmine
 Skill trainers 
 Healer tactics 
-select quantity for shops
 put gold in bank
-
-
+drop items from inventory
+balance level requiurements and xp
