@@ -7,23 +7,43 @@ import { ratCellarQuest, testQuest } from "./QuestsDB"
 export function dreamingWorkerInnDialogue(hero) {
     var innDialogue = ""
     var questIndex = CheckForQuest(hero.Journal, ratCellarQuest())
-    console.log(hero.Journal)
     if (questIndex === null) {
-        innDialogue = { Name: "Dialogue with Sweetheart", Char: "Sweetheart the Ogre", Conversation: [{ Dialogue: ["Would you like to rent a room?"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 0) { if (hero.Gold >= 5) { RemoveGold(hero, 5); PartyRecovery(hero) } } } }, { Dialogue: ["Now that you've rested would you mind taking care of the large rat in the cellar?", "Well in the meantime would you mind taking care of the large rat in the cellar?"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 0) { StartQuest(hero, ratCellarQuest()) } } }, { Dialogue: ["Thanks, sweetheart", "Well let me Know if you change your mind"], Responses: [], responseEffect(hero, option) { } }] }
+        innDialogue = sweetheart1(hero, questIndex)
     }
     else if (hero.Journal[questIndex].ObjectiveProgress < hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "In Progress") {
-        innDialogue = { Name: "Dialogue with Sweetheart", Char: "Sweetheat the Ogre", Conversation: [{ Dialogue: ["Would you like to rent a room?"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 0) { if (hero.Gold >= 5) { RemoveGold(hero, 5); PartyRecovery(hero) } } } }, { Dialogue: ["Have a good night, sweetheart", "See you later, sweetheart."], Responses: [], responseEffect(hero, option) { }, }] }
+        innDialogue = sweetheart2(hero)
     }
     else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "In Progress") {
-        innDialogue = { Name: "Dialogue with Sweetheart", Char: "Sweetheart the Ogre", Conversation: [{ Dialogue: ["Thanks for taking care of that Giant Rat, Sweetheart. As thanks you can rent a room anytime you want, free of charge."], Responses: [["Accept Reward", 0]], responseEffect(hero, option) { { CompleteQuest(hero, hero.Journal[questIndex]) } } }, { Dialogue: ["Bye for now."], Responses: [], responseEffect(hero, option) { } }] }
+        innDialogue = sweetheart3(hero, questIndex)
     }
     else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
-        innDialogue = { Name: "Dialogue with Sweetheart", Char: "Sweetheat the Ogre", Conversation: [{ Dialogue: ["Would you like to take a rest?"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 0) { PartyRecovery(hero) } } }, { Dialogue: ["Have a good night, sweetheart", "See you later, sweetheart."], Responses: [], responseEffect(hero, option) { }, }] }
+        innDialogue = sweetheart4(hero)
     }
     else {
-        innDialogue = { Name: "Dialogue with Sweetheart", Char: "Sweetheat the Ogre", Conversation: [{ Dialogue: ["Would you like to rent a room?"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 0) { if (hero.Gold >= 5) { RemoveGold(hero, 5); PartyRecovery(hero) } } } }, { Dialogue: ["Have a good night, sweetheart", "See you later, sweetheart."], Responses: [], responseEffect(hero, option) { }, }] }
+        innDialogue = sweetheart5(hero)
     }
     return innDialogue;
+}
+//dreamingworker inn sub dialogues
+export function sweetheart1(hero){
+    var sweetheart = { Name: "Dialogue with Sweetheart", Char: "Sweetheart the Ogre", Conversation: [{ Dialogue: ["Would you like to rent a room?"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 0) { if (hero.Gold >= 5) { RemoveGold(hero, 5); PartyRecovery(hero) } } } }, { Dialogue: ["Now that you've rested would you mind taking care of the large rat in the cellar?", "Well in the meantime would you mind taking care of the large rat in the cellar?"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 0) { StartQuest(hero, ratCellarQuest()) } } }, { Dialogue: ["Thanks, sweetheart", "Well let me Know if you change your mind"], Responses: [], responseEffect(hero, option) { } }] }
+    return sweetheart
+}
+export function sweetheart2(hero){
+    var sweetheart = { Name: "Dialogue with Sweetheart", Char: "Sweetheat the Ogre", Conversation: [{ Dialogue: ["Would you like to rent a room?"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 0) { if (hero.Gold >= 5) { RemoveGold(hero, 5); PartyRecovery(hero) } } } }, { Dialogue: ["Have a good night, sweetheart", "See you later, sweetheart."], Responses: [], responseEffect(hero, option) { }, }] }
+    return sweetheart
+}
+export function sweetheart3(hero, questIndex){
+    var sweetheart = { Name: "Dialogue with Sweetheart", Char: "Sweetheart the Ogre", Conversation: [{ Dialogue: ["Thanks for taking care of that Giant Rat, Sweetheart. As thanks you can rent a room anytime you want, free of charge."], Responses: [["Accept Reward", 0]], responseEffect(hero, option) { { CompleteQuest(hero, hero.Journal[questIndex]) } } }, { Dialogue: ["Bye for now."], Responses: [], responseEffect(hero, option) { } }] }
+    return sweetheart
+}
+export function sweetheart4(hero){
+    var sweetheart = { Name: "Dialogue with Sweetheart", Char: "Sweetheat the Ogre", Conversation: [{ Dialogue: ["Would you like to take a rest?"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 0) { PartyRecovery(hero) } } }, { Dialogue: ["Have a good night, sweetheart", "See you later, sweetheart."], Responses: [], responseEffect(hero, option) { }, }] }
+    return sweetheart
+}
+export function sweetheart5(hero){
+    var sweetheart = { Name: "Dialogue with Sweetheart", Char: "Sweetheat the Ogre", Conversation: [{ Dialogue: ["Would you like to rent a room?"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 0) { if (hero.Gold >= 5) { RemoveGold(hero, 5); PartyRecovery(hero) } } } }, { Dialogue: ["Have a good night, sweetheart", "See you later, sweetheart."], Responses: [], responseEffect(hero, option) { }, }] }
+    return sweetheart
 }
 export function innDialogue(hero) {
     var innDialogue = { Name: "Dialogue with Innkeeper", Char: "Innkeeper", Conversation: [{ Dialogue: ["Would you like to rent a room?"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 0) { if (hero.Gold >= 5) { RemoveGold(hero, 5); PartyRecovery(hero) } } } }, { Dialogue: ["Have a good rest", "Okay"], Responses: [], responseEffect(hero, option) { }, }] }

@@ -10,11 +10,9 @@ add time delay for log
 Property
 random encounter that forces combat (set movement as false)
 quest failure if took to long
-journal doesn't update until after leaving shop or dialogoue
-break dialogue up into sub dialogues?
+journal doesn't update until after leaving shop
 dungeon exploration and/or puzzles
 Weight or inventory slots?
-Bank?
 Magic penalties for heavier armor? MP penalty?
 Magic resistance?
 Map for dungeon with leaving like world map
@@ -28,5 +26,7 @@ Wizard tower with dungeon
 Ferra joins for goblinmine
 Skill trainers 
 Healer tactics 
+select quantity for shops
+put gold in bank
 
 

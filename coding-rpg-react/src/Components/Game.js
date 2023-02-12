@@ -1,8 +1,8 @@
 import '../App.css';
 import './Game.css'
 import { useState } from "react";
-import { EarnXP, PartyRecovery } from '../Scripts/CharacterScripts';
 import Abilities from './Abilities';
+import Bank from './Bank';
 import CharacterSheet from './CharacterSheet';
 import Combat from './Combat';
 import Dialogue from './Dialogue';
@@ -21,7 +21,6 @@ import Shop from './Shop';
 import Toolbar from './Toolbar';
 import { testDialogue } from '../Database/DialoguesDB';
 import { testDungeon } from '../Database/DungeonsDB';
-import { testEncounter } from '../Database/EncountersDB';
 import { worldMap } from '../Database/MapsDB';
 import { testShop } from '../Database/ShopsDB'
 
@@ -29,10 +28,10 @@ function Game(props) {
   const [active, setActive] = useState("Game");
   const [hero, setHero] = useState(props.hero)
   const [log, setLog] = useState(props.log)
-  const [combat, setCombat] = useState(testEncounter())
+  const [combat, setCombat] = useState(null)
   const [dialogue, setDialogue] = useState(testDialogue(hero))
   const [dungeon, setDungeon] = useState(testDungeon(hero))
-  const [shop, setShop] = useState()
+  const [shop, setShop] = useState(testShop(hero))
   const [skill, setSkill] = useState()
   const handleCallback = (childData, location) => {
     var newLog = [...childData.Log]
@@ -56,20 +55,6 @@ function Game(props) {
       }
     }
   }
-  function Heal(char) {
-    PartyRecovery(char)
-    var newChar = char;
-    setHero(newChar);
-    var newLog = [...char.Log]
-    setLog(newLog)
-  }
-  function TestXP(char) {
-    EarnXP(char, char.MaxXP)
-    var newChar = char;
-    setHero(newChar);
-    var newLog = [...char.Log]
-    setLog(newLog)
-  }
 
   return (
     <div>
@@ -79,6 +64,7 @@ function Game(props) {
       <div>
         {active === "Menu" ? <Menu hero={hero} Back={() => setActive("Game")}></Menu> : <div></div>}
         {active === "Abilities" ? <Abilities hero={hero} Back={() => setActive("Game")}></Abilities> : <div></div>}
+        {active === "Bank" ? <Bank parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></Bank> : <div></div>}
         {active === "CharacterSheet" ? <CharacterSheet parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></CharacterSheet> : <div></div>}
         {active === "Combat" ? <Combat parentCallback={handleCallback} hero={hero} enemies={combat} Back={() => setActive("Game")}></Combat> : <div></div>}
         {active === "Dialogue" ? <Dialogue parentCallback={handleCallback} hero={hero} talk={dialogue} Back={() => setActive("Game")}></Dialogue> : <div></div>}
@@ -93,12 +79,7 @@ function Game(props) {
         {active === "Spells" ? <SpellBook hero={hero} Back={() => setActive("Game")} parentCallback={handleCallback}></SpellBook> : <div></div>}
         {active === "Test" ? <div className='menu-box'>
           <h2>Tests</h2>
-          <div><button className='menu-button' onClick={() => setActive("Combat")}><h3>Test Combat</h3></button></div>
-          <div><button className='menu-button' onClick={() => setActive("Dialogue")}><h3>Test Dialogue</h3></button></div>
-          <div><button className='menu-button' onClick={() => setActive("Dungeon")}><h3>Test Dungeon</h3></button></div>
-          <div><button className='menu-button' onClick={() => Heal(hero)}><h3>Test Heal</h3></button></div>
-          <div><button className='menu-button' onClick={() => setActive("Shop")}><h3>Test Shop</h3></button></div>
-          <div><button className='menu-button' onClick={() => TestXP(hero)}><h3>Test XP</h3></button></div>
+          <div><button className='menu-button' onClick={() => setActive("Bank")}><h3>Test Bank</h3></button></div>
           <div><button className='menu-button' onClick={() => setActive("Game")}><h3>Leave</h3></button></div>
         </div> : <div></div>}
       </div>
