@@ -14,21 +14,22 @@ function Shop(props) {
     const [hero, setHero] = useState(props.hero);
     const [gold, setGold] = useState(props.hero.Gold)
     const [barter, setBarter] = useState(FindSkillInSkillBook(hero, barterSkill()))
+    const [quantity, setQuantity] = useState(1)
     const [shopInventory, setShopInventory] = useState(props.shop.Inventory)
     const [heroInventory, setHeroInventory] = useState(props.shop.buyFilter(hero))
     const [dialogue, setDialogue] = useState(props.shop.Dialogue)
     const [dungeon, setDungeon] = useState(props.shop.Dungeon)
     const [node, setNode] = useState(props.shop.Node)
-    const shopInventoryList = shopInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {Math.round(item.Cost - item.Cost * (FindSkillInSkillBook(hero, barterSkill()).Level / 10))} GP <button onClick={() => { handleBuy(hero, heroInventory, item) }}><h4>Buy</h4></button></h4>)
-    const heroInventoryList = heroInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {Math.floor(item.Cost / 2 + (item.Cost / 2) * (FindSkillInSkillBook(hero, barterSkill()).Level / 10))} GP, QTY: {item.Quantity} <button onClick={() => { handleSell(hero, heroInventory, shopInventory, item) }}><h4>Sell</h4></button></h4>)
-    function handleBuy(hero, inventory, item) {
-        if (item.Cost > hero.Gold) {
-            AddToCharacterLog(hero, "Cannot afford " + item.Name)
+    const shopInventoryList = shopInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {Math.round(item.Cost - item.Cost * (FindSkillInSkillBook(hero, barterSkill()).Level / 10))} GP <button onClick={() => { handleBuy(hero, heroInventory, item, quantity) }}><h4>Buy</h4></button></h4>)
+    const heroInventoryList = heroInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {Math.floor(item.Cost / 2 + (item.Cost / 2) * (FindSkillInSkillBook(hero, barterSkill()).Level / 10))} GP, QTY: {item.Quantity} <button onClick={() => { handleSell(hero, heroInventory, shopInventory, item, quantity) }}><h4>Sell</h4></button></h4>)
+    function handleBuy(hero, inventory, item, quantity) {
+        if (item.Cost*quantity > hero.Gold) {
+            AddToCharacterLog(hero, "Cannot afford " + item.Name + " X " + quantity)
         }
         else {
-            RemoveGold(hero, Math.round(item.Cost - item.Cost * (FindSkillInSkillBook(hero, barterSkill()).Level / 10)))
+            RemoveGold(hero, quantity*(Math.round(item.Cost - item.Cost * (FindSkillInSkillBook(hero, barterSkill()).Level / 10))))
             EarnSkillXP(hero, FindSkillInSkillBook(hero, barterSkill()), Math.round(item.Cost - item.Cost * (FindSkillInSkillBook(hero, barterSkill()).Level / 10)))
-            AddItemToInventory(hero, inventory, item, item.Quantity)
+            AddItemToInventory(hero, inventory, item, quantity)
             var newHero = hero;
             setHero(newHero);
             setBarter(FindSkillInSkillBook(hero, barterSkill()))
@@ -42,28 +43,34 @@ function Shop(props) {
 
     }
     function handleSell(hero, heroInventory, shopInventory, item) {
-        AddGold(hero, Math.floor(item.Cost / 2 + (item.Cost / 2) * (FindSkillInSkillBook(hero, barterSkill()).Level / 10)))
-        RemoveItemFromInventory(hero, heroInventory, item, item.Quantity)
-        EarnSkillXP(hero, FindSkillInSkillBook(hero, barterSkill()), Math.floor(item.Cost / 2 + (item.Cost / 2) * (FindSkillInSkillBook(hero, barterSkill()).Level / 10)))
-        var newHero = hero;
-        setHero(newHero);
-        setBarter(FindSkillInSkillBook(hero, barterSkill()))
-        var newGold = hero.Gold;
-        setGold(newGold)
-        if (shopInventory.find(x => x.Name === item.Name)) {
-            var findItem = shopInventory.findIndex(x => x.Name === item.Name);
-            var newItem = shopInventory[findItem];
-            newItem.Quantity++;
-            shopInventory[findItem] = newItem;
+        if (quantity > 0 && quantity <= item.Quantity) {
+            AddGold(hero, quantity*(Math.floor(item.Cost / 2 + (item.Cost / 2) * (FindSkillInSkillBook(hero, barterSkill()).Level / 10))))
+            RemoveItemFromInventory(hero, heroInventory, item, quantity)
+            EarnSkillXP(hero, FindSkillInSkillBook(hero, barterSkill()), Math.floor(item.Cost / 2 + (item.Cost / 2) * (FindSkillInSkillBook(hero, barterSkill()).Level / 10)))
+            var newHero = hero;
+            setHero(newHero);
+            setBarter(FindSkillInSkillBook(hero, barterSkill()))
+            var newGold = hero.Gold;
+            setGold(newGold)
+            if (shopInventory.find(x => x.Name === item.Name)) {
+                var findItem = shopInventory.findIndex(x => x.Name === item.Name);
+                var newItem = shopInventory[findItem];
+                newItem.Quantity++;
+                shopInventory[findItem] = newItem;
+            }
+            else {
+                shopInventory.push(item);
+            }
+            setShopInventory(shopInventory);
+            var newHeroInventory = [...hero.Inventory];
+            setHeroInventory(newHeroInventory);
+            var newShopInventory = [...shopInventory];
+            setShopInventory(newShopInventory);
         }
-        else {
-            shopInventory.push(item);
+        else
+        {
+            AddToCharacterLog(hero, "Quantity cannot be less than 0 or greater than the item's Quantity")
         }
-        setShopInventory(shopInventory);
-        var newHeroInventory = [...hero.Inventory];
-        setHeroInventory(newHeroInventory);
-        var newShopInventory = [...shopInventory];
-        setShopInventory(newShopInventory);
         props.parentCallback(hero);
     }
     function startShopDialogue(hero) {
@@ -113,9 +120,11 @@ function Shop(props) {
                 <div><button className='menu-button' onClick={props.Back}><h3>Leave Store</h3></button></div>
             </div> : <div></div>}
         {active === "buy" ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%", height: "200px" }}>
+            <button style={{ display: "inline-block" }} onClick={() => setQuantity(quantity - 1)}>-</button><h4 style={{ display: "inline-block" }}> Qty: {quantity} </h4><button style={{ display: "inline-block" }} onClick={() => setQuantity(quantity + 1)}>+</button>
             {shopInventoryList}
         </div> : <div></div>}
         {active === "sell" ? <div>
+            <button style={{ display: "inline-block" }} onClick={() => setQuantity(quantity - 1)}>-</button><h4 style={{ display: "inline-block" }}> Qty: {quantity} </h4><button style={{ display: "inline-block" }} onClick={() => setQuantity(quantity + 1)}>+</button>
             {heroInventoryList.length > 0 ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%", height: "200px" }}>{heroInventoryList}</div> : <h3>Nothing to sell</h3>}
         </div> : <div></div>}
         {active !== "Shopping" && active !== "Dialogue" && active !== "Node" && active !== "Dungeon" ? <div><button onClick={() => setActive("Shopping")}><h4>Back to {props.shop.Name}</h4></button></div> : <div></div>}
