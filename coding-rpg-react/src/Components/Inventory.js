@@ -4,6 +4,7 @@ import './Game.css'
 import SkillNode from "./SkillNode"
 import { EquipItemFromInventory, RemoveItemFromInventory } from '../Scripts/ItemScripts';
 import { alchemyNode, craftNode, fireNode, fletchNode } from '../Database/SkillNodesDB'
+import { AddToCharacterLog } from '../Scripts/CharacterScripts';
 
 function Inventory(props) {
   const [hero, setHero] = useState(props.hero);
@@ -36,15 +37,23 @@ function Inventory(props) {
       handleEquip(char, inventory, item, item.Quantity)
     }
     else {
-      char.Log.push(item.Name + " cannot be equipped or consumed")
+      AddToCharacterLog(char, item.Name + " cannot be equipped or consumed")
     }
     setHero(char)
-    props.parentCallback(hero);
+    props.parentCallback(char);
+  }
+  function dropItem(char, inventory, item) {
+    AddToCharacterLog(char, "Dropped " + item.Name + " X " + item.Quantity)
+    RemoveItemFromInventory(char, inventory, item, item.Quantity)
+    setHero(char)
+    var newInventory = [...char.Inventory];
+    setInventory(newInventory);
+    props.parentCallback(char);
   }
   const charList = allies.map((ally, index) => <h4 key={index}>{ally.Name} <button onClick={() => setActiveUser(ally)}><h4>Set Active Character</h4></button></h4>)
-  const itemList = inventory.sort((a, b) => a.Name.localeCompare(b.Name)).map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} {item.Type === "Equipable" ? <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}> Equip </button> : <div></div>}{item.Type === "Consumable" ? <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}> Consume </button> : <div></div>}</h4>)
-  const consumeList = inventory.sort((a, b) => a.Name.localeCompare(b.Name)).filter(item => item.Type === "Consumable").map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}><h4>Consume</h4></button></h4>)
-  const equipList = inventory.sort((a, b) => a.Name.localeCompare(b.Name)).filter(item => item.Type === "Equipable").map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}><h4>Equip</h4></button></h4>)
+  const itemList = inventory.sort((a, b) => a.Name.localeCompare(b.Name)).map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} {item.Type === "Equipable" ? <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}> Equip </button> : <div></div>}{item.Type === "Consumable" ? <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}> Consume </button> : <div></div>}<button onClick={() => dropItem(hero, hero.Inventory, item)}>Drop</button></h4>)
+  const consumeList = inventory.sort((a, b) => a.Name.localeCompare(b.Name)).filter(item => item.Type === "Consumable").map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}><h4>Consume</h4></button><button>Drop</button></h4>)
+  const equipList = inventory.sort((a, b) => a.Name.localeCompare(b.Name)).filter(item => item.Type === "Equipable").map((item, index) => <h4 key={index}>{item.Name} - Price: {item.Cost} GP, QTY: {item.Quantity} <button onClick={() => { handleItem(activeUser, hero.Inventory, item) }}><h4>Equip</h4></button><button>Drop</button></h4>)
   function enterSkill(node) {
     setNode(node)
     setActive("Node")

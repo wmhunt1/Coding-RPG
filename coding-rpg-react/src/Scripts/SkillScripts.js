@@ -78,8 +78,13 @@ export function UseSkillRecipe(char, skill, recipe) {
         }
         if (sucess === true) {
             var fail;
+            var toolTier = 0;
+            if (recipe.Tool !== null)
+            {
+                toolTier = char.Inventory[toolIndex].Tier
+            }
             if (recipe.Skill === "Cooking" || recipe.Skill === "Crafting") {
-                var failChance = Math.floor(Math.random() * 100) + 1 + skill.Level - recipe.LevelRequirement;
+                var failChance = Math.floor(Math.random() * 100) + 1 + skill.Level - recipe.LevelRequirement + toolTier;
                 if (failChance >= 50) {
                     fail = false
                 }

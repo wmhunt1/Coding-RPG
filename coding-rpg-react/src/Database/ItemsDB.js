@@ -600,69 +600,69 @@ export function woodLogs() {
 }
 //tools
 export function bucket() {
-    var bucket = { Name: "Bucket", Type: "Tool", SubType: "Bucket", Cost: 1, Quantity: 1 }
+    var bucket = { Name: "Bucket", Type: "Tool", SubType: "Bucket", Tier: 1, Cost: 1, Quantity: 1 }
     return bucket
 }
 export function thread() {
-    var thread = { Name: "Thread", Type: "Tool", SubType: "Thread", Cost: 1, Quantity: 1 }
+    var thread = { Name: "Thread", Type: "Tool", SubType: "Thread", Tier: 1, Cost: 1, Quantity: 1 }
     return thread;
 }
 //crafting
 export function needle() {
-    var needle = { Name: "Needle", Type: "Tool", SubType: "Needle", Cost: 1, Quantity: 1 }
+    var needle = { Name: "Needle", Type: "Tool", SubType: "Needle", Tier: 1, Cost: 1, Quantity: 1 }
     return needle
 }
 //farming
 export function shears() {
-    var shears = { Name: "Shears", Type: "Tool", SubType: "Shears", Cost: 1, Quantity: 1 }
+    var shears = { Name: "Shears", Type: "Tool", SubType: "Shears", Tier: 1, Cost: 1, Quantity: 1 }
     return shears;
 }
 //fishing
 export function fishingRod() {
-    var fishingRod = { Name: "Fishing Rod", Type: "Tool", SubType: "Fishing Rod", Cost: 1, Quantity: 1 }
+    var fishingRod = { Name: "Fishing Rod", Type: "Tool", SubType: "Fishing Rod", Tier: 1, Cost: 1, Quantity: 1 }
     return fishingRod
 }
 //hatchets
 export function bronzeHatchet() {
-    var hatchet = { Name: "Bronze Hatchet", Type: "Tool", SubType: "Hatchet", Cost: 1, Quantity: 1 }
+    var hatchet = { Name: "Bronze Hatchet", Type: "Tool", SubType: "Hatchet", Tier: 1, Cost: 1, Quantity: 1 }
     return hatchet
 }
 export function hatchet() {
-    var hatchet = { Name: "hatchet", Type: "Tool", SubType: "Hatchet", Cost: 1, Quantity: 1 }
+    var hatchet = { Name: "hatchet", Type: "Tool", SubType: "Hatchet", Tier: 1, Cost: 1, Quantity: 1 }
     return hatchet
 }
 export function ironHatchet() {
-    var hatchet = { Name: "Iron Hatchet", Type: "Tool", SubType: "Hatchet", Cost: 5, Quantity: 1 }
+    var hatchet = { Name: "Iron Hatchet", Type: "Tool", SubType: "Hatchet", Tier: 2, Cost: 5, Quantity: 1 }
     return hatchet
 }
 export function steelHatchet() {
-    var hatchet = { Name: "Steel Hatchet", Type: "Tool", SubType: "Hatchet", Cost: 10, Quantity: 1 }
+    var hatchet = { Name: "Steel Hatchet", Type: "Tool", SubType: "Hatchet", Tier: 3, Cost: 10, Quantity: 1 }
     return hatchet
 }
 //knife
 export function knife() {
-    var knife = { Name: "Knife", Type: "Tool", SubType: "Knife", Cost: 1, Quantity: 1 }
+    var knife = { Name: "Knife", Type: "Tool", SubType: "Knife", Tier: 1, Cost: 1, Quantity: 1 }
     return knife
 }
 //pickaxes
 export function bronzePickAxe() {
-    var pickAxe = { Name: "Bronze Pickaxe", Type: "Tool", SubType: "Pickaxe", Cost: 1, Quantity: 1 }
+    var pickAxe = { Name: "Bronze Pickaxe", Type: "Tool", SubType: "Pickaxe", Tier: 1, Cost: 1, Quantity: 1 }
     return pickAxe
 }
 export function ironPickAxe() {
-    var pickAxe = { Name: "Iron Pickaxe", Type: "Tool", SubType: "Pickaxe", Cost: 5, Quantity: 1 }
+    var pickAxe = { Name: "Iron Pickaxe", Type: "Tool", SubType: "Pickaxe", Tier: 2, Cost: 5, Quantity: 1 }
     return pickAxe
 }
 export function pickAxe() {
-    var pickAxe = { Name: "Pickaxe", Type: "Tool", SubType: "Pickaxe", Cost: 1, Quantity: 1 }
+    var pickAxe = { Name: "Pickaxe", Type: "Tool", SubType: "Pickaxe", Tier: 1, Cost: 1, Quantity: 1 }
     return pickAxe
 }
 export function steelPickAxe() {
-    var pickAxe = { Name: "Pickaxe", Type: "Tool", SubType: "Pickaxe", Cost: 10, Quantity: 1 }
+    var pickAxe = { Name: "Pickaxe", Type: "Tool", SubType: "Pickaxe", Tier: 3, Cost: 10, Quantity: 1 }
     return pickAxe
 }
 //tinderboxes
 export function tinderBox() {
-    var tinderBox = { Name: "Tinderbox", Type: "Tool", SubType: "Tinder Box", Cost: 1, Quantity: 1 }
+    var tinderBox = { Name: "Tinderbox", Type: "Tool", SubType: "Tinder Box", Tier: 1, Cost: 1, Quantity: 1 }
     return tinderBox
 }
