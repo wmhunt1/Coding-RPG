@@ -19,19 +19,16 @@ import SkillNode from './SkillNode';
 import SpellBook from './SpellBook';
 import Shop from './Shop';
 import Toolbar from './Toolbar';
-import { testDialogue } from '../Database/DialoguesDB';
-import { testDungeon } from '../Database/DungeonsDB';
 import { worldMap } from '../Database/MapsDB';
-import { testShop } from '../Database/ShopsDB'
 
 function Game(props) {
   const [active, setActive] = useState("Game");
   const [hero, setHero] = useState(props.hero)
   const [log, setLog] = useState(props.log)
   const [combat, setCombat] = useState(null)
-  const [dialogue, setDialogue] = useState(testDialogue(hero))
-  const [dungeon, setDungeon] = useState(testDungeon(hero))
-  const [shop, setShop] = useState(testShop(hero))
+  const [dialogue, setDialogue] = useState(null)
+  const [dungeon, setDungeon] = useState(null)
+  const [shop, setShop] = useState(null)
   const [skill, setSkill] = useState()
   const handleCallback = (childData, location) => {
     var newLog = [...childData.Log]

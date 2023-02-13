@@ -17,7 +17,7 @@ function SpellBook(props) {
         props.parentCallback(char);
     }
     const charList = allies.map((ally, index) => <h4 key={index}>{ally.Name} <button onClick={() => setActiveTarget(ally)}><h4>Set Active Character</h4></button></h4>)
-    const spellList = spells.map((spell, index) => <h4 key={index}>{spell.Name} - {spell.School.Name} ({spell.ManaCost} MP) - {spell.Description}</h4>)
+    const spellList = spells.map((spell, index) => <h4 key={index}>{spell.Name} - {spell.School.Name} ({spell.ManaCost} MP) - {spell.Description} {spell.Use !== "Combat" ? <button onClick={() => handleCastSpell(hero, allies, allies, activeTarget, hero.Log, spell)}>Cast</button> : <div></div>}</h4>)
     const conjSpellList = spells.filter(spell => spell.School.Name === "Conjuration").map((spell, index) => <h4 key={index}>{spell.Name} - {spell.School.Name} ({spell.ManaCost} MP) - {spell.Description} {spell.Use !== "Combat" ? <button onClick={() => handleCastSpell(hero, allies, allies, activeTarget, hero.Log, spell)}>Cast</button> : <div></div>}</h4>)
     const destSpellList = spells.filter(spell => spell.School.Name === "Destruction").map((spell, index) => <h4 key={index}>{spell.Name} - {spell.School.Name} ({spell.ManaCost} MP) - {spell.Description} {spell.Use !== "Combat" ? <button onClick={() => handleCastSpell(hero, allies, allies, activeTarget, hero.Log, spell)}>Cast</button> : <div></div>}</h4>)
     const illSpellList = spells.filter(spell => spell.School.Name === "Illusion").map((spell, index) => <h4 key={index}>{spell.Name} - {spell.School.Name} ({spell.ManaCost} MP) - {spell.Description} {spell.Use !== "Combat" ? <button onClick={() => handleCastSpell(hero, allies, allies, activeTarget, hero.Log, spell)}>Cast</button> : <div></div>}</h4>)

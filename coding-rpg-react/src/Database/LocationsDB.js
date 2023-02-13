@@ -1,7 +1,6 @@
-import { testDialogue } from "./DialoguesDB"
 import { goblinMine} from "./DungeonsDB"
-import { cowEncounter, testEncounter } from "./EncountersDB"
-import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, testShop, witchHutShop } from "./ShopsDB"
+import { cowEncounter } from "./EncountersDB"
+import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, witchHutShop } from "./ShopsDB"
 import { alchemyNode, cookNode, farmNode, fireNode, fishNode, fletchNode, huntNode, mineNode, woodNode } from "./SkillNodesDB"
 
 //locations
@@ -118,30 +117,4 @@ export function enterMineNode(hero) {
 export function enterWoodNode(hero) {
     var wood = { Name: "Trees", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: woodNode(hero) }; return content } }
     return wood
-}
-//test locations
-export function startingLocation(hero) {
-    var startingLocation = { LocationName: "Starting Location", XCoord: 0, YCoord: 0, SubLocations: [] }
-    return startingLocation
-}
-export function testLocation2(hero) {
-    var testLocation2 = { LocationName: "Location 2", XCoord: 1, YCoord: 0, SubLocations: [testCombatEnter(), testDialogueEnter(), testShopEnter()] }
-    return testLocation2
-}
-//test sublocations
-export function testCombatEnter() {
-    var test = { Name: "TestCombat", enterLocation(hero) { var content = { active: "Combat", combat: testEncounter(), dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
-    return test
-}
-export function testDialogueEnter() {
-    var test = { Name: "TestDialogue", enterLocation(hero) { var content = { active: "Dialogue", combat: null, dialogue: testDialogue(hero), dungeon: null, shop: null, skill: null }; return content } }
-    return test
-}
-export function testShopEnter() {
-    var test = { Name: "TestShop", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: testShop(hero), skill: null }; return content } }
-    return test
-}
-export function testSkillHub() {
-    var test = { Name: "TestShop", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: testShop(hero), skill: null }; return content } }
-    return test
 }

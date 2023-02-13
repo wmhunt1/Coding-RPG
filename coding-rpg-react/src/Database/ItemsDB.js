@@ -45,6 +45,10 @@ export function stew() {
     return stew;
 }
 //potions
+export function allPotions(){
+    var all = [antidote(), healingPotion(), manaPotion(), staminaPotion()]
+    return all;
+}
 export function antidote() {
     var antidote = { Name: "Antidote", Type: "Consumable", SubType: "Potion", Cost: 5, Quantity: 1, ConsumeEffect(hero) { if (hero.Conditon.Name === "Poison") { hero.Log.push(hero.Name + " drinks " + this.Name); RemoveCondition(hero, hero.Log) } } }
     return antidote;
@@ -64,6 +68,10 @@ export function staminaPotion() {
 //scrolls
 //abilityscroll
 //spellscroll
+export function allSpellScrolls(){
+    var all = [magicMissileScroll()]
+    return all;
+}
 export function magicMissileScroll() {
     var magicMissileScroll = { Name: "Scroll of Magic Missile", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " studies " + this.Name); LearnSpell(hero, magicMissile()) } }
     return magicMissileScroll;
@@ -628,7 +636,7 @@ export function bronzeHatchet() {
     return hatchet
 }
 export function hatchet() {
-    var hatchet = { Name: "hatchet", Type: "Tool", SubType: "Hatchet", Tier: 1, Cost: 1, Quantity: 1 }
+    var hatchet = { Name: "Hatchet", Type: "Tool", SubType: "Hatchet", Tier: 1, Cost: 1, Quantity: 1 }
     return hatchet
 }
 export function ironHatchet() {

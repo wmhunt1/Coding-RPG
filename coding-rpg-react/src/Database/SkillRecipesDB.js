@@ -11,19 +11,31 @@ export function cookingRecipes() {
     return cookingRecipes;
 }
 export function cookRawBeef() {
-    var cook = { Name: "Cook Raw Beef", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawBeef(), Quantity: 1 }], Output: { Item: cookedBeef(), Quantity: 1 }, FailureOutput: { Item: burntBeef(), Quantity: 1 } }
+    var cook = {
+        Name: "Cook Raw Beef", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25,
+        Input: [{ Item: rawBeef(), Quantity: 1 }], Output: { Item: cookedBeef(), Quantity: 1 }, FailureOutput: { Item: burntBeef(), Quantity: 1 }
+    }
     return cook
 }
 export function cookRawFish() {
-    var cook = { Name: "Cook Raw Fish", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawFish(), Quantity: 1 }], Output: { Item: cookedFish(), Quantity: 1 }, FailureOutput: { Item: burntFish(), Quantity: 1 } }
+    var cook = {
+        Name: "Cook Raw Fish", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25,
+        Input: [{ Item: rawFish(), Quantity: 1 }], Output: { Item: cookedFish(), Quantity: 1 }, FailureOutput: { Item: burntFish(), Quantity: 1 }
+    }
     return cook
 }
 export function cookRawRabbitMeat() {
-    var cook = { Name: "Cook Raw Rabbit Meat", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawRabbitMeat(), Quantity: 1 }], Output: { Item: cookedRabbitMeat(), Quantity: 1 }, FailureOutput: { Item: burntRabbitMeat(), Quantity: 1 } }
+    var cook = {
+        Name: "Cook Raw Rabbit Meat", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25,
+        Input: [{ Item: rawRabbitMeat(), Quantity: 1 }], Output: { Item: cookedRabbitMeat(), Quantity: 1 }, FailureOutput: { Item: burntRabbitMeat(), Quantity: 1 }
+    }
     return cook
 }
 export function cookRawRatMeat() {
-    var cook = { Name: "Cook Raw Rat Meat", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25, Input: [{ Item: rawRatMeat(), Quantity: 1 }], Output: { Item: cookedRatMeat(), Quantity: 1 }, FailureOutput: { Item: burntRatMeat(), Quantity: 1 } }
+    var cook = {
+        Name: "Cook Raw Rat Meat", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25,
+        Input: [{ Item: rawRatMeat(), Quantity: 1 }], Output: { Item: cookedRatMeat(), Quantity: 1 }, FailureOutput: { Item: burntRatMeat(), Quantity: 1 }
+    }
     return cook
 }
 //crafting
@@ -32,19 +44,31 @@ export function craftingRecipes() {
     return craft;
 }
 export function craftLeatherBoots() {
-    var craft = { Name: "Craft Leather Boots", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25, Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherBoots(), Quantity: 1 }, FailureOutput: { Item: cowLeather(), Quantity: 1 } }
+    var craft = {
+        Name: "Craft Leather Boots", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25,
+        Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherBoots(), Quantity: 1 }, FailureOutput: { Item: cowLeather(), Quantity: 1 }
+    }
     return craft;
 }
 export function craftLeatherCowl() {
-    var craft = { Name: "Craft Leather Cowl", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 2, Exp: 50, Input: [{ Item: cowLeather(), Quantity: 2 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherCowl(), Quantity: 1 }, FailureOutput: { Item: cowLeather(), Quantity: 2 } }
+    var craft = {
+        Name: "Craft Leather Cowl", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 2, Exp: 50,
+        Input: [{ Item: cowLeather(), Quantity: 2 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherCowl(), Quantity: 1 }, FailureOutput: { Item: cowLeather(), Quantity: 2 }
+    }
     return craft;
 }
 export function craftLeatherGloves() {
-    var craft = { Name: "Craft Leather Gloves", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25, Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherGloves(), Quantity: 1 }, FailureOutput: { Item: cowLeather(), Quantity: 1 } }
+    var craft = {
+        Name: "Craft Leather Gloves", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25,
+        Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherGloves(), Quantity: 1 }, FailureOutput: { Item: cowLeather(), Quantity: 1 }
+    }
     return craft;
 }
 export function craftLeatherLegs() {
-    var craft = { Name: "Craft Leather Legs", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 3, Exp: 75, Input: [{ Item: cowLeather(), Quantity: 3 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherLegs(), Quantity: 1 }, FailureOutput: { Item: cowLeather(), Quantity: 3 } }
+    var craft = {
+        Name: "Craft Leather Legs", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 3, Exp: 75,
+        Input: [{ Item: cowLeather(), Quantity: 3 }, { Item: thread(), Quantity: 1 }], Output: { Item: leatherLegs(), Quantity: 1 }, FailureOutput: { Item: cowLeather(), Quantity: 3 }
+    }
     return craft;
 }
 export function craftLeatherTorso() {

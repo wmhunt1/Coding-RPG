@@ -1,14 +1,24 @@
 bugs
 journal doesn't update until after leaving shop
+hp can be healed over maxhp
 
-content
+to-do content
 dwarven mine (faldan) and (inside mine) encounter dialogue
+
+ideas
 Wizard tower with dungeon 
-Ferra joins for goblinmine
-Healer tactics 
+retrieve sheepscale's stolen sheep
+deliver letter to ambrosius quest
+save foreman george from giant (lumbermill)
+retrieve cargo from bandits for general store
+possesed scarecrow at littleroot farm
+leads to tengu camp and tengu captured by spiders
+
+fixes/changes
 balance level requiurements and xp
 
 features
+companions get jobs that give new abilities or change tactics
 feats/perks
 save/load via json
 common log

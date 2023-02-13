@@ -4,9 +4,7 @@ import Game from './Game';
 
 function MainMenu(props) {
   const [active, setActive] = useState("MainMenu");
-  const [name, setName] = useState('');
   const [hero, setHero] = useState(props.hero)
-  const [title, setTitle] = useState(props.hero.Title)
   const exitGame = () => {
     window.opener = null;
     window.open("", "_self");

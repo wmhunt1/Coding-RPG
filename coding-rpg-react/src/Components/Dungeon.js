@@ -18,6 +18,7 @@ function Dungeon(props) {
     const [defeated, setDefeated] = useState(0)
     const [showBoss, setShowBoss] = useState(0)
     const [bossDefeated, setBossDefeated] = useState(0)
+    const [afterBoss, setAfterBoss] = useState(props.dungeon.AfterBoss)
     const [rewardClaimed, setRewardClaimed] = useState(false)
     function handleEncounter(encounter) {
         setActiveEncounter(encounter.Content)
@@ -104,7 +105,9 @@ function Dungeon(props) {
                         bossDefeated === 1 && active !== "Dialogue" && active === "Dungeon" ?
                             <div>
                                 <h3>Dungeon Cleared</h3>
+
                                 {rewardClaimed === false ? <div><button onClick={() => claimRewards(hero)}><h3>Claim Rewards</h3></button></div> : <div><h3>Rewards Claimed</h3></div>}
+                                {afterBoss !== null ? <div><button onClick={() => handleEncounter(afterBoss)}><h3>{afterBoss.Name}</h3></button></div>:<div></div>}
                             </div> : <div></div>
                     }
                     {active === "Encounter" ? <div> <Combat parentCallback={handleCallback} hero={hero} enemies={activeEncounter} Back={() => checkIfEncounterDefeated(activeEncounter, activeEncounterIndex, encounters, defeated)}></Combat></div> : <div></div>}

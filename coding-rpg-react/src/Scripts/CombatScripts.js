@@ -204,7 +204,7 @@ export function NPCTurn(allies, enemies, combatLog, round, hero) {
         if (allies[a].CurrentHP + allies[a].TempHP > 0) {
             Regen(allies[a], combatLog)
             if (SkipConditionCheck(allies[a], combatLog) === false) {
-                allies[a].Tactics(allies[a], allies, enemies, combatLog, round)
+                allies[a].Tactics.Tactics(allies[a], allies, enemies, combatLog, round)
             }
             else {
                 AddToCombatLog(combatLog, allies[a].Name + " lost turn due to " + allies[a].Condition.Name)
@@ -218,7 +218,7 @@ export function CalculateAverageSpeed(team) {
     var speed = 0;
     for (let t = 0; t < team.length; t++) {
         if (team[t].CurrentHP + team[t].TempHP > 0) {
-            speed += team[t].Speed;
+            speed += team[t].Speed+team[t].SpdBonus-team[t].SpdPenalty;
         }
     }
     speed /= team.length;

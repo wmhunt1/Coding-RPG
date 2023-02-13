@@ -41,8 +41,9 @@ export function EarnXP(char, xp) {
 }
 export function HealHP(char, hp) {
     char.CurrentHP += hp;
-    if (char.CurrentHP > char.MaxHP + char.HPBonus - char.HPPenalty) {
-        char.CurrentHP = char.MaxHP + char.HPBonus - char.HPPenalty;
+    var totalHP = char.MaxHP + char.HPBonus - char.HPPenalty 
+    if (char.CurrentHP > totalHP) {
+        char.CurrentHP = totalHP;
     }
 }
 export function TakeDamage(char, damage) {
