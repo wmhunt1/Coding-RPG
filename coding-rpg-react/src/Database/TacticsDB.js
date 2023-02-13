@@ -1,11 +1,10 @@
 import { rage } from "./AbilitiesDB";
 import { BasicAttack } from "../Scripts/CombatScripts"
-import { CastSpell,CheckIfKnowsAbility, CheckIfKnowsSpell, UseAbility } from "../Scripts/SpellScripts";
+import { CastSpell, CheckIfKnowsAbility, CheckIfKnowsSpell, UseAbility } from "../Scripts/SpellScripts";
 import { basicHeal, webSpell } from "./SpellsDB";
 
-export function tacticsList()
-{
-    var tacticsList = [BasicAttacker(), BasicHealer(), Rager()]
+export function tacticsList() {
+    var tacticsList = [{Name:"Basic Attacker", Desc: "Use only basic attacks" }, {Name:"Basic Healer", Desc: "Cast Basic Heal when a ally has <= MaxHP" }, {Name: "Rager", Desc: "Use Rage on first round" }]
     return tacticsList
 }
 export function BasicAttacker(char, allies, enemies, combatLog, round) {
@@ -47,18 +46,15 @@ export function Rager(char, allies, enemies, combatLog, round) {
         BasicAttacker(char, allies, enemies, combatLog)
     }
     else {
-        if (CheckIfKnowsAbility(char, rage()) !== null)
-        {
-        UseAbility(char, rage(), char, combatLog)
+        if (CheckIfKnowsAbility(char, rage()) !== null) {
+            UseAbility(char, allies, enemies, char, combatLog, rage())
         }
-        else
-        {
+        else {
             BasicAttacker(char, allies, enemies, combatLog)
         }
     }
 }
-export function Webber(char, allies, enemies, combatLog, round)
-{
+export function Webber(char, allies, enemies, combatLog, round) {
     if (round > 1) {
         BasicAttacker(char, allies, enemies, combatLog)
     }

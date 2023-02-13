@@ -514,8 +514,12 @@ export function steelWarHammer2H() {
     return hammer;
 }
 //ranged weapon
+export function oakBow() {
+    var bow = { Name: "Oak Bow", Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: rangedSkill(), Damage: 2, DamageType: piercingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
+    return bow;
+}
 export function woodBow() {
-    var bow = { Name: "Wood Bow", Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: rangedSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
+    var bow = { Name: "Wood Bow", Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: rangedSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return bow;
 }
 //junk
@@ -617,6 +621,10 @@ export function rawRatMeat() {
     return rawRatMeat;
 }
 //wood
+export function oakLogs() {
+    var wood = { Name: "Oak Logs", Type: "Resource", SubType: "Logs", Cost: 4, Quantity: 1 }
+    return wood;
+}
 export function woodLogs() {
     var wood = { Name: "Wood Logs", Type: "Resource", SubType: "Logs", Cost: 2, Quantity: 1 }
     return wood;

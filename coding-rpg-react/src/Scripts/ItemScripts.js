@@ -94,16 +94,16 @@ export function UnEquip(char, inventory, item) {
     if (item.Slot === "Torso") {
         char.Torso.ProtectionType.onUnEquip(char, char.Torso)
         if (char.Torso.Class.Name === "Heavy Armor") {
-            char.DexPenalty += 3;
-            char.SpdPenalty += 3;
+            //char.DexPenalty += 3;
+            //char.SpdPenalty += 3;
         }
         if (char.Torso.Class.Name === "Medium Armor") {
-            char.DexPenalty += 2;
-            char.SpdPenalty += 2;
+            //char.DexPenalty += 2;
+            //char.SpdPenalty += 2;
         }
         if (char.Torso.Class.Name === "Light Armor") {
-            char.DexPenalty += 1;
-            char.SpdPenalty += 1;
+            //char.DexPenalty += 1;
+            //char.SpdPenalty += 1;
         }
         char.Torso = bareTorso()
     }
@@ -150,16 +150,16 @@ export function EquipItem(char, inventory, item) {
         item.ProtectionType.onEquip(char, item)
         char.Torso = item
         if (char.Torso.Class.Name === "Heavy Armor") {
-            char.DexPenalty -= 3;
-            char.SpdPenalty -= 3;
+            //char.DexPenalty -= 3;
+            //char.SpdPenalty -= 3;
         }
         if (char.Torso.Class.Name === "Medium Armor") {
-            char.DexPenalty -= 2;
-            char.SpdPenalty -= 3;
+            //char.DexPenalty -= 2;
+            //char.SpdPenalty -= 3;
         }
         if (char.Torso.Class.Name === "Light Armor") {
-            char.DexPenalty -= 1;
-            char.SpdPenalty -= 3;
+            //char.DexPenalty -= 1;
+            //char.SpdPenalty -= 3;
         }
     }
     if (item.Slot === "Legs") {

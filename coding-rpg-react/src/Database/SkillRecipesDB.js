@@ -1,4 +1,4 @@
-import { ashes, bronzeAxe, bronzeAxe2H, bronzeBar, bronzeDagger, bronzeDaggerOffHand, bronzeGauntlets, bronzeHatchet, bronzeHelmet, bronzeLegs, bronzeMace, bronzePickAxe, bronzeShield, bronzeSword, bronzeSword2H, bronzeTorso, bronzeWarHammer, bronzeWarHammer2H, bucket, burntBeef, burntFish, burntRabbitMeat, burntRatMeat, coalOre, cookedBeef, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, cowLeather, fishingRod, hatchet, ironAxe, ironAxe2H, ironBar, ironBoots, ironDagger, ironDaggerOffHand, ironGauntlets, ironHatchet, ironHelmet, ironLegs, ironMace, ironOre, ironPickAxe, ironShield, ironSword, ironSword2H, ironTorso, ironWarHammer, ironWarHammer2H, knife, leatherBoots, leatherCowl, leatherGloves, leatherLegs, leatherTorso, milk, needle, pickAxe, rawBeef, rawFish, rawRabbitMeat, rawRatMeat, shears, steelAxe, steelAxe2H, steelBar, steelBoots, steelDagger, steelDaggerOffHand, steelGauntlets, steelHatchet, steelHelmet, steelLegs, steelMace, steelPickAxe, steelShield, steelSword, steelSword2H, steelTorso, steelWarHammer, steelWarHammer2H, thread, tinderBox, tinOre, woodBow, woodLogs, woolBoots, woolCloth, woolGloves, woolHat, woolRobeBottom, woolRobeTop, woolTrousers, woolTunic, woolWizardHat, } from "./ItemsDB"
+import { ashes, bronzeAxe, bronzeAxe2H, bronzeBar, bronzeDagger, bronzeDaggerOffHand, bronzeGauntlets, bronzeHatchet, bronzeHelmet, bronzeLegs, bronzeMace, bronzePickAxe, bronzeShield, bronzeSword, bronzeSword2H, bronzeTorso, bronzeWarHammer, bronzeWarHammer2H, bucket, burntBeef, burntFish, burntRabbitMeat, burntRatMeat, coalOre, cookedBeef, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, cowLeather, fishingRod, hatchet, ironAxe, ironAxe2H, ironBar, ironBoots, ironDagger, ironDaggerOffHand, ironGauntlets, ironHatchet, ironHelmet, ironLegs, ironMace, ironOre, ironPickAxe, ironShield, ironSword, ironSword2H, ironTorso, ironWarHammer, ironWarHammer2H, knife, leatherBoots, leatherCowl, leatherGloves, leatherLegs, leatherTorso, milk, needle, oakBow, oakLogs, pickAxe, rawBeef, rawFish, rawRabbitMeat, rawRatMeat, shears, steelAxe, steelAxe2H, steelBar, steelBoots, steelDagger, steelDaggerOffHand, steelGauntlets, steelHatchet, steelHelmet, steelLegs, steelMace, steelPickAxe, steelShield, steelSword, steelSword2H, steelTorso, steelWarHammer, steelWarHammer2H, thread, tinderBox, tinOre, woodBow, woodLogs, woolBoots, woolCloth, woolGloves, woolHat, woolRobeBottom, woolRobeTop, woolTrousers, woolTunic, woolWizardHat, } from "./ItemsDB"
 //crafting
 //alchemy
 export function alchemyRecipes() {
@@ -109,8 +109,12 @@ export function weaveWoolWizardHat() {
 }
 //firemaking
 export function firemakingRecipes() {
-    var firemakingRecipes = [burnWoodLogs()]
+    var firemakingRecipes = [burnOakLogs(), burnWoodLogs()]
     return firemakingRecipes
+}
+export function burnOakLogs() {
+    var burn = { Name: "Burn Oak Logs", Skill: "Firemaking", Tool: tinderBox(), Verb: "Burn", LevelRequirement: 5, Exp: 100, Input: [{ Item: oakLogs(), Quantity: 1 }], Output: { Item: ashes(), Quantity: 1 } }
+    return burn;
 }
 export function burnWoodLogs() {
     var burn = { Name: "Burn Wood Logs", Skill: "Firemaking", Tool: tinderBox(), Verb: "Burn", LevelRequirement: 1, Exp: 25, Input: [{ Item: woodLogs(), Quantity: 1 }], Output: { Item: ashes(), Quantity: 1 } }
@@ -118,8 +122,12 @@ export function burnWoodLogs() {
 }
 //fletching
 export function fletchingRecipes() {
-    var fletchingRecipes = [fletchWoodBow()]
+    var fletchingRecipes = [fletchOakBow(), fletchWoodBow()]
     return fletchingRecipes
+}
+export function fletchOakBow() {
+    var fletch = { Name: "Fletch Oak Bow", Skill: "Fletching", Tool: knife(), Verb: "Fletched", LevelRequirement: 5, Exp: 100, Input: [{ Item: oakLogs(), Quantity: 1 }], Output: { Item: oakBow(), Quantity: 1 } }
+    return fletch;
 }
 export function fletchWoodBow() {
     var fletch = { Name: "Fletch Wood Bow", Skill: "Fletching", Tool: knife(), Verb: "Fletched", LevelRequirement: 1, Exp: 25, Input: [{ Item: woodLogs(), Quantity: 1 }], Output: { Item: woodBow(), Quantity: 1 } }

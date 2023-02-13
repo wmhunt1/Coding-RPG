@@ -1,18 +1,33 @@
 import { ApplyCondition, HealHP, RemoveCondition } from "../Scripts/CharacterScripts";
 import { AddToCombatLog, ProjectileMagicAttack } from "../Scripts/CombatScripts";
-import { CalculateAlterationDuration,CalculateConjurationDuration, CalculateHealAmount, CalculateIllusionDuration, ModifySummon } from "../Scripts/SpellScripts";
+import { CalculateAlterationDuration, CalculateConjurationDuration, CalculateHealAmount, CalculateIllusionDuration, CalculateRestorationBuff, ModifySummon } from "../Scripts/SpellScripts";
+import { blessBuff, courageBuff } from "./BuffsDB";
 import { rat, skeleton } from "./CharactersDB";
 import { poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
 import { fireDamage, forceDamage, noDamage, poisonDamage } from "./DamageTypesDB";
+import { baneDeBuff } from "./DeBuffsDB"
 import { alterationSkill, conjurationSkill, destructionSkill, illusionSkill, restorationSkill } from "./SkillsDB";
 
+//buff spells
+export function bless() {
+    var bless = { Name: "Bless", School: restorationSkill(), LevelRequirement: 1, Use: "Combat", Amount: 3, ManaCost: 10, Description: "Heals All Allies for 5HP", SpellEffect(char, allies, enemies, target, combatLog) { var calcBuff = CalculateRestorationBuff(char, this.Amount); AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on the party, healing them for."); for (var a = 0; a < allies.length; a++) { blessBuff(calcBuff).ApplyBuff(allies[a]) } } }
+    return bless;
+}
+export function heroism() {
+    var heroism = { Name: "Heroism", School: restorationSkill(), LevelRequirement: 1, Use: "Combat", Amount: 1, ManaCost: 5, Description: "Gives one all Allies Temp HP", SpellEffect(char, allies, enemies, target, combatLog) { var calcBuff = CalculateRestorationBuff(char, 1); AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on " + target.Name + ", giving them " + calcBuff + " Temp HP"); target.TempHP += calcBuff } }
+    return heroism
+}
+export function inspireCourage() {
+    var inspireCourage = { Name: "Inspire Courage", School: illusionSkill(), LevelRequirement: 1, Use: "Combat", Amount: 1, ManaCost: 5, Description: "Inspires one ally, increasing their damage", SpellEffect(char, allies, enemies, target, combatLog) { var calcDuration = CalculateIllusionDuration(target, this.Amount); AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on " + target.Name + ", increasing their strength by 1"); courageBuff(calcDuration).ApplyBuff(target) } }
+    return inspireCourage
+}
 //control spells
 export function sleepSpell() {
-    var sleep = { Name: "Sleep", School: illusionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Puts all foes to sleep", Amount: 0, DamageType: noDamage(), SpellEffect(char, allies, enemies, target, combatLog) {var calcDuration = CalculateIllusionDuration(char, 3); AddToCombatLog(combatLog, char.Name + " puts all foes to sleep"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], sleepCondition(0, calcDuration), combatLog) } } }
+    var sleep = { Name: "Sleep", School: illusionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Puts all foes to sleep", Amount: 0, DamageType: noDamage(), SpellEffect(char, allies, enemies, target, combatLog) { var calcDuration = CalculateIllusionDuration(char, 3); AddToCombatLog(combatLog, char.Name + " puts all foes to sleep"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], sleepCondition(0, calcDuration), combatLog) } } }
     return sleep;
 }
 export function webSpell() {
-    var web = { Name: "Sleep", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Webs all foes", Amount: 0, DamageType: noDamage(), SpellEffect(char, allies, enemies, target, combatLog) {var calcDuration = CalculateConjurationDuration(char, 3); AddToCombatLog(combatLog, char.Name + " webs all foes"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], webCondition(0, calcDuration), combatLog) } } }
+    var web = { Name: "Sleep", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Webs all foes", Amount: 0, DamageType: noDamage(), SpellEffect(char, allies, enemies, target, combatLog) { var calcDuration = CalculateConjurationDuration(char, 3); AddToCombatLog(combatLog, char.Name + " webs all foes"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], webCondition(0, calcDuration), combatLog) } } }
     return web;
 }
 //conditon
@@ -22,13 +37,20 @@ export function poisonSpray() {
 }
 //damage spells
 export function fireBall() {
-    var fireBall = { Name: "Fire Ball", School: destructionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Ball of Fire that deals 10 Fire Damage to All Foes", Amount: 10, DamageType: fireDamage(),
-     SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " launches a fireball at the enemies"); for (var e = 0; e < enemies.length; e++) { ProjectileMagicAttack(char, enemies[e], combatLog, this) } } }
+    var fireBall = {
+        Name: "Fire Ball", School: destructionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Ball of Fire that deals 10 Fire Damage to All Foes", Amount: 10, DamageType: fireDamage(),
+        SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " launches a fireball at the enemies"); for (var e = 0; e < enemies.length; e++) { ProjectileMagicAttack(char, enemies[e], combatLog, this) } }
+    }
     return fireBall;
 }
 export function magicMissile() {
     var magicMissile = { Name: "Magic Missile", School: destructionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 5, Description: "Missile of Magical Force that deals 5 Force Damage to One Foe", Amount: 5, DamageType: forceDamage(), SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " fires a " + this.Name + " at " + target.Name); ProjectileMagicAttack(char, target, combatLog, this) } }
     return magicMissile;
+}
+//debuff spells
+export function bane() {
+    var bane = { Name: "Bane", School: restorationSkill(), LevelRequirement: 1, Use: "Combat", Amount: 3, ManaCost: 10, Description: "Heals All Allies for 5HP", SpellEffect(char, allies, enemies, target, combatLog) { var calcBuff = CalculateRestorationBuff(char, this.Amount); AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on the their enemies."); for (var e = 0; e < enemies.length; e++) { baneDeBuff(calcBuff).ApplyDeBuff(enemies[e]) } } }
+    return bane;
 }
 //healing spells
 //condition spells

@@ -18,21 +18,16 @@ leads to tengu camp and tengu captured by spiders
 fixes/changes
 balance level requiurements and xp
 change iron to level 10 and steel to level 20
+fix tactic selection
 
 features
-Oak trees
-Inspire courage Illusion plus 1 str bonus
-Heroism illuson or restoration thp
-Bless restoration str b and dex b
-Bane Necromancy? opposite 
+variable skills for party members (calculate xp based on level)
 Bandit hide out
 Bat cave
 Wolf encounter
 Talking tree
 Quincy companion
 Wyle companion
-See skills of companions
-Put all tactics in a list to select for companions 
 Use rs3 tiers for crafting?
 companions get jobs that give new abilities or change tactics
 feats/perks

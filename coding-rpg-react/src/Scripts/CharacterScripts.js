@@ -1,4 +1,5 @@
 import { noCondition } from "../Database/ConditionsDB";
+import { BasicAttacker, BasicHealer, Rager } from "../Database/TacticsDB";
 import { AddToCombatLog } from "./CombatScripts";
 
 Array.prototype.remove = function () {
@@ -41,7 +42,7 @@ export function EarnXP(char, xp) {
 }
 export function HealHP(char, hp) {
     char.CurrentHP += hp;
-    var totalHP = char.MaxHP + char.HPBonus - char.HPPenalty 
+    var totalHP = char.MaxHP + char.HPBonus - char.HPPenalty
     if (char.CurrentHP > totalHP) {
         char.CurrentHP = totalHP;
     }
@@ -162,15 +163,15 @@ export function BuffAndDeBuffDuration(char, log) {
     for (var b = 0; b < char.Buffs.length; b++) {
         char.Buffs[b].RemainingDuration--;
         if (char.Buffs[b].RemainingDuration === 0) {
-            char.Buffs.RemoveBuff(char)
-            AddToCombatLog(char, char.Buffs[b].Name + " expires")
+            AddToCombatLog(log, char.Buffs[b].Name + " expires")
+            char.Buffs[b].RemoveBuff(char)
         }
     }
     for (var d = 0; d < char.DeBuffs.length; d++) {
         char.DeBuffs[d].RemainingDuration--;
         if (char.DeBuffs[d].RemainingDuration === 0) {
-            char.DeBuffs.RemoveDeBuff(char)
-            AddToCombatLog(char, char.DeBuffs[d].Name + " expires")
+            AddToCombatLog(log, char.DeBuffs[d].Name + " expires")
+            char.DeBuffs[d].RemoveDeBuff(char)
         }
     }
 }
@@ -271,8 +272,7 @@ export function CalculateTime(char, hours) {
     else if (char.Time.Hour >= 18 && char.Time.Hour < 21) {
         char.Time.TimeOfDay = "Evening"
     }
-    else if (char.Time.Hour === 0)
-    {
+    else if (char.Time.Hour === 0) {
         char.Time.TimeOfDay = "Midnight"
     }
     else {
@@ -282,4 +282,16 @@ export function CalculateTime(char, hours) {
         char.Time.Day++;
         char.Time.Hour = 0
     }
+}
+export function ChangeTactics(hero, tactic) {
+    if (tactic.Name === "Basic Healer") {
+        hero.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
+    }
+    else if (tactic.Name === "Rager") {
+        hero.Tactics = { Tactics(char, allies, enemies, combatLog, round) { Rager(char, allies, enemies, combatLog, round) } }
+    }
+    else {
+        hero.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicAttacker(char, allies, enemies, combatLog, round) } }
+    }
+    return hero;
 }

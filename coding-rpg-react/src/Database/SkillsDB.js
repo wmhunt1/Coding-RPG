@@ -3,6 +3,11 @@ export function allSkills(level){
     return allSkills
 }
 //armor skills
+export function allArmorSkills(b, h, l, m, u)
+{
+    var allArmorSkills = [blockSkill(b), heavyArmorSkill(h), lightArmorSkill(l), mediumArmorSkill(m), unArmoredSkill(u)]
+    return allArmorSkills;
+}
 export function blockSkill(level) {
     var block = { Name: "Block", Type: "Armor", Level: level, CurrentXP: 0, MaxXP: 50 }
     return block;
@@ -71,6 +76,11 @@ export function woodcuttingSkill() {
 }
 //knowledge skills
 //magic skills
+export function allMagicSkills(a, c, d, e, i, r)
+{
+    var allMagicSkills = [alterationSkill(a), conjurationSkill(c), destructionSkill(d), enchantingSKill(e), illusionSkill(i), restorationSkill(r)]
+    return allMagicSkills
+}
 export function alterationSkill(level) {
     var alt = { Name: "Alteration", Type: "Magic", Level: level, CurrentXP: 0, MaxXP: 50 }
     return alt;
@@ -129,6 +139,11 @@ export function survivalSkill() {
     return surv;
 }
 //weapon skills
+export function allWeaponSkills(a, b, l, r, sh, sp, u)
+{
+    var allWeaponSkills = [axeSkill(a), bluntSKill(b), longBladeSkill(l), rangedSkill(r), shortBladeSkill(sh), spearSkill(sp), unArmedSkill(u)]
+    return allWeaponSkills
+}
 export function axeSkill(level) {
     var axe = { Name: "Axe", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
     return axe;

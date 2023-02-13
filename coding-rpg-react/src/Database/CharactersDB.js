@@ -29,13 +29,15 @@ export function character(name) {
 }
 export function hero() {
     var hero = character("Hero")
-    hero.Log = ["Starting Game"]; hero.Weapon = bronzeSword(); hero.Head = hat(); hero.Torso = tunic(); hero.Legs = trousers(); hero.Hands = gloves(); hero.Feet = shoes(); hero.Inventory = []; hero.Gold = 5; hero.Companions = []; hero.Abilities = [cleave(), pierceArmor(), rage()]; hero.SpellBook = [basicHeal(), curePoison(), fireBall(), magicMissile(), poisonSpray(), sleepSpell(), summonRat()]; hero.Weaknesses = [fireDamage()]; hero.Weaknesses[0].Source = hero.Torso;
+    hero.Log = ["Starting Game"]; hero.Weapon = bronzeSword(); hero.Head = hat(); hero.Torso = tunic(); hero.Legs = trousers(); hero.Hands = gloves(); hero.Feet = shoes(); hero.Inventory = []; hero.Gold = 5; hero.Companions = [dog("Dog")]; hero.Abilities = [cleave(), pierceArmor(), rage()]; hero.SpellBook = [basicHeal(), curePoison(), fireBall(), magicMissile(), poisonSpray(), sleepSpell(), summonRat()]; hero.Weaknesses = [fireDamage()]; hero.Weaknesses[0].Source = hero.Torso;
     return hero
 }
 //companions
 export function ferraForgeHeart() {
     var hero = character("Ferra Forgeheart")
-    hero.Weapon = ironWarHammer(); hero.OffHand = ironShield(); hero.Head = ironHelmet(); hero.Torso = ironTorso(); hero.Legs = ironLegs(); hero.Hands = ironGauntlets(); hero.Feet = ironBoots(); hero.SpellBook = [basicHeal(), curePoison()]; hero.Weaknesses = [lightningDamage()]; hero.Weaknesses[0].Source = hero.Torso; hero.DexPenalty = 3; hero.SpdPenalty = 3; hero.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
+    hero.Weapon = ironWarHammer(); hero.OffHand = ironShield(); hero.Head = ironHelmet(); hero.Torso = ironTorso(); hero.Legs = ironLegs(); hero.Hands = ironGauntlets(); hero.Feet = ironBoots(); hero.SpellBook = [basicHeal(), curePoison()]; hero.Weaknesses = [lightningDamage()]; hero.Weaknesses[0].Source = hero.Torso;
+    //hero.DexPenalty = 3; hero.SpdPenalty = 3; 
+    hero.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
     return hero
 }
 //beast
@@ -52,6 +54,7 @@ export function cow() {
 export function dog(name) {
     var dog = beast(name)
     dog.Neck = dogCollar();
+    dog.Abilities = [rage()]
     return dog;
 }
 export function giantRat() {

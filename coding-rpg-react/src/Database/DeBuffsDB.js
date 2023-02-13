@@ -1,4 +1,4 @@
-export function curseDeBuff(duration) {
-    var curse = { Name: "Curse", Duration: duration, RemainingDuration: duration, ApplyDeBuff(target) { target.StrPenalty -= 2; target.DexPenalty -= 2; target.DeBuffs.push(this) }, RemoveDeBuff(target) { target.StrPenalty += 2; target.DexPenalty += 2 } }
-    return curse
+export function baneDeBuff(duration) {
+    var deBuff = { Name: "Bane", Duration: duration, RemainingDuration: duration, ApplyDeBuff(target) { target.StrBonus -= 1; target.DexBonus -= 1; target.DeBuffs.push(this) }, RemoveDeBuff(target) { target.StrBonus += 1; target.DexBonus += 1; } }
+    return deBuff
 }
