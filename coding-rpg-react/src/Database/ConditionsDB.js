@@ -12,3 +12,7 @@ export function sleepCondition(damage, duration) {
     var sleep = { Name: "Sleep", Symbol: "SLP", Type: "Skip", Duration: duration, RemainingDuration: duration, DamageType: noDamage(), Damage: 0, Source: null }
     return sleep;
 }
+export function webCondition(damage, duration) {
+    var web = { Name: "Webed", Symbol: "SLP", Type: "Skip", Duration: duration, RemainingDuration: duration, DamageType: noDamage(), Damage: 0, Source: null }
+    return web;
+}

@@ -1,3 +1,4 @@
+import { daleTownRumors } from "./DialoguesDB"
 import { goblinMine} from "./DungeonsDB"
 import { cowEncounter } from "./EncountersDB"
 import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, witchHutShop } from "./ShopsDB"
@@ -16,12 +17,12 @@ export function witchHut(hero, x, y) {
 }
 //towns
 export function daleTown(hero) {
-    var daleTown = { LocationName: "Dale Town", XCoord: 0, YCoord: 0, CanTravel: true, SubLocations: [enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterGeneralStore(hero)] }
+    var daleTown = { LocationName: "Dale Town", XCoord: 0, YCoord: 0, CanTravel: true, SubLocations: [enterDaleTownRumors(hero), enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterGeneralStore(hero)] }
     return daleTown;
 }
 //reusable locations
 export function bridgeOverRiver(hero, x, y) {
-    var river = { LocationName: "Bridge Over River", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero)] }
+    var river = { LocationName: "Bridge", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero)] }
     return river;
 }
 export function farm(hero, x, y) {
@@ -45,6 +46,12 @@ export function road(hero, x, y) {
 export function enterDwarvenMine(hero) {
     var enterDwarvenMine = { Name: "Dwarven Mine (Goblins)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: goblinMine(hero), shop: null, skill: null }; return content } }
     return enterDwarvenMine
+}
+//enter dialogues
+export function enterDaleTownRumors(hero)
+{
+    var enterDaleTownRumors = { Name: "Listen to rumors", enterLocation(hero) { var content = { active: "Dialogue", combat: null, dialogue: daleTownRumors(hero), dungeon: null, shop: null, skill: null }; return content } }
+    return enterDaleTownRumors
 }
 //enter encounters
 export function enterCowEncounter(hero) {

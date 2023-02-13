@@ -7,7 +7,11 @@ export function CalculateHealAmount(char, baseHeal) {
     return heal;
 }
 export function CalculateAlterationDuration(char, defaultDuration) {
-    var mod = Math.round((FindSkillInSkillBook(char, alterationSkill()).Level + char.WillPower + char.WlpBonus - char.WlpPenalty) / 10)
+    var mod = Math.round((FindSkillInSkillBook(char, alterationSkill()).Level + char.Charisma + char.ChaBonus - char.ChaPenalt) / 10)
+    return defaultDuration + mod;
+}
+export function CalculateConjurationDuration(char, defaultDuration) {
+    var mod = Math.round((FindSkillInSkillBook(char, conjurationSkill()).Level + char.WillPower + char.WlpBonus - char.WlpPenalty) / 10)
     return defaultDuration + mod;
 }
 export function CalculateIllusionDuration(char, defaultDuration) {
@@ -48,4 +52,20 @@ export function UseAbility(char, allies, enemies, target, combatLog, abil) {
     else {
         combatLog.push(char.Name + "didn't have enough SP")
     }
+}
+export function CheckIfKnowsAbility(char, abil)
+{
+    var index = null
+    if (char.Abilities.find(x => x.Name === abil.Name)) {
+        index = char.Abilities.findIndex(x => x.Name === abil.Name);
+    }
+    return index
+}
+export function CheckIfKnowsSpell(char, spell)
+{
+    var index = null
+    if (char.SpellBook.find(x => x.Name === spell.Name)) {
+        index = char.SpellBook.findIndex(x => x.Name === spell.Name);
+    }
+    return index
 }

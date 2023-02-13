@@ -17,7 +17,6 @@ export function saveMinersDialogue(hero) {
     var dialogue = { Name: "Speak with Mine Foreman", Char: "Mine Foreman", Conversation: [{ Dialogue: [""], Responses: [["Next", 0]], responseEffect(hero, option) { } }, { Dialogue: [""], Responses: [], responseEffect(hero, option) { } }] }
     return dialogue
 }
-//can free kobolds after first battle
 //shop dialogues
 //inn dialogues
 export function dreamingWorkerInnDialogue(hero) {
@@ -151,5 +150,31 @@ export function forgeHeart4(hero) {
 }
 export function forgeHeart5(hero) {
     var dialogue = { Name: "Speak with Faldan", Char: "Faldan", Conversation: [{ Dialogue: ["The old dwarf is sleeping"], Responses: [["Leave", 0]], responseEffect(hero, option) { } }, { Dialogue: ["...ZZZZZZZ"], Responses: [], responseEffect(hero, option) { } }] }
+    return dialogue
+}
+//town dialogue
+export function daleTownRumors(hero) {
+    var dialogue = ""
+    var potentialRumors = [witchRumor(hero)]
+    if (CheckForQuest(hero.Journal, dwarvenMineGoblinQuest()) === null) {
+        potentialRumors.push(goblinRumor(hero))
+    }
+    if (CheckForQuest(hero.Journal, ratCellarQuest()) === null) {
+        potentialRumors.push(ratRumor(hero))
+    }
+    var rumor = potentialRumors[Math.floor(Math.random() * potentialRumors.length)];
+    dialogue = rumor
+    return dialogue;
+}
+export function goblinRumor(hero) {
+    var dialogue = { Name: "Listen to Rumors", Char: "Townsperson", Conversation: [{ Dialogue: ["Townsperson: 'The Smithy hasn't gotten any shipments of ore for a few days.'"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } }] }
+    return dialogue
+}
+export function ratRumor(hero) {
+    var dialogue = { Name: "Listen to Rumors", Char: "Townsperson", Conversation: [{ Dialogue: ["Townsperson: 'I heard that there's a rat problem at the inn.'"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } }] }
+    return dialogue
+}
+export function witchRumor(hero) {
+    var dialogue = { Name: "Listen to Rumors", Char: "Townsperson", Conversation: [{ Dialogue: ["Townsperson: 'There's a witch that lives north of town if you're looking for potions.'"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } }] }
     return dialogue
 }

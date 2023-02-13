@@ -1,7 +1,7 @@
 import { bridgeOverRiver, daleTown, dwarvenMine, farm, forest, river, road, witchHut } from "./LocationsDB"
 
 export function startingAdjacentLocations() {
-    var start = ["N: Bridge Over River (0,1)", "NE: River (1,1)", "E: Farm (1,0)", "SE: Farm (1,-1)", "S: Road (0,-1)", "SW: Farm (1,0)", "W: River (-1,0)", "NW: River (-1,1)"]
+    var start = ["Bridge", "River", "Farm", "Farm", "Road", "Farm", "River", "River"]
     return start;
 }
 export function worldMap(hero) {

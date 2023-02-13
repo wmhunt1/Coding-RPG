@@ -2,38 +2,38 @@ import { AddToCharacterLog, CalculateTime } from "./CharacterScripts";
 export function findAdjacentLocation(hero, map, x, y) {
     if (map.Locations.find(m => m.XCoord === x && m.YCoord === y)) {
         var mapIndex = map.Locations.findIndex(m => m.XCoord === x && m.YCoord === y);
-        return map.Locations[mapIndex].LocationName + " (" + x + "," + y + ")"
+        return map.Locations[mapIndex].LocationName
     }
     else {
-        return "OOB - (" + x + "," + y + ")"
+        return "OOB"
     }
 }
 export function findAdjacentLocations(hero, map, x, y) {
     //n
     hero.AdjacentLocations = []
     var n = findAdjacentLocation(hero, map, x, y + 1)
-    hero.AdjacentLocations.push("N: " + n)
+    hero.AdjacentLocations.push(n)
     //ne
     var ne = findAdjacentLocation(hero, map, x + 1, y + 1)
-    hero.AdjacentLocations.push("NE: " + ne)
+    hero.AdjacentLocations.push(ne)
     //e
     var e = findAdjacentLocation(hero, map, x + 1, y)
-    hero.AdjacentLocations.push("E: " + e)
+    hero.AdjacentLocations.push(e)
     //se
     var se = findAdjacentLocation(hero, map, x + 1, y - 1)
-    hero.AdjacentLocations.push("SE: " + se)
+    hero.AdjacentLocations.push(se)
     //s
     var s = findAdjacentLocation(hero, map, x, y - 1)
-    hero.AdjacentLocations.push("S: " + s)
+    hero.AdjacentLocations.push(s)
     //sw
     var sw = findAdjacentLocation(hero, map, x + 1, y)
-    hero.AdjacentLocations.push("SW: " + sw)
+    hero.AdjacentLocations.push(sw)
     //w
     var w = findAdjacentLocation(hero, map, x - 1, y)
-    hero.AdjacentLocations.push("W: " + w)
+    hero.AdjacentLocations.push(w)
     //nw
     var nw = findAdjacentLocation(hero, map, x - 1, y + 1)
-    hero.AdjacentLocations.push("NW: " + nw)
+    hero.AdjacentLocations.push(nw)
 }
 export function updateLocation(hero, map, x, y, hour) {
     if (map.Locations.find(m => m.XCoord === x && m.YCoord === y)) {

@@ -1,24 +1,29 @@
 import { ApplyCondition, HealHP, RemoveCondition } from "../Scripts/CharacterScripts";
 import { AddToCombatLog, ProjectileMagicAttack } from "../Scripts/CombatScripts";
-import { CalculateAlterationDuration, CalculateHealAmount, CalculateIllusionDuration, ModifySummon } from "../Scripts/SpellScripts";
-import { rat } from "./CharactersDB";
-import { poisonCondition, sleepCondition } from "./ConditionsDB";
+import { CalculateAlterationDuration,CalculateConjurationDuration, CalculateHealAmount, CalculateIllusionDuration, ModifySummon } from "../Scripts/SpellScripts";
+import { rat, skeleton } from "./CharactersDB";
+import { poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
 import { fireDamage, forceDamage, noDamage, poisonDamage } from "./DamageTypesDB";
 import { alterationSkill, conjurationSkill, destructionSkill, illusionSkill, restorationSkill } from "./SkillsDB";
 
 //control spells
 export function sleepSpell() {
-    var sleep = { Name: "Sleep", School: illusionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Puts all foes to sleep", Amount: 0, DamageType: noDamage(), SpellEffect(char, allies, enemies, target, combatLog) {var calcDuration = CalculateIllusionDuration(char, 1); AddToCombatLog(combatLog, char.Name + " puts all foes to sleep"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], sleepCondition(0, calcDuration), combatLog) } } }
+    var sleep = { Name: "Sleep", School: illusionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Puts all foes to sleep", Amount: 0, DamageType: noDamage(), SpellEffect(char, allies, enemies, target, combatLog) {var calcDuration = CalculateIllusionDuration(char, 3); AddToCombatLog(combatLog, char.Name + " puts all foes to sleep"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], sleepCondition(0, calcDuration), combatLog) } } }
     return sleep;
 }
-//condition spell
+export function webSpell() {
+    var web = { Name: "Sleep", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Webs all foes", Amount: 0, DamageType: noDamage(), SpellEffect(char, allies, enemies, target, combatLog) {var calcDuration = CalculateConjurationDuration(char, 3); AddToCombatLog(combatLog, char.Name + " webs all foes"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], webCondition(0, calcDuration), combatLog) } } }
+    return web;
+}
+//conditon
 export function poisonSpray() {
-    var poisonSpray = { Name: "Poison Spray", School: alterationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "A Spray of Poison that Poisons all Foes", Amount: 5, DamageType: poisonDamage(), SpellEffect(char, allies, enemies, target, combatLog) { var calcDuration = CalculateAlterationDuration(char, 1); AddToCombatLog(combatLog, char.Name + " sprays all foes with poison"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], poisonCondition(this.Amount, calcDuration), combatLog) } } }
+    var poisonSpray = { Name: "Poison Spray", School: alterationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "A Spray of Poison that Poisons all Foes", Amount: 5, DamageType: poisonDamage(), SpellEffect(char, allies, enemies, target, combatLog) { var calcDuration = CalculateAlterationDuration(char, 3); AddToCombatLog(combatLog, char.Name + " sprays all foes with poison"); for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], poisonCondition(this.Amount, calcDuration), combatLog) } } }
     return poisonSpray;
 }
 //damage spells
 export function fireBall() {
-    var fireBall = { Name: "Fire Ball", School: destructionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Ball of Fire that deals 10 Fire Damage to All Foes", Amount: 10, DamageType: fireDamage(), SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " launches a fireball at the enemies"); for (var e = 0; e < enemies.length; e++) { ProjectileMagicAttack(char, enemies[e], combatLog, this) } } }
+    var fireBall = { Name: "Fire Ball", School: destructionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Ball of Fire that deals 10 Fire Damage to All Foes", Amount: 10, DamageType: fireDamage(),
+     SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " launches a fireball at the enemies"); for (var e = 0; e < enemies.length; e++) { ProjectileMagicAttack(char, enemies[e], combatLog, this) } } }
     return fireBall;
 }
 export function magicMissile() {
@@ -44,4 +49,8 @@ export function basicMassHeal() {
 export function summonRat() {
     var summonRat = { Name: "Summon Rat", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 5, Description: "Summons a Rat to fight", Summon: rat(), SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " summons a " + this.Summon.Name); ModifySummon(char, allies, this.Summon) } }
     return summonRat;
+}
+export function summonSkeleton() {
+    var summon = { Name: "Summon Skeleton", School: conjurationSkill(), LevelRequirement: 10, Use: "Combat", ManaCost: 10, Description: "Summons a Skeleton to fight", Summon: skeleton(), SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " summons a " + this.Summon.Name); ModifySummon(char, allies, this.Summon) } }
+    return summon;
 }

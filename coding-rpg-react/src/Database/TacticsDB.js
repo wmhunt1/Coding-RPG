@@ -1,8 +1,13 @@
 import { rage } from "./AbilitiesDB";
 import { BasicAttack } from "../Scripts/CombatScripts"
-import { CastSpell, UseAbility } from "../Scripts/SpellScripts";
-import { basicHeal } from "./SpellsDB";
+import { CastSpell,CheckIfKnowsAbility, CheckIfKnowsSpell, UseAbility } from "../Scripts/SpellScripts";
+import { basicHeal, webSpell } from "./SpellsDB";
 
+export function tacticsList()
+{
+    var tacticsList = [BasicAttacker(), BasicHealer(), Rager()]
+    return tacticsList
+}
 export function BasicAttacker(char, allies, enemies, combatLog, round) {
     var enemyOverZero = []
     for (let e = 0; e < enemies.length; e++) {
@@ -19,7 +24,7 @@ export function BasicAttacker(char, allies, enemies, combatLog, round) {
     }
 }
 export function BasicHealer(char, allies, enemies, combatLog, round) {
-    if (char.CurrentMP > 0) {
+    if (char.CurrentMP > 0 && CheckIfKnowsSpell(char, basicHeal()) !== null) {
         var alliesUnderHalf = []
         for (var a = 0; a < allies.length; a++) {
             if (allies[a].CurrentHP <= allies[a].MaxHP / 2) {
@@ -42,7 +47,22 @@ export function Rager(char, allies, enemies, combatLog, round) {
         BasicAttacker(char, allies, enemies, combatLog)
     }
     else {
+        if (CheckIfKnowsAbility(char, rage()) !== null)
+        {
         UseAbility(char, rage(), char, combatLog)
+        }
+        else
+        {
+            BasicAttacker(char, allies, enemies, combatLog)
+        }
     }
-
+}
+export function Webber(char, allies, enemies, combatLog, round)
+{
+    if (round > 1) {
+        BasicAttacker(char, allies, enemies, combatLog)
+    }
+    else {
+        CastSpell(char, allies, enemies, enemies[0], combatLog, webSpell())
+    }
 }

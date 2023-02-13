@@ -1,11 +1,17 @@
 import { HealHP, LearnSpell, RecoverMP, RecoverSP, RemoveCondition } from "../Scripts/CharacterScripts";
+import { ProjectileMagicAttack } from "../Scripts/CombatScripts";
 import { EarnSkillXP, FindSkillInSkillBook } from "../Scripts/SkillScripts";
 import { bludeoningDamage, piercingDamage, slashingDamage } from "./DamageTypesDB";
-import { fireEnchantment, fireImmuneEnchantment, iceResistEnchantment, strengthEnchantment, unEnchanted } from "./EnchantmentsDB";
+import { fireEnchantment, fireImmuneEnchantment, iceResistEnchantment, poisonApplyEnchantment, strengthEnchantment, unEnchanted } from "./EnchantmentsDB";
 import { clothProtection, leatherProtection, metalProtection, naturalProtection, woodProtection } from "./ProtectionTypesDB";
 import { axeSkill, blockSkill, bluntSKill, heavyArmorSkill, lightArmorSkill, longBladeSkill, rangedSkill, shortBladeSkill, smithingSkill, unArmedSkill, unArmoredSkill } from "./SkillsDB";
-import { magicMissile } from "./SpellsDB";
+import { fireBall, magicMissile } from "./SpellsDB";
 //consumables
+//battle items
+export function bomb() {
+    var bomb = { Name: "Bomb", Type: "Consumable", SubType: "Battle", Cost: 10, Quantity: 1, ConsumeEffect(hero, allies, enemies, target, combatLog) { hero.Log.push(hero.Name + " throws a " + this.Name); for (var e = 0; e < enemies.length; e++) { ProjectileMagicAttack(hero, enemies[e], combatLog, fireBall()) } } }
+    return bomb
+}
 //drinks
 export function ale() {
     var ale = { Name: "Ale", Type: "Consumable", SubType: "Drink", Cost: 2, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks an " + this.Name); RecoverSP(hero, 5) } }
@@ -437,6 +443,10 @@ export function bite() {
     var bite = { Name: "Bite", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: unArmedSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bite;
 }
+export function poisonedBite() {
+    var bite = { Name: "Poisoned Bite", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: unArmedSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 0, Quantity: 1, Enchantment: poisonApplyEnchantment() }
+    return bite;
+}
 export function slam() {
     var slam = { Name: "Slam", Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: unArmedSkill(), Damage: 1, DamageType: bludeoningDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return slam;
@@ -542,6 +552,11 @@ export function ratTail() {
 export function ashes() {
     var ashes = { Name: "Ashes", Type: "Resource", SubType: "Ashes", Cost: 1, Quantity: 1 }
     return ashes
+}
+//cloth
+export function spiderSilkCloth() {
+    var cloth = { Name: "Spider Silk", Type: "Resource", SubType: "Cloth", Cost: 5, Quantity: 1 }
+    return cloth;
 }
 export function woolCloth() {
     var cloth = { Name: "Wool", Type: "Resource", SubType: "Cloth", Cost: 1, Quantity: 1 }
