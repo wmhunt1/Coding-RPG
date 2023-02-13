@@ -26,7 +26,7 @@ export function findAdjacentLocations(hero, map, x, y) {
     var s = findAdjacentLocation(hero, map, x, y - 1)
     hero.AdjacentLocations.push(s)
     //sw
-    var sw = findAdjacentLocation(hero, map, x + 1, y)
+    var sw = findAdjacentLocation(hero, map, x + 1, y-1)
     hero.AdjacentLocations.push(sw)
     //w
     var w = findAdjacentLocation(hero, map, x - 1, y)
@@ -34,6 +34,7 @@ export function findAdjacentLocations(hero, map, x, y) {
     //nw
     var nw = findAdjacentLocation(hero, map, x - 1, y + 1)
     hero.AdjacentLocations.push(nw)
+    console.log(hero.AdjacentLocations)
 }
 export function updateLocation(hero, map, x, y, hour) {
     if (map.Locations.find(m => m.XCoord === x && m.YCoord === y)) {

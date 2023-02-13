@@ -1,13 +1,23 @@
+import { CheckForQuest } from "../Scripts/QuestScripts"
 import { daleTownRumors } from "./DialoguesDB"
 import { goblinMine} from "./DungeonsDB"
 import { cowEncounter } from "./EncountersDB"
+import { dwarvenMineGoblinQuest } from "./QuestsDB"
 import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, witchHutShop } from "./ShopsDB"
 import { alchemyNode, cookNode, farmNode, fireNode, fishNode, fletchNode, huntNode, mineNode, woodNode } from "./SkillNodesDB"
 
 //locations
 //mine
 export function dwarvenMine(hero, x, y) {
-    var dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDwarvenMine(hero), enterMineNode(hero)] }
+    var dwarvenMine
+    if (CheckForQuest(hero.Journal, dwarvenMineGoblinQuest()) === null)
+    {
+        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterMineNode(hero)] }
+    }
+    else
+    {
+        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDwarvenMine(hero), enterMineNode(hero)] }
+    }
     return dwarvenMine;
 }
 //shop
@@ -33,6 +43,14 @@ export function forest(hero, x, y) {
     var forest = { LocationName: "Forest", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterCookNodeCampFire(hero), enterHuntNode(hero), enterWoodNode(hero)] }
     return forest;
 }
+export function lake(hero, x, y) {
+    var lake = { LocationName: "Lake", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero)] }
+    return lake;
+}
+export function mountains(hero, x, y) {
+    var mountains = { LocationName: "Mountains", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [] }
+    return mountains;
+}
 export function river(hero, x, y) {
     var river = { LocationName: "River", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero)] }
     return river;
@@ -44,7 +62,7 @@ export function road(hero, x, y) {
 //sublocations
 //enter dungeons
 export function enterDwarvenMine(hero) {
-    var enterDwarvenMine = { Name: "Dwarven Mine (Goblins)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: goblinMine(hero), shop: null, skill: null }; return content } }
+    var enterDwarvenMine = { Name: "Dwarven Mine (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: goblinMine(hero), shop: null, skill: null }; return content } }
     return enterDwarvenMine
 }
 //enter dialogues
@@ -118,7 +136,7 @@ export function enterHuntNode(hero) {
     return hunt;
 }
 export function enterMineNode(hero) {
-    var mine = { Name: "Mine", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: mineNode(hero) }; return content } }
+    var mine = { Name: "Mine (skill)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: mineNode(hero) }; return content } }
     return mine
 }
 export function enterWoodNode(hero) {

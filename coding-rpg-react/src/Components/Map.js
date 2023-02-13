@@ -43,8 +43,8 @@ function Map(props) {
             <h2>{map.Name} Map - {hero.Name}</h2>
             <div><h3>{location} - ({coordinateX},{coordinateY}) Time: {hero.Time.Day}, {hero.Time.Hour} - {hero.Time.TimeOfDay}</h3></div>
             <div>
-            <div style={{ display: "inline-block", verticalAlign: "text-top", marginRight: ".1%", border: "solid", paddingLeft: ".5%", paddingRight: ".5%", height: "200px", overflow: "scroll", width: "250px" }}>{subLocations.length > 0 ? <div><h4 style={{ lineHeight: "0pt" }}>Sub Locations</h4>{subLocationsList}</div> : <div><h4 style={{ lineHeight: "0pt" }}>Sub Locations</h4></div>}</div>
-                <div style={{ display: "inline-block", verticalAlign: "text-top", marginRight: ".1%", border: "solid", paddingLeft: ".5%", paddingRight: ".5%", height: "200px", width: "250px" }}>
+                <div className="map-row" style={{ width: "200px" }}>{subLocations.length > 0 ? <div><h4 style={{ lineHeight: "0pt" }}>Sub Locations</h4>{subLocationsList}</div> : <div><h4 style={{ lineHeight: "0pt" }}>Sub Locations</h4></div>}</div>
+                <div className="map-row" style={{ width: "300px" }}>
                     <h4 style={{ lineHeight: "0pt" }}>Compass</h4>
                     <div>
                         <button onClick={() => handleMove(hero, map, coordinateX - 1, coordinateY + 1, 1)}>NW</button><button onClick={() => handleMove(hero, map, coordinateX, coordinateY + 1, 1)}>N</button><button onClick={() => handleMove(hero, map, coordinateX + 1, coordinateY + 1, 1)}>NE</button>
@@ -58,7 +58,7 @@ function Map(props) {
                         <button onClick={() => handleMove(hero, map, coordinateX - 1, coordinateY - 1, 1)}>SW</button><button onClick={() => handleMove(hero, map, coordinateX, coordinateY - 1, 1)}>S</button><button onClick={() => handleMove(hero, map, coordinateX + 1, coordinateY - 1, 1)}>SE</button>
                     </div>
                 </div>
-                <div style={{ display: "inline-block", verticalAlign: "text-top", marginRight: ".1%", border: "solid", paddingLeft: ".5%", paddingRight: ".5%", height: "200px", overflow: "scroll", width: "170px" }}>{knownLocations.length > 0 ? <div><h4 style={{ lineHeight: "0pt" }}>Known Locations</h4>{knownLocationsList}</div> : <div><h4 style={{ lineHeight: "0pt" }}>Known Locations</h4></div>}</div>
+                <div className="map-row" style={{ width: "170px" }}>{knownLocations.length > 0 ? <div><h4 style={{ lineHeight: "0pt" }}>Known Locations</h4>{knownLocationsList}</div> : <div><h4 style={{ lineHeight: "0pt" }}>Known Locations</h4></div>}</div>
             </div>
         </div>
     </div>)

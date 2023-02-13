@@ -1,7 +1,7 @@
 
 bugs
 journal doesn't update until after leaving shop
-hp can be healed over maxhp
+hp can be healed over maxhp\
 
 to-do content
 dwarven mine (faldan) and (inside mine) encounter dialogue
@@ -48,3 +48,4 @@ Magic resistance?
 Map for dungeon with leaving like world map
 Or town maps
 Skill trainers 
+skill reqs for weapons and armor

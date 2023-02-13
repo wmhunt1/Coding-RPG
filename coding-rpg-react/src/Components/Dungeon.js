@@ -27,7 +27,7 @@ function Dungeon(props) {
         }
         else {
             setActive("Dialogue")
-            setDialogue(encounter.Content[0])
+            setDialogue(encounter.Content)
         }
     }
     function claimRewards(char) {
@@ -116,6 +116,7 @@ function Dungeon(props) {
                 :
                 <div>
                     <h3>You cannot continue</h3>
+                    <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave Dungeon</h3></button>
                 </div>
             }
             {active !== "Encounter" && active !== "Dialogue" ? <div>

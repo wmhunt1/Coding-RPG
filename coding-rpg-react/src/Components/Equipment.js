@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../App.css';
+import './Game.css';
 import { UnEquip } from '../Scripts/ItemScripts';
 
 function Equipment(props) {
@@ -34,7 +35,7 @@ function Equipment(props) {
     return (
         <div>
             <h2>{hero.Name}'s Equipment</h2>
-            <div style={{ display: "inline-block", verticalAlign: "text-top", marginRight: "1%", border: "solid", paddingLeft: "1%", paddingRight: "1%", height: "350px" }}>
+            <div className='equipment-box'>
                 <h3>Weapons</h3>
                 <h5>Weapon - Name: {weapon.Name}, Damage: {weapon.Damage}, Damage Type: {weapon.DamageType.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, weapon)}>UnEquip</button></h5>
                 <h5><div style={{ display: "inline-block" }}>OffHand - Name: {offHand.Name}</div>{offHand.SubType === "Weapon" ? <div style={{ display: "inline-block" }}>, Damage: {offHand.Damage}, Damage Type: {offHand.DamageType.Name}</div> : <div></div>} {offHand.SubType === "Shield" ? <div><div style={{ marginLeft: ".5%", display: "inline-block" }}>, Protection: {offHand.Protection}, Protection Type: {offHand.ProtectionType.Name}</div> <div style={{ display: "inline-block" }}><button onClick={() => handleUnEquip(hero, hero.Inventory, offHand)}>UnEquip</button></div></div> : <div></div>}</h5>
@@ -43,7 +44,7 @@ function Equipment(props) {
                 <h5>Back - Name: {back.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, back)}>UnEquip</button></h5>
                 <h5>Ring - Name: {ring.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, ring)}>UnEquip</button></h5>
             </div>
-            <div style={{ display: "inline-block", verticalAlign: "text-top", marginLeft: "1%", border: "solid", paddingLeft: "1%", paddingRight: "1%", height: "350px" }}>
+            <div className='equipment-box'>
                 <h3>Armor</h3>
                 <h5>Head - Name: {head.Name}, Protection: {head.Protection}, Protection Type: {head.ProtectionType.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, head)}>UnEquip</button></h5>
                 <h5>Torso - Name: {torso.Name}, Protection: {torso.Protection}, Protection Type: {torso.ProtectionType.Name} <button onClick={() => handleUnEquip(hero, hero.Inventory, torso)}>UnEquip</button></h5>

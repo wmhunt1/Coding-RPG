@@ -79,11 +79,11 @@ function Bank(props) {
             </div> : <div></div>}
         {active === "withdraw" ? <div>
             <h3 style={{ display: "inline-block" }}>Withdraw - Bank's Gold: {bankGold} <button onClick={() => withdrawGold(hero,gold,  bankGold, quantity)}> Withdraw {quantity} </button></h3>(<button style={{ display: "inline-block" }} onClick={() => setQuantity(quantity - 1)}>-</button><h4 style={{ display: "inline-block" }}> Qty: {quantity} </h4><button style={{ display: "inline-block" }} onClick={() => setQuantity(quantity + 1)}>+</button>)
-            {bankList.length > 0 ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%", height: "200px" }}>{bankList}</div> : <h3>Nothing to withdraw</h3>}
+            {bankList.length > 0 ? <div className='bank-box' >{bankList}</div> : <h3>Nothing to withdraw</h3>}
         </div> : <div></div>}
         {active === "deposit" ? <div>
             <h3 style={{ display: "inline-block" }}>Deposit - {hero.Name}'s Gold: {gold} <button onClick={() => depositGold(hero, gold, bankGold, quantity)}> Deposit {quantity} </button></h3>(<button style={{ display: "inline-block" }} onClick={() => setQuantity(quantity - 1)}>-</button><h4 style={{ display: "inline-block" }}> Qty: {quantity} </h4> <button style={{ display: "inline-block" }} onClick={() => setQuantity(quantity + 1)}>+</button>)
-            {inventoryList.length > 0 ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%", height: "200px" }}>{inventoryList}</div> : <h3>Nothing to deposit</h3>}
+            {inventoryList.length > 0 ? <div className='bank-box'>{inventoryList}</div> : <h3>Nothing to deposit</h3>}
         </div> : <div></div>}
         {active !== "banking" ? <div><button onClick={() => setActive("banking")}><h4>Back to Bank</h4></button></div> : <div></div>}
 

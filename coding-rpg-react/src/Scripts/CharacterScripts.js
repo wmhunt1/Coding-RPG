@@ -134,8 +134,12 @@ export function RemoveGold(char, gold) {
     AddToCharacterLog(char, char.Name + " paid " + gold + " GP")
 }
 export function JoinParty(char1, char2, party) {
-    party.push(char2)
-    AddToCharacterLog(char1, char2.Name + " has joined the party.")
+    if (party.find(x => x.Name === char2.Name)) {
+    }
+    else {
+        party.push(char2)
+        AddToCharacterLog(char1, char2.Name + " has joined the party.")
+    }
 }
 export function LeaveParty(char1, char2, party) {
     party.remove(char2)

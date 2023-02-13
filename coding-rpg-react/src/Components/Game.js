@@ -80,7 +80,7 @@ function Game(props) {
           <div><button className='menu-button' onClick={() => setActive("Game")}><h3>Leave</h3></button></div>
         </div> : <div></div>}
       </div>
-      {active === "Game" ? <div><div style={{ marginLeft: "20%", marginRight: "20%" }}><Map parentCallback={handleCallback} hero={hero} map={worldMap()}></Map></div> </div> : <div> </div>}
+      {active === "Game" ? <div><div style={{ marginLeft: "20%", marginRight: "20%" }}><Map parentCallback={handleCallback} hero={hero} map={worldMap(hero)}></Map></div> </div> : <div> </div>}
       {active !== "Dungeon" && active !== "Dialogue" && active !== "Combat" ? <div style={{ marginLeft: "25%", marginRight: "25%", width: "auto", height: "200px" }}>
         <Log log={log} logName={"Game"}></Log>
       </div> : <div></div>}
