@@ -15,7 +15,7 @@ Array.prototype.remove = function () {
 export function AddToCharacterLog(char, message) {
     char.Log.push(message);
 }
-export function LevelUp(char) {
+export function LevelUp(char, log) {
     char.Level++;
     char.MaxXP = (char.Level * (char.Level - 1)) * 100;
     char.MaxHP += char.Constitution;
@@ -24,21 +24,21 @@ export function LevelUp(char) {
     char.CurrentMP = char.Intelligence;
     char.MaxSP += 10;
     char.CurrentSP = char.Constitution;
-    AddToCharacterLog(char, char.Name + " has reached level " + char.Level);
+    AddToCharacterLog(log, char.Name + " has reached level " + char.Level);
 }
-export function CheckForLevelUp(char) {
+export function CheckForLevelUp(char, log) {
     if (char.CurrentXP >= char.MaxXP) {
-        AddToCharacterLog(char, char.Name + " has enough XP to Level Up");
+        AddToCharacterLog(log, char.Name + " has enough XP to Level Up");
         return true;
     }
     else {
-        AddToCharacterLog(char, char.Name + " doesn't have enough XP to Level Up");
+        AddToCharacterLog(log, char.Name + " doesn't have enough XP to Level Up");
         return false;
     }
 }
-export function EarnXP(char, xp) {
+export function EarnXP(char, xp, log) {
     char.CurrentXP += xp;
-    AddToCharacterLog(char, char.Name + " earned " + xp + " XP");
+    AddToCharacterLog(log, char.Name + " earned " + xp + " XP");
 }
 export function HealHP(char, hp) {
     char.CurrentHP += hp;

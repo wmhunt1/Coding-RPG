@@ -24,7 +24,7 @@ export function FindItemInInventoryBySubType(inventory, item) {
     }
     return index
 }
-export function AddItemToInventory(char, inventory, item, quantity) {
+export function AddItemToInventory(char, inventory, item, quantity, log) {
     if (inventory.find(x => x.Name === item.Name)) {
         var itemIndex = FindItemInInventory(inventory, item)
         if (itemIndex !== null) {
@@ -37,7 +37,7 @@ export function AddItemToInventory(char, inventory, item, quantity) {
         item.Quantity = quantity;
         inventory.push(item);
     }
-    AddToCharacterLog(char, "Adding " + item.Name + " X " + quantity + " to " + char.Name + "'s Inventory");
+    AddToCharacterLog(log, "Adding " + item.Name + " X " + quantity + " to " + log.Name + "'s Inventory");
     char.Inventory = inventory;
 }
 export function AddItemToBank(char, inventory, item, quantity) {
@@ -56,7 +56,7 @@ export function AddItemToBank(char, inventory, item, quantity) {
     AddToCharacterLog(char, "Adding " + item.Name + " X " + quantity + " to " + char.Name + "'s Bank");
     char.Bank = inventory;
 }
-export function RemoveItemFromInventory(char, inventory, item, quantity) {
+export function RemoveItemFromInventory(char, inventory, item, quantity, log) {
     var findItem = inventory.findIndex(x => x.Name === item.Name);
     var newItem = inventory[findItem];
     newItem.Quantity -= quantity
@@ -64,7 +64,7 @@ export function RemoveItemFromInventory(char, inventory, item, quantity) {
     if (inventory[findItem].Quantity <= 0) {
         inventory.remove(inventory[findItem]);
     }
-    AddToCharacterLog(char, "Removing " + item.Name + " X " + quantity + " from " + char.Name + "'s Inventory");
+    AddToCharacterLog(log, "Removing " + item.Name + " X " + quantity + " from " + char.Name + "'s Inventory");
     char.Inventory = inventory;
 }
 export function RemoveItemFromBank(char, inventory, item, quantity) {
@@ -78,9 +78,10 @@ export function RemoveItemFromBank(char, inventory, item, quantity) {
     AddToCharacterLog(char, "Withdrawing " + item.Name + " X " + quantity + " from " + char.Name + "'s Bank");
     char.Bank = inventory;
 }
-export function UnEquip(char, inventory, item) {
+export function UnEquip(char, inventory, item, log) {
     if (item.Name !== "None" && item.Name !== "Empty" && item.Name !== "Fist") {
-        AddItemToInventory(char, inventory, item, item.Quantity)
+        AddToCharacterLog(log, char.Name + " UnEquipped " + item.Name)
+        AddItemToInventory(char, inventory, item, item.Quantity, log)
     }
     if (item.Slot === "Weapon") {
         char.Weapon = bareFist()
@@ -128,25 +129,25 @@ export function UnEquip(char, inventory, item) {
     item.Enchantment.OnUnEquipEffect(char, item)
     char.Inventory = inventory;
 }
-export function EquipItem(char, inventory, item) {
-    AddToCharacterLog(char, char.Name + " Equipped " + item.Name);
+export function EquipItem(char, inventory, item, log) {
+    AddToCharacterLog(log, char.Name + " Equipped " + item.Name);
     if (item.Slot === "Weapon") {
-        UnEquip(char, inventory, char.Weapon)
+        UnEquip(char, inventory, char.Weapon, log)
         char.Weapon = item;
         if (item.Type === "TwoHands") {
             EquipItem(char, inventory, char.OffHand)
         }
     }
     if (item.Slot === "OffHand") {
-        UnEquip(char, inventory, char.OffHand)
+        UnEquip(char, inventory, char.OffHand, log)
         char.OffHand = item
     }
     if (item.Slot === "Head") {
-        UnEquip(char, inventory, char.Head)
+        UnEquip(char, inventory, char.Head, log)
         char.Head = item
     }
     if (item.Slot === "Torso") {
-        UnEquip(char, inventory, char.Torso)
+        UnEquip(char, inventory, char.Torso, log)
         item.ProtectionType.onEquip(char, item)
         char.Torso = item
         if (char.Torso.Class.Name === "Heavy Armor") {
@@ -163,36 +164,36 @@ export function EquipItem(char, inventory, item) {
         }
     }
     if (item.Slot === "Legs") {
-        UnEquip(char, inventory, char.Legs)
+        UnEquip(char, inventory, char.Legs, log)
         char.Legs = item
     }
     if (item.Slot === "Hands") {
-        UnEquip(char, inventory, char.Hands)
+        UnEquip(char, inventory, char.Hands, log)
         char.Hands = item
     }
     if (item.Slot === "Feet") {
-        UnEquip(char, inventory, char.Feet)
+        UnEquip(char, inventory, char.Feet, log)
         char.Feet = item
     }
     if (item.Slot === "Back") {
-        UnEquip(char, inventory, char.Back)
+        UnEquip(char, inventory, char.Back, log)
         char.Back = item
     }
     if (item.Slot === "Neck") {
-        UnEquip(char, inventory, char.Neck)
+        UnEquip(char, inventory, char.Neck, log)
         char.Neck = item
     }
     if (item.Slot === "Ring") {
-        UnEquip(char, inventory, char.Ring)
+        UnEquip(char, inventory, char.Ring, log)
         char.Ring = item
     }
     item.Enchantment.OnEquipEffect(char, item)
-    char.Inventory = inventory;
+    log.Inventory = inventory;
 }
-export function EquipItemFromInventory(char, inventory, item) {
-    EquipItem(char, inventory, item)
-    RemoveItemFromInventory(char, inventory, item, item.Quantity)
-    char.Inventory = inventory;
+export function EquipItemFromInventory(char, inventory, item, log) {
+    EquipItem(char, inventory, item, log)
+    RemoveItemFromInventory(log, inventory, item, item.Quantity, log)
+    log.Inventory = inventory;
 }
 export function ApplyOnEquipEffect(hero, immune, resist, weak, cImmune, cResist, cWeak, item) {
     for (var i = 0; i < immune.length; i++) {

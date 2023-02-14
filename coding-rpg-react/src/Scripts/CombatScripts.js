@@ -253,7 +253,7 @@ export function CombatRewards(hero, allies, enemies) {
     AddToCharacterLog(hero, "Recieving Combat Rewards")
     for (var e = 0; e < enemies.length; e++) {
         for (var a = 0; a < allies.length; a++) {
-            EarnXP(allies[a], enemies[e].CurrentXP);
+            EarnXP(allies[a], enemies[e].CurrentXP, hero);
             RemoveAllBuffs(allies[a])
         }
         AddGold(hero, enemies[e].Gold)

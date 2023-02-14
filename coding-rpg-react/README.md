@@ -18,6 +18,7 @@ fixes/changes
 balance level requiurements and xp
 change iron to level 10 and steel to level 20
 fix tactic selection
+clean up scripts
 
 features
 Seperate bandit for farming
@@ -44,7 +45,7 @@ Use rs3 tiers for crafting?
 companions get jobs that give new abilities or change tactics
 feats/perks
 save/load via json
-common log
+combine combat and game logs
 log filter with message types
 factions
 jobs

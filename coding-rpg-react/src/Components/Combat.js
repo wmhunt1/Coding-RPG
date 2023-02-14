@@ -73,7 +73,7 @@ function Combat(props) {
     }
     function handleConsumable(hero, allies, enemies, target, combatLog, action, spell, abil, round, inventory, item) {
         if (item.SubType !== "Battle") {
-            item.ConsumeEffect(hero)
+            item.ConsumeEffect(hero, combatLog)
         }
         else {
             item.ConsumeEffect(hero, allies, enemies, target, combatLog)

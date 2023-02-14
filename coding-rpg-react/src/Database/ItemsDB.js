@@ -1,5 +1,5 @@
-import { HealHP, LearnSpell, RecoverMP, RecoverSP, RemoveCondition } from "../Scripts/CharacterScripts";
-import { ProjectileMagicAttack } from "../Scripts/CombatScripts";
+import { AddToCharacterLog, HealHP, LearnSpell, RecoverMP, RecoverSP, RemoveCondition } from "../Scripts/CharacterScripts";
+import { AddToCombatLog, ProjectileMagicAttack } from "../Scripts/CombatScripts";
 import { EarnSkillXP, FindSkillInSkillBook } from "../Scripts/SkillScripts";
 import { bludeoningDamage, forceDamage, piercingDamage, slashingDamage } from "./DamageTypesDB";
 import { drunkDeBuff } from "./DeBuffsDB";
@@ -10,45 +10,45 @@ import { fireBall, magicMissile } from "./SpellsDB";
 //consumables
 //battle items
 export function bomb() {
-    var bomb = { Name: "Bomb", Type: "Consumable", SubType: "Battle", Cost: 10, Quantity: 1, ConsumeEffect(hero, allies, enemies, target, combatLog) { hero.Log.push(hero.Name + " throws a " + this.Name); for (var e = 0; e < enemies.length; e++) { ProjectileMagicAttack(hero, enemies[e], combatLog, fireBall()) } } }
+    var bomb = { Name: "Bomb", Type: "Consumable", SubType: "Battle", Cost: 10, Quantity: 1, ConsumeEffect(hero, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, hero.Name + " throws a " + this.Name); for (var e = 0; e < enemies.length; e++) { ProjectileMagicAttack(hero, enemies[e], combatLog, fireBall()) } } }
     return bomb
 }
 //drinks
 export function ale() {
-    var ale = { Name: "Ale", Type: "Consumable", SubType: "Drink", Cost: 2, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks an " + this.Name); RecoverSP(hero, 5); drunkDeBuff(3).ApplyDeBuff(hero) } }
+    var ale = { Name: "Ale", Type: "Consumable", SubType: "Drink", Cost: 2, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks an " + this.Name); RecoverSP(hero, 5); drunkDeBuff(3).ApplyDeBuff(hero) } }
     return ale
 }
 export function milk() {
-    var milk = { Name: "Milk", Type: "Consumable", SubType: "Drink", Cost: 2, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks a " + this.Name); RecoverSP(hero, 5) } }
+    var milk = { Name: "Milk", Type: "Consumable", SubType: "Drink", Cost: 2, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks a " + this.Name); RecoverSP(hero, 5) } }
     return milk
 }
 //food
 export function bread() {
-    var bread = { Name: "Bread", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
+    var bread = { Name: "Bread", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
     return bread
 }
 export function cheese() {
-    var cheese = { Name: "Cheese", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
+    var cheese = { Name: "Cheese", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
     return cheese
 }
 export function cookedBeef() {
-    var cook = { Name: "Cooked Beef", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
+    var cook = { Name: "Cooked Beef", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
     return cook;
 }
 export function cookedFish() {
-    var cook = { Name: "Cooked Fish", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
+    var cook = { Name: "Cooked Fish", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
     return cook;
 }
 export function cookedRabbitMeat() {
-    var cookedRabbitMeat = { Name: "Cooked Rabbit Meat", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
+    var cookedRabbitMeat = { Name: "Cooked Rabbit Meat", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
     return cookedRabbitMeat;
 }
 export function cookedRatMeat() {
-    var cookedRatMeat = { Name: "Cooked Rat Meat", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
+    var cookedRatMeat = { Name: "Cooked Rat Meat", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
     return cookedRatMeat;
 }
 export function stew() {
-    var stew = { Name: "Stew", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
+    var stew = { Name: "Stew", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 5) } }
     return stew;
 }
 //potions
@@ -57,19 +57,22 @@ export function allPotions() {
     return all;
 }
 export function antidote() {
-    var antidote = { Name: "Antidote", Type: "Consumable", SubType: "Potion", Cost: 5, Quantity: 1, ConsumeEffect(hero) { if (hero.Conditon.Name === "Poison") { hero.Log.push(hero.Name + " drinks " + this.Name); RemoveCondition(hero, hero.Log) } } }
+    var antidote = {
+        Name: "Antidote", Type: "Consumable", SubType: "Potion", Cost: 5, Quantity: 1,
+        ConsumeEffect(hero, log) { if (hero.Conditon.Name === "Poison") { AddToCharacterLog(log, hero.Name + " drinks " + this.Name); RemoveCondition(hero, hero.Log) } }
+    }
     return antidote;
 }
 export function healingPotion() {
-    var healingPotion = { Name: "Healing Potion", Type: "Consumable", SubType: "Potion", Cost: 5, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks " + this.Name); HealHP(hero, 5) } }
+    var healingPotion = { Name: "Healing Potion", Type: "Consumable", SubType: "Potion", Cost: 5, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks " + this.Name); HealHP(hero, 5) } }
     return healingPotion;
 }
 export function manaPotion() {
-    var manaPotion = { Name: "Mana Potion", Type: "Consumable", SubType: "Potion", Cost: 5, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks " + this.Name); RecoverMP(hero, 5) } }
+    var manaPotion = { Name: "Mana Potion", Type: "Consumable", SubType: "Potion", Cost: 5, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks " + this.Name); RecoverMP(hero, 5) } }
     return manaPotion;
 }
 export function staminaPotion() {
-    var staminaPotion = { Name: "Stamina Potion", Type: "Consumable", SubType: "Potion", Cost: 5, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " drinks " + this.Name); RecoverSP(hero, 5) } }
+    var staminaPotion = { Name: "Stamina Potion", Type: "Consumable", SubType: "Potion", Cost: 5, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks " + this.Name); RecoverSP(hero, 5) } }
     return staminaPotion;
 }
 //scrolls
@@ -80,12 +83,12 @@ export function allSpellScrolls() {
     return all;
 }
 export function magicMissileScroll() {
-    var magicMissileScroll = { Name: "Scroll of Magic Missile", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " studies " + this.Name); LearnSpell(hero, magicMissile()) } }
+    var magicMissileScroll = { Name: "Scroll of Magic Missile", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, magicMissile()) } }
     return magicMissileScroll;
 }
 //xp lamps
 export function lessonsFromFaldan() {
-    var lessonsFromFaldan = { Name: "Lessons from Faldan", Type: "Consumable", SubType: "Lamp", Cost: 10, Quantity: 1, ConsumeEffect(hero) { hero.Log.push(hero.Name + " studies " + this.Name); EarnSkillXP(hero, FindSkillInSkillBook(hero, smithingSkill()), 500) } }
+    var lessonsFromFaldan = { Name: "Lessons from Faldan", Type: "Consumable", SubType: "Lamp", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); EarnSkillXP(hero, FindSkillInSkillBook(hero, smithingSkill()), 500) } }
     return lessonsFromFaldan
 }
 //equipables
