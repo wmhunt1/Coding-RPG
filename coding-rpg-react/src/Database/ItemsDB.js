@@ -1,4 +1,4 @@
-import { AddToCharacterLog, HealHP, LearnSpell, RecoverMP, RecoverSP, RemoveCondition } from "../Scripts/CharacterScripts";
+import { AddToCharacterLog, EarnXP, HealHP, LearnSpell, RecoverMP, RecoverSP, RemoveCondition } from "../Scripts/CharacterScripts";
 import { AddToCombatLog, ProjectileMagicAttack } from "../Scripts/CombatScripts";
 import { EarnSkillXP, FindSkillInSkillBook } from "../Scripts/SkillScripts";
 import { bludeoningDamage, forceDamage, piercingDamage, slashingDamage } from "./DamageTypesDB";
@@ -91,6 +91,14 @@ export function lessonsFromFaldan() {
     var lessonsFromFaldan = { Name: "Lessons from Faldan", Type: "Consumable", SubType: "Lamp", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); EarnSkillXP(hero, FindSkillInSkillBook(hero, smithingSkill()), 500) } }
     return lessonsFromFaldan
 }
+export function skillLamp(skill, xp) {
+    var lamp = { Name: skill.Name + " XP Lamp", Type: "Consumable", SubType: "Lamp", Cost: 0, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " rubs " + this.Name + " gaining " + skill.Name + " " + xp + " XP"); EarnSkillXP(hero, FindSkillInSkillBook(hero, skill), xp) } }
+    return lamp;
+}
+export function levelLamp(xp) {
+    var lamp = { Name: "Character XP Lamp", Type: "Consumable", SubType: "Lamp", Cost: 0, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " rubs " + this.Name + " gaining " + xp + " XP"); EarnXP(hero, xp, hero) } }
+    return lamp;
+}
 //equipables
 export function allBronze() {
     var all = [bronzeAxe(), bronzeAxe2H(), bronzeBoots(), bronzeDagger(), bronzeDaggerOffHand(), bronzeGauntlets(), bronzeHatchet(), bronzeHelmet(), bronzeLegs(), bronzeMace(), bronzePickAxe(), bronzeShield(), bronzeSword(), bronzeSword2H(), bronzeTorso(), bronzeWarHammer(), bronzeWarHammer2H()]
@@ -142,6 +150,10 @@ export function bareFinger() {
 }
 export function ringOfStr() {
     var ring = { Name: "Ring of Strength", Slot: "Ring", Type: "Equipable", SubType: "", Cost: 10, Quantity: 1, Enchantment: strengthEnchantment() }
+    return ring;
+}
+export function silverRingLR() {
+    var ring = { Name: "Silver Ring engraved with the Initials CR ", Slot: "Ring", Type: "Equipable", SubType: "", Cost: 10, Quantity: 1, Enchantment: strengthEnchantment() }
     return ring;
 }
 //armor
@@ -558,6 +570,10 @@ export function ratTail() {
 export function ashes() {
     var ashes = { Name: "Ashes", Type: "Resource", SubType: "Ashes", Cost: 1, Quantity: 1 }
     return ashes
+}
+export function blackFeather() {
+    var feathers = { Name: "Black Feather", Type: "Resource", SubType: "Feather", Cost: 1, Quantity: 1 }
+    return feathers
 }
 //cloth
 export function spiderSilkCloth() {

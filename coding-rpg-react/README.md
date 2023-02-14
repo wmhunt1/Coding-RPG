@@ -4,25 +4,26 @@ journal doesn't update until after leaving shop
 hp can be healed over maxhp\
 
 to-do content
-dwarven mine (faldan) and (inside mine) encounter dialogue
 
 ideas
 Wizard tower with dungeon  (quest, monsters, dialogue, dungeon, location, place on map)
 retrieve sheepscale's stolen sheep  (quest, monsters, dialogue, dungeon, location, place on map)
 deliver letter to ambrosius quest (quest, monsters, dialogue, dungeon, location, place on map)
-save foreman george from giant (dialogue)
 retrieve cargo from bandits for general store (quest, dialogue, dungeon, location, place on map)
-scarecrow quest 1-3 (dialogue)
+skeleton killing quest
 
 fixes/changes
+give ferra 9000 xp in each relevant skill
+collect feathers from tengu camp and actual random junk from tengu
+write more than generic dialogue
 balance level requiurements and xp
 change iron to level 10 and steel to level 20
 fix tactic selection
 clean up scripts
-
+dialogue overhaul (more options or branches)
+quest rewards for scarecrowquest (1-2 and 4), goblinmine, giantcave
 features
 Seperate bandit for farming
-Hidden quest to return ring to littleroots
 Have hidden quests that are filtered to keep track of other stuff
 Or an array of switches 
 Temple with graveyard for skeletons
@@ -31,7 +32,6 @@ Haunted manor with ghosts
 Hidden quest for if went to witch and met Wyle and family 
 Maybe if 3 quests completed John Dale shows up
 Orc village
-Auto end combat
 Dale town rep increase for doing quests 
 Maybe just make rep and unsellable item
 variable skills for party members (calculate xp based on level)

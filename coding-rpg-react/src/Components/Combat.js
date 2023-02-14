@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CombatPenalties, CombatRewards, CombatRound } from '../Scripts/CombatScripts';
 import { RemoveItemFromInventory } from '../Scripts/ItemScripts';
 import Log from './Log';
+import { AddToCharacterLog } from '../Scripts/CharacterScripts';
 
 function Combat(props) {
     const [hero, setHero] = useState(props.hero)
@@ -51,8 +52,10 @@ function Combat(props) {
         setPreparedAbility(null)
         setPreparedSpell(null)
         if (overZero === 0) {
+            AddToCharacterLog(hero, "The Party is Victorious")
             CombatRewards(hero, allies, enemies)
             setHero(hero)
+            props.Back()
             props.parentCallback(hero);
         }
         var overZeroA = 0;
@@ -63,8 +66,10 @@ function Combat(props) {
         }
         setAlliesOverZero(overZeroA)
         if (overZeroA === 0) {
+            AddToCharacterLog(hero, "The Party is Defeated")
             CombatPenalties(hero)
             setHero(hero)
+            props.Back()
             props.parentCallback(hero);
         }
         round++;
@@ -147,13 +152,8 @@ function Combat(props) {
                     <div style={{ paddingTop: "1%" }}>
                         <button style={{ marginBottom: "1%" }} onClick={props.Back}><h4>Run Away</h4></button>
                     </div>
-                </div></div> : <div> <div>
-                    <h4>{hero.Name}'s Party is victorious!</h4>
-                    <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button>
-                </div></div>}
-            </div> : <div><h4>Name: {hero.Name} cannot Fight</h4>
-                <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button></div>}</div>
-
+                </div></div> : <div></div>}
+            </div> : <div></div>}</div>
     </div>)
 }
 

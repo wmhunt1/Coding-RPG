@@ -5,9 +5,9 @@ import './Game.css';
 function Journal(props) {
     const [quests, setQuests] = useState(props.hero.Journal)
     const [list, setList] = useState("Default")
-    const questList = quests.sort((a, b) => a.Name.localeCompare(b.Name)).map((quest, index) => <h4 key={index}>{quest.Name}({quest.Status}): {quest.Description} {quest.ObjectiveProgress}/{quest.Objective}</h4>)
-    const inProgressQuestList = quests.sort((a, b) => a.Name.localeCompare(b.Name)).filter(quest => quest.Status === "In Progress").map((quest, index) => <h4 key={index}>{quest.Name}({quest.Status}): {quest.Description} {quest.ObjectiveProgress}/{quest.Objective}</h4>)
-    const completedQuestList = quests.sort((a, b) => a.Name.localeCompare(b.Name)).filter(quest => quest.Status === "Completed").map((quest, index) => <h4 key={index}>{quest.Name}({quest.Status}): {quest.Description} {quest.ObjectiveProgress}/{quest.Objective}</h4>)
+    const questList = quests.sort((a, b) => a.Name.localeCompare(b.Name)).filter(quest => quest.Type !== "Hidden").map((quest, index) => <h4 key={index}>{quest.Name}({quest.Status}): {quest.Description} {quest.ObjectiveProgress}/{quest.Objective}</h4>)
+    const inProgressQuestList = quests.sort((a, b) => a.Name.localeCompare(b.Name)).filter(quest => quest.Status === "In Progress" && quest.Type !== "Hidden").map((quest, index) => <h4 key={index}>{quest.Name}({quest.Status}): {quest.Description} {quest.ObjectiveProgress}/{quest.Objective}</h4>)
+    const completedQuestList = quests.sort((a, b) => a.Name.localeCompare(b.Name)).filter(quest => quest.Status === "Completed" && quest.Type !== "Hidden").map((quest, index) => <h4 key={index}>{quest.Name}({quest.Status}): {quest.Description} {quest.ObjectiveProgress}/{quest.Objective}</h4>)
     return (<div>
         <h2>{props.hero.Name}'s Journal</h2>
         <div style = {{overflow: "scroll", marginRight: "25%", marginLeft:"25%", border: "solid", height: "250px"}}>

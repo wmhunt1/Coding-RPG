@@ -1,5 +1,5 @@
 import { CheckForQuest } from "../Scripts/QuestScripts"
-import { daleTownRumors } from "./DialoguesDB"
+import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, tenguCampDialogue } from "./DialoguesDB"
 import { giantCaveDungeon, goblinMine, goblinMineAfterQuest, spiderCaveDungeon } from "./DungeonsDB"
 import { cowEncounter, giantEncounter, goblinEncounter, scareCrowEncounter, spiderEncounter } from "./EncountersDB"
 import { dwarvenMineGoblinQuest } from "./QuestsDB"
@@ -8,15 +8,15 @@ import { alchemyNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletc
 
 //locations
 export function lumbermill(hero, x, y) {
-    var lumber = { LocationName: "Lumbermill", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterWoodNode(hero)] }
+    var lumber = { LocationName: "Lumbermill", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterLumbermillDialogue(hero), enterWoodNode(hero)] }
     return lumber;
 }
 export function littleRootFarm(hero, x, y) {
-    var farm = { LocationName: "Little Root Farm", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterCowEncounter(hero), enterFarmNode(hero), enterScareCrowEncounter(hero)] }
+    var farm = { LocationName: "Little Root Farm", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterCowEncounter(hero), enterFarmNode(hero), enterLittleRootFarmDialogue(hero), enterScareCrowEncounter(hero)] }
     return farm;
 }
 export function tenguCamp(hero, x, y) {
-    var camp = { LocationName: "Strange Camp", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [] }
+    var camp = { LocationName: "Strange Camp", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterTenguCampDialogue(hero)] }
     return camp;
 }
 //dungeon
@@ -103,6 +103,18 @@ export function enterSpiderCaveDungeon(hero) {
 export function enterDaleTownRumors(hero) {
     var enterDaleTownRumors = { Name: "Listen to rumors", enterLocation(hero) { var content = { active: "Dialogue", combat: null, dialogue: daleTownRumors(hero), dungeon: null, shop: null, skill: null }; return content } }
     return enterDaleTownRumors
+}
+export function enterLittleRootFarmDialogue(hero) {
+    var enter = { Name: "Speak with Farmer Littleroot", enterLocation(hero) { var content = { active: "Dialogue", combat: null, dialogue: littleRootFarmDialogue(hero), dungeon: null, shop: null, skill: null }; return content } }
+    return enter
+}
+export function enterLumbermillDialogue(hero) {
+    var enter = { Name: "Speak with woodcutters", enterLocation(hero) { var content = { active: "Dialogue", combat: null, dialogue: lumbermillDialogue(hero), dungeon: null, shop: null, skill: null }; return content } }
+    return enter
+}
+export function enterTenguCampDialogue(hero) {
+    var enter = { Name: "Inspect Camp", enterLocation(hero) { var content = { active: "Dialogue", combat: null, dialogue: tenguCampDialogue(hero), dungeon: null, shop: null, skill: null }; return content } }
+    return enter
 }
 //enter encounters
 export function enterCowEncounter(hero) {

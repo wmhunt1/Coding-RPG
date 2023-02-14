@@ -133,6 +133,14 @@ export function RemoveGold(char, gold) {
     char.Gold -= gold;
     AddToCharacterLog(char, char.Name + " paid " + gold + " GP")
 }
+export function FindPartyMember(char, party)
+{
+    var index = null;
+    if (party.find(x => x.Name === char.Name)) {
+        index = party.findIndex(x => x.Name === char.Name);
+    }
+    return index
+}
 export function JoinParty(char1, char2, party) {
     if (party.find(x => x.Name === char2.Name)) {
     }

@@ -1,16 +1,16 @@
-import { bossGoblinEncounter, enterGoblinMineEncounter, giantEncounter, giantRatEncounter, goblinEncounter, goblinWithWorgEncounter, koboldSlavesEncounter, ratEncounter, saveMinersEncounter, spiderEncounter } from "./EncountersDB";
+import { bossGoblinEncounter, enterGoblinMineEncounter, foremanGeorgeEncounter, giantEncounter, giantRatEncounter, goblinEncounter, goblinWithWorgEncounter, koboldSlavesEncounter, ratEncounter, saveMinersEncounter, saveTenguEncounter, spiderEncounter } from "./EncountersDB";
 import { ale, pickAxe } from "./ItemsDB"
 import { CheckForQuest } from "../Scripts/QuestScripts";
-import { scareCrowQuest3 } from "./QuestsDB";
+import { giantQuest, scareCrowQuest3 } from "./QuestsDB";
 
 export function giantCaveDungeon(hero) {
     var cave;
-    var questIndex = CheckForQuest(hero.Journal, scareCrowQuest3())
+    var questIndex = CheckForQuest(hero.Journal, giantQuest())
     if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
         cave = { Name: "Giant Cave", Encounters: [], Boss: giantEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: null }
     }
     else {
-        cave = { Name: "Giant Cave", Encounters: [], Boss: giantEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: null }
+        cave = { Name: "Giant Cave", Encounters: [], Boss: giantEncounter(), AfterBoss: foremanGeorgeEncounter(hero), GoldReward: 0, ItemReward: null }
     }
     return cave
 }
@@ -34,7 +34,7 @@ export function spiderCaveDungeon(hero) {
         spiderCave = { Name: "Spider Cave", Encounters: [spiderEncounter()], Boss: spiderEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: null }
     }
     else {
-        spiderCave = { Name: "Spider Cave", Encounters: [spiderEncounter()], Boss: spiderEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: null }
+        spiderCave = { Name: "Spider Cave", Encounters: [spiderEncounter()], Boss: spiderEncounter(), AfterBoss: saveTenguEncounter(hero), GoldReward: 0, ItemReward: null }
     }
     return spiderCave
 }
