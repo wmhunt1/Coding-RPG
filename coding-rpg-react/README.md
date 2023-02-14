@@ -7,13 +7,12 @@ to-do content
 dwarven mine (faldan) and (inside mine) encounter dialogue
 
 ideas
-Wizard tower with dungeon 
-retrieve sheepscale's stolen sheep
-deliver letter to ambrosius quest
-save foreman george from giant (lumbermill)
-retrieve cargo from bandits for general store
-possesed scarecrow at littleroot farm
-leads to tengu camp and tengu captured by spiders
+Wizard tower with dungeon  (quest, monsters, dialogue, dungeon, location, place on map)
+retrieve sheepscale's stolen sheep  (quest, monsters, dialogue, dungeon, location, place on map)
+deliver letter to ambrosius quest (quest, monsters, dialogue, dungeon, location, place on map)
+save foreman george from giant (dialogue)
+retrieve cargo from bandits for general store (quest, dialogue, dungeon, location, place on map)
+scarecrow quest 1-3 (dialogue)
 
 fixes/changes
 balance level requiurements and xp
@@ -24,6 +23,7 @@ features
 variable skills for party members (calculate xp based on level)
 Bandit hide out
 Bat cave
+abraham arkwright companion
 Wolf encounter
 Talking tree
 Quincy companion

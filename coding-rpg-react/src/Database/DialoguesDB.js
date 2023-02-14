@@ -1,7 +1,7 @@
 import { CalculateTime, JoinParty, PartyRecovery, RemoveGold } from "../Scripts/CharacterScripts";
 import { CheckForQuest, CompleteQuest, StartQuest } from "../Scripts/QuestScripts"
 import { ferraForgeHeart } from "./CharactersDB";
-import { dwarvenMineGoblinQuest, ratCellarQuest } from "./QuestsDB"
+import { dwarvenMineGoblinQuest, giantQuest, ratCellarQuest, scareCrowQuest1 } from "./QuestsDB"
 
 //dungeon encounter dialogues
 //goblinMine Dialogues
@@ -159,12 +159,22 @@ export function daleTownRumors(hero) {
     if (CheckForQuest(hero.Journal, dwarvenMineGoblinQuest()) === null) {
         potentialRumors.push(goblinRumor(hero))
     }
+    if (CheckForQuest(hero.Journal, giantQuest()) === null) {
+        potentialRumors.push(giantRumor(hero))
+    }
     if (CheckForQuest(hero.Journal, ratCellarQuest()) === null) {
         potentialRumors.push(ratRumor(hero))
+    }
+    if (CheckForQuest(hero.Journal, scareCrowQuest1()) === null) {
+        potentialRumors.push(scareCrowRumor(hero))
     }
     var rumor = potentialRumors[Math.floor(Math.random() * potentialRumors.length)];
     dialogue = rumor
     return dialogue;
+}
+export function giantRumor(hero) {
+    var dialogue = { Name: "Listen to Rumors", Char: "Townsperson", Conversation: [{ Dialogue: ["Townsperson: 'The lumbermill's foreman was recently kidnapped by a giant'"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } }] }
+    return dialogue
 }
 export function goblinRumor(hero) {
     var dialogue = { Name: "Listen to Rumors", Char: "Townsperson", Conversation: [{ Dialogue: ["Townsperson: 'The Smithy hasn't gotten any shipments of ore for a few days.'"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } }] }
@@ -172,6 +182,10 @@ export function goblinRumor(hero) {
 }
 export function ratRumor(hero) {
     var dialogue = { Name: "Listen to Rumors", Char: "Townsperson", Conversation: [{ Dialogue: ["Townsperson: 'I heard that there's a rat problem at the inn.'"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } }] }
+    return dialogue
+}
+export function scareCrowRumor(hero) {
+    var dialogue = { Name: "Listen to Rumors", Char: "Townsperson", Conversation: [{ Dialogue: ["Townsperson: 'Littleroot farm is having problems with a possesed scarecrow.'"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } }] }
     return dialogue
 }
 export function witchRumor(hero) {

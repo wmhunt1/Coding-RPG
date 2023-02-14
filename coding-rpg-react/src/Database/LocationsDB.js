@@ -1,24 +1,42 @@
 import { CheckForQuest } from "../Scripts/QuestScripts"
 import { daleTownRumors } from "./DialoguesDB"
-import { goblinMine} from "./DungeonsDB"
-import { cowEncounter } from "./EncountersDB"
+import { giantCaveDungeon, goblinMine, spiderCaveDungeon } from "./DungeonsDB"
+import { cowEncounter, scareCrowEncounter } from "./EncountersDB"
 import { dwarvenMineGoblinQuest } from "./QuestsDB"
 import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, witchHutShop } from "./ShopsDB"
 import { alchemyNode, cookNode, farmNode, fireNode, fishNode, fletchNode, huntNode, mineNode, woodNode } from "./SkillNodesDB"
 
 //locations
-//mine
+export function lumbermill(hero, x, y) {
+    var lumber = { LocationName: "Lumbermill", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterWoodNode(hero)] }
+    return lumber;
+}
+export function littleRootFarm(hero, x, y) {
+    var farm = { LocationName: "Little Root Farm", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterCowEncounter(hero), enterFarmNode(hero), enterScareCrowEncounter(hero)] }
+    return farm;
+}
+export function tenguCamp(hero, x, y) {
+    var camp = { LocationName: "Strange Camp", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [] }
+    return camp;
+}
+//dungeon
 export function dwarvenMine(hero, x, y) {
     var dwarvenMine
-    if (CheckForQuest(hero.Journal, dwarvenMineGoblinQuest()) === null)
-    {
+    if (CheckForQuest(hero.Journal, dwarvenMineGoblinQuest()) === null) {
         dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterMineNode(hero)] }
     }
-    else
-    {
+    else {
         dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDwarvenMine(hero), enterMineNode(hero)] }
     }
     return dwarvenMine;
+}
+export function giantCave(hero, x, y) {
+    var giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterGiantCaveDungeon(hero)] }
+    return giant;
+}
+export function spiderCave(hero, x, y) {
+    var spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterSpiderCaveDungeon(hero)] }
+    return spider;
 }
 //shop
 export function witchHut(hero, x, y) {
@@ -26,8 +44,8 @@ export function witchHut(hero, x, y) {
     return witchHut;
 }
 //towns
-export function daleTown(hero) {
-    var daleTown = { LocationName: "Dale Town", XCoord: 0, YCoord: 0, CanTravel: true, SubLocations: [enterDaleTownRumors(hero), enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterGeneralStore(hero)] }
+export function daleTown(hero, x, y) {
+    var daleTown = { LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDaleTownRumors(hero), enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterGeneralStore(hero)] }
     return daleTown;
 }
 //reusable locations
@@ -65,16 +83,27 @@ export function enterDwarvenMine(hero) {
     var enterDwarvenMine = { Name: "Dwarven Mine (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: goblinMine(hero), shop: null, skill: null }; return content } }
     return enterDwarvenMine
 }
+export function enterGiantCaveDungeon(hero) {
+    var enter = { Name: "Giant Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: giantCaveDungeon(hero), shop: null, skill: null }; return content } }
+    return enter;
+}
+export function enterSpiderCaveDungeon(hero) {
+    var enter = { Name: "Spider Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: spiderCaveDungeon(hero), shop: null, skill: null }; return content } }
+    return enter;
+}
 //enter dialogues
-export function enterDaleTownRumors(hero)
-{
+export function enterDaleTownRumors(hero) {
     var enterDaleTownRumors = { Name: "Listen to rumors", enterLocation(hero) { var content = { active: "Dialogue", combat: null, dialogue: daleTownRumors(hero), dungeon: null, shop: null, skill: null }; return content } }
     return enterDaleTownRumors
 }
 //enter encounters
 export function enterCowEncounter(hero) {
-    var enterCowEncounter = { Name: "Kill Cows", enterLocation(hero) { var content = { active: "Combat", combat: cowEncounter(hero), dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    var enterCowEncounter = { Name: "Kill Cows", enterLocation(hero) { var content = { active: "Combat", combat: cowEncounter(), dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return enterCowEncounter
+}
+export function enterScareCrowEncounter(hero) {
+    var encounter = { Name: "Kill Scarecrow", enterLocation(hero) { var content = { active: "Combat", combat: scareCrowEncounter(), dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    return encounter;
 }
 //enter shops
 //general store

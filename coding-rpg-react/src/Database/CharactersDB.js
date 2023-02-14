@@ -1,9 +1,9 @@
 import { noCondition, poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
 import { cleave, pierceArmor, rage } from "./AbilitiesDB";
-import { bareBack, bareFinger, bareNeck, bite, emptyOffHand, furFeet, furHands, furHead, furLegs, furTorso, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth } from "./ItemsDB";
+import { bareBack, bareFinger, bareNeck, bite, emptyOffHand, furFeet, furHands, furHead, furLegs, furTorso, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakBow, ironAxe2H } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
 import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell, summonRat } from "./SpellsDB"
-import { BasicAttacker, BasicHealer } from "./TacticsDB";
+import { BasicAttacker, BasicHealer, Rager } from "./TacticsDB";
 import { allSkills } from "./SkillsDB";
 import { noTitle } from "./TitlesDB";
 import { bludeoningDamage, fireDamage, lightningDamage, piercingDamage, poisonDamage, slashingDamage } from "./DamageTypesDB";
@@ -23,7 +23,7 @@ export function character(name) {
         Companions: [], Journal: [], Abilities: [], SpellBook: [], SkillBook: allSkills(), Buffs: [], DeBuffs: [], Condition: noCondition(),
         ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], Immunities: [], Resistances: [], Weaknesses: [],
         Tactics: { Tactics(char, allies, enemies, combatLog, round) { BasicAttacker(char, allies, enemies, combatLog, round) } },
-        ItemDrops: [], CurrentLocation: daleTown(), Map: [daleTown()], AdjacentLocations: startingAdjacentLocations(), Time: { Day: 0, Hour: 9, TimeOfDay: "Morning" }
+        ItemDrops: [], CurrentLocation: daleTown(this, 0, 0), Map: [daleTown(this, 0, 0)], AdjacentLocations: startingAdjacentLocations(), Time: { Day: 0, Hour: 9, TimeOfDay: "Morning" }
     }
     return char;
 }
@@ -79,7 +79,41 @@ export function worg() {
     worg.CurrentXP = 10; worg.Strength = 14; worg.CurrentHP = 20; worg.MaxHP = 20;
     return worg;
 }
+//construct
+export function construct(name) {
+    var construct = character("Construct");
+    construct.ConditionImmunities = [poisonCondition(), sleepCondition()]
+    return construct;
+}
+export function scareCrow() {
+    var scareCrow = construct("Scarecrow")
+    scareCrow.CurrentXP = 10;
+    scareCrow.Weaknesses = [fireDamage()]
+    return scareCrow;
+}
 //humanoid
+export function bandit() {
+    var bandit = character("Bandit"); bandit.Head = leatherCowl(); bandit.Torso = leatherTorso(); bandit.Legs = leatherLegs(); bandit.Hands = leatherGloves(); bandit.Feet = leatherBoots();
+    bandit.Weapon = ironDagger(); bandit.Offhand = ironDaggerOffHand(); bandit.ItemDrops = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso(), ironDagger(), ironDaggerOffHand()]
+}
+export function banditArcher() {
+    var bandit = character("Bandit Archer"); bandit.Head = leatherCowl(); bandit.Torso = leatherTorso(); bandit.Legs = leatherLegs(); bandit.Hands = leatherGloves(); bandit.Feet = leatherBoots();
+    bandit.Weapon = oakBow()
+    bandit.ItemDrops = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso(), oakBow()]
+}
+export function banditBerseker() {
+    var bandit = character("Bandit Berserker"); bandit.Head = leatherCowl(); bandit.Torso = leatherTorso(); bandit.Legs = leatherLegs(); bandit.Hands = leatherGloves(); bandit.Feet = leatherBoots();
+    bandit.Weapon = ironAxe2H(); bandit.ItemDrops = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso(), ironAxe2H()]
+    bandit.Abilities = [rage()]
+    bandit.Tactics = { Tactics(char, allies, enemies, combatLog, round) { Rager(char, allies, enemies, combatLog, round) } }
+}
+export function giant() {
+    var giant = character("Giant")
+    giant.Weapon = woodenclub();
+    giant.CurrentSP = 100;
+    giant.StrBonus = 20;
+    return giant;
+}
 export function goblin() {
     var goblin = character("Goblin")
     goblin.CurrentXP = 10; goblin.Weapon = woodenclub(); goblin.OffHand = woodenShield(); goblin.Legs = loinCloth(); goblin.ItemDrops = [woodenclub(), woodenShield()]
