@@ -96,16 +96,16 @@ export function UseSkillRecipe(char, skill, recipe) {
                 fail = false;
             }
             for (var r2 = 0; r2 < recipe.Input.length; r2++) {
-                RemoveItemFromInventory(char, char.Inventory, recipe.Input[r2].Item, recipe.Input[r2].Quantity)
+                RemoveItemFromInventory(char, char.Inventory, recipe.Input[r2].Item, recipe.Input[r2].Quantity, char)
             }
             if (fail === false) {
                 AddToCharacterLog(char, char.Name + " has " + recipe.Verb + "ed " + recipe.Output.Item.Name + " X " + quantity + ", earning " + recipe.Exp + " " + skill.Name + " XP")
-                AddItemToInventory(char, char.Inventory, recipe.Output.Item, recipe.Output.Quantity)
+                AddItemToInventory(char, char.Inventory, recipe.Output.Item, recipe.Output.Quantity, char)
                 EarnSkillXP(char, skill, recipe.Exp)
             }
             else {
                 AddToCharacterLog(char, char.Name + " has failed to " + recipe.Verb + " " + recipe.Output.Item.Name)
-                AddItemToInventory(char, char.Inventory, recipe.FailureOutput.Item, recipe.FailureOutput.Quantity)
+                AddItemToInventory(char, char.Inventory, recipe.FailureOutput.Item, recipe.FailureOutput.Quantity, char)
             }
             CalculateTime(char, 1)
         }

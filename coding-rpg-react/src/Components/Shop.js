@@ -29,7 +29,7 @@ function Shop(props) {
         else {
             RemoveGold(hero, quantity*(Math.round(item.Cost - item.Cost * (FindSkillInSkillBook(hero, barterSkill()).Level / 10))))
             EarnSkillXP(hero, FindSkillInSkillBook(hero, barterSkill()), Math.round(item.Cost - item.Cost * (FindSkillInSkillBook(hero, barterSkill()).Level / 10)))
-            AddItemToInventory(hero, inventory, item, quantity)
+            AddItemToInventory(hero, inventory, item, quantity, hero)
             var newHero = hero;
             setHero(newHero);
             setBarter(FindSkillInSkillBook(hero, barterSkill()))
@@ -45,7 +45,7 @@ function Shop(props) {
     function handleSell(hero, heroInventory, shopInventory, item) {
         if (quantity > 0 && quantity <= item.Quantity) {
             AddGold(hero, quantity*(Math.floor(item.Cost / 2 + (item.Cost / 2) * (FindSkillInSkillBook(hero, barterSkill()).Level / 10))))
-            RemoveItemFromInventory(hero, heroInventory, item, quantity)
+            RemoveItemFromInventory(hero, heroInventory, item, quantity, hero)
             EarnSkillXP(hero, FindSkillInSkillBook(hero, barterSkill()), Math.floor(item.Cost / 2 + (item.Cost / 2) * (FindSkillInSkillBook(hero, barterSkill()).Level / 10)))
             var newHero = hero;
             setHero(newHero);

@@ -8,7 +8,7 @@ export function worldMap(hero) {
     var worldMap = {
         Name: "World", Locations: [
             bridgeOverRiver(hero, 0, 1), bridgeOverRiver(hero, 2, 4), daleTown(hero, 0, 0), dwarvenMine(hero, 3, -3), giantCave(hero, 4, 4),
-            farm(hero, 1, 0), farm(hero, 1, -1), forest(hero, -1, 2), forest(hero, 2, -2), forest(hero, 3, -2), forest(hero, 1, 3),
+            farm(hero, 1, 0), farm(hero, 1, -1), forest(hero, -1, 2), forest(hero, 2, -2), forest(hero, 3, -2), forest(hero, 1, 3), forest(hero, -3, -2),
             littleRootFarm(hero, -1, -1), lumbermill(hero, 1, 4), mountains(hero, 2, -4), mountains(hero, 3, -4), mountains(hero, 4, -4), mountains(hero, 4, -3),
             mountains(hero, 4, -2), mountains(hero, 4, 5), mountains(hero, 4, 3),
             river(hero, 1, 1), river(hero, -1, 0), river(hero, -1, 1), river(hero, 2, 1), river(hero, 2, 2), river(hero, 2, 3),
@@ -44,7 +44,7 @@ export function worldMap(hero) {
 //|          |          |crow camp |river    |lr farm  |road      |      farm|          |          |          |          |
 //|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|
 //|- (-5,-2)-|- (-4,-2)-|-(-3,-2) -|-(-2,-2)-|-(-1,-2)-|- (0,-2)- |- (1,-2) -|- (2,-2) -|- (3,-2) -|- (4,-2) -|- (5,-2) -|
-//|          |          |          |         |         |road      |road      |forest    |forest    |mountains |          |
+//|          |          |forest    |         |         |road      |road      |forest    |forest    |mountains |          |
 //|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|
 //|- (-5,-3)-|- (-4,-3)-|- (-3,-3)-|-(-2,-3)-|-(-1,-3)-|- (0,-3)- |- (1,-3) -|- (2,-3) -|- (3,-3) -|- (4,-3) -|- (5,-3) -|
 //|          |          |spider    |         |         |          |road      |road      |dwarf mine|mountains |          |

@@ -1,13 +1,14 @@
 import { noCondition, poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
 import { cleave, pierceArmor, rage } from "./AbilitiesDB";
-import { bareBack, bareFinger, bareNeck, bite, emptyOffHand,hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakBow, ironAxe2H } from "./ItemsDB";
+import { bareBack, bareFinger, bareNeck, bite, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakBow, ironAxe2H } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
 import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell, summonRat } from "./SpellsDB"
 import { BasicAttacker, BasicHealer, Rager } from "./TacticsDB";
-import { allSkills } from "./SkillsDB";
+import { allSkills, barterSkill, blockSkill, bluntSKill, heavyArmorSkill, miningSkill, restorationSkill, smithingSkill } from "./SkillsDB";
 import { noTitle } from "./TitlesDB";
 import { bludeoningDamage, fireDamage, lightningDamage, piercingDamage, poisonDamage, slashingDamage } from "./DamageTypesDB";
 import { startingAdjacentLocations } from "./MapsDB";
+import { EarnSkillXP, FindSkillInSkillBook } from "../Scripts/SkillScripts";
 
 export function character(name) {
     var char = {
@@ -40,6 +41,27 @@ export function ferraForgeHeart() {
     hero.Weapon = ironWarHammer(); hero.OffHand = ironShield(); hero.Head = ironHelmet(); hero.Torso = ironTorso(); hero.Legs = ironLegs(); hero.Hands = ironGauntlets(); hero.Feet = ironBoots(); hero.SpellBook = [basicHeal(), curePoison()]; hero.Weaknesses = [lightningDamage()]; hero.Weaknesses[0].Source = hero.Torso;
     //hero.DexPenalty = 3; hero.SpdPenalty = 3; 
     hero.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
+    FindSkillInSkillBook(hero, barterSkill()).Level = 10;
+    FindSkillInSkillBook(hero, barterSkill()).CurrentXP = 7200;
+    FindSkillInSkillBook(hero, barterSkill()).MaxXP = 9000;
+    FindSkillInSkillBook(hero, blockSkill()).Level = 10;
+    FindSkillInSkillBook(hero, blockSkill()).CurrentXP = 7200;
+    FindSkillInSkillBook(hero, blockSkill()).MaxXP = 9000;
+    FindSkillInSkillBook(hero, bluntSKill()).Level = 10;
+    FindSkillInSkillBook(hero, bluntSKill()).CurrentXP = 7200;
+    FindSkillInSkillBook(hero, bluntSKill()).MaxXP = 9000;
+    FindSkillInSkillBook(hero, heavyArmorSkill()).Level = 10;
+    FindSkillInSkillBook(hero, heavyArmorSkill()).CurrentXP = 7200;
+    FindSkillInSkillBook(hero, heavyArmorSkill()).MaxXP = 9000;
+    FindSkillInSkillBook(hero, miningSkill()).Level = 10;
+    FindSkillInSkillBook(hero, miningSkill()).CurrentXP = 7200;
+    FindSkillInSkillBook(hero, miningSkill()).MaxXP = 9000;
+    FindSkillInSkillBook(hero, restorationSkill()).Level = 10;
+    FindSkillInSkillBook(hero, restorationSkill()).CurrentXP = 7200;
+    FindSkillInSkillBook(hero, restorationSkill()).MaxXP = 9000;
+    FindSkillInSkillBook(hero, smithingSkill()).Level = 10;
+    FindSkillInSkillBook(hero, smithingSkill()).CurrentXP = 7200;
+    FindSkillInSkillBook(hero, smithingSkill()).MaxXP = 9000;
     return hero
 }
 //beast

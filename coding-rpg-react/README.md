@@ -1,7 +1,7 @@
 
 bugs
 journal doesn't update until after leaving shop
-hp can be healed over maxhp\
+hp can be healed over maxhp
 
 to-do content
 
@@ -13,7 +13,6 @@ retrieve cargo from bandits for general store (quest, dialogue, dungeon, locatio
 skeleton killing quest
 
 fixes/changes
-give ferra 9000 xp in each relevant skill
 collect feathers from tengu camp and actual random junk from tengu
 write more than generic dialogue
 balance level requiurements and xp
@@ -34,7 +33,6 @@ Maybe if 3 quests completed John Dale shows up
 Orc village
 Dale town rep increase for doing quests 
 Maybe just make rep and unsellable item
-variable skills for party members (calculate xp based on level)
 Bat cave
 abraham arkwright companion
 Wolf encounter
