@@ -1,6 +1,6 @@
 import { noCondition, poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
 import { cleave, pierceArmor, rage } from "./AbilitiesDB";
-import { bareBack, bareFinger, bareNeck, bite, emptyOffHand, furFeet, furHands, furHead, furLegs, furTorso, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakBow, ironAxe2H } from "./ItemsDB";
+import { bareBack, bareFinger, bareNeck, bite, emptyOffHand,hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakBow, ironAxe2H } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
 import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell, summonRat } from "./SpellsDB"
 import { BasicAttacker, BasicHealer, Rager } from "./TacticsDB";
@@ -45,7 +45,7 @@ export function ferraForgeHeart() {
 //beast
 export function beast(name) {
     var beast = character(name)
-    beast.Weapon = bite(); beast.Head = furHead(); beast.Torso = furTorso(); beast.Legs = furLegs(); beast.Hands = furHands(); beast.Feet = furFeet();
+    beast.Weapon = bite();
     return beast
 }
 export function cow() {

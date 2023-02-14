@@ -1,6 +1,6 @@
 import { dreamingWorkerInnDialogue, forgeheartSmithDialogue, innDialogue } from "./DialoguesDB";
 import { ratCellar } from "./DungeonsDB";
-import { ale, allBronze, allIron, allPotions, allSpellScrolls, bread, bronzeHatchet, bronzePickAxe, bucket, fishingRod, knife, needle, shears, stew, tinderBox } from "./ItemsDB"
+import { ale, allBronze, allIron, allPotions, allSpellScrolls, bread, bronzeHatchet, bronzePickAxe, bucket, enchantmentTome, fishingRod, knife, needle, shears, stew, tinderBox } from "./ItemsDB"
 import { cookNode, smithNode } from "./SkillNodesDB";
 
 //alchemists
@@ -27,7 +27,7 @@ export function innShop(hero) {
 }
 //magic shop
 export function magicShop(hero) {
-    var magicShop = { Name: "Magic Shop", Dialogue: null, Dungeon: null, Node: null, Inventory: allSpellScrolls(), buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll") } }
+    var magicShop = { Name: "Magic Shop", Dialogue: null, Dungeon: null, Node: null, Inventory: [...allSpellScrolls(), enchantmentTome()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll") } }
     return magicShop
 }
 //smiths

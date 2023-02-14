@@ -1,4 +1,4 @@
-import { ashes, bronzeAxe, bronzeAxe2H, bronzeBar, bronzeDagger, bronzeDaggerOffHand, bronzeGauntlets, bronzeHatchet, bronzeHelmet, bronzeLegs, bronzeMace, bronzePickAxe, bronzeShield, bronzeSword, bronzeSword2H, bronzeTorso, bronzeWarHammer, bronzeWarHammer2H, bucket, burntBeef, burntFish, burntRabbitMeat, burntRatMeat, coalOre, cookedBeef, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, cowLeather, fishingRod, hatchet, ironAxe, ironAxe2H, ironBar, ironBoots, ironDagger, ironDaggerOffHand, ironGauntlets, ironHatchet, ironHelmet, ironLegs, ironMace, ironOre, ironPickAxe, ironShield, ironSword, ironSword2H, ironTorso, ironWarHammer, ironWarHammer2H, knife, leatherBoots, leatherCowl, leatherGloves, leatherLegs, leatherTorso, milk, needle, oakBow, oakLogs, pickAxe, rawBeef, rawFish, rawRabbitMeat, rawRatMeat, shears, steelAxe, steelAxe2H, steelBar, steelBoots, steelDagger, steelDaggerOffHand, steelGauntlets, steelHatchet, steelHelmet, steelLegs, steelMace, steelPickAxe, steelShield, steelSword, steelSword2H, steelTorso, steelWarHammer, steelWarHammer2H, thread, tinderBox, tinOre, woodBow, woodLogs, woolBoots, woolCloth, woolGloves, woolHat, woolRobeBottom, woolRobeTop, woolTrousers, woolTunic, woolWizardHat, } from "./ItemsDB"
+import { ashes, bronzeAxe, bronzeAxe2H, bronzeBar, bronzeDagger, bronzeDaggerOffHand, bronzeGauntlets, bronzeHatchet, bronzeHelmet, bronzeLegs, bronzeMace, bronzePickAxe, bronzeShield, bronzeSword, bronzeSword2H, bronzeTorso, bronzeWarHammer, bronzeWarHammer2H, bucket, burntBeef, burntFish, burntRabbitMeat, burntRatMeat, coalOre, cookedBeef, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, cowLeather, enchantmentTome, fishingRod, hatchet, ironAxe, ironAxe2H, ironBar, ironBoots, ironDagger, ironDaggerOffHand, ironGauntlets, ironHatchet, ironHelmet, ironLegs, ironMace, ironOre, ironPickAxe, ironShield, ironSword, ironSword2H, ironTorso, ironWarHammer, ironWarHammer2H, knife, leatherBoots, leatherCowl, leatherGloves, leatherLegs, leatherTorso, milk, needle, oakBow, oakLogs, oakStaff, oakWand, pickAxe, rawBeef, rawFish, rawRabbitMeat, rawRatMeat, shears, steelAxe, steelAxe2H, steelBar, steelBoots, steelDagger, steelDaggerOffHand, steelGauntlets, steelHatchet, steelHelmet, steelLegs, steelMace, steelPickAxe, steelShield, steelSword, steelSword2H, steelTorso, steelWarHammer, steelWarHammer2H, thread, tinderBox, tinOre, woodBow, woodLogs, woodStaff, woodWand, woolBoots, woolCloth, woolGloves, woolHat, woolRobeBottom, woolRobeTop, woolTrousers, woolTunic, woolWizardHat, } from "./ItemsDB"
 //crafting
 //alchemy
 export function alchemyRecipes() {
@@ -106,6 +106,27 @@ export function weaveWoolTunic() {
 export function weaveWoolWizardHat() {
     var weave = { Name: "Weave Wool Wizard Hat", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 2, Exp: 50, Input: [{ Item: woolCloth(), Quantity: 2 }, { Item: thread(), Quantity: 1 }], Output: { Item: woolWizardHat(), Quantity: 1 }, FailureOutput: { Item: woolCloth(), Quantity: 2 } }
     return weave;
+}
+//enchanting;
+export function enchantingRecipes() {
+    var enchantingRecipes = [enchantOakStaff(), enchantOakWand(), enchantWoodStaff(), enchantWoodWand()]
+    return enchantingRecipes
+}
+export function enchantOakStaff() {
+    var enchant = { Name: "Enchant Oak Staff", Skill: "Enchanting", Tool: enchantmentTome(), Verb: "Enchant", LevelRequirement: 7, Exp: 200, Input: [{ Item: oakLogs(), Quantity: 2 }], Output: { Item: oakStaff(), Quantity: 1 }, FailureOutput: { Item: oakLogs(), Quantity: 2 } }
+    return enchant;
+}
+export function enchantOakWand() {
+    var enchant = { Name: "Enchant Oak Wand", Skill: "Enchanting", Tool: enchantmentTome(), Verb: "Enchant", LevelRequirement: 5, Exp: 100, Input: [{ Item: oakLogs(), Quantity: 1 }], Output: { Item: oakWand(), Quantity: 1 }, FailureOutput: { Item: oakLogs(), Quantity: 1 } }
+    return enchant;
+}
+export function enchantWoodStaff() {
+    var enchant = { Name: "Enchant Wood Staff", Skill: "Enchanting", Tool: enchantmentTome(), Verb: "Enchant", LevelRequirement: 3, Exp: 50, Input: [{ Item: woodLogs(), Quantity: 2 }], Output: { Item: woodStaff(), Quantity: 1 }, FailureOutput: { Item: woodLogs(), Quantity: 2 } }
+    return enchant;
+}
+export function enchantWoodWand() {
+    var enchant = { Name: "Enchant Wood Wand", Skill: "Enchanting", Tool: enchantmentTome(), Verb: "Enchant", LevelRequirement: 1, Exp: 25, Input: [{ Item: woodLogs(), Quantity: 1 }], Output: { Item: woodWand(), Quantity: 1 }, FailureOutput: { Item: woodLogs(), Quantity: 1 } }
+    return enchant;
 }
 //firemaking
 export function firemakingRecipes() {
@@ -387,6 +408,11 @@ export function fishingRecipes() {
 export function fishFish() {
     var fish = { Name: "Fish Fish", Skill: "Fishing", Tool: fishingRod(), Verb: "Fish", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: rawFish(), Quantity: 1 } }
     return fish
+}
+//herblore
+export function herbLoreRecipes(){
+    var herb = []
+    return herb;
 }
 //hunting
 export function huntingRecipes() {

@@ -20,8 +20,20 @@ change iron to level 10 and steel to level 20
 fix tactic selection
 
 features
+Seperate bandit for farming
+Hidden quest to return ring to littleroots
+Have hidden quests that are filtered to keep track of other stuff
+Or an array of switches 
+Temple with graveyard for skeletons
+Lake with Fort Dale
+Haunted manor with ghosts 
+Hidden quest for if went to witch and met Wyle and family 
+Maybe if 3 quests completed John Dale shows up
+Orc village
+Auto end combat
+Dale town rep increase for doing quests 
+Maybe just make rep and unsellable item
 variable skills for party members (calculate xp based on level)
-Bandit hide out
 Bat cave
 abraham arkwright companion
 Wolf encounter
@@ -43,8 +55,6 @@ random encounter that forces combat (set movement as false)
 quest failure if took to long
 dungeon exploration and/or puzzles
 Weight or inventory slots?
-Magic penalties for heavier armor? MP penalty?
-Magic resistance?
 Map for dungeon with leaving like world map
 Or town maps
 Skill trainers 

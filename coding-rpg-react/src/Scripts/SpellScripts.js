@@ -1,30 +1,9 @@
-import { alterationSkill, conjurationSkill, illusionSkill, restorationSkill } from "../Database/SkillsDB";
+import { conjurationSkill } from "../Database/SkillsDB";
 import { HasEnoughMP, UseMP, HasEnoughSP, UseSP } from "./CharacterScripts";
 import { EarnSkillXP, FindSkillInSkillBook } from "./SkillScripts";
-export function CalculateHealAmount(char, baseHeal) {
-    var extraHeal = Math.round((FindSkillInSkillBook(char, restorationSkill()).Level + char.Wisdom + char.WisBonus - char.WisPenalty) / 10)
-    var heal = baseHeal + extraHeal
-    return heal;
-}
-export function CalculateAlterationDuration(char, defaultDuration) {
-    var mod = Math.round((FindSkillInSkillBook(char, alterationSkill()).Level + char.Charisma + char.ChaBonus - char.ChaPenalt) / 10)
-    return defaultDuration + mod;
-}
-export function CalculateConjurationDuration(char, defaultDuration) {
-    var mod = Math.round((FindSkillInSkillBook(char, conjurationSkill()).Level + char.WillPower + char.WlpBonus - char.WlpPenalty) / 10)
-    return defaultDuration + mod;
-}
-export function CalculateIllusionBuff(char, defaultBuff) {
-    var mod = Math.round((FindSkillInSkillBook(char, illusionSkill()).Level + char.Charisma + char.ChaBonus - char.ChaPenalty) / 10)
-    return defaultBuff + mod;
-}
-export function CalculateIllusionDuration(char, defaultDuration) {
-    var mod = Math.round((FindSkillInSkillBook(char, illusionSkill()).Level + char.Charisma + char.ChaBonus - char.ChaPenalty) / 10)
-    return defaultDuration + mod;
-}
-export function CalculateRestorationBuff(char, defaultBuff) {
-    var mod = Math.round((FindSkillInSkillBook(char, restorationSkill()).Level + char.Wisdom + char.WisBonus - char.WisPenalty) / 10)
-    return defaultBuff + mod;
+export function CalculateSpellBonus(char, spell, attr, attrB, attrP, base) {
+    var extra = Math.round((FindSkillInSkillBook(char, spell.School).Level + attr + attrB - attrP) / 10)
+    return extra + base;
 }
 export function ModifySummon(char, allies, summon) {
     var mod = Math.round((FindSkillInSkillBook(char, conjurationSkill()).Level + char.Charisma + char.ChaBonus - char.ChaPenalty) / 10)

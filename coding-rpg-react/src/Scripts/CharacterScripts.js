@@ -235,11 +235,14 @@ export function ResistCondition(char, log) {
     if (char.Condition.Name !== "None") {
         char.Condition.RemainingDuration--;
         var resistingAttribute = 0;
-        if (char.Condition.Type === "Damage") {
-            resistingAttribute = char.Constitution + char.ConBonus - char.ConPenalty;
+        if (char.Condition.Attribute === "Con") {
+            resistingAttribute = char.Constitution + char.ConBonus - char.ConPenalty
         }
-        if (char.Condition.Type === "Skip") {
-            resistingAttribute = char.WillPower + char.WlpBonus - char.WlpPenalty;
+        else if (char.Condition.Attribute === "Str") {
+            resistingAttribute = char.Strength + char.StrBonus - char.StrPenalty
+        }
+        else {
+            resistingAttribute = char.WillPower + char.WlpBonus - char.WlpPenalty
         }
         var resistChance = Math.floor(Math.random() * 50) + 1 + resistingAttribute;
         if (char.ConditionImmunities.find(x => x.Name === char.Conditon.Name) === true) {

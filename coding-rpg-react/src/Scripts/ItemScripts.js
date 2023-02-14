@@ -79,7 +79,7 @@ export function RemoveItemFromBank(char, inventory, item, quantity) {
     char.Bank = inventory;
 }
 export function UnEquip(char, inventory, item) {
-    if (item.Name !== "Bare" && item.Name !== "Empty" && item.Name !== "Fist") {
+    if (item.Name !== "None" && item.Name !== "Empty" && item.Name !== "Fist") {
         AddItemToInventory(char, inventory, item, item.Quantity)
     }
     if (item.Slot === "Weapon") {

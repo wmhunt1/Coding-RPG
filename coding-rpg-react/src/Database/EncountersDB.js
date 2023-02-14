@@ -1,4 +1,4 @@
-import { cow, giantRat, goblin, goblinBoss, rat,scareCrow,spider, worg } from "./CharactersDB";
+import { cow,giant, giantRat, goblin, goblinBoss, rat,scareCrow,spider, worg } from "./CharactersDB";
 import { enslavedKoboldsDialogue, enterGoblinMineDialogue, saveMinersDialogue } from "./DialoguesDB";
 
 //combat encounters
@@ -28,6 +28,11 @@ export function scareCrowEncounter()
     return encounter;
 }
 //humanoids
+export function giantEncounter()
+{
+    var encounter = { Name: "Scarecrow", Type: "Combat", Content: [giant()] }
+    return encounter;
+}
 //goblins
 export function bossGoblinEncounter() {
     var bossGoblinEncounter = { Name: "Boss Goblin", Type: "Combat", Content: [goblinBoss(), goblin(), goblin(), goblin()] }

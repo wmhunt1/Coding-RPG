@@ -1,10 +1,9 @@
-export function allSkills(level){
-    var allSkills =  [alchemySkill(), acrobaticsSkill(), alterationSkill(1), athleticsSkill(), axeSkill(1), barterSkill(), blockSkill(1), bluntSKill(1), conjurationSkill(1), cookingSkill(), craftingSkill(), destructionSkill(1), enchantingSKill(1), farmingSkill(), firemakingSkill(), fishingSkill(), fletchingSkill(), heavyArmorSkill(1), huntingSkill(), illusionSkill(1), lightArmorSkill(1), lockpickingSkill(), longBladeSkill(1), mediumArmorSkill(1), miningSkill(), persuationSkill(), rangedSkill(1), restorationSkill(1), shortBladeSkill(1), smithingSkill(), spearSkill(1), stealthSkill(), survivalSkill(), unArmedSkill(1), unArmoredSkill(1), senseSkill(), woodcuttingSkill()]
+export function allSkills(level) {
+    var allSkills = [alchemySkill(), acrobaticsSkill(), alterationSkill(1), athleticsSkill(), axeSkill(1), barterSkill(), blockSkill(1), bluntSKill(1), conjurationSkill(1), cookingSkill(), craftingSkill(), destructionSkill(1), divinationSkill(1), enchantingSKill(1), farmingSkill(), firemakingSkill(), fishingSkill(), fletchingSkill(), heavyArmorSkill(1), herbloreSkill(), huntingSkill(), illusionSkill(1), lightArmorSkill(1), lockpickingSkill(), longBladeSkill(1), mediumArmorSkill(1), miningSkill(), persuationSkill(), rangedSkill(1), restorationSkill(1), shortBladeSkill(1), smithingSkill(), spearSkill(1), stealthSkill(), survivalSkill(), unArmedSkill(1), unArmoredSkill(1), senseSkill(), woodcuttingSkill()]
     return allSkills
 }
 //armor skills
-export function allArmorSkills(b, h, l, m, u)
-{
+export function allArmorSkills(b, h, l, m, u) {
     var allArmorSkills = [blockSkill(b), heavyArmorSkill(h), lightArmorSkill(l), mediumArmorSkill(m), unArmoredSkill(u)]
     return allArmorSkills;
 }
@@ -62,6 +61,10 @@ export function fishingSkill() {
     var fish = { Name: "Fishing", Type: "Gathering", Level: 1, CurrentXP: 0, MaxXP: 50 }
     return fish;
 }
+export function herbloreSkill() {
+    var herb = { Name: "Herblore", Type: "Gathering", Level: 1, CurrentXP: 0, MaxXP: 50 }
+    return herb;
+}
 export function huntingSkill() {
     var hunt = { Name: "Hunting", Type: "Gathering", Level: 1, CurrentXP: 0, MaxXP: 50 }
     return hunt;
@@ -76,9 +79,8 @@ export function woodcuttingSkill() {
 }
 //knowledge skills
 //magic skills
-export function allMagicSkills(a, c, d, e, i, r)
-{
-    var allMagicSkills = [alterationSkill(a), conjurationSkill(c), destructionSkill(d), enchantingSKill(e), illusionSkill(i), restorationSkill(r)]
+export function allMagicSkills(a, c, de, di, e, i, r) {
+    var allMagicSkills = [alterationSkill(a), conjurationSkill(c), destructionSkill(de), divinationSkill(di), enchantingSKill(e), illusionSkill(i), restorationSkill(r)]
     return allMagicSkills
 }
 export function alterationSkill(level) {
@@ -92,6 +94,10 @@ export function conjurationSkill(level) {
 export function destructionSkill(level) {
     var dest = { Name: "Destruction", Type: "Magic", Level: level, CurrentXP: 0, MaxXP: 50 }
     return dest;
+}
+export function divinationSkill(level) {
+    var div = { Name: "Destruction", Type: "Magic", Level: level, CurrentXP: 0, MaxXP: 50 }
+    return div;
 }
 export function enchantingSKill(level) {
     var enchant = { Name: "Enchanting", Type: "Magic", Level: level, CurrentXP: 0, MaxXP: 50 }
@@ -126,8 +132,8 @@ export function persuationSkill() {
     var pers = { Name: "Persuation", Type: "Utility", Level: 1, CurrentXP: 0, MaxXP: 50 }
     return pers;
 }
-export function senseSkill(){
-    var sense = {Name: "Sense", Type: "Utility", Level: 1, CurrentXP: 0, MaxXP: 50}
+export function senseSkill() {
+    var sense = { Name: "Sense", Type: "Utility", Level: 1, CurrentXP: 0, MaxXP: 50 }
     return sense;
 }
 export function stealthSkill() {
@@ -139,8 +145,7 @@ export function survivalSkill() {
     return surv;
 }
 //weapon skills
-export function allWeaponSkills(a, b, l, r, sh, sp, u)
-{
+export function allWeaponSkills(a, b, l, r, sh, sp, u) {
     var allWeaponSkills = [axeSkill(a), bluntSKill(b), longBladeSkill(l), rangedSkill(r), shortBladeSkill(sh), spearSkill(sp), unArmedSkill(u)]
     return allWeaponSkills
 }
