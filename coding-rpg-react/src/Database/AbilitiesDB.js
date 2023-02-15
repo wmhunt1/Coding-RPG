@@ -1,9 +1,9 @@
 import { rageBuff } from "./BuffsDB";
 import { CheckIfBuffApplied } from "../Scripts/BuffConditionAndDeBuffScripts";
-import { ArmorIgnoringAttack, BasicAttack } from "../Scripts/CombatScripts";
+import { AddToCombatLog, ArmorIgnoringAttack, BasicAttack } from "../Scripts/CombatScripts";
 
 export function cleave() {
-    var cleave = { Name: "Cleave", StaminaCost: 10, Description: "Cleaves through all foes with a weapon", AbilityEffect(char, allies, enemies, target, combatLog) { combatLog.push(char.Name + " cleaves through all foes with their weapon"); for (var e = 0; e < enemies.length; e++) { BasicAttack(char, enemies[e], combatLog, char.Weapon) } } }
+    var cleave = { Name: "Cleave", StaminaCost: 10, Description: "Cleaves through all foes with a weapon", AbilityEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " cleaves through all foes with their weapon"); for (var e = 0; e < enemies.length; e++) { BasicAttack(char, enemies[e], combatLog, char.Weapon) } } }
     return cleave;
 }
 export function pierceArmor() {
@@ -17,6 +17,10 @@ export function pierceArmor() {
     return pierceArmor;
 }
 export function rage() {
-    var rage = { Name: "Rage", StaminaCost: 5, Description: "Temporarily gain a +2 bonus to Strength", AbilityEffect(char, allies, enemies, target, combatLog) { combatLog.push(char.Name + " Enters a rage"); CheckIfBuffApplied(char, rageBuff(3), combatLog) } }
+    var rage = { Name: "Rage", StaminaCost: 5, Description: "Temporarily gain a +2 bonus to Strength", AbilityEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " enters a rage"); CheckIfBuffApplied(char, rageBuff(3), combatLog) } }
     return rage;
+}
+export function raiseShield() {
+    var abil = { Name: "Raise Shield", StaminaCost: 5, Description: "Raises a Shield to Give a +2 Shield Bonus", AbilityEffect(char, allies, enemies, target, combatLog) { if (char.OffHand.SubType === "Shield") { AddToCombatLog(combatLog, char.Name + " raises their shield"); CheckIfBuffApplied(char, raiseShield(3), combatLog) } else { AddToCombatLog(combatLog, char.Name + " does not have a shield to raise.") } } }
+    return abil;
 }

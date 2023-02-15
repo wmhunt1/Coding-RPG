@@ -9,23 +9,23 @@ ideas
 Wizard tower with dungeon  (quest, monsters, dialogue, dungeon, location, place on map)
 retrieve sheepscale's stolen sheep  (quest, monsters, dialogue, dungeon, location, place on map)
 deliver letter to ambrosius quest (quest, monsters, dialogue, dungeon, location, place on map)
-retrieve cargo from bandits for general store (quest, dialogue, dungeon, location, place on map)
+retrieve cargo from bandits for general store (dialogue, place on map)(find location out from joe)
 skeleton killing quest
 
 fixes/changes
+move bandit encounter to random road
 collect feathers from tengu camp and actual random junk from tengu
 write more than generic dialogue
 balance level requiurements and xp
-change iron to level 10 and steel to level 20
 fix tactic selection
 clean up scripts
 dialogue overhaul (more options or branches)
-quest rewards for scarecrowquest (1-2 and 4), goblinmine, giantcave
+quest rewards for scarecrowquest (1-2 and 4), giantquest, banditquest
 more relationship and reputation names
 
 features
+enchanting reagent
 discount based on rep
-Seperate bandit for farming
 Temple with graveyard for skeletons
 Lake with Fort Dale
 Haunted manor with ghosts 
@@ -54,5 +54,4 @@ dungeon exploration and/or puzzles
 Weight or inventory slots?
 Map for dungeon with leaving like world map
 Or town maps
-Skill trainers 
-skill reqs for weapons and armor
+Skill trainers (just sell lamps?)

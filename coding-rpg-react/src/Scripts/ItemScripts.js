@@ -1,5 +1,6 @@
 import { AddToCharacterLog } from "./CharacterScripts";
 import { bareBack, bareFeet, bareFinger, bareFist, bareHands, bareHead, bareLegs, bareNeck, bareTorso, emptyOffHand } from "../Database/ItemsDB"
+import { FindSkillInSkillBook } from "./SkillScripts";
 Array.prototype.remove = function () {
     var what, a = arguments, L = a.length, ax;
     while (L && this.length) {
@@ -130,69 +131,76 @@ export function UnEquip(char, inventory, item, log) {
     char.Inventory = inventory;
 }
 export function EquipItem(char, inventory, item, log) {
-    AddToCharacterLog(log, char.Name + " Equipped " + item.Name);
-    if (item.Slot === "Weapon") {
-        UnEquip(char, inventory, char.Weapon, log)
-        char.Weapon = item;
-        if (item.Type === "TwoHands") {
-            EquipItem(char, inventory, char.OffHand)
+    if (FindSkillInSkillBook(char, item.Class).Level >= item.Level) {
+        AddToCharacterLog(log, char.Name + " Equipped " + item.Name);
+        if (item.Slot === "Weapon") {
+            UnEquip(char, inventory, char.Weapon, log)
+            char.Weapon = item;
+            if (item.Type === "TwoHands") {
+                EquipItem(char, inventory, char.OffHand)
+            }
         }
-    }
-    if (item.Slot === "OffHand") {
-        UnEquip(char, inventory, char.OffHand, log)
-        char.OffHand = item
-    }
-    if (item.Slot === "Head") {
-        UnEquip(char, inventory, char.Head, log)
-        char.Head = item
-    }
-    if (item.Slot === "Torso") {
-        UnEquip(char, inventory, char.Torso, log)
-        item.ProtectionType.onEquip(char, item)
-        char.Torso = item
-        if (char.Torso.Class.Name === "Heavy Armor") {
-            //char.DexPenalty -= 3;
-            //char.SpdPenalty -= 3;
+        if (item.Slot === "OffHand") {
+            UnEquip(char, inventory, char.OffHand, log)
+            char.OffHand = item
         }
-        if (char.Torso.Class.Name === "Medium Armor") {
-            //char.DexPenalty -= 2;
-            //char.SpdPenalty -= 3;
+        if (item.Slot === "Head") {
+            UnEquip(char, inventory, char.Head, log)
+            char.Head = item
         }
-        if (char.Torso.Class.Name === "Light Armor") {
-            //char.DexPenalty -= 1;
-            //char.SpdPenalty -= 3;
+        if (item.Slot === "Torso") {
+            UnEquip(char, inventory, char.Torso, log)
+            item.ProtectionType.onEquip(char, item)
+            char.Torso = item
+            if (char.Torso.Class.Name === "Heavy Armor") {
+                //char.DexPenalty -= 3;
+                //char.SpdPenalty -= 3;
+            }
+            if (char.Torso.Class.Name === "Medium Armor") {
+                //char.DexPenalty -= 2;
+                //char.SpdPenalty -= 3;
+            }
+            if (char.Torso.Class.Name === "Light Armor") {
+                //char.DexPenalty -= 1;
+                //char.SpdPenalty -= 3;
+            }
         }
+        if (item.Slot === "Legs") {
+            UnEquip(char, inventory, char.Legs, log)
+            char.Legs = item
+        }
+        if (item.Slot === "Hands") {
+            UnEquip(char, inventory, char.Hands, log)
+            char.Hands = item
+        }
+        if (item.Slot === "Feet") {
+            UnEquip(char, inventory, char.Feet, log)
+            char.Feet = item
+        }
+        if (item.Slot === "Back") {
+            UnEquip(char, inventory, char.Back, log)
+            char.Back = item
+        }
+        if (item.Slot === "Neck") {
+            UnEquip(char, inventory, char.Neck, log)
+            char.Neck = item
+        }
+        if (item.Slot === "Ring") {
+            UnEquip(char, inventory, char.Ring, log)
+            char.Ring = item
+        }
+        item.Enchantment.OnEquipEffect(char, item)
     }
-    if (item.Slot === "Legs") {
-        UnEquip(char, inventory, char.Legs, log)
-        char.Legs = item
+    else {
+        AddToCharacterLog(log, item.Name + " requires Level " + item.Level + " in " + item.Class.Name + " to equip.");
     }
-    if (item.Slot === "Hands") {
-        UnEquip(char, inventory, char.Hands, log)
-        char.Hands = item
-    }
-    if (item.Slot === "Feet") {
-        UnEquip(char, inventory, char.Feet, log)
-        char.Feet = item
-    }
-    if (item.Slot === "Back") {
-        UnEquip(char, inventory, char.Back, log)
-        char.Back = item
-    }
-    if (item.Slot === "Neck") {
-        UnEquip(char, inventory, char.Neck, log)
-        char.Neck = item
-    }
-    if (item.Slot === "Ring") {
-        UnEquip(char, inventory, char.Ring, log)
-        char.Ring = item
-    }
-    item.Enchantment.OnEquipEffect(char, item)
     log.Inventory = inventory;
 }
 export function EquipItemFromInventory(char, inventory, item, log) {
     EquipItem(char, inventory, item, log)
-    RemoveItemFromInventory(log, inventory, item, item.Quantity, log)
+    if (FindSkillInSkillBook(char, item.Class).Level >= item.Level) {
+        RemoveItemFromInventory(log, inventory, item, item.Quantity, log)
+    }
     log.Inventory = inventory;
 }
 export function ApplyOnEquipEffect(hero, immune, resist, weak, cImmune, cResist, cWeak, item) {

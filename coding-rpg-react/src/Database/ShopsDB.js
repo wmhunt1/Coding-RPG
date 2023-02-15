@@ -1,5 +1,5 @@
 import { dreamingWorkerInnDialogue, forgeheartSmithDialogue, innDialogue } from "./DialoguesDB";
-import { ratCellar } from "./DungeonsDB";
+import { banditHideoutDungeon, ratCellar } from "./DungeonsDB";
 import { ale, allBronze, allIron, allPotions, allSpellScrolls, bread, bronzeHatchet, bronzePickAxe, bucket, enchantmentTome, fishingRod, knife, needle, shears, stew, tinderBox } from "./ItemsDB"
 import { cookNode, smithNode } from "./SkillNodesDB";
 
@@ -11,6 +11,10 @@ export function alchemyShop(hero) {
 //general store
 export function generalShop(hero) {
     var generalShop = { Name: "General Store", Dialogue: null, Dungeon: null, Node: null, Inventory: [bronzeHatchet(), bronzePickAxe(), bucket(), fishingRod(), knife(), needle(), shears(), tinderBox()], buyFilter(hero) { return hero.Inventory.filter(item => item.Type !== "") } };
+    return generalShop
+}
+export function joeTheTradersTradingPost(hero){
+    var generalShop = { Name: "Joe the Trader's Trading Post", Dialogue: null, Dungeon: null, Node: null, Inventory: [bronzeHatchet(), bronzePickAxe(), bucket(), fishingRod(), knife(), needle(), shears(), tinderBox()], buyFilter(hero) { return hero.Inventory.filter(item => item.Type !== "") } };
     return generalShop
 }
 //inns

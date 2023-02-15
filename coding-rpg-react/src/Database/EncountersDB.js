@@ -1,4 +1,4 @@
-import { cow, giant, giantRat, goblin, goblinBoss, rat, scareCrow, skeleton, spider, worg } from "./CharactersDB";
+import { bandit, banditArcher, banditBerseker, cow, giant, giantRat, giantSpider, goblin, goblinBoss, rat, scareCrow, skeleton, spider, worg } from "./CharactersDB";
 import { enslavedKoboldsDialogue, enterGoblinMineDialogue, giantCaveDialogue, saveMinersDialogue, spiderCaveDialogue } from "./DialoguesDB";
 
 //combat encounters
@@ -16,8 +16,13 @@ export function ratEncounter(hero) {
     var ratEncounter = { Name: "Rats", Type: "Combat", Content: [rat(), rat(), rat()] }
     return ratEncounter
 }
+//spiders
+export function giantSpiderEncounter(hero) {
+    var spiderEncounter = { Name: "Spiders", Type: "Combat", Content: [giantSpider()] }
+    return spiderEncounter;
+}
 export function spiderEncounter(hero) {
-    var spiderEncounter = { Name: "Spiders", Type: "Combat", Content: [spider()] }
+    var spiderEncounter = { Name: "Spiders", Type: "Combat", Content: [spider(), spider(), spider()] }
     return spiderEncounter;
 }
 //constructs
@@ -26,6 +31,34 @@ export function scareCrowEncounter(hero) {
     return encounter;
 }
 //humanoids
+export function banditEncounter(hero) {
+    var encounter = { Name: "Bandits", Type: "Combat", Content: [bandit(), bandit()] }
+    return encounter;
+}
+export function banditAndBanditArcherEncounter(hero) {
+    var encounter = { Name: "Bandits", Type: "Combat", Content: [bandit(), banditArcher()] }
+    return encounter;
+}
+export function banditAndBanditBersekerEncounter(hero) {
+    var encounter = { Name: "Bandits", Type: "Combat", Content: [bandit(), banditBerseker()] }
+    return encounter;
+}
+export function banditArcherEncounter(hero) {
+    var encounter = { Name: "Bandit Archers", Type: "Combat", Content: [banditArcher(), banditArcher()] }
+    return encounter;
+}
+export function banditArcherAndBanditBersekerEncounter(hero) {
+    var encounter = { Name: "Bandits", Type: "Combat", Content: [banditArcher(), banditBerseker()] }
+    return encounter;
+}
+export function banditBerserkerEncounter(hero) {
+    var encounter = { Name: "Bandit Berserkers", Type: "Combat", Content: [banditBerseker(), banditBerseker()] }
+    return encounter;
+}
+export function banditTrioEncounter(hero) {
+    var encounter = { Name: "Bandit Trio", Type: "Combat", Content: [bandit(), banditArcher(), banditBerseker()] }
+    return encounter;
+}
 export function giantEncounter(hero) {
     var encounter = { Name: "Scarecrow", Type: "Combat", Content: [giant()] }
     return encounter;

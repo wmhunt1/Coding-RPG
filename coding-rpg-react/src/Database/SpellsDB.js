@@ -1,5 +1,5 @@
 import { blessBuff, courageBuff } from "./BuffsDB";
-import { rat, skeleton } from "./CharactersDB";
+import { rat, skeleton, spider } from "./CharactersDB";
 import { poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
 import { fireDamage, forceDamage, noDamage, poisonDamage } from "./DamageTypesDB";
 import { baneDeBuff } from "./DeBuffsDB"
@@ -53,10 +53,20 @@ export function summonSkeleton() {
     }
     return summon;
 }
+export function summonSpider() {
+    var summon = {
+        Name: "Summon Spider", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 5, Description: "Summons a spider to fight", Summon: spider(),
+        SpellEffect(char, allies, enemies, target, combatLog) {
+            AddToCombatLog(combatLog, char.Name + " summons a " + this.Summon.Name);
+            ModifySummon(char, allies, this.Summon)
+        }
+    }
+    return summon;
+}
 //desctruction spells
 export function fireBall() {
     var fireBall = {
-        Name: "Fire Ball", School: destructionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Ball of Fire that deals 10 Fire Damage to All Foes", Amount: 10, DamageType: fireDamage(),
+        Name: "Fire Ball", School: destructionSkill(), LevelRequirement: 10, Use: "Combat", ManaCost: 10, Description: "Ball of Fire that deals 10 Fire Damage to All Foes", Amount: 10, DamageType: fireDamage(),
         SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " launches a fireball at the enemies"); for (var e = 0; e < enemies.length; e++) { ProjectileMagicAttack(char, enemies[e], combatLog, this) } }
     }
     return fireBall;
@@ -85,7 +95,7 @@ export function inspireCourage() {
 }
 export function sleepSpell() {
     var sleep = {
-        Name: "Sleep", School: illusionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Puts all foes to sleep", Amount: 0, DamageType: noDamage(),
+        Name: "Sleep", School: illusionSkill(), LevelRequirement: 10, Use: "Combat", ManaCost: 10, Description: "Puts all foes to sleep", Amount: 0, DamageType: noDamage(),
         SpellEffect(char, allies, enemies, target, combatLog) {
             var calcDuration = CalculateSpellBonus(char, this, char.Charisma, char.ChaBonus, char.ChaPenalty, 3);
             AddToCombatLog(combatLog, char.Name + " puts all foes to sleep");
@@ -119,7 +129,7 @@ export function basicHeal() {
 }
 export function basicMassHeal() {
     var basicHeal = {
-        Name: "Basic Mass Heal", School: restorationSkill(), LevelRequirement: 1, Use: "Hybrid", Amount: 5, ManaCost: 5, Description: "Heals All Allies for 5HP",
+        Name: "Basic Mass Heal", School: restorationSkill(), LevelRequirement: 10, Use: "Hybrid", Amount: 5, ManaCost: 5, Description: "Heals All Allies for 5HP",
         SpellEffect(char, allies, enemies, target, combatLog) {
             var totalHeal = CalculateSpellBonus(char, this, char.Wisdom, char.WisBonus, char.WisPenalty, this.Amount);
             AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on the party, healing them for " + totalHeal + " Health");

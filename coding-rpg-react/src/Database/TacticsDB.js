@@ -1,10 +1,10 @@
 import { rage } from "./AbilitiesDB";
-import { basicHeal, webSpell } from "./SpellsDB";
+import { basicHeal, summonSpider, webSpell } from "./SpellsDB";
 import { CastSpell, CheckIfKnowsAbility, CheckIfKnowsSpell, UseAbility } from "../Scripts/AbilityAndSpellScripts";
 import { BasicAttack } from "../Scripts/CombatScripts"
 
 export function tacticsList() {
-    var tacticsList = [{Name:"Basic Attacker", Desc: "Use only basic attacks" }, {Name:"Basic Healer", Desc: "Cast Basic Heal when a ally has <= MaxHP" }, {Name: "Rager", Desc: "Use Rage on first round" }]
+    var tacticsList = [{ Name: "Basic Attacker", Desc: "Use only basic attacks" }, { Name: "Basic Healer", Desc: "Cast Basic Heal when a ally has <= MaxHP" }, { Name: "Rager", Desc: "Use Rage on first round" }]
     return tacticsList
 }
 export function BasicAttacker(char, allies, enemies, combatLog, round) {
@@ -60,5 +60,13 @@ export function Webber(char, allies, enemies, combatLog, round) {
     }
     else {
         CastSpell(char, allies, enemies, enemies[0], combatLog, webSpell())
+    }
+}
+export function spiderSummoner(char, allies, enemies, combatLog, round) {
+    if (char.CurrentMP > 0) {
+        CastSpell(char, allies, enemies, enemies[0], combatLog, summonSpider())
+    }
+    else {
+        BasicAttacker(char, allies, enemies, combatLog)
     }
 }

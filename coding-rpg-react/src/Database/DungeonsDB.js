@@ -1,9 +1,14 @@
-import { bossGoblinEncounter, enterGoblinMineEncounter, foremanGeorgeEncounter, giantEncounter, giantRatEncounter, goblinEncounter, goblinWithWorgEncounter, koboldSlavesEncounter, ratEncounter, saveMinersEncounter, saveTenguEncounter, spiderEncounter } from "./EncountersDB";
-import { ale, pickAxe } from "./ItemsDB"
+import { banditAndBanditArcherEncounter, banditAndBanditBersekerEncounter, banditArcherEncounter, banditBerserkerEncounter, banditEncounter, banditTrioEncounter, bossGoblinEncounter, enterGoblinMineEncounter, foremanGeorgeEncounter, giantEncounter, giantRatEncounter, giantSpiderEncounter, goblinEncounter, goblinWithWorgEncounter, koboldSlavesEncounter, ratEncounter, saveMinersEncounter, saveTenguEncounter, spiderEncounter } from "./EncountersDB";
+import { ale, banditSpoils, pickAxe } from "./ItemsDB"
 import { CheckForQuest } from "../Scripts/QuestScripts";
 import { scareCrowQuest3 } from "./QuestsDB";
 
 
+//had to split these up for some reasons
+export function banditHideoutDungeon(hero) {
+    var hideout = { Name: "Bandit Hideout", Encounters: [banditArcherEncounter(), banditEncounter(), banditAndBanditArcherEncounter(), banditEncounter(), banditAndBanditBersekerEncounter(), banditEncounter(), banditBerserkerEncounter()], Boss: banditTrioEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: banditSpoils() }
+    return hideout
+}
 export function giantCaveDungeon(hero) {
     var cave = { Name: "Giant Cave", Encounters: [], Boss: giantEncounter(), AfterBoss: foremanGeorgeEncounter(hero), GoldReward: 0, ItemReward: null }
     return cave
@@ -12,7 +17,7 @@ export function giantCaveDungeonBeforeAndAfterQuest(hero) {
     var cave = { Name: "Giant Cave", Encounters: [], Boss: giantEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: null }
     return cave
 }
-//had to split these up for some reasons
+//had to split these up for some reason
 export function goblinMine(hero) {
     var goblinMine = { Name: "Dwarven Mine", Encounters: [enterGoblinMineEncounter(hero), goblinWithWorgEncounter(), koboldSlavesEncounter(hero), goblinEncounter(), goblinWithWorgEncounter(), goblinEncounter()], Boss: bossGoblinEncounter(), AfterBoss: saveMinersEncounter(hero), GoldReward: 0, ItemReward: pickAxe() }
     return goblinMine;
@@ -29,10 +34,10 @@ export function spiderCaveDungeon(hero) {
     var spiderCave;
     var questIndex = CheckForQuest(hero.Journal, scareCrowQuest3())
     if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
-        spiderCave = { Name: "Spider Cave", Encounters: [spiderEncounter()], Boss: spiderEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: null }
+        spiderCave = { Name: "Spider Cave", Encounters: [spiderEncounter(),spiderEncounter(), spiderEncounter()], Boss: giantSpiderEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: null }
     }
     else {
-        spiderCave = { Name: "Spider Cave", Encounters: [spiderEncounter()], Boss: spiderEncounter(), AfterBoss: saveTenguEncounter(hero), GoldReward: 0, ItemReward: null }
+        spiderCave = { Name: "Spider Cave", Encounters: [spiderEncounter(), spiderEncounter(), spiderEncounter()], Boss: spiderEncounter(), AfterBoss: saveTenguEncounter(hero), GoldReward: 0, ItemReward: null }
     }
     return spiderCave
 }

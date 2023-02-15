@@ -1,9 +1,9 @@
 import { noCondition, poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
 import { cleave, pierceArmor, rage } from "./AbilitiesDB";
-import { bareBack, bareFinger, bareNeck, bite, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakBow, ironAxe2H } from "./ItemsDB";
+import { bareBack, bareFinger, bareNeck, bite, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakBow, ironAxe2H, ironSword } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
 import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell, summonRat } from "./SpellsDB"
-import { BasicAttacker, BasicHealer, Rager } from "./TacticsDB";
+import { BasicAttacker, BasicHealer, Rager, spiderSummoner } from "./TacticsDB";
 import { allSkills, barterSkill, blockSkill, bluntSKill, heavyArmorSkill, miningSkill, restorationSkill, smithingSkill } from "./SkillsDB";
 import { noTitle } from "./TitlesDB";
 import { bludeoningDamage, fireDamage, lightningDamage, piercingDamage, poisonDamage, slashingDamage } from "./DamageTypesDB";
@@ -18,7 +18,7 @@ export function character(name) {
         Strength: 10, StrBonus: 0, StrPenalty: 0, Constitution: 10, ConBonus: 0, ConPenalty: 0, Dexterity: 10, DexBonus: 0, DexPenalty: 0,
         Intelligence: 10, IntBonus: 0, IntPenalty: 0, Wisdom: 10, WisBonus: 0, WisPenalty: 0, Charisma: 10, ChaBonus: 0, ChaPenalty: 0,
         WillPower: 10, WlpBonus: 0, WlpPenalty: 0, Perception: 10, PrcBonus: 0, PrcPenalty: 0, Luck: 10, LckBonus: 0, LckPenalty: 0,
-        Beauty: 10, BtyBonus: 0, BtyPenalty: 0, Speed: 10, SpdBonus: 0, SpdPenalty: 0,
+        Beauty: 10, BtyBonus: 0, BtyPenalty: 0, Speed: 10, SpdBonus: 0, SpdPenalty: 0, ShieldBonus: 0, ShieldPenalty: 0,
         Weapon: bareFist(), OffHand: emptyOffHand(), Head: bareHead(), Torso: bareTorso(), Legs: bareLegs(), Hands: bareHands(), Feet: bareFeet(),
         Back: bareBack(), Neck: bareNeck(), Ring: bareFinger(), Inventory: [], Gold: 0, Bank: [], BankGold: 0,
         Companions: [], Journal: [], Abilities: [], SpellBook: [], SkillBook: allSkills(), Reputation: [], Relationships: [],
@@ -31,9 +31,9 @@ export function character(name) {
 }
 export function hero() {
     var hero = character("Hero")
-    hero.CanEnterGoblinMine = false;
     hero.Log = ["Starting Game"]; hero.Weapon = bronzeSword(); hero.Head = hat(); hero.Torso = tunic(); hero.Legs = trousers(); hero.Hands = gloves(); hero.Feet = shoes(); hero.Inventory = [dogCollar()]; hero.Gold = 5; hero.Companions = [dog("Dog")]; hero.Abilities = [cleave(), pierceArmor(), rage()]; hero.SpellBook = [basicHeal(), curePoison(), fireBall(), magicMissile(), poisonSpray(), sleepSpell(), summonRat()]; hero.Weaknesses = [fireDamage()]; hero.Weaknesses[0].Source = hero.Torso;
     hero.Journal = [];
+    hero.Inventory = [ironSword()]
     return hero
 }
 //companions
@@ -87,6 +87,13 @@ export function giantRat() {
     rat.CurrentXP = 10; rat.Strength = 14; rat.ItemDrops = [rawRatMeat(), ratTail()]
     return rat;
 }
+export function giantSpider() {
+    var spider = beast("Giant Spider")
+    spider.CurrentMP = 20; spider.MaxMP = 20; spider.CurrentHP = 20; spider.MaxHP = 10;
+    spider.CurrentXP = 50; spider.Strength = 12; spider.Weapon = poisonedBite(); spider.ConditionImmunities = [webCondition(), poisonCondition()]; spider.Immunities(poisonDamage()); spider.ItemDrops = [spiderSilkCloth()]
+    bandit.Tactics = { Tactics(char, allies, enemies, combatLog, round) { spiderSummoner(char, allies, enemies, combatLog, round) } }
+    return spider;
+}
 export function rat() {
     var rat = beast("Rat")
     rat.CurrentXP = 5; rat.CurrentHP = 5; rat.MaxHP = 5; rat.CurrentMP = 5; rat.MaxMP = 5; rat.CurrentSP = 5; rat.MaxSP = 5; rat.ItemDrops = [rawRatMeat(), ratTail()]
@@ -115,6 +122,7 @@ export function scareCrow() {
     return scareCrow;
 }
 //humanoid
+//bandits
 export function bandit() {
     var bandit = character("Bandit"); bandit.Head = leatherCowl(); bandit.Torso = leatherTorso(); bandit.Legs = leatherLegs(); bandit.Hands = leatherGloves(); bandit.Feet = leatherBoots();
     bandit.Weapon = ironDagger(); bandit.Offhand = ironDaggerOffHand(); bandit.ItemDrops = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso(), ironDagger(), ironDaggerOffHand()]

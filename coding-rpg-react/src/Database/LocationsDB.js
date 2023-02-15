@@ -1,9 +1,9 @@
 import { CheckForQuest } from "../Scripts/QuestScripts"
 import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, tenguCampDialogue } from "./DialoguesDB"
-import { giantCaveDungeon, giantCaveDungeonBeforeAndAfterQuest, goblinMine, goblinMineAfterQuest, spiderCaveDungeon } from "./DungeonsDB"
-import { cowEncounter, giantEncounter, goblinEncounter, scareCrowEncounter, spiderEncounter } from "./EncountersDB"
+import { banditHideoutDungeon, giantCaveDungeon, giantCaveDungeonBeforeAndAfterQuest, goblinMine, goblinMineAfterQuest, spiderCaveDungeon } from "./DungeonsDB"
+import { banditEncounter, cowEncounter, giantEncounter, goblinEncounter, scareCrowEncounter, spiderEncounter } from "./EncountersDB"
 import { dwarvenMineGoblinQuest, giantQuest } from "./QuestsDB"
-import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, witchHutShop } from "./ShopsDB"
+import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, joeTheTradersTradingPost, witchHutShop } from "./ShopsDB"
 import { alchemyNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletchNode, herbNode, huntNode, mineNode, woodNode } from "./SkillNodesDB"
 
 //locations
@@ -20,6 +20,10 @@ export function tenguCamp(hero, x, y) {
     return camp;
 }
 //dungeon
+export function banditHideout(hero, x, y) {
+    var bandit = { LocationName: "Bandit Hideout", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterBanditEncounter(hero), enterBanditHideout(hero)] }
+    return bandit;
+}
 export function dwarvenMine(hero, x, y) {
     var dwarvenMine;
     var questIndex = CheckForQuest(hero.Journal, dwarvenMineGoblinQuest())
@@ -53,8 +57,12 @@ export function spiderCave(hero, x, y) {
     return spider;
 }
 //shop
+export function tradingPost(hero, x, y) {
+    var tradingPost = { LocationName: "Joe the Trader's Trading Post", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterWitchHut(hero)] }
+    return tradingPost;
+}
 export function witchHut(hero, x, y) {
-    var witchHut = { LocationName: "Witch's Hut", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterWitchHut(hero)] }
+    var witchHut = { LocationName: "Witch's Hut", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [] }
     return witchHut;
 }
 //towns
@@ -93,6 +101,10 @@ export function road(hero, x, y) {
 }
 //sublocations
 //enter dungeons
+export function enterBanditHideout(hero) {
+    var enter = { Name: "Bandit Hideout (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: banditHideoutDungeon(hero), shop: null, skill: null }; return content } }
+    return enter;
+}
 export function enterDwarvenMine(hero) {
     var enterDwarvenMine = { Name: "Dwarven Mine (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: goblinMine(hero), shop: null, skill: null }; return content } }
     return enterDwarvenMine
@@ -131,6 +143,10 @@ export function enterTenguCampDialogue(hero) {
     return enter
 }
 //enter encounters
+export function enterBanditEncounter(hero) {
+    var encounter = { Name: "Kill Bandits", enterLocation(hero) { var content = { active: "Combat", combat: banditEncounter(hero), dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    return encounter;
+}
 export function enterCowEncounter(hero) {
     var enterCowEncounter = { Name: "Kill Cows", enterLocation(hero) { var content = { active: "Combat", combat: cowEncounter(), dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return enterCowEncounter
@@ -155,6 +171,10 @@ export function enterSpiderEncounter(hero) {
 //general store
 export function enterGeneralStore(hero) {
     var generalStore = { Name: "General Store", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: generalShop(hero), skill: null }; return content } }
+    return generalStore
+}
+export function enterTradingPost(hero) {
+    var generalStore = { Name: "Joe the Trader's Trading Post", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: joeTheTradersTradingPost(hero), skill: null }; return content } }
     return generalStore
 }
 //inns

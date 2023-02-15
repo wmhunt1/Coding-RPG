@@ -446,8 +446,12 @@ export function mineTinOre() {
 }
 //woodcutting
 export function woodcuttingRecipes() {
-    var wood = [cutWood()]
+    var wood = [cutOakWood(), cutWood()]
     return wood;
+}
+export function cutOakWood() {
+    var cut = { Name: "Cut Oak Wood", Skill: "Woodcutting", Tool: hatchet(), Verb: "Chop", LevelRequirement: 1, Exp: 100, Input: [], Output: { Item: oakLogs(), Quantity: 1 } }
+    return cut;
 }
 export function cutWood() {
     var cut = { Name: "Cut Wood", Skill: "Woodcutting", Tool: hatchet(), Verb: "Chop", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: woodLogs(), Quantity: 1 } }
