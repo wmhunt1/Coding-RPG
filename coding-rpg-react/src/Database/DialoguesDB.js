@@ -22,16 +22,16 @@ export function banditHideoutDialogue(hero) {
         Name: "Inspect Hideout", Char: "Yourself", Conversation: []
     }
     if (questIndex === null) {
-        dialogue.Consersation.push({ Dialogue: ["You've found what appears to be a Bandit Hideout, you could clear this out."], Responses: [[]], responseEffect(hero, option) { } })
-        dialogue.Consersation.push({ Dialogue: [], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+        dialogue.Conversation.push({ Dialogue: ["You've found what appears to be a Bandit Hideout, you could clear this out."], Responses: [[]], responseEffect(hero, option) { } })
+        dialogue.Conversation.push({ Dialogue: [], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
     }
     else if (questIndex2 === null) {
-        dialogue.Consersation.push({ Dialogue: ["You've found the bandit hideout."], Responses: [["Finish Quest", 0]], responseEffect(hero, option) { { CompleteQuest(hero, banditQuest1()); } } })
-        dialogue.Consersation.push({ Dialogue: ["Leave"], Responses: [], responseEffect(hero, option) { StartQuest(hero, banditQuest2()) } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+        dialogue.Conversation.push({ Dialogue: ["You've found the bandit hideout."], Responses: [["Finish Quest", 0]], responseEffect(hero, option) { { CompleteQuest(hero, banditQuest1()); } } })
+        dialogue.Conversation.push({ Dialogue: ["Leave"], Responses: [], responseEffect(hero, option) { StartQuest(hero, banditQuest2()) } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
     }
     else {
-        dialogue.Consersation.push({ Dialogue: ["It would appear that the bandits are back."], Responses: [[]], responseEffect(hero, option) { } })
-        dialogue.Consersation.push({ Dialogue: [], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+        dialogue.Conversation.push({ Dialogue: ["It would appear that the bandits are back."], Responses: [[]], responseEffect(hero, option) { } })
+        dialogue.Conversation.push({ Dialogue: [], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
     }
     return dialogue
 }
@@ -180,7 +180,7 @@ export function forgeHeart1(hero) {
     dialogue.Conversation.push({ Dialogue: ["Bringing Ferra", "Not Bringing Ferra"], Responses: [], responseEffect(hero, option) { } })
     //}
     //else {
-    //  dialogue.Conversation.push({ Dialogue: ["Leave Consersation"], Responses: [], responseEffect(hero, option) { } })
+    //  dialogue.Conversation.push({ Dialogue: ["Leave Conversation"], Responses: [], responseEffect(hero, option) { } })
     //}
     return dialogue
 }
@@ -275,8 +275,8 @@ export function littleRoot3(hero, questIndex) {
     var dialogue = {
         Name: "Speak to Farmer LittleRoot", Char: "Farmer Littleroot", Conversation: []
     }
-    dialogue.Consersation.push({ Dialogue: ["Reward"], Responses: [["Accept Reward", 0]], responseEffect(hero, option) { { CompleteQuest(hero, hero.Journal[questIndex]); IncreaseReputation(hero, daleTownReputation(), 1) } } })
-    dialogue.Consersation.push({ Dialogue: ["Find crows"], Responses: [], responseEffect(hero, option) { StartQuest(hero, scareCrowQuest2()) } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+    dialogue.Conversation.push({ Dialogue: ["Reward"], Responses: [["Accept Reward", 0]], responseEffect(hero, option) { { CompleteQuest(hero, hero.Journal[questIndex]); IncreaseReputation(hero, daleTownReputation(), 1) } } })
+    dialogue.Conversation.push({ Dialogue: ["Find crows"], Responses: [], responseEffect(hero, option) { StartQuest(hero, scareCrowQuest2()) } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
     return dialogue
 }
 export function littleRoot4(hero) {
@@ -301,7 +301,7 @@ export function littleRoot6(hero) {
     var questIndex = CheckForQuest(hero.Journal, scareCrowQuest4())
     dialogue.Conversation.push({ Dialogue: ["Give ring to Farmer Littleroot"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 0) { var index = FindItemInInventory(hero.Inventory, silverRingLR()); RemoveItemFromInventory(hero, hero.Inventory, hero.Inventory[index], 1, hero); IncreaseReputation(hero, daleTownReputation(), 1) } } })
     dialogue.Conversation.push({ Dialogue: ["You Decide to", "You Decide Not To"], Responses: [["Continue", 0]], responseEffect(hero, option) { if (option === 0) { CompleteQuest(hero, hero.Journal[questIndex]) } } })
-    dialogue.Conversation.push({ Dialogue: ["Leave Consersation"], Responses: [], responseEffect(hero, option) { } })
+    dialogue.Conversation.push({ Dialogue: ["Leave Conversation"], Responses: [], responseEffect(hero, option) { } })
     return dialogue
 }
 //lumbermill dialogue
@@ -314,13 +314,13 @@ export function lumbermillDialogue(hero) {
     if (questIndex === null) {
         dialogue.Conversation.push({ Dialogue: ["Accept Quest Rescue Foreman George from Giant"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 0) { StartQuest(hero, giantQuest()) } } })
         dialogue.Conversation.push({ Dialogue: ["Accepted Quest", "Did Not Accept Quest"], Responses: [["Continue", 0]], responseEffect(hero, option) { } })
-        dialogue.Conversation.push({ Dialogue: ["Leave Consersation"], Responses: [], responseEffect(hero, option) { } })
+        dialogue.Conversation.push({ Dialogue: ["Leave Conversation"], Responses: [], responseEffect(hero, option) { } })
     }
     else if (hero.Journal[questIndex].Status === "Finished") {
-        dialogue.Consersation.push({ Dialogue: ["The Foreman gives you a hearty wave"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+        dialogue.Conversation.push({ Dialogue: ["The Foreman gives you a hearty wave"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
     }
     else {
-        dialogue.Consersation.push({ Dialogue: ["The Woodcutters are busy at work"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+        dialogue.Conversation.push({ Dialogue: ["The Woodcutters are busy at work"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
     }
 }
 
@@ -330,8 +330,8 @@ export function spiderCaveDialogue(hero) {
     var dialogue = {
         Name: "Talk to Tengu", Char: "Tengu", Conversation: []
     }
-    dialogue.Consersation.push({ Dialogue: ["."], Responses: [["Finish Quest", 0]], responseEffect(hero, option) { { CompleteQuest(hero, hero.Journal[questIndex]); } } })
-    dialogue.Consersation.push({ Dialogue: ["Leave"], Responses: [], responseEffect(hero, option) { StartQuest(hero, scareCrowQuest3()) } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+    dialogue.Conversation.push({ Dialogue: ["."], Responses: [["Finish Quest", 0]], responseEffect(hero, option) { { CompleteQuest(hero, hero.Journal[questIndex]); } } })
+    dialogue.Conversation.push({ Dialogue: ["Leave"], Responses: [], responseEffect(hero, option) { StartQuest(hero, scareCrowQuest3()) } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
     return dialogue
 }
 //tengu camp dialogue
@@ -342,17 +342,17 @@ export function tenguCampDialogue(hero) {
     var questIndex = CheckForQuest(hero.Journal, scareCrowQuest2())
     var questIndex2 = CheckForQuest(hero.Journal, scareCrowQuest3())
     if (questIndex !== null && questIndex2 === null) {
-        dialogue.Consersation.push({ Dialogue: ["Found black feathers leading towards a spider cave."], Responses: [["Finish Quest", 0]], responseEffect(hero, option) { { CompleteQuest(hero, hero.Journal[questIndex]); AddItemToInventory(hero, hero.Inventory, blackFeather(), 1, hero) } } })
-        dialogue.Consersation.push({ Dialogue: ["Go to Spider Cave"], Responses: [], responseEffect(hero, option) { StartQuest(hero, scareCrowQuest3()) } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+        dialogue.Conversation.push({ Dialogue: ["Found black feathers leading towards a spider cave."], Responses: [["Finish Quest", 0]], responseEffect(hero, option) { { CompleteQuest(hero, hero.Journal[questIndex]); AddItemToInventory(hero, hero.Inventory, blackFeather(), 1, hero) } } })
+        dialogue.Conversation.push({ Dialogue: ["Go to Spider Cave"], Responses: [], responseEffect(hero, option) { StartQuest(hero, scareCrowQuest3()) } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
     }
     else if (hero.Journal[questIndex].Status === "Finished" && hero.Journal[questIndex2].Status === "In Progress") {
-        dialogue.Consersation.push({ Dialogue: ["There's nothing else but scattered junk and food scraps"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+        dialogue.Conversation.push({ Dialogue: ["There's nothing else but scattered junk and food scraps"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
     }
     else if (hero.Journal[questIndex].Status === "Finished" && hero.Journal[questIndex2].Status === "Finished") {
-        dialogue.Consersation.push({ Dialogue: ["The Tengu greet you and give you a random piece of 'Treasure'"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+        dialogue.Conversation.push({ Dialogue: ["The Tengu greet you and give you a random piece of 'Treasure'"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
     }
     else {
-        dialogue.Consersation.push({ Dialogue: ["There's nothing here but scattered junk and food scraps"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+        dialogue.Conversation.push({ Dialogue: ["There's nothing here but scattered junk and food scraps"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
     }
     return dialogue
 }
@@ -373,8 +373,8 @@ export function joeTheTradersTradingPostDialogue(hero) {
         dialogue.Conversation.push({ Dialogue: [], Responses: [], responseEffect(hero, option) { } })
     }
     else if (hero.Journal[index2].ObjectiveProgress >= hero.Journal[index2].Objective && hero.Journal[index2].Status === "In Progress") {
-        dialogue.Consersation.push({ Dialogue: ["Reward"], Responses: [["Accept Reward", 0]], responseEffect(hero, option) { { CompleteQuest(hero, banditQuest2()); IncreaseReputation(hero, daleTownReputation(), 1) } } })
-        dialogue.Consersation.push({ Dialogue: ["Leave"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+        dialogue.Conversation.push({ Dialogue: ["Reward"], Responses: [["Accept Reward", 0]], responseEffect(hero, option) { { CompleteQuest(hero, banditQuest2()); IncreaseReputation(hero, daleTownReputation(), 1) } } })
+        dialogue.Conversation.push({ Dialogue: ["Leave"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
     }
     else {
         dialogue.Conversation.push({ Dialogue: ["Joe offers to sell you something"], Responses: [["Leave", 0]], responseEffect(hero, option) { } })
