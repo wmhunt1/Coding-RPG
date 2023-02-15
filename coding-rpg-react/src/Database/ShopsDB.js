@@ -1,5 +1,5 @@
 import { dreamingWorkerInnDialogue, forgeheartSmithDialogue, innDialogue } from "./DialoguesDB";
-import { banditHideoutDungeon, ratCellar } from "./DungeonsDB";
+import { ratCellar } from "./DungeonsDB";
 import { ale, allBronze, allIron, allPotions, allSpellScrolls, bread, bronzeHatchet, bronzePickAxe, bucket, enchantmentTome, fishingRod, knife, needle, shears, stew, tinderBox } from "./ItemsDB"
 import { cookNode, smithNode } from "./SkillNodesDB";
 

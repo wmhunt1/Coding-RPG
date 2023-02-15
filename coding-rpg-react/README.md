@@ -9,7 +9,6 @@ ideas
 Wizard tower with dungeon  (quest, monsters, dialogue, dungeon, location, place on map)
 retrieve sheepscale's stolen sheep  (quest, monsters, dialogue, dungeon, location, place on map)
 deliver letter to ambrosius quest (quest, monsters, dialogue, dungeon, location, place on map)
-retrieve cargo from bandits for general store (dialogue, place on map)(find location out from joe)
 skeleton killing quest
 
 fixes/changes
@@ -20,8 +19,9 @@ balance level requiurements and xp
 fix tactic selection
 clean up scripts
 dialogue overhaul (more options or branches)
-quest rewards for scarecrowquest (1-2 and 4), giantquest, banditquest
+quest rewards for scarecrowquest (1-2 and 4), giantquest
 more relationship and reputation names
+fix nested redundant block
 
 features
 enchanting reagent

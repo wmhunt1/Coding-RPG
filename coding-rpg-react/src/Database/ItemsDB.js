@@ -2,7 +2,7 @@ import { bludeoningDamage, forceDamage, piercingDamage, slashingDamage } from ".
 import { drunkDeBuff } from "./DeBuffsDB";
 import { fireEnchantment, fireImmuneEnchantment, iceResistEnchantment, poisonApplyEnchantment, strengthEnchantment, unEnchanted } from "./EnchantmentsDB";
 import { clothProtection, leatherProtection, metalProtection, naturalProtection, woodProtection } from "./ProtectionTypesDB";
-import { axeSkill, blockSkill, bluntSKill, destructionSkill, heavyArmorSkill, lightArmorSkill, longBladeSkill, rangedSkill, shortBladeSkill, smithingSkill, unArmedSkill, unArmoredSkill } from "./SkillsDB";
+import { axeSkill, barterSkill, blockSkill, bluntSKill, destructionSkill, heavyArmorSkill, lightArmorSkill, longBladeSkill, rangedSkill, shortBladeSkill, smithingSkill, unArmedSkill, unArmoredSkill } from "./SkillsDB";
 import { fireBall, magicMissile } from "./SpellsDB";
 import { LearnSpell } from "../Scripts/AbilityAndSpellScripts";
 import { RemoveCondition } from "../Scripts/BuffConditionAndDeBuffScripts";
@@ -90,7 +90,7 @@ export function magicMissileScroll() {
 }
 //xp lamps
 export function lessonsFromFaldan() {
-    var lessonsFromFaldan = { Name: "Lessons from Faldan", Type: "Consumable", SubType: "Lamp", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); EarnSkillXP(hero, FindSkillInSkillBook(hero, smithingSkill()), 500) } }
+    var lessonsFromFaldan = { Name: "Lessons from Faldan", Type: "Consumable", SubType: "Lamp", Cost: 0, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); EarnSkillXP(hero, FindSkillInSkillBook(hero, smithingSkill()), 500) } }
     return lessonsFromFaldan
 }
 export function skillLamp(skill, xp) {
@@ -100,6 +100,10 @@ export function skillLamp(skill, xp) {
 export function levelLamp(xp) {
     var lamp = { Name: "Character XP Lamp", Type: "Consumable", SubType: "Lamp", Cost: 0, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " rubs " + this.Name + " gaining " + xp + " XP"); EarnXP(hero, xp, hero) } }
     return lamp;
+}
+export function tipsTraderJoe() {
+    var tips = { Name: "Trading Tips from Joe the Trader", Type: "Consumable", SubType: "Lamp", Cost: 0, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); EarnSkillXP(hero, FindSkillInSkillBook(hero, barterSkill()), 500) } }
+    return tips
 }
 //equipables
 export function allBronze() {
@@ -540,7 +544,7 @@ export function woodBow() {
 }
 //junk
 //burnt food
-export function banditSpoils(){
+export function banditSpoils() {
     var bandit = { Name: "Bandit Spoils", Type: "Junk", SubType: "Vendor Trash", Cost: 50, Quantity: 1, ConsumeEffect(hero) { } }
     return bandit;
 }

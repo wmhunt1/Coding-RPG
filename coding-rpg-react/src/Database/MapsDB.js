@@ -1,4 +1,4 @@
-import { bridgeOverRiver, daleTown, dwarvenMine, farm, forest, giantCave, littleRootFarm, lumbermill, mountains, river, road, spiderCave, tenguCamp, witchHut } from "./LocationsDB"
+import { banditHideout, bridge, daleTown, dwarvenMine, farm, forest, giantCave, littleRootFarm, lumbermill, mountains, river, road, spiderCave, tenguCamp, witchHut } from "./LocationsDB"
 
 export function startingAdjacentLocations() {
     var start = ["Bridge", "River", "Farm", "Farm", "Road", "LittleRoot Farm", "River", "River"]
@@ -7,57 +7,19 @@ export function startingAdjacentLocations() {
 export function worldMap(hero) {
     var worldMap = {
         Name: "World", Locations: [
-            bridgeOverRiver(hero, 0, 1), bridgeOverRiver(hero, 2, 4), daleTown(hero, 0, 0), dwarvenMine(hero, 3, -3), giantCave(hero, 4, 4),
-            farm(hero, 1, 0), farm(hero, 1, -1), forest(hero, -1, 2), forest(hero, 2, -2), forest(hero, 3, -2), forest(hero, 1, 3), forest(hero, -3, -2),
-            forest(hero, -1, -1), forest(hero, -4, -2), forest(hero, -4, -3), forest(hero, -2, -3), forest(hero, -2, -2), forest(hero, -4, -3), forest(hero, -4, -2), forest(hero, -4, -1),
-            forest(hero, -1, -2), forest(hero, -4, 0), forest(hero, -3, 0), forest(hero, 0, 4), forest(hero, 0, 5),
-            littleRootFarm(hero, -1, -1), lumbermill(hero, 1, 4), mountains(hero, 2, -4), mountains(hero, 3, -4), mountains(hero, 4, -4), mountains(hero, 4, -3),
-            mountains(hero, 4, -2), mountains(hero, 4, 5), mountains(hero, 4, 3), mountains(hero, 5, 5), mountains(hero, 5, 4), mountains(hero, 5, 3),
-            river(hero, 1, 1), river(hero, -1, 0), river(hero, -1, 1), river(hero, 2, 1), river(hero, 2, 2), river(hero, 2, 3),
-            river(hero, -2, 0), river(hero, -2, -1), river(hero, 2, 5),
-            road(hero, 0, -1), road(hero, 0, 2), road(hero, 0, -2), road(hero, 1, -2), road(hero, 1, -3), road(hero, 2, - 3), road(hero, 0, 2), road(hero, 0, 3),
-            road(hero, -1, 4), road(hero, -1, 5), road(hero, -1, 6), road(hero, -1, 7),
-            spiderCave(hero, -3, -3), tenguCamp(hero, -3, -1), witchHut(hero, 1, 2)]
+            road(hero, -1, 6),
+            road(hero, -1, 5), forest(hero, 0, 5), river(hero, 2, 5), mountains(hero, 4, 5), mountains(hero, 5, 5),
+            road(hero, -1, 4), forest(hero, 0, 4), lumbermill(hero, 1, 4), bridge(hero, 2, 4), giantCave(hero, 4, 4), mountains(hero, 5, 4),
+            road(hero, 0, 3), forest(hero, 1, 3), river(hero, 2, 3), mountains(hero, 4, 3), mountains(hero, 5, 3),
+            forest(hero, -1, 2), road(hero, 0, 2), witchHut(hero, 1, 2), river(hero, 2, 2), forest(hero, 3, 2), mountains(hero, 4, 2), mountains(hero, 5, 2),
+            river(hero, -1, 1), bridge(hero, 0, 1), river(hero, 1, 1), river(hero, 2, 1), forest(hero, 3, 1), banditHideout(hero, 4, 1), mountains(hero, 5, 1),
+            forest(hero, -4, 0), forest(hero, -3, 0), river(hero, -2, 0), river(hero, -1, 0), daleTown(hero, 0, 0), road(hero, 1, 0), road(hero, 2, 0), road(hero, 3, 0), road(hero, 4, 0), road(hero, 5, 0),
+            forest(hero, -4, -1), littleRootFarm(hero, -1, -1), road(hero, 0, -1), farm(hero, 1, -1), forest(hero, 2, -1), forest(hero, 3, -1), mountains(hero, 4, -1), mountains(hero, 5, -1),
+            forest(hero, -4, -2), tenguCamp(hero, -3, -1), forest(hero, -3, -2), river(hero, -2, -2), road(hero, 1, -2), river(hero, -2, -1), road(hero, 0, -2), farm(hero, -1, -2), forest(hero, 2, -2), forest(hero, 3, -2), mountains(hero, 4, -2),
+            forest(hero, -4, -3), spiderCave(hero, -3, -3), river(hero, -2, -3), road(hero, 1, -3), road(hero, 2, - 3), dwarvenMine(hero, 3, -3), mountains(hero, 4, -3),
+            river(hero, -2, -4), road(hero, 1, -4), mountains(hero, 2, -4), mountains(hero, 3, -4), mountains(hero, 4, -4),
+            river(hero, -2, -5), road(hero, 1, -5),
+        ]
     }
     return worldMap
 }
-//map sketch
-//|- (-5,7) -|- (-4,7) -|- (-3,7) -|- (-2,7)-|-(-1, 7)-|- (0,6)  -|- (1, 7) -|- (2, 7) -|- (3, 7) -|- (4,7) - |- (5,7) - |
-//|          |          |          |         |rd       |          |          |          |          |          |          |
-//|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|
-//|- (-5,6) -|- (-4,6) -|- (-3,6) -|- (-2,6)-|-(-1, 6)-|- (0,6)  -|- (1, 6) -|- (2, 6) -|- (3, 6) -|- (4,6) - |- (5,6) - |
-//|          |          |          |         |rd       |          |          |          |          |          |          |
-//|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|
-//|- (-5,5) -|- (-4,5) -|- (-3,5) -|- (-2,5)-|-(-1, 5)-|- (0,5)  -|- (1, 5) -|- (2, 5) -|- (3, 5) -|- (4,5)  -|- (5,5) - |
-//|          |          |          |         |rd       |frst      |frst      |river     |          |mountains |mountains |
-//|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|
-//|- (-5,4) -|- (-4,4) -|- (-3,4) -|- (-2,4)-|-(-1, 4)-|- (0,4)  -|- (1, 4) -|- (2, 4) -|- (3, 4) -|- (4,4) - |- (5,4) - |
-//|          |          |          |         |rd       |road      |lumber    |bridge    |forest    |giant     |mountins  |
-//|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|
-//|- (-5,3) -|- (-4,4) -|- (-3,3) -|- (-2,3)-|-(-1, 3)-|- (0,3)  -|- (1, 3) -|- (2, 3) -|- (3, 3) -|- (4,3)  -|- (5,3) - |
-//|          |          |          |         |         |road      |forest    |river     |forest    |mountains |mtns      |
-//|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|
-//|- (-5,2) -|- (-4,2) -|- (-3,2) -|- (-2,2)-|-(-1, 2)-|- (0,2)  -|- (1, 2) -|- (2, 2) -|- (3, 2) -|- (4,2)  -|- (5,2) - |
-//|          |          |          |         |forest   |road      |witchhut  |river     |          |          |          |
-//|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|
-//|- (-5,1) -|- (-4,1) -|-(-3, 1) -|-(-2,1) -|-(-1, 1)-|- (0,1)  -|- (1, 1) -|- (2, 1) -|- (3, 1) -|- (4,1)  -|- (5,1) - |
-//|          |          |          |         |river    |bridge    |river     |river     |          |          |          |
-//|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|
-//|- (-5,0) -|- (-4,0) -|-(-3, 0) -|-(-2,0) -|-(-1, 0)-|- (0,0)  -|- (1, 0) -|- (2, 0) -|- (3, 0) -|- (4,0)  -|- (5,0) - |
-//|          |forst     |forst     |river    |river    |daleTown  |farm      |          |          |          |          |
-//|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|
-//|- (-5,-1)-|- (-4,-1)-|-(-3,-1) -|-(-2,-1) |-(-1,-1)-|- (0,-1)- |- (1, -1)-|- (2,-1) -|- (3,-1) -|- (4,-1) -|- (5,-1) -|
-//|          |fores     |crow camp |river    |lr farm  |road      |      farm|          |          |          |          |
-//|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|
-//|- (-5,-2)-|- (-4,-2)-|-(-3,-2) -|-(-2,-2)-|-(-1,-2)-|- (0,-2)- |- (1,-2) -|- (2,-2) -|- (3,-2) -|- (4,-2) -|- (5,-2) -|
-//|          |fore      |forest    |forest   |forst    |road      |road      |forest    |forest    |mountains |          |
-//|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|
-//|- (-5,-3)-|- (-4,-3)-|- (-3,-3)-|-(-2,-3)-|-(-1,-3)-|- (0,-3)- |- (1,-3) -|- (2,-3) -|- (3,-3) -|- (4,-3) -|- (5,-3) -|
-//|          |forest    |spider    |forest   |         |          |road      |road      |dwarf mine|mountains |          |
-//|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|
-//|- (-5,6) -|- (-4,-4)-|- (-3,-4)-|-(-2,-4)-|-(-1,-4)-|- (0,-4)- |- (1,-4) -|- (2,-4) -|- (3,-4) -|- (4,-4) -|- (5,-4) -|
-//|-         |forest    |forest    |forest   |         |          |          |mountains |mountains |mountains |          |
-//|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|
-//|- (-5,-5)-|- (-4,-5)-|- (-3,-5)-|-(-2,-5)-|-(-1,-5)-|- (0,-5)- |- (1,-5) -|- (2,-5) -|- (3,-5) -|- (4,-5) -|- (5,-5)- |
-//|          |          |          |         |         |          |          |          |          |          |          |
-//|----------|----------|----------|---------|---------|----------|----------|----------|----------|----------|----------|

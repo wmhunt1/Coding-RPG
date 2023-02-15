@@ -57,21 +57,17 @@ export function spiderCave(hero, x, y) {
     return spider;
 }
 //shop
-export function tradingPost(hero, x, y) {
-    var tradingPost = { LocationName: "Joe the Trader's Trading Post", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterWitchHut(hero)] }
-    return tradingPost;
-}
 export function witchHut(hero, x, y) {
     var witchHut = { LocationName: "Witch's Hut", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [] }
     return witchHut;
 }
 //towns
 export function daleTown(hero, x, y) {
-    var daleTown = { LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDaleTownRumors(hero), enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterGeneralStore(hero)] }
+    var daleTown = { LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDaleTownRumors(hero), enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterTradingPost(hero)] }
     return daleTown;
 }
 //reusable locations
-export function bridgeOverRiver(hero, x, y) {
+export function bridge(hero, x, y) {
     var river = { LocationName: "Bridge", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero)] }
     return river;
 }
