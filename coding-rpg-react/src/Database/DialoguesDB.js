@@ -7,7 +7,7 @@ import { AddItemToInventory, FindItemInInventory, RemoveItemFromInventory } from
 import { CheckForQuest, CompleteQuest, StartQuest } from "../Scripts/QuestScripts"
 import { DecreaseRelationship, IncreaseRelationship, IncreaseReputation } from "../Scripts/RelationshipAndReputationScript";
 import { ferraForgeheartRelationship } from "./RelationshipsDB";
-import { daleTownReputation } from "./ReputationsDB";
+import { daleTownReputation, whiteScalesFlockReputation } from "./ReputationsDB";
 
 //generic dialogue
 export function innDialogue(hero) {
@@ -220,7 +220,7 @@ export function enterGoblinMineDialogue(hero) {
     return dialogue
 }
 export function enslavedKoboldsDialogue(hero) {
-    var dialogue = { Name: "Speak with Kobolds", Char: "Kobolds", Conversation: [{ Dialogue: ["Multiple enslaved kobolds"], Responses: [["Free", 0], ["Kill", 1], ["Ignore", 2]], responseEffect(hero, option) { if (option === 0) { IncreaseRelationship(hero, ferraForgeheartRelationship(), 2) } else if (option === 1) { DecreaseRelationship(hero, ferraForgeheartRelationship(), 2) } else { DecreaseRelationship(hero, ferraForgeheartRelationship(), 1) } } }, { Dialogue: ["Freed Kobolds", "Killed Kobolds", "Ignore Kobolds"], Responses: [], responseEffect(hero, option) { } }] }
+    var dialogue = { Name: "Speak with Kobolds", Char: "Kobolds", Conversation: [{ Dialogue: ["Multiple enslaved kobolds"], Responses: [["Free", 0], ["Kill", 1], ["Ignore", 2]], responseEffect(hero, option) { if (option === 0) { IncreaseRelationship(hero, ferraForgeheartRelationship(), 2); IncreaseReputation(hero, whiteScalesFlockReputation(), 5) } else if (option === 1) { DecreaseRelationship(hero, ferraForgeheartRelationship(), 2) } else { DecreaseRelationship(hero, ferraForgeheartRelationship(), 1) } } }, { Dialogue: ["Freed Kobolds", "Killed Kobolds", "Ignore Kobolds"], Responses: [], responseEffect(hero, option) { } }] }
     return dialogue
 }
 export function saveMinersDialogue(hero) {

@@ -25,13 +25,10 @@ fix nested redundant block
 
 features
 enchanting reagent
-discount based on rep
 Temple with graveyard for skeletons
-Lake with Fort Dale
 Haunted manor with ghosts 
 Hidden quest for if went to witch and met Wyle and family 
 Maybe if 3 quests completed John Dale shows up
-Orc village
 Bat cave
 abraham arkwright companion
 Wolf encounter
@@ -44,7 +41,6 @@ feats/perks
 save/load via json
 combine combat and game logs
 log filter with message types
-factions
 jobs
 add time delay for log
 Property

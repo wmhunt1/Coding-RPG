@@ -63,7 +63,12 @@ export function findAdjacentLocations(hero, map, x, y) {
 }
 export function updateLocation(hero, map, x, y, hour) {
     if (map.Locations.find(m => m.XCoord === x && m.YCoord === y)) {
-        CalculateTime(hero, hour)
+        if (hero.CurrentLocation.LocationName === "Forest" || hero.CurrentLocation.LocationName === "Mountains" || hero.CurrentLocation.LocationName === "River" || hero.CurrentLocation.LocationName === "Lake") {
+            CalculateTime(hero, hour * 2)
+        }
+        else {
+            CalculateTime(hero, hour)
+        }
         var mapIndex = map.Locations.findIndex(m => m.XCoord === x && m.YCoord === y);
         hero.CurrentLocation.LocationName = map.Locations[mapIndex].LocationName;
         hero.CurrentLocation.XCoord = map.Locations[mapIndex].XCoord;

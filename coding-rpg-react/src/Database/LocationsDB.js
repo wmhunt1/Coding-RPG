@@ -4,7 +4,7 @@ import { banditHideoutDungeon, giantCaveDungeon, giantCaveDungeonBeforeAndAfterQ
 import { banditEncounter, cowEncounter, giantEncounter, goblinEncounter, scareCrowEncounter, spiderEncounter } from "./EncountersDB"
 import { dwarvenMineGoblinQuest, giantQuest } from "./QuestsDB"
 import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, joeTheTradersTradingPost, witchHutShop } from "./ShopsDB"
-import { alchemyNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletchNode, herbNode, huntNode, mineNode, woodNode } from "./SkillNodesDB"
+import { alchemyNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletchNode, herbNode, huntNode, millNode, mineNode, sheepNode, waterNode, wellNode, woodNode } from "./SkillNodesDB"
 
 //locations
 export function lumbermill(hero, x, y) {
@@ -38,6 +38,10 @@ export function dwarvenMine(hero, x, y) {
     }
     return dwarvenMine;
 }
+export function fortDale(hero, x, y) {
+    var fort = { LocationName: "Fort Dale", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [] }
+    return fort;
+}
 export function giantCave(hero, x, y) {
     var giant;
     var questIndex = CheckForQuest(hero.Journal, giantQuest())
@@ -58,17 +62,29 @@ export function spiderCave(hero, x, y) {
 }
 //shop
 export function witchHut(hero, x, y) {
-    var witchHut = { LocationName: "Witch's Hut", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [] }
+    var witchHut = { LocationName: "Witch's Hut", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterWitchHut(hero)] }
     return witchHut;
 }
 //towns
 export function daleTown(hero, x, y) {
-    var daleTown = { LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDaleTownRumors(hero), enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterTradingPost(hero)] }
+    var daleTown = { LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDaleTownRumors(hero), enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterTradingPost(hero), enterWellNode(hero)] }
     return daleTown;
+}
+export function orcVillage(hero, x, y) {
+    var orc = { LocationName: "Orc Village", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [] }
+    return orc;
+}
+export function whiteScalesLair(hero, x, y) {
+    var lair = { LocationName: "Whitescale's Lair", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterSheepNode(hero)] }
+    return lair;
 }
 //reusable locations
 export function bridge(hero, x, y) {
     var river = { LocationName: "Bridge", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero)] }
+    return river;
+}
+export function brokenBridge(hero, x, y) {
+    var river = { LocationName: "Broken Bridge", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero)] }
     return river;
 }
 export function farm(hero, x, y) {
@@ -80,15 +96,19 @@ export function forest(hero, x, y) {
     return forest;
 }
 export function lake(hero, x, y) {
-    var lake = { LocationName: "Lake", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero)] }
+    var lake = { LocationName: "Lake", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero), enterWaterNode(hero)] }
     return lake;
+}
+export function mill(hero, x, y) {
+    var mill = { LocationName: "Mill", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterMillNode(hero)] }
+    return mill;
 }
 export function mountains(hero, x, y) {
     var mountains = { LocationName: "Mountains", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [] }
     return mountains;
 }
 export function river(hero, x, y) {
-    var river = { LocationName: "River", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero)] }
+    var river = { LocationName: "River", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero), enterWaterNode(hero)] }
     return river;
 }
 export function road(hero, x, y) {
@@ -202,6 +222,7 @@ export function enterEnchantNode(hero) {
     var enchant = { Name: "Enchanter", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: enchantNode(hero) }; return content } }
     return enchant
 }
+//cooking
 export function enterCookNode(hero) {
     var cook = { Name: "Stove", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: cookNode(hero) }; return content } }
     return cook
@@ -210,8 +231,25 @@ export function enterCookNodeCampFire(hero) {
     var cook = { Name: "Camp Fire (Cook)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: cookNode(hero) }; return content } }
     return cook
 }
+export function enterMillNode(hero) {
+    var cook = { Name: "Mill", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: millNode(hero) }; return content } }
+    return cook
+}
+export function enterWaterNode(hero) {
+    var cook = { Name: "Water Source", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: waterNode(hero) }; return content } }
+    return cook
+}
+export function enterWellNode(hero) {
+    var cook = { Name: "Well", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: wellNode(hero) }; return content } }
+    return cook
+}
+//farming
 export function enterFarmNode(hero) {
     var farm = { Name: "Farm", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: farmNode(hero) }; return content } }
+    return farm
+}
+export function enterSheepNode(hero) {
+    var farm = { Name: "Flock of Sheep", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: sheepNode(hero) }; return content } }
     return farm
 }
 export function enterFireNode(hero) {

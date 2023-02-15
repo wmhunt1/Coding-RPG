@@ -1,4 +1,4 @@
-import { ashes, bronzeAxe, bronzeAxe2H, bronzeBar, bronzeDagger, bronzeDaggerOffHand, bronzeGauntlets, bronzeHatchet, bronzeHelmet, bronzeLegs, bronzeMace, bronzePickAxe, bronzeShield, bronzeSword, bronzeSword2H, bronzeTorso, bronzeWarHammer, bronzeWarHammer2H, bucket, burntBeef, burntFish, burntRabbitMeat, burntRatMeat, coalOre, cookedBeef, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, cowLeather, enchantmentTome, fishingRod, hatchet, ironAxe, ironAxe2H, ironBar, ironBoots, ironDagger, ironDaggerOffHand, ironGauntlets, ironHatchet, ironHelmet, ironLegs, ironMace, ironOre, ironPickAxe, ironShield, ironSword, ironSword2H, ironTorso, ironWarHammer, ironWarHammer2H, knife, leatherBoots, leatherCowl, leatherGloves, leatherLegs, leatherTorso, milk, needle, oakBow, oakLogs, oakStaff, oakWand, pickAxe, rawBeef, rawFish, rawRabbitMeat, rawRatMeat, shears, steelAxe, steelAxe2H, steelBar, steelBoots, steelDagger, steelDaggerOffHand, steelGauntlets, steelHatchet, steelHelmet, steelLegs, steelMace, steelPickAxe, steelShield, steelSword, steelSword2H, steelTorso, steelWarHammer, steelWarHammer2H, thread, tinderBox, tinOre, woodBow, woodLogs, woodStaff, woodWand, woolBoots, woolCloth, woolGloves, woolHat, woolRobeBottom, woolRobeTop, woolTrousers, woolTunic, woolWizardHat, } from "./ItemsDB"
+import { ashes, beefStew, bread, bronzeAxe, bronzeAxe2H, bronzeBar, bronzeDagger, bronzeDaggerOffHand, bronzeGauntlets, bronzeHatchet, bronzeHelmet, bronzeLegs, bronzeMace, bronzePickAxe, bronzeShield, bronzeSword, bronzeSword2H, bronzeTorso, bronzeWarHammer, bronzeWarHammer2H, bucket, burntBeef, burntBread, burntFish, burntRabbitMeat, burntRatMeat, burntStew, coalOre, cookedBeef, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, cowLeather, dough, enchantmentTome, fishingRod, fishStew, flour, hatchet, ironAxe, ironAxe2H, ironBar, ironBoots, ironDagger, ironDaggerOffHand, ironGauntlets, ironHatchet, ironHelmet, ironLegs, ironMace, ironOre, ironPickAxe, ironShield, ironSword, ironSword2H, ironTorso, ironWarHammer, ironWarHammer2H, knife, leatherBoots, leatherCowl, leatherGloves, leatherLegs, leatherTorso, milk, needle, oakBow, oakLogs, oakStaff, oakWand, pickAxe, rabbitStew, ratStew, rawBeef, rawFish, rawRabbitMeat, rawRatMeat, shears, sickle, steelAxe, steelAxe2H, steelBar, steelBoots, steelDagger, steelDaggerOffHand, steelGauntlets, steelHatchet, steelHelmet, steelLegs, steelMace, steelPickAxe, steelShield, steelSword, steelSword2H, steelTorso, steelWarHammer, steelWarHammer2H, thread, tinderBox, tinOre, water, wheat, woodBow, woodLogs, woodStaff, woodWand, woolBoots, woolCloth, woolGloves, woolHat, woolRobeBottom, woolRobeTop, woolTrousers, woolTunic, woolWizardHat, } from "./ItemsDB"
 //crafting
 //alchemy
 export function alchemyRecipes() {
@@ -7,8 +7,43 @@ export function alchemyRecipes() {
 }
 //cooking
 export function cookingRecipes() {
-    var cookingRecipes = [cookRawBeef(), cookRawFish(), cookRawRabbitMeat(), cookRawRatMeat()]
+    var cookingRecipes = [bakeBread(), cookBeefStew(), cookFishStew(), cookRabbitStew(), cookRatStew(), cookRawBeef(), cookRawFish(), cookRawRabbitMeat(), cookRawRatMeat(), makeDough()]
     return cookingRecipes;
+}
+export function bakeBread() {
+    var cook = {
+        Name: "Bake Bread", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25,
+        Input: [{ Item: dough(), Quantity: 1 }], Output: { Item: bread(), Quantity: 1 }, FailureOutput: { Item: burntBread(), Quantity: 1 }
+    }
+    return cook
+}
+export function cookBeefStew() {
+    var cook = {
+        Name: "Cook Beef Stew", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 5, Exp: 125,
+        Input: [{ Item: rawBeef(), Quantity: 1 }, { Item: milk(), Quantity: 1 }], Output: { Item: beefStew(), Quantity: 1 }, FailureOutput: { Item: burntStew(), Quantity: 1 }
+    }
+    return cook
+}
+export function cookFishStew() {
+    var cook = {
+        Name: "Cook Fish Stew", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 5, Exp: 125,
+        Input: [{ Item: rawFish(), Quantity: 1 }, { Item: milk(), Quantity: 1 }], Output: { Item: fishStew(), Quantity: 1 }, FailureOutput: { Item: burntStew(), Quantity: 1 }
+    }
+    return cook
+}
+export function cookRabbitStew() {
+    var cook = {
+        Name: "Cook Rabbit Stew", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 5, Exp: 125,
+        Input: [{ Item: rawRabbitMeat(), Quantity: 1 }, { Item: milk(), Quantity: 1 }], Output: { Item: rabbitStew(), Quantity: 1 }, FailureOutput: { Item: burntStew(), Quantity: 1 }
+    }
+    return cook
+}
+export function cookRatStew() {
+    var cook = {
+        Name: "Cook Rat Stew", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 5, Exp: 125,
+        Input: [{ Item: rawRatMeat(), Quantity: 1 }, { Item: milk(), Quantity: 1 }], Output: { Item: ratStew(), Quantity: 1 }, FailureOutput: { Item: burntStew(), Quantity: 1 }
+    }
+    return cook
 }
 export function cookRawBeef() {
     var cook = {
@@ -35,6 +70,27 @@ export function cookRawRatMeat() {
     var cook = {
         Name: "Cook Raw Rat Meat", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25,
         Input: [{ Item: rawRatMeat(), Quantity: 1 }], Output: { Item: cookedRatMeat(), Quantity: 1 }, FailureOutput: { Item: burntRatMeat(), Quantity: 1 }
+    }
+    return cook
+}
+export function drawWater() {
+    var cook = {
+        Name: "Draw Water", Skill: "Cooking", Tool: null, Verb: "Draw", LevelRequirement: 1, Exp: 1,
+        Input: [{ Item: bucket(), Quantity: 1 }], Output: { Item: water(), Quantity: 1 }, FailureOutput: null
+    }
+    return cook
+}
+export function makeDough() {
+    var cook = {
+        Name: "Make Dough", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 5,
+        Input: [{ Item: flour(), Quantity: 1 }, { Item: water(), Quantity: 1 }], Output: { Item: dough(), Quantity: 1 }, FailureOutput: null
+    }
+    return cook
+}
+export function millWheat() {
+    var cook = {
+        Name: "Cook Raw Rat Meat", Skill: "Cooking", Tool: null, Verb: "Cook", LevelRequirement: 1, Exp: 25,
+        Input: [{ Item: wheat(), Quantity: 1 }], Output: { Item: flour(), Quantity: 1 }, FailureOutput: null
     }
     return cook
 }
@@ -389,8 +445,12 @@ export function smithSteelWarHammer2H() {
 //gathering
 //farming
 export function farmingRecipes() {
-    var farm = [milkCow(), shearSheep()]
+    var farm = [harvestWheat(), milkCow(), shearSheep()]
     return farm;
+}
+export function harvestWheat() {
+    var harvest = { Name: "Harvest Wheat", Skill: "Farming", Tool: sickle(), Verb: "Harvest", LevelRequirement: 1, Exp: 5, Input: [], Output: { Item: wheat(), Quantity: 1 } }
+    return harvest;
 }
 export function milkCow() {
     var milkCow = { Name: "Milk Cow", Skill: "Farming", Tool: null, Verb: "Milk", LevelRequirement: 1, Exp: 25, Input: [{ Item: bucket(), Quantity: 1 }], Output: { Item: milk(), Quantity: 1 } }
@@ -410,7 +470,7 @@ export function fishFish() {
     return fish
 }
 //herblore
-export function herbLoreRecipes(){
+export function herbLoreRecipes() {
     var herb = []
     return herb;
 }
@@ -457,3 +517,4 @@ export function cutWood() {
     var cut = { Name: "Cut Wood", Skill: "Woodcutting", Tool: hatchet(), Verb: "Chop", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: woodLogs(), Quantity: 1 } }
     return cut;
 }
+//utility
