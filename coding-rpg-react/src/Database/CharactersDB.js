@@ -118,26 +118,30 @@ export function construct(name) {
 }
 export function scareCrow() {
     var scareCrow = construct("Scarecrow")
-    scareCrow.CurrentXP = 10;
+    scareCrow.CurrentXP = 25;
     scareCrow.Weaknesses = [fireDamage()]
     return scareCrow;
 }
 //humanoid
 //bandits
 export function bandit() {
-    var bandit = character("Bandit"); bandit.Head = leatherCowl(); bandit.Torso = leatherTorso(); bandit.Legs = leatherLegs(); bandit.Hands = leatherGloves(); bandit.Feet = leatherBoots();
-    bandit.Weapon = ironDagger(); bandit.Offhand = ironDaggerOffHand(); bandit.ItemDrops = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso(), ironDagger(), ironDaggerOffHand()]
+    var bandit = character("Bandit");
+     bandit.Head = leatherCowl(); bandit.Torso = leatherTorso(); bandit.Legs = leatherLegs(); bandit.Hands = leatherGloves(); bandit.Feet = leatherBoots();
+    bandit.Weapon = ironDagger(); bandit.OffHand = ironDaggerOffHand(); bandit.ItemDrops = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso(), ironDagger(), ironDaggerOffHand()]
+    return bandit;
 }
 export function banditArcher() {
     var bandit = character("Bandit Archer"); bandit.Head = leatherCowl(); bandit.Torso = leatherTorso(); bandit.Legs = leatherLegs(); bandit.Hands = leatherGloves(); bandit.Feet = leatherBoots();
     bandit.Weapon = oakBow()
     bandit.ItemDrops = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso(), oakBow()]
+    return bandit;
 }
 export function banditBerseker() {
     var bandit = character("Bandit Berserker"); bandit.Head = leatherCowl(); bandit.Torso = leatherTorso(); bandit.Legs = leatherLegs(); bandit.Hands = leatherGloves(); bandit.Feet = leatherBoots();
     bandit.Weapon = ironAxe2H(); bandit.ItemDrops = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso(), ironAxe2H()]
     bandit.Abilities = [rage()]
     bandit.Tactics = { Tactics(char, allies, enemies, combatLog, round) { Rager(char, allies, enemies, combatLog, round) } }
+    return bandit;
 }
 export function giant() {
     var giant = character("Giant")

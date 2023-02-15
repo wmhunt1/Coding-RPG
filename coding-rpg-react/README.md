@@ -2,7 +2,6 @@
 bugs
 journal doesn't update until after leaving shop
 hp can be healed over maxhp
-sometimes map says wrong place
 had to put map encounters in seprateley
 
 to-do content

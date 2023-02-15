@@ -9,13 +9,18 @@ export function AddToCombatLog(log, message) {
     log.push(message)
 }
 export function CalculateCharWeaponDamage(char, weapon) {
+    var attribute = 0;
     var damage = Math.round((FindSkillInSkillBook(char, weapon.Class).Level) / 10)
     if (weapon.Class.Name === "Short Blade" || weapon.Class.Name === "Ranged") {
-        damage += char.Dexterity + weapon.Damage + char.DexBonus - char.DexPenalty + char.AttackBonus - char.AttackPenalty;
+        attribute = char.Dexterity + char.DexBonus - char.DexPenalty
+    }
+    else if (weapon.Class.Name === "Destruction") {
+        attribute = char.Intelligence + char.IntBonus - char.IntPenalty
     }
     else {
-        damage += char.Strength + weapon.Damage + char.StrBonus - char.StrPenalty + char.AttackBonus - char.AttackPenalty;
+        attribute = char.Strength + char.StrBonus - char.StrPenalty
     }
+    damage += weapon.Damage + attribute + char.AttackBonus - char.AttackPenalty;
     return damage;
 }
 export function CalculateCharArmor(char) {

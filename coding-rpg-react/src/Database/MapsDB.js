@@ -1,7 +1,7 @@
 import { banditHideout, bridge, brokenBridge, daleTown, dwarvenMine, farm, forest, fortDale, giantCave,graveyard,lake, littleRootFarm, lumbermill,mill, mountains, orcVillage, river, road, spiderCave, tenguCamp, whiteScalesLair, witchHut } from "./LocationsDB"
 
 export function startingAdjacentLocations() {
-    var start = ["Bridge", "River", "Farm", "Farm", "Road", "LittleRoot Farm", "River", "River"]
+    var start = ["Bridge", "River", "Road", "Farm", "Road", "LittleRoot Farm", "River", "River"]
     return start;
 }
 export function worldMap(hero) {
