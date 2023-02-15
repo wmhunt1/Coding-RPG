@@ -1,6 +1,6 @@
 import { noCondition, poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
 import { cleave, pierceArmor, rage } from "./AbilitiesDB";
-import { bareBack, bareFinger, bareNeck, bite, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakBow, ironAxe2H, ironSword } from "./ItemsDB";
+import { bareBack, bareFinger, bareNeck, bite, bones, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakBow, ironAxe2H, ironSword, skull, bronzeShield, bronzeMace, bronzeHelmet } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
 import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell, summonRat } from "./SpellsDB"
 import { BasicAttacker, BasicHealer, Rager, spiderSummoner } from "./TacticsDB";
@@ -162,7 +162,7 @@ export function undead(name) {
 }
 export function skeleton() {
     var skeleton = undead("Skeleton")
-    skeleton.Resistances.push(piercingDamage()); skeleton.Resistances.push(slashingDamage()); skeleton.Weaknesses.push(bludeoningDamage()); skeleton.ItemDrops = [woodenclub()]
-    skeleton.Weapon = woodenclub()
+    skeleton.Resistances.push(piercingDamage()); skeleton.Resistances.push(slashingDamage()); skeleton.Weaknesses.push(bludeoningDamage()); skeleton.ItemDrops = [bones(), bronzeHelmet(), bronzeMace(), bronzeShield(), skull()]
+    skeleton.Weapon = bronzeMace(); skeleton.OffHand = bronzeShield(); skeleton.Head = bronzeHelmet()
     return skeleton;
 }

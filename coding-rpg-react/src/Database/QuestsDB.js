@@ -1,6 +1,6 @@
-import { giantRat, scareCrow } from "./CharactersDB"
+import { giantRat, scareCrow, skeleton } from "./CharactersDB"
 import { banditHideoutDungeon, giantCaveDungeon, goblinMine, spiderCaveDungeon } from "./DungeonsDB"
-import { lessonsFromFaldan, silverRingLR, tipsTraderJoe } from "./ItemsDB"
+import { basicHealScroll, lessonsFromFaldan, silverRingLR, tipsTraderJoe } from "./ItemsDB"
 
 export function banditQuest1(hero) {
     var bandit = { Name: "Stop  the Bandits Part 1", Status: "In Progress", Type: "Dungeon", Description: "Find where the bandits' hideout.", Target: null, Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
@@ -18,6 +18,10 @@ export function giantQuest(hero) {
     var giant = { Name: "Of Mice and Minotaurs", Status: "In Progress", Type: "Dungeon", Description: "Save Foreman George from the Giant", Target: giantCaveDungeon(hero), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
     return giant;
 }
+export function ratCellarQuest(hero) {
+    var ratCellarQuest = { Name: "Rats in The Cellar", Status: "In Progress", Type: "Kill", Description: "Kill the Giant Rat in the cellar", Target: giantRat(), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
+    return ratCellarQuest
+}
 export function scareCrowQuest1(hero) {
     var crow = { Name: "Scarecrow Part 1", Status: "In Progress", Type: "Kill", Description: "Kill the possessed scarecrow", Target: scareCrow(), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
     return crow;
@@ -34,7 +38,7 @@ export function scareCrowQuest4(hero) {
     var crow = { Name: "Scarecrow Part 4", Status: "In Progress", Type: "Hidden", Description: "Return ring to Farmer Littleroot", Target: null, Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
     return crow;
 }
-export function ratCellarQuest(hero) {
-    var ratCellarQuest = { Name: "Rats in The Cellar", Status: "In Progress", Type: "Kill", Description: "Kill the Giant Rat in the cellar", Target: giantRat(), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
-    return ratCellarQuest
+export function skeletonQuest(hero) {
+    var quest = { Name: "Putting them to Rest", Status: "In Progress", Type: "Kill", Description: "Kill Skeletons", Target: skeleton(), Objective: 9, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{ Item: basicHealScroll(), Quantity: 1 }] } }
+    return quest;
 }

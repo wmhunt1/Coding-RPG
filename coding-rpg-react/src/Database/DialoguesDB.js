@@ -1,6 +1,6 @@
 import { ferraForgeHeart } from "./CharactersDB";
 import { blackFeather, ironPickAxe, silverRingLR } from "./ItemsDB";
-import { banditQuest1, banditQuest2, dwarvenMineGoblinQuest, giantQuest, ratCellarQuest, scareCrowQuest1, scareCrowQuest2, scareCrowQuest3, scareCrowQuest4 } from "./QuestsDB"
+import { banditQuest1, banditQuest2, dwarvenMineGoblinQuest, giantQuest, ratCellarQuest, scareCrowQuest1, scareCrowQuest2, scareCrowQuest3, scareCrowQuest4, skeletonQuest } from "./QuestsDB"
 import { CalculateTime } from "../Scripts/MapScripts";
 import { FindPartyMember, JoinParty, LeaveParty, PartyRecovery, RemoveGold } from "../Scripts/CharacterScripts";
 import { AddItemToInventory, FindItemInInventory, RemoveItemFromInventory } from "../Scripts/ItemScripts";
@@ -8,6 +8,7 @@ import { CheckForQuest, CompleteQuest, StartQuest } from "../Scripts/QuestScript
 import { DecreaseRelationship, IncreaseRelationship, IncreaseReputation } from "../Scripts/RelationshipAndReputationScript";
 import { ferraForgeheartRelationship } from "./RelationshipsDB";
 import { daleTownReputation, whiteScalesFlockReputation } from "./ReputationsDB";
+import { blessBuff } from "./BuffsDB";
 
 //generic dialogue
 export function innDialogue(hero) {
@@ -39,6 +40,9 @@ export function banditHideoutDialogue(hero) {
 export function daleTownRumors(hero) {
     var dialogue = ""
     var potentialRumors = [witchRumor(hero)]
+    if (CheckForQuest(hero.Journal, banditQuest1(hero)) === null) {
+        potentialRumors.push(banditRumor(hero))
+    }
     if (CheckForQuest(hero.Journal, dwarvenMineGoblinQuest(hero)) === null) {
         potentialRumors.push(goblinRumor(hero))
     }
@@ -51,9 +55,16 @@ export function daleTownRumors(hero) {
     if (CheckForQuest(hero.Journal, scareCrowQuest1(hero)) === null) {
         potentialRumors.push(scareCrowRumor(hero))
     }
+    if (CheckForQuest(hero.Journal, skeletonQuest(hero)) === null) {
+        potentialRumors.push(skeletonRumor(hero))
+    }
     var rumor = potentialRumors[Math.floor(Math.random() * potentialRumors.length)];
     dialogue = rumor;
     return dialogue;
+}
+export function banditRumor(hero) {
+    var dialogue = { Name: "Listen to Rumors", Char: "Townsperson", Conversation: [{ Dialogue: ["Townsperson: The trading post is looking for someone to deal with a bandit problem"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } }] }
+    return dialogue
 }
 export function giantRumor(hero) {
     var dialogue = { Name: "Listen to Rumors", Char: "Townsperson", Conversation: [{ Dialogue: ["Townsperson: The lumbermill's foreman was recently kidnapped by a giant"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } }] }
@@ -71,8 +82,32 @@ export function scareCrowRumor(hero) {
     var dialogue = { Name: "Listen to Rumors", Char: "Townsperson", Conversation: [{ Dialogue: ["Townsperson: Littleroot farm is having problems with a possesed scarecrow."], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } }] }
     return dialogue
 }
+export function skeletonRumor(hero) {
+    var dialogue = { Name: "Listen to Rumors", Char: "Townsperson", Conversation: [{ Dialogue: ["Townsperson: The priest is looking for someone to deal with a skeleton problem."], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } }] }
+    return dialogue
+}
 export function witchRumor(hero) {
     var dialogue = { Name: "Listen to Rumors", Char: "Townsperson", Conversation: [{ Dialogue: ["Townsperson: There's a witch that lives north of town if you're looking for potions."], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } }] }
+    return dialogue
+}
+export function priestDialogue(hero) {
+    var questIndex = CheckForQuest(hero.Journal, skeletonQuest())
+    var dialogue = {
+        Name: "Talk to Priest", Char: "Priest", Conversation: []
+    }
+    if (questIndex === null) {
+        dialogue.Conversation.push({ Dialogue: ["Accept Quest kill Skeletons?"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 0) { StartQuest(hero, skeletonQuest()) } } })
+        dialogue.Conversation.push({ Dialogue: ["Accepted Quest", "Did Not Accept Quest"], Responses: [["Leave", 0]], responseEffect(hero, option) { } })
+        dialogue.Conversation.push({ Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+    }
+    else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "In Progress") {
+        dialogue.Conversation.push({ Dialogue: ["The Priest thanks you"], Responses: [["Finish Quest", 0]], responseEffect(hero, option) { { CompleteQuest(hero, skeletonQuest(hero)); IncreaseReputation(hero, daleTownReputation(), 1) } } })
+        dialogue.Conversation.push({ Dialogue: ["Leave"], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+    }
+    else {
+        dialogue.Conversation.push({ Dialogue: ["The Priest blesses you."], Responses: [["Leave", 0]], responseEffect(hero, option) { blessBuff(3).ApplyBuff(hero) } })
+        dialogue.Conversation.push({ Dialogue: [], Responses: [], responseEffect(hero, option) { } })
+    }
     return dialogue
 }
 //dreaming worker inn

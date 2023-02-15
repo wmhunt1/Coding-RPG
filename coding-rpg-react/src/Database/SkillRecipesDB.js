@@ -1,4 +1,4 @@
-import { ashes, beefStew, bread, bronzeAxe, bronzeAxe2H, bronzeBar, bronzeDagger, bronzeDaggerOffHand, bronzeGauntlets, bronzeHatchet, bronzeHelmet, bronzeLegs, bronzeMace, bronzePickAxe, bronzeShield, bronzeSword, bronzeSword2H, bronzeTorso, bronzeWarHammer, bronzeWarHammer2H, bucket, burntBeef, burntBread, burntFish, burntRabbitMeat, burntRatMeat, burntStew, coalOre, cookedBeef, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, cowLeather, dough, enchantmentTome, fishingRod, fishStew, flour, hatchet, ironAxe, ironAxe2H, ironBar, ironBoots, ironDagger, ironDaggerOffHand, ironGauntlets, ironHatchet, ironHelmet, ironLegs, ironMace, ironOre, ironPickAxe, ironShield, ironSword, ironSword2H, ironTorso, ironWarHammer, ironWarHammer2H, knife, leatherBoots, leatherCowl, leatherGloves, leatherLegs, leatherTorso, milk, needle, oakBow, oakLogs, oakStaff, oakWand, pickAxe, rabbitStew, ratStew, rawBeef, rawFish, rawRabbitMeat, rawRatMeat, shears, sickle, steelAxe, steelAxe2H, steelBar, steelBoots, steelDagger, steelDaggerOffHand, steelGauntlets, steelHatchet, steelHelmet, steelLegs, steelMace, steelPickAxe, steelShield, steelSword, steelSword2H, steelTorso, steelWarHammer, steelWarHammer2H, thread, tinderBox, tinOre, water, wheat, woodBow, woodLogs, woodStaff, woodWand, woolBoots, woolCloth, woolGloves, woolHat, woolRobeBottom, woolRobeTop, woolTrousers, woolTunic, woolWizardHat, } from "./ItemsDB"
+import { ashes, beefStew, blackFeather, bread, bronzeAxe, bronzeAxe2H, bronzeBar, bronzeDagger, bronzeDaggerOffHand, bronzeGauntlets, bronzeHatchet, bronzeHelmet, bronzeLegs, bronzeMace, bronzePickAxe, bronzeShield, bronzeSword, bronzeSword2H, bronzeTorso, bronzeWarHammer, bronzeWarHammer2H, bucket, burntBeef, burntBread, burntFish, burntRabbitMeat, burntRatMeat, burntStew, coalOre, cookedBeef, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, cowLeather, dough, enchantmentTome, fishingRod, fishStew, flour, hatchet, ironAxe, ironAxe2H, ironBar, ironBoots, ironDagger, ironDaggerOffHand, ironGauntlets, ironHatchet, ironHelmet, ironLegs, ironMace, ironOre, ironPickAxe, ironShield, ironSword, ironSword2H, ironTorso, ironWarHammer, ironWarHammer2H, knife, leatherBoots, leatherCowl, leatherGloves, leatherLegs, leatherTorso, milk, needle, oakBow, oakLogs, oakStaff, oakWand, pickAxe, rabbitStew, ratStew, rawBeef, rawFish, rawRabbitMeat, rawRatMeat, shears, sickle, steelAxe, steelAxe2H, steelBar, steelBoots, steelDagger, steelDaggerOffHand, steelGauntlets, steelHatchet, steelHelmet, steelLegs, steelMace, steelPickAxe, steelShield, steelSword, steelSword2H, steelTorso, steelWarHammer, steelWarHammer2H, thread, tinderBox, tinOre, water, wheat, woodBow, woodLogs, woodStaff, woodWand, woolBoots, woolCloth, woolGloves, woolHat, woolRobeBottom, woolRobeTop, woolTrousers, woolTunic, woolWizardHat, } from "./ItemsDB"
 //crafting
 //alchemy
 export function alchemyRecipes() {
@@ -479,8 +479,12 @@ export function huntingRecipes() {
     var hunt = [huntRabbit()]
     return hunt;
 }
+export function gatherBlackFeathers() {
+    var hunt = { Name: "Gather Feathers", Skill: "Hunting", Tool: null, Verb: "Gather", LevelRequirement: 1, Exp: 5, Input: [], Output: { Item: blackFeather(), Quantity: 1 } }
+    return hunt
+}
 export function huntRabbit() {
-    var hunt = { Name: "Hunt Rabbit", Skill: "Hunting", Tool: null, Verb: "Rabbit", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: rawRabbitMeat(), Quantity: 1 } }
+    var hunt = { Name: "Hunt Rabbit", Skill: "Hunting", Tool: null, Verb: "Hunt", LevelRequirement: 1, Exp: 25, Input: [], Output: { Item: rawRabbitMeat(), Quantity: 1 } }
     return hunt
 }
 //mining

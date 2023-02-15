@@ -3,7 +3,7 @@ import { drunkDeBuff } from "./DeBuffsDB";
 import { fireEnchantment, fireImmuneEnchantment, iceResistEnchantment, poisonApplyEnchantment, strengthEnchantment, unEnchanted } from "./EnchantmentsDB";
 import { clothProtection, leatherProtection, metalProtection, naturalProtection, woodProtection } from "./ProtectionTypesDB";
 import { axeSkill, barterSkill, blockSkill, bluntSKill, destructionSkill, heavyArmorSkill, lightArmorSkill, longBladeSkill, rangedSkill, shortBladeSkill, smithingSkill, unArmedSkill, unArmoredSkill } from "./SkillsDB";
-import { fireBall, magicMissile } from "./SpellsDB";
+import { basicHeal, fireBall, magicMissile } from "./SpellsDB";
 import { LearnSpell } from "../Scripts/AbilityAndSpellScripts";
 import { RemoveCondition } from "../Scripts/BuffConditionAndDeBuffScripts";
 import { AddToCharacterLog, EarnXP, HealHP, RecoverMP, RecoverSP } from "../Scripts/CharacterScripts";
@@ -99,6 +99,10 @@ export function staminaPotion() {
 export function allSpellScrolls() {
     var all = [magicMissileScroll()]
     return all;
+}
+export function basicHealScroll() {
+    var scroll = { Name: "Scroll of Basic Heal", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, basicHeal()) } }
+    return scroll;
 }
 export function magicMissileScroll() {
     var magicMissileScroll = { Name: "Scroll of Magic Missile", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, magicMissile()) } }
@@ -601,6 +605,10 @@ export function blackFeather() {
     var feathers = { Name: "Black Feather", Type: "Resource", SubType: "Feather", Cost: 1, Quantity: 1 }
     return feathers
 }
+export function bones() {
+    var bones = { Name: "Bones", Type: "Resource", SubType: "Bones", Cost: 1, Quantity: 1 }
+    return bones;
+}
 export function dough() {
     var dough = { Name: "Dough", Type: "Resource", SubType: "", Cost: 2, Quantity: 1 }
     return dough;
@@ -608,6 +616,10 @@ export function dough() {
 export function flour() {
     var flour = { Name: "Flour", Type: "Resource", SubType: "", Cost: 2, Quantity: 1 }
     return flour;
+}
+export function skull() {
+    var bones = { Name: "Skull", Type: "Resource", SubType: "Bones", Cost: 1, Quantity: 1 }
+    return bones;
 }
 export function water() {
     var water = { Name: "Water", Type: "Resource", SubType: "", Cost: 1, Quantity: 1 }

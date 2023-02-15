@@ -1,5 +1,5 @@
 export function blessBuff(duration) {
-    var buff = { Name: "Bless", Duration: duration, RemainingDuration: duration, ApplyBuff(target) { target.StrBonus += 1; target.DexBonus += 1; target.Buffs.push(this) }, RemoveBuff(target) { target.StrBonus -= 1; target.DexBonus -= 1; } }
+    var buff = { Name: "Bless", Duration: duration, RemainingDuration: duration, ApplyBuff(target) { target.AttackBonus += 2; target.Buffs.push(this) }, RemoveBuff(target) { target.AttackBonus -= 2; } }
     return buff
 }
 export function courageBuff(duration) {
