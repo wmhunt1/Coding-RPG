@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Coding-RPG/static/css/main.e34330fa.css",
-    "main.js": "/Coding-RPG/static/js/main.3ad3fa1f.js",
+    "main.js": "/Coding-RPG/static/js/main.82eef735.js",
     "static/js/787.d6f70141.chunk.js": "/Coding-RPG/static/js/787.d6f70141.chunk.js",
     "index.html": "/Coding-RPG/index.html",
     "main.e34330fa.css.map": "/Coding-RPG/static/css/main.e34330fa.css.map",
-    "main.3ad3fa1f.js.map": "/Coding-RPG/static/js/main.3ad3fa1f.js.map",
+    "main.82eef735.js.map": "/Coding-RPG/static/js/main.82eef735.js.map",
     "787.d6f70141.chunk.js.map": "/Coding-RPG/static/js/787.d6f70141.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e34330fa.css",
-    "static/js/main.3ad3fa1f.js"
+    "static/js/main.82eef735.js"
   ]
 }
