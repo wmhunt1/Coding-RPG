@@ -1,4 +1,5 @@
-import { AddToCharacterLog, CalculateTime } from "./CharacterScripts";
+import { CalculateTime } from "./MapScripts";
+import { AddToCharacterLog} from "./CharacterScripts";
 import { AddItemToInventory, FindItemInInventory, FindItemInInventoryBySubType, RemoveItemFromInventory } from "./ItemScripts"
 
 Array.prototype.remove = function () {

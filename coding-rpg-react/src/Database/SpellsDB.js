@@ -1,12 +1,13 @@
-import { ApplyCondition, HealHP, RemoveCondition } from "../Scripts/CharacterScripts";
-import { AddToCombatLog, ProjectileMagicAttack } from "../Scripts/CombatScripts";
-import { CalculateSpellBonus, ModifySummon } from "../Scripts/SpellScripts";
 import { blessBuff, courageBuff } from "./BuffsDB";
 import { rat, skeleton } from "./CharactersDB";
 import { poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
 import { fireDamage, forceDamage, noDamage, poisonDamage } from "./DamageTypesDB";
 import { baneDeBuff } from "./DeBuffsDB"
 import { alterationSkill, conjurationSkill, destructionSkill, illusionSkill, restorationSkill } from "./SkillsDB";
+import { CalculateSpellBonus, ModifySummon } from "../Scripts/AbilityAndSpellScripts";
+import { HealHP } from "../Scripts/CharacterScripts";
+import { AddToCombatLog, ProjectileMagicAttack } from "../Scripts/CombatScripts";
+import { ApplyCondition, RemoveCondition } from "../Scripts/BuffConditionAndDeBuffScripts";
 
 //alteration spells
 export function poisonSpray() {

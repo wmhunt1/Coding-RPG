@@ -54,3 +54,21 @@ export function CheckIfKnowsSpell(char, spell) {
     }
     return index
 }
+export function LearnAbility(char, abil) {
+    if (char.Abilites.find(x => x.Name === abil.Name)) {
+        char.Log.push(char.Name + " already knows " + abil.Name)
+    }
+    else {
+        char.Abilites.push(abil);
+        char.Log.push(char.Name + " learns " + abil.Name)
+    }
+}
+export function LearnSpell(char, spell) {
+    if (char.SpellBook.find(x => x.Name === spell.Name)) {
+        char.Log.push(char.Name + " already knows " + spell.Name)
+    }
+    else {
+        char.SpellBook.push(spell);
+        char.Log.push(char.Name + " learns " + spell.Name)
+    }
+}

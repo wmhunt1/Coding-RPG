@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { CastSpell } from '../Scripts/SpellScripts';
 import '../App.css';
 import './Game.css'
+import { CastSpell } from "../Scripts/AbilityAndSpellScripts"
 
 function SpellBook(props) {
     const [hero, setHero] = useState(props.hero)

@@ -1,8 +1,8 @@
 import { CheckForQuest } from "../Scripts/QuestScripts"
 import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, tenguCampDialogue } from "./DialoguesDB"
-import { giantCaveDungeon, goblinMine, goblinMineAfterQuest, spiderCaveDungeon } from "./DungeonsDB"
+import { giantCaveDungeon, giantCaveDungeonBeforeAndAfterQuest, goblinMine, goblinMineAfterQuest, spiderCaveDungeon } from "./DungeonsDB"
 import { cowEncounter, giantEncounter, goblinEncounter, scareCrowEncounter, spiderEncounter } from "./EncountersDB"
-import { dwarvenMineGoblinQuest } from "./QuestsDB"
+import { dwarvenMineGoblinQuest, giantQuest } from "./QuestsDB"
 import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, witchHutShop } from "./ShopsDB"
 import { alchemyNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletchNode, herbNode, huntNode, mineNode, woodNode } from "./SkillNodesDB"
 
@@ -35,7 +35,17 @@ export function dwarvenMine(hero, x, y) {
     return dwarvenMine;
 }
 export function giantCave(hero, x, y) {
-    var giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterGiantCaveDungeon(hero), enterGiantEncounter(hero)] }
+    var giant;
+    var questIndex = CheckForQuest(hero.Journal, giantQuest())
+    if (CheckForQuest(hero.Journal, dwarvenMineGoblinQuest()) === null) {
+        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterGiantCaveDungeonBeforeAndAfterQuest(hero), enterGiantEncounter(hero)] }
+    }
+    else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
+        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterGiantCaveDungeonBeforeAndAfterQuest(hero), enterGiantEncounter(hero)] }
+    }
+    else {
+        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterGiantCaveDungeon(hero), enterGiantEncounter(hero)] }
+    }
     return giant;
 }
 export function spiderCave(hero, x, y) {
@@ -93,6 +103,10 @@ export function enterDwarvenMineAfterQuest(hero) {
 }
 export function enterGiantCaveDungeon(hero) {
     var enter = { Name: "Giant Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: giantCaveDungeon(hero), shop: null, skill: null }; return content } }
+    return enter;
+}
+export function enterGiantCaveDungeonBeforeAndAfterQuest(hero) {
+    var enter = { Name: "Giant Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: giantCaveDungeonBeforeAndAfterQuest(hero), shop: null, skill: null }; return content } }
     return enter;
 }
 export function enterSpiderCaveDungeon(hero) {

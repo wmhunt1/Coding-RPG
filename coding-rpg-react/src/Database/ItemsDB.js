@@ -1,12 +1,14 @@
-import { AddToCharacterLog, EarnXP, HealHP, LearnSpell, RecoverMP, RecoverSP, RemoveCondition } from "../Scripts/CharacterScripts";
-import { AddToCombatLog, ProjectileMagicAttack } from "../Scripts/CombatScripts";
-import { EarnSkillXP, FindSkillInSkillBook } from "../Scripts/SkillScripts";
 import { bludeoningDamage, forceDamage, piercingDamage, slashingDamage } from "./DamageTypesDB";
 import { drunkDeBuff } from "./DeBuffsDB";
 import { fireEnchantment, fireImmuneEnchantment, iceResistEnchantment, poisonApplyEnchantment, strengthEnchantment, unEnchanted } from "./EnchantmentsDB";
 import { clothProtection, leatherProtection, metalProtection, naturalProtection, woodProtection } from "./ProtectionTypesDB";
 import { axeSkill, blockSkill, bluntSKill, destructionSkill, heavyArmorSkill, lightArmorSkill, longBladeSkill, rangedSkill, shortBladeSkill, smithingSkill, unArmedSkill, unArmoredSkill } from "./SkillsDB";
 import { fireBall, magicMissile } from "./SpellsDB";
+import { LearnSpell } from "../Scripts/AbilityAndSpellScripts";
+import { RemoveCondition } from "../Scripts/BuffConditionAndDeBuffScripts";
+import { AddToCharacterLog, EarnXP, HealHP, RecoverMP, RecoverSP} from "../Scripts/CharacterScripts";
+import { AddToCombatLog, ProjectileMagicAttack } from "../Scripts/CombatScripts";
+import { EarnSkillXP, FindSkillInSkillBook } from "../Scripts/SkillScripts";
 //consumables
 //battle items
 export function bomb() {

@@ -1,7 +1,7 @@
 import { rage } from "./AbilitiesDB";
-import { BasicAttack } from "../Scripts/CombatScripts"
-import { CastSpell, CheckIfKnowsAbility, CheckIfKnowsSpell, UseAbility } from "../Scripts/SpellScripts";
 import { basicHeal, webSpell } from "./SpellsDB";
+import { CastSpell, CheckIfKnowsAbility, CheckIfKnowsSpell, UseAbility } from "../Scripts/AbilityAndSpellScripts";
+import { BasicAttack } from "../Scripts/CombatScripts"
 
 export function tacticsList() {
     var tacticsList = [{Name:"Basic Attacker", Desc: "Use only basic attacks" }, {Name:"Basic Healer", Desc: "Cast Basic Heal when a ally has <= MaxHP" }, {Name: "Rager", Desc: "Use Rage on first round" }]

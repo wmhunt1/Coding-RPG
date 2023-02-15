@@ -20,6 +20,9 @@ import SpellBook from './SpellBook';
 import Shop from './Shop';
 import Toolbar from './Toolbar';
 import { worldMap } from '../Database/MapsDB';
+import { IncreaseRelationship, IncreaseReputation } from '../Scripts/RelationshipAndReputationScript';
+import { ferraForgeheartRelationship } from '../Database/RelationshipsDB';
+import { daleTownReputation } from '../Database/ReputationsDB';
 
 function Game(props) {
   const [active, setActive] = useState("Game");

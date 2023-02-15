@@ -8,7 +8,7 @@ import { allSkills, barterSkill, blockSkill, bluntSKill, heavyArmorSkill, mining
 import { noTitle } from "./TitlesDB";
 import { bludeoningDamage, fireDamage, lightningDamage, piercingDamage, poisonDamage, slashingDamage } from "./DamageTypesDB";
 import { startingAdjacentLocations } from "./MapsDB";
-import { EarnSkillXP, FindSkillInSkillBook } from "../Scripts/SkillScripts";
+import { FindSkillInSkillBook } from "../Scripts/SkillScripts";
 
 export function character(name) {
     var char = {
@@ -21,7 +21,8 @@ export function character(name) {
         Beauty: 10, BtyBonus: 0, BtyPenalty: 0, Speed: 10, SpdBonus: 0, SpdPenalty: 0,
         Weapon: bareFist(), OffHand: emptyOffHand(), Head: bareHead(), Torso: bareTorso(), Legs: bareLegs(), Hands: bareHands(), Feet: bareFeet(),
         Back: bareBack(), Neck: bareNeck(), Ring: bareFinger(), Inventory: [], Gold: 0, Bank: [], BankGold: 0,
-        Companions: [], Journal: [], Abilities: [], SpellBook: [], SkillBook: allSkills(), Buffs: [], DeBuffs: [], Condition: noCondition(),
+        Companions: [], Journal: [], Abilities: [], SpellBook: [], SkillBook: allSkills(), Reputation: [], Relationships: [],
+        Buffs: [], DeBuffs: [], Condition: noCondition(),
         ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], Immunities: [], Resistances: [], Weaknesses: [],
         Tactics: { Tactics(char, allies, enemies, combatLog, round) { BasicAttacker(char, allies, enemies, combatLog, round) } },
         ItemDrops: [], CurrentLocation: daleTown(this, 0, 0), Map: [daleTown(this, 0, 0)], AdjacentLocations: startingAdjacentLocations(), Time: { Day: 0, Hour: 9, TimeOfDay: "Morning" }

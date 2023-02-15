@@ -36,7 +36,7 @@ function Dungeon(props) {
         }
         if (itemReward !== null) {
 
-            AddItemToInventory(char, char.Inventory, itemReward, itemReward.Quantity)
+            AddItemToInventory(char, char.Inventory, itemReward, itemReward.Quantity, char)
         }
         CheckIfDungeonQuestObjective(char, props.dungeon)
         setHero(char)

@@ -1,9 +1,10 @@
 import { destructionSkill } from "../Database/SkillsDB";
-import { AddGold, AddToCharacterLog, BuffAndDeBuffDuration, EarnXP, Regen, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition, TakeDamage } from "./CharacterScripts";
+import { CastSpell, UseAbility } from "./AbilityAndSpellScripts";
+import { BuffAndDeBuffDuration, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition } from "./BuffConditionAndDeBuffScripts";
+import { AddGold, AddToCharacterLog, EarnXP, Regen, TakeDamage } from "./CharacterScripts";
 import { AddItemToInventory } from "./ItemScripts";
 import { CheckIfKillQuestObjective } from "./QuestScripts";
 import { EarnSkillXP, FindSkillInSkillBook } from "./SkillScripts";
-import { CastSpell, UseAbility } from "./SpellScripts";
 export function AddToCombatLog(log, message) {
     log.push(message)
 }
@@ -25,7 +26,7 @@ export function CalculateCharArmor(char) {
         var blockSkill = Math.round((char.SkillBook[blockSkillIndex].Level / 10))
         shield = char.OffHand.Protection + blockSkill
     }
-    var armor = Math.round((char.Head.Protection + char.Torso.Protection + char.Legs.Protection + char.Hands.Protection + char.Feet.Protection)/5) + shield + armorSkill;
+    var armor = Math.round((char.Head.Protection + char.Torso.Protection + char.Legs.Protection + char.Hands.Protection + char.Feet.Protection) / 5) + shield + armorSkill;
     return armor;
 }
 export function CalculateCharDefenseWithArmor(char, armor) {
@@ -218,7 +219,7 @@ export function CalculateAverageSpeed(team) {
     var speed = 0;
     for (let t = 0; t < team.length; t++) {
         if (team[t].CurrentHP + team[t].TempHP > 0) {
-            speed += team[t].Speed+team[t].SpdBonus-team[t].SpdPenalty;
+            speed += team[t].Speed + team[t].SpdBonus - team[t].SpdPenalty;
         }
     }
     speed /= team.length;

@@ -1,4 +1,29 @@
-import { AddToCharacterLog, CalculateTime } from "./CharacterScripts";
+import { AddToCharacterLog } from "./CharacterScripts";
+export function CalculateTime(char, hours) {
+    char.Time.Hour += hours;
+    if (char.Time.Hour >= 6 && char.Time.Hour < 12) {
+        char.Time.TimeOfDay = "Morning"
+    }
+    else if (char.Time.Hour === 12) {
+        char.Time.TimeOfDay = "Noon"
+    }
+    else if (char.Time.Hour > 12 && char.Time.Hour < 18) {
+        char.Time.TimeOfDay = "Afternoon"
+    }
+    else if (char.Time.Hour >= 18 && char.Time.Hour < 21) {
+        char.Time.TimeOfDay = "Evening"
+    }
+    else if (char.Time.Hour === 0) {
+        char.Time.TimeOfDay = "Midnight"
+    }
+    else {
+        char.Time.TimeOfDay = "Night"
+    }
+    if (char.Time.Hour >= 24) {
+        char.Time.Day++;
+        char.Time.Hour = 0
+    }
+}
 export function findAdjacentLocation(hero, map, x, y) {
     if (map.Locations.find(m => m.XCoord === x && m.YCoord === y)) {
         var mapIndex = map.Locations.findIndex(m => m.XCoord === x && m.YCoord === y);
@@ -26,7 +51,7 @@ export function findAdjacentLocations(hero, map, x, y) {
     var s = findAdjacentLocation(hero, map, x, y - 1)
     hero.AdjacentLocations.push(s)
     //sw
-    var sw = findAdjacentLocation(hero, map, x + 1, y-1)
+    var sw = findAdjacentLocation(hero, map, x + 1, y - 1)
     hero.AdjacentLocations.push(sw)
     //w
     var w = findAdjacentLocation(hero, map, x - 1, y)

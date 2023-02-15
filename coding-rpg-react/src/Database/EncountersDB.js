@@ -3,43 +3,43 @@ import { enslavedKoboldsDialogue, enterGoblinMineDialogue, giantCaveDialogue, sa
 
 //combat encounters
 //beasts
-export function cowEncounter() {
+export function cowEncounter(hero) {
     var cowEncounter = { Name: "Cow", Type: "Combat", Content: [cow()] }
     return cowEncounter;
 }
 //rat
-export function giantRatEncounter() {
+export function giantRatEncounter(hero) {
     var ratEncounter = { Name: "Giant Rat", Type: "Combat", Content: [giantRat(), rat(), rat(), rat()] }
     return ratEncounter
 }
-export function ratEncounter() {
+export function ratEncounter(hero) {
     var ratEncounter = { Name: "Rats", Type: "Combat", Content: [rat(), rat(), rat()] }
     return ratEncounter
 }
-export function spiderEncounter() {
+export function spiderEncounter(hero) {
     var spiderEncounter = { Name: "Spiders", Type: "Combat", Content: [spider()] }
     return spiderEncounter;
 }
 //constructs
-export function scareCrowEncounter() {
+export function scareCrowEncounter(hero) {
     var encounter = { Name: "Scarecrow", Type: "Combat", Content: [scareCrow()] }
     return encounter;
 }
 //humanoids
-export function giantEncounter() {
+export function giantEncounter(hero) {
     var encounter = { Name: "Scarecrow", Type: "Combat", Content: [giant()] }
     return encounter;
 }
 //goblins
-export function bossGoblinEncounter() {
+export function bossGoblinEncounter(hero) {
     var bossGoblinEncounter = { Name: "Boss Goblin", Type: "Combat", Content: [goblinBoss(), goblin(), goblin(), goblin()] }
     return bossGoblinEncounter;
 }
-export function goblinEncounter() {
+export function goblinEncounter(hero) {
     var goblinEncounter = { Name: "Goblins", Type: "Combat", Content: [goblin(), goblin(), goblin()] }
     return goblinEncounter
 }
-export function goblinWithWorgEncounter() {
+export function goblinWithWorgEncounter(hero) {
     var goblinWithWorgEncounter = { Name: "Goblin and Worg", Type: "Combat", Content: [goblin(), worg()] }
     return goblinWithWorgEncounter
 }

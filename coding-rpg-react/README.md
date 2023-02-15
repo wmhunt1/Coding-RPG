@@ -21,18 +21,17 @@ fix tactic selection
 clean up scripts
 dialogue overhaul (more options or branches)
 quest rewards for scarecrowquest (1-2 and 4), goblinmine, giantcave
+more relationship and reputation names
+
 features
+discount based on rep
 Seperate bandit for farming
-Have hidden quests that are filtered to keep track of other stuff
-Or an array of switches 
 Temple with graveyard for skeletons
 Lake with Fort Dale
 Haunted manor with ghosts 
 Hidden quest for if went to witch and met Wyle and family 
 Maybe if 3 quests completed John Dale shows up
 Orc village
-Dale town rep increase for doing quests 
-Maybe just make rep and unsellable item
 Bat cave
 abraham arkwright companion
 Wolf encounter
@@ -47,7 +46,6 @@ combine combat and game logs
 log filter with message types
 factions
 jobs
-relationships
 add time delay for log
 Property
 random encounter that forces combat (set movement as false)

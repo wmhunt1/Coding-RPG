@@ -1,17 +1,15 @@
 import { bossGoblinEncounter, enterGoblinMineEncounter, foremanGeorgeEncounter, giantEncounter, giantRatEncounter, goblinEncounter, goblinWithWorgEncounter, koboldSlavesEncounter, ratEncounter, saveMinersEncounter, saveTenguEncounter, spiderEncounter } from "./EncountersDB";
 import { ale, pickAxe } from "./ItemsDB"
 import { CheckForQuest } from "../Scripts/QuestScripts";
-import { giantQuest, scareCrowQuest3 } from "./QuestsDB";
+import { scareCrowQuest3 } from "./QuestsDB";
+
 
 export function giantCaveDungeon(hero) {
-    var cave;
-    var questIndex = CheckForQuest(hero.Journal, giantQuest())
-    if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
-        cave = { Name: "Giant Cave", Encounters: [], Boss: giantEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: null }
-    }
-    else {
-        cave = { Name: "Giant Cave", Encounters: [], Boss: giantEncounter(), AfterBoss: foremanGeorgeEncounter(hero), GoldReward: 0, ItemReward: null }
-    }
+    var cave = { Name: "Giant Cave", Encounters: [], Boss: giantEncounter(), AfterBoss: foremanGeorgeEncounter(hero), GoldReward: 0, ItemReward: null }
+    return cave
+}
+export function giantCaveDungeonBeforeAndAfterQuest(hero) {
+    var cave = { Name: "Giant Cave", Encounters: [], Boss: giantEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: null }
     return cave
 }
 //had to split these up for some reasons

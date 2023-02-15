@@ -1,6 +1,6 @@
-import { CheckIfBuffApplied } from "../Scripts/CharacterScripts";
-import { ArmorIgnoringAttack, BasicAttack } from "../Scripts/CombatScripts";
 import { rageBuff } from "./BuffsDB";
+import { CheckIfBuffApplied } from "../Scripts/BuffConditionAndDeBuffScripts";
+import { ArmorIgnoringAttack, BasicAttack } from "../Scripts/CombatScripts";
 
 export function cleave() {
     var cleave = { Name: "Cleave", StaminaCost: 10, Description: "Cleaves through all foes with a weapon", AbilityEffect(char, allies, enemies, target, combatLog) { combatLog.push(char.Name + " cleaves through all foes with their weapon"); for (var e = 0; e < enemies.length; e++) { BasicAttack(char, enemies[e], combatLog, char.Weapon) } } }

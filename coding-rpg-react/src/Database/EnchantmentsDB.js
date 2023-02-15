@@ -1,8 +1,9 @@
-import { ApplyCondition, TakeDamage } from "../Scripts/CharacterScripts";
-import { AddToCombatLog, CalculateDamageModifiers } from "../Scripts/CombatScripts";
-import { ApplyOnEquipEffect, ApplyOnUnEquipEffect } from "../Scripts/ItemScripts";
 import { poisonCondition } from "./ConditionsDB";
 import { fireDamage, iceDamage, noDamage, poisonDamage } from "./DamageTypesDB";
+import { ApplyCondition } from "../Scripts/BuffConditionAndDeBuffScripts";
+import { TakeDamage } from "../Scripts/CharacterScripts";
+import { AddToCombatLog, CalculateDamageModifiers } from "../Scripts/CombatScripts";
+import { ApplyOnEquipEffect, ApplyOnUnEquipEffect } from "../Scripts/ItemScripts";
 export function unEnchanted() {
     var UnEnchanted = { Name: "UnEnchanted", Damage: 0, DamageType: noDamage(), OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { }, OnUnEquipEffect(char, item) { } }
     return UnEnchanted
