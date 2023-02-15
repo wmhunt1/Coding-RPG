@@ -8,8 +8,7 @@ export function CalculateSpellBonus(char, spell, attr, attrB, attrP, base) {
 export function ModifySummon(char, allies, summon) {
     var mod = Math.round((FindSkillInSkillBook(char, conjurationSkill()).Level + char.Charisma + char.ChaBonus - char.ChaPenalty) / 10)
     summon.TempHP += mod;
-    summon.StrBonus += mod;
-    summon.DexBonus += mod;
+    summon.AttackBonus += mod;
     allies.push(summon);
 }
 export function CastSpell(char, allies, enemies, target, combatLog, spell) {
@@ -21,7 +20,6 @@ export function CastSpell(char, allies, enemies, target, combatLog, spell) {
             spell.SpellEffect(char, allies, enemies, target, combatLog)
             var skillIndex = char.SkillBook.findIndex(x => x.Name === spell.School.Name);
             EarnSkillXP(char, char.SkillBook[skillIndex], spell.ManaCost)
-
         }
         else {
             combatLog.push(char.Name + "didn't have enough MP to cast  " + spell.Name + " and the spell fizzled.")

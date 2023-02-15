@@ -247,7 +247,6 @@ export function CombatRound(char1, allies, enemies, target, combatLog, option, s
         //allies
         NPCTurn(allies, enemies, combatLog, round, 1)
     }
-
 }
 export function CombatPenalties(hero) {
     AddToCharacterLog(hero, hero.Name + " was Defeated")

@@ -92,7 +92,6 @@ function Shop(props) {
         setHero(hero)
         setGold(hero.Gold)
         props.parentCallback(hero);
-
     }
     function startShopDungeon(hero) {
         setActive("Dungeon")
@@ -145,7 +144,6 @@ function Shop(props) {
         }
         {active === "Node" ? <SkillNode parentCallback={handleCallback} hero={hero} node={node} Back={() => leaveSkill(hero)}></SkillNode> : <div></div>
         }
-
     </div>)
 }
 

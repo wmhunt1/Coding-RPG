@@ -107,7 +107,7 @@ function Dungeon(props) {
                                 <h3>Dungeon Cleared</h3>
 
                                 {rewardClaimed === false ? <div><button onClick={() => claimRewards(hero)}><h3>Claim Rewards</h3></button></div> : <div><h3>Rewards Claimed</h3></div>}
-                                {afterBoss !== null ? <div><button onClick={() => handleEncounter(afterBoss)}><h3>{afterBoss.Name}</h3></button></div>:<div></div>}
+                                {afterBoss !== null ? <div><button onClick={() => handleEncounter(afterBoss)}><h3>{afterBoss.Name}</h3></button></div> : <div></div>}
                             </div> : <div></div>
                     }
                     {active === "Encounter" ? <div> <Combat parentCallback={handleCallback} hero={hero} enemies={activeEncounter} Back={() => checkIfEncounterDefeated(activeEncounter, activeEncounterIndex, encounters, defeated)}></Combat></div> : <div></div>}

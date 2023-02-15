@@ -39,7 +39,6 @@ function CharacterSheet(props) {
     setMaxXP(newChar.MaxXP)
     props.parentCallback(newChar);
   }
-
   const titleList = hero.TitleList.sort((a, b) => a.Name.localeCompare(b.Name)).map((title, index) => <div key={index}>{title.Name} <button onClick={() => handleChangeTitle(hero, title)}>Select Title</button></div>)
   return (
     <div>
@@ -54,7 +53,6 @@ function CharacterSheet(props) {
         <div style={{ display: "inline-block" }}>
           <h4>Level: {hero.Level}, XP: {hero.CurrentXP}/{hero.MaxXP}</h4>
         </div>
-      
         {currentXP >= maxXP ? <LevelUpButton click={() => handleCheckForLevelUp(hero)} ></LevelUpButton> : <div></div>}
         <h4>HP {hero.CurrentHP}/{hero.MaxHP}({hero.HPBonus})({hero.HPPenalty}), MP {hero.CurrentMP}/{hero.MaxMP}({hero.MPBonus})({hero.MPPenalty}), SP {hero.CurrentSP}/{hero.MaxSP}({hero.SPBonus})({hero.SPPenalty})</h4>
         <h4>HPRegen {hero.HPRegen}({hero.HPRegenBonus})({hero.HPRegenPenalty}), MPRegen {hero.MPRegen}({hero.MPRegenBonus})({hero.MPRegenPenalty}), SPRegen {hero.SPRegen}({hero.SPRegenBonus})({hero.SPRegenPenalty})</h4>

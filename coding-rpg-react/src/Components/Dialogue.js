@@ -4,14 +4,13 @@ import { AdvanceConversation } from "../Scripts/DialogueScripts"
 
 export function Dialogue(props) {
     const [hero, setHero] = useState(props.hero)
-    const [char, setChar] = useState(props.talk.Char)
     const [dialogue, setDialogue] = useState(props.talk)
     const [conversationLog, setConversationLog] = useState([props.talk.Conversation[0].Dialogue[0]])
     const [responses, setReponses] = useState(props.talk.Conversation[0].Responses)
     const [progress, setProgress] = useState(0)
-    const responseOptions = responses.map((option, index) => <h4 style={{ display: "inline-block", marginLeft: ".5%", marginRight: ".5%" }} key={index}><button onClick={() => handleResponse(hero, char, dialogue, conversationLog, option, progress)}>{option[0]}</button></h4>)
-    function handleResponse(char1, char2, dialogue, conversation, option, progress) {
-        AdvanceConversation(char1, char2, dialogue, conversation, option, progress)
+    const responseOptions = responses.map((option, index) => <h4 style={{ display: "inline-block", marginLeft: ".5%", marginRight: ".5%" }} key={index}><button onClick={() => handleResponse(hero, dialogue, conversationLog, option, progress)}>{option[0]}</button></h4>)
+    function handleResponse(char1, dialogue, conversation, option, progress) {
+        AdvanceConversation(char1, dialogue, conversation, option, progress)
         setReponses(dialogue.Conversation[progress + 1].Responses)
         setProgress(progress + 1)
         setConversationLog(conversation)
@@ -19,8 +18,7 @@ export function Dialogue(props) {
         props.parentCallback(char1);
     }
     return (<div>
-        <div><h3>{char}</h3></div>
-
+        <div><h3>{dialogue.Name}</h3></div>
         <div>
             <div style={{ marginLeft: "25%", marginRight: "25%", width: "auto" }}>
                 <Log log={conversationLog} logName="Conversation"></Log>

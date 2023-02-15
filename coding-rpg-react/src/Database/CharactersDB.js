@@ -1,6 +1,6 @@
 import { noCondition, poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
 import { cleave, pierceArmor, rage } from "./AbilitiesDB";
-import { bareBack, bareFinger, bareNeck, bite, bones, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakBow, ironAxe2H, ironSword, skull, bronzeShield, bronzeMace, bronzeHelmet } from "./ItemsDB";
+import { bareBack, bareFinger, bareNeck, bite, bones, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakBow, ironAxe2H, ironSword, skull, bronzeShield, bronzeMace, bronzeHelmet, wolfFur, clawSlash, bearFur } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
 import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell, summonRat } from "./SpellsDB"
 import { BasicAttacker, BasicHealer, Rager, spiderSummoner } from "./TacticsDB";
@@ -30,7 +30,7 @@ export function character(name) {
 }
 export function hero() {
     var hero = character("Hero")
-    hero.CurrentXP = 0;
+    hero.CurrentXP = 0; hero.Strength = 20;
     hero.Log = ["Starting Game"]; hero.Weapon = bronzeSword(); hero.Head = hat(); hero.Torso = tunic(); hero.Legs = trousers(); hero.Hands = gloves(); hero.Feet = shoes(); hero.Inventory = [dogCollar()]; hero.Gold = 5; hero.Companions = [dog("Dog")]; hero.Abilities = [cleave(), pierceArmor(), rage()]; hero.SpellBook = [basicHeal(), curePoison(), fireBall(), magicMissile(), poisonSpray(), sleepSpell(), summonRat()]; hero.Weaknesses = [fireDamage()]; hero.Weaknesses[0].Source = hero.Torso;
     hero.Journal = [];
     hero.Inventory = [ironSword()]
@@ -72,6 +72,11 @@ export function beast(name) {
     beast.Weapon = bite();
     return beast
 }
+export function bear() {
+    var bear = beast("Bear")
+    bear.CurrentHP = 20; bear.MaxHP = 20; bear.Strength = 14; bear.Constitution = 14; bear.Weapon = clawSlash(); bear.ItemDrops = [bearFur()]
+    return bear;
+}
 export function cow() {
     var cow = beast("Cow")
     cow.Weapon = slam(); cow.ItemDrops = [cowLeather(), rawBeef()]
@@ -79,8 +84,6 @@ export function cow() {
 }
 export function dog(name) {
     var dog = beast(name)
-    //dog.Neck = dogCollar();
-    dog.Abilities = [rage()]
     return dog;
 }
 export function giantRat() {
@@ -105,6 +108,10 @@ export function spider() {
     spider.CurrentXP = 10; spider.Dexterity = 12; spider.Speed = 12; spider.Weapon = poisonedBite(); spider.ConditionImmunities = [webCondition(), poisonCondition()]; spider.Immunities(poisonDamage()); spider.ItemDrops = [spiderSilkCloth()]
     return spider;
 }
+export function wolf() {
+    var wolf = beast("Wolf"); wolf.Dexterity = 12; wolf.Speed = 12; wolf.Weapon = bite(); wolf.ItemDrops = [wolfFur()]
+    return wolf;
+}
 export function worg() {
     var worg = beast("Worg")
     worg.CurrentXP = 10; worg.Strength = 14; worg.CurrentHP = 20; worg.MaxHP = 20;
@@ -126,7 +133,7 @@ export function scareCrow() {
 //bandits
 export function bandit() {
     var bandit = character("Bandit");
-     bandit.Head = leatherCowl(); bandit.Torso = leatherTorso(); bandit.Legs = leatherLegs(); bandit.Hands = leatherGloves(); bandit.Feet = leatherBoots();
+    bandit.Head = leatherCowl(); bandit.Torso = leatherTorso(); bandit.Legs = leatherLegs(); bandit.Hands = leatherGloves(); bandit.Feet = leatherBoots();
     bandit.Weapon = ironDagger(); bandit.OffHand = ironDaggerOffHand(); bandit.ItemDrops = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso(), ironDagger(), ironDaggerOffHand()]
     return bandit;
 }

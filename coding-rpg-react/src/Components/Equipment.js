@@ -53,7 +53,6 @@ function Equipment(props) {
                 <h5>Hands - Name: {hands.Name}, Protection: {hands.Protection}, Protection Type: {hands.ProtectionType.Name} <button onClick={() => handleUnEquip(hero, log.Inventory, hands, log)}>UnEquip</button></h5>
                 <h5>Feet - Name: {feet.Name}, Protection: {feet.Protection}, Protection Type: {feet.ProtectionType.Name} <button onClick={() => handleUnEquip(hero, log.Inventory, feet, log)}>UnEquip</button></h5>
             </div>
-
             {/* <button style={{ marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button> */}
         </div>
     );

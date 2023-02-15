@@ -394,6 +394,10 @@ export function oakWand() {
     var wand = { Name: "Oak Wand", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: destructionSkill(), Damage: 3, DamageType: forceDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
     return wand;
 }
+export function willowWand() {
+    var wand = { Name: "Willow Wand", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: destructionSkill(), Damage: 4, DamageType: forceDamage(), Cost: 20, Quantity: 1, Enchantment: unEnchanted() }
+    return wand;
+}
 export function woodWand() {
     var wand = { Name: "Wooden Wand", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: destructionSkill(), Damage: 2, DamageType: forceDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return wand;
@@ -401,6 +405,10 @@ export function woodWand() {
 //2h magic weapons
 export function oakStaff() {
     var staff = { Name: "Oak Staff", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: destructionSkill(), Damage: 4, DamageType: forceDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
+    return staff;
+}
+export function willowStaff() {
+    var staff = { Name: "Willow Staff", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: destructionSkill(), Damage: 5, DamageType: forceDamage(), Cost: 20, Quantity: 1, Enchantment: unEnchanted() }
     return staff;
 }
 export function woodStaff() {
@@ -483,6 +491,10 @@ export function bite() {
     var bite = { Name: "Bite", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: unArmedSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bite;
 }
+export function clawSlash() {
+    var slash = { Name: "Slam", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: unArmedSkill(), Damage: 2, DamageType: slashingDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    return slash;
+}
 export function poisonedBite() {
     var bite = { Name: "Poisoned Bite", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: unArmedSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 0, Quantity: 1, Enchantment: poisonApplyEnchantment() }
     return bite;
@@ -556,6 +568,10 @@ export function steelWarHammer2H() {
 //ranged weapon
 export function oakBow() {
     var bow = { Name: "Oak Bow", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: rangedSkill(), Damage: 2, DamageType: piercingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
+    return bow;
+}
+export function willowBow() {
+    var bow = { Name: "Willow Bow", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: rangedSkill(), Damage: 3, DamageType: piercingDamage(), Cost: 20, Quantity: 1, Enchantment: unEnchanted() }
     return bow;
 }
 export function woodBow() {
@@ -638,6 +654,15 @@ export function woolCloth() {
     var cloth = { Name: "Wool", Type: "Resource", SubType: "Cloth", Cost: 1, Quantity: 1 }
     return cloth;
 }
+//fur
+export function bearFur() {
+    var fur = { Name: "Bear Fur", Type: "Resource", SubType: "Fur", Cost: 10, Quantity: 1 }
+    return fur;
+}
+export function wolfFur() {
+    var fur = { Name: "Wolf Fur", Type: "Resource", SubType: "Fur", Cost: 5, Quantity: 1 }
+    return fur;
+}
 //leather
 export function cowLeather() {
     var leather = { Name: "Cow Leather", Type: "Resource", SubType: "Leather", Cost: 1, Quantity: 1 }
@@ -695,6 +720,10 @@ export function rawRatMeat() {
 //wood
 export function oakLogs() {
     var wood = { Name: "Oak Logs", Type: "Resource", SubType: "Logs", Cost: 4, Quantity: 1 }
+    return wood;
+}
+export function willowLogs() {
+    var wood = { Name: "Willow Logs", Type: "Resource", SubType: "Logs", Cost: 8, Quantity: 1 }
     return wood;
 }
 export function woodLogs() {

@@ -30,7 +30,6 @@ export function LevelUpSkill(char, skill) {
     AddToCharacterLog(char, char.Name + " has reached " + skill.Name + " level " + skill.Level);
 }
 export function CheckForSkillLevelUp(skill) {
-
     if (skill.CurrentXP >= skill.MaxXP) {
         return true
     }
@@ -111,7 +110,6 @@ export function UseSkillRecipe(char, skill, recipe) {
             CalculateTime(char, 1)
         }
     }
-
     else {
         if (toolIndex === null) {
             AddToCharacterLog(char, char.Name + " requires " + recipe.Tool.Name + " to " + recipe.Name)

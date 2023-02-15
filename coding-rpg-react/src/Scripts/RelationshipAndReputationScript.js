@@ -1,7 +1,6 @@
 import { AddToCharacterLog } from "./CharacterScripts";
 
 export function FindRelationship(hero, rel) {
-
     var index = null
     if (hero.Relationships.find(x => x.Name === rel.Name)) {
         index = hero.Relationships.findIndex(x => x.Name === rel.Name);
@@ -41,7 +40,6 @@ export function DecreaseRelationship(hero, rel, dec) {
         hero.Relationships.push(rel)
         var index2 = FindRelationship(hero, rel)
         hero.Relationships[index2].DisApproval -= dec;
-
     }
     else {
         hero.Relationships[index].DisApproval -= dec;

@@ -1,5 +1,5 @@
 import { CheckForQuest } from "../Scripts/QuestScripts"
-import { bandit, cow, giant, goblin, scareCrow, skeleton, spider } from './CharactersDB'
+import { bandit, bear, cow, giant, goblin, scareCrow, skeleton, spider, wolf } from './CharactersDB'
 import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, priestDialogue, tenguCampDialogue } from "./DialoguesDB"
 import { banditHideoutDungeon, giantCaveDungeon, giantCaveDungeonBeforeAndAfterQuest, goblinMine, goblinMineAfterQuest, spiderCaveDungeon } from "./DungeonsDB"
 import { dwarvenMineGoblinQuest, giantQuest } from "./QuestsDB"
@@ -7,6 +7,10 @@ import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, joeTheTrader
 import { alchemyNode, blackFeatherNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletchNode, herbNode, huntNode, millNode, mineNode, sheepNode, waterNode, wellNode, woodNode } from "./SkillNodesDB"
 
 //locations
+export function bearCave(hero, x, y) {
+    var cave = { LocationName: "Bear Cave", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterBearEncounter(hero)] }
+    return cave;
+}
 export function lumbermill(hero, x, y) {
     var lumber = { LocationName: "Lumbermill", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterLumbermillDialogue(hero), enterWoodNode(hero)] }
     return lumber;
@@ -18,6 +22,11 @@ export function littleRootFarm(hero, x, y) {
 export function tenguCamp(hero, x, y) {
     var camp = { LocationName: "Strange Camp", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterBlackFeatherNode(hero), enterTenguCampDialogue(hero)] }
     return camp;
+}
+export function wolfDen(hero, x, y)
+{
+    var cave = { LocationName: "Wolf Den", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterWolfEncounter(hero)] }
+    return cave;
 }
 //dungeon
 export function banditHideout(hero, x, y) {
@@ -170,6 +179,10 @@ export function enterBanditEncounter(hero) {
     var encounter = { Name: "Kill Bandits", enterLocation(hero) { var content = { active: "Combat", combat: [bandit(), bandit(), bandit()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
+export function enterBearEncounter(hero) {
+    var encounter = { Name: "Kill Bear", enterLocation(hero) { var content = { active: "Combat", combat: [bear()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    return encounter;
+}
 export function enterCowEncounter(hero) {
     var enterCowEncounter = { Name: "Kill Cows", enterLocation(hero) { var content = { active: "Combat", combat: [cow()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return enterCowEncounter
@@ -192,6 +205,10 @@ export function enterSkeletonEncounter(hero) {
 }
 export function enterSpiderEncounter(hero) {
     var encounter = { Name: "Kill Spiders", enterLocation(hero) { var content = { active: "Combat", combat: [spider(), spider(), spider()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    return encounter;
+}
+export function enterWolfEncounter(hero) {
+    var encounter = { Name: "Kill Wolves", enterLocation(hero) { var content = { active: "Combat", combat: [wolf(), wolf(), wolf()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
 //enter shops

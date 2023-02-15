@@ -30,7 +30,6 @@ export function CheckIfBuffApplied(char, buff, combatLog) {
     else {
         buff.ApplyBuff(char)
     }
-
 }
 export function CheckIfDeBuffApplied(char, deBuff, combatLog) {
     if (char.DeBuffs.find(x => x.Name !== deBuff.Name)) {

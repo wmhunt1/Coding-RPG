@@ -89,5 +89,4 @@ function Bank(props) {
 
     </div>)
 }
-
 export default Bank

@@ -52,7 +52,6 @@ function Game(props) {
       }
     }
   }
-
   return (
     <div>
       <div>

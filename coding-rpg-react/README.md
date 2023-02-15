@@ -12,27 +12,27 @@ retrieve sheepscale's stolen sheep  (quest, monsters, dialogue, dungeon, locatio
 deliver letter to ambrosius quest (quest, monsters, dialogue, dungeon, location, place on map)
 
 fixes/changes
+Use rs3 tiers for crafting?
 write more than generic dialogue
 balance level requiurements and xp
 fix tactic selection
 clean up scripts
 dialogue overhaul (more options or branches)
 quest rewards for scarecrowquest (1-2 and 4), giantquest
-more relationship and reputation names
+dungeon reward giantcave, goblinMine, better ratcellar reward, spidecave
 fix nested redundant block
 
 features
+wolf/bear fur armor lv 5?
 enchanting reagent
 Haunted manor with ghosts 
 Hidden quest for if went to witch and met Wyle and family 
 Maybe if 3 quests completed John Dale shows up
 Bat cave
 abraham arkwright companion
-Wolf encounter
 Talking tree
 Quincy companion
 Wyle companion
-Use rs3 tiers for crafting?
 companions get jobs that give new abilities or change tactics
 feats/perks
 save/load via json
