@@ -7,3 +7,5 @@ In Combat even if you use a multi target ability or spell still click Target on 
 Armor Protection Type Notes
 Cloth gives weakness to Fire
 Metal gives weakness to Lightning
+
+map is in mapsdb.js
