@@ -1,7 +1,7 @@
 import { CheckForQuest } from "../Scripts/QuestScripts"
+import { bandit, cow, giant, goblin, scareCrow, skeleton, spider } from './CharactersDB'
 import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, priestDialogue, tenguCampDialogue } from "./DialoguesDB"
 import { banditHideoutDungeon, giantCaveDungeon, giantCaveDungeonBeforeAndAfterQuest, goblinMine, goblinMineAfterQuest, spiderCaveDungeon } from "./DungeonsDB"
-import { banditEncounter, cowEncounter, giantEncounter, goblinEncounter, scareCrowEncounter, skeletonEncounter, spiderEncounter } from "./EncountersDB"
 import { dwarvenMineGoblinQuest, giantQuest } from "./QuestsDB"
 import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, joeTheTradersTradingPost, witchHutShop } from "./ShopsDB"
 import { alchemyNode, blackFeatherNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletchNode, herbNode, huntNode, millNode, mineNode, sheepNode, waterNode, wellNode, woodNode } from "./SkillNodesDB"
@@ -12,7 +12,7 @@ export function lumbermill(hero, x, y) {
     return lumber;
 }
 export function littleRootFarm(hero, x, y) {
-    var farm = { LocationName: "Little Root Farm", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterCowEncounter(), enterFarmNode(hero), enterLittleRootFarmDialogue(hero), enterScareCrowEncounter(hero)] }
+    var farm = { LocationName: "Little Root Farm", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterCowEncounter(hero), enterFarmNode(hero), enterLittleRootFarmDialogue(hero), enterScareCrowEncounter(hero)] }
     return farm;
 }
 export function tenguCamp(hero, x, y) {
@@ -21,20 +21,20 @@ export function tenguCamp(hero, x, y) {
 }
 //dungeon
 export function banditHideout(hero, x, y) {
-    var bandit = { LocationName: "Bandit Hideout", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterBanditEncounter(), enterBanditHideout(hero)] }
+    var bandit = { LocationName: "Bandit Hideout", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterBanditEncounter(hero), enterBanditHideout(hero)] }
     return bandit;
 }
 export function dwarvenMine(hero, x, y) {
     var dwarvenMine;
-    var questIndex = CheckForQuest(hero.Journal, dwarvenMineGoblinQuest())
-    if (CheckForQuest(hero.Journal, dwarvenMineGoblinQuest()) === null) {
+    var questIndex = CheckForQuest(hero, dwarvenMineGoblinQuest())
+    if (CheckForQuest(hero, dwarvenMineGoblinQuest()) === null) {
         dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterMineNode(hero)] }
     }
     else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
-        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDwarvenMine(hero), enterGoblinEncounter(), enterMineNode(hero)] }
+        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDwarvenMine(hero), enterGoblinEncounter(hero), enterMineNode(hero)] }
     }
     else {
-        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDwarvenMine(hero), enterGoblinEncounter(), enterMineNode(hero)] }
+        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDwarvenMine(hero), enterGoblinEncounter(hero), enterMineNode(hero)] }
     }
     return dwarvenMine;
 }
@@ -44,20 +44,19 @@ export function fortDale(hero, x, y) {
 }
 export function giantCave(hero, x, y) {
     var giant;
-    var questIndex = CheckForQuest(hero.Journal, giantQuest())
-    if (CheckForQuest(hero.Journal, dwarvenMineGoblinQuest()) === null) {
-        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterGiantCaveDungeonBeforeAndAfterQuest(hero), enterGiantEncounter()] }
+    if (CheckForQuest(hero, giantQuest()) === null) {
+        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterGiantCaveDungeonBeforeAndAfterQuest(hero), enterGiantEncounter(hero)] }
     }
-    else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
-        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterGiantCaveDungeonBeforeAndAfterQuest(hero), enterGiantEncounter()] }
+    else if (hero.Journal[CheckForQuest(hero, giantQuest())].Status === "Completed") {
+        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterGiantCaveDungeonBeforeAndAfterQuest(hero), enterGiantEncounter(hero)] }
     }
     else {
-        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterGiantCaveDungeon(hero), enterGiantEncounter()] }
+        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterGiantCaveDungeon(hero), enterGiantEncounter(hero)] }
     }
     return giant;
 }
 export function spiderCave(hero, x, y) {
-    var spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterSpiderCaveDungeon(hero), enterSpiderEncounter()] }
+    var spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterSpiderCaveDungeon(hero), enterSpiderEncounter(hero)] }
     return spider;
 }
 //shop
@@ -88,7 +87,7 @@ export function brokenBridge(hero, x, y) {
     return river;
 }
 export function farm(hero, x, y) {
-    var farm = { LocationName: "Farm", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterCowEncounter(), enterFarmNode(hero)] }
+    var farm = { LocationName: "Farm", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterCowEncounter(hero), enterFarmNode(hero)] }
     return farm;
 }
 export function forest(hero, x, y) {
@@ -96,7 +95,7 @@ export function forest(hero, x, y) {
     return forest;
 }
 export function graveyard(hero, x, y) {
-    var grave = { LocationName: "Graveyard", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterSkeletonEncounter()] }
+    var grave = { LocationName: "Graveyard", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterSkeletonEncounter(hero)] }
     return grave;
 }
 export function lake(hero, x, y) {
@@ -167,32 +166,32 @@ export function enterTenguCampDialogue(hero) {
     return enter
 }
 //enter encounters
-export function enterBanditEncounter() {
-    var encounter = { Name: "Kill Bandits", enterLocation(hero) { var content = { active: "Combat", combat: banditEncounter(), dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+export function enterBanditEncounter(hero) {
+    var encounter = { Name: "Kill Bandits", enterLocation(hero) { var content = { active: "Combat", combat: [bandit(), bandit(), bandit()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
-export function enterCowEncounter() {
-    var enterCowEncounter = { Name: "Kill Cows", enterLocation(hero) { var content = { active: "Combat", combat: cowEncounter(), dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+export function enterCowEncounter(hero) {
+    var enterCowEncounter = { Name: "Kill Cows", enterLocation(hero) { var content = { active: "Combat", combat: [cow()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return enterCowEncounter
 }
-export function enterGiantEncounter() {
-    var encounter = { Name: "Kill Giants", enterLocation(hero) { var content = { active: "Combat", combat: giantEncounter(), dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+export function enterGiantEncounter(hero) {
+    var encounter = { Name: "Kill Giants", enterLocation(hero) { var content = { active: "Combat", combat: [giant()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
-export function enterGoblinEncounter() {
-    var encounter = { Name: "Kill Goblins", enterLocation(hero) { var content = { active: "Combat", combat: goblinEncounter(), dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+export function enterGoblinEncounter(hero) {
+    var encounter = { Name: "Kill Goblins", enterLocation(hero) { var content = { active: "Combat", combat: [goblin(), goblin(), goblin()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
-export function enterScareCrowEncounter() {
-    var encounter = { Name: "Kill Scarecrows", enterLocation(hero) { var content = { active: "Combat", combat: scareCrowEncounter(), dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+export function enterScareCrowEncounter(hero) {
+    var encounter = { Name: "Kill Scarecrows", enterLocation(hero) { var content = { active: "Combat", combat: [scareCrow()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
-export function enterSkeletonEncounter() {
-    var encounter = { Name: "Kill Skeletons", enterLocation(hero) { var content = { active: "Combat", combat: skeletonEncounter(), dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+export function enterSkeletonEncounter(hero) {
+    var encounter = { Name: "Kill Skeletons", enterLocation(hero) { var content = { active: "Combat", combat: [skeleton(), skeleton(), skeleton()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
-export function enterSpiderEncounter() {
-    var encounter = { Name: "Kill Spiders", enterLocation(hero) { var content = { active: "Combat", combat: spiderEncounter(), dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+export function enterSpiderEncounter(hero) {
+    var encounter = { Name: "Kill Spiders", enterLocation(hero) { var content = { active: "Combat", combat: [spider(), spider(), spider()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
 //enter shops

@@ -2,12 +2,12 @@ import { giantRat, scareCrow, skeleton } from "./CharactersDB"
 import { banditHideoutDungeon, giantCaveDungeon, goblinMine, spiderCaveDungeon } from "./DungeonsDB"
 import { basicHealScroll, lessonsFromFaldan, silverRingLR, tipsTraderJoe } from "./ItemsDB"
 
+// export function banditQuest1(hero) {
+//     var bandit = { Name: "Stop  the Bandits Part 1", Status: "In Progress", Type: "Dungeon", Description: "Find where the bandits' hideout.", Target: null, Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
+//     return bandit;
+// }
 export function banditQuest1(hero) {
-    var bandit = { Name: "Stop  the Bandits Part 1", Status: "In Progress", Type: "Dungeon", Description: "Find where the bandits' hideout.", Target: null, Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
-    return bandit;
-}
-export function banditQuest2(hero) {
-    var bandit = { Name: "Stop the Bandits Part 2", Status: "In Progress", Type: "Dungeon", Description: "Clear out the bandit hideout.", Target: banditHideoutDungeon(hero), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{ Item: tipsTraderJoe(), Quantity: 1 }] } }
+    var bandit = { Name: "Stop the Bandits", Status: "In Progress", Type: "Dungeon", Description: "Clear out the bandit hideout.", Target: banditHideoutDungeon(hero), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{ Item: tipsTraderJoe(), Quantity: 1 }] } }
     return bandit;
 }
 export function dwarvenMineGoblinQuest(hero) {

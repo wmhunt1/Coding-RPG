@@ -12,7 +12,7 @@ import { FindSkillInSkillBook } from "../Scripts/SkillScripts";
 
 export function character(name) {
     var char = {
-        Name: name, Title: noTitle(), TitleList: [noTitle()], Log: [], Level: 1, CurrentXP: 0, MaxXP: 50, CurrentHP: 10, MaxHP: 10, HPBonus: 0, HPPenalty: 0, TempHP: 0, HPRegen: 0, HPRegenBonus: 0, HPRegenPenalty: 0,
+        Name: name, Title: noTitle(), TitleList: [noTitle()], Log: [], Level: 1, CurrentXP: 10, MaxXP: 50, CurrentHP: 10, MaxHP: 10, HPBonus: 0, HPPenalty: 0, TempHP: 0, HPRegen: 0, HPRegenBonus: 0, HPRegenPenalty: 0,
         CurrentMP: 10, MaxMP: 10, MPBonus: 0, MPPenalty: 0, MPRegen: 0, MPRegenBonus: 0, MPRegenPenalty: 0,
         CurrentSP: 10, MaxSP: 10, SPBonus: 0, SPPenalty: 0, SPRegen: 0, SPRegenBonus: 0, SPRegenPenalty: 0,
         Strength: 10, StrBonus: 0, StrPenalty: 0, Constitution: 10, ConBonus: 0, ConPenalty: 0, Dexterity: 10, DexBonus: 0, DexPenalty: 0,
@@ -30,6 +30,7 @@ export function character(name) {
 }
 export function hero() {
     var hero = character("Hero")
+    hero.CurrentXP = 0;
     hero.Log = ["Starting Game"]; hero.Weapon = bronzeSword(); hero.Head = hat(); hero.Torso = tunic(); hero.Legs = trousers(); hero.Hands = gloves(); hero.Feet = shoes(); hero.Inventory = [dogCollar()]; hero.Gold = 5; hero.Companions = [dog("Dog")]; hero.Abilities = [cleave(), pierceArmor(), rage()]; hero.SpellBook = [basicHeal(), curePoison(), fireBall(), magicMissile(), poisonSpray(), sleepSpell(), summonRat()]; hero.Weaknesses = [fireDamage()]; hero.Weaknesses[0].Source = hero.Torso;
     hero.Journal = [];
     hero.Inventory = [ironSword()]
@@ -38,6 +39,7 @@ export function hero() {
 //companions
 export function ferraForgeHeart() {
     var hero = character("Ferra Forgeheart")
+    hero.CurrentXP = 0;
     hero.Weapon = ironWarHammer(); hero.OffHand = ironShield(); hero.Head = ironHelmet(); hero.Torso = ironTorso(); hero.Legs = ironLegs(); hero.Hands = ironGauntlets(); hero.Feet = ironBoots(); hero.SpellBook = [basicHeal(), curePoison()]; hero.Weaknesses = [lightningDamage()]; hero.Weaknesses[0].Source = hero.Torso;
     //hero.DexPenalty = 3; hero.SpdPenalty = 3; 
     hero.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
@@ -140,8 +142,8 @@ export function banditBerseker() {
 export function giant() {
     var giant = character("Giant")
     giant.Weapon = woodenclub();
-    giant.CurrentSP = 100;
-    giant.StrBonus = 20;
+    giant.CurrentXP = 100;
+    giant.StrBonus = 10;
     return giant;
 }
 export function goblin() {
@@ -157,7 +159,7 @@ export function goblinBoss() {
 //undead
 export function undead(name) {
     var undead = character(name)
-    undead.ConditionImmunities(poisonCondition()); undead.ConditionImmunities(sleepCondition())
+    undead.ConditionImmunities.push(poisonCondition()); undead.ConditionImmunities.push(sleepCondition())
     return undead;
 }
 export function skeleton() {

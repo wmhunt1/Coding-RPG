@@ -1,15 +1,15 @@
 import { AddGold, AddToCharacterLog } from "./CharacterScripts";
 import { AddItemToInventory } from "./ItemScripts";
 
-export function CheckForQuest(journal, quest) {
+export function CheckForQuest(hero, quest) {
     var index = null
-    if (journal.find(x => x.Name === quest.Name)) {
-        index = journal.findIndex(x => x.Name === quest.Name);
+    if (hero.Journal.find(x => x.Name === quest.Name)) {
+        index = hero.Journal.findIndex(x => x.Name === quest.Name);
     }
     return index
 }
 export function StartQuest(char, quest) {
-    var questIndex = CheckForQuest(char.Journal, quest)
+    var questIndex = CheckForQuest(char, quest)
     if (questIndex === null) {
         char.Journal.push(quest);
         AddToCharacterLog(char, char.Name + " Has Accepted Quest: " + quest.Name)
@@ -25,7 +25,7 @@ export function GetQuestReward(char, quest) {
     }
 }
 export function CompleteQuest(char, quest) {
-    var questIndex = CheckForQuest(char.Journal, quest)
+    var questIndex = CheckForQuest(char, quest)
     if (questIndex !== null) {
         var updateQuest = char.Journal[questIndex]
         updateQuest.Status = "Completed"
@@ -34,7 +34,7 @@ export function CompleteQuest(char, quest) {
     }
 }
 export function UpdateQuestProgress(char, quest, objective) {
-    var questIndex = CheckForQuest(char.Journal, quest)
+    var questIndex = CheckForQuest(char, quest)
     if (questIndex !== null) {
         var updateQuest = char.Journal[questIndex]
         updateQuest.ObjectiveProgress += objective;

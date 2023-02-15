@@ -1,5 +1,5 @@
 import { bandit, banditArcher, banditBerseker, cow, giant, giantRat, giantSpider, goblin, goblinBoss, rat, scareCrow, skeleton, spider, worg } from "./CharactersDB";
-import { banditHideoutDialogue, enslavedKoboldsDialogue, enterGoblinMineDialogue, giantCaveDialogue, saveMinersDialogue, spiderCaveDialogue } from "./DialoguesDB";
+import { enslavedKoboldsDialogue, enterGoblinMineDialogue, giantCaveDialogue, saveMinersDialogue, spiderCaveDialogue } from "./DialoguesDB";
 
 //combat encounters
 //beasts
@@ -82,10 +82,10 @@ export function skeletonEncounter() {
     return encounter;
 }
 //dialogue encounters
-export function banditHideoutDialogueEncounter(hero) {
-    var encounter = { Name: "Inspect Hideout", Type: "Dialogue", Content: banditHideoutDialogue(hero) }
-    return encounter;
-}
+// export function banditHideoutDialogueEncounter(hero) {
+//     var encounter = { Name: "Inspect Hideout", Type: "Dialogue", Content: banditHideoutDialogue(hero) }
+//     return encounter;
+// }
 export function enterGoblinMineEncounter(hero) {
     var encounter = { Name: "Speak with Ferra", Type: "Dialogue", Content: enterGoblinMineDialogue(hero) }
     return encounter;
