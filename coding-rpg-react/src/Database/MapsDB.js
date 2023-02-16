@@ -1,7 +1,7 @@
 import { banditHideout, bearCave, bridge, brokenBridge, daleTown, dwarvenMine, farm, forest, fortDale, giantCave,graveyard,lake, littleRootFarm, lumbermill,mill, mountains, orcVillage, river, road, spiderCave, tenguCamp, whiteScalesLair, witchHut, wolfDen } from "./LocationsDB"
 
-export function startingAdjacentLocations() {
-    var start = ["Bridge", "River", "Road", "Farm", "Road", "LittleRoot Farm", "River", "River"]
+export function startingAdjacentLocations(hero) {
+    var start = [bridge(hero, 0,1),river(hero, 1,1), road(hero, 1, 0), farm(hero, 1,-1), road(hero, 0, -1), littleRootFarm(hero, -1, -1), river(hero, 0, -1), river(hero, -1, 1), road(hero, 0, 2), road(hero,2,0), road(hero, 0, -2), river(hero,-2,0)]
     return start;
 }
 export function worldMap(hero) {
@@ -10,7 +10,7 @@ export function worldMap(hero) {
             mountains(hero, 3, 15),mountains(hero, 4, 15), mountains(hero, 5, 15),
             road (hero, -2, 14), road(hero, -1, 14),orcVillage(hero, 0, 14), road (hero, 1, 14),forest(hero, 3,14), whiteScalesLair(hero, 4, 14), mountains(hero, 5, 14),
             road(hero, -3, 13), road(hero, -2, 13), lake(hero, -1, 13), lake(hero, 0, 13),road(hero, 1, 13), road(hero, 2, 13), forest(hero,3,13),farm(hero, 4, 13), mountains(hero, 5, 13),
-            road(hero, -4, 12), road(hero, -3, 12), lake(hero, -2, 12), lake(hero, -1, 12), lake(hero, 0, 12), lake(hero, 1, 2),road(hero, 2, 12), road(hero, 3, 12),road(hero, 4, 12), mountains(hero, 5, 12),
+            road(hero, -4, 12), road(hero, -3, 12), lake(hero, -2, 12), lake(hero, -1, 12), lake(hero, 0, 12), lake(hero, 1, 12),road(hero, 2, 12), road(hero, 3, 12),road(hero, 4, 12), mountains(hero, 5, 12),
             road(hero, -4, 11),lake(hero, -3, 11), lake(hero, -2, 11), lake(hero, -1, 11), lake(hero, 0, 11), lake(hero, 1, 11),lake(hero, 2, 11),road(hero, 3, 11),
             road(hero, -4, 10),lake(hero, -3, 10), lake(hero, -2, 10), fortDale(hero, -1, 10), lake(hero, 0, 10), lake(hero, 1, 10), lake(2, 10),road(hero, 3, 10),
             road(hero, -4, 9),lake(hero, -3, 9), lake(hero, -2, 9), brokenBridge(hero, -1, 9), lake(hero, 0, 9), lake(hero, 1, 9), lake(2, 9),road(hero, 3, 9),

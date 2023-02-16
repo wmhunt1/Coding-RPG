@@ -12,9 +12,8 @@ retrieve sheepscale's stolen sheep  (quest, monsters, dialogue, dungeon, locatio
 deliver letter to ambrosius quest (quest, monsters, dialogue, dungeon, location, place on map)
 
 fixes/changes
-change map to 3 by 3 with extra box for cardinal directions
-actual square with name/color
 dialogue that response finds next dialogue in array by id and skips to end if finished
+sublocation button formating
 Use rs3 tiers for crafting?
 write more than generic dialogue
 balance level requiurements and xp

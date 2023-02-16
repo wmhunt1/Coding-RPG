@@ -1,3 +1,4 @@
+import { OutOfBounds } from "../Database/LocationsDB";
 import { AddToCharacterLog } from "./CharacterScripts";
 export function CalculateTime(char, hours) {
     char.Time.Hour += hours;
@@ -27,38 +28,51 @@ export function CalculateTime(char, hours) {
 export function findAdjacentLocation(hero, map, x, y) {
     if (map.Locations.find(m => m.XCoord === x && m.YCoord === y)) {
         var mapIndex = map.Locations.findIndex(m => m.XCoord === x && m.YCoord === y);
-        return map.Locations[mapIndex].LocationName
+        return map.Locations[mapIndex]
     }
     else {
-        return "OOB"
+        return OutOfBounds(hero, x, y)
     }
 }
 export function findAdjacentLocations(hero, map, x, y) {
-    //n
+    //n 0
     hero.AdjacentLocations = []
     var n = findAdjacentLocation(hero, map, x, y + 1)
     hero.AdjacentLocations.push(n)
-    //ne
+    //ne 1
     var ne = findAdjacentLocation(hero, map, x + 1, y + 1)
     hero.AdjacentLocations.push(ne)
-    //e
+    //e 2
     var e = findAdjacentLocation(hero, map, x + 1, y)
     hero.AdjacentLocations.push(e)
-    //se
+    //se 3
     var se = findAdjacentLocation(hero, map, x + 1, y - 1)
     hero.AdjacentLocations.push(se)
-    //s
+    //s 4
     var s = findAdjacentLocation(hero, map, x, y - 1)
     hero.AdjacentLocations.push(s)
-    //sw
-    var sw = findAdjacentLocation(hero, map, x + 1, y - 1)
+    //sw 5
+    var sw = findAdjacentLocation(hero, map, x - 1, y - 1)
     hero.AdjacentLocations.push(sw)
-    //w
+    //w 6
     var w = findAdjacentLocation(hero, map, x - 1, y)
     hero.AdjacentLocations.push(w)
-    //nw
+    //nw 7
     var nw = findAdjacentLocation(hero, map, x - 1, y + 1)
     hero.AdjacentLocations.push(nw)
+    //n2 8
+    var n2 = findAdjacentLocation(hero, map, x, y + 2)
+    hero.AdjacentLocations.push(n2)
+    //e2 9
+    var e2 = findAdjacentLocation(hero, map, x + 2, y)
+    hero.AdjacentLocations.push(e2)
+    //s2 10
+    var s2 = findAdjacentLocation(hero, map, x, y - 2)
+    hero.AdjacentLocations.push(s2)
+    //w2 11
+    var w2 = findAdjacentLocation(hero, map, x - 2, y)
+    hero.AdjacentLocations.push(w2)
+    console.log(hero.AdjacentLocations)
 }
 export function updateLocation(hero, map, x, y, hour) {
     if (map.Locations.find(m => m.XCoord === x && m.YCoord === y)) {

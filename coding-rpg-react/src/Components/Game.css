@@ -61,7 +61,16 @@
     padding-left: 1%;
     padding-right: 1%;
 }
-
+.map-box{
+    display: inline-grid;
+    height: 75px;
+    width:  75px;
+    border: solid;
+    /* background-color: blue; */
+    color:white;
+    text-align:center;
+    padding-top: 15px;  
+}
 .map-row {
     display: inline-block;
     vertical-align: text-top;
@@ -69,10 +78,9 @@
     border: solid;
     padding-left: .5%;
     padding-right: .5%;
-    height: 200px;
+    height: 450px;
     overflow: scroll
 }
-
 .menu-box {
     margin-bottom: 1%;
     margin-top: 1%;

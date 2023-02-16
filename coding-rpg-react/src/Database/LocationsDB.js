@@ -8,123 +8,126 @@ import { alchemyNode, blackFeatherNode, cookNode, enchantNode, farmNode, fireNod
 
 //locations
 export function bearCave(hero, x, y) {
-    var cave = { LocationName: "Bear Cave", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterBearEncounter(hero)] }
+    var cave = { LocationName: "Bear Cave", XCoord: x, YCoord: y, CanTravel: false, Color: "Red", SubLocations: [enterBearEncounter(hero)] }
     return cave;
 }
 export function lumbermill(hero, x, y) {
-    var lumber = { LocationName: "Lumbermill", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterLumbermillDialogue(hero), enterWoodNode(hero)] }
+    var lumber = { LocationName: "Lumbermill", XCoord: x, YCoord: y, CanTravel: true, Color: "ForestGreen", SubLocations: [enterLumbermillDialogue(hero), enterWoodNode(hero)] }
     return lumber;
 }
 export function littleRootFarm(hero, x, y) {
-    var farm = { LocationName: "Little Root Farm", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterCowEncounter(hero), enterFarmNode(hero), enterLittleRootFarmDialogue(hero), enterScareCrowEncounter(hero)] }
+    var farm = { LocationName: "Little Root Farm", XCoord: x, YCoord: y, CanTravel: true, Color: "GoldenRod", SubLocations: [enterCowEncounter(hero), enterFarmNode(hero), enterLittleRootFarmDialogue(hero), enterScareCrowEncounter(hero)] }
     return farm;
 }
 export function tenguCamp(hero, x, y) {
-    var camp = { LocationName: "Strange Camp", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterBlackFeatherNode(hero), enterTenguCampDialogue(hero)] }
+    var camp = { LocationName: "Strange Camp", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [enterBlackFeatherNode(hero), enterTenguCampDialogue(hero)] }
     return camp;
 }
-export function wolfDen(hero, x, y)
-{
-    var cave = { LocationName: "Wolf Den", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterWolfEncounter(hero)] }
+export function wolfDen(hero, x, y) {
+    var cave = { LocationName: "Wolf Den", XCoord: x, YCoord: y, CanTravel: false, Color: "Red", SubLocations: [enterWolfEncounter(hero)] }
     return cave;
 }
 //dungeon
 export function banditHideout(hero, x, y) {
-    var bandit = { LocationName: "Bandit Hideout", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterBanditEncounter(hero), enterBanditHideout(hero)] }
+    var bandit = { LocationName: "Bandit Hideout", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterBanditEncounter(hero), enterBanditHideout(hero)] }
     return bandit;
 }
 export function dwarvenMine(hero, x, y) {
     var dwarvenMine;
     var questIndex = CheckForQuest(hero, dwarvenMineGoblinQuest())
     if (CheckForQuest(hero, dwarvenMineGoblinQuest()) === null) {
-        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterMineNode(hero)] }
+        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterMineNode(hero)] }
     }
     else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
-        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDwarvenMine(hero), enterGoblinEncounter(hero), enterMineNode(hero)] }
+        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterDwarvenMine(hero), enterGoblinEncounter(hero), enterMineNode(hero)] }
     }
     else {
-        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDwarvenMine(hero), enterGoblinEncounter(hero), enterMineNode(hero)] }
+        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterDwarvenMine(hero), enterGoblinEncounter(hero), enterMineNode(hero)] }
     }
     return dwarvenMine;
 }
 export function fortDale(hero, x, y) {
-    var fort = { LocationName: "Fort Dale", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [] }
+    var fort = { LocationName: "Fort Dale", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [] }
     return fort;
 }
 export function giantCave(hero, x, y) {
     var giant;
     if (CheckForQuest(hero, giantQuest()) === null) {
-        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterGiantCaveDungeonBeforeAndAfterQuest(hero), enterGiantEncounter(hero)] }
+        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterGiantCaveDungeonBeforeAndAfterQuest(hero), enterGiantEncounter(hero)] }
     }
     else if (hero.Journal[CheckForQuest(hero, giantQuest())].Status === "Completed") {
-        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterGiantCaveDungeonBeforeAndAfterQuest(hero), enterGiantEncounter(hero)] }
+        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterGiantCaveDungeonBeforeAndAfterQuest(hero), enterGiantEncounter(hero)] }
     }
     else {
-        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterGiantCaveDungeon(hero), enterGiantEncounter(hero)] }
+        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterGiantCaveDungeon(hero), enterGiantEncounter(hero)] }
     }
     return giant;
 }
 export function spiderCave(hero, x, y) {
-    var spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterSpiderCaveDungeon(hero), enterSpiderEncounter(hero)] }
+    var spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterSpiderCaveDungeon(hero), enterSpiderEncounter(hero)] }
     return spider;
 }
 //shop
 export function witchHut(hero, x, y) {
-    var witchHut = { LocationName: "Witch's Hut", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterWitchHut(hero)] }
+    var witchHut = { LocationName: "Witch's Hut", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [enterWitchHut(hero)] }
     return witchHut;
 }
 //towns
 export function daleTown(hero, x, y) {
-    var daleTown = { LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterDaleTownRumors(hero), enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterPriestDialogue(hero), enterTradingPost(hero), enterWellNode(hero)] }
+    var daleTown = { LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [enterDaleTownRumors(hero), enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterPriestDialogue(hero), enterTradingPost(hero), enterWellNode(hero)] }
     return daleTown;
 }
 export function orcVillage(hero, x, y) {
-    var orc = { LocationName: "Orc Village", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [] }
+    var orc = { LocationName: "Orc Village", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [] }
     return orc;
 }
 export function whiteScalesLair(hero, x, y) {
-    var lair = { LocationName: "Whitescale's Lair", XCoord: x, YCoord: y, CanTravel: true, SubLocations: [enterSheepNode(hero)] }
+    var lair = { LocationName: "Whitescale's Lair", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [enterSheepNode(hero)] }
     return lair;
 }
 //reusable locations
+export function OutOfBounds(hero, x, y) {
+    var oob = { LocationName: "OOB", XCoord: x, YCoord: y, CanTravel: false, Color: "Orange", SubLocations: [enterFishNode(hero)] }
+    return oob;
+}
 export function bridge(hero, x, y) {
-    var river = { LocationName: "Bridge", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero)] }
+    var river = { LocationName: "Bridge", XCoord: x, YCoord: y, CanTravel: false, Color: "Black", SubLocations: [enterFishNode(hero)] }
     return river;
 }
 export function brokenBridge(hero, x, y) {
-    var river = { LocationName: "Broken Bridge", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero)] }
+    var river = { LocationName: "Broken Bridge", XCoord: x, YCoord: y, CanTravel: false, Color: "Black", SubLocations: [enterFishNode(hero)] }
     return river;
 }
 export function farm(hero, x, y) {
-    var farm = { LocationName: "Farm", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterCowEncounter(hero), enterFarmNode(hero)] }
+    var farm = { LocationName: "Farm", XCoord: x, YCoord: y, CanTravel: false, Color: "GoldenRod", SubLocations: [enterCowEncounter(hero), enterFarmNode(hero)] }
     return farm;
 }
 export function forest(hero, x, y) {
-    var forest = { LocationName: "Forest", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterCookNodeCampFire(hero), enterHerbNode(hero), enterHuntNode(hero), enterWoodNode(hero)] }
+    var forest = { LocationName: "Forest", XCoord: x, YCoord: y, CanTravel: false, Color: "ForestGreen", SubLocations: [enterCookNodeCampFire(hero), enterHerbNode(hero), enterHuntNode(hero), enterWoodNode(hero)] }
     return forest;
 }
 export function graveyard(hero, x, y) {
-    var grave = { LocationName: "Graveyard", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterSkeletonEncounter(hero)] }
+    var grave = { LocationName: "Graveyard", XCoord: x, YCoord: y, CanTravel: false, Color: "Red", SubLocations: [enterSkeletonEncounter(hero)] }
     return grave;
 }
 export function lake(hero, x, y) {
-    var lake = { LocationName: "Lake", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero), enterWaterNode(hero)] }
+    var lake = { LocationName: "Lake", XCoord: x, YCoord: y, CanTravel: false, Color: "Blue", SubLocations: [enterFishNode(hero), enterWaterNode(hero)] }
     return lake;
 }
 export function mill(hero, x, y) {
-    var mill = { LocationName: "Mill", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterMillNode(hero)] }
+    var mill = { LocationName: "Mill", XCoord: x, YCoord: y, CanTravel: false, Color: "GoldenRod", SubLocations: [enterMillNode(hero)] }
     return mill;
 }
 export function mountains(hero, x, y) {
-    var mountains = { LocationName: "Mountains", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [] }
+    var mountains = { LocationName: "Mountains", XCoord: x, YCoord: y, CanTravel: false, Color: "Gray", SubLocations: [] }
     return mountains;
 }
 export function river(hero, x, y) {
-    var river = { LocationName: "River", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [enterFishNode(hero), enterWaterNode(hero)] }
+    var river = { LocationName: "River", XCoord: x, YCoord: y, CanTravel: false, Color: "LightBlue", SubLocations: [enterFishNode(hero), enterWaterNode(hero)] }
     return river;
 }
 export function road(hero, x, y) {
-    var road = { LocationName: "Road", XCoord: x, YCoord: y, CanTravel: false, SubLocations: [] }
+    var road = { LocationName: "Road", XCoord: x, YCoord: y, CanTravel: false, Color: "Black", SubLocations: [] }
     return road;
 }
 //sublocations

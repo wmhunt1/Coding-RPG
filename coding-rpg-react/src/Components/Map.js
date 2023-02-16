@@ -8,7 +8,7 @@ function Map(props) {
     const [map, setMap] = useState(props.map)
     const [move, setMove] = useState(true)
     const [knownLocations, setKnownLocations] = useState(props.hero.Map)
-    const [location, setLocation] = useState(props.hero.CurrentLocation.LocationName)
+    const [location, setLocation] = useState(props.hero.CurrentLocation)
     const [subLocations, setSubLocations] = useState(props.hero.CurrentLocation.SubLocations)
     const [coordinateX, setCoordinateX] = useState(props.hero.CurrentLocation.XCoord)
     const [coordinateY, setCoordinateY] = useState(props.hero.CurrentLocation.YCoord)
@@ -21,7 +21,7 @@ function Map(props) {
             setKnownLocations(updateKnownLocations)
             setCoordinateX(hero.CurrentLocation.XCoord)
             setCoordinateY(hero.CurrentLocation.YCoord)
-            setLocation(hero.CurrentLocation.LocationName)
+            setLocation(hero.CurrentLocation)
             setSubLocations(hero.CurrentLocation.SubLocations)
             setAdjacentLocations(hero.AdjacentLocations)
         }
@@ -38,25 +38,17 @@ function Map(props) {
     const subLocationsList = subLocations.sort((a, b) => a.Name.localeCompare(b.Name)).map((location, index) => <div key={index}><div style={{ display: "inline-block", lineHeight: "0pt" }}><h5>{location.Name}</h5></div> <div style={{ display: "inline-block", lineHeight: "0pt" }}><button onClick={() => handleEnterLocation(hero, location)}>Enter</button></div></div>)
     const knownLocationsList = knownLocations.sort((a, b) => a.LocationName.localeCompare(b.LocationName)).map((location, index) => <div key={index}><div style={{ display: "inline-block", lineHeight: "0pt" }}><h5>{location.LocationName}: ({location.XCoord}, {location.YCoord})</h5></div> <div style={{ display: "inline-block", lineHeight: "0pt" }}><button onClick={() => goToKnownLocation(hero, map, location.XCoord, location.YCoord, coordinateX, coordinateY)}>Travel</button></div></div>)
     return (<div>
-
-        <div style={{ border: "solid", height: "350px" }}>
+        <div style={{ border: "solid", height: "580px" }}>
             <h2>{map.Name} Map - {hero.Name}</h2>
-            <div><h3>{location} - ({coordinateX},{coordinateY}) Time: {hero.Time.Day}, {hero.Time.Hour} - {hero.Time.TimeOfDay}</h3></div>
+            <div><h3>{location.LocationName} - ({coordinateX},{coordinateY}) Time: {hero.Time.Day}, {hero.Time.Hour} - {hero.Time.TimeOfDay}</h3></div>
             <div>
                 <div className="map-row" style={{ width: "200px" }}>{subLocations.length > 0 ? <div><h4 style={{ lineHeight: "0pt" }}>Sub Locations</h4>{subLocationsList}</div> : <div><h4 style={{ lineHeight: "0pt" }}>Sub Locations</h4></div>}</div>
-                <div className="map-row" style={{ width: "300px" }}>
-                    <h4 style={{ lineHeight: "0pt" }}>Compass</h4>
-                    <div>
-                        <button onClick={() => handleMove(hero, map, coordinateX - 1, coordinateY + 1, 1)}>NW</button><button onClick={() => handleMove(hero, map, coordinateX, coordinateY + 1, 1)}>N</button><button onClick={() => handleMove(hero, map, coordinateX + 1, coordinateY + 1, 1)}>NE</button>
-                    </div>
-                    <div>| {adjacentLocations[7]} | {adjacentLocations[0]} | {adjacentLocations[1]} |</div>
-                    <div>
-                        <button onClick={() => handleMove(hero, map, coordinateX - 1, coordinateY, 1)}>W</button>| {adjacentLocations[6]} | {location} | {adjacentLocations[2]} |<button onClick={() => handleMove(hero, map, coordinateX + 1, coordinateY, 1)}>E</button>
-                    </div>
-                    <div>| {adjacentLocations[5]} | {adjacentLocations[4]}| {adjacentLocations[3]} |</div>
-                    <div>
-                        <button onClick={() => handleMove(hero, map, coordinateX - 1, coordinateY - 1, 1)}>SW</button><button onClick={() => handleMove(hero, map, coordinateX, coordinateY - 1, 1)}>S</button><button onClick={() => handleMove(hero, map, coordinateX + 1, coordinateY - 1, 1)}>SE</button>
-                    </div>
+                <div className="map-row" style={{ width: "400px" }}><h4 style={{ lineHeight: "0pt" }}>Compass</h4>
+                    <div><button style={{ backgroundColor: adjacentLocations[8].Color }} className="map-box" onClick={() => handleMove(hero, map, coordinateX, coordinateY + 2, 1)}>{adjacentLocations[8].LocationName}</button></div>
+                    <div><button style={{ backgroundColor: adjacentLocations[7].Color }} className="map-box" onClick={() => handleMove(hero, map, coordinateX - 1, coordinateY + 1, 1)}>{adjacentLocations[7].LocationName}</button><button className="map-box" style={{ backgroundColor: adjacentLocations[0].Color }} onClick={() => handleMove(hero, map, coordinateX, coordinateY + 1, 1)}>{adjacentLocations[0].LocationName}</button><button className="map-box" style={{ backgroundColor: adjacentLocations[1].Color }} onClick={() => handleMove(hero, map, coordinateX + 1, coordinateY + 1, 1)}>{adjacentLocations[1].LocationName}</button></div>
+                    <div><button style={{ backgroundColor: adjacentLocations[11].Color }} className="map-box" onClick={() => handleMove(hero, map, coordinateX - 2, coordinateY, 1)}>{adjacentLocations[11].LocationName}</button><button className="map-box" style={{ backgroundColor: adjacentLocations[6].Color }} onClick={() => handleMove(hero, map, coordinateX - 1, coordinateY, 1)}>{adjacentLocations[6].LocationName}</button><button style={{backgroundColor:location.Color}} className="map-box">{location.LocationName}</button><button style={{ backgroundColor: adjacentLocations[2].Color }} className="map-box" onClick={() => handleMove(hero, map, coordinateX + 1, coordinateY, 1)}>{adjacentLocations[2].LocationName}</button><button className="map-box" style={{backgroundColor:adjacentLocations[9].Color}} onClick={() => handleMove(hero, map, coordinateX + 2, coordinateY, 1)}>{adjacentLocations[9].LocationName}</button></div>
+                    <div><button style={{ backgroundColor: adjacentLocations[5].Color }} className="map-box" onClick={() => handleMove(hero, map, coordinateX - 1, coordinateY - 1, 1)}>{adjacentLocations[5].LocationName}</button><button className="map-box" style={{ backgroundColor: adjacentLocations[4].Color }} onClick={() => handleMove(hero, map, coordinateX, coordinateY - 1, 1)}>{adjacentLocations[4].LocationName}</button><button className="map-box" style={{ backgroundColor: adjacentLocations[3].Color }} onClick={() => handleMove(hero, map, coordinateX + 1, coordinateY - 1, 1)}>{adjacentLocations[3].LocationName}</button></div>
+                    <div><button style={{ backgroundColor: adjacentLocations[10].Color }} className="map-box" onClick={() => handleMove(hero, map, coordinateX, coordinateY - 2, 1)}>{adjacentLocations[10].LocationName}</button></div>
                 </div>
                 <div className="map-row" style={{ width: "170px" }}>{knownLocations.length > 0 ? <div><h4 style={{ lineHeight: "0pt" }}>Known Locations</h4>{knownLocationsList}</div> : <div><h4 style={{ lineHeight: "0pt" }}>Known Locations</h4></div>}</div>
             </div>
