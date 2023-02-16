@@ -1,5 +1,5 @@
 import { banditAndBanditArcherEncounter, banditAndBanditBersekerEncounter, banditArcherEncounter, banditBerserkerEncounter, banditEncounter, banditTrioEncounter, bossGoblinEncounter, enterGoblinMineEncounter, foremanGeorgeEncounter, giantEncounter, giantRatEncounter, giantSpiderEncounter, goblinEncounter, goblinWithWorgEncounter, koboldSlavesEncounter, ratEncounter, saveMinersEncounter, saveTenguEncounter, spiderEncounter } from "./EncountersDB";
-import { ale, banditSpoils, pickAxe } from "./ItemsDB"
+import { ale, banditSpoils} from "./ItemsDB"
 import { CheckForQuest } from "../Scripts/QuestScripts";
 import { scareCrowQuest3 } from "./QuestsDB";
 

@@ -50,7 +50,6 @@ function MainMenu(props) {
         </div>
         <button onClick={() => setActive("MainMenu")}><h3>Back</h3></button>
       </div> : <div></div>}
-      {active === "Game" ? <div><Game hero={hero} log={hero.Log}></Game></div> : <div></div>}
     </div>
   </div>)
 }
