@@ -1,5 +1,8 @@
 import { OutOfBounds } from "../Database/LocationsDB";
-import { AddToCharacterLog } from "./CharacterScripts";
+export function AddToExplorationLog(log, message)
+{
+    log.Log.push("Exploration: " + message);
+}
 export function CalculateTime(char, hours) {
     char.Time.Hour += hours;
     if (char.Time.Hour >= 6 && char.Time.Hour < 12) {
@@ -86,7 +89,7 @@ export function updateLocation(hero, map, x, y, hour) {
         hero.CurrentLocation.XCoord = map.Locations[mapIndex].XCoord;
         hero.CurrentLocation.YCoord = map.Locations[mapIndex].YCoord;
         hero.CurrentLocation.SubLocations = map.Locations[mapIndex].SubLocations;
-        AddToCharacterLog(hero, hero.Name + " travels to " + hero.CurrentLocation.LocationName)
+        AddToExplorationLog(hero,hero.Name + " travels to " + hero.CurrentLocation.LocationName)
         var knownIndex = null;
         if (hero.Map.find(x => x.LocationName === map.Locations[mapIndex].LocationName)) {
             knownIndex = hero.Map.findIndex(x => x.LocationName === map.Locations[mapIndex].LocationName);
@@ -94,12 +97,12 @@ export function updateLocation(hero, map, x, y, hour) {
         if (knownIndex === null) {
             if (map.Locations[mapIndex].CanTravel === true) {
                 hero.Map.push(map.Locations[mapIndex])
-                AddToCharacterLog(hero, hero.Name + " discovers " + map.Locations[mapIndex].LocationName)
+                AddToExplorationLog(hero,hero.Name + " discovers " + map.Locations[mapIndex].LocationName)
             }
         }
         findAdjacentLocations(hero, map, x, y)
     }
     else {
-        AddToCharacterLog(hero, "Location is out of bounds")
+        AddToExplorationLog(hero,"Location is out of bounds")
     }
 }

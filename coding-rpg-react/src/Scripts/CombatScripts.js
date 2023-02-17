@@ -6,7 +6,7 @@ import { AddItemToInventory } from "./ItemScripts";
 import { CheckIfKillQuestObjective } from "./QuestScripts";
 import { EarnSkillXP, FindSkillInSkillBook } from "./SkillScripts";
 export function AddToCombatLog(log, message) {
-    log.push(message)
+    log.push("Combat: " + message)
 }
 export function CalculateCharWeaponDamage(char, weapon) {
     var attribute = 0;
@@ -249,7 +249,6 @@ export function CombatRound(char1, allies, enemies, target, combatLog, option, s
     }
 }
 export function CombatPenalties(hero) {
-    AddToCharacterLog(hero, hero.Name + " was Defeated")
     AddToCharacterLog(hero, hero.Name + " lost " + Math.floor(hero.Gold / 2) + " GP")
     hero.Gold = Math.floor(hero.Gold / 2);
 }

@@ -1,6 +1,9 @@
-import { AddGold, AddToCharacterLog } from "./CharacterScripts";
+import { AddGold } from "./CharacterScripts";
 import { AddItemToInventory } from "./ItemScripts";
 
+export function AddToQuestLog(char, message) {
+    char.Log.push("Quest: " + message);
+}
 export function CheckForQuest(hero, quest) {
     var index = null
     if (hero.Journal.find(x => x.Name === quest.Name)) {
@@ -12,11 +15,11 @@ export function StartQuest(char, quest) {
     var questIndex = CheckForQuest(char, quest)
     if (questIndex === null) {
         char.Journal.push(quest);
-        AddToCharacterLog(char, char.Name + " Has Accepted Quest: " + quest.Name)
+        AddToQuestLog(char, char.Name + " Has Accepted Quest: " + quest.Name)
     }
 }
 export function GetQuestReward(char, quest) {
-    AddToCharacterLog(char, quest.Name + " Rewards...")
+    AddToQuestLog(char, quest.Name + " Rewards...")
     AddGold(char, quest.Reward.Gold);
     if (quest.Reward.Items.length > 0) {
         for (var q = 0; q < quest.Reward.Items.length; q++) {
@@ -30,7 +33,7 @@ export function CompleteQuest(char, quest) {
         var updateQuest = char.Journal[questIndex]
         updateQuest.Status = "Completed"
         char.Journal[questIndex] = updateQuest;
-        AddToCharacterLog(char, char.Name + " Has Completed Quest: " + updateQuest.Name)
+        AddToQuestLog(char, char.Name + " Has Completed Quest: " + updateQuest.Name)
     }
 }
 export function UpdateQuestProgress(char, quest, objective) {
@@ -39,7 +42,7 @@ export function UpdateQuestProgress(char, quest, objective) {
         var updateQuest = char.Journal[questIndex]
         updateQuest.ObjectiveProgress += objective;
         char.Journal[questIndex] = updateQuest
-        AddToCharacterLog(char, quest.Description + " Progess: " + updateQuest.ObjectiveProgress + "/" + updateQuest.Objective)
+        AddToQuestLog(char, quest.Description + " Progess: " + updateQuest.ObjectiveProgress + "/" + updateQuest.Objective)
     }
 }
 export function CheckIfFetchQuestObjective(char, item) {

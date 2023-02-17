@@ -41,7 +41,6 @@ companions get jobs that give new abilities or change tactics
 feats/perks
 save/load via json
 combine combat and game logs
-log filter with message types
 jobs
 add time delay for log
 Property (include your own allotments)

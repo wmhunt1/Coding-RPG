@@ -36,7 +36,7 @@ export function character(name) {
 export function hero() {
     var hero = character("Hero")
     hero.CurrentXP = 0; hero.Attributes.Strength.Value = 20;
-    hero.Log = ["Starting Game"]; hero.Equipment.Weapon = bronzeSword(); hero.Equipment.Head = hat(); hero.Equipment.Torso = tunic(); hero.Equipment.Legs = trousers(); hero.Equipment.Hands = gloves(); hero.Equipment.Feet = shoes(); hero.Inventory = [dogCollar()]; hero.Gold = 5; hero.Companions = [dog("Dog")]; hero.Abilities = [cleave(), pierceArmor(), rage()]; hero.BaseStats.SpellBook = [basicHeal(), curePoison(), fireBall(), magicMissile(), poisonSpray(), sleepSpell(), summonRat()]; hero.DamageModifiers.Weaknesses = [fireDamage()]; hero.DamageModifiers.Weaknesses[0].Source = hero.Equipment.Torso;
+    hero.Log = ["Game: Starting Game"]; hero.Equipment.Weapon = bronzeSword(); hero.Equipment.Head = hat(); hero.Equipment.Torso = tunic(); hero.Equipment.Legs = trousers(); hero.Equipment.Hands = gloves(); hero.Equipment.Feet = shoes(); hero.Inventory = [dogCollar()]; hero.Gold = 5; hero.Companions = [dog("Dog")]; hero.Abilities = [cleave(), pierceArmor(), rage()]; hero.BaseStats.SpellBook = [basicHeal(), curePoison(), fireBall(), magicMissile(), poisonSpray(), sleepSpell(), summonRat()]; hero.DamageModifiers.Weaknesses = [fireDamage()]; hero.DamageModifiers.Weaknesses[0].Source = hero.Equipment.Torso;
     hero.Journal = [];
     hero.Inventory = [ironSword()]
     return hero

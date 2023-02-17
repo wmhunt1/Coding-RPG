@@ -39,8 +39,10 @@ function Map(props) {
     const knownLocationsList = knownLocations.sort((a, b) => a.LocationName.localeCompare(b.LocationName)).map((location, index) => <div key={index}><button onClick={() => goToKnownLocation(hero, map, location.XCoord, location.YCoord, coordinateX, coordinateY)}>{location.LocationName}</button></div>)
     return (<div>
         <div style={{ border: "solid", height: "580px" }}>
-            <h2>{map.Name} Map - {hero.Name}</h2>
-            <div><h3>{location.LocationName} - ({coordinateX},{coordinateY}) Time: {hero.Time.Day}, {hero.Time.Hour} - {hero.Time.TimeOfDay}</h3></div>
+            {hero.BaseStats.HP.Current > 0 ? <h2>{hero.Name}</h2> : <h2 style={{color:"red"}}>{hero.Name} - Cannot Fight</h2>}
+            <div><h3>{location.LocationName} - {hero.Time.TimeOfDay}</h3>
+             {/* - ({coordinateX},{coordinateY}) Time: {hero.Time.Day}, {hero.Time.Hour} -  */}
+             </div>
             <div>
                 <div className="map-row" style={{ width: "200px" }}>{subLocations.length > 0 ? <div><h4 style={{ lineHeight: "0pt" }}>Sub Locations</h4>{subLocationsList}</div> : <div><h4 style={{ lineHeight: "0pt" }}>Sub Locations</h4></div>}</div>
                 <div className="map-row" style={{ width: "400px" }}><h4 style={{ lineHeight: "0pt" }}>Compass</h4>

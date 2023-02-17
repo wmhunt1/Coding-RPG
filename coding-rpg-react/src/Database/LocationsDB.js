@@ -221,7 +221,7 @@ export function enterGeneralStore(hero) {
     return generalStore
 }
 export function enterTradingPost(hero) {
-    var generalStore = { Name: "Joe the Trader's Trading Post", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: joeTheTradersTradingPost(hero), skill: null }; return content } }
+    var generalStore = { Name: "Joe the Trader's", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: joeTheTradersTradingPost(hero), skill: null }; return content } }
     return generalStore
 }
 //inns
@@ -271,7 +271,7 @@ export function enterWaterNode(hero) {
     return cook
 }
 export function enterWellNode(hero) {
-    var cook = { Name: "Well", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: wellNode(hero) }; return content } }
+    var cook = { Name: "Well (Draw Water)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: wellNode(hero) }; return content } }
     return cook
 }
 //farming

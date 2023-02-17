@@ -15,7 +15,7 @@ export function generalShop(hero) {
     return generalShop
 }
 export function joeTheTradersTradingPost(hero) {
-    var generalShop = { Name: "Joe the Trader's Trading Post", Dialogue: joeTheTradersTradingPostDialogue(hero), Dungeon: null, Node: null, Rep: daleTownReputation(), Inventory: [bronzeHatchet(), bronzePickAxe(), bucket(), fishingRod(), knife(), needle(), shears(), tinderBox()], buyFilter(hero) { return hero.Inventory.filter(item => item.Type !== "") } };
+    var generalShop = { Name: "Joe the Trader's", Dialogue: joeTheTradersTradingPostDialogue(hero), Dungeon: null, Node: null, Rep: daleTownReputation(), Inventory: [bronzeHatchet(), bronzePickAxe(), bucket(), fishingRod(), knife(), needle(), shears(), tinderBox()], buyFilter(hero) { return hero.Inventory.filter(item => item.Type !== "") } };
     return generalShop
 }
 //inns

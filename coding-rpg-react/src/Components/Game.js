@@ -83,9 +83,9 @@ function Game(props) {
           </div> : <div></div>}
         </div>
         {active === "Game" ? <div><div style={{ marginLeft: "15%", marginRight: "15%" }}><Map parentCallback={handleCallback} hero={hero} map={worldMap(hero)}></Map></div> </div> : <div> </div>}
-        {active !== "Dungeon" && active !== "Dialogue" && active !== "Combat" && active !== "MainMenu" ? 
+        {active !== "Dungeon" && active !== "Dialogue" && active !== "MainMenu" ? 
         <div style={{marginTop:"1%", marginLeft: "25%", marginRight: "25%", width: "auto", height: "200px", marginBottom:"1%", position:"relative", bottom:"-1" }}>
-          <Log log={log} logName={"Game"}></Log>
+          <Log log={log} logName={""}></Log>
         </div>
          : <div></div>}
       </div>
