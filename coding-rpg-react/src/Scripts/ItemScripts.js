@@ -6,7 +6,7 @@ Array.prototype.remove = function () {
     while (L && this.length) {
         what = a[--L];
         while ((ax = this.indexOf(what)) !== -1) {
-            this.BaseStats.SP.lice(ax, 1);
+            this.splice(ax, 1);
         }
     }
     return this;
@@ -207,17 +207,17 @@ export function ApplyOnEquipEffect(hero, immune, resist, weak, cImmune, cResist,
     for (var i = 0; i < immune.length; i++) {
         var immunity = immune[i]
         immunity.Source = item;
-        hero.Immunities.push(immunity)
+        hero.DamageModifiers.Immunities.push(immunity)
     }
     for (var r = 0; r < resist.length; r++) {
         var resistance = resist[r]
         resistance.Source = item;
-        hero.Resistances.push(resistance)
+        hero.DamageModifiers.Resistances.push(resistance)
     }
     for (var w = 0; w < weak.length; w++) {
         var weakness = weak[w]
         weakness.Source = item;
-        hero.Weaknesses.push(weakness)
+        hero.DamageModifiers.Weaknesses.push(weakness)
     }
     for (var i2 = 0; i2 < cImmune.length; i2++) {
         var cImmunity = cImmune[i2]
@@ -239,19 +239,19 @@ export function ApplyOnUnEquipEffect(hero, immune, resist, weak, cImmune, cResis
     for (var i = 0; i < immune.length; i++) {
         var immunity = immune[i]
         if (immunity.Source === item) {
-            hero.Immunities.remove(immunity)
+            hero.DamageModifiers.Immunities.remove(immunity)
         }
     }
     for (var r = 0; r < resist.length; r++) {
         var resistance = resist[r]
         if (resistance.Source === item) {
-            hero.Resistances.remove(resistance)
+            hero.DamageModifiers.Resistances.remove(resistance)
         }
     }
     for (var w = 0; w < weak.length; w++) {
         var weakness = weak[w]
         if (weakness.Source === item) {
-            hero.Weaknesses.remove(weakness)
+            hero.DamageModifiers.Weaknesses.remove(weakness)
         }
     }
     for (var i2 = 0; i2 < cImmune.length; i2++) {
