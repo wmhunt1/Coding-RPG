@@ -19,7 +19,7 @@ public class DamageCondition : Condition
     public override Character ResistCondition(Character char1)
     {
         Random random = new Random();
-        int resistingAttribute = char1.Constitution + char1.ConstitutionBonus + char1.ConstitutionPenalty;
+        int resistingAttribute = char1.Attributes.Constitution.Value + char1.Attributes.Constitution.ValueBonus + char1.Attributes.Constitution.ValuePenalty;
         int chance = random.Next(resistingAttribute, 100);
         if (chance >= 50)
         {

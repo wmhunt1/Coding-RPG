@@ -6,37 +6,36 @@ import { UnEquip } from '../Scripts/ItemScripts';
 function Equipment(props) {
     const [hero, setHero] = useState(props.hero);
     const [log, setLog] = useState(props.log)
-    const [weapon, setWeapon] = useState(props.hero.Weapon)
-    const [offHand, setOffHand] = useState(props.hero.OffHand)
-    const [head, setHead] = useState(props.hero.Head)
-    const [torso, setTorso] = useState(props.hero.Torso)
-    const [legs, setLegs] = useState(props.hero.Legs)
-    const [hands, setHands] = useState(props.hero.Hands)
-    const [feet, setFeet] = useState(props.hero.Feet)
-    const [back, setBack] = useState(props.hero.Back)
-    const [neck, setNeck] = useState(props.hero.Neck)
-    const [ring, setRing] = useState(props.hero.Ring)
+    const [weapon, setWeapon] = useState(props.hero.Equipment.Weapon)
+    const [offHand, setOffHand] = useState(props.hero.Equipment.OffHand)
+    const [head, setHead] = useState(props.hero.Equipment.Head)
+    const [torso, setTorso] = useState(props.hero.Equipment.Torso)
+    const [legs, setLegs] = useState(props.hero.Equipment.Legs)
+    const [hands, setHands] = useState(props.hero.Equipment.Hands)
+    const [feet, setFeet] = useState(props.hero.Equipment.Feet)
+    const [back, setBack] = useState(props.hero.Equipment.Back)
+    const [neck, setNeck] = useState(props.hero.Equipment.Neck)
+    const [ring, setRing] = useState(props.hero.Equipment.Ring)
     function handleUnEquip(char, inventory, item, log) {
         //if (char.Name !== "Dog") {
         UnEquip(char, inventory, item, log)
         setHero(char);
-        setWeapon(char.Weapon)
-        setOffHand(char.OffHand)
-        setHead(char.Head)
-        setTorso(char.Torso)
-        setLegs(char.Legs)
-        setHands(char.Hands)
-        setFeet(char.Feet)
-        setBack(char.Back)
-        setNeck(char.Neck)
-        setRing(char.Ring)
+        setWeapon(char.Equipment.Weapon)
+        setOffHand(char.Equipment.OffHand)
+        setHead(char.Equipment.Head)
+        setTorso(char.Equipment.Torso)
+        setLegs(char.Equipment.Legs)
+        setHands(char.Equipment.Hands)
+        setFeet(char.Equipment.Feet)
+        setBack(char.Equipment.Back)
+        setNeck(char.Equipment.Neck)
+        setRing(char.Equipment.Ring)
         props.parentCallback(log);
         //}
     }
     return (
         <div>
             <h2>{hero.Name}'s Equipment</h2>
-            <h4>ATK: {hero.Weapon.Damage + hero.AttackBonus - hero.AttackPenalty} PROT: {hero.Head.Protection + hero.Torso.Protection + hero.Legs.Protection + hero.Hands.Protection + hero.Feet.Protection + hero.ProtectionBonus - hero.ProtectionPenalty} SHD: {hero.ShieldBonus - hero.ShieldPenalty}</h4>
             <div className='equipment-box'>
                 <h3>Weapons</h3>
                 <h5>Weapon - Name: {weapon.Name}, Damage: {weapon.Damage}, Damage Type: {weapon.DamageType.Name} <button onClick={() => handleUnEquip(hero, log.Inventory, weapon, log)}>UnEquip</button></h5>

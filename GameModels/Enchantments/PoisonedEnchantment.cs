@@ -9,7 +9,7 @@ public class PoisonedEnchantment : Enchantment
     }
     public override void OnHitEnchantment(Character hero, Character target)
     {
-        Console.WriteLine($"{hero.Weapon.Name} deals 5 extra Posion Damage and Posions the {target.Name}");
+        Console.WriteLine($"{hero.Equipment.Weapon.Name} deals 5 extra Posion Damage and Posions the {target.Name}");
         hero.AttackSpell(target, 5, new PoisonDamage());
         PoisonCondition poison = new PoisonCondition();
         poison.ApplyCondition(target);

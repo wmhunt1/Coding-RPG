@@ -10,23 +10,23 @@ export function tacticsList() {
 export function BasicAttacker(char, allies, enemies, combatLog, round) {
     var enemyOverZero = []
     for (let e = 0; e < enemies.length; e++) {
-        if (enemies[e].CurrentHP > 0) {
+        if (enemies[e].BaseStats.HP.Current > 0) {
             enemyOverZero.push(enemies[e])
         }
     }
     if (enemyOverZero.length > 0) {
         const randomEnemy = Math.floor(Math.random() * enemyOverZero.length);
-        BasicAttack(char, enemyOverZero[randomEnemy], combatLog, char.Weapon)
-        if (char.OffHand.SubType === "Weapon" && char.OffHand.Name !== "Empty") {
-            BasicAttack(char, enemyOverZero[randomEnemy], combatLog, char.OffHand)
+        BasicAttack(char, enemyOverZero[randomEnemy], combatLog, char.Equipment.Weapon)
+        if (char.Equipment.OffHand.SubType === "Weapon" && char.Equipment.OffHand.Name !== "Empty") {
+            BasicAttack(char, enemyOverZero[randomEnemy], combatLog, char.Equipment.OffHand)
         }
     }
 }
 export function BasicHealer(char, allies, enemies, combatLog, round) {
-    if (char.CurrentMP > 0 && CheckIfKnowsSpell(char, basicHeal()) !== null) {
+    if (char.BaseStats.MP.Current > 0 && CheckIfKnowsSpell(char, basicHeal()) !== null) {
         var alliesUnderHalf = []
         for (var a = 0; a < allies.length; a++) {
-            if (allies[a].CurrentHP <= allies[a].MaxHP / 2) {
+            if (allies[a].BaseStats.HP.Current <= allies[a].BaseStats.HP.Max / 2) {
                 alliesUnderHalf.push(allies[a])
             }
         }
@@ -63,7 +63,7 @@ export function Webber(char, allies, enemies, combatLog, round) {
     }
 }
 export function spiderSummoner(char, allies, enemies, combatLog, round) {
-    if (char.CurrentMP > 0) {
+    if (char.BaseStats.MP.Current > 0) {
         CastSpell(char, allies, enemies, enemies[0], combatLog, summonSpider())
     }
     else {

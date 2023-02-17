@@ -15,7 +15,7 @@ public class Ability
     }
     public bool HasEnoughSP(Character user)
     {
-        if (user.CurrentSP >= StaminaCost)
+        if (user.BaseStats.SP.Current >= StaminaCost)
         {
             return true;
         }
@@ -33,7 +33,7 @@ public class Ability
         bool staminaCheck = this.HasEnoughSP(user);
         if (staminaCheck == true)
         {
-            user.SpendStamina(StaminaCost);
+            user.BaseStats.SP.endStamina(StaminaCost);
             AbilityEffect(user, targets);
         }
         else

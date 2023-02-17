@@ -49,7 +49,7 @@ function Dungeon(props) {
         if (activeEncounter.Type === "Combat") {
             var overZero = activeEncounter.Content.length;
             for (var e = 0; e < activeEncounter.Content.length; e++) {
-                if (activeEncounter.Content[e].CurrentHP <= 0) {
+                if (activeEncounter.Content[e].BaseStats.HP.Current <= 0) {
                     overZero--
                 }
             }
@@ -83,7 +83,7 @@ function Dungeon(props) {
     return (<div>
         <div>
             <h2>{props.dungeon.Name}</h2>
-            {hero.CurrentHP > 0 ?
+            {hero.BaseStats.HP.Current > 0 ?
                 <div>
                     {active === "Dungeon" && bossDefeated === 0 ?
                         <div>

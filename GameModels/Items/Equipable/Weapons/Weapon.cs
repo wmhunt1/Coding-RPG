@@ -16,13 +16,13 @@ public class Weapon : Equipable
     }
     public override void EquipItem(Character hero, Character inventory)
     {
-        hero.Weapon = this;
+        hero.Equipment.Weapon = this;
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }
     public override void UnEquipItem(Character hero, Character inventory)
     {
         this.EquipmentEnchantment.RemoveEnchantmentOnUnEquip(hero);
-        hero.Weapon = new Fist();
+        hero.Equipment.Weapon = new Fist();
         if (this.Name != "Fist")
         {
             this.AddItemToInventory(inventory);
@@ -30,7 +30,7 @@ public class Weapon : Equipable
     }
     public override void EquipItemFromInventory(Character hero, Character inventory)
     {
-        hero.Weapon.UnEquipItem(hero, inventory);
+        hero.Equipment.Weapon.UnEquipItem(hero, inventory);
         this.RemoveItemFromInventory(inventory);
         this.EquipItem(hero, inventory);
     }

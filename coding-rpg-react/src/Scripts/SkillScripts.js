@@ -7,7 +7,7 @@ Array.prototype.remove = function () {
     while (L && this.length) {
         what = a[--L];
         while ((ax = this.indexOf(what)) !== -1) {
-            this.splice(ax, 1);
+            this.BaseStats.SP.lice(ax, 1);
         }
     }
     return this;

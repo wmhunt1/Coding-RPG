@@ -46,7 +46,7 @@ namespace GameModels
                         break;
                     case "1":
                         RunEncounter(hero, Dungeon.Encounter1);
-                        if (hero.CurrentHP > 0)
+                        if (hero.BaseStats.HP.Current > 0)
                         {
                             e1 = true;
                         }
@@ -59,7 +59,7 @@ namespace GameModels
                         if (e1 == true)
                         {
                             RunEncounter(hero, Dungeon.Encounter2);
-                            if (hero.CurrentHP > 0)
+                            if (hero.BaseStats.HP.Current > 0)
                             {
                                 e2 = true;
                             }
@@ -73,7 +73,7 @@ namespace GameModels
                         if (e2 == true)
                         {
                             RunEncounter(hero, Dungeon.Encounter3);
-                            if (hero.CurrentHP > 0)
+                            if (hero.BaseStats.HP.Current > 0)
                             {
                                 e3 = true;
                             }
@@ -87,7 +87,7 @@ namespace GameModels
                         if (e3 == true)
                         {
                             RunEncounter(hero, Dungeon.BossEncounter);
-                            if (hero.CurrentHP > 0)
+                            if (hero.BaseStats.HP.Current > 0)
                             {
                                 Console.WriteLine($"You have defeated the {Dungeon.Name} Dungeon");
                                 List<DungeonQuest> dungeonQuests = new List<DungeonQuest>();

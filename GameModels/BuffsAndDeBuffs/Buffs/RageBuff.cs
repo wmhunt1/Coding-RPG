@@ -13,16 +13,16 @@ public class RageBuff : Buff
     public override Character ApplyBuff(Character character)
     {
         Console.WriteLine($"{character.Name} enters a rage.");
-        character.StrengthBonus += 5;
-        character.CurrentHP += 5;
+        character.Attributes.Strength.ValueBonus += 5;
+        character.BaseStats.HP.Current += 5;
         character.Buffs.Add(this);
         return character;
     }
     public override Character RemoveBuff(Character character)
     {
         Console.WriteLine($"{character.Name} loses their rage.");
-        character.StrengthBonus -= 5;
-        character.CurrentHP -= 5;
+        character.Attributes.Strength.ValueBonus -= 5;
+        character.BaseStats.HP.Current -= 5;
         character.Buffs.Remove(this);
         return character;
     }

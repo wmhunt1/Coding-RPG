@@ -9,12 +9,12 @@ public class StrengthBonusEnchantment : Enchantment
     }
     public override Character ApplyEnchantmentOnEquip(Character hero)
     {
-        hero.StrengthBonus += 5;
+        hero.Attributes.Strength.ValueBonus += 5;
         return hero;
     }
     public override Character RemoveEnchantmentOnUnEquip(Character hero)
     {
-        hero.StrengthBonus -= 5;
+        hero.Attributes.Strength.ValueBonus -= 5;
         return hero;
     }
 }

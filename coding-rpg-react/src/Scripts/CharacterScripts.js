@@ -5,7 +5,7 @@ Array.prototype.remove = function () {
     while (L && this.length) {
         what = a[--L];
         while ((ax = this.indexOf(what)) !== -1) {
-            this.splice(ax, 1);
+            this.BaseStats.SP.lice(ax, 1);
         }
     }
     return this;
@@ -16,12 +16,12 @@ export function AddToCharacterLog(char, message) {
 export function LevelUp(char, log) {
     char.Level++;
     char.MaxXP = (char.Level * (char.Level - 1)) * 100;
-    char.MaxHP += char.Constitution;
-    char.CurrentHP = char.MaxHP;
-    char.MaxMP += 10;
-    char.CurrentMP = char.Intelligence;
-    char.MaxSP += 10;
-    char.CurrentSP = char.Constitution;
+    char.BaseStats.HP.Max += char.Attributes.Constitution.Value;
+    char.BaseStats.HP.Current = char.BaseStats.HP.Max;
+    char.BaseStats.MP.Max += 10;
+    char.BaseStats.MP.Current = char.Attributes.Intelligence.Value;
+    char.BaseStats.SP.Max += 10;
+    char.BaseStats.SP.Current = char.Attributes.Constitution.Value;
     FullyRecover(char)
     AddToCharacterLog(log, char.Name + " has reached level " + char.Level);
 }
@@ -40,38 +40,38 @@ export function EarnXP(char, xp, log) {
     AddToCharacterLog(log, char.Name + " earned " + xp + " XP");
 }
 export function HealHP(char, hp) {
-    char.CurrentHP += hp;
-    var totalHP = char.MaxHP + char.HPBonus - char.HPPenalty
-    if (char.CurrentHP > totalHP) {
-        char.CurrentHP = totalHP;
+    char.BaseStats.HP.Current += hp;
+    var totalHP = char.BaseStats.HP.Max + char.BaseStats.HP.Bonus - char.BaseStats.HP.Penalty
+    if (char.BaseStats.HP.Current > totalHP) {
+        char.BaseStats.HP.Current = totalHP;
     }
 }
 export function TakeDamage(char, damage) {
     if (damage < 0) {
         damage = 0;
     }
-    var updateTempHP = damage - char.TempHP;
-    damage -= char.TempHP
-    char.CurrentHP -= damage;
-    char.TempHP = updateTempHP;
-    if (char.CurrentHP < 0) {
-        char.CurrentHP = 0;
+    var updateTempHP = damage - char.BaseStats.HP.Temp;
+    damage -= char.BaseStats.HP.Temp
+    char.BaseStats.HP.Current -= damage;
+    char.BaseStats.HP.Temp = updateTempHP;
+    if (char.BaseStats.HP.Current < 0) {
+        char.BaseStats.HP.Current = 0;
     }
-    if (char.TempHP < 0) {
-        char.TempHP = 0
+    if (char.BaseStats.HP.Temp < 0) {
+        char.BaseStats.HP.Temp = 0
     }
 }
 export function RecoverMP(char, mp) {
-    char.CurrentMP += mp;
-    if (char.CurrentMP > char.MaxMP + char.MPBonus - char.MPPenalty) {
-        char.CurrentMP = char.MaxMP + char.MPBonus - char.MPPenalty;
+    char.BaseStats.MP.Current += mp;
+    if (char.BaseStats.MP.Current > char.BaseStats.MP.Max + char.BaseStats.MP.Bonus - char.BaseStats.MP.Penalty) {
+        char.BaseStats.MP.Current = char.BaseStats.MP.Max + char.BaseStats.MP.Bonus - char.BaseStats.MP.Penalty;
     }
 }
 export function UseMP(char, mp) {
-    char.CurrentMP -= mp;
+    char.BaseStats.MP.Current -= mp;
 }
 export function HasEnoughMP(char, mp) {
-    if (char.CurrentMP >= mp) {
+    if (char.BaseStats.MP.Current >= mp) {
         return true;
     }
     else {
@@ -79,17 +79,17 @@ export function HasEnoughMP(char, mp) {
     }
 }
 export function RecoverSP(char, sp) {
-    char.CurrentSP += sp;
-    if (char.CurrentSP > char.MaxSP + char.SPBonus - char.SPPenalty) {
-        char.CurrentSP = char.MaxSP + char.SPBonus - char.SPPenalty;
+    char.BaseStats.SP.Current += sp;
+    if (char.BaseStats.SP.Current > char.BaseStats.SP.Max + char.BaseStats.SP.Bonus - char.BaseStats.SP.Penalty) {
+        char.BaseStats.SP.Current = char.BaseStats.SP.Max + char.BaseStats.SP.Bonus - char.BaseStats.SP.Penalty;
     }
 }
 export function UseSP(char, sp) {
-    char.CurrentSP -= sp;
+    char.BaseStats.SP.Current -= sp;
     AddToCharacterLog(char, char.Name + " uses " + sp + " SP");
 }
 export function HasEnoughSP(char, sp) {
-    if (char.CurrentSP >= sp) {
+    if (char.BaseStats.SP.Current >= sp) {
         return true;
     }
     else {
@@ -97,23 +97,23 @@ export function HasEnoughSP(char, sp) {
     }
 }
 export function Regen(char, log) {
-    HealHP(char, char.HPRegen + char.HPRegenBonus - char.HPRegenPenalty)
-    if (char.HPRegen + char.HPRegenBonus - char.HPRegenPenalty > 0) {
-        AddToCharacterLog(log, char.Name + " Regenerates " + char.HPRegenBonus - char.HPRegenPenalty + " HP")
+    HealHP(char, char.BaseStats.HP.Regen + char.BaseStats.HP.RegenBonus - char.BaseStats.HP.RegenPenalty)
+    if (char.BaseStats.HP.Regen + char.BaseStats.HP.RegenBonus - char.BaseStats.HP.RegenPenalty > 0) {
+        AddToCharacterLog(log, char.Name + " Regenerates " + char.BaseStats.HP.RegenBonus - char.BaseStats.HP.RegenPenalty + " HP")
     }
-    RecoverMP(char, char.MPRegen + char.MPRegenBonus - char.MPRegenPenalty)
-    if (char.MPRegen + char.MPRegenBonus - char.MPRegenPenalty > 0) {
-        AddToCharacterLog(log, char.Name + " Regenerates " + char.MPRegen + char.MPRegenBonus - char.MPRegenPenalty + " MP")
+    RecoverMP(char, char.BaseStats.MP.Regen + char.BaseStats.MP.RegenBonus - char.BaseStats.MP.RegenPenalty)
+    if (char.BaseStats.MP.Regen + char.BaseStats.MP.RegenBonus - char.BaseStats.MP.RegenPenalty > 0) {
+        AddToCharacterLog(log, char.Name + " Regenerates " + char.BaseStats.MP.Regen + char.BaseStats.MP.RegenBonus - char.BaseStats.MP.RegenPenalty + " MP")
     }
-    RecoverSP(char, char.SPRegen + char.SPRegenBonus - char.SPRegenPenalty)
-    if (char.SPRegen + char.SPRegenBonus - char.SPRegenPenalty > 0) {
-        AddToCharacterLog(log, char.Name + " Regenerates " + char.SPRegen + char.SPRegenBonus - char.SPRegenPenalty + " SP")
+    RecoverSP(char, char.BaseStats.SP.Regen + char.BaseStats.SP.RegenBonus - char.BaseStats.SP.RegenPenalty)
+    if (char.BaseStats.SP.Regen + char.BaseStats.SP.RegenBonus - char.BaseStats.SP.RegenPenalty > 0) {
+        AddToCharacterLog(log, char.Name + " Regenerates " + char.BaseStats.SP.Regen + char.BaseStats.SP.RegenBonus - char.BaseStats.SP.RegenPenalty + " SP")
     }
 }
 export function FullyRecover(char) {
-    HealHP(char, char.MaxHP + char.HPBonus - char.HPPenalty)
-    RecoverMP(char, char.MaxMP + char.MPBonus - char.MPPenalty)
-    RecoverSP(char, char.CurrentSP + char.SPBonus - char.SPPenalty)
+    HealHP(char, char.BaseStats.HP.Max + char.BaseStats.HP.Bonus - char.BaseStats.HP.Penalty)
+    RecoverMP(char, char.BaseStats.MP.Max + char.BaseStats.MP.Bonus - char.BaseStats.MP.Penalty)
+    RecoverSP(char, char.BaseStats.SP.Current + char.BaseStats.SP.Bonus - char.BaseStats.SP.Penalty)
     AddToCharacterLog(char, char.Name + " Fully Recovered")
 }
 export function PartyRecovery(char) {

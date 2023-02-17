@@ -8,72 +8,72 @@ namespace GameModels
             Console.WriteLine("==== Character Info ====");
             Console.WriteLine($"{hero.Name} - {hero.Job.Name}");
             Console.WriteLine($"Level: {hero.Level} EXP {hero.CurrentXP}/{hero.MaxXP}");
-            Console.WriteLine($"HP: {hero.CurrentHP}/{hero.MaxHP}({hero.HPRegen}) MP: {hero.CurrentMP}/{hero.MaxMP}({hero.MPRegen}) SP: {hero.CurrentSP}/{hero.MaxSP}({hero.SPRegen})");
+            Console.WriteLine($"HP: {hero.BaseStats.HP.Current}/{hero.BaseStats.HP.Max}({hero.BaseStats.HP.Regen}) MP: {hero.BaseStats.MP.Current}/{hero.BaseStats.MP.Max}({hero.BaseStats.MP.Regen}) SP: {hero.BaseStats.SP.Current}/{hero.BaseStats.SP.Max}({hero.BaseStats.SP.Regen})");
             Console.WriteLine("==== Attributes =====");
-            Console.WriteLine($"STR: {hero.Strength + hero.StrengthBonus - hero.StrengthPenalty}(+{hero.StrengthBonus})(-{hero.StrengthPenalty}) CON: {hero.Constitution + hero.ConstitutionBonus - hero.ConstitutionPenalty}(+{hero.ConstitutionBonus})(-{hero.ConstitutionPenalty} DEX: {hero.Dexterity + hero.DexterityBonus - hero.DexterityPenalty}(+{hero.DexterityBonus})(-{hero.DexterityPenalty}) SPD: {hero.Speed + hero.SpeedBonus - hero.SpeedPenalty}(+{hero.SpeedBonus})(-{hero.SpeedPenalty})");
-            Console.WriteLine($"INT: {hero.Intelligence + hero.IntelligenceBonus - hero.IntelligencePenalty}(+{hero.IntelligenceBonus})(-{hero.IntelligencePenalty}) WIS: {hero.Wisdom + hero.WisdomBonus - hero.WisdomPenalty}(+{hero.WisdomBonus})(-{hero.WisdomPenalty} CHA: {hero.Charisma + hero.CharismaBonus - hero.CharismaPenalty}(+{hero.CharismaBonus})(-{hero.CharismaPenalty})");
-            Console.WriteLine($"WIL: {hero.WillPower + hero.WillPowerBonus - hero.WillPowerPenalty}(+{hero.WillPowerBonus})(-{hero.WillPowerPenalty}) PER: {hero.Perception + hero.PerceptionBonus - hero.PerceptionPenalty}(+{hero.PerceptionBonus})(-{hero.PerceptionPenalty} LCK: {hero.Luck + hero.LuckBonus - hero.LuckPenalty}(+{hero.LuckBonus})(-{hero.LuckPenalty}) Bea: {hero.Beauty + hero.BeautyBonus - hero.BeautyPenalty}(+{hero.BeautyBonus})(-{hero.BeautyPenalty})");
+            Console.WriteLine($"STR: {hero.Attributes.Strength.Value + hero.Attributes.Strength.ValueBonus - hero.Attributes.Strength.ValuePenalty}(+{hero.Attributes.Strength.ValueBonus})(-{hero.Attributes.Strength.ValuePenalty}) CON: {hero.Attributes.Constitution.Value + hero.Attributes.Constitution.ValueBonus - hero.Attributes.Constitution.ValuePenalty}(+{hero.Attributes.Constitution.ValueBonus})(-{hero.Attributes.Constitution.ValuePenalty} DEX: {hero.Attributes.Dexterity.Value + hero.Attributes.Dexterity.ValueBonus - hero.Attributes.Dexterity.ValuePenalty}(+{hero.Attributes.Dexterity.ValueBonus})(-{hero.Attributes.Dexterity.ValuePenalty}) SPD: {hero.Attributes.Speed.Value + hero.Attributes.Speed.ValueBonus - hero.Attributes.Speed.ValuePenalty}(+{hero.Attributes.Speed.ValueBonus})(-{hero.Attributes.Speed.ValuePenalty})");
+            Console.WriteLine($"INT: {hero.Attributes.Intelligence.Value + hero.Attributes.Intelligence.ValueBonus - hero.Attributes.Intelligence.ValuePenalty}(+{hero.Attributes.Intelligence.ValueBonus})(-{hero.Attributes.Intelligence.ValuePenalty}) WIS: {hero.Attributes.Wisdom.Value + hero.Attributes.Wisdom.ValueBonus - hero.Attributes.Wisdom.ValuePenalty}(+{hero.Attributes.Wisdom.ValueBonus})(-{hero.Attributes.Wisdom.ValuePenalty} CHA: {hero.Attributes.Charisma.Value + hero.Attributes.Charisma.ValueBonus - hero.Attributes.Charisma.ValuePenalty}(+{hero.Attributes.Charisma.ValueBonus})(-{hero.Attributes.Charisma.ValuePenalty})");
+            Console.WriteLine($"WIL: {hero.Attributes.WillPower.Value + hero.Attributes.WillPower.ValueBonus - hero.Attributes.WillPower.ValuePenalty}(+{hero.Attributes.WillPower.ValueBonus})(-{hero.Attributes.WillPower.ValuePenalty}) PER: {hero.Attributes.Perception.Value + hero.Attributes.Perception.ValueBonus - hero.Attributes.Perception.ValuePenalty}(+{hero.Attributes.Perception.ValueBonus})(-{hero.Attributes.Perception.ValuePenalty} LCK: {hero.Attributes.Luck.Value + hero.Attributes.Luck.ValueBonus - hero.Attributes.Luck.ValuePenalty}(+{hero.Attributes.Luck.ValueBonus})(-{hero.Attributes.Luck.ValuePenalty}) Bea: {hero.Attributes.Beauty.Value + hero.Attributes.Beauty.ValueBonus - hero.Attributes.Beauty.ValuePenalty}(+{hero.Attributes.Beauty.ValueBonus})(-{hero.Attributes.Beauty.ValuePenalty})");
             AnyKey();
         }
         public void DisplayEquipment(Character hero, Character inventory)
         {
             Console.WriteLine($"{hero.Name}'s Equipment");
-            Console.WriteLine($"[1] Weapon: {hero.Weapon.Name} - {hero.Weapon.WeaponDmg} {hero.Weapon.WeaponDmgType.Name} Damage");
-            if (hero.OffHand is Shield)
+            Console.WriteLine($"[1] Weapon: {hero.Equipment.Weapon.Name} - {hero.Equipment.Weapon.Equipment.WeaponDmg} {hero.Equipment.Weapon.Equipment.WeaponDmgType.Name} Damage");
+            if (hero.Equipment.OffHand is Shield)
             {
-                var shield = (Shield)hero.OffHand;
-                Console.WriteLine($"[2] OffHand : {hero.OffHand.Name} - Shield Value {shield.ShieldValue}");
+                var shield = (Shield)hero.Equipment.OffHand;
+                Console.WriteLine($"[2] OffHand : {hero.Equipment.OffHand.Name} - Shield Value {shield.ShieldValue}");
             }
-            else if (hero.OffHand is OffHandWeapon)
+            else if (hero.Equipment.OffHand is OffHandWeapon)
             {
-                var offHand = (OffHandWeapon)hero.OffHand;
-                Console.WriteLine($"[2] OffHand : {hero.OffHand.Name} - Damage Value {offHand.OffHandDamageValue}");
+                var offHand = (OffHandWeapon)hero.Equipment.OffHand;
+                Console.WriteLine($"[2] OffHand : {hero.Equipment.OffHand.Name} - Damage Value {offHand.Equipment.OffHandDamageValue}");
             }
             else
             {
-                Console.WriteLine($"[2] OffHand : {hero.OffHand.Name}");
+                Console.WriteLine($"[2] OffHand : {hero.Equipment.OffHand.Name}");
             }
-            Console.WriteLine($"[3] Head: {hero.Head.Name} - {hero.Head.Protection} {hero.Head.ProtectionType.Name} Protection");
-            Console.WriteLine($"[4] Torso: {hero.Torso.Name} - {hero.Torso.Protection} {hero.Torso.ProtectionType.Name} Protection");
-            Console.WriteLine($"[5] Legs: {hero.Legs.Name} - {hero.Legs.Protection} {hero.Legs.ProtectionType.Name} Protection");
-            Console.WriteLine($"[6] Hands: {hero.Hands.Name} - {hero.Hands.Protection} {hero.Hands.ProtectionType.Name} Protection");
-            Console.WriteLine($"[7] Feet: {hero.Feet.Name} - {hero.Feet.Protection} {hero.Feet.ProtectionType.Name} Protection");
-            Console.WriteLine($"[8] Neck: {hero.Neck.Name}");
-            Console.WriteLine($"[9] Ring: {hero.Ring.Name}");
-            Console.WriteLine($"[10] Back: {hero.Back.Name}");
+            Console.WriteLine($"[3] Head: {hero.Equipment.Head.Name} - {hero.Equipment.Head.Protection} {hero.Equipment.Head.ProtectionType.Name} Protection");
+            Console.WriteLine($"[4] Torso: {hero.Equipment.Torso.Name} - {hero.Equipment.Torso.Protection} {hero.Equipment.Torso.ProtectionType.Name} Protection");
+            Console.WriteLine($"[5] Legs: {hero.Equipment.Legs.Name} - {hero.Equipment.Legs.Protection} {hero.Equipment.Legs.ProtectionType.Name} Protection");
+            Console.WriteLine($"[6] Hands: {hero.Equipment.Hands.Name} - {hero.Equipment.Hands.Protection} {hero.Equipment.Hands.ProtectionType.Name} Protection");
+            Console.WriteLine($"[7] Feet: {hero.Equipment.Feet.Name} - {hero.Equipment.Feet.Protection} {hero.Equipment.Feet.ProtectionType.Name} Protection");
+            Console.WriteLine($"[8] Neck: {hero.Equipment.Neck.Name}");
+            Console.WriteLine($"[9] Ring: {hero.Equipment.Ring.Name}");
+            Console.WriteLine($"[10] Back: {hero.Equipment.Back.Name}");
             Console.WriteLine("[0] Leave Equipment");
             string? input = Console.ReadLine();
             switch (input)
             {
                 case "1":
-                    hero.Weapon.UnEquipItemFromEquipment(hero, inventory);
+                    hero.Equipment.Weapon.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "2":
-                    hero.OffHand.UnEquipItemFromEquipment(hero, inventory);
+                    hero.Equipment.OffHand.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "3":
-                    hero.Head.UnEquipItemFromEquipment(hero, inventory);
+                    hero.Equipment.Head.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "4":
-                    hero.Torso.UnEquipItemFromEquipment(hero, inventory);
+                    hero.Equipment.Torso.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "5":
-                    hero.Legs.UnEquipItemFromEquipment(hero, inventory);
+                    hero.Equipment.Legs.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "6":
-                    hero.Hands.UnEquipItemFromEquipment(hero, inventory);
+                    hero.Equipment.Hands.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "7":
-                    hero.Feet.UnEquipItemFromEquipment(hero, inventory);
+                    hero.Equipment.Feet.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "8":
-                    hero.Neck.UnEquipItemFromEquipment(hero, inventory);
+                    hero.Equipment.Neck.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "9":
-                    hero.Ring.UnEquipItemFromEquipment(hero, inventory);
+                    hero.Equipment.Ring.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "10":
-                    hero.Back.UnEquipItemFromEquipment(hero, inventory);
+                    hero.Equipment.Back.UnEquipItemFromEquipment(hero, inventory);
                     break;
                 case "0":
                     break;
@@ -150,11 +150,11 @@ namespace GameModels
         public void DisplaySpellBook(Character hero)
         {
             Console.WriteLine("SpellBook");
-            if (hero.SpellBook.Count > 0)
+            if (hero.BaseStats.SP.ellBook.Count > 0)
             {
-                for (int spell = 0; spell < hero.SpellBook.Count; spell++)
+                for (int spell = 0; spell < hero.BaseStats.SP.ellBook.Count; spell++)
                 {
-                    Console.WriteLine($"{hero.SpellBook[spell].Name}");
+                    Console.WriteLine($"{hero.BaseStats.SP.ellBook[spell].Name}");
                 }
             }
             AnyKey();

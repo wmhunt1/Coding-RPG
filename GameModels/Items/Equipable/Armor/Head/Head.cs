@@ -10,12 +10,12 @@ public class Head : Armor
     }
     public override void EquipItem(Character hero, Character inventory)
     {
-        hero.Head = this;
+        hero.Equipment.Head = this;
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }
     public override void UnEquipItem(Character hero, Character inventory)
     {
-        hero.Head = new BareHead();
+        hero.Equipment.Head = new BareHead();
         if (this.Name != "Bare")
         {
             this.AddItemToInventory(inventory);
@@ -24,7 +24,7 @@ public class Head : Armor
     public override void EquipItemFromInventory(Character hero, Character inventory)
     {
         this.EquipmentEnchantment.RemoveEnchantmentOnUnEquip(hero);
-        hero.Head.UnEquipItem(hero, inventory);
+        hero.Equipment.Head.UnEquipItem(hero, inventory);
         this.RemoveItemFromInventory(inventory);
         this.EquipItem(hero, inventory);
     }

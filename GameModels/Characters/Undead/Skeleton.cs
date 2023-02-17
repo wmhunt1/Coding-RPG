@@ -8,7 +8,7 @@ public class Skeleton : Undead
         Name = name;
         Ally = false;
         this.CurrentXP = 10;
-        this.Dexterity = 8;
+        this.Attributes.Dexterity.Value = 8;
         Weapon = new Club();
         Torso = new Torso("Leather Scraps", 0, 0);
         Resistances = new List<DamageType>{new PiercingDamage(), new SlashingDamage()};

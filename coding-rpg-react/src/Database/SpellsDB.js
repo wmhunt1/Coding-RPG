@@ -14,7 +14,7 @@ export function poisonSpray() {
     var poisonSpray = {
         Name: "Poison Spray", School: alterationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "A Spray of Poison that Poisons all Foes", Amount: 5, DamageType: poisonDamage(),
         SpellEffect(char, allies, enemies, target, combatLog) {
-            var calcDuration = CalculateSpellBonus(char, this, char.Intelligence, char.IntBonus, char.IntPenalty, 3);
+            var calcDuration = CalculateSpellBonus(char, this, char.Attributes.Intelligence.Value, char.Attributes.Intelligence.Bonus, char.Attributes.Intelligence.Penalty, 3);
             AddToCombatLog(combatLog, char.Name + " sprays all foes with poison");
             for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], poisonCondition(this.Amount, calcDuration), combatLog) }
         }
@@ -26,7 +26,7 @@ export function webSpell() {
     var web = {
         Name: "Sleep", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Webs all foes", Amount: 0, DamageType: noDamage(),
         SpellEffect(char, allies, enemies, target, combatLog) {
-            var calcDuration = CalculateSpellBonus(char, this, char.Intelligence, char.IntBonus, char.IntPenalty, 3);
+            var calcDuration = CalculateSpellBonus(char, this, char.Attributes.Intelligence.Value, char.Attributes.Intelligence.Bonus, char.Attributes.Intelligence.Penalty, 3);
             AddToCombatLog(combatLog, char.Name + " webs all foes");
             for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], webCondition(0, calcDuration), combatLog) }
         }
@@ -86,7 +86,7 @@ export function inspireCourage() {
     var inspireCourage = {
         Name: "Inspire Courage", School: illusionSkill(), LevelRequirement: 1, Use: "Combat", Amount: 1, ManaCost: 5, Description: "Inspires one ally, increasing their damage",
         SpellEffect(char, allies, enemies, target, combatLog) {
-            var calcDuration = CalculateSpellBonus(char, this, char.Charisma, char.ChaBonus, char.ChaPenalty, 3);
+            var calcDuration = CalculateSpellBonus(char, this, char.Attributes.Charisma.Value, char.Attributes.Charisma.Bonus, char.Attributes.Charisma.Penalty, 3);
             AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on " + target.Name + ", increasing their strength by 1");
             courageBuff(calcDuration).ApplyBuff(target)
         }
@@ -97,7 +97,7 @@ export function sleepSpell() {
     var sleep = {
         Name: "Sleep", School: illusionSkill(), LevelRequirement: 10, Use: "Combat", ManaCost: 10, Description: "Puts all foes to sleep", Amount: 0, DamageType: noDamage(),
         SpellEffect(char, allies, enemies, target, combatLog) {
-            var calcDuration = CalculateSpellBonus(char, this, char.Charisma, char.ChaBonus, char.ChaPenalty, 3);
+            var calcDuration = CalculateSpellBonus(char, this, char.Attributes.Charisma.Value, char.Attributes.Charisma.Bonus, char.Attributes.Charisma.Penalty, 3);
             AddToCombatLog(combatLog, char.Name + " puts all foes to sleep");
             for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], sleepCondition(0, calcDuration), combatLog) }
         }
@@ -109,7 +109,7 @@ export function bane() {
     var bane = {
         Name: "Bane", School: restorationSkill(), LevelRequirement: 1, Use: "Combat", Amount: 3, ManaCost: 10, Description: "Weakens all Foes",
         SpellEffect(char, allies, enemies, target, combatLog) {
-            var calcBuff = CalculateSpellBonus(char, this, char.Wisdom, char.WisBonus, char.WisPenalty, 3);
+            var calcBuff = CalculateSpellBonus(char, this, char.Attributes.Wisdom.Value, char.Attributes.Wisdom.Bonus, char.Attributes.Wisdom.Penalty, 3);
             AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on the their enemies.");
             for (var e = 0; e < enemies.length; e++) { baneDeBuff(calcBuff).ApplyDeBuff(enemies[e]) }
         }
@@ -120,7 +120,7 @@ export function basicHeal() {
     var basicHeal = {
         Name: "Basic Heal", School: restorationSkill(), LevelRequirement: 1, Use: "Hybrid", Amount: 5, ManaCost: 5, Description: "Heals One Ally for 5HP",
         SpellEffect(char, allies, enemies, target, combatLog) {
-            var totalHeal = CalculateSpellBonus(char, this, char.Wisdom, char.WisBonus, char.WisPenalty, this.Amount);
+            var totalHeal = CalculateSpellBonus(char, this, char.Attributes.Wisdom.Value, char.Attributes.Wisdom.Bonus, char.Attributes.Wisdom.Penalty, this.Amount);
             AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on " + target.Name + ", healing them for " + totalHeal + " Health");
             HealHP(target, totalHeal)
         }
@@ -131,7 +131,7 @@ export function basicMassHeal() {
     var basicHeal = {
         Name: "Basic Mass Heal", School: restorationSkill(), LevelRequirement: 10, Use: "Hybrid", Amount: 5, ManaCost: 5, Description: "Heals All Allies for 5HP",
         SpellEffect(char, allies, enemies, target, combatLog) {
-            var totalHeal = CalculateSpellBonus(char, this, char.Wisdom, char.WisBonus, char.WisPenalty, this.Amount);
+            var totalHeal = CalculateSpellBonus(char, this, char.Attributes.Wisdom.Value, char.Attributes.Wisdom.Bonus, char.Attributes.Wisdom.Penalty, this.Amount);
             AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on the party, healing them for " + totalHeal + " Health");
             for (var a = 0; a < allies.length; a++) { HealHP(allies[a], totalHeal) }
         }
@@ -142,7 +142,7 @@ export function bless() {
     var bless = {
         Name: "Bless", School: restorationSkill(), LevelRequirement: 1, Use: "Combat", Amount: 3, ManaCost: 10, Description: "Blesses all Allies, Strengthening Them",
         SpellEffect(char, allies, enemies, target, combatLog) {
-            var calcBuff = CalculateSpellBonus(char, this, char.Wisdom, char.WisBonus, char.WisPenalty, this.Amount);
+            var calcBuff = CalculateSpellBonus(char, this, char.Attributes.Wisdom.Value, char.Attributes.Wisdom.Bonus, char.Attributes.Wisdom.Penalty, this.Amount);
             AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " blessing them.");
             for (var a = 0; a < allies.length; a++) { blessBuff(calcBuff).ApplyBuff(allies[a]) }
         }
@@ -165,9 +165,9 @@ export function heroism() {
     var heroism = {
         Name: "Heroism", School: restorationSkill(), LevelRequirement: 1, Use: "Combat", Amount: 1, ManaCost: 5, Description: "Gives one all Allies Temp HP",
         SpellEffect(char, allies, enemies, target, combatLog) {
-            var calcBuff = CalculateSpellBonus(char, this, char.Wisdom, char.WisBonus, char.WisPenalty, this.Amount);
+            var calcBuff = CalculateSpellBonus(char, this, char.Attributes.Wisdom.Value, char.Attributes.Wisdom.Bonus, char.Attributes.Wisdom.Penalty, this.Amount);
             AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on " + target.Name + ", giving them " + calcBuff + " Temp HP");
-            target.TempHP += calcBuff
+            target.BaseStats.HP.Temp += calcBuff
         }
     }
     return heroism

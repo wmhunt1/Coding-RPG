@@ -8,14 +8,14 @@ public class Back : Accessory
     }
     public override void EquipItem(Character hero, Character inventory)
     {
-        hero.Back = this;
+        hero.Equipment.Back = this;
         this.EquipmentEnchantment.ApplyEnchantmentOnEquip(hero);
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }
     public override void UnEquipItem(Character hero, Character inventory)
     {
         this.EquipmentEnchantment.RemoveEnchantmentOnUnEquip(hero);
-        hero.Back = new NoBack();
+        hero.Equipment.Back = new NoBack();
         if (this.Name != "None")
         {
             this.AddItemToInventory(inventory);
@@ -23,7 +23,7 @@ public class Back : Accessory
     }
     public override void EquipItemFromInventory(Character hero, Character inventory)
     {
-        hero.Back.UnEquipItem(hero, inventory);
+        hero.Equipment.Back.UnEquipItem(hero, inventory);
         this.RemoveItemFromInventory(inventory);
         this.EquipItem(hero, inventory);
     }

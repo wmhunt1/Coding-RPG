@@ -21,34 +21,34 @@ export function LevelUpScreen(props) {
     }
     function IncreaseAttribute(hero, attribute) {
         if (attribute === "Strength") {
-            hero.Strength++;
+            hero.Attributes.Strength.Value++;
         }
         else if (attribute === "Constitution") {
-            hero.Constitution++;
+            hero.Attributes.Constitution.Value++;
         }
         else if (attribute === "Dexterity") {
-            hero.Dexterity++;
+            hero.Attributes.Dexterity.Value++;
         }
         else if (attribute === "Intelligence") {
-            hero.Intelligence++;
+            hero.Attributes.Intelligence.Value++;
         }
         else if (attribute === "Wisdom") {
-            hero.Wisdom++;
+            hero.Attributes.Wisdom.Value++;
         }
         else if (attribute === "Charisma") {
-            hero.Charisma++;
+            hero.Attributes.Charisma.Value++;
         }
         else if (attribute === "Perception") {
-            hero.Perception++;
+            hero.Attributes.Perception.Value++;
         }
         else if (attribute === "Luck") {
-            hero.Luck++;
+            hero.Attributes.Luck.Value++;
         }
         else if (attribute === "Beauty") {
-            hero.Beauty++;
+            hero.Attributes.Beauty.Value++;
         }
         else {
-            hero.Speed++;
+            hero.Attributes.Speed.Value++;
         }
         setHero(hero);
     }

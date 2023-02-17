@@ -25,6 +25,9 @@ dungeon reward giantcave, goblinMine, better ratcellar reward, spidecave
 fix nested redundant block
 
 features
+Put Attributes, equipment etc into a object for sorting
+Inventory slots str plus str from party members
+Can't move if over slots
 wolf/bear fur armor lv 5?
 enchanting reagent
 Haunted manor with ghosts 

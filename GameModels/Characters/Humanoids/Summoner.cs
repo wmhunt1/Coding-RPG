@@ -8,15 +8,15 @@ public class Summoner : Humanoid
         Name = name;
         Ally = false;
         CurrentXP = 20;
-        this.CurrentHP = 20;
-        this.MaxHP = 20;
+        this.BaseStats.HP.Current = 20;
+        this.BaseStats.HP.Max = 20;
         SpellBook = new List<Spell>{new SummonSkeletonSpell()};
     }
     public override void CombatAI(Character char1, List<Character> allies, List<Character> enemies)
     {
-        if (this.CurrentMP > 0)
+        if (this.BaseStats.MP.Current > 0)
         {
-            char1.SpellBook.Find(x => x.Name == "Summon Skeleton")?.CastSpell(char1, allies, enemies);
+            char1.BaseStats.SP.ellBook.Find(x => x.Name == "Summon Skeleton")?.CastSpell(char1, allies, enemies);
         }
         else
         {

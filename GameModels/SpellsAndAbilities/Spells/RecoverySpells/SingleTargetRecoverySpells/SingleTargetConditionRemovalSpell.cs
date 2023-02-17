@@ -17,7 +17,7 @@ public class SingleTargetConditionRemovalSpell : SingleTargetRecoverySpell
         Console.WriteLine("Select target");
         for (int ally = 0; ally < allies.Count; ally++)
         {
-            Console.WriteLine($"[{ally + 1}]{allies[ally].Name}: {allies[ally].CurrentHP}/{allies[ally].MaxHP}");
+            Console.WriteLine($"[{ally + 1}]{allies[ally].Name}: {allies[ally].BaseStats.HP.Current}/{allies[ally].BaseStats.HP.Max}");
         }
         string? selectionInput = Console.ReadLine();
         int selection;

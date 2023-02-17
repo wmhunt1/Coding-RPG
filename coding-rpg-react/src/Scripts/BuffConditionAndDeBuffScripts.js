@@ -74,22 +74,22 @@ export function ResistCondition(char, log) {
         char.Condition.RemainingDuration--;
         var resistingAttribute = 0;
         if (char.Condition.Attribute === "Con") {
-            resistingAttribute = char.Constitution + char.ConBonus - char.ConPenalty
+            resistingAttribute = char.Attributes.Constitution.Value + char.Attributes.Constitution.Bonus - char.Attributes.Constitution.Penalty
         }
         else if (char.Condition.Attribute === "Str") {
-            resistingAttribute = char.Strength + char.StrBonus - char.StrPenalty
+            resistingAttribute = char.Attributes.Strength.Value + char.Attributes.Strength.Bonus - char.Attributes.Strength.Penalty
         }
         else {
-            resistingAttribute = char.WillPower + char.WlpBonus - char.WlpPenalty
+            resistingAttribute = char.Attributes.WillPower.Value + char.Attributes.WillPower.Bonus - char.Attributes.WillPower.Penalty
         }
         var resistChance = Math.floor(Math.random() * 50) + 1 + resistingAttribute;
-        if (char.ConditionImmunities.find(x => x.Name === char.Conditon.Name) === true) {
+        if (char.ConditionModifiers.Immunities.find(x => x.Name === char.Conditon.Name) === true) {
             resistChance += 100;
         }
-        if (char.ConditionResistances.find(x => x.Name === char.Conditon.Name) === true) {
+        if (char.ConditionModifiers.Resistances.find(x => x.Name === char.Conditon.Name) === true) {
             resistChance += 50;
         }
-        if (char.ConditionWeaknesses.find(x => x.Name === char.Conditon.Name) === true) {
+        if (char.ConditionModifiers.Weaknesses.find(x => x.Name === char.Conditon.Name) === true) {
             resistChance -= 50
         }
         if (resistChance >= 50 || char.Condition.RemainingDuration === 0) {

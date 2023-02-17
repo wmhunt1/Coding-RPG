@@ -12,11 +12,11 @@ public class Condition
     public bool CheckIfImmuneToCondition(Character char1)
     {
         bool immune = false;
-        if (char1.ConditionImmunities.Count > 0)
+        if (char1.ConditionModifiers.Immunities.Count > 0)
         {
-            for (int cdn = 0; cdn < char1.ConditionImmunities.Count; cdn++)
+            for (int cdn = 0; cdn < char1.ConditionModifiers.Immunities.Count; cdn++)
             {
-                if (char1.ConditionImmunities[cdn].Name == this.Name)
+                if (char1.ConditionModifiers.Immunities[cdn].Name == this.Name)
                 {
                     immune = true;
                 }

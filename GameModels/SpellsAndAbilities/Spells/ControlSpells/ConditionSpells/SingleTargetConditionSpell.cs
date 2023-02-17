@@ -14,7 +14,7 @@ public class SingleTargetConditionSpell : ConditionSpell
         Console.WriteLine("Select target");
         for (int enemy = 0; enemy < enemies.Count; enemy++)
         {
-            Console.WriteLine($"[{enemy + 1}]{enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
+            Console.WriteLine($"[{enemy + 1}]{enemies[enemy].Name}: {enemies[enemy].BaseStats.HP.Current}/{enemies[enemy].BaseStats.HP.Max}");
         }
         string? selectionInput = Console.ReadLine();
         int selection;

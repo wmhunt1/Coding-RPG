@@ -10,7 +10,7 @@ function Combat(props) {
     const [hero, setHero] = useState(props.hero)
     const [abilities, setAbilities] = useState(props.hero.Abilities)
     const [inventory, setInventory] = useState(props.hero.Inventory)
-    const [spells, setSpells] = useState(props.hero.SpellBook)
+    const [spells, setSpells] = useState(props.hero.BaseStats.SpellBook)
     const [allies, setAllies] = useState([props.hero, ...props.hero.Companions])
     const [allyBuffs, setAllyBuffs] = useState(allies)
     const [allyDeBuffs, setAllyDeBuffs] = useState(allies)
@@ -43,7 +43,7 @@ function Combat(props) {
         setEnemyDeBuffs(newEnemyDeBuffs)
         var overZero = 0;
         for (let e = 0; e < enemies.length; e++) {
-            if (enemies[e].CurrentHP) {
+            if (enemies[e].BaseStats.HP.Current) {
                 overZero++;
             }
         }
@@ -60,7 +60,7 @@ function Combat(props) {
         }
         var overZeroA = 0;
         for (let a = 0; a < allies.length; a++) {
-            if (allies[a].CurrentHP) {
+            if (allies[a].BaseStats.HP.Current) {
                 overZeroA++;
             }
         }
@@ -98,12 +98,12 @@ function Combat(props) {
         setPreparedAbility(abil)
         setAction(abil.Name)
     }
-    const alliesList = allies.filter(ally => ally.CurrentHP > 0).map((ally, index) => <h4 key={index}>{ally.Condition.Symbol} {ally.Name} - HP {ally.CurrentHP + ally.TempHP}/{ally.MaxHP + ally.HPBonus - ally.HPPenalty}, MP {ally.CurrentMP}/{ally.MaxMP + ally.MPBonus - ally.MPPenalty}, SP {ally.CurrentSP}/{ally.MaxSP + ally.SPBonus - ally.SPPenalty}, SPD: {ally.Speed + ally.SpdBonus - ally.SpdPenalty} <button onClick={() => RunCombat(hero, allies, enemies, ally, combatLog, action, preparedSpell, preparedAbility, round)}>Target</button></h4>)
-    const alliesBuffList = allyBuffs.filter(ally => ally.CurrentHP > 0 && ally.Buffs.length > 0).map((ally, index) => <h5 style={{ display: "inline" }} key={index}>{ally.Name}'s Buffs: {ally.Buffs.map((buff, index) => <li style={{ display: "inline" }} key={index}>{buff.Name}</li>)} </h5>)
-    const alliesDeBuffList = allyDeBuffs.filter(ally => ally.CurrentHP > 0 && ally.DeBuffs.length > 0).map((ally, index) => <h5 style={{ display: "inline" }} key={index}>{ally.Name}'s DeBuffs: {ally.DeBuffs.map((deBuff, index) => <li style={{ display: "inline" }} key={index}>{deBuff.Name}</li>)} </h5>)
-    const enemiesList = enemies.filter(enemy => enemy.CurrentHP > 0).map((enemy, index) => <h4 key={index}>{enemy.Condition.Symbol} {enemy.Name} - HP: {enemy.CurrentHP}/{enemy.MaxHP + enemy.HPBonus - enemy.HPPenalty}, MP {enemy.CurrentMP}/{enemy.MaxMP + enemy.MPBonus - enemy.MPPenalty}, SP: {enemy.CurrentSP}/{enemy.MaxSP + enemy.SPBonus - enemy.SPPenalty}, SPD: {enemy.Speed + enemy.SpdBonus - enemy.SpdPenalty} <button onClick={() => RunCombat(hero, allies, enemies, enemy, combatLog, action, preparedSpell, preparedAbility, round)}>Target</button></h4>)
-    const enemiesBuffList = enemyBuffs.filter(enemy => enemy.CurrentHP > 0 && enemy.Buffs.length > 0).map((enemy, index) => <h5 style={{ display: "inline" }} key={index}>{enemy.Name}'s Buffs {enemy.Buffs.map((buff, index) => <li style={{ display: "inline" }} key={index}>{buff.Name}</li>)} </h5>)
-    const enemiesDeBuffList = enemyDeBuffs.filter(enemy => enemy.CurrentHP > 0 && enemy.DeBuffs.length > 0).map((enemy, index) => <h5 style={{ display: "inline" }} key={index}>{enemy.Name}'s DeBuffs {enemy.DeBuffs.map((deBuff, index) => <li style={{ display: "inline" }} key={index}>{deBuff.Name}</li>)} </h5>)
+    const alliesList = allies.filter(ally => ally.BaseStats.HP.Current > 0).map((ally, index) => <h4 key={index}>{ally.Condition.Symbol} {ally.Name} - HP {ally.BaseStats.HP.Current + ally.BaseStats.HP.Temp}/{ally.BaseStats.HP.Max + ally.BaseStats.HP.Bonus - ally.BaseStats.HP.Penalty}, MP {ally.BaseStats.MP.Current}/{ally.BaseStats.MP.Max + ally.BaseStats.MP.Bonus - ally.BaseStats.MP.Penalty}, SP {ally.BaseStats.SP.Current}/{ally.BaseStats.SP.Max + ally.BaseStats.SP.Bonus - ally.BaseStats.SP.Penalty}, SPD: {ally.Attributes.Speed.Value + ally.Attributes.Speed.Bonus - ally.Attributes.Speed.Penalty} <button onClick={() => RunCombat(hero, allies, enemies, ally, combatLog, action, preparedSpell, preparedAbility, round)}>Target</button></h4>)
+    const alliesBuffList = allyBuffs.filter(ally => ally.BaseStats.HP.Current > 0 && ally.Buffs.length > 0).map((ally, index) => <h5 style={{ display: "inline" }} key={index}>{ally.Name}'s Buffs: {ally.Buffs.map((buff, index) => <li style={{ display: "inline" }} key={index}>{buff.Name}</li>)} </h5>)
+    const alliesDeBuffList = allyDeBuffs.filter(ally => ally.BaseStats.HP.Current > 0 && ally.DeBuffs.length > 0).map((ally, index) => <h5 style={{ display: "inline" }} key={index}>{ally.Name}'s DeBuffs: {ally.DeBuffs.map((deBuff, index) => <li style={{ display: "inline" }} key={index}>{deBuff.Name}</li>)} </h5>)
+    const enemiesList = enemies.filter(enemy => enemy.BaseStats.HP.Current > 0).map((enemy, index) => <h4 key={index}>{enemy.Condition.Symbol} {enemy.Name} - HP: {enemy.BaseStats.HP.Current}/{enemy.BaseStats.HP.Max + enemy.BaseStats.HP.Bonus - enemy.BaseStats.HP.Penalty}, MP {enemy.BaseStats.MP.Current}/{enemy.BaseStats.MP.Max + enemy.BaseStats.MP.Bonus - enemy.BaseStats.MP.Penalty}, SP: {enemy.BaseStats.SP.Current}/{enemy.BaseStats.SP.Max + enemy.BaseStats.SP.Bonus - enemy.BaseStats.SP.Penalty}, SPD: {enemy.Attributes.Speed.Value + enemy.Attributes.Speed.Bonus - enemy.Attributes.Speed.Penalty} <button onClick={() => RunCombat(hero, allies, enemies, enemy, combatLog, action, preparedSpell, preparedAbility, round)}>Target</button></h4>)
+    const enemiesBuffList = enemyBuffs.filter(enemy => enemy.BaseStats.HP.Current > 0 && enemy.Buffs.length > 0).map((enemy, index) => <h5 style={{ display: "inline" }} key={index}>{enemy.Name}'s Buffs {enemy.Buffs.map((buff, index) => <li style={{ display: "inline" }} key={index}>{buff.Name}</li>)} </h5>)
+    const enemiesDeBuffList = enemyDeBuffs.filter(enemy => enemy.BaseStats.HP.Current > 0 && enemy.DeBuffs.length > 0).map((enemy, index) => <h5 style={{ display: "inline" }} key={index}>{enemy.Name}'s DeBuffs {enemy.DeBuffs.map((deBuff, index) => <li style={{ display: "inline" }} key={index}>{deBuff.Name}</li>)} </h5>)
     const itemList = inventory.filter(item => item.Type === "Consumable").map((item, index) => <h5 key={index}>{item.Name} - QTY: {item.Quantity} <button onClick={() => { handleConsumable(hero, allies, enemies, enemies[0], combatLog, "Use", preparedSpell, preparedAbility, round, inventory, item) }}>Use</button></h5>)
     const abilList = abilities.map((abil, index) => <h5 key={index}>{abil.Name} ({abil.StaminaCost} SP) <button onClick={() => handleAbility(abil)}>Use</button></h5>)
     //const abilListSP = abilities.sort((a, b) => a.Name.localeCompare(b.Name)).map((abil, index) => <h5 key={index}>{abil.Name} ({abil.StaminaCost} SP) <button onClick={() => handleAbility(abil)}>Use</button></h5>)

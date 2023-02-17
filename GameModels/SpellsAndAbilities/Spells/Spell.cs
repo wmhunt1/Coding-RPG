@@ -22,7 +22,7 @@ public class Spell
     }
     public bool HasEnoughMP(Character caster)
     {
-        if (caster.CurrentMP >= ManaCost)
+        if (caster.BaseStats.MP.Current >= ManaCost)
         {
             return true;
         }
@@ -41,7 +41,7 @@ public class Spell
         Console.WriteLine($"{caster.Name} casts {this.Name}");
         if (manaCheck == true)
         {
-            caster.SpendMana(ManaCost);
+            caster.BaseStats.SP.endMana(ManaCost);
             SpellEffect(caster, allies, enemies);
         }
         else
@@ -51,10 +51,10 @@ public class Spell
     }
     public Character LearnSpell(Character caster)
     {
-        if (caster.SpellBook.Find(x => x.Name == Name) == null)
+        if (caster.BaseStats.SP.ellBook.Find(x => x.Name == Name) == null)
         {
             Console.WriteLine($"{caster.Name} learns the Spell: {Name}");
-            caster.SpellBook.Add(this);
+            caster.BaseStats.SP.ellBook.Add(this);
         }
         return caster;
     }

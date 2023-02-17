@@ -202,9 +202,9 @@ public class Character
     {
         this.Level++;
         Console.WriteLine($"{this.Name} Levels Up, reaching Level {this.Level}");
-        this.MaxHP = this.MaxHP + this.Constitution;
-        this.MaxMP = this.MaxMP + this.Intelligence;
-        this.MaxSP = this.MaxSP + this.Dexterity;
+        this.BaseStats.HP.Max = this.BaseStats.HP.Max + this.Attributes.Constitution.Value;
+        this.BaseStats.MP.Max = this.BaseStats.MP.Max + this.Attributes.Intelligence.Value;
+        this.BaseStats.SP.Max = this.BaseStats.SP.Max + this.Attributes.Dexterity.Value;
         this.MaxXP = this.Level * this.MaxXP;
         FullRest();
         return this.Level;
@@ -233,75 +233,75 @@ public class Character
     }
     public int HealHP(int heal)
     {
-        this.CurrentHP += heal;
+        this.BaseStats.HP.Current += heal;
 
-        if (this.CurrentHP > this.MaxHP)
+        if (this.BaseStats.HP.Current > this.BaseStats.HP.Max)
         {
-            this.CurrentHP = this.MaxHP;
+            this.BaseStats.HP.Current = this.BaseStats.HP.Max;
         }
-        return this.CurrentHP;
+        return this.BaseStats.HP.Current;
     }
     public int TakeDamage(int damage)
     {
         if (damage >= 0)
         {
-            this.CurrentHP -= damage;
+            this.BaseStats.HP.Current -= damage;
         }
-        return this.CurrentHP;
+        return this.BaseStats.HP.Current;
     }
     public int GainMana(int gain)
     {
-        this.CurrentMP += gain;
+        this.BaseStats.MP.Current += gain;
 
-        if (this.CurrentMP > this.MaxMP)
+        if (this.BaseStats.MP.Current > this.BaseStats.MP.Max)
         {
-            this.CurrentMP = this.MaxMP;
+            this.BaseStats.MP.Current = this.BaseStats.MP.Max;
         }
-        return this.CurrentMP;
+        return this.BaseStats.MP.Current;
     }
     public int SpendMana(int cost)
     {
         if (cost >= 0)
         {
-            this.CurrentMP -= cost;
+            this.BaseStats.MP.Current -= cost;
         }
-        return this.CurrentMP;
+        return this.BaseStats.MP.Current;
     }
     public int RecoverStamina(int gain)
     {
-        this.CurrentSP += gain;
+        this.BaseStats.SP.Current += gain;
 
-        if (this.CurrentSP > this.MaxSP)
+        if (this.BaseStats.SP.Current > this.BaseStats.SP.Max)
         {
-            this.CurrentSP = this.MaxSP;
+            this.BaseStats.SP.Current = this.BaseStats.SP.Max;
         }
-        return this.CurrentSP;
+        return this.BaseStats.SP.Current;
     }
     public int SpendStamina(int cost)
     {
         if (cost >= 0)
         {
-            this.CurrentSP -= cost;
+            this.BaseStats.SP.Current -= cost;
         }
-        return this.CurrentSP;
+        return this.BaseStats.SP.Current;
     }
     public int RegenHP()
     {
-        int regen = this.HPRegen + this.HPRegenBonus - this.HPRegenPenalty;
-        this.CurrentHP += regen;
-        return this.CurrentHP;
+        int regen = this.BaseStats.HP.Regen + this.BaseStats.HP.RegenBonus - this.BaseStats.HP.RegenPenalty;
+        this.BaseStats.HP.Current += regen;
+        return this.BaseStats.HP.Current;
     }
     public int RegenMP()
     {
-        int regen = this.MPRegen + this.MPRegenBonus - this.MPRegenPenalty;
-        this.CurrentMP += regen;
-        return this.CurrentMP;
+        int regen = this.BaseStats.MP.Regen + this.BaseStats.MP.RegenBonus - this.BaseStats.MP.RegenPenalty;
+        this.BaseStats.MP.Current += regen;
+        return this.BaseStats.MP.Current;
     }
     public int RegenSP()
     {
-        int regen = this.SPRegen + this.SPRegenBonus - this.SPRegenPenalty;
-        this.CurrentSP += regen;
-        return this.CurrentSP;
+        int regen = this.BaseStats.SP.Regen + this.BaseStats.SP.RegenBonus - this.BaseStats.SP.RegenPenalty;
+        this.BaseStats.SP.Current += regen;
+        return this.BaseStats.SP.Current;
     }
     public void RegenAll()
     {
@@ -323,9 +323,9 @@ public class Character
         RecoverFromConditions(this.Conditions);
         for (int comp = 0; comp < this.Companions.Count; comp++)
         {
-            Companions[comp].HealHP(Companions[comp].MaxHP);
-            Companions[comp].GainMana(Companions[comp].MaxMP);
-            Companions[comp].RecoverStamina(Companions[comp].MaxSP);
+            Companions[comp].HealHP(Companions[comp].BaseStats.HP.Max);
+            Companions[comp].GainMana(Companions[comp].BaseStats.MP.Max);
+            Companions[comp].RecoverStamina(Companions[comp].BaseStats.SP.Max);
             Companions[comp].RecoverFromConditions(Companions[comp].Conditions);
         }
     }
@@ -333,7 +333,7 @@ public class Character
     {
         Random rand = new Random();
         int number = rand.Next(0, 100);
-        if (number <= this.Luck)
+        if (number <= this.Attributes.Luck.Value)
         {
             Console.WriteLine("Critical Hit!");
             damage *= 2;
@@ -401,48 +401,48 @@ public class Character
     }
     public void BasicAttack(Character target)
     {
-        int totalArmor = target.Torso.Protection;
-        int totalStrength = this.Strength + this.StrengthBonus - this.StrengthPenalty;
-        int totalOffHand = this.OffHandDamage + this.OffHandDamageBonus + this.OffHandDamagePenalty;
-        int totalDexterity = target.Dexterity + target.DexterityBonus - target.DexterityPenalty;
-        int totalShield = target.Shield + target.ShieldBonus - target.ShieldPenalty;
-        int damage = this.Strength + this.Weapon.WeaponDmg + totalStrength + totalOffHand - totalArmor - totalDexterity - totalShield;
-        int calculatedDamage = CalculateDamageWithPossibleCrit(target, damage, this.Weapon.WeaponDmgType);
+        int totalArmor = target.Equipment.Torso.Protection;
+        int totalStrength = this.Attributes.Strength.Value + this.Attributes.Strength.ValueBonus - this.Attributes.Strength.ValuePenalty;
+        int totalOffHand = this.Equipment.OffHandDamage + this.Equipment.OffHandDamageBonus + this.Equipment.OffHandDamagePenalty;
+        int totalDexterity = target.Attributes.Dexterity.Value + target.Attributes.Dexterity.ValueBonus - target.Attributes.Dexterity.ValuePenalty;
+        int totalShield = target.Shield + target.BaseStats.Defense.Bonus - target.BaseStats.Defense.Penalty;
+        int damage = this.Attributes.Strength.Value + this.Equipment.Weapon.Equipment.WeaponDmg + totalStrength + totalOffHand - totalArmor - totalDexterity - totalShield;
+        int calculatedDamage = CalculateDamageWithPossibleCrit(target, damage, this.Equipment.Weapon.Equipment.WeaponDmgType);
         target.TakeDamage(calculatedDamage);
         if (calculatedDamage > 0)
         {
-            Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, dealing {calculatedDamage} {this.Weapon.WeaponDmgType.Name} Damage");
+            Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Equipment.Weapon.Name}, dealing {calculatedDamage} {this.Equipment.Weapon.Equipment.WeaponDmgType.Name} Damage");
             Weapon.EquipmentEnchantment.OnHitEnchantment(this, target);
         }
         else
         {
             if (totalArmor + totalShield > totalDexterity)
             {
-                Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, but the attack bounces off their armor");
+                Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Equipment.Weapon.Name}, but the attack bounces off their armor");
             }
             else
             {
-                Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, but the attack misses");
+                Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Equipment.Weapon.Name}, but the attack misses");
             }
 
         }
     }
     public void ArmorIgnoringAttack(Character target)
     {
-        int totalStrength = this.Strength + this.StrengthBonus - this.StrengthPenalty;
-        int totalOffHand = this.OffHandDamage + this.OffHandDamageBonus + this.OffHandDamagePenalty;
-        int totalDexterity = target.Dexterity + target.DexterityBonus - target.DexterityPenalty;
-        int damage = this.Strength + this.Weapon.WeaponDmg + totalStrength + totalOffHand - totalDexterity;
-        int calculatedDamage = CalculateDamageWithPossibleCrit(target, damage, this.Weapon.WeaponDmgType);
+        int totalStrength = this.Attributes.Strength.Value + this.Attributes.Strength.ValueBonus - this.Attributes.Strength.ValuePenalty;
+        int totalOffHand = this.Equipment.OffHandDamage + this.Equipment.OffHandDamageBonus + this.Equipment.OffHandDamagePenalty;
+        int totalDexterity = target.Attributes.Dexterity.Value + target.Attributes.Dexterity.ValueBonus - target.Attributes.Dexterity.ValuePenalty;
+        int damage = this.Attributes.Strength.Value + this.Equipment.Weapon.Equipment.WeaponDmg + totalStrength + totalOffHand - totalDexterity;
+        int calculatedDamage = CalculateDamageWithPossibleCrit(target, damage, this.Equipment.Weapon.Equipment.WeaponDmgType);
         target.TakeDamage(calculatedDamage);
         if (calculatedDamage > 0)
         {
-            Console.WriteLine($"{this.Name} sneak attacks {target.Name} with {this.Weapon.Name}, dealing {calculatedDamage} {this.Weapon.WeaponDmgType.Name} Damage");
+            Console.WriteLine($"{this.Name} sneak attacks {target.Name} with {this.Equipment.Weapon.Name}, dealing {calculatedDamage} {this.Equipment.Weapon.Equipment.WeaponDmgType.Name} Damage");
             Weapon.EquipmentEnchantment.OnHitEnchantment(this, target);
         }
         else
         {
-            Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Weapon.Name}, but the attack misses");
+            Console.WriteLine($"{this.Name} attacks {target.Name} with {this.Equipment.Weapon.Name}, but the attack misses");
         }
     }
     public void AttackSpell(Character target, int baseDamage, DamageType damageType)

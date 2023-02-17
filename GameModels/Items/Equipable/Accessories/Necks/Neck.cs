@@ -8,14 +8,14 @@ public class Neck : Accessory
     }
     public override void EquipItem(Character hero, Character inventory)
     {
-        hero.Neck = this;
+        hero.Equipment.Neck = this;
         this.EquipmentEnchantment.ApplyEnchantmentOnEquip(hero);
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }
     public override void UnEquipItem(Character hero, Character inventory)
     {
         this.EquipmentEnchantment.RemoveEnchantmentOnUnEquip(hero);
-        hero.Neck = new NoNeck();
+        hero.Equipment.Neck = new NoNeck();
         if (this.Name != "None")
         {
             this.AddItemToInventory(inventory);
@@ -23,7 +23,7 @@ public class Neck : Accessory
     }
     public override void EquipItemFromInventory(Character hero, Character inventory)
     {
-        hero.Neck.UnEquipItem(hero, inventory);
+        hero.Equipment.Neck.UnEquipItem(hero, inventory);
         this.RemoveItemFromInventory(inventory);
         this.EquipItem(hero, inventory);
     }

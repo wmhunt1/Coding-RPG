@@ -12,34 +12,34 @@ export function CalculateCharWeaponDamage(char, weapon) {
     var attribute = 0;
     var damage = Math.round((FindSkillInSkillBook(char, weapon.Class).Level) / 10)
     if (weapon.Class.Name === "Short Blade" || weapon.Class.Name === "Ranged") {
-        attribute = char.Dexterity + char.DexBonus - char.DexPenalty
+        attribute = char.Attributes.Dexterity.Value + char.Attributes.Dexterity.Bonus - char.Attributes.Dexterity.Penalty
     }
     else if (weapon.Class.Name === "Destruction") {
-        attribute = char.Intelligence + char.IntBonus - char.IntPenalty
+        attribute = char.Attributes.Intelligence.Value + char.Attributes.Intelligence.Bonus - char.Attributes.Intelligence.Penalty
     }
     else {
-        attribute = char.Strength + char.StrBonus - char.StrPenalty
+        attribute = char.Attributes.Strength.Value + char.Attributes.Strength.Bonus - char.Attributes.Strength.Penalty
     }
-    damage += weapon.Damage + attribute + char.AttackBonus - char.AttackPenalty;
+    damage += weapon.Damage + attribute + char.BaseStats.Attack.Bonus - char.BaseStats.Attack.Penalty;
     return damage;
 }
 export function CalculateCharArmor(char) {
-    var armorSkill = Math.round((FindSkillInSkillBook(char, char.Torso.Class).Level) / 10)
+    var armorSkill = Math.round((FindSkillInSkillBook(char, char.Equipment.Torso.Class).Level) / 10)
     var shield = 0;
-    if (char.OffHand.SubType === "Shield") {
+    if (char.Equipment.OffHand.SubType === "Shield") {
         var blockSkillIndex = char.SkillBook.findIndex(x => x.Name === "Block");
         var blockSkill = Math.round((char.SkillBook[blockSkillIndex].Level / 10))
-        shield = char.OffHand.Protection + blockSkill + char.ShieldBonus - char.ShieldPenalty
+        shield = char.Equipment.OffHand.Protection + blockSkill;
     }
-    var armor = Math.round((char.Head.Protection + char.Torso.Protection + char.Legs.Protection + char.Hands.Protection + char.Feet.Protection) / 5) + shield + armorSkill;
+    var armor = Math.round((char.Equipment.Head.Protection + char.Equipment.Torso.Protection + char.Equipment.Legs.Protection + char.Equipment.Hands.Protection + char.Equipment.Feet.Protection) / 5) + shield + armorSkill;
     return armor;
 }
 export function CalculateCharDefenseWithArmor(char, armor) {
-    var defense = armor + char.Dexterity + char.DexBonus - char.DexPenalty
+    var defense = armor + char.Attributes.Dexterity.Value + char.Attributes.Dexterity.Bonus - char.Attributes.Dexterity.Penalty
     return defense;
 }
 export function CalculateCharDefenseWithoutArmor(char) {
-    var defense = char.Dexterity + char.DexBonus - char.DexPenalty
+    var defense = char.Attributes.Dexterity.Value + char.Attributes.Dexterity.Bonus - char.Attributes.Dexterity.Penalty
     return defense;
 }
 export function CalculateBaseDamage(damage, defense) {
@@ -52,15 +52,15 @@ export function CalculateBaseDamage(damage, defense) {
 }
 export function CalculateDamageModifiers(char, damage, type) {
     var mod = ""
-    if (char.Immunities.includes(type) === true) {
+    if (char.DamageModifiers.Immunities.includes(type) === true) {
         damage = 0;
         mod = " (Immune) "
     }
-    if (char.Resistances.includes(type) === true) {
+    if (char.DamageModifiers.Resistances.includes(type) === true) {
         damage /= 2;
         mod = " (Resistant) "
     }
-    if (char.Weaknesses.includes(type) === true) {
+    if (char.DamageModifiers.Weaknesses.includes(type) === true) {
         damage *= 2;
         mod = " (Weak) "
     }
@@ -68,7 +68,7 @@ export function CalculateDamageModifiers(char, damage, type) {
 }
 export function CalculateCritDamage(char1, damage) {
     var crit = " "
-    if (Math.floor(Math.random() * 100) + 1 + char1.Luck >= 75) {
+    if (Math.floor(Math.random() * 100) + 1 + char1.Attributes.Luck.Value >= 75) {
         damage *= 2;
         crit = " Critical "
     }
@@ -78,7 +78,7 @@ export function BasicAttackResults(char1, char2, combatLog, baseDamage, modified
     var result = "";
     if (baseDamage === 0) {
         var miss = ""
-        if (char2Armor > char2.Dexterity + char2.DexBonus - char2.DexPenalty) {
+        if (char2Armor > char2.Attributes.Dexterity.Value + char2.Attributes.Dexterity.Bonus - char2.Attributes.Dexterity.Penalty) {
             miss = "'s armor deflects "
         }
         else {
@@ -102,20 +102,20 @@ export function BasicAttack(char1, char2, combatLog, weapon) {
     TakeDamage(char2, totalDamage[0])
     var combatSkillIndex = char1.SkillBook.findIndex(x => x.Name === weapon.Class.Name);
     EarnSkillXP(char1, char1.SkillBook[combatSkillIndex], totalDamage[0])
-    var armorSkillIndex = char2.SkillBook.findIndex(x => x.Name === char2.Torso.Class.Name);
+    var armorSkillIndex = char2.SkillBook.findIndex(x => x.Name === char2.Equipment.Torso.Class.Name);
     EarnSkillXP(char2, char2.SkillBook[armorSkillIndex], totalDamage[0])
-    if (char2.OffHand.SubType === "Shield") {
+    if (char2.Equipment.OffHand.SubType === "Shield") {
         var blockSkillIndex = char1.SkillBook.findIndex(x => x.Name === "Block");
         EarnSkillXP(char2, char2.SkillBook[blockSkillIndex], totalDamage[0])
     }
     BasicAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, char2Armor, weapon.DamageType)
-    char1.Weapon.Enchantment.OnHitEffect(char1, char2, combatLog)
+    char1.Equipment.Weapon.Enchantment.OnHitEffect(char1, char2, combatLog)
 }
 export function MagicAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, spell) {
     var result = "";
     var miss = "";
     if (baseDamage === 0) {
-        if (char2.WillPower + char2.WlpBonus - char2.WlpPenalty > char2.Dexterity + char2.DexBonus - char2.DexPenalty) {
+        if (char2.Attributes.WillPower.Value + char2.Attributes.WillPower.Bonus - char2.Attributes.WillPower.Penalty > char2.Attributes.Dexterity.Value + char2.Attributes.Dexterity.Bonus - char2.Attributes.Dexterity.Penalty) {
             miss = "'s resists with their Willpower "
         }
         else {
@@ -130,8 +130,8 @@ export function MagicAttackResults(char1, char2, combatLog, baseDamage, modified
 }
 export function ProjectileMagicAttack(char1, char2, combatLog, spell) {
     var skillDamage = Math.round((FindSkillInSkillBook(char1, destructionSkill()).Level) / 10)
-    var char1Damage = char1.Intelligence + char1.IntBonus - char1.IntPenalty + spell.Amount + skillDamage;
-    var char2Defense = (char2.WillPower + char2.WlpBonus - char2.WlpPenalty) / 2 + (char2.Dexterity + char2.DexBonus - char2.DexPenalty) / 2;
+    var char1Damage = char1.Attributes.Intelligence.Value + char1.Attributes.Intelligence.Bonus - char1.Attributes.Intelligence.Penalty + spell.Amount + skillDamage;
+    var char2Defense = (char2.Attributes.WillPower.Value + char2.Attributes.WillPower.Bonus - char2.Attributes.WillPower.Penalty) / 2 + (char2.Attributes.Dexterity.Value + char2.Attributes.Dexterity.Bonus - char2.Attributes.Dexterity.Penalty) / 2;
     var baseDamage = CalculateBaseDamage(char1Damage, char2Defense)
     var modifiedDamage = CalculateDamageModifiers(char2, baseDamage, spell.DamageType)
     var totalDamage = CalculateCritDamage(char1, modifiedDamage[0])
@@ -159,7 +159,7 @@ export function ArmorIgnoringAttack(char1, char2, combatLog, weapon) {
     var skillIndex = char1.SkillBook.findIndex(x => x.Name === weapon.Class.Name);
     EarnSkillXP(char1, char1.SkillBook[skillIndex], totalDamage[0])
     ArmorIgnoringAttackResults(char1, char2, combatLog, baseDamage, modifiedDamage, totalDamage, weapon.DamageType)
-    char1.Weapon.Enchantment.OnHitEffect(char1, char2, combatLog)
+    char1.Equipment.Weapon.Enchantment.OnHitEffect(char1, char2, combatLog)
 }
 export function DamageConditionCheck(char, combatLog) {
     ResistCondition(char, combatLog)
@@ -182,13 +182,13 @@ export function SkipConditionCheck(char, combatLog) {
     }
 }
 export function HeroTurn(char1, allies, enemies, target, combatLog, option, spell, abil) {
-    if (char1.CurrentHP + char1.TempHP > 0) {
+    if (char1.BaseStats.HP.Current + char1.BaseStats.HP.Temp > 0) {
         Regen(char1, combatLog)
         if (SkipConditionCheck(char1, combatLog) === false) {
             if (option === "Basic Attack") {
-                BasicAttack(char1, target, combatLog, char1.Weapon)
-                if (char1.OffHand.SubType === "Weapon" && char1.OffHand.Name !== "Empty") {
-                    BasicAttack(char1, target, combatLog, char1.OffHand)
+                BasicAttack(char1, target, combatLog, char1.Equipment.Weapon)
+                if (char1.Equipment.OffHand.SubType === "Weapon" && char1.Equipment.OffHand.Name !== "Empty") {
+                    BasicAttack(char1, target, combatLog, char1.Equipment.OffHand)
                 }
             }
             if (abil !== null) {
@@ -207,7 +207,7 @@ export function HeroTurn(char1, allies, enemies, target, combatLog, option, spel
 }
 export function NPCTurn(allies, enemies, combatLog, round, hero) {
     for (let a = hero; a < allies.length; a++) {
-        if (allies[a].CurrentHP + allies[a].TempHP > 0) {
+        if (allies[a].BaseStats.HP.Current + allies[a].BaseStats.HP.Temp > 0) {
             Regen(allies[a], combatLog)
             if (SkipConditionCheck(allies[a], combatLog) === false) {
                 allies[a].Tactics.Tactics(allies[a], allies, enemies, combatLog, round)
@@ -223,8 +223,8 @@ export function NPCTurn(allies, enemies, combatLog, round, hero) {
 export function CalculateAverageSpeed(team) {
     var speed = 0;
     for (let t = 0; t < team.length; t++) {
-        if (team[t].CurrentHP + team[t].TempHP > 0) {
-            speed += team[t].Speed + team[t].SpdBonus - team[t].SpdPenalty;
+        if (team[t].BaseStats.HP.Current + team[t].BaseStats.HP.Temp > 0) {
+            speed += team[t].Attributes.Speed.Value + team[t].Attributes.Speed.Bonus - team[t].Attributes.Speed.Penalty;
         }
     }
     speed /= team.length;
@@ -272,6 +272,6 @@ export function CombatRewards(hero, allies, enemies) {
         RemoveAllBuffs(allies[a2])
         RemoveAllDeBuffs(allies[a2])
         RemoveCondition(allies[a2])
-        allies[a2].TempHP = 0;
+        allies[a2].BaseStats.HP.Temp = 0;
     }
 }

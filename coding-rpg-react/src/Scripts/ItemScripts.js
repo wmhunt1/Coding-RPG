@@ -6,7 +6,7 @@ Array.prototype.remove = function () {
     while (L && this.length) {
         what = a[--L];
         while ((ax = this.indexOf(what)) !== -1) {
-            this.splice(ax, 1);
+            this.BaseStats.SP.lice(ax, 1);
         }
     }
     return this;
@@ -85,47 +85,47 @@ export function UnEquip(char, inventory, item, log) {
         AddItemToInventory(char, inventory, item, item.Quantity, log)
     }
     if (item.Slot === "Weapon") {
-        char.Weapon = bareFist()
+        char.Equipment.Weapon = bareFist()
     }
     if (item.Slot === "OffHand") {
-        char.OffHand = emptyOffHand()
+        char.Equipment.OffHand = emptyOffHand()
     }
     if (item.Slot === "Head") {
-        char.Head = bareHead()
+        char.Equipment.Head = bareHead()
     }
     if (item.Slot === "Torso") {
-        char.Torso.ProtectionType.onUnEquip(char, char.Torso)
-        if (char.Torso.Class.Name === "Heavy Armor") {
-            //char.DexPenalty += 3;
-            //char.SpdPenalty += 3;
+        char.Equipment.Torso.ProtectionType.onUnEquip(char, char.Equipment.Torso)
+        if (char.Equipment.Torso.Class.Name === "Heavy Armor") {
+            //char.Attributes.Dexterity.Penalty += 3;
+            //char.Attributes.Speed.Penalty += 3;
         }
-        if (char.Torso.Class.Name === "Medium Armor") {
-            //char.DexPenalty += 2;
-            //char.SpdPenalty += 2;
+        if (char.Equipment.Torso.Class.Name === "Medium Armor") {
+            //char.Attributes.Dexterity.Penalty += 2;
+            //char.Attributes.Speed.Penalty += 2;
         }
-        if (char.Torso.Class.Name === "Light Armor") {
-            //char.DexPenalty += 1;
-            //char.SpdPenalty += 1;
+        if (char.Equipment.Torso.Class.Name === "Light Armor") {
+            //char.Attributes.Dexterity.Penalty += 1;
+            //char.Attributes.Speed.Penalty += 1;
         }
-        char.Torso = bareTorso()
+        char.Equipment.Torso = bareTorso()
     }
     if (item.Slot === "Legs") {
-        char.Legs = bareLegs()
+        char.Equipment.Legs = bareLegs()
     }
     if (item.Slot === "Hands") {
-        char.Hands = bareHands()
+        char.Equipment.Hands = bareHands()
     }
     if (item.Slot === "Feet") {
-        char.Feet = bareFeet()
+        char.Equipment.Feet = bareFeet()
     }
     if (item.Slot === "Back") {
-        char.Back = bareBack()
+        char.Equipment.Back = bareBack()
     }
     if (item.Slot === "Neck") {
-        char.Neck = bareNeck()
+        char.Equipment.Neck = bareNeck()
     }
     if (item.Slot === "Ring") {
-        char.Ring = bareFinger()
+        char.Equipment.Ring = bareFinger()
     }
     item.Enchantment.OnUnEquipEffect(char, item)
     char.Inventory = inventory;
@@ -134,60 +134,60 @@ export function EquipItem(char, inventory, item, log) {
     if (FindSkillInSkillBook(char, item.Class).Level >= item.Level) {
         AddToCharacterLog(log, char.Name + " Equipped " + item.Name);
         if (item.Slot === "Weapon") {
-            UnEquip(char, inventory, char.Weapon, log)
-            char.Weapon = item;
+            UnEquip(char, inventory, char.Equipment.Weapon, log)
+            char.Equipment.Weapon = item;
             if (item.Type === "TwoHands") {
-                EquipItem(char, inventory, char.OffHand)
+                EquipItem(char, inventory, char.Equipment.OffHand)
             }
         }
         if (item.Slot === "OffHand") {
-            UnEquip(char, inventory, char.OffHand, log)
-            char.OffHand = item
+            UnEquip(char, inventory, char.Equipment.OffHand, log)
+            char.Equipment.OffHand = item
         }
         if (item.Slot === "Head") {
-            UnEquip(char, inventory, char.Head, log)
-            char.Head = item
+            UnEquip(char, inventory, char.Equipment.Head, log)
+            char.Equipment.Head = item
         }
         if (item.Slot === "Torso") {
-            UnEquip(char, inventory, char.Torso, log)
+            UnEquip(char, inventory, char.Equipment.Torso, log)
             item.ProtectionType.onEquip(char, item)
-            char.Torso = item
-            if (char.Torso.Class.Name === "Heavy Armor") {
-                //char.DexPenalty -= 3;
-                //char.SpdPenalty -= 3;
+            char.Equipment.Torso = item
+            if (char.Equipment.Torso.Class.Name === "Heavy Armor") {
+                //char.Attributes.Dexterity.Penalty -= 3;
+                //char.Attributes.Speed.Penalty -= 3;
             }
-            if (char.Torso.Class.Name === "Medium Armor") {
-                //char.DexPenalty -= 2;
-                //char.SpdPenalty -= 3;
+            if (char.Equipment.Torso.Class.Name === "Medium Armor") {
+                //char.Attributes.Dexterity.Penalty -= 2;
+                //char.Attributes.Speed.Penalty -= 3;
             }
-            if (char.Torso.Class.Name === "Light Armor") {
-                //char.DexPenalty -= 1;
-                //char.SpdPenalty -= 3;
+            if (char.Equipment.Torso.Class.Name === "Light Armor") {
+                //char.Attributes.Dexterity.Penalty -= 1;
+                //char.Attributes.Speed.Penalty -= 3;
             }
         }
         if (item.Slot === "Legs") {
-            UnEquip(char, inventory, char.Legs, log)
-            char.Legs = item
+            UnEquip(char, inventory, char.Equipment.Legs, log)
+            char.Equipment.Legs = item
         }
         if (item.Slot === "Hands") {
-            UnEquip(char, inventory, char.Hands, log)
-            char.Hands = item
+            UnEquip(char, inventory, char.Equipment.Hands, log)
+            char.Equipment.Hands = item
         }
         if (item.Slot === "Feet") {
-            UnEquip(char, inventory, char.Feet, log)
-            char.Feet = item
+            UnEquip(char, inventory, char.Equipment.Feet, log)
+            char.Equipment.Feet = item
         }
         if (item.Slot === "Back") {
-            UnEquip(char, inventory, char.Back, log)
-            char.Back = item
+            UnEquip(char, inventory, char.Equipment.Back, log)
+            char.Equipment.Back = item
         }
         if (item.Slot === "Neck") {
-            UnEquip(char, inventory, char.Neck, log)
-            char.Neck = item
+            UnEquip(char, inventory, char.Equipment.Neck, log)
+            char.Equipment.Neck = item
         }
         if (item.Slot === "Ring") {
-            UnEquip(char, inventory, char.Ring, log)
-            char.Ring = item
+            UnEquip(char, inventory, char.Equipment.Ring, log)
+            char.Equipment.Ring = item
         }
         item.Enchantment.OnEquipEffect(char, item)
     }
@@ -222,17 +222,17 @@ export function ApplyOnEquipEffect(hero, immune, resist, weak, cImmune, cResist,
     for (var i2 = 0; i2 < cImmune.length; i2++) {
         var cImmunity = cImmune[i2]
         cImmunity.Source = item;
-        hero.ConditionImmunities.push(immunity)
+        hero.ConditionModifiers.Immunities.push(immunity)
     }
     for (var r2 = 0; r2 < cResist.length; r2++) {
         var cResistance = cResist[r2]
         cResistance.Source = item;
-        hero.ConditionResistances.push(cResistance)
+        hero.ConditionModifiers.Resistances.push(cResistance)
     }
     for (var w2 = 0; w < cWeak.length; w2++) {
         var cWeakness = cWeak[w2]
         cWeakness.Source = item;
-        hero.ConditionWeaknesses.push(cWeakness)
+        hero.ConditionModifiers.Weaknesses.push(cWeakness)
     }
 }
 export function ApplyOnUnEquipEffect(hero, immune, resist, weak, cImmune, cResist, cWeak, item) {
@@ -257,19 +257,19 @@ export function ApplyOnUnEquipEffect(hero, immune, resist, weak, cImmune, cResis
     for (var i2 = 0; i2 < cImmune.length; i2++) {
         var cImmunity = cImmune[i2]
         if (cImmunity.Source === item) {
-            hero.ConditionImmunities.remove(immunity)
+            hero.ConditionModifiers.Immunities.remove(immunity)
         }
     }
     for (var r2 = 0; r2 < cResist.length; r2++) {
         var cResistance = cResist[r2]
         if (cResistance.Source === item) {
-            hero.ConditionResistances.remove(cResistance)
+            hero.ConditionModifiers.Resistances.remove(cResistance)
         }
     }
     for (var w2 = 0; w < cWeak.length; w2++) {
         var cWeakness = cWeak[w2]
         if (cWeakness.Source === item) {
-            hero.ConditionWeaknesses.remove(cWeakness)
+            hero.ConditionModifiers.Weaknesses.remove(cWeakness)
         }
     }
 }

@@ -7,7 +7,7 @@ import { AddGold, AddToCharacterLog, RemoveGold } from '../Scripts/CharacterScri
 function Bank(props) {
     const [active, setActive] = useState("banking")
     const [hero, setHero] = useState(props.hero);
-    const [gold, setGold] = useState(hero.Gold)
+    const [gold, setGold] = useState(hero.Inventory.Gold)
     const [bank, setBank] = useState(hero.Bank)
     const [bankGold, setBankGold] = useState(hero.BankGold)
     const [inventory, setInventory] = useState(hero.Inventory)

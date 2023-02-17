@@ -5,15 +5,15 @@ import { CastSpell } from "../Scripts/AbilityAndSpellScripts"
 
 function SpellBook(props) {
     const [hero, setHero] = useState(props.hero)
-    const [heroMP, setHeroMP] = useState(props.hero.CurrentMP)
-    const [spells, setSpells] = useState(props.hero.SpellBook)
+    const [heroMP, setHeroMP] = useState(props.hero.BaseStats.MP.Current)
+    const [spells, setSpells] = useState(props.hero.BaseStats.SpellBook)
     const [allies, setAllies] = useState([props.hero, ...props.hero.Companions])
     const [activeTarget, setActiveTarget] = useState(props.hero)
     const [list, setList] = useState("Default")
     function handleCastSpell(char, allies, enemies, target, log, spell) {
         CastSpell(char, allies, enemies, target, log, spell)
         setHero(char)
-        setHeroMP(char.CurrentMP)
+        setHeroMP(char.BaseStats.MP.Current)
         props.parentCallback(char);
     }
     const charList = allies.map((ally, index) => <h4 key={index}>{ally.Name} <button onClick={() => setActiveTarget(ally)}><h4>Set Active Character</h4></button></h4>)

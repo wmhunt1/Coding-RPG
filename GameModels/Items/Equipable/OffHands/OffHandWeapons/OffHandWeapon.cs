@@ -15,15 +15,15 @@ public class OffHandWeapon : OffHand
     }
     public override void EquipItem(Character hero, Character inventory)
     {
-        hero.OffHand = this;
-        hero.OffHandDamageBonus += OffHandDamageValue;
+        hero.Equipment.OffHand = this;
+        hero.Equipment.OffHandDamageBonus += OffHandDamageValue;
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }
     public override void UnEquipItem(Character hero, Character inventory)
     {
         this.EquipmentEnchantment.RemoveEnchantmentOnUnEquip(hero);
-        hero.OffHand = new EmptyHand();
-        hero.OffHandDamage -= OffHandDamageValue;
+        hero.Equipment.OffHand = new EmptyHand();
+        hero.Equipment.OffHandDamage -= OffHandDamageValue;
         if (this.Name != "Empty Hand")
         {
             this.AddItemToInventory(inventory);

@@ -44,10 +44,10 @@ namespace GameModels
         {
             for (int character = 0; character < characters.Count; character++)
             {
-                if (characters[character].CurrentHP > 0)
+                if (characters[character].BaseStats.HP.Current > 0)
                 {
                     characters[character].RegenAll();
-                    Console.WriteLine($"{characters[character].Name} - HP: {characters[character].CurrentHP}/{characters[character].MaxHP} MP: {characters[character].CurrentMP}/{characters[character].MaxMP} SP: {characters[character].CurrentSP}/{characters[character].MaxSP}");
+                    Console.WriteLine($"{characters[character].Name} - HP: {characters[character].BaseStats.HP.Current}/{characters[character].BaseStats.HP.Max} MP: {characters[character].BaseStats.MP.Current}/{characters[character].BaseStats.MP.Max} SP: {characters[character].BaseStats.SP.Current}/{characters[character].BaseStats.SP.Max}");
                     if (characters[character].Conditions.Count > 0)
                     {
                         for (int cond = 0; cond < characters[character].Conditions.Count; cond++)
@@ -63,9 +63,9 @@ namespace GameModels
             Console.WriteLine("Select target");
             for (int enemy = 0; enemy < enemies.Count; enemy++)
             {
-                if (enemies[enemy].CurrentHP > 0)
+                if (enemies[enemy].BaseStats.HP.Current > 0)
                 {
-                    Console.WriteLine($"[{enemy + 1}]{enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
+                    Console.WriteLine($"[{enemy + 1}]{enemies[enemy].Name}: {enemies[enemy].BaseStats.HP.Current}/{enemies[enemy].BaseStats.HP.Max}");
                 }
             }
             string? selectionInput = Console.ReadLine();
@@ -100,16 +100,16 @@ namespace GameModels
         public void SpellOption(Character char1, List<Character> allies, List<Character> enemies)
         {
             Console.WriteLine("Select Spell");
-            for (int spell = 0; spell < char1.SpellBook.Count; spell++)
+            for (int spell = 0; spell < char1.BaseStats.SP.ellBook.Count; spell++)
             {
-                Console.WriteLine($"[{spell + 1}]{char1.SpellBook[spell].Name} : {char1.SpellBook[spell].ManaCost}");
+                Console.WriteLine($"[{spell + 1}]{char1.BaseStats.SP.ellBook[spell].Name} : {char1.BaseStats.SP.ellBook[spell].ManaCost}");
             }
             string? selectionInput = Console.ReadLine();
             int selection;
             bool parseSucess = Int32.TryParse(selectionInput, out selection);
-            if (parseSucess == true && selection > 0 && selection <= char1.SpellBook.Count)
+            if (parseSucess == true && selection > 0 && selection <= char1.BaseStats.SP.ellBook.Count)
             {
-                char1.SpellBook[selection - 1].CastSpell(char1, allies, enemies);
+                char1.BaseStats.SP.ellBook[selection - 1].CastSpell(char1, allies, enemies);
             }
             AnyKey();
         }
@@ -152,7 +152,7 @@ namespace GameModels
             bool left = false;
             for (int enemy = 0; enemy < enemies.Count; enemy++)
             {
-                if (enemies[enemy].CurrentHP > 0)
+                if (enemies[enemy].BaseStats.HP.Current > 0)
                 {
                     left = true;
                 }
@@ -169,9 +169,9 @@ namespace GameModels
                 {
                     for (int enemy = 0; enemy < enemies.Count; enemy++)
                     {
-                        if (enemies[enemy].CurrentHP > 0)
+                        if (enemies[enemy].BaseStats.HP.Current > 0)
                         {
-                            Console.WriteLine($"[{enemy + 1}]{enemies[enemy].Name}: {enemies[enemy].CurrentHP}/{enemies[enemy].MaxHP}");
+                            Console.WriteLine($"[{enemy + 1}]{enemies[enemy].Name}: {enemies[enemy].BaseStats.HP.Current}/{enemies[enemy].BaseStats.HP.Max}");
                         }
                     }
                     Console.WriteLine($"{char1.Name} - Combat Options");
@@ -180,7 +180,7 @@ namespace GameModels
                     {
                         Console.WriteLine("[2] Use Ability");
                     }
-                    if (char1.SpellBook.Count > 0)
+                    if (char1.BaseStats.SP.ellBook.Count > 0)
                     {
                         Console.WriteLine("[3] Cast Spell");
                     }
@@ -198,7 +198,7 @@ namespace GameModels
                             }
                             break;
                         case "3":
-                            if (char1.SpellBook.Count > 0)
+                            if (char1.BaseStats.SP.ellBook.Count > 0)
                             {
                                 SpellOption(char1, allies, enemies);
                             }
@@ -276,7 +276,7 @@ namespace GameModels
         {
             for (int sort = 0; sort < sortedTurnOrder.Count; sort++)
             {
-                if (sortedTurnOrder[sort].CurrentHP > 0)
+                if (sortedTurnOrder[sort].BaseStats.HP.Current > 0)
                 {
                     ChanceForConditionToEnd(sortedTurnOrder[sort]);
                     bool turnSkip = CheckForTurnSkippingConditions(sortedTurnOrder[sort]);
@@ -352,15 +352,15 @@ namespace GameModels
             {
                 unsortedTurnOrder.Add(enemies[enemy]);
             }
-            List<Character> sortedTurnOrder = unsortedTurnOrder.OrderByDescending(o => o.Speed).ToList();
+            List<Character> sortedTurnOrder = unsortedTurnOrder.OrderByDescending(o => o.Attributes.Speed.Value).ToList();
             while (!combatOver)
             {
                 ShowTitle();
-                if (hero.CurrentHP > 0 && enemies.Count > 0)
+                if (hero.BaseStats.HP.Current > 0 && enemies.Count > 0)
                 {
                     for (int enemy = 0; enemy < enemies.Count; enemy++)
                     {
-                        if (enemies[enemy].CurrentHP <= 0)
+                        if (enemies[enemy].BaseStats.HP.Current <= 0)
                         {
                             defeatedEnemies.Add(enemies[enemy]);
                             enemies.Remove(enemies[enemy]);
@@ -375,9 +375,9 @@ namespace GameModels
                         round++;
                     }
                 }
-                if (hero.CurrentHP <= 0 || enemies.Count == 0)
+                if (hero.BaseStats.HP.Current <= 0 || enemies.Count == 0)
                 {
-                    if (hero.CurrentHP > 0)
+                    if (hero.BaseStats.HP.Current > 0)
                     {
                         Console.WriteLine($"{hero.Name}'s Party is Victorious");
                         for (int enemy = 0; enemy < defeatedEnemies.Count; enemy++)

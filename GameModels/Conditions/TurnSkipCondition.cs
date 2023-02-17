@@ -10,7 +10,7 @@ public class TurnSkipCondition : Condition
     public override Character ResistCondition(Character char1)
     {
         Random random = new Random();
-        int resistingAttribute = char1.WillPower + char1.WillPowerBonus + char1.WillPowerPenalty;
+        int resistingAttribute = char1.Attributes.WillPower.Value + char1.Attributes.WillPower.ValueBonus + char1.Attributes.WillPower.ValuePenalty;
         int chance = random.Next(resistingAttribute, 100);
         if (chance >= 50)
         {

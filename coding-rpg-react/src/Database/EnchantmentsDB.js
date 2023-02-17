@@ -13,11 +13,11 @@ export function fireEnchantment() {
     return fireEnchantment
 }
 export function fireImmuneEnchantment() {
-    var fireEnchantment = { Name: "Immunity to Fire", Immunities: [fireDamage()], Resistances: [], Weaknesses: [], ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionImmunities, this.ConditionResistances, this.ConditionWeaknesses, item) }, OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, char.ConditionImmunities, char.ConditionResistances, char.ConditionWeaknesses, item) } }
+    var fireEnchantment = { Name: "Immunity to Fire", Immunities: [fireDamage()], Resistances: [], Weaknesses: [], ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionModifiers.Immunities, this.ConditionModifiers.Resistances, this.ConditionModifiers.Weaknesses, item) }, OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, char.ConditionModifiers.Immunities, char.ConditionModifiers.Resistances, char.ConditionModifiers.Weaknesses, item) } }
     return fireEnchantment
 }
 export function iceResistEnchantment() {
-    var iceResist = { Name: "Resistance to Ice", Immunities: [], Resistances: [iceDamage()], Weaknesses: [], ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionImmunities, this.ConditionResistances, this.ConditionWeaknesses, item) }, OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, char.ConditionImmunities, char.ConditionResistances, char.ConditionWeaknesses, item) } }
+    var iceResist = { Name: "Resistance to Ice", Immunities: [], Resistances: [iceDamage()], Weaknesses: [], ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionModifiers.Immunities, this.ConditionModifiers.Resistances, this.ConditionModifiers.Weaknesses, item) }, OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, char.ConditionModifiers.Immunities, char.ConditionModifiers.Resistances, char.ConditionModifiers.Weaknesses, item) } }
     return iceResist
 }
 export function poisonApplyEnchantment(){
@@ -25,6 +25,6 @@ export function poisonApplyEnchantment(){
     return poisonApplyEnchantment
 }
 export function strengthEnchantment() {
-    var strengthEnchantment = { Name: "Strength Enchantment", OnHitEffect() { }, OnEquipEffect(char, item) { char.StrBonus += 2; char.Log.push(char.Name + " gains a +2 Strength Bonus due to enchantment") }, OnUnEquipEffect(char, item) { char.StrBonus -= 2 } }
+    var strengthEnchantment = { Name: "Strength Enchantment", OnHitEffect() { }, OnEquipEffect(char, item) { char.Attributes.Strength.Bonus += 2; char.Log.push(char.Name + " gains a +2 Strength Bonus due to enchantment") }, OnUnEquipEffect(char, item) { char.Attributes.Strength.Bonus -= 2 } }
     return strengthEnchantment;
 }

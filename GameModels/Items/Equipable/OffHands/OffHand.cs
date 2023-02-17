@@ -10,13 +10,13 @@ public class OffHand : Equipable
     }
      public override void EquipItem(Character hero, Character inventory)
     {
-        hero.OffHand = this;
+        hero.Equipment.OffHand = this;
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }
     public override void UnEquipItem(Character hero, Character inventory)
     {
         this.EquipmentEnchantment.RemoveEnchantmentOnUnEquip(hero);
-        hero.OffHand = new EmptyHand();
+        hero.Equipment.OffHand = new EmptyHand();
         if (this.Name != "Empty Hand")
         {
             this.AddItemToInventory(inventory);
@@ -24,7 +24,7 @@ public class OffHand : Equipable
     }
     public override void EquipItemFromInventory(Character hero, Character inventory)
     {
-        hero.OffHand.UnEquipItem(hero, inventory);
+        hero.Equipment.OffHand.UnEquipItem(hero, inventory);
         this.RemoveItemFromInventory(inventory);
         this.EquipItem(hero, inventory);
     }

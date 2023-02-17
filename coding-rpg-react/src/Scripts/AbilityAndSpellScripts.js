@@ -6,9 +6,9 @@ export function CalculateSpellBonus(char, spell, attr, attrB, attrP, base) {
     return extra + base;
 }
 export function ModifySummon(char, allies, summon) {
-    var mod = Math.round((FindSkillInSkillBook(char, conjurationSkill()).Level + char.Charisma + char.ChaBonus - char.ChaPenalty) / 10)
-    summon.TempHP += mod;
-    summon.AttackBonus += mod;
+    var mod = Math.round((FindSkillInSkillBook(char, conjurationSkill()).Level + char.Attributes.Charisma.Value + char.Attributes.Charisma.Bonus - char.Attributes.Charisma.Penalty) / 10)
+    summon.BaseStats.HP.Temp += mod;
+    summon.BaseStats.Attack.Bonus += mod;
     allies.push(summon);
 }
 export function CastSpell(char, allies, enemies, target, combatLog, spell) {
@@ -17,7 +17,7 @@ export function CastSpell(char, allies, enemies, target, combatLog, spell) {
     if (spell.LevelRequirement <= level) {
         if (HasEnoughMP(char, spell.ManaCost) === true) {
             UseMP(char, spell.ManaCost)
-            spell.SpellEffect(char, allies, enemies, target, combatLog)
+            spell.BaseStats.SP.ellEffect(char, allies, enemies, target, combatLog)
             var skillIndex = char.SkillBook.findIndex(x => x.Name === spell.School.Name);
             EarnSkillXP(char, char.SkillBook[skillIndex], spell.ManaCost)
         }
@@ -47,8 +47,8 @@ export function CheckIfKnowsAbility(char, abil) {
 }
 export function CheckIfKnowsSpell(char, spell) {
     var index = null
-    if (char.SpellBook.find(x => x.Name === spell.Name)) {
-        index = char.SpellBook.findIndex(x => x.Name === spell.Name);
+    if (char.BaseStats.SP.ellBook.find(x => x.Name === spell.Name)) {
+        index = char.BaseStats.SP.ellBook.findIndex(x => x.Name === spell.Name);
     }
     return index
 }
@@ -62,11 +62,11 @@ export function LearnAbility(char, abil) {
     }
 }
 export function LearnSpell(char, spell) {
-    if (char.SpellBook.find(x => x.Name === spell.Name)) {
+    if (char.BaseStats.SP.ellBook.find(x => x.Name === spell.Name)) {
         char.Log.push(char.Name + " already knows " + spell.Name)
     }
     else {
-        char.SpellBook.push(spell);
+        char.BaseStats.SP.ellBook.push(spell);
         char.Log.push(char.Name + " learns " + spell.Name)
     }
 }

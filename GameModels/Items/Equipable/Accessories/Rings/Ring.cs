@@ -8,14 +8,14 @@ public class Ring : Accessory
     }
     public override void EquipItem(Character hero, Character inventory)
     {
-        hero.Ring = this;
+        hero.Equipment.Ring = this;
         this.EquipmentEnchantment.ApplyEnchantmentOnEquip(hero);
         Console.WriteLine($"{hero.Name} equips {this.Name}");
     }
     public override void UnEquipItem(Character hero, Character inventory)
     {
         this.EquipmentEnchantment.RemoveEnchantmentOnUnEquip(hero);
-        hero.Ring = new EmptyFinger();
+        hero.Equipment.Ring = new EmptyFinger();
         if (this.Name != "Empty Finger")
         {
             this.AddItemToInventory(inventory);
@@ -23,7 +23,7 @@ public class Ring : Accessory
     }
     public override void EquipItemFromInventory(Character hero, Character inventory)
     {
-        hero.Ring.UnEquipItem(hero, inventory);
+        hero.Equipment.Ring.UnEquipItem(hero, inventory);
         this.RemoveItemFromInventory(inventory);
         this.EquipItem(hero, inventory);
     }
