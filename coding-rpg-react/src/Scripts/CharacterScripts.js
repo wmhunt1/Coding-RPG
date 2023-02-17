@@ -22,6 +22,7 @@ export function LevelUp(char, log) {
     char.CurrentMP = char.Intelligence;
     char.MaxSP += 10;
     char.CurrentSP = char.Constitution;
+    FullyRecover(char)
     AddToCharacterLog(log, char.Name + " has reached level " + char.Level);
 }
 export function CheckForLevelUp(char, log) {

@@ -36,6 +36,7 @@ function Equipment(props) {
     return (
         <div>
             <h2>{hero.Name}'s Equipment</h2>
+            <h4>ATK: {hero.Weapon.Damage + hero.AttackBonus - hero.AttackPenalty} PROT: {hero.Head.Protection + hero.Torso.Protection + hero.Legs.Protection + hero.Hands.Protection + hero.Feet.Protection + hero.ProtectionBonus - hero.ProtectionPenalty} SHD: {hero.ShieldBonus - hero.ShieldPenalty}</h4>
             <div className='equipment-box'>
                 <h3>Weapons</h3>
                 <h5>Weapon - Name: {weapon.Name}, Damage: {weapon.Damage}, Damage Type: {weapon.DamageType.Name} <button onClick={() => handleUnEquip(hero, log.Inventory, weapon, log)}>UnEquip</button></h5>

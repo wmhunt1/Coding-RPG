@@ -5,6 +5,7 @@ import './Game.css'
 
 export function LevelUpScreen(props) {
     const [hero, setHero] = useState(props.hero)
+    const [log, setLog] = useState(props.log)
     const [active, setActive] = useState("Leveling")
     const [aOne, setAOne] = useState("Strength")
     const [aTwo, setATwo] = useState("Strength")
@@ -51,8 +52,8 @@ export function LevelUpScreen(props) {
         }
         setHero(hero);
     }
-    function handleLevelUp(char, a1, a2, a3) {
-        LevelUp(char);
+    function handleLevelUp(char, a1, a2, a3, log) {
+        LevelUp(char, log);
         IncreaseAttribute(char, a1)
         IncreaseAttribute(char, a2)
         IncreaseAttribute(char, a3)
@@ -73,7 +74,7 @@ export function LevelUpScreen(props) {
                     <div className="attribute-selection"><AttributeIncrease parentCallback={handleCallbackThree}></AttributeIncrease></div>
                 </div>
                 <div style={{ paddingBottom: "1%" }}>
-                    <button onClick={() => handleLevelUp(hero, aOne, aTwo, aThree)}><h3>Level {hero.Name} to Level {hero.Level + 1}</h3></button>
+                    <button onClick={() => handleLevelUp(hero, aOne, aTwo, aThree, log)}><h3>Level {hero.Name} to Level {hero.Level + 1}</h3></button>
                 </div>
                 <div>
                 </div>

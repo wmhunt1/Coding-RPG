@@ -63,7 +63,7 @@ function Game(props) {
           {active === "Menu" ? <Menu hero={hero} Back={() => setActive("Game")} MainMenu={() => setActive("MainMenu")}></Menu> : <div></div>}
           {active === "Abilities" ? <Abilities hero={hero} Back={() => setActive("Game")}></Abilities> : <div></div>}
           {active === "Bank" ? <Bank parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></Bank> : <div></div>}
-          {active === "CharacterSheet" ? <CharacterSheet parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></CharacterSheet> : <div></div>}
+          {active === "CharacterSheet" ? <CharacterSheet parentCallback={handleCallback} hero={hero} log={hero} Back={() => setActive("Game")}></CharacterSheet> : <div></div>}
           {active === "Combat" ? <Combat parentCallback={handleCallback} hero={hero} enemies={combat} Back={() => setActive("Game")}></Combat> : <div></div>}
           {active === "Dialogue" ? <Dialogue parentCallback={handleCallback} hero={hero} talk={dialogue} Back={() => setActive("Game")}></Dialogue> : <div></div>}
           {active === "Dungeon" ? <Dungeon parentCallback={handleCallback} hero={hero} dungeon={dungeon} Back={() => setActive("Game")}></Dungeon> : <div></div>}

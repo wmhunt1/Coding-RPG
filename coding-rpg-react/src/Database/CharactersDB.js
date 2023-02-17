@@ -18,7 +18,7 @@ export function character(name) {
         Strength: 10, StrBonus: 0, StrPenalty: 0, Constitution: 10, ConBonus: 0, ConPenalty: 0, Dexterity: 10, DexBonus: 0, DexPenalty: 0,
         Intelligence: 10, IntBonus: 0, IntPenalty: 0, Wisdom: 10, WisBonus: 0, WisPenalty: 0, Charisma: 10, ChaBonus: 0, ChaPenalty: 0,
         WillPower: 10, WlpBonus: 0, WlpPenalty: 0, Perception: 10, PrcBonus: 0, PrcPenalty: 0, Luck: 10, LckBonus: 0, LckPenalty: 0,
-        Beauty: 10, BtyBonus: 0, BtyPenalty: 0, Speed: 10, SpdBonus: 0, SpdPenalty: 0, ShieldBonus: 0, ShieldPenalty: 0, AttackBonus: 0, AttackPenalty: 0,
+        Beauty: 10, BtyBonus: 0, BtyPenalty: 0, Speed: 10, SpdBonus: 0, SpdPenalty: 0, AttackBonus: 0, AttackPenalty: 0, ShieldBonus: 0, ShieldPenalty: 0, ProtectionBonus: 0, ProtectionPenalty: 0,
         Weapon: bareFist(), OffHand: emptyOffHand(), Head: bareHead(), Torso: bareTorso(), Legs: bareLegs(), Hands: bareHands(), Feet: bareFeet(),
         Back: bareBack(), Neck: bareNeck(), Ring: bareFinger(), Inventory: [], Gold: 0, Bank: [], BankGold: 0,
         Companions: [], Journal: [], Abilities: [], SpellBook: [], SkillBook: allSkills(), Reputation: [], Relationships: [],

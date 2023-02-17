@@ -276,7 +276,7 @@ export function enterWellNode(hero) {
 }
 //farming
 export function enterFarmNode(hero) {
-    var farm = { Name: "Farm", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: farmNode(hero) }; return content } }
+    var farm = { Name: "Farm (Skill)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: farmNode(hero) }; return content } }
     return farm
 }
 export function enterSheepNode(hero) {

@@ -63,7 +63,7 @@ function Party(props) {
             <h2>{props.hero.Name}'s Party</h2>
             {party.length > 0 ? <div>{partyList}</div> : <div><h3>No Companions</h3></div>}
             {active === "ViewAbil" ? <div><Abilities hero={activeHero}></Abilities></div> : <div></div>}
-            {active === "ViewCS" ? <div><CharacterSheet hero={activeHero}></CharacterSheet></div> : <div></div>}
+            {active === "ViewCS" ? <div><CharacterSheet hero={activeHero} log={hero}></CharacterSheet></div> : <div></div>}
             {active === "ViewEquip" ? <div><Equipment hero={activeHero} log ={hero} parentCallback={handleCallback}></Equipment></div> : <div></div>}
             {active === "ViewSkill" ? <div><SkillBook hero={activeHero}></SkillBook></div> : <div></div>}
             {active === "ViewSpell" ? <div><SpellBook hero={activeHero}></SpellBook></div> : <div></div>}
