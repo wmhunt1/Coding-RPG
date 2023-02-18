@@ -1,6 +1,6 @@
 import { noCondition, poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
 import { cleave, pierceArmor, rage } from "./AbilitiesDB";
-import { bareBack, bareFinger, bareNeck, bite, bones, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakBow, ironAxe2H, ironSword, skull, bronzeShield, bronzeMace, bronzeHelmet, wolfFur, clawSlash, bearFur } from "./ItemsDB";
+import { bareBack, bareFinger, bareNeck, bite, bones, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakBow, ironAxe2H, ironSword, skull, bronzeShield, bronzeMace, bronzeHelmet, wolfFur, clawSlash, bearFur, rawChicken, feather, peck, batGuano } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
 import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell, summonRat } from "./SpellsDB"
 import { BasicAttacker, BasicHealer, Rager, spiderSummoner } from "./TacticsDB";
@@ -77,10 +77,21 @@ export function beast(name) {
     beast.Equipment.Weapon = bite();
     return beast
 }
+export function bat() {
+    var rat = beast("Bat")
+    rat.CurrentXP = 5; rat.BaseStats.HP.Current = 5; rat.BaseStats.HP.Max = 5; rat.BaseStats.MP.Current = 5; rat.BaseStats.MP.Max = 5; rat.BaseStats.SP.Current = 5; rat.BaseStats.SP.Max = 5; rat.ItemDrops = [batGuano()]
+    return rat;
+}
 export function bear() {
     var bear = beast("Bear")
     bear.BaseStats.HP.Current = 20; bear.BaseStats.HP.Max = 20; bear.Attributes.Strength.Value = 14; bear.Attributes.Constitution.Value = 14; bear.Equipment.Weapon = clawSlash(); bear.ItemDrops = [bearFur()]
     return bear;
+}
+export function chicken() {
+    var chicken = beast("Chicken")
+    chicken.CurrentXP = 5; chicken.BaseStats.HP.Current = 5; chicken.BaseStats.HP.Max = 5; chicken.BaseStats.MP.Current = 5; chicken.BaseStats.MP.Max = 5; rat.BaseStats.SP.Current = 5; chicken.BaseStats.SP.Max = 5; chicken.ItemDrops = [rawChicken(), feather()];
+    chicken.Equipment.Weapon = peck(); chicken.Attributes.Strength = 5;
+    return chicken;
 }
 export function cow() {
     var cow = beast("Cow")

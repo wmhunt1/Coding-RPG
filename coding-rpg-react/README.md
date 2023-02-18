@@ -12,31 +12,19 @@ retrieve sheepscale's stolen sheep  (quest, monsters, dialogue, dungeon, locatio
 deliver letter to ambrosius quest (quest, monsters, dialogue, dungeon, location, place on map)
 
 fixes/changes
-Use rs3 tiers for crafting?
+balancing
 write more than generic dialogue
-balance level requiurements and xp
 fix tactic selection
 clean up scripts
 quest rewards for scarecrowquest (1-2 and 4), giantquest
 dungeon reward giantcave, goblinMine, better ratcellar reward, spidecave
 fix nested redundant block
 Combine barter and Persuasion?
-
+combine weapons into light and heavy weapons (dex or str)
+short and longbow?
 
 features
-Add engineering?
-Guns and bombs tier metal/woos
-Crossbows
-Bat poop plus for saltpeter or mine mix with water
-Mine sulfur
-Make charcoal from wood
-Gunpowder with metal and wood for gun
-X1.for pistol x2 for rifle
-Ammo?
-Chicken mob for chicken and feathers
-Make arrows bolts and bullets
-Balance melee ranged and magic
-Make melee items more ecpensive,expensive,?
+Ammo? Make arrows bolts and bullets
 Combat positions?
 sublocation button formating
 wolf/bear fur armor lv 5?
@@ -44,7 +32,6 @@ enchanting reagent
 Haunted manor with ghosts 
 Hidden quest for if went to witch and met Wyle and family 
 Maybe if 3 quests completed John Dale shows up
-Bat cave
 abraham arkwright companion
 Talking tree
 Quincy companion
@@ -58,7 +45,6 @@ Property (include your own allotments)
 random encounter that forces combat (set movement as false)
 quest failure if took to long
 dungeon exploration and/or puzzles
-Weight or inventory slots?
 Map for dungeon with leaving like world map
 Or town maps
 Skill trainers (just sell lamps?)

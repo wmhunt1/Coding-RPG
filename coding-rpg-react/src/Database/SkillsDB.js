@@ -1,5 +1,5 @@
 export function allSkills(level) {
-    var allSkills = [alchemySkill(), acrobaticsSkill(), alterationSkill(1), athleticsSkill(), axeSkill(1), barterSkill(), blockSkill(1), bluntSKill(1), conjurationSkill(1), cookingSkill(), craftingSkill(), destructionSkill(1), divinationSkill(1), enchantingSKill(1), farmingSkill(), firemakingSkill(), fishingSkill(), fletchingSkill(), heavyArmorSkill(1), herbloreSkill(), huntingSkill(), illusionSkill(1), lightArmorSkill(1), lockpickingSkill(), longBladeSkill(1), miningSkill(), persuationSkill(), rangedSkill(1), restorationSkill(1), shortBladeSkill(1), smithingSkill(), spearSkill(1), stealthSkill(), survivalSkill(), unArmedSkill(1), unArmoredSkill(1), senseSkill(), woodcuttingSkill()]
+    var allSkills = [alchemySkill(), acrobaticsSkill(), alterationSkill(1), athleticsSkill(), axeSkill(1), barterSkill(), blockSkill(1), bluntSKill(1), conjurationSkill(1), cookingSkill(), craftingSkill(), destructionSkill(1), divinationSkill(1),engineeringSkill(), enchantingSKill(1), farmingSkill(), firemakingSkill(), fishingSkill(), fletchingSkill(), heavyArmorSkill(1), herbloreSkill(), huntingSkill(), illusionSkill(1), lightArmorSkill(1), lockpickingSkill(), longBladeSkill(1), miningSkill(), persuationSkill(), rangedSkill(1), restorationSkill(1), shortBladeSkill(1), smithingSkill(), spearSkill(1), stealthSkill(), survivalSkill(), unArmedSkill(1), unArmoredSkill(1), senseSkill(), woodcuttingSkill()]
     return allSkills
 }
 //armor skills
@@ -35,6 +35,10 @@ export function cookingSkill() {
 export function craftingSkill() {
     var craft = { Name: "Crafting", Type: "Crafting", Level: 1, CurrentXP: 0, MaxXP: 50 }
     return craft
+}
+export function engineeringSkill() {
+    var engine = { Name: "Engineering", Type: "Crafting", Level: 1, CurrentXP: 0, MaxXP: 50 }
+    return engine;
 }
 export function firemakingSkill() {
     var fire = { Name: "Firemaking", Type: "Crafting", Level: 1, CurrentXP: 0, MaxXP: 50 }

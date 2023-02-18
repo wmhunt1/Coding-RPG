@@ -1,4 +1,4 @@
-import { banditHideout, bearCave, bridge, brokenBridge, daleTown, dwarvenMine, farm, forest, fortDale, giantCave,graveyard,lake, littleRootFarm, lumbermill,mill, mountains, orcVillage, river, road, spiderCave, tenguCamp, whiteScalesLair, witchHut, wolfDen } from "./LocationsDB"
+import { banditHideout, batCave, bearCave, bridge, brokenBridge, daleTown, dwarvenMine, farm, forest, fortDale, giantCave,graveyard,lake, littleRootFarm, lumbermill,mill, mountains, orcVillage, river, road, spiderCave, tenguCamp, whiteScalesLair, witchHut, wolfDen } from "./LocationsDB"
 
 export function startingAdjacentLocations(hero) {
     var start = [bridge(hero, 0,1),river(hero, 1,1), road(hero, 1, 0), graveyard(hero, 1,-1), road(hero, 0, -1), littleRootFarm(hero, -1, -1), river(hero, 0, -1), river(hero, -1, 1), road(hero, 0, 2), road(hero,2,0), road(hero, 0, -2), river(hero,-2,0)]
@@ -12,9 +12,9 @@ export function worldMap(hero) {
             road(hero, -3, 13), road(hero, -2, 13), lake(hero, -1, 13), lake(hero, 0, 13),road(hero, 1, 13), road(hero, 2, 13), forest(hero,3,13),farm(hero, 4, 13), mountains(hero, 5, 13),
             road(hero, -4, 12), road(hero, -3, 12), lake(hero, -2, 12), lake(hero, -1, 12), lake(hero, 0, 12), lake(hero, 1, 12),road(hero, 2, 12), road(hero, 3, 12),road(hero, 4, 12), mountains(hero, 5, 12),
             road(hero, -4, 11),lake(hero, -3, 11), lake(hero, -2, 11), lake(hero, -1, 11), lake(hero, 0, 11), lake(hero, 1, 11),lake(hero, 2, 11),road(hero, 3, 11),
-            road(hero, -4, 10),lake(hero, -3, 10), lake(hero, -2, 10), fortDale(hero, -1, 10), lake(hero, 0, 10), lake(hero, 1, 10), lake(2, 10),road(hero, 3, 10),
-            road(hero, -4, 9),lake(hero, -3, 9), lake(hero, -2, 9), brokenBridge(hero, -1, 9), lake(hero, 0, 9), lake(hero, 1, 9), lake(2, 9),road(hero, 3, 9),
-            road(hero, -4, 8),road(hero, -3, 8),lake(hero, -2, 8), brokenBridge(hero, -1, 8), lake(hero, 1, 8),road(hero, 2, 8),road(hero, 3, 8),
+            road(hero, -4, 10),lake(hero, -3, 10), lake(hero, -2, 10), fortDale(hero, -1, 10), lake(hero, 0, 10), lake(hero, 1, 10), lake(2, 10),road(hero, 3, 10),mountains(hero, 4, 10), mountains(hero, 5, 10),
+            road(hero, -4, 9),lake(hero, -3, 9), lake(hero, -2, 9), brokenBridge(hero, -1, 9), lake(hero, 0, 9), lake(hero, 1, 9), lake(2, 9),road(hero, 3, 9),batCave(hero, 4, 9),mountains(hero, 5, 9),
+            road(hero, -4, 8),road(hero, -3, 8),lake(hero, -2, 8), brokenBridge(hero, -1, 8), lake(hero, 1, 8),road(hero, 2, 8),road(hero, 3, 8),mountains(hero, 4, 8), mountains(hero, 5, 8),
             mountains(hero, -5,7),forest(hero, -4,7), road(hero, -3, 7),road(hero, -3, 7),road(hero, -1, 7),road(hero,0, 7), bridge(hero, 1, 7),road(hero, 2, 7),
             mountains(hero, -5,6),bearCave(hero, -4,6),forest(hero,-3,6), road(hero, -1, 6), river(hero, 1, 6), river(hero, 2, 6),forest(hero,3,6), mountains(hero, 4, 6),mountains(hero, 5, 6),
             mountains(hero, -5,6),forest(hero, -4,5),forest(hero,-3,5), road(hero, -1, 5), forest(hero, 0, 5), forest(hero, 1, 5), river(hero, 2, 5),forest(hero,3,5), giantCave(hero, 4, 5) , mountains(hero, 5, 5),
@@ -43,9 +43,9 @@ export function worldMap(hero) {
 //|- 13  -||       ||       ||  road ||  road || lake  || lake  || road  || road  ||  for  || farm  ||mtn    |
 //|- 12  -||       || road  || road  ||  lake || lake  || lake  ||  lake || road  ||  road ||rd     ||mtn    |
 //|- 11  -||       ||road   ||  lake ||  lake || lake  || lake  ||  lake || lake  || road  ||       ||       |
-//|- 10  -||       ||road   ||  lake ||  lake || fort  || lake  ||  lake || lake  || road  ||       ||       |
-//|-  9  -||       ||road   ||  lake ||  lake ||brk brg|| lake  || lake  || lake  || road  ||       ||       |
-//|-  8  -||       ||road   ||  road || lake  ||brk brg|| lake  || lake  ||  road || road  ||       ||       |
+//|- 10  -||       ||road   ||  lake ||  lake || fort  || lake  ||  lake || lake  || road  ||mtn    ||mtn    |
+//|-  9  -||       ||road   ||  lake ||  lake ||brk brg|| lake  || lake  || lake  || road  ||bat    ||mtn    |
+//|-  8  -||       ||road   ||  road || lake  ||brk brg|| lake  || lake  ||  road || road  ||mtn    ||mt     |
 //|-  7  -||mtn    ||frst   || road  || road  || rd    ||  rd   ||  brg  ||  road ||       ||       ||       |
 //|-  6  -||mtn    ||bear   ||frst   ||       ||  rd   ||       ||  rvr  ||  rvr  ||  for  ||  mtn  ||  mtn  |
 //|-  5  -||mtn    ||frst   ||frst   ||       ||  rd   ||  for  ||  for  || rvr   ||  for  || gcave ||  mtn  |

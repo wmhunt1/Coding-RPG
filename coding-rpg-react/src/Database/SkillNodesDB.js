@@ -1,4 +1,4 @@
-import { alchemyRecipes, cookingRecipes, craftingRecipes, drawWater, enchantingRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, gatherBlackFeathers, herbLoreRecipes, huntingRecipes, millWheat, miningRecipes, shearSheep, smithingRecipes, woodcuttingRecipes } from "./SkillRecipesDB"
+import { alchemyRecipes, cookingRecipes, craftingRecipes, drawWater, enchantingRecipes, engineeringRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, gatherBlackFeathers, herbLoreRecipes, huntingRecipes, millWheat, mineSaltpeter, miningRecipes, shearSheep, smithingRecipes, woodcuttingRecipes } from "./SkillRecipesDB"
 
 export function alchemyNode(hero) {
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Alchemy");
@@ -35,6 +35,12 @@ export function enchantNode(hero) {
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Enchanting");
     var enchantNode = { Name: "Enchanting", Skill: hero.SkillBook[skillIndex], Recipes: enchantingRecipes() }
     return enchantNode;
+}
+//enginering
+export function engineNode(hero) {
+    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Engineering");
+    var engineNode = { Name: "Engineering Bench", Skill: hero.SkillBook[skillIndex], Recipes: engineeringRecipes() }
+    return engineNode;
 }
 //farming
 export function farmNode(hero) {
@@ -78,9 +84,15 @@ export function huntNode(hero) {
     var huntNode = { Name: "Hunting Ground", Skill: hero.SkillBook[skillIndex], Recipes: huntingRecipes() }
     return huntNode;
 }
+//mining
 export function mineNode(hero) {
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Mining");
     var mineNode = { Name: "Mine", Skill: hero.SkillBook[skillIndex], Recipes: miningRecipes() }
+    return mineNode
+}
+export function saltPeterNode(hero) {
+    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Mining");
+    var mineNode = { Name: "Mine", Skill: hero.SkillBook[skillIndex], Recipes: [mineSaltpeter()] }
     return mineNode
 }
 export function smithNode(hero) {

@@ -1,12 +1,17 @@
 import { CheckForQuest } from "../Scripts/QuestScripts"
-import { bandit, bear, cow, giant, goblin, scareCrow, skeleton, spider, wolf } from './CharactersDB'
+import { bandit,bat, bear, chicken, cow, giant, goblin, scareCrow, skeleton, spider, wolf } from './CharactersDB'
 import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, priestDialogue, tenguCampDialogue } from "./DialoguesDB"
 import { banditHideoutDungeon, giantCaveDungeon, giantCaveDungeonBeforeAndAfterQuest, goblinMine, goblinMineAfterQuest, spiderCaveDungeon } from "./DungeonsDB"
 import { dwarvenMineGoblinQuest, giantQuest } from "./QuestsDB"
 import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, joeTheTradersTradingPost, witchHutShop } from "./ShopsDB"
-import { alchemyNode, blackFeatherNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletchNode, herbNode, huntNode, millNode, mineNode, sheepNode, waterNode, wellNode, woodNode } from "./SkillNodesDB"
+import { alchemyNode, blackFeatherNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletchNode, herbNode, huntNode, millNode, mineNode, saltPeterNode, sheepNode, waterNode, wellNode, woodNode } from "./SkillNodesDB"
 
 //locations
+export function batCave(hero, x, y)
+{
+    var cave = { LocationName: "Bat Cave", XCoord: x, YCoord: y, CanTravel: false, Color: "Red", SubLocations: [enterBatEncounter(hero), enterSaltPeterNode(hero)] }
+    return cave;
+}
 export function bearCave(hero, x, y) {
     var cave = { LocationName: "Bear Cave", XCoord: x, YCoord: y, CanTravel: false, Color: "Red", SubLocations: [enterBearEncounter(hero)] }
     return cave;
@@ -16,7 +21,7 @@ export function lumbermill(hero, x, y) {
     return lumber;
 }
 export function littleRootFarm(hero, x, y) {
-    var farm = { LocationName: "Little Root Farm", XCoord: x, YCoord: y, CanTravel: true, Color: "GoldenRod", SubLocations: [enterCowEncounter(hero), enterFarmNode(hero), enterLittleRootFarmDialogue(hero), enterScareCrowEncounter(hero)] }
+    var farm = { LocationName: "Little Root Farm", XCoord: x, YCoord: y, CanTravel: true, Color: "GoldenRod", SubLocations: [enterChickenEncounter(hero), enterCowEncounter(hero), enterFarmNode(hero), enterLittleRootFarmDialogue(hero), enterScareCrowEncounter(hero)] }
     return farm;
 }
 export function tenguCamp(hero, x, y) {
@@ -99,7 +104,7 @@ export function brokenBridge(hero, x, y) {
     return river;
 }
 export function farm(hero, x, y) {
-    var farm = { LocationName: "Farm", XCoord: x, YCoord: y, CanTravel: false, Color: "GoldenRod", SubLocations: [enterCowEncounter(hero), enterFarmNode(hero)] }
+    var farm = { LocationName: "Farm", XCoord: x, YCoord: y, CanTravel: false, Color: "GoldenRod", SubLocations: [enterChickenEncounter(hero), enterCowEncounter(hero), enterFarmNode(hero)] }
     return farm;
 }
 export function forest(hero, x, y) {
@@ -178,6 +183,10 @@ export function enterTenguCampDialogue(hero) {
     return enter
 }
 //enter encounters
+export function enterBatEncounter(hero) {
+    var encounter = { Name: "Kill Bats", enterLocation(hero) { var content = { active: "Combat", combat: [bat(), bat(), bat()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    return encounter;
+}
 export function enterBanditEncounter(hero) {
     var encounter = { Name: "Kill Bandits", enterLocation(hero) { var content = { active: "Combat", combat: [bandit(), bandit(), bandit()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
@@ -185,6 +194,10 @@ export function enterBanditEncounter(hero) {
 export function enterBearEncounter(hero) {
     var encounter = { Name: "Kill Bear", enterLocation(hero) { var content = { active: "Combat", combat: [bear()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
+}
+export function enterChickenEncounter(hero) {
+    var encounter = { Name: "Kill Chickens", enterLocation(hero) { var content = { active: "Combat", combat: [chicken(), chicken(), chicken()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    return encounter
 }
 export function enterCowEncounter(hero) {
     var enterCowEncounter = { Name: "Kill Cows", enterLocation(hero) { var content = { active: "Combat", combat: [cow()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
@@ -308,8 +321,13 @@ export function enterHuntNode(hero) {
     var hunt = { Name: "Hunting Ground", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: huntNode(hero) }; return content } }
     return hunt;
 }
+//mining
 export function enterMineNode(hero) {
     var mine = { Name: "Mine (skill)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: mineNode(hero) }; return content } }
+    return mine
+}
+export function enterSaltPeterNode(hero) {
+    var mine = { Name: "Mine Saltpeter", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: saltPeterNode(hero) }; return content } }
     return mine
 }
 export function enterWoodNode(hero) {
