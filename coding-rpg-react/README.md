@@ -12,21 +12,33 @@ retrieve sheepscale's stolen sheep  (quest, monsters, dialogue, dungeon, locatio
 deliver letter to ambrosius quest (quest, monsters, dialogue, dungeon, location, place on map)
 
 fixes/changes
-dialogue that response finds next dialogue in array by id and skips to end if finished
-sublocation button formating
 Use rs3 tiers for crafting?
 write more than generic dialogue
 balance level requiurements and xp
 fix tactic selection
 clean up scripts
-dialogue overhaul (more options or branches)
 quest rewards for scarecrowquest (1-2 and 4), giantquest
 dungeon reward giantcave, goblinMine, better ratcellar reward, spidecave
 fix nested redundant block
+Combine barter and Persuasion?
+
 
 features
-Inventory slots str plus str from party members
-Can't move if over slots
+Add engineering?
+Guns and bombs tier metal/woos
+Crossbows
+Bat poop plus for saltpeter or mine mix with water
+Mine sulfur
+Make charcoal from wood
+Gunpowder with metal and wood for gun
+X1.for pistol x2 for rifle
+Ammo?
+Chicken mob for chicken and feathers
+Make arrows bolts and bullets
+Balance melee ranged and magic
+Make melee items more ecpensive,expensive,?
+Combat positions?
+sublocation button formating
 wolf/bear fur armor lv 5?
 enchanting reagent
 Haunted manor with ghosts 
@@ -40,7 +52,6 @@ Wyle companion
 companions get jobs that give new abilities or change tactics
 feats/perks
 save/load via json
-combine combat and game logs
 jobs
 add time delay for log
 Property (include your own allotments)
@@ -51,3 +62,4 @@ Weight or inventory slots?
 Map for dungeon with leaving like world map
 Or town maps
 Skill trainers (just sell lamps?)
+drop table

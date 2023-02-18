@@ -18,6 +18,11 @@ export function giantQuest(hero) {
     var giant = { Name: "Of Mice and Minotaurs", Status: "In Progress", Type: "Dungeon", Description: "Save Foreman George from the Giant", Target: giantCaveDungeon(hero), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
     return giant;
 }
+export function metSweetheart(hero)
+{
+    var sw = { Name: "Met Sweetheart", Status: "In Progress", Type: "Hidden", Description: "Checks if met Sweetheart", Target: null, Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
+    return sw;
+}
 export function ratCellarQuest(hero) {
     var ratCellarQuest = { Name: "Rats in The Cellar", Status: "In Progress", Type: "Kill", Description: "Kill the Giant Rat in the cellar", Target: giantRat(), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
     return ratCellarQuest

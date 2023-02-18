@@ -15,11 +15,15 @@ export function StartQuest(char, quest) {
     var questIndex = CheckForQuest(char, quest)
     if (questIndex === null) {
         char.Journal.push(quest);
-        AddToQuestLog(char, char.Name + " Has Accepted Quest: " + quest.Name)
+        if (quest.Type !== "Hidden") {
+            AddToQuestLog(char, char.Name + " Has Accepted Quest: " + quest.Name)
+        }
     }
 }
 export function GetQuestReward(char, quest) {
-    AddToQuestLog(char, quest.Name + " Rewards...")
+    if (quest.Type !== "Hidden") {
+        AddToQuestLog(char, quest.Name + " Rewards...")
+    }
     AddGold(char, quest.Reward.Gold);
     if (quest.Reward.Items.length > 0) {
         for (var q = 0; q < quest.Reward.Items.length; q++) {
@@ -33,7 +37,9 @@ export function CompleteQuest(char, quest) {
         var updateQuest = char.Journal[questIndex]
         updateQuest.Status = "Completed"
         char.Journal[questIndex] = updateQuest;
-        AddToQuestLog(char, char.Name + " Has Completed Quest: " + updateQuest.Name)
+        if (quest.Type !== "Hidden") {
+            AddToQuestLog(char, char.Name + " Has Completed Quest: " + updateQuest.Name)
+        }
     }
 }
 export function UpdateQuestProgress(char, quest, objective) {
@@ -42,7 +48,9 @@ export function UpdateQuestProgress(char, quest, objective) {
         var updateQuest = char.Journal[questIndex]
         updateQuest.ObjectiveProgress += objective;
         char.Journal[questIndex] = updateQuest
-        AddToQuestLog(char, quest.Description + " Progess: " + updateQuest.ObjectiveProgress + "/" + updateQuest.Objective)
+        if (quest.Type !== "Hidden") {
+            AddToQuestLog(char, quest.Description + " Progess: " + updateQuest.ObjectiveProgress + "/" + updateQuest.Objective)
+        }
     }
 }
 export function CheckIfFetchQuestObjective(char, item) {

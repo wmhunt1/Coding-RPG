@@ -21,13 +21,14 @@ import SpellBook from './SpellBook';
 import Shop from './Shop';
 import Toolbar from './Toolbar';
 import { worldMap } from '../Database/MapsDB';
+import { testDialogueOverhaul } from '../Database/DialoguesDB';
 
 function Game(props) {
   const [active, setActive] = useState("MainMenu");
   const [hero, setHero] = useState(props.hero)
   const [log, setLog] = useState(props.log)
   const [combat, setCombat] = useState(null)
-  const [dialogue, setDialogue] = useState(null)
+  const [dialogue, setDialogue] = useState(testDialogueOverhaul(hero))
   const [dungeon, setDungeon] = useState(null)
   const [shop, setShop] = useState(null)
   const [skill, setSkill] = useState()
@@ -79,6 +80,7 @@ function Game(props) {
           {active === "Test" ? <div className='menu-box'>
             <h2>Tests</h2>
             <div><button className='menu-button' onClick={() => setActive("Bank")}><h3>Test Bank</h3></button></div>
+            <div><button className='menu-button' onClick={() => setActive("Dialogue")}><h3>Test Dialogue</h3></button></div>
             <div><button className='menu-button' onClick={() => setActive("Game")}><h3>Leave</h3></button></div>
           </div> : <div></div>}
         </div>

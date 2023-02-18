@@ -1,10 +1,10 @@
 export function allSkills(level) {
-    var allSkills = [alchemySkill(), acrobaticsSkill(), alterationSkill(1), athleticsSkill(), axeSkill(1), barterSkill(), blockSkill(1), bluntSKill(1), conjurationSkill(1), cookingSkill(), craftingSkill(), destructionSkill(1), divinationSkill(1), enchantingSKill(1), farmingSkill(), firemakingSkill(), fishingSkill(), fletchingSkill(), heavyArmorSkill(1), herbloreSkill(), huntingSkill(), illusionSkill(1), lightArmorSkill(1), lockpickingSkill(), longBladeSkill(1), mediumArmorSkill(1), miningSkill(), persuationSkill(), rangedSkill(1), restorationSkill(1), shortBladeSkill(1), smithingSkill(), spearSkill(1), stealthSkill(), survivalSkill(), unArmedSkill(1), unArmoredSkill(1), senseSkill(), woodcuttingSkill()]
+    var allSkills = [alchemySkill(), acrobaticsSkill(), alterationSkill(1), athleticsSkill(), axeSkill(1), barterSkill(), blockSkill(1), bluntSKill(1), conjurationSkill(1), cookingSkill(), craftingSkill(), destructionSkill(1), divinationSkill(1), enchantingSKill(1), farmingSkill(), firemakingSkill(), fishingSkill(), fletchingSkill(), heavyArmorSkill(1), herbloreSkill(), huntingSkill(), illusionSkill(1), lightArmorSkill(1), lockpickingSkill(), longBladeSkill(1), miningSkill(), persuationSkill(), rangedSkill(1), restorationSkill(1), shortBladeSkill(1), smithingSkill(), spearSkill(1), stealthSkill(), survivalSkill(), unArmedSkill(1), unArmoredSkill(1), senseSkill(), woodcuttingSkill()]
     return allSkills
 }
 //armor skills
-export function allArmorSkills(b, h, l, m, u) {
-    var allArmorSkills = [blockSkill(b), heavyArmorSkill(h), lightArmorSkill(l), mediumArmorSkill(m), unArmoredSkill(u)]
+export function allArmorSkills(b, h, l, u) {
+    var allArmorSkills = [blockSkill(b), heavyArmorSkill(h), lightArmorSkill(l), unArmoredSkill(u)]
     return allArmorSkills;
 }
 export function blockSkill(level) {
@@ -18,10 +18,6 @@ export function heavyArmorSkill(level) {
 export function lightArmorSkill(level) {
     var light = { Name: "Light Armor", Type: "Armor", Level: level, CurrentXP: 0, MaxXP: 50 }
     return light
-}
-export function mediumArmorSkill(level) {
-    var medium = { Name: "Medium Armor", Type: "Armor", Level: level, CurrentXP: 0, MaxXP: 50 }
-    return medium;
 }
 export function unArmoredSkill(level) {
     var unArmored = { Name: "UnArmored", Type: "Armor", Level: level, CurrentXP: 0, MaxXP: 50 }

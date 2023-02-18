@@ -273,3 +273,11 @@ export function ApplyOnUnEquipEffect(hero, immune, resist, weak, cImmune, cResis
         }
     }
 }
+export function CalculateInventorySlots(hero) {
+    var slots = hero.Attributes.Strength.Value + hero.Attributes.Strength.Bonus - hero.Attributes.Strength.Penalty;
+    var party = hero.Companions;
+    for (var p = 0; p < party.length; p++) {
+        slots += party[p].Attributes.Strength.Value + party[p].Attributes.Strength.Bonus - party[p].Attributes.Strength.Penalty;
+    }
+    return slots;
+}

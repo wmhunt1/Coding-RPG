@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../App.css';
 import './Game.css'
 import SkillNode from "./SkillNode"
-import { EquipItemFromInventory, RemoveItemFromInventory } from '../Scripts/ItemScripts';
+import {CalculateInventorySlots, EquipItemFromInventory, RemoveItemFromInventory } from '../Scripts/ItemScripts';
 import { alchemyNode, craftNode, enchantNode, fireNode, fletchNode } from '../Database/SkillNodesDB'
 import { AddToCharacterLog } from '../Scripts/CharacterScripts';
 
@@ -68,10 +68,12 @@ function Inventory(props) {
     setHero(newChar)
     props.parentCallback(newChar);
   }
+ 
   return (<div>
     {active === "Inventory" ? <div>
       <h2>{hero.Name}'s Inventory</h2>
       <h3>{hero.Name} has {hero.Gold} GP</h3>
+      <h3>Inventory Slots: {inventory.length}/{CalculateInventorySlots(hero)}</h3>
       <div className='inv-box'>
         <h4>Active User: {activeUser.Name}</h4>
         {charList}
