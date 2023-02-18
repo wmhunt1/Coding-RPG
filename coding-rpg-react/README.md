@@ -18,10 +18,9 @@ fix tactic selection
 clean up scripts
 quest rewards for scarecrowquest (1-2 and 4), giantquest
 dungeon reward giantcave, goblinMine, better ratcellar reward, spidecave
-fix nested redundant block
+fix 4nested redundant block
 Combine barter and Persuasion?
 combine weapons into light and heavy weapons (dex or str)
-short and longbow?
 
 features
 Ammo? Make arrows bolts and bullets

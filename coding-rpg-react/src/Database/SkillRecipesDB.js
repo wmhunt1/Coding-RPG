@@ -1,4 +1,4 @@
-import { ashes, batGuano, beefStew, blackFeather, bread, bronzeAxe, bronzeAxe2H, bronzeBar, bronzeBarrel, bronzeBomb, bronzeCrossBow1H, bronzeCrossBow2H, bronzeCrossBowOffHand, bronzeDagger, bronzeDaggerOffHand, bronzeGauntlets, bronzeHatchet, bronzeHelmet, bronzeLegs, bronzeLimbs, bronzeMace, bronzePickAxe, bronzePistol, bronzePistolOffHand, bronzeRifle, bronzeShield, bronzeSword, bronzeSword2H, bronzeTools, bronzeTorso, bronzeWarHammer, bronzeWarHammer2H, bucket, burntBeef, burntBread, burntChicken, burntFish, burntRabbitMeat, burntRatMeat, burntStew, charcoal, coalOre, cookedBeef, cookedChicken, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, cowLeather, dough, enchantmentTome, fishingRod, fishStew, flour, gunPowder, hatchet, ironAxe, ironAxe2H, ironBar, ironBarrel, ironBomb, ironBoots, ironCrossBow1H, ironCrossBow2H, ironCrossBowOffHand, ironDagger, ironDaggerOffHand, ironGauntlets, ironHatchet, ironHelmet, ironLegs, ironLimbs, ironMace, ironOre, ironPickAxe, ironPistol, ironPistolOffHand, ironRifle, ironShield, ironSword, ironSword2H, ironTools, ironTorso, ironWarHammer, ironWarHammer2H, knife, leatherBoots, leatherCowl, leatherGloves, leatherLegs, leatherTorso, milk, needle, oakBow, oakLogs, oakStaff, oakStock, oakWand, pickAxe, rabbitStew, ratStew, rawBeef, rawChicken, rawFish, rawRabbitMeat, rawRatMeat, saltPeter, shears, sickle, steelAxe, steelAxe2H, steelBar, steelBarrel, steelBomb, steelBoots, steelCrossBow1H, steelCrossBow2H, steelCrossBowOffHand, steelDagger, steelDaggerOffHand, steelGauntlets, steelHatchet, steelHelmet, steelLegs, steelLimbs, steelMace, steelPickAxe, steelPistol, steelPistolOffHand, steelRifle, steelShield, steelSword, steelSword2H, steelTools, steelTorso, steelWarHammer, steelWarHammer2H, sulphur, thread, tinderBox, tinOre, tools, water, wheat, willowBow, willowLogs, willowStaff, willowStock, willowWand, woodBow, woodLogs, woodStaff, woodStock, woodWand, woolBoots, woolCloth, woolGloves, woolHat, woolRobeBottom, woolRobeTop, woolTrousers, woolTunic, woolWizardHat, } from "./ItemsDB"
+import { ashes, batGuano, beefStew, blackFeather, bread, bronzeAxe, bronzeAxe2H, bronzeBar, bronzeBarrel, bronzeBomb, bronzeCrossBow1H, bronzeCrossBow2H, bronzeCrossBowOffHand, bronzeDagger, bronzeDaggerOffHand, bronzeGauntlets, bronzeHatchet, bronzeHelmet, bronzeLegs, bronzeLimbs, bronzeMace, bronzePickAxe, bronzePistol, bronzePistolOffHand, bronzeRifle, bronzeShield, bronzeSword, bronzeSword2H, bronzeTools, bronzeTorso, bronzeWarHammer, bronzeWarHammer2H, bucket, burntBeef, burntBread, burntChicken, burntFish, burntRabbitMeat, burntRatMeat, burntStew, charcoal, coalOre, cookedBeef, cookedChicken, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, cowLeather, dough, enchantmentTome, fishingRod, fishStew, flour, gunPowder, hatchet, ironAxe, ironAxe2H, ironBar, ironBarrel, ironBomb, ironBoots, ironCrossBow1H, ironCrossBow2H, ironCrossBowOffHand, ironDagger, ironDaggerOffHand, ironGauntlets, ironHatchet, ironHelmet, ironLegs, ironLimbs, ironMace, ironOre, ironPickAxe, ironPistol, ironPistolOffHand, ironRifle, ironShield, ironSword, ironSword2H, ironTools, ironTorso, ironWarHammer, ironWarHammer2H, knife, leatherBoots, leatherCowl, leatherGloves, leatherLegs, leatherTorso, milk, needle, oakBow, oakLogs, oakStaff, oakStock, oakWand, pickAxe, rabbitStew, ratStew, rawBeef, rawChicken, rawFish, rawRabbitMeat, rawRatMeat, saltPeter, shears, sickle, steelAxe, steelAxe2H, steelBar, steelBarrel, steelBomb, steelBoots, steelCrossBow1H, steelCrossBow2H, steelCrossBowOffHand, steelDagger, steelDaggerOffHand, steelGauntlets, steelHatchet, steelHelmet, steelLegs, steelLimbs, steelMace, steelPickAxe, steelPistol, steelPistolOffHand, steelRifle, steelShield, steelSword, steelSword2H, steelTools, steelTorso, steelWarHammer, steelWarHammer2H, sulphur, thread, tinderBox, tinOre, tools, water, wheat, willowBow, willowLogs, willowStaff, willowStock, willowWand, woodBow, woodLogs, woodShortBow, woodStaff, woodStock, woodWand, woolBoots, woolCloth, woolGloves, woolHat, woolRobeBottom, woolRobeTop, woolTrousers, woolTunic, woolWizardHat, oakShortBow, willowShortBow, oakLongBow, willowLongBow, woodLongtBow, woodLongBow } from "./ItemsDB"
 //crafting
 //alchemy
 export function alchemyRecipes() {
@@ -507,7 +507,7 @@ export function fletchingRecipes() {
     var fletchingRecipes = [assembleBronzeCrossBow1H(), assembleBronzeCrossBow2H(), assembleBronzeCrossBowOffHand(),
     assembleIronCrossBow1H(), assembleIronCrossBow2H(), assembleIronCrossBowOffHand(),
     assembleSteelCrossBow1H(), assembleSteelCrossBow2H(), assembleSteelCrossBowOffHand(),
-    fletchOakBow(), fletchOakStock(), fletchWillowBow(), fletchWillowStock(), fletchWoodBow(), fletchWillowStock()]
+    fletchOakLongBow(),fletchOakShortBow(), fletchOakStock(),fletchWillowLongBow(), fletchWillowShortBow(), fletchWillowStock(),fletchWoodLongBow(), fletchWoodShortBow(), fletchWillowStock()]
     return fletchingRecipes
 }
 export function assembleBronzeCrossBow1H() {
@@ -591,11 +591,20 @@ export function assembleSteelCrossBowOffHand() {
     }
     return assemble;
 }
-export function fletchOakBow() {
+export function fletchOakLongBow() {
     var fletch = {
-        Name: "Fletch Oak Bow", Skill: "Fletching", Tool: knife(), Verb: "Fletched", LevelRequirement: 5, Exp: 100,
+        Name: "Fletch Oak Long Bow", Skill: "Fletching", Tool: knife(), Verb: "Fletched", LevelRequirement: 5, Exp: 100,
         Input: [{ Item: oakLogs(), Quantity: 1 }],
-        Output: { Item: oakBow(), Quantity: 1 },
+        Output: { Item: oakLongBow(), Quantity: 1 },
+        FailureOutput: null
+    }
+    return fletch;
+}
+export function fletchOakShortBow() {
+    var fletch = {
+        Name: "Fletch Oak Short Bow", Skill: "Fletching", Tool: knife(), Verb: "Fletched", LevelRequirement: 5, Exp: 100,
+        Input: [{ Item: oakLogs(), Quantity: 1 }],
+        Output: { Item: oakShortBow(), Quantity: 1 },
         FailureOutput: null
     }
     return fletch;
@@ -609,11 +618,20 @@ export function fletchOakStock() {
     }
     return fletch;
 }
-export function fletchWillowBow() {
+export function fletchWillowLongBow() {
     var fletch = {
-        Name: "Fletch Willow Bow", Skill: "Fletching", Tool: knife(), Verb: "Fletched", LevelRequirement: 10, Exp: 400,
+        Name: "Fletch Willow Long Bow", Skill: "Fletching", Tool: knife(), Verb: "Fletched", LevelRequirement: 10, Exp: 400,
         Input: [{ Item: willowLogs(), Quantity: 1 }],
-        Output: { Item: willowBow(), Quantity: 1 },
+        Output: { Item: willowLongBow(), Quantity: 1 },
+        FailureOutput: null
+    }
+    return fletch;
+}
+export function fletchWillowShortBow() {
+    var fletch = {
+        Name: "Fletch Willow Short Bow", Skill: "Fletching", Tool: knife(), Verb: "Fletched", LevelRequirement: 10, Exp: 400,
+        Input: [{ Item: willowLogs(), Quantity: 1 }],
+        Output: { Item: willowShortBow(), Quantity: 1 },
         FailureOutput: null
     }
     return fletch;
@@ -627,11 +645,20 @@ export function fletchWillowStock() {
     }
     return fletch;
 }
-export function fletchWoodBow() {
+export function fletchWoodLongBow() {
     var fletch = {
-        Name: "Fletch Wood Bow", Skill: "Fletching", Tool: knife(), Verb: "Fletched", LevelRequirement: 1, Exp: 25,
+        Name: "Fletch Wood Long Bow", Skill: "Fletching", Tool: knife(), Verb: "Fletched", LevelRequirement: 1, Exp: 25,
         Input: [{ Item: woodLogs(), Quantity: 1 }],
-        Output: { Item: woodBow(), Quantity: 1 },
+        Output: { Item: woodLongBow(), Quantity: 1 },
+        FailureOutput: null
+    }
+    return fletch;
+}
+export function fletchWoodShortBow() {
+    var fletch = {
+        Name: "Fletch Wood Short Bow", Skill: "Fletching", Tool: knife(), Verb: "Fletched", LevelRequirement: 1, Exp: 25,
+        Input: [{ Item: woodLogs(), Quantity: 1 }],
+        Output: { Item: woodShortBow(), Quantity: 1 },
         FailureOutput: null
     }
     return fletch;

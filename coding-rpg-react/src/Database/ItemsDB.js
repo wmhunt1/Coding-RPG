@@ -631,16 +631,28 @@ export function steelWarHammer2H() {
 }
 //ranged weapon
 //bows
-export function oakBow() {
-    var bow = { Name: "Oak Bow", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: rangedSkill(), Damage: 4, DamageType: piercingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
+export function oakLongBow() {
+    var bow = { Name: "Oak Long Bow", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: rangedSkill(), Damage: 4, DamageType: piercingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
     return bow;
 }
-export function willowBow() {
-    var bow = { Name: "Willow Bow", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: rangedSkill(), Damage: 5, DamageType: piercingDamage(), Cost: 20, Quantity: 1, Enchantment: unEnchanted() }
+export function oakShortBow() {
+    var bow = { Name: "Oak Short Bow", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: rangedSkill(), Damage: 4, DamageType: piercingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
     return bow;
 }
-export function woodBow() {
-    var bow = { Name: "Wood Bow", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: rangedSkill(), Damage: 3, DamageType: piercingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+export function willowLongBow() {
+    var bow = { Name: "Willow Long Bow", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: rangedSkill(), Damage: 5, DamageType: piercingDamage(), Cost: 20, Quantity: 1, Enchantment: unEnchanted() }
+    return bow;
+}
+export function willowShortBow() {
+    var bow = { Name: "Willow Short Bow", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: rangedSkill(), Damage: 5, DamageType: piercingDamage(), Cost: 20, Quantity: 1, Enchantment: unEnchanted() }
+    return bow;
+}
+export function woodLongBow() {
+    var bow = { Name: "Wood Long Bow", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: rangedSkill(), Damage: 3, DamageType: piercingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    return bow;
+}
+export function woodShortBow() {
+    var bow = { Name: "Wood Short Bow", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: rangedSkill(), Damage: 3, DamageType: piercingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return bow;
 }
 //crossbows
