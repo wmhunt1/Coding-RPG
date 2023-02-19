@@ -56,7 +56,7 @@ function Party(props) {
         setHero(childData)
         props.parentCallback(newChar);
       }
-    const partyList = party.map((companion, index) => <h3 key={index}>Name: {companion.Name} <button onClick={() => handleAbilityView(companion, index)}><h3>View Abilities</h3></button><button onClick={() => handleCompanionView(companion, index)}><h3>View Character Sheet</h3></button><button onClick={() => handleEquipmentView(companion, index)}><h3>View Equipment</h3></button><button onClick={() => handleSkillView(companion, index)}><h3>View Skills</h3></button><button onClick={() => handleSpellView(companion, index)}><h3>View SpellBook</h3></button><button onClick={() => handleTacticView(companion, index)}><h3>Change Tactics</h3></button></h3>)
+    const partyList = party.map((companion, index) => <h3 key={index}>Name: {companion.Name} - {companion.Job.Name}<div><button onClick={() => handleAbilityView(companion, index)}><h3>View Abilities</h3></button><button onClick={() => handleCompanionView(companion, index)}><h3>View Character Sheet</h3></button><button onClick={() => handleEquipmentView(companion, index)}><h3>View Equipment</h3></button><button onClick={() => handleSkillView(companion, index)}><h3>View Skills</h3></button><button onClick={() => handleSpellView(companion, index)}><h3>View SpellBook</h3></button><button onClick={() => handleTacticView(companion, index)}><h3>Change Tactics</h3></button></div></h3>)
     const tacticList = tactics.map((tactic, index) => <h3 key={index}>{tactic.Name} - {tactic.Desc} <button onClick={()=> handleTacticSelection(activeHero, tactic)}>Select</button></h3>)
     return (
         <div>

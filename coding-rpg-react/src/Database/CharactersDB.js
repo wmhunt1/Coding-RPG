@@ -2,6 +2,7 @@ import { noCondition, poisonCondition, sleepCondition, webCondition } from "./Co
 import { cleave, pierceArmor, rage } from "./AbilitiesDB";
 import { bareBack, bareFinger, bareNeck, bite, bones, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakShortBow, ironAxe2H, ironSword, skull, bronzeShield, bronzeMace, bronzeHelmet, wolfFur, clawSlash, bearFur, rawChicken, feather, peck, batGuano, ironAxe, oakStaff } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
+import {cleric, freelancer, pet } from "./JobsDB";
 import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell, summonRat } from "./SpellsDB"
 import { BasicAttacker, BasicHealer, Rager, spiderSummoner } from "./TacticsDB";
 import { allSkills, barterSkill, blockSkill, heavyWeaponSkill, heavyArmorSkill, miningSkill, restorationSkill, smithingSkill } from "./SkillsDB";
@@ -12,7 +13,7 @@ import { FindSkillInSkillBook } from "../Scripts/SkillScripts";
 
 export function character(name) {
     var char = {
-        Name: name, Title: noTitle(), TitleList: [noTitle()], Log: [], Level: 1, CurrentXP: 10, MaxXP: 50,
+        Name: name, Job:freelancer(), Title: noTitle(), TitleList: [noTitle()], Log: [], Level: 1, CurrentXP: 10, MaxXP: 50,
         BaseStats: { Attack: { Bonus: 0, Penalty: 0 }, Defense: { Bonus: 0, Penalty: 0 }, HP: { Current: 10, Max: 10, Bonus: 0, Penalty: 0, Regen: 0, RegenBonus: 0, RegenPenalty: 0, Temp: 0 }, MP: { Current: 10, Max: 10, Bonus: 0, Penalty: 0, Regen: 0, RegenBonus: 0, RegenPenalty: 0 }, SP: { Current: 10, Max: 10, Bonus: 0, Penalty: 0, Regen: 0, RegenBonus: 0, RegenPenalty: 0 } },
         Attributes: {
             Beauty: { Value: 10, Bonus: 0, Penalty: 0 }, Charisma: { Value: 10, Bonus: 0, Penalty: 0 }, Constitution: { Value: 10, Bonus: 0, Penalty: 0 },
@@ -44,6 +45,7 @@ export function hero() {
 //companions
 export function ferraForgeHeart() {
     var hero = character("Ferra Forgeheart")
+    hero.Job = cleric();
     hero.CurrentXP = 0;
     hero.Equipment.Weapon = ironWarHammer(); hero.Equipment.OffHand = ironShield(); hero.Equipment.Head = ironHelmet(); hero.Equipment.Torso = ironTorso(); hero.Equipment.Legs = ironLegs(); hero.Equipment.Hands = ironGauntlets(); hero.Equipment.Feet = ironBoots(); hero.BaseStats.SpellBook = [basicHeal(), curePoison()]; hero.DamageModifiers.Weaknesses = [lightningDamage()]; hero.DamageModifiers.Weaknesses[0].Source = hero.Equipment.Torso;
     //hero.Attributes.Dexterity.Penalty = 3; hero.Attributes.Speed.Penalty = 3; 
@@ -100,6 +102,7 @@ export function cow() {
 }
 export function dog(name) {
     var dog = beast(name)
+    dog.Job = pet()
     return dog;
 }
 export function giantRat() {
