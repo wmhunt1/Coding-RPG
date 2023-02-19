@@ -19,6 +19,10 @@ export function lightningDamage() {
     var lightning = { Name: "Lightning", Type: "Elemental", Source: null }
     return lightning;
 }
+export function necroticDamage() {
+    var necroticDamage = { Name: "Necrotic", Type: "Elemental", Source: null }
+    return necroticDamage;
+}
 export function poisonDamage() {
     var poison = { Name: "Poison", Type: "Elemental", Source: null }
     return poison;

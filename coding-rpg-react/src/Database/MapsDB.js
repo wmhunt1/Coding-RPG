@@ -1,4 +1,4 @@
-import { banditHideout, batCave, bearCave, bridge, brokenBridge, daleTown, daleWizardTower, dwarvenMine, farm, forest, fortDale, giantCave,gnollDen,graveyard,lake, littleRootFarm, lumbermill,mill, mountains, orcVillage, river, road, spiderCave, tenguCamp, whiteScalesLair, witchHut, wolfDen } from "./LocationsDB"
+import { banditHideout, batCave, bearCave, bridge, brokenBridge, daleTown, daleWizardTower, dwarvenMine, farm, forest, fortDale, giantCave,gnollDen,graveyard,hauntedManor,lake, littleRootFarm, lumbermill,mill, mountains, orcVillage, river, road, spiderCave, tenguCamp, whiteScalesLair, witchHut, wolfDen } from "./LocationsDB"
 
 export function startingAdjacentLocations(hero) {
     var start = [bridge(hero, 0,1),river(hero, 1,1), road(hero, 1, 0), graveyard(hero, 1,-1), road(hero, 0, -1), littleRootFarm(hero, -1, -1), river(hero, 0, -1), river(hero, -1, 1), road(hero, 0, 2), road(hero,2,0), road(hero, 0, -2), river(hero,-2,0)]
@@ -29,7 +29,7 @@ export function worldMap(hero) {
             river(hero, -1, 1), bridge(hero, 0, 1), river(hero, 1, 1), river(hero, 2, 1), forest(hero, 3, 1), banditHideout(hero, 4, 1), mountains(hero, 5, 1),
             forest(hero, -4, 0), forest(hero, -3, 0), river(hero, -2, 0), river(hero, -1, 0), daleTown(hero, 0, 0), road(hero, 1, 0), road(hero, 2, 0), road(hero, 3, 0), road(hero, 4, 0), road(hero, 5, 0),
             forest(hero, -4, -1), tenguCamp(hero, -3, -1), river(hero, -2, -1), littleRootFarm(hero, -1, -1), road(hero, 0, -1),graveyard(hero, 1, -1), forest(hero, 2, -1), forest(hero, 3, -1), mountains(hero, 4, -1), mountains(hero, 5, -1),
-            forest(hero, -4, -2), forest(hero, -3, -2), river(hero, -2, -2),mill(hero, -1, -2), road(hero, 0, -2), forest(hero, 2, -2), forest(hero, 3, -2), mountains(hero, 4, -2), mountains(hero, 5, -2),
+            forest(hero, -4, -2), forest(hero, -3, -2), river(hero, -2, -2),mill(hero, -1, -2), road(hero, 0, -2),hauntedManor(hero, 1, -2), forest(hero, 2, -2), forest(hero, 3, -2), mountains(hero, 4, -2), mountains(hero, 5, -2),
             forest(hero, -4, -3), spiderCave(hero, -3, -3), river(hero, -2, -3),farm(hero, -1, -3), road(hero, 1, -3),road(hero,0,-3), road(hero, 2, - 3), dwarvenMine(hero, 3, -3), mountains(hero, 4, -3), mountains(hero, 5, -3),
             forest(hero, -4, -4), forest(hero, -3, -4), river(hero, -2, -4), road(hero, 1, -4), mountains(hero, 2, -4), mountains(hero, 3, -4), mountains(hero, 4, -4), mountains(hero, 5, -3),
             river(hero, -2, -5), road(hero, 1, -5),
@@ -60,8 +60,10 @@ export function worldMap(hero) {
 //|-  1  -||       ||       ||       ||       ||  rvr  ||  brdg || rivr  ||  rvr  ||  for  ||bandit1|| mtn   |
 //|-  0  -||       || for   || for   || rvr   ||  rvr  ||  dale || rd    ||  rd   ||  rd   ||  rd   ||  rd   |
 //|- -1  -||       || for   || crow  || rvr   ||lrfarm ||  rd   ||grave  || for   || for   || mtn   ||  mtn  |
-//|- -2  -||       || for   || for   || rvr   ||mill   ||  rd   ||       || rvr   || for   ||  mtn  ||  mtn  |
+//|- -2  -||       || for   || for   || rvr   ||mill   ||  rd   ||manor  || rvr   || for   ||  mtn  ||  mtn  |
 //|- -3  -||       || for   || spdr  || rvr   ||farm   ||  rd   ||  rd   ||  rd   || mine  ||  mtn  ||  mtn  |
 //|- -4  -||       || for   || for   || rvr   ||       ||       ||  rd   || mtn   || mtn   ||  mtn  ||  mtn  |
 //|- -5  -||       ||       ||       || rvr   ||       ||       ||  rd   ||       ||       ||       ||       |
 //|- x,y -||- -5  -||- -4  -||- -3  -||- -2  -||- -1  -||-  0  -||-  1  -||-  2  -||-  3  -||-  4  -||-  5  -|
+
+

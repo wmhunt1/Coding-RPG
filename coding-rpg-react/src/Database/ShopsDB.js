@@ -1,6 +1,6 @@
 import { dreamingWorkerInnDialogue, forgeheartSmithDialogue, innDialogue, joeTheTradersTradingPostDialogue } from "./DialoguesDB";
 import { ratCellar } from "./DungeonsDB";
-import { ale, allBronze, allIron, allPotions, allSpellScrolls, bread, bronzeHatchet, bronzePickAxe, bucket, enchantmentTome, fishingRod, knife, needle, shears,sickle, stew, tinderBox } from "./ItemsDB"
+import { ale, allBronze, allIron, allPotions, allSpellScrolls, bread, bronzeHatchet, bronzePickAxe, bucket, enchantmentTome, fishingRod, knife, needle, shears, sickle, stew, tinderBox } from "./ItemsDB"
 import { daleTownReputation } from "./ReputationsDB";
 import { cookNode, smithNode } from "./SkillNodesDB";
 
@@ -9,9 +9,13 @@ export function alchemyShop(hero) {
     var alchemyShop = { Name: "Alchemy Shop", Dialogue: null, Dungeon: null, Node: null, Rep: null, Inventory: allPotions(), buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Potion") } }
     return alchemyShop
 }
+export function witchHutShop(hero) {
+    var witchHutShop = { Name: "Witch's Hut", Dialogue: null, Dungeon: null, Node: null, Rep: daleTownReputation(), Inventory: [...allPotions()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll" || item.SubType === "Potion") } }
+    return witchHutShop
+}
 //general store
 export function generalShop(hero) {
-    var generalShop = { Name: "General Store", Dialogue: null, Dungeon: null, Node: null, Rep: null, Inventory: [bronzeHatchet(), bronzePickAxe(), bucket(), fishingRod(), knife(), needle(), shears(),sickle(), tinderBox()], buyFilter(hero) { return hero.Inventory.filter(item => item.Type !== "") } };
+    var generalShop = { Name: "General Store", Dialogue: null, Dungeon: null, Node: null, Rep: null, Inventory: [bronzeHatchet(), bronzePickAxe(), bucket(), fishingRod(), knife(), needle(), shears(), sickle(), tinderBox()], buyFilter(hero) { return hero.Inventory.filter(item => item.Type !== "") } };
     return generalShop
 }
 export function joeTheTradersTradingPost(hero) {
@@ -36,6 +40,10 @@ export function magicShop(hero) {
     var magicShop = { Name: "Magic Shop", Dialogue: null, Dungeon: null, Node: null, Inventory: [...allSpellScrolls(), enchantmentTome()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll") } }
     return magicShop
 }
+export function wizardTowerShop(hero) {
+    var magicShop = { Name: "Wizard Tower Shop", Dialogue: null, Dungeon: null, Node: null, Inventory: [...allSpellScrolls(), enchantmentTome()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll") } }
+    return magicShop
+}
 //smiths
 export function forgeHeartSmithy(hero) {
     var smith = smithShop(hero)
@@ -49,8 +57,3 @@ export function smithShop(hero) {
     return smithShop
 }
 //hybrid
-//alchemist and magic
-export function witchHutShop(hero) {
-    var witchHutShop = { Name: "Witch's Hut", Dialogue: null, Dungeon: null, Node: null, Rep: daleTownReputation(), Inventory: [...allPotions(), ...allSpellScrolls()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll" || item.SubType === "Potion") } }
-    return witchHutShop
-}

@@ -1,6 +1,6 @@
 import { ferraForgeHeart } from "./CharactersDB";
 import { silverRingLR } from "./ItemsDB";
-import { banditQuest1, dwarvenMineGoblinQuest, giantQuest, gnollQuest1, metSweetheart, ratCellarQuest, scareCrowQuest1, scareCrowQuest2, scareCrowQuest3, scareCrowQuest4, skeletonQuest } from "./QuestsDB"
+import { banditQuest1, dwarvenMineGoblinQuest, giantQuest, gnollQuest1, metSweetheart, ratCellarQuest, scareCrowQuest1, scareCrowQuest2, scareCrowQuest3, scareCrowQuest4, skeletonQuest, wizardTowerQuest1 } from "./QuestsDB"
 import { CalculateTime } from "../Scripts/MapScripts";
 import { FindPartyMember, JoinParty, LeaveParty, PartyRecovery, RemoveGold } from "../Scripts/CharacterScripts";
 import { FindItemInInventory, RemoveItemFromInventory } from "../Scripts/ItemScripts";
@@ -222,6 +222,7 @@ export function forgeHeart1(hero) {
     return dialogue
 }
 export function forgeHeart2(hero) {
+    //ferra can rejoin you here
     var dialogue = { Name: "Speak with Faldan", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The old dwarf is sleeping.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { } }
     return dialogue
 }
@@ -343,6 +344,11 @@ export function lumbermillDialogue(hero) {
     }
     return dialogue;
 }
+//puzzle dungeon dialogue
+export function puzzleDungeonDialogue(hero)
+{
+    //apprentice joins
+}
 //spider cave dialogue
 export function spiderCaveDialogue(hero) {
     var dialogue = { Name: "Listen to Crows", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The crows thank you and give you a silver ring.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, scareCrowQuest3()) } }
@@ -396,4 +402,42 @@ export function whiteScaleDialogue(hero) {
         dialogue = { Name: "Speak with Whitescale", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Whitescale is knitting.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { } }
     }
     return dialogue
+}
+//witchhut dialogue
+export function witchHutDialogue(hero) {
+
+}
+export function wizardTowerDialogue(hero) {
+    var questIndex = CheckForQuest(hero, wizardTowerQuest1())
+    var dialogue = ""
+    if (questIndex === null) {
+        dialogue = wizardTower1(hero)
+    }
+    else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "In Progress") {
+        dialogue = wizardTower2(hero)
+    }
+    else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
+        dialogue = wizardTower3(hero)
+    }
+    else {
+        dialogue = wizardTower4(hero)
+    }
+    return dialogue;
+}
+export function wizardTower1(hero) {
+    //talking with apprentice
+    //skill check or int check to see if you figure out puzzle else they do
+    //apprentice sucked in
+}
+export function wizardTower2(hero) {
+//apprentice thanks you and ambrosius scolds you
+//says apprentice should journey to gain knowledge and maturity
+//apprentice can perma join
+}
+export function wizardTower3(hero) {
+//if not in party wizard asks to join again
+//if in party ambrosius checks progress
+}
+export function wizardTower4(hero) {
+//guilt over apprentice being sucked in
 }

@@ -1,22 +1,13 @@
-export function allSkills(level) {
-    var allSkills = [alchemySkill(), acrobaticsSkill(), alterationSkill(1), athleticsSkill(),
-    //axeSkill(1), 
-    barterSkill(), blockSkill(1),
-    //bluntSKill(1), 
-    conjurationSkill(1), cookingSkill(), craftingSkill(), destructionSkill(1), divinationSkill(1), engineeringSkill(), enchantingSKill(1), farmingSkill(), firemakingSkill(), fishingSkill(), fletchingSkill(), heavyArmorSkill(1), heavyWeaponSkill(1), herbloreSkill(), huntingSkill(), illusionSkill(1), lightArmorSkill(1), lightWeaponSkill(1), lockpickingSkill(),
-    //longBladeSkill(1), 
-    miningSkill(), persuationSkill(), rangedSkill(1), restorationSkill(1),
-    //shortBladeSkill(1),
-    smithingSkill(),
-    //spearSkill(1), 
-    stealthSkill(), survivalSkill(), unArmedSkill(1), unArmoredSkill(1), senseSkill(), woodcuttingSkill()]
+export function allSkills() {
+    var allSkills = [alchemySkill(), acrobaticsSkill(), alterationSkill(1), athleticsSkill(), barterSkill(), blockSkill(1),
+    conjurationSkill(1), constructionSkill(), cookingSkill(), craftingSkill(), destructionSkill(1), divinationSkill(1),
+    engineeringSkill(), enchantingSKill(1), farmingSkill(), firemakingSkill(), fishingSkill(), fletchingSkill(), heavyArmorSkill(1),
+    heavyWeaponSkill(1), herbloreSkill(), huntingSkill(), illusionSkill(1), lightArmorSkill(1), lightWeaponSkill(1), lockpickingSkill(),
+    miningSkill(), persuationSkill(), rangedSkill(1), restorationSkill(1), smithingSkill(), stealthSkill(), survivalSkill(),
+    unArmedSkill(1), unArmoredSkill(1), senseSkill(), woodcuttingSkill()]
     return allSkills
 }
 //armor skills
-export function allArmorSkills(b, h, l, u) {
-    var allArmorSkills = [blockSkill(b), heavyArmorSkill(h), lightArmorSkill(l), unArmoredSkill(u)]
-    return allArmorSkills;
-}
 export function blockSkill(level) {
     var block = { Name: "Block", Type: "Armor", Level: level, CurrentXP: 0, MaxXP: 50 }
     return block;
@@ -37,6 +28,10 @@ export function unArmoredSkill(level) {
 export function alchemySkill() {
     var alchemySkill = { Name: "Alchemy", Type: "Crafting", Level: 1, CurrentXP: 0, MaxXP: 50 }
     return alchemySkill
+}
+export function constructionSkill() {
+    var constr = { Name: "Construction", Type: "Crafting", Level: 1, CurrentXP: 0, MaxXP: 50 }
+    return constr;
 }
 export function cookingSkill() {
     var cook = { Name: "Cooking", Type: "Crafting", Level: 1, CurrentXP: 0, MaxXP: 50 }

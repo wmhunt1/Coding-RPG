@@ -1,4 +1,4 @@
-import { bludeoningDamage, fireDamage, forceDamage, piercingDamage, slashingDamage } from "./DamageTypesDB";
+import { bludeoningDamage, fireDamage, forceDamage, necroticDamage, piercingDamage, slashingDamage } from "./DamageTypesDB";
 import { drunkDeBuff } from "./DeBuffsDB";
 import { fireEnchantment, fireImmuneEnchantment, iceResistEnchantment, poisonApplyEnchantment, strengthEnchantment, unEnchanted } from "./EnchantmentsDB";
 import { clothProtection, leatherProtection, metalProtection, naturalProtection, woodProtection } from "./ProtectionTypesDB";
@@ -555,6 +555,11 @@ export function clawSlash() {
     var slash = { Name: "Slam", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: unArmedSkill(), Damage: 2, DamageType: slashingDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return slash;
 }
+export function ghostTouch()
+{
+    var touch = { Name: "Ghost Touch", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: destructionSkill(), Damage: 1, DamageType: necroticDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
+    return touch;
+}
 export function peck() {
     var bite = { Name: "Peck", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: unArmedSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return bite;
@@ -815,6 +820,10 @@ export function batGuano() {
 export function bones() {
     var bones = { Name: "Bones", Type: "Resource", SubType: "Bones", Cost: 1, Quantity: 1 }
     return bones;
+}
+export function ectoplasm() {
+    var ectoplasm = { Name: "Ectoplasm", Type: "Resource", SubType: "Bones", Cost: 1, Quantity: 1 }
+    return ectoplasm;
 }
 export function skull() {
     var bones = { Name: "Skull", Type: "Resource", SubType: "Bones", Cost: 1, Quantity: 1 }
