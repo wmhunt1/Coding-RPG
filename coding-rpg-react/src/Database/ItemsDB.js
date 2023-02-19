@@ -2,7 +2,7 @@ import { bludeoningDamage, fireDamage, forceDamage, piercingDamage, slashingDama
 import { drunkDeBuff } from "./DeBuffsDB";
 import { fireEnchantment, fireImmuneEnchantment, iceResistEnchantment, poisonApplyEnchantment, strengthEnchantment, unEnchanted } from "./EnchantmentsDB";
 import { clothProtection, leatherProtection, metalProtection, naturalProtection, woodProtection } from "./ProtectionTypesDB";
-import { axeSkill, barterSkill, blockSkill, bluntSKill, destructionSkill, heavyArmorSkill, lightArmorSkill, longBladeSkill, rangedSkill, shortBladeSkill, smithingSkill, unArmedSkill, unArmoredSkill } from "./SkillsDB";
+import { barterSkill, blockSkill, heavyWeaponSkill, destructionSkill, heavyArmorSkill, lightArmorSkill, rangedSkill, lightWeaponSkill, smithingSkill, unArmedSkill, unArmoredSkill } from "./SkillsDB";
 import { basicHeal, magicMissile } from "./SpellsDB";
 import { LearnSpell } from "../Scripts/AbilityAndSpellScripts";
 import { RemoveCondition } from "../Scripts/BuffConditionAndDeBuffScripts";
@@ -402,19 +402,19 @@ export function steelCrossBowOffHand() {
 }
 //daggers
 export function bronzeDaggerOffHand() {
-    var dagger = { Name: "Bronze Dagger (OffHand)", Level: 1, Slot: "OffHand", Type: "Equipable", SubType: "OneHand", Class: shortBladeSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var dagger = { Name: "Bronze Dagger (OffHand)", Level: 1, Slot: "OffHand", Type: "Equipable", SubType: "OneHand", Class: lightWeaponSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return dagger;
 }
 export function daggerOffHand() {
-    var dagger = { Name: "Dagger (OffHand)", Level: 1, Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Class: shortBladeSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var dagger = { Name: "Dagger (OffHand)", Level: 1, Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Class: lightWeaponSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return dagger;
 }
 export function ironDaggerOffHand() {
-    var dagger = { Name: "Iron Dagger (OffHand)", Level: 5, Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Class: shortBladeSkill(), Damage: 2, DamageType: piercingDamage(), Cost: 4, Quantity: 1, Enchantment: unEnchanted() }
+    var dagger = { Name: "Iron Dagger (OffHand)", Level: 5, Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Class: lightWeaponSkill(), Damage: 2, DamageType: piercingDamage(), Cost: 4, Quantity: 1, Enchantment: unEnchanted() }
     return dagger;
 }
 export function steelDaggerOffHand() {
-    var dagger = { Name: "Steel Dagger (OffHand)", Level: 10, Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Class: shortBladeSkill(), Damage: 3, DamageType: piercingDamage(), Cost: 6, Quantity: 1, Enchantment: unEnchanted() }
+    var dagger = { Name: "Steel Dagger (OffHand)", Level: 10, Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Class: lightWeaponSkill(), Damage: 3, DamageType: piercingDamage(), Cost: 6, Quantity: 1, Enchantment: unEnchanted() }
     return dagger;
 }
 //pistol
@@ -479,67 +479,67 @@ export function woodStaff() {
 //axes
 //1h axes
 export function bronzeAxe() {
-    var axe = { Name: "Bronze Axe", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: axeSkill(), Damage: 2, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var axe = { Name: "Bronze Axe", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 2, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return axe;
 }
 export function ironAxe() {
-    var axe = { Name: "Iron Axe", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: axeSkill(), Damage: 3, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var axe = { Name: "Iron Axe", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 3, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return axe;
 }
 export function steelAxe() {
-    var axe = { Name: "Steel Axe", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: axeSkill(), Damage: 4, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var axe = { Name: "Steel Axe", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 4, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return axe;
 }
 //2h axes
 export function bronzeAxe2H() {
-    var axe = { Name: "Bronze Axe 2H", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: axeSkill(), Damage: 3, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var axe = { Name: "Bronze Axe 2H", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: heavyWeaponSkill(), Damage: 3, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return axe;
 }
 export function ironAxe2H() {
-    var axe = { Name: "Iron Axe 2H", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: axeSkill(), Damage: 4, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var axe = { Name: "Iron Axe 2H", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: heavyWeaponSkill(), Damage: 4, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return axe;
 }
 export function steelAxe2H() {
-    var axe = { Name: "Iron Axe 2H", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: axeSkill(), Damage: 5, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var axe = { Name: "Iron Axe 2H", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: heavyWeaponSkill(), Damage: 5, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return axe;
 }
 //clubs
 export function club() {
-    var club = { Name: "Club", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: bluntSKill(), Damage: 1, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var club = { Name: "Club", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 1, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return club;
 }
 export function woodenclub() {
-    var club = { Name: "Wooden Club", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: bluntSKill(), Damage: 1, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var club = { Name: "Wooden Club", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 1, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return club;
 }
 //daggers
 export function bronzeDagger() {
-    var dagger = { Name: "Bronze Dagger", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: shortBladeSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var dagger = { Name: "Bronze Dagger", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: lightWeaponSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return dagger;
 }
 export function dagger() {
-    var dagger = { Name: "Dagger", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: shortBladeSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var dagger = { Name: "Dagger", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: lightWeaponSkill(), Damage: 1, DamageType: piercingDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return dagger;
 }
 export function ironDagger() {
-    var dagger = { Name: "Iron Dagger", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: shortBladeSkill(), Damage: 2, DamageType: piercingDamage(), Cost: 4, Quantity: 1, Enchantment: unEnchanted() }
+    var dagger = { Name: "Iron Dagger", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: lightWeaponSkill(), Damage: 2, DamageType: piercingDamage(), Cost: 4, Quantity: 1, Enchantment: unEnchanted() }
     return dagger;
 }
 export function steelDagger() {
-    var dagger = { Name: "Steel Dagger", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: shortBladeSkill(), Damage: 3, DamageType: piercingDamage(), Cost: 6, Quantity: 1, Enchantment: unEnchanted() }
+    var dagger = { Name: "Steel Dagger", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: lightWeaponSkill(), Damage: 3, DamageType: piercingDamage(), Cost: 6, Quantity: 1, Enchantment: unEnchanted() }
     return dagger;
 }
 //maces
 export function bronzeMace() {
-    var mace = { Name: "Bronze Mace", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: bluntSKill(), Damage: 2, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var mace = { Name: "Bronze Mace", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 2, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return mace;
 }
 export function ironMace() {
-    var mace = { Name: "Iron Mace", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: bluntSKill(), Damage: 3, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var mace = { Name: "Iron Mace", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 3, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return mace;
 }
 export function steelMace() {
-    var mace = { Name: "Steel Mace", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: bluntSKill(), Damage: 4, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var mace = { Name: "Steel Mace", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 4, DamageType: bludeoningDamage(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return mace;
 }
 //natural weapons
@@ -570,63 +570,63 @@ export function slam() {
 //swords
 //1hswords
 export function bronzeSword() {
-    var sword = { Name: "Bronze Sword", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 2, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var sword = { Name: "Bronze Sword", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 2, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return sword;
 }
 export function flamingsword() {
-    var sword = { Name: "Flaming Sword", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 5, DamageType: slashingDamage(), Cost: 50, Quantity: 1, Enchantment: fireEnchantment() }
+    var sword = { Name: "Flaming Sword", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 5, DamageType: slashingDamage(), Cost: 50, Quantity: 1, Enchantment: fireEnchantment() }
     return sword;
 }
 export function ironSword() {
-    var sword = { Name: "Iron Sword", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 3, DamageType: slashingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
+    var sword = { Name: "Iron Sword", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 3, DamageType: slashingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
     return sword;
 }
 export function steelSword() {
-    var sword = { Name: "Steel Sword", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 4, DamageType: slashingDamage(), Cost: 15, Quantity: 1, Enchantment: unEnchanted() }
+    var sword = { Name: "Steel Sword", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 4, DamageType: slashingDamage(), Cost: 15, Quantity: 1, Enchantment: unEnchanted() }
     return sword;
 }
 export function sword() {
-    var sword = { Name: "Sword", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: longBladeSkill(), Damage: 2, DamageType: slashingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
+    var sword = { Name: "Sword", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 2, DamageType: slashingDamage(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
     return sword;
 }
 //2hswords
 export function bronzeSword2H() {
-    var sword = { Name: "Bronze Sword 2H", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: longBladeSkill(), Damage: 3, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var sword = { Name: "Bronze Sword 2H", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: heavyWeaponSkill(), Damage: 3, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return sword;
 }
 export function ironSword2H() {
-    var sword = { Name: "Iron Sword 2H", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: longBladeSkill(), Damage: 4, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var sword = { Name: "Iron Sword 2H", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: heavyWeaponSkill(), Damage: 4, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return sword;
 }
 export function steelSword2H() {
-    var sword = { Name: "Steel Sword 2H", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: longBladeSkill(), Damage: 5, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var sword = { Name: "Steel Sword 2H", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: heavyWeaponSkill(), Damage: 5, DamageType: slashingDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return sword;
 }
 //warhammers
 //1h warhammer
 export function bronzeWarHammer() {
-    var hammer = { Name: "Bronze WarHammer", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: bluntSKill(), Damage: 2, DamageType: bludeoningDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var hammer = { Name: "Bronze WarHammer", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 2, DamageType: bludeoningDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return hammer;
 }
 export function ironWarHammer() {
-    var hammer = { Name: "Iron WarHammer", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: bluntSKill(), Damage: 3, DamageType: bludeoningDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var hammer = { Name: "Iron WarHammer", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 3, DamageType: bludeoningDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return hammer;
 }
 export function steelWarHammer() {
-    var hammer = { Name: "Steel WarHammer", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: bluntSKill(), Damage: 4, DamageType: bludeoningDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var hammer = { Name: "Steel WarHammer", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: heavyWeaponSkill(), Damage: 4, DamageType: bludeoningDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return hammer;
 }
 //2h warhammer
 export function bronzeWarHammer2H() {
-    var hammer = { Name: "Bronze WarHammer 2H", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: bluntSKill(), Damage: 3, DamageType: bludeoningDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var hammer = { Name: "Bronze WarHammer 2H", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: heavyWeaponSkill(), Damage: 3, DamageType: bludeoningDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return hammer;
 }
 export function ironWarHammer2H() {
-    var hammer = { Name: "Iron WarHammer 2H", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: bluntSKill(), Damage: 4, DamageType: bludeoningDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var hammer = { Name: "Iron WarHammer 2H", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: heavyWeaponSkill(), Damage: 4, DamageType: bludeoningDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return hammer;
 }
 export function steelWarHammer2H() {
-    var hammer = { Name: "Steel WarHammer 2H", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: bluntSKill(), Damage: 5, DamageType: bludeoningDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    var hammer = { Name: "Steel WarHammer 2H", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: heavyWeaponSkill(), Damage: 5, DamageType: bludeoningDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
     return hammer;
 }
 //ranged weapon

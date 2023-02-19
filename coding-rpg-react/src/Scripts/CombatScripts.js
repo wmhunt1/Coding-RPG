@@ -11,7 +11,7 @@ export function AddToCombatLog(log, message) {
 export function CalculateCharWeaponDamage(char, weapon) {
     var attribute = 0;
     var damage = Math.round((FindSkillInSkillBook(char, weapon.Class).Level) / 10)
-    if (weapon.Class.Name === "Short Blade" || weapon.Class.Name === "Ranged") {
+    if (weapon.Class.Name === "Light Weapon" || weapon.Class.Name === "Ranged") {
         attribute = char.Attributes.Dexterity.Value + char.Attributes.Dexterity.Bonus - char.Attributes.Dexterity.Penalty
     }
     else if (weapon.Class.Name === "Destruction") {

@@ -1,7 +1,7 @@
 import { CheckForQuest } from "../Scripts/QuestScripts"
-import { bandit,bat, bear, chicken, cow, giant, goblin, scareCrow, skeleton, spider, wolf } from './CharactersDB'
+import { bandit,bat, bear, chicken, cow, giant,gnoll, goblin, scareCrow, skeleton, spider, wolf } from './CharactersDB'
 import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, priestDialogue, tenguCampDialogue } from "./DialoguesDB"
-import { banditHideoutDungeon, giantCaveDungeon, giantCaveDungeonBeforeAndAfterQuest, goblinMine, goblinMineAfterQuest, spiderCaveDungeon } from "./DungeonsDB"
+import { banditHideoutDungeon, giantCaveDungeon, giantCaveDungeonBeforeAndAfterQuest, gnollDenDungeon, goblinMine, goblinMineAfterQuest, spiderCaveDungeon } from "./DungeonsDB"
 import { dwarvenMineGoblinQuest, giantQuest } from "./QuestsDB"
 import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, joeTheTradersTradingPost, witchHutShop } from "./ShopsDB"
 import { alchemyNode, blackFeatherNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletchNode, herbNode, huntNode, millNode, mineNode, saltPeterNode, sheepNode, waterNode, wellNode, woodNode } from "./SkillNodesDB"
@@ -68,6 +68,11 @@ export function giantCave(hero, x, y) {
     }
     return giant;
 }
+export function gnollDen(hero , x, y)
+{
+    var den = { LocationName: "Gnoll Den", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterGnolDenDungeon(hero), enterGnollEncounter(hero)] }
+    return den;
+}
 export function spiderCave(hero, x, y) {
     var spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterSpiderCaveDungeon(hero), enterSpiderEncounter(hero)] }
     return spider;
@@ -78,6 +83,11 @@ export function witchHut(hero, x, y) {
     return witchHut;
 }
 //towns
+export function daleWizardTower(hero, x, y)
+{
+    var tower ={ LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [] }
+    return tower;
+}
 export function daleTown(hero, x, y) {
     var daleTown = { LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [enterDaleTownRumors(hero), enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterPriestDialogue(hero), enterTradingPost(hero), enterWellNode(hero)] }
     return daleTown;
@@ -157,6 +167,10 @@ export function enterGiantCaveDungeonBeforeAndAfterQuest(hero) {
     var enter = { Name: "Giant Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: giantCaveDungeonBeforeAndAfterQuest(hero), shop: null, skill: null }; return content } }
     return enter;
 }
+export function enterGnolDenDungeon(hero) {
+    var enter = { Name: "Gnoll Den (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: gnollDenDungeon(hero), shop: null, skill: null }; return content } }
+    return enter;
+}
 export function enterSpiderCaveDungeon(hero) {
     var enter = { Name: "Spider Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: spiderCaveDungeon(hero), shop: null, skill: null }; return content } }
     return enter;
@@ -205,6 +219,10 @@ export function enterCowEncounter(hero) {
 }
 export function enterGiantEncounter(hero) {
     var encounter = { Name: "Kill Giants", enterLocation(hero) { var content = { active: "Combat", combat: [giant()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    return encounter;
+}
+export function enterGnollEncounter(hero) {
+    var encounter = { Name: "Kill Gnolls", enterLocation(hero) { var content = { active: "Combat", combat: [gnoll(), gnoll(), gnoll()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
 export function enterGoblinEncounter(hero) {

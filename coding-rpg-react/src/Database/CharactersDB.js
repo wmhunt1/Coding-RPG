@@ -1,10 +1,10 @@
 import { noCondition, poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
 import { cleave, pierceArmor, rage } from "./AbilitiesDB";
-import { bareBack, bareFinger, bareNeck, bite, bones, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakShortBow, ironAxe2H, ironSword, skull, bronzeShield, bronzeMace, bronzeHelmet, wolfFur, clawSlash, bearFur, rawChicken, feather, peck, batGuano } from "./ItemsDB";
+import { bareBack, bareFinger, bareNeck, bite, bones, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakShortBow, ironAxe2H, ironSword, skull, bronzeShield, bronzeMace, bronzeHelmet, wolfFur, clawSlash, bearFur, rawChicken, feather, peck, batGuano, ironAxe, oakStaff } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
 import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell, summonRat } from "./SpellsDB"
 import { BasicAttacker, BasicHealer, Rager, spiderSummoner } from "./TacticsDB";
-import { allSkills, barterSkill, blockSkill, bluntSKill, heavyArmorSkill, miningSkill, restorationSkill, smithingSkill } from "./SkillsDB";
+import { allSkills, barterSkill, blockSkill, heavyWeaponSkill, heavyArmorSkill, miningSkill, restorationSkill, smithingSkill } from "./SkillsDB";
 import { noTitle } from "./TitlesDB";
 import { bludeoningDamage, fireDamage, lightningDamage, piercingDamage, poisonDamage, slashingDamage } from "./DamageTypesDB";
 import { startingAdjacentLocations } from "./MapsDB";
@@ -54,9 +54,9 @@ export function ferraForgeHeart() {
     FindSkillInSkillBook(hero, blockSkill()).Level = 10;
     FindSkillInSkillBook(hero, blockSkill()).CurrentXP = 7200;
     FindSkillInSkillBook(hero, blockSkill()).MaxXP = 9000;
-    FindSkillInSkillBook(hero, bluntSKill()).Level = 10;
-    FindSkillInSkillBook(hero, bluntSKill()).CurrentXP = 7200;
-    FindSkillInSkillBook(hero, bluntSKill()).MaxXP = 9000;
+    FindSkillInSkillBook(hero, heavyWeaponSkill()).Level = 10;
+    FindSkillInSkillBook(hero, heavyWeaponSkill()).CurrentXP = 7200;
+    FindSkillInSkillBook(hero, heavyWeaponSkill()).MaxXP = 9000;
     FindSkillInSkillBook(hero, heavyArmorSkill()).Level = 10;
     FindSkillInSkillBook(hero, heavyArmorSkill()).CurrentXP = 7200;
     FindSkillInSkillBook(hero, heavyArmorSkill()).MaxXP = 9000;
@@ -111,8 +111,12 @@ export function giantSpider() {
     var spider = beast("Giant Spider")
     spider.BaseStats.MP.Current = 20; spider.BaseStats.MP.Max = 20; spider.BaseStats.HP.Current = 20; spider.BaseStats.HP.Max = 10;
     spider.CurrentXP = 50; spider.Attributes.Strength.Value = 12; spider.Equipment.Weapon = poisonedBite(); spider.ConditionModifiers.Immunities = [webCondition(), poisonCondition()]; spider.Immunities(poisonDamage()); spider.ItemDrops = [spiderSilkCloth()]
-    bandit.Tactics = { Tactics(char, allies, enemies, combatLog, round) { spiderSummoner(char, allies, enemies, combatLog, round) } }
+    spider.Tactics = { Tactics(char, allies, enemies, combatLog, round) { spiderSummoner(char, allies, enemies, combatLog, round) } }
     return spider;
+}
+export function hyena(name) {
+    var dog = beast("Hyena")
+    return dog;
 }
 export function rat() {
     var rat = beast("Rat")
@@ -172,6 +176,31 @@ export function giant() {
     giant.CurrentXP = 100;
     giant.Attributes.Strength.Bonus = 10;
     return giant;
+}
+export function gnoll() {
+    var gnoll = character("Gnoll")
+    gnoll.BaseStats.HP.Current = 15; gnoll.BaseStats.HP.Max = 15;
+    gnoll.Attributes.Strength.Value = 12; gnoll.Attributes.Dexterity.Value = 12;
+    gnoll.CurrentXP = 20; gnoll.Equipment.Weapon = ironAxe(); gnoll.Equipment.OffHand = ironShield(); gnoll.Equipment.Legs = loinCloth(); gnoll.ItemDrops = [ironAxe(), ironShield()]
+    return gnoll
+}
+export function gnollShaman() {
+    var gnoll = character("Shaman")
+    gnoll.BaseStats.HP.Current = 15; gnoll.BaseStats.HP.Max = 15;
+    gnoll.Attributes.Wisdom.Value = 12;
+    gnoll.SpellBook = [basicHeal()]
+    gnoll.CurrentXP = 20; gnoll.Equipment.Weapon = oakStaff(); gnoll.Equipment.Legs = loinCloth(); gnoll.ItemDrops = [oakStaff()]
+    gnoll.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
+    return gnoll
+}
+export function gnollLeader() {
+    var gnoll = character("Gnoll Leader")
+    gnoll.Abilities = [rage()]
+    gnoll.BaseStats.HP.Current = 30; gnoll.BaseStats.HP.Max = 30;
+    gnoll.Attributes.Strength.Value = 14; gnoll.Attributes.Dexterity.Value = 12;
+    gnoll.CurrentXP = 50; gnoll.Equipment.Weapon = ironAxe(); gnoll.Equipment.OffHand = ironShield(); gnoll.Equipment.Legs = loinCloth(); gnoll.ItemDrops = [ironAxe(), ironShield()]
+    gnoll.Tactics = { Tactics(char, allies, enemies, combatLog, round) { Rager(char, allies, enemies, combatLog, round) } }
+    return gnoll
 }
 export function goblin() {
     var goblin = character("Goblin")

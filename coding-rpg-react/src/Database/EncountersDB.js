@@ -1,4 +1,4 @@
-import { bandit, banditArcher, banditBerseker, cow, giant, giantRat, giantSpider, goblin, goblinBoss, rat, scareCrow, skeleton, spider, worg } from "./CharactersDB";
+import { bandit, banditArcher, banditBerseker, cow, giant, giantRat, giantSpider,gnoll, gnollLeader, gnollShaman, goblin, goblinBoss, hyena, rat, scareCrow, skeleton, spider, worg } from "./CharactersDB";
 import { enslavedKoboldsDialogue, enterGoblinMineDialogue, giantCaveDialogue, saveMinersDialogue, spiderCaveDialogue } from "./DialoguesDB";
 
 //combat encounters
@@ -61,6 +61,19 @@ export function banditTrioEncounter() {
 }
 export function giantEncounter() {
     var encounter = { Name: "Scarecrow", Type: "Combat", Content: [giant()] }
+    return encounter;
+}
+//gnolls
+export function gnollEncounter(){
+    var encounter = { Name: "Gnolls", Type: "Combat", Content: [gnoll(), gnoll(), gnoll()] }
+    return encounter;
+}
+export function gnollShamanEncounter(){
+    var encounter = { Name: "Gnoll Shaman", Type: "Combat", Content: [gnollShaman(), hyena(), hyena()] }
+    return encounter;
+}
+export function gnollLeaderEncounter(){
+    var encounter = { Name: "Gnoll Leader", Type: "Combat", Content: [gnollLeader(), gnoll(), hyena()] }
     return encounter;
 }
 //goblins

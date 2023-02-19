@@ -1,6 +1,6 @@
 import { ferraForgeHeart } from "./CharactersDB";
 import { blackFeather, silverRingLR } from "./ItemsDB";
-import { banditQuest1, dwarvenMineGoblinQuest, giantQuest, metSweetheart, ratCellarQuest, scareCrowQuest1, scareCrowQuest2, scareCrowQuest3, scareCrowQuest4, skeletonQuest } from "./QuestsDB"
+import { banditQuest1, dwarvenMineGoblinQuest, giantQuest, gnollQuest1, metSweetheart, ratCellarQuest, scareCrowQuest1, scareCrowQuest2, scareCrowQuest3, scareCrowQuest4, skeletonQuest } from "./QuestsDB"
 import { CalculateTime } from "../Scripts/MapScripts";
 import { FindPartyMember, JoinParty, LeaveParty, PartyRecovery, RemoveGold } from "../Scripts/CharacterScripts";
 import { AddItemToInventory, FindItemInInventory, RemoveItemFromInventory } from "../Scripts/ItemScripts";
@@ -342,7 +342,7 @@ export function tenguCampDialogue(hero) {
     var questIndex = CheckForQuest(hero, scareCrowQuest2())
     var questIndex2 = CheckForQuest(hero, scareCrowQuest3())
     if (questIndex !== null && questIndex2 === null) {
-        dialogue = { Name: "Investigate Camp", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "You Find black feathers leading towards a spider cave.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, hero.Journal[questIndex]); AddItemToInventory(hero, hero.Inventory, blackFeather(), 1, hero) } }
+        dialogue = { Name: "Investigate Camp", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "You Find black feathers leading towards a spider cave.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, hero.Journal[questIndex]); } }
     }
     else if (hero.Journal[questIndex].Status === "Finished" && hero.Journal[questIndex2].Status === "In Progress") {
         dialogue = { Name: "Investigate Camp", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "There's nothing else but scattered junk and food scraps", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { } }
@@ -367,6 +367,22 @@ export function joeTheTradersTradingPostDialogue(hero) {
     }
     else {
         dialogue = { Name: "Speak with Joe", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Joe asks if you'd like to buy or sell something.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { } }
+    }
+    return dialogue
+}
+//whitescale dialogue
+export function whiteScaleDialogue(hero)
+{
+    var questIndex = CheckForQuest(hero, gnollQuest1())
+    var dialogue = ""
+    if (questIndex === null) {
+        dialogue = { Name: "Speak with Whitescale", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Clear out Gnoll Den?", Next: 1 }, { Id: 2, Line: "Accepted Quest", Next: 2 }, { Id: 3, Line: "Didn't Accept Quest", Next: 3 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }, { Id: 3, Options: [["Leave", 0]] }] }, responseEffect(hero, option) { if (option === 2) { StartQuest(hero, banditQuest1()) } } }
+    }
+    else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "In Progress") {
+        dialogue = { Name: "Speak with Whitescale", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Joe Thanks you.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, gnollQuest1(hero)); IncreaseReputation(hero, whiteScalesFlockReputation(), 1) } }
+    }
+    else {
+        dialogue = { Name: "Speak with Whitescale", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Whitescale is knitting.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { } }
     }
     return dialogue
 }

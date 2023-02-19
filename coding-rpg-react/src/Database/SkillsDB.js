@@ -1,5 +1,15 @@
 export function allSkills(level) {
-    var allSkills = [alchemySkill(), acrobaticsSkill(), alterationSkill(1), athleticsSkill(), axeSkill(1), barterSkill(), blockSkill(1), bluntSKill(1), conjurationSkill(1), cookingSkill(), craftingSkill(), destructionSkill(1), divinationSkill(1),engineeringSkill(), enchantingSKill(1), farmingSkill(), firemakingSkill(), fishingSkill(), fletchingSkill(), heavyArmorSkill(1), herbloreSkill(), huntingSkill(), illusionSkill(1), lightArmorSkill(1), lockpickingSkill(), longBladeSkill(1), miningSkill(), persuationSkill(), rangedSkill(1), restorationSkill(1), shortBladeSkill(1), smithingSkill(), spearSkill(1), stealthSkill(), survivalSkill(), unArmedSkill(1), unArmoredSkill(1), senseSkill(), woodcuttingSkill()]
+    var allSkills = [alchemySkill(), acrobaticsSkill(), alterationSkill(1), athleticsSkill(),
+    //axeSkill(1), 
+    barterSkill(), blockSkill(1),
+    //bluntSKill(1), 
+    conjurationSkill(1), cookingSkill(), craftingSkill(), destructionSkill(1), divinationSkill(1), engineeringSkill(), enchantingSKill(1), farmingSkill(), firemakingSkill(), fishingSkill(), fletchingSkill(), heavyArmorSkill(1), heavyWeaponSkill(1), herbloreSkill(), huntingSkill(), illusionSkill(1), lightArmorSkill(1), lightWeaponSkill(1), lockpickingSkill(),
+    //longBladeSkill(1), 
+    miningSkill(), persuationSkill(), rangedSkill(1), restorationSkill(1),
+    //shortBladeSkill(1),
+    smithingSkill(),
+    //spearSkill(1), 
+    stealthSkill(), survivalSkill(), unArmedSkill(1), unArmoredSkill(1), senseSkill(), woodcuttingSkill()]
     return allSkills
 }
 //armor skills
@@ -145,34 +155,42 @@ export function survivalSkill() {
     return surv;
 }
 //weapon skills
-export function allWeaponSkills(a, b, l, r, sh, sp, u) {
-    var allWeaponSkills = [axeSkill(a), bluntSKill(b), longBladeSkill(l), rangedSkill(r), shortBladeSkill(sh), spearSkill(sp), unArmedSkill(u)]
-    return allWeaponSkills
+// export function allWeaponSkills(a, b, l, r, sh, sp, u) {
+//     var allWeaponSkills = [axeSkill(a), bluntSKill(b), longBladeSkill(l), rangedSkill(r), shortBladeSkill(sh), spearSkill(sp), unArmedSkill(u)]
+//     return allWeaponSkills
+//}
+// export function axeSkill(level) {
+//     var axe = { Name: "Axe", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
+//     return axe;
+// }
+// export function bluntSKill(level) {
+//     var blunt = { Name: "Blunt", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
+//     return blunt;
+// }
+// export function longBladeSkill(level) {
+//     var long = { Name: "Long Blade", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
+//     return long;
+// }
+export function heavyWeaponSkill(level) {
+    var ranged = { Name: "Heavy Armor", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
+    return ranged;
 }
-export function axeSkill(level) {
-    var axe = { Name: "Axe", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
-    return axe;
-}
-export function bluntSKill(level) {
-    var blunt = { Name: "Blunt", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
-    return blunt;
-}
-export function longBladeSkill(level) {
-    var long = { Name: "Long Blade", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
-    return long;
+export function lightWeaponSkill(level) {
+    var ranged = { Name: "Light Weapon", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
+    return ranged;
 }
 export function rangedSkill(level) {
     var ranged = { Name: "Ranged", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
     return ranged;
 }
-export function shortBladeSkill(level) {
-    var short = { Name: "Short Blade", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
-    return short;
-}
-export function spearSkill(level) {
-    var spear = { Name: "Spear", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
-    return spear;
-}
+// export function shortBladeSkill(level) {
+//     var short = { Name: "Short Blade", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
+//     return short;
+// }
+// export function spearSkill(level) {
+//     var spear = { Name: "Spear", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
+//     return spear;
+// }
 export function unArmedSkill(level) {
     var unarmed = { Name: "UnArmed", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
     return unarmed;

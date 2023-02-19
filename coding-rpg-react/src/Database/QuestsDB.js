@@ -1,6 +1,7 @@
 import { giantRat, scareCrow, skeleton } from "./CharactersDB"
-import { banditHideoutDungeon, giantCaveDungeon, goblinMine, spiderCaveDungeon } from "./DungeonsDB"
-import { basicHealScroll, lessonsFromFaldan, silverRingLR, tipsTraderJoe } from "./ItemsDB"
+import { banditHideoutDungeon, giantCaveDungeon, gnollDenDungeon, goblinMine, spiderCaveDungeon } from "./DungeonsDB"
+import { basicHealScroll, blackFeather, lessonsFromFaldan, silverRingLR, skillLamp, tipsTraderJoe, wheat } from "./ItemsDB"
+import { farmingSkill, woodcuttingSkill } from "./SkillsDB";
 
 // export function banditQuest1(hero) {
 //     var bandit = { Name: "Stop  the Bandits Part 1", Status: "In Progress", Type: "Dungeon", Description: "Find where the bandits' hideout.", Target: null, Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
@@ -15,24 +16,31 @@ export function dwarvenMineGoblinQuest(hero) {
     return dwarvenMineGoblinQuest
 }
 export function giantQuest(hero) {
-    var giant = { Name: "Of Mice and Minotaurs", Status: "In Progress", Type: "Dungeon", Description: "Save Foreman George from the Giant", Target: giantCaveDungeon(hero), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
+    var giant = { Name: "Of Mice and Minotaurs", Status: "In Progress", Type: "Dungeon", Description: "Save Foreman George from the Giant", Target: giantCaveDungeon(hero), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{Item:skillLamp(woodcuttingSkill(), 500)}] } }
     return giant;
 }
-export function metSweetheart(hero)
-{
+export function gnollQuest1(hero) {
+    var gnoll = { Name: "Flock of Gnolls", Status: "In Progress", Type: "Dungeon", Description: "Clear out the Gnoll Den to protect Whitescale's Flock", Target: gnollDenDungeon(), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
+    return gnoll;
+}
+export function metSweetheart(hero) {
     var sw = { Name: "Met Sweetheart", Status: "In Progress", Type: "Hidden", Description: "Checks if met Sweetheart", Target: null, Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
     return sw;
+}
+export function metWitch(hero) {
+    var witch = { Name: "Met Witch and Wyle", Status: "In Progress", Type: "Hidden", Description: "Checks if met Witch And Wyle", Target: null, Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
+    return witch;
 }
 export function ratCellarQuest(hero) {
     var ratCellarQuest = { Name: "Rats in The Cellar", Status: "In Progress", Type: "Kill", Description: "Kill the Giant Rat in the cellar", Target: giantRat(), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
     return ratCellarQuest
 }
 export function scareCrowQuest1(hero) {
-    var crow = { Name: "Scarecrow Part 1", Status: "In Progress", Type: "Kill", Description: "Kill the possessed scarecrow", Target: scareCrow(), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
+    var crow = { Name: "Scarecrow Part 1", Status: "In Progress", Type: "Kill", Description: "Kill the possessed scarecrow", Target: scareCrow(), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 10, Items: [{Item: wheat(), Quantity:5}] } }
     return crow;
 }
 export function scareCrowQuest2(hero) {
-    var crow = { Name: "Scarecrow Part 2", Status: "In Progress", Type: "Kill", Description: "Find the crows", Target: null, Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
+    var crow = { Name: "Scarecrow Part 2", Status: "In Progress", Type: "Kill", Description: "Find the crows", Target: null, Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{ Item: blackFeather(), Quantity: 1 }] } }
     return crow;
 }
 export function scareCrowQuest3(hero) {
@@ -40,7 +48,7 @@ export function scareCrowQuest3(hero) {
     return crow;
 }
 export function scareCrowQuest4(hero) {
-    var crow = { Name: "Scarecrow Part 4", Status: "In Progress", Type: "Hidden", Description: "Return ring to Farmer Littleroot", Target: null, Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
+    var crow = { Name: "Scarecrow Part 4", Status: "In Progress", Type: "Hidden", Description: "Return ring to Farmer Littleroot", Target: null, Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{Item: skillLamp(farmingSkill(), 500)}] } }
     return crow;
 }
 export function skeletonQuest(hero) {
