@@ -1,8 +1,8 @@
-import { dreamingWorkerInnDialogue, forgeheartSmithDialogue, innDialogue, joeTheTradersTradingPostDialogue } from "./DialoguesDB";
+import { dreamingWorkerInnDialogue, forgeheartSmithDialogue, innDialogue, joeTheTradersTradingPostDialogue, priestDialogue } from "./DialoguesDB";
 import { ratCellar } from "./DungeonsDB";
-import { ale, allBronze, allIron, allPotions, allSpellScrolls, bread, bronzeHatchet, bronzePickAxe, bucket, enchantmentTome, fishingRod, knife, needle, shears, sickle, stew, tinderBox } from "./ItemsDB"
+import { ale, allBronze, allHealingScrolls, allIron, allPotions, allSpellScrolls, bread, bronzeHatchet, bronzePickAxe, bucket, enchantmentTome, fishingRod, knife, needle, shears, sickle, stew, tinderBox } from "./ItemsDB"
 import { daleTownReputation } from "./ReputationsDB";
-import { cookNode, smithNode } from "./SkillNodesDB";
+import { cookNode, restorationNode, smithNode } from "./SkillNodesDB";
 
 //alchemists
 export function alchemyShop(hero) {
@@ -36,6 +36,16 @@ export function innShop(hero) {
     return inn;
 }
 //magic shop
+export function chapel(hero) {
+
+    var magicShop = { Name: "Chapel", Dialogue: priestDialogue(hero), Dungeon: null, Node: restorationNode(hero), Inventory: [...allHealingScrolls()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll") } }
+    return magicShop
+
+}
+export function daleChapelShop(hero) {
+    var magicShop = { Name: "Dale Chapel", Dialogue: priestDialogue(hero), Dungeon: null, Node: restorationNode(hero), Inventory: [...allHealingScrolls()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll") } }
+    return magicShop
+}
 export function magicShop(hero) {
     var magicShop = { Name: "Magic Shop", Dialogue: null, Dungeon: null, Node: null, Inventory: [...allSpellScrolls(), enchantmentTome()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll") } }
     return magicShop

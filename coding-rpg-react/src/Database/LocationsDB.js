@@ -1,14 +1,13 @@
 import { CheckForQuest } from "../Scripts/QuestScripts"
-import { bandit,bat, bear, chicken, cow,ghost, giant,gnoll, goblin, scareCrow, skeleton, spider, wolf } from './CharactersDB'
-import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, priestDialogue, tenguCampDialogue } from "./DialoguesDB"
+import { bandit, bat, bear, chicken, cow, ghost, giant, gnoll, goblin, scareCrow, skeleton, spider, wolf } from './CharactersDB'
+import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, tenguCampDialogue } from "./DialoguesDB"
 import { banditHideoutDungeon, giantCaveDungeon, giantCaveDungeonBeforeAndAfterQuest, gnollDenDungeon, goblinMine, goblinMineAfterQuest, spiderCaveDungeon } from "./DungeonsDB"
 import { dwarvenMineGoblinQuest, giantQuest } from "./QuestsDB"
-import { dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, joeTheTradersTradingPost, witchHutShop, wizardTowerShop } from "./ShopsDB"
+import { daleChapelShop, dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, joeTheTradersTradingPost, witchHutShop, wizardTowerShop } from "./ShopsDB"
 import { alchemyNode, blackFeatherNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletchNode, herbNode, huntNode, millNode, mineNode, saltPeterNode, sheepNode, waterNode, wellNode, woodNode } from "./SkillNodesDB"
 
 //locations
-export function batCave(hero, x, y)
-{
+export function batCave(hero, x, y) {
     var cave = { LocationName: "Bat Cave", XCoord: x, YCoord: y, CanTravel: false, Color: "Red", SubLocations: [enterBatEncounter(hero), enterSaltPeterNode(hero)] }
     return cave;
 }
@@ -68,8 +67,7 @@ export function giantCave(hero, x, y) {
     }
     return giant;
 }
-export function gnollDen(hero , x, y)
-{
+export function gnollDen(hero, x, y) {
     var den = { LocationName: "Gnoll Den", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterGnolDenDungeon(hero), enterGnollEncounter(hero)] }
     return den;
 }
@@ -87,13 +85,12 @@ export function witchHut(hero, x, y) {
     return witchHut;
 }
 //towns
-export function daleWizardTower(hero, x, y)
-{
-    var tower ={ LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [enterWizardTowerMagicShop(hero)] }
+export function daleWizardTower(hero, x, y) {
+    var tower = { LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [enterWizardTowerMagicShop(hero)] }
     return tower;
 }
 export function daleTown(hero, x, y) {
-    var daleTown = { LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [enterDaleTownRumors(hero), enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterPriestDialogue(hero), enterTradingPost(hero), enterWellNode(hero)] }
+    var daleTown = { LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [enterDaleTownRumors(hero), enterDaleChapelShop(hero), enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterTradingPost(hero), enterWellNode(hero)] }
     return daleTown;
 }
 export function orcVillage(hero, x, y) {
@@ -192,10 +189,6 @@ export function enterLumbermillDialogue(hero) {
     var enter = { Name: "Speak with woodcutters", enterLocation(hero) { var content = { active: "Dialogue", combat: null, dialogue: lumbermillDialogue(hero), dungeon: null, shop: null, skill: null }; return content } }
     return enter
 }
-export function enterPriestDialogue(hero) {
-    var enter = { Name: "Talk to Priest", enterLocation(hero) { var content = { active: "Dialogue", combat: null, dialogue: priestDialogue(hero), dungeon: null, shop: null, skill: null }; return content } }
-    return enter
-}
 export function enterTenguCampDialogue(hero) {
     var enter = { Name: "Inspect Camp", enterLocation(hero) { var content = { active: "Dialogue", combat: null, dialogue: tenguCampDialogue(hero), dungeon: null, shop: null, skill: null }; return content } }
     return enter
@@ -278,8 +271,11 @@ export function enterInn(hero) {
     return inn
 }
 //magic
-export function enterWizardTowerMagicShop(hero)
-{
+export function enterDaleChapelShop(hero) {
+    var shop = { Name: "Dale Chapel", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: daleChapelShop(hero), skill: null }; return content } }
+    return shop
+}
+export function enterWizardTowerMagicShop(hero) {
     var shop = { Name: "Wizard Tower Shop", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: wizardTowerShop(shop), skill: null }; return content } }
     return shop
 }

@@ -1,4 +1,4 @@
-import { alchemyRecipes, cookingRecipes, craftingRecipes, drawWater, enchantingRecipes, engineeringRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, gatherBlackFeathers, herbLoreRecipes, huntingRecipes, millWheat, mineSaltpeter, miningRecipes, shearSheep, smithingRecipes, woodcuttingRecipes } from "./SkillRecipesDB"
+import { alchemyRecipes, cookingRecipes, craftingRecipes, drawWater, enchantingRecipes, engineeringRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, gatherBlackFeathers, herbLoreRecipes, huntingRecipes, millWheat, mineSaltpeter, miningRecipes, restorationRecipes, shearSheep, smithingRecipes, woodcuttingRecipes } from "./SkillRecipesDB"
 
 export function alchemyNode(hero) {
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Alchemy");
@@ -94,6 +94,13 @@ export function saltPeterNode(hero) {
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Mining");
     var mineNode = { Name: "Mine", Skill: hero.SkillBook[skillIndex], Recipes: [mineSaltpeter()] }
     return mineNode
+}
+//restoration
+export function restorationNode(hero)
+{
+    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Restoration");
+    var restNode = { Name: "Altar", Skill: hero.SkillBook[skillIndex], Recipes: restorationRecipes() }
+    return restNode   
 }
 export function smithNode(hero) {
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Smithing");

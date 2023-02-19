@@ -3,7 +3,6 @@ journal doesn't update until after leaving shop
 hp can be healed over maxhp
 
 to-do content
-Make scrolls for the rest of the spells
 Wizard tower with dungeon  (monsters, dialogue, dungeon)
     * animated brooms? elemental imps?
     * you talk to the apprentice as they solve the puzzle and they get sucked in.
@@ -11,11 +10,8 @@ Wizard tower with dungeon  (monsters, dialogue, dungeon)
     * then only puzzle
     * archmage doesn't show up until afterwards
 wolf/bear fur armor lv 5?
-make chapel
 witch hut dialogue
-ferra can rejoin if ask
 companion dialogue in other places
-ferra comments if present during goblin mine quest
 
 possible content
 more damage modifers for prot types

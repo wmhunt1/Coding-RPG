@@ -49,7 +49,11 @@ export function EarnSkillXP(char, skill, xp) {
 }
 export function UseSkillRecipe(char, skill, recipe) {
     AddToSkillLog(char, char.Name + " tries to  " + recipe.Name)
-    var quantity = recipe.Output.Quantity
+    var quantity = 0;
+    if (recipe.Output !== null)
+    {
+        quantity = recipe.Output.Quantity
+    }
     var sucess = false;
     var foundItems = 0;
     if (recipe.Tool !== null) {
@@ -100,8 +104,15 @@ export function UseSkillRecipe(char, skill, recipe) {
                 RemoveItemFromInventory(char, char.Inventory, recipe.Input[r2].Item, recipe.Input[r2].Quantity, char)
             }
             if (fail === false) {
+                if (recipe.Output !== null)
+                {
                 AddToSkillLog(char, char.Name + " has " + recipe.Verb + "ed " + recipe.Output.Item.Name + " X " + quantity + ", earning " + recipe.Exp + " " + skill.Name + " XP")
                 AddItemToInventory(char, char.Inventory, recipe.Output.Item, recipe.Output.Quantity, char)
+                }
+                else
+                {
+                    AddToSkillLog(char, char.Name + " has " + recipe.Verb + "ed " + recipe.Input.Item.Name + ", earning " + recipe.Exp + " " + skill.Name + " XP")
+                }
                 EarnSkillXP(char, skill, recipe.Exp)
             }
             else {

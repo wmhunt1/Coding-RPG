@@ -216,14 +216,19 @@ export function forgeHeart1(hero) {
             { Id: 3, Options: [["Leave", 0]] }]
         },
         responseEffect(hero, option) {
-            if (option === 2) { StartQuest(hero, dwarvenMineGoblinQuest()); } if (option === 5) { JoinParty(hero, ferraForgeHeart(), hero.Companions); IncreaseRelationship(hero, ferraForgeheartRelationship(), 1) }
+            if (option === 2) { StartQuest(hero, dwarvenMineGoblinQuest()); } if (option === 5) { JoinParty(hero, ferraForgeHeart(), hero); IncreaseRelationship(hero, ferraForgeheartRelationship(), 1) }
         }
     }
     return dialogue
 }
 export function forgeHeart2(hero) {
-    //ferra can rejoin you here
-    var dialogue = { Name: "Speak with Faldan", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The old dwarf is sleeping.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { } }
+    var dialogue;
+    if (FindPartyMember(ferraForgeHeart(), hero.Companions) !== null) {
+        dialogue = { Name: "Speak with Faldan", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The old dwarf is sleeping.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { } }
+    }
+    else {
+        dialogue = { Name: "Speak with Ferra", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Let Ferra Join?", Next: 1 }, { Id: 2, Line: "Ferra comes along", Next: 2 }, { Id: 3, Line: "You leave Ferra", Next: 3 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }, { Id: 3, Options: [["Leave", 0]] }] }, responseEffect(hero, option) { if (option === 2) { JoinParty(hero, ferraForgeHeart(), hero) } } }
+    }
     return dialogue
 }
 export function forgeHeart3(hero, questIndex) {
@@ -243,7 +248,7 @@ export function forgeHeart3(hero, questIndex) {
         },
         responseEffect(hero, option) {
             if (option === 2) { CompleteQuest(hero, dwarvenMineGoblinQuest()); IncreaseReputation(hero, daleTownReputation(), 1) } if (option === 5) {
-                JoinParty(hero, ferraForgeHeart(), hero.Companions); IncreaseRelationship(hero, ferraForgeheartRelationship(), 1)
+                JoinParty(hero, ferraForgeHeart(), hero); IncreaseRelationship(hero, ferraForgeheartRelationship(), 1)
                 if (option === 4) { LeaveParty(hero, FindPartyMember(ferraForgeHeart(), hero.Party), hero.Party); DecreaseRelationship(hero, ferraForgeheartRelationship(), 1) } if (option === 3) { IncreaseRelationship(hero, ferraForgeheartRelationship(), 1) }
             }
         }
@@ -257,7 +262,7 @@ export function giantCaveDialogue(hero) {
 }
 //goblinMine Dialogues
 export function enterGoblinMineDialogue(hero) {
-    var dialogue = { Name: "Entering Mine", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "You see goblins overruning the mine", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, giantQuest(hero)); IncreaseReputation(hero, daleTownReputation(), 1) } }
+    var dialogue = { Name: "Entering Mine", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "You see goblins overruning the mine", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { } }
     return dialogue
 }
 export function enslavedKoboldsDialogue(hero) {
@@ -345,8 +350,7 @@ export function lumbermillDialogue(hero) {
     return dialogue;
 }
 //puzzle dungeon dialogue
-export function puzzleDungeonDialogue(hero)
-{
+export function puzzleDungeonDialogue(hero) {
     //apprentice joins
 }
 //spider cave dialogue
@@ -430,14 +434,14 @@ export function wizardTower1(hero) {
     //apprentice sucked in
 }
 export function wizardTower2(hero) {
-//apprentice thanks you and ambrosius scolds you
-//says apprentice should journey to gain knowledge and maturity
-//apprentice can perma join
+    //apprentice thanks you and ambrosius scolds you
+    //says apprentice should journey to gain knowledge and maturity
+    //apprentice can perma join
 }
 export function wizardTower3(hero) {
-//if not in party wizard asks to join again
-//if in party ambrosius checks progress
+    //if not in party wizard asks to join again
+    //if in party ambrosius checks progress
 }
 export function wizardTower4(hero) {
-//guilt over apprentice being sucked in
+    //guilt over apprentice being sucked in
 }

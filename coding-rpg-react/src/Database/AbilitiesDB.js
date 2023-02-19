@@ -1,4 +1,4 @@
-import { rageBuff } from "./BuffsDB";
+import { attackBonusBuff, rageBuff } from "./BuffsDB";
 import { CheckIfBuffApplied } from "../Scripts/BuffConditionAndDeBuffScripts";
 import { AddToCombatLog, ArmorIgnoringAttack, BasicAttack } from "../Scripts/CombatScripts";
 
@@ -22,5 +22,9 @@ export function rage() {
 }
 export function raiseShield() {
     var abil = { Name: "Raise Shield", StaminaCost: 5, Description: "Raises a Shield to Give a +2 Shield Bonus", AbilityEffect(char, allies, enemies, target, combatLog) { if (char.Equipment.OffHand.SubType === "Shield") { AddToCombatLog(combatLog, char.Name + " raises their shield"); CheckIfBuffApplied(char, raiseShield(3), combatLog) } else { AddToCombatLog(combatLog, char.Name + " does not have a shield to raise.") } } }
+    return abil;
+}
+export function studyFoes() {
+    var abil = { Name: "Study Foes", StaminaCost: 5, Description: "Temporarily gain a +2 bonus to Attack", AbilityEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " studies their  foes"); CheckIfBuffApplied(char, attackBonusBuff(3), combatLog) } }
     return abil;
 }

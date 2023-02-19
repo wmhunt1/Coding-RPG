@@ -3,12 +3,13 @@ import { drunkDeBuff } from "./DeBuffsDB";
 import { fireEnchantment, fireImmuneEnchantment, iceResistEnchantment, poisonApplyEnchantment, strengthEnchantment, unEnchanted } from "./EnchantmentsDB";
 import { clothProtection, leatherProtection, metalProtection, naturalProtection, woodProtection } from "./ProtectionTypesDB";
 import { barterSkill, blockSkill, heavyWeaponSkill, destructionSkill, heavyArmorSkill, lightArmorSkill, rangedSkill, lightWeaponSkill, smithingSkill, unArmedSkill, unArmoredSkill } from "./SkillsDB";
-import { basicHeal, magicMissile } from "./SpellsDB";
-import { LearnSpell } from "../Scripts/AbilityAndSpellScripts";
+import { bane, basicHeal, basicMassHeal, bless, curePoison, fireBall, heroism, inspireCourage, magicMissile, poisonSpray, sleepSpell, summonRat, summonSkeleton, summonSpider, webSpell } from "./SpellsDB";
+import { LearnAbility, LearnSpell } from "../Scripts/AbilityAndSpellScripts";
 import { RemoveCondition } from "../Scripts/BuffConditionAndDeBuffScripts";
 import { AddToCharacterLog, EarnXP, HealHP, RecoverMP, RecoverSP } from "../Scripts/CharacterScripts";
 import { AddToCombatLog, BasicAttack, } from "../Scripts/CombatScripts";
 import { EarnSkillXP, FindSkillInSkillBook } from "../Scripts/SkillScripts";
+import { cleave, pierceArmor, rage, raiseShield, studyFoes } from "./AbilitiesDB";
 //items
 export function bronzeShrapnel() {
     var shrapnel = { Name: "Bronze Shrapnel", Level: 1, Slot: "", Type: "", SubType: "OneHand", Class: rangedSkill(), Damage: 3, DamageType: fireDamage(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
@@ -128,18 +129,95 @@ export function staminaPotion() {
 }
 //scrolls
 //abilityscroll
+export function cleaveScroll() {
+    var scroll = { Name: "Scroll of Cleave", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnAbility(hero, cleave()) } }
+    return scroll;
+}
+export function pierceArmorScroll() {
+    var scroll = { Name: "Scroll of Pierce Armor", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnAbility(hero, pierceArmor()) } }
+    return scroll;
+}
+export function rageScroll() {
+    var scroll = { Name: "Scroll of Rage", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnAbility(hero, rage()) } }
+    return scroll;
+}
+export function raiseShieldScroll() {
+    var scroll = { Name: "Scroll of Raise Shield", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnAbility(hero, raiseShield()) } }
+    return scroll;
+}
+export function studyFoesScroll() {
+    var scroll = { Name: "Scroll of Study Foes", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnAbility(hero, studyFoes()) } }
+    return scroll;
+}
 //spellscroll
+export function allHealingScrolls()
+{
+    var all =[baneScroll(), basicHealScroll(), basicMassHealScroll(), blessScroll(), curePoisonScroll(), heroismScroll()]
+    return all
+}
 export function allSpellScrolls() {
-    var all = [magicMissileScroll()]
+    var all = [fireBallScroll(),inspireCourageScroll(), magicMissileScroll(), poisonSprayScroll(),sleepSpell(), summonRatScroll(), summonSkeletonScroll(), summonSpiderScroll()]
     return all;
+}
+export function baneScroll() {
+    var scroll = { Name: "Scroll of Bane", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, bane()) } }
+    return scroll;
 }
 export function basicHealScroll() {
     var scroll = { Name: "Scroll of Basic Heal", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, basicHeal()) } }
     return scroll;
 }
+export function basicMassHealScroll() {
+    var scroll = { Name: "Scroll of Basic Mass Heal", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, basicMassHeal()) } }
+    return scroll;
+}
+export function blessScroll() {
+    var scroll = { Name: "Scroll of Bless", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, bless()) } }
+    return scroll;
+}
+export function curePoisonScroll() {
+    var scroll = { Name: "Scroll of Cure Poison", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, curePoison()) } }
+    return scroll;
+}
+export function fireBallScroll() {
+    var scroll = { Name: "Scroll of Fireball", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, fireBall()) } }
+    return scroll;
+}
+export function heroismScroll() {
+    var scroll = { Name: "Scroll of Heroism", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, heroism()) } }
+    return scroll;
+}
+export function inspireCourageScroll() {
+    var scroll = { Name: "Scroll of Inspire Courage", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, inspireCourage()) } }
+    return scroll;
+}
 export function magicMissileScroll() {
     var magicMissileScroll = { Name: "Scroll of Magic Missile", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, magicMissile()) } }
     return magicMissileScroll;
+}
+export function poisonSprayScroll() {
+    var scroll = { Name: "Scroll of Poison Spray", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, poisonSpray()) } }
+    return scroll;
+}
+export function sleepScroll() {
+    var scroll = { Name: "Scroll of Sleep", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, sleepSpell()) } }
+    return scroll;
+}
+export function summonRatScroll() {
+    var scroll = { Name: "Scroll of Summon Rat", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, summonRat()) } }
+    return scroll;
+}
+export function summonSkeletonScroll() {
+    var scroll = { Name: "Scroll of Summon Skeleton", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, summonSkeleton()) } }
+    return scroll;
+}
+export function summonSpiderScroll() {
+    var scroll = { Name: "Scroll of Summon Spider", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, summonSpider()) } }
+    return scroll;
+}
+export function webScroll() {
+    var scroll = { Name: "Scroll of Web", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, webSpell()) } }
+    return scroll;
 }
 //xp lamps
 export function lessonsFromFaldan() {

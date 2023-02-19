@@ -134,16 +134,18 @@ export function RemoveGold(char, gold) {
 }
 export function FindPartyMember(char, party) {
     var index = null;
-    if (party.find(x => x.Name === char.Name)) {
-        index = party.findIndex(x => x.Name === char.Name);
+    if (party.Companions.find(x => x.Name === char.Name)) {
+        index = party.Companions.findIndex(x => x.Name === char.Name);
     }
     return index
 }
 export function JoinParty(char1, char2, party) {
-    if (party.find(x => x.Name === char2.Name)) {
+    if (party.Companions.find(x => x.Name === char2.Name)) {
     }
     else {
-        party.push(char2)
+        char2.CurrentXP = char1.CurrentXP;
+        char2.MaxXP = char1.MaxXP;
+        party.Companions.push(char2)
         AddToCharacterLog(char1, char2.Name + " has joined the party.")
     }
 }

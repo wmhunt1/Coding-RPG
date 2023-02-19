@@ -167,7 +167,7 @@ export function survivalSkill() {
 //     return long;
 // }
 export function heavyWeaponSkill(level) {
-    var ranged = { Name: "Heavy Armor", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
+    var ranged = { Name: "Heavy Weapon", Type: "Weapon", Level: level, CurrentXP: 0, MaxXP: 50 }
     return ranged;
 }
 export function lightWeaponSkill(level) {

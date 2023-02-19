@@ -1,3 +1,7 @@
+export function attackBonusBuff(duration) {
+    var buff = { Name: "Attack Buff", Duration: duration, RemainingDuration: duration, ApplyBuff(target) { target.BaseStats.Attack.Bonus += 2; target.Buffs.push(this) }, RemoveBuff(target) { target.BaseStats.Attack.Bonus -= 2 } }
+    return buff
+}
 export function blessBuff(duration) {
     var buff = { Name: "Bless", Duration: duration, RemainingDuration: duration, ApplyBuff(target) { target.BaseStats.Attack.Bonus += 2; target.Buffs.push(this) }, RemoveBuff(target) { target.BaseStats.Attack.Bonus -= 2; } }
     return buff

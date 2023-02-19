@@ -22,17 +22,6 @@ export function poisonSpray() {
     return poisonSpray;
 }
 //conjuration spells
-export function webSpell() {
-    var web = {
-        Name: "Sleep", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Webs all foes", Amount: 0, DamageType: noDamage(),
-        SpellEffect(char, allies, enemies, target, combatLog) {
-            var calcDuration = CalculateSpellBonus(char, this, char.Attributes.Intelligence.Value, char.Attributes.Intelligence.Bonus, char.Attributes.Intelligence.Penalty, 3);
-            AddToCombatLog(combatLog, char.Name + " webs all foes");
-            for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], webCondition(0, calcDuration), combatLog) }
-        }
-    }
-    return web;
-}
 export function summonRat() {
     var summonRat = {
         Name: "Summon Rat", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 5, Description: "Summons a Rat to fight", Summon: rat(),
@@ -62,6 +51,17 @@ export function summonSpider() {
         }
     }
     return summon;
+}
+export function webSpell() {
+    var web = {
+        Name: "Sleep", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Webs all foes", Amount: 0, DamageType: noDamage(),
+        SpellEffect(char, allies, enemies, target, combatLog) {
+            var calcDuration = CalculateSpellBonus(char, this, char.Attributes.Intelligence.Value, char.Attributes.Intelligence.Bonus, char.Attributes.Intelligence.Penalty, 3);
+            AddToCombatLog(combatLog, char.Name + " webs all foes");
+            for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], webCondition(0, calcDuration), combatLog) }
+        }
+    }
+    return web;
 }
 //desctruction spells
 export function fireBall() {
