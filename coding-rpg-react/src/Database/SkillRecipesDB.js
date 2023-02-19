@@ -1,4 +1,4 @@
-import { ashes, batGuano, beefStew, blackFeather, bread, bronzeAxe, bronzeAxe2H, bronzeBar, bronzeBarrel, bronzeBomb, bronzeCrossBow1H, bronzeCrossBow2H, bronzeCrossBowOffHand, bronzeDagger, bronzeDaggerOffHand, bronzeGauntlets, bronzeHatchet, bronzeHelmet, bronzeLegs, bronzeLimbs, bronzeMace, bronzePickAxe, bronzePistol, bronzePistolOffHand, bronzeRifle, bronzeShield, bronzeSword, bronzeSword2H, bronzeTools, bronzeTorso, bronzeWarHammer, bronzeWarHammer2H, bucket, burntBeef, burntBread, burntChicken, burntFish, burntRabbitMeat, burntRatMeat, burntStew, charcoal, coalOre, cookedBeef, cookedChicken, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, cowLeather, dough, enchantmentTome, fishingRod, fishStew, flour, gunPowder, hatchet, ironAxe, ironAxe2H, ironBar, ironBarrel, ironBomb, ironBoots, ironCrossBow1H, ironCrossBow2H, ironCrossBowOffHand, ironDagger, ironDaggerOffHand, ironGauntlets, ironHatchet, ironHelmet, ironLegs, ironLimbs, ironMace, ironOre, ironPickAxe, ironPistol, ironPistolOffHand, ironRifle, ironShield, ironSword, ironSword2H, ironTools, ironTorso, ironWarHammer, ironWarHammer2H, knife, leatherBoots, leatherCowl, leatherGloves, leatherLegs, leatherTorso, milk, needle, oakLogs, oakStaff, oakStock, oakWand, pickAxe, rabbitStew, ratStew, rawBeef, rawChicken, rawFish, rawRabbitMeat, rawRatMeat, saltPeter, shears, sickle, steelAxe, steelAxe2H, steelBar, steelBarrel, steelBomb, steelBoots, steelCrossBow1H, steelCrossBow2H, steelCrossBowOffHand, steelDagger, steelDaggerOffHand, steelGauntlets, steelHatchet, steelHelmet, steelLegs, steelLimbs, steelMace, steelPickAxe, steelPistol, steelPistolOffHand, steelRifle, steelShield, steelSword, steelSword2H, steelTools, steelTorso, steelWarHammer, steelWarHammer2H, sulphur, thread, tinderBox, tinOre, tools, water, wheat, willowLogs, willowStaff, willowStock, willowWand, woodLogs, woodShortBow, woodStaff, woodStock, woodWand, woolBoots, woolCloth, woolGloves, woolHat, woolRobeBottom, woolRobeTop, woolTrousers, woolTunic, woolWizardHat, oakShortBow, willowShortBow, oakLongBow, willowLongBow, woodLongBow, bones, skull, ectoplasm } from "./ItemsDB"
+import { ashes, batGuano, beefStew, blackFeather, bread, bronzeAxe, bronzeAxe2H, bronzeBar, bronzeBarrel, bronzeBomb, bronzeCrossBow1H, bronzeCrossBow2H, bronzeCrossBowOffHand, bronzeDagger, bronzeDaggerOffHand, bronzeGauntlets, bronzeHatchet, bronzeHelmet, bronzeLegs, bronzeLimbs, bronzeMace, bronzePickAxe, bronzePistol, bronzePistolOffHand, bronzeRifle, bronzeShield, bronzeSword, bronzeSword2H, bronzeTools, bronzeTorso, bronzeWarHammer, bronzeWarHammer2H, bucket, burntBeef, burntBread, burntChicken, burntFish, burntRabbitMeat, burntRatMeat, burntStew, charcoal, coalOre, cookedBeef, cookedChicken, cookedFish, cookedRabbitMeat, cookedRatMeat, copperOre, cowLeather, dough, enchantmentTome, fishingRod, fishStew, flour, gunPowder,hardLeatherBoots, hardLeatherCowl, hardLeatherGloves, hardLeatherLegs, hardLeatherTorso, hatchet, ironAxe, ironAxe2H, ironBar, ironBarrel, ironBomb, ironBoots, ironCrossBow1H, ironCrossBow2H, ironCrossBowOffHand, ironDagger, ironDaggerOffHand, ironGauntlets, ironHatchet, ironHelmet, ironLegs, ironLimbs, ironMace, ironOre, ironPickAxe, ironPistol, ironPistolOffHand, ironRifle, ironShield, ironSword, ironSword2H, ironTools, ironTorso, ironWarHammer, ironWarHammer2H, knife, leatherBoots, leatherCowl, leatherGloves, leatherLegs, leatherTorso, milk, needle, oakLogs, oakStaff, oakStock, oakWand, pickAxe, rabbitStew, ratStew, rawBeef, rawChicken, rawFish, rawRabbitMeat, rawRatMeat, saltPeter, shears, sickle, steelAxe, steelAxe2H, steelBar, steelBarrel, steelBomb, steelBoots, steelCrossBow1H, steelCrossBow2H, steelCrossBowOffHand, steelDagger, steelDaggerOffHand, steelGauntlets, steelHatchet, steelHelmet, steelLegs, steelLimbs, steelMace, steelPickAxe, steelPistol, steelPistolOffHand, steelRifle, steelShield, steelSword, steelSword2H, steelTools, steelTorso, steelWarHammer, steelWarHammer2H, sulphur, thread, tinderBox, tinOre, tools, water, wheat, willowLogs, willowStaff, willowStock, willowWand, woodLogs, woodShortBow, woodStaff, woodStock, woodWand, woolBoots, woolCloth, woolGloves, woolHat, woolRobeBottom, woolRobeTop, woolTrousers, woolTunic, woolWizardHat, oakShortBow, willowShortBow, oakLongBow, willowLongBow, woodLongBow, bones, skull, ectoplasm, spiderSilkCloth, spiderSilkBoots, spiderSilkGloves, spiderSilkRobeBottom, spiderSilkRobeTop, spiderSilkWizardHat } from "./ItemsDB"
 //crafting
 //alchemy
 export function alchemyRecipes() {
@@ -147,13 +147,60 @@ export function millWheat() {
 }
 //crafting
 export function craftingRecipes() {
-    var craft = [craftLeatherBoots(), craftLeatherCowl(), craftLeatherGloves(), craftLeatherLegs(), craftLeatherTorso(),
+    var craft = [craftHardLeatherBoots(), craftHardLeatherCowl(), craftHardLeatherGloves(), craftHardLeatherLegs(), craftHardLeatherTorso(),
+    craftLeatherBoots(), craftLeatherCowl(), craftLeatherGloves(), craftLeatherLegs(), craftLeatherTorso(),
+    weaveSpiderSilkBoots(), weaveSpiderSilkGloves(), weaveSpiderSilkRobeBottom(), weaveSpiderSilkRobeTop(), weaveSpiderSilkWizardHat(),
     weaveWoolBoots(), weaveWoolGloves(), weaveWoolHat(), weaveWoolRobeBottom(), weaveWoolRobeTop(), weaveWoolTrousers(), weaveWoolTunic(), weaveWoolWizardHat()]
+    return craft;
+}
+export function craftHardLeatherBoots() {
+    var craft = {
+        Name: "Craft Hard Leather Boots", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 5, Exp: 50,
+        Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }],
+        Output: { Item: hardLeatherBoots(), Quantity: 1 },
+        FailureOutput: { Item: cowLeather(), Quantity: 1 }
+    }
+    return craft;
+}
+export function craftHardLeatherCowl() {
+    var craft = {
+        Name: "Craft Hard Leather Cowl", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 6, Exp: 100,
+        Input: [{ Item: cowLeather(), Quantity: 2 }, { Item: thread(), Quantity: 1 }],
+        Output: { Item: hardLeatherCowl(), Quantity: 1 },
+        FailureOutput: { Item: cowLeather(), Quantity: 2 }
+    }
+    return craft;
+}
+export function craftHardLeatherGloves() {
+    var craft = {
+        Name: "Craft Hard Leather Gloves", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 5, Exp: 50,
+        Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }],
+        Output: { Item: hardLeatherGloves(), Quantity: 1 },
+        FailureOutput: { Item: cowLeather(), Quantity: 1 }
+    }
+    return craft;
+}
+export function craftHardLeatherLegs() {
+    var craft = {
+        Name: "Craft Hard Leather Legs", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 7, Exp: 150,
+        Input: [{ Item: cowLeather(), Quantity: 3 }, { Item: thread(), Quantity: 1 }],
+        Output: { Item: hardLeatherLegs(), Quantity: 1 },
+        FailureOutput: { Item: cowLeather(), Quantity: 3 }
+    }
+    return craft;
+}
+export function craftHardLeatherTorso() {
+    var craft = {
+        Name: "Craft Hard Leather Armor", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 9, Exp: 250,
+        Input: [{ Item: cowLeather(), Quantity: 5 }, { Item: thread(), Quantity: 1 }],
+        Output: { Item: hardLeatherTorso(), Quantity: 1 },
+        FailureOutput: { Item: cowLeather(), Quantity: 5 }
+    }
     return craft;
 }
 export function craftLeatherBoots() {
     var craft = {
-        Name: "Craft Leather Boots", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 1, Exp: 25,
+        Name: "Craft Hard Leather Boots", Skill: "Crafting", Tool: needle(), Verb: "Craft", LevelRequirement: 5, Exp: 50,
         Input: [{ Item: cowLeather(), Quantity: 1 }, { Item: thread(), Quantity: 1 }],
         Output: { Item: leatherBoots(), Quantity: 1 },
         FailureOutput: { Item: cowLeather(), Quantity: 1 }
@@ -195,6 +242,51 @@ export function craftLeatherTorso() {
         FailureOutput: { Item: cowLeather(), Quantity: 5 }
     }
     return craft;
+}
+export function weaveSpiderSilkBoots() {
+    var weave = {
+        Name: "Weave Spider Silk Boots", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 5, Exp: 50,
+        Input: [{ Item: spiderSilkCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }],
+        Output: { Item: spiderSilkBoots(), Quantity: 1 },
+        FailureOutput: { Item: spiderSilkCloth(), Quantity: 1 }
+    }
+    return weave;
+}
+export function weaveSpiderSilkGloves() {
+    var weave = {
+        Name: "Weave Spider Silk Gloves", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 5, Exp: 50,
+        Input: [{ Item: spiderSilkCloth(), Quantity: 1 }, { Item: thread(), Quantity: 1 }],
+        Output: { Item: spiderSilkGloves(), Quantity: 1 },
+        FailureOutput: { Item: spiderSilkCloth(), Quantity: 1 }
+    }
+    return weave;
+}
+export function weaveSpiderSilkRobeBottom() {
+    var weave = {
+        Name: "Weave Spider SilkRobe Bottom", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 7, Exp: 150,
+        Input: [{ Item: spiderSilkCloth(), Quantity: 3 }, { Item: thread(), Quantity: 1 }],
+        Output: { Item: spiderSilkRobeBottom(), Quantity: 3 },
+        FailureOutput: { Item: spiderSilkCloth(), Quantity: 3 }
+    }
+    return weave;
+}
+export function weaveSpiderSilkRobeTop() {
+    var weave = {
+        Name: "Weave Spider Silk Robe Top", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 9, Exp: 250,
+        Input: [{ Item: spiderSilkCloth(), Quantity: 5 }, { Item: thread(), Quantity: 1 }],
+        Output: { Item: spiderSilkRobeTop(), Quantity: 1 },
+        FailureOutput: { Item: spiderSilkCloth(), Quantity: 5 }
+    }
+    return weave;
+}
+export function weaveSpiderSilkWizardHat() {
+    var weave = {
+        Name: "Weave Spider Silk Wizard Hat", Skill: "Crafting", Tool: needle(), Verb: "Weave", LevelRequirement: 6, Exp: 100,
+        Input: [{ Item: spiderSilkCloth(), Quantity: 2 }, { Item: thread(), Quantity: 1 }],
+        Output: { Item: spiderSilkWizardHat(), Quantity: 1 },
+        FailureOutput: { Item: spiderSilkCloth(), Quantity: 2 }
+    }
+    return weave;
 }
 export function weaveWoolBoots() {
     var weave = {

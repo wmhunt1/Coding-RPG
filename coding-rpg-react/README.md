@@ -9,7 +9,6 @@ Wizard tower with dungeon  (monsters, dialogue, dungeon)
     * apprentice becomes party member inside dialogue
     * then only puzzle
     * archmage doesn't show up until afterwards
-wolf/bear fur armor lv 5?
 witch hut dialogue
 companion dialogue in other places
 
@@ -18,7 +17,6 @@ more damage modifers for prot types
 Ferra and apprentice know each other?
 If Quincy apprentice sent away since wizard knows he seeks knowledge but not necessarily magic
 Ferra gives bonus xp rate feat to mining etc?
-Spider silk robes lvl 5
 Add image icons?,
 enchanting reagent (maybe gems?)
 Talking tree

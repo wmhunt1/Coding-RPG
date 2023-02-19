@@ -150,13 +150,12 @@ export function studyFoesScroll() {
     return scroll;
 }
 //spellscroll
-export function allHealingScrolls()
-{
-    var all =[baneScroll(), basicHealScroll(), basicMassHealScroll(), blessScroll(), curePoisonScroll(), heroismScroll()]
+export function allHealingScrolls() {
+    var all = [baneScroll(), basicHealScroll(), basicMassHealScroll(), blessScroll(), curePoisonScroll(), heroismScroll()]
     return all
 }
 export function allSpellScrolls() {
-    var all = [fireBallScroll(),inspireCourageScroll(), magicMissileScroll(), poisonSprayScroll(),sleepSpell(), summonRatScroll(), summonSkeletonScroll(), summonSpiderScroll()]
+    var all = [fireBallScroll(), inspireCourageScroll(), magicMissileScroll(), poisonSprayScroll(), sleepSpell(), summonRatScroll(), summonSkeletonScroll(), summonSpiderScroll()]
     return all;
 }
 export function baneScroll() {
@@ -242,7 +241,7 @@ export function allBronze() {
     return all;
 }
 export function allIron() {
-    var all = [ironAxe(), ironAxe2H(), ironBoots(), ironDagger(), ironCrossBow1H(), ironCrossBow2H(), ironCrossBowOffHand(), ironDaggerOffHand(), ironGauntlets(), ironHatchet(), ironHelmet(), ironLegs(), ironMace(), ironPickAxe(), ironPistol(), ironPistolOffHand(), ironRifle(),ironShield(), ironSword(), ironSword2H(), ironTools(), ironTorso(), ironWarHammer(), ironWarHammer2H()]
+    var all = [ironAxe(), ironAxe2H(), ironBoots(), ironDagger(), ironCrossBow1H(), ironCrossBow2H(), ironCrossBowOffHand(), ironDaggerOffHand(), ironGauntlets(), ironHatchet(), ironHelmet(), ironLegs(), ironMace(), ironPickAxe(), ironPistol(), ironPistolOffHand(), ironRifle(), ironShield(), ironSword(), ironSword2H(), ironTools(), ironTorso(), ironWarHammer(), ironWarHammer2H()]
     return all;
 }
 export function allLeather() {
@@ -303,6 +302,10 @@ export function bronzeBoots() {
     var boots = { Name: "Bronze Boots", Level: 1, Slot: "Feet", Type: "Equipable", SubType: "", Class: heavyArmorSkill(), Protection: 1, ProtectionType: metalProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return boots;
 }
+export function hardLeatherBoots() {
+    var boots = { Name: "Hard Leather Boots", Level: 5, Slot: "Feet", Type: "Equipable", SubType: "", Class: lightArmorSkill(), Protection: 2, ProtectionType: leatherProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return boots;
+}
 export function ironBoots() {
     var boots = { Name: "Iron Boots", Level: 5, Slot: "Feet", Type: "Equipable", SubType: "", Class: heavyArmorSkill(), Protection: 2, ProtectionType: metalProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return boots;
@@ -315,12 +318,16 @@ export function shoes() {
     var shoes = { Name: "Shoes", Level: 1, Slot: "Feet", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return shoes;
 }
+export function spiderSilkBoots() {
+    var shoes = { Name: "Spider Silk Boots", Level: 5, Slot: "Feet", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 2, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return shoes;
+}
 export function steelBoots() {
     var boots = { Name: "Steel Boots", Level: 10, Slot: "Feet", Type: "Equipable", SubType: "", Class: heavyArmorSkill(), Protection: 3, ProtectionType: metalProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return boots;
 }
 export function woolBoots() {
-    var shoes = { Name: "Wool Boots", Level: 1, Slot: "Feet", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var shoes = { Name: "Wool Boots", Level: 1, Slot: "Feet", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 1, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return shoes;
 }
 //hands
@@ -337,6 +344,10 @@ export function gloves() {
     var gloves = { Name: "Gloves", Level: 1, Slot: "Hands", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return gloves;
 }
+export function hardLeatherGloves() {
+    var gloves = { Name: "Hard Leather Gloves", Level: 5, Slot: "Hands", Type: "Equipable", SubType: "", Class: lightArmorSkill(), Protection: 2, ProtectionType: leatherProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return gloves;
+}
 export function ironGauntlets() {
 
     var gauntlets = { Name: "Iron Gauntlets", Level: 5, Slot: "Hands", Type: "Equipable", SubType: "", Class: heavyArmorSkill(), Protection: 2, ProtectionType: metalProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
@@ -346,13 +357,17 @@ export function leatherGloves() {
     var gloves = { Name: "Leather Gloves", Level: 1, Slot: "Hands", Type: "Equipable", SubType: "", Class: lightArmorSkill(), Protection: 1, ProtectionType: leatherProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return gloves;
 }
+export function spiderSilkGloves() {
+    var gloves = { Name: "Spider Silk Gloves", Level: 5, Slot: "Hands", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 2, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return gloves;
+}
 export function steelGauntlets() {
 
     var gauntlets = { Name: "Steel Gauntlets", Level: 10, Slot: "Hands", Type: "Equipable", SubType: "", Class: heavyArmorSkill(), Protection: 3, ProtectionType: metalProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return gauntlets;
 }
 export function woolGloves() {
-    var gloves = { Name: "Wool Gloves", Level: 1, Slot: "Hands", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var gloves = { Name: "Wool Gloves", Level: 1, Slot: "Hands", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 1, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return gloves;
 }
 //head
@@ -368,12 +383,20 @@ export function hat() {
     var hat = { Name: "Hat", Slot: "Head", Level: 1, Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return hat;
 }
+export function hardLeatherCowl() {
+    var hat = { Name: "Hard Leather Cowl", Level: 5, Slot: "Head", Type: "Equipable", SubType: "", Class: lightArmorSkill(), Protection: 2, ProtectionType: leatherProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return hat;
+}
 export function ironHelmet() {
     var helmet = { Name: "Iron Helmet", Level: 5, Slot: "Head", Type: "Equipable", SubType: "", Class: heavyArmorSkill(), Protection: 2, ProtectionType: metalProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return helmet;
 }
 export function leatherCowl() {
     var hat = { Name: "Leather Cowl", Level: 1, Slot: "Head", Type: "Equipable", SubType: "", Class: lightArmorSkill(), Protection: 1, ProtectionType: leatherProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return hat;
+}
+export function spiderSilkWizardHat() {
+    var hat = { Name: "Spider Silk Wizard Hat", Level: 5, Slot: "Head", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 2, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return hat;
 }
 export function steelHelmet() {
@@ -385,7 +408,7 @@ export function woolHat() {
     return hat;
 }
 export function woolWizardHat() {
-    var hat = { Name: "Wool Wizard Hat", Level: 1, Slot: "Head", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var hat = { Name: "Wool Wizard Hat", Level: 1, Slot: "Head", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 1, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return hat;
 }
 //legs
@@ -395,6 +418,10 @@ export function bareLegs() {
 }
 export function bronzeLegs() {
     var legs = { Name: "Bronze Legs", Level: 1, Slot: "Legs", Type: "Equipable", SubType: "", Class: heavyArmorSkill(), Protection: 1, ProtectionType: metalProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return legs;
+}
+export function hardLeatherLegs() {
+    var legs = { Name: "Hard Leather Legs", Level: 5, Slot: "Legs", Type: "Equipable", SubType: "", Class: lightArmorSkill(), Protection: 2, ProtectionType: leatherProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return legs;
 }
 export function ironLegs() {
@@ -409,6 +436,10 @@ export function loinCloth() {
     var loinCloth = { Name: "Loincloth", Level: 1, Slot: "Legs", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return loinCloth
 }
+export function spiderSilkRobeBottom() {
+    var legs = { Name: "Spider Silk Robe Bottom", Level: 5, Slot: "Legs", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 1, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    return legs;
+}
 export function steelLegs() {
     var legs = { Name: "Steel Legs", Level: 10, Slot: "Legs", Type: "Equipable", SubType: "", Class: heavyArmorSkill(), Protection: 3, ProtectionType: metalProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return legs;
@@ -422,7 +453,7 @@ export function woolTrousers() {
     return trousers;
 }
 export function woolRobeBottom() {
-    var legs = { Name: "Wool Robe Bottom", Level: 1, Slot: "Legs", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var legs = { Name: "Wool Robe Bottom", Level: 1, Slot: "Legs", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 1, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return legs;
 }
 //torso
@@ -434,12 +465,20 @@ export function bronzeTorso() {
     var torso = { Name: "Bronze Armor", Level: 1, Slot: "Torso", Type: "Equipable", SubType: "", Class: heavyArmorSkill(), Protection: 1, ProtectionType: metalProtection(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
     return torso;
 }
+export function hardLeatherTorso() {
+    var torso = { Name: "Hard Leather Armor", Level: 5, Slot: "Torso", Type: "Equipable", SubType: "", Class: lightArmorSkill(), Protection: 2, ProtectionType: leatherProtection(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    return torso;
+}
 export function ironTorso() {
     var torso = { Name: "Iron Armor", Level: 5, Slot: "Torso", Type: "Equipable", SubType: "", Class: heavyArmorSkill(), Protection: 2, ProtectionType: metalProtection(), Cost: 10, Quantity: 1, Enchantment: unEnchanted() }
     return torso;
 }
 export function leatherTorso() {
     var torso = { Name: "Leather Armor", Level: 1, Slot: "Torso", Type: "Equipable", SubType: "", Class: lightArmorSkill(), Protection: 1, ProtectionType: leatherProtection(), Cost: 5, Quantity: 1, Enchantment: unEnchanted() }
+    return torso;
+}
+export function spiderSilkRobeTop() {
+    var torso = { Name: "Spider Silk Robe Torso", Level: 5, Slot: "Torso", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 2, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return torso;
 }
 export function steelTorso() {
@@ -451,7 +490,7 @@ export function tunic() {
     return tunic;
 }
 export function woolRobeTop() {
-    var torso = { Name: "Wool Robe Torso", Level: 1, Slot: "Torso", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 0, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
+    var torso = { Name: "Wool Robe Torso", Level: 1, Slot: "Torso", Type: "Equipable", SubType: "", Class: unArmoredSkill(), Protection: 1, ProtectionType: clothProtection(), Cost: 2, Quantity: 1, Enchantment: unEnchanted() }
     return torso;
 }
 export function woolTunic() {
@@ -633,8 +672,7 @@ export function clawSlash() {
     var slash = { Name: "Slam", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: unArmedSkill(), Damage: 2, DamageType: slashingDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return slash;
 }
-export function ghostTouch()
-{
+export function ghostTouch() {
     var touch = { Name: "Ghost Touch", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: destructionSkill(), Damage: 1, DamageType: necroticDamage(), Cost: 0, Quantity: 1, Enchantment: unEnchanted() }
     return touch;
 }
