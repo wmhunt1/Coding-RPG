@@ -88,6 +88,7 @@ export function updateLocation(hero, map, x, y, hour) {
         hero.CurrentLocation.LocationName = map.Locations[mapIndex].LocationName;
         hero.CurrentLocation.XCoord = map.Locations[mapIndex].XCoord;
         hero.CurrentLocation.YCoord = map.Locations[mapIndex].YCoord;
+        hero.CurrentLocation.Color = map.Locations[mapIndex].Color;
         hero.CurrentLocation.SubLocations = map.Locations[mapIndex].SubLocations;
         AddToExplorationLog(hero,hero.Name + " travels to " + hero.CurrentLocation.LocationName)
         var knownIndex = null;

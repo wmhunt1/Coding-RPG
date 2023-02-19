@@ -1,9 +1,9 @@
 bugs
 journal doesn't update until after leaving shop
 hp can be healed over maxhp
-had to put map encounters in seprateley
 
 to-do content
+Make scrolls for the rest of the spells
 Wizard tower with dungeon  (monsters, dialogue, dungeon)
     * animated brooms? elemental imps?
     * you talk to the apprentice as they solve the puzzle and they get sucked in.
@@ -18,7 +18,7 @@ companion dialogue in other places
 ferra comments if present during goblin mine quest
 
 possible content
-Shrink map?
+more damage modifers for prot types
 Ferra and apprentice know each other?
 If Quincy apprentice sent away since wizard knows he seeks knowledge but not necessarily magic
 Ferra gives bonus xp rate feat to mining etc?
