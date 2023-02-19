@@ -8,6 +8,7 @@ import Combat from './Combat';
 import Dialogue from './Dialogue';
 import Dungeon from './Dungeon';
 import Equipment from './Equipment';
+import Factions from './Factions';
 import Inventory from './Inventory';
 import Journal from './Journal';
 import Log from './Log';
@@ -58,7 +59,7 @@ function Game(props) {
     <div>
       <div>
         <div>
-          {active !== "Combat" && active !== "Dungeon" && active !== "Dialogue" && active !== "MainMenu" ? <Toolbar home={() => setActive("Game")} abil={() => setActive("Abilities")} cSheet={() => setActive("CharacterSheet")} equip={() => setActive("Equipment")} inv={() => setActive("Inventory")} journal={() => setActive("Journal")} party={() => setActive("Party")} spells={() => setActive("Spells")} skill={() => setActive("Skills")} menu={() => setActive("Menu")} test={() => setActive("Test")}></Toolbar> : <div></div>}
+          {active !== "Combat" && active !== "Dungeon" && active !== "Dialogue" && active !== "MainMenu" ? <Toolbar home={() => setActive("Game")} abil={() => setActive("Abilities")} cSheet={() => setActive("CharacterSheet")} fact={() => setActive("Factions")} equip={() => setActive("Equipment")} inv={() => setActive("Inventory")} journal={() => setActive("Journal")} party={() => setActive("Party")} spells={() => setActive("Spells")} skill={() => setActive("Skills")} menu={() => setActive("Menu")} test={() => setActive("Test")}></Toolbar> : <div></div>}
         </div>
         <div>
           {active === "Menu" ? <Menu hero={hero} Back={() => setActive("Game")} MainMenu={() => setActive("MainMenu")}></Menu> : <div></div>}
@@ -68,6 +69,7 @@ function Game(props) {
           {active === "Combat" ? <Combat parentCallback={handleCallback} hero={hero} enemies={combat} Back={() => setActive("Game")}></Combat> : <div></div>}
           {active === "Dialogue" ? <Dialogue parentCallback={handleCallback} hero={hero} talk={dialogue} Back={() => setActive("Game")}></Dialogue> : <div></div>}
           {active === "Dungeon" ? <Dungeon parentCallback={handleCallback} hero={hero} dungeon={dungeon} Back={() => setActive("Game")}></Dungeon> : <div></div>}
+          {active === "Factions" ? <Factions hero={hero}></Factions> :<div></div>}
           {active === "Equipment" ? <Equipment parentCallback={handleCallback} hero={hero} log={hero} Back={() => setActive("Game")}></Equipment> : <div></div>}
           {active === "Inventory" ? <Inventory parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></Inventory> : <div></div>}
           {active === "Journal" ? <Journal hero={hero} skill={skill} Back={() => setActive("Game")}></Journal> : <div></div>}
@@ -85,11 +87,11 @@ function Game(props) {
           </div> : <div></div>}
         </div>
         {active === "Game" ? <div><div style={{ marginLeft: "15%", marginRight: "15%" }}><Map parentCallback={handleCallback} hero={hero} map={worldMap(hero)}></Map></div> </div> : <div> </div>}
-        {active !== "Dungeon" && active !== "Dialogue" && active !== "MainMenu" ? 
-        <div style={{marginTop:"1%", marginLeft: "25%", marginRight: "25%", width: "auto", height: "200px", marginBottom:"1%", position:"relative", bottom:"-1" }}>
-          <Log log={log} logName={""}></Log>
-        </div>
-         : <div></div>}
+        {active !== "Dungeon" && active !== "Dialogue" && active !== "MainMenu" ?
+          <div style={{ marginTop: "1%", marginLeft: "25%", marginRight: "25%", width: "auto", height: "200px", marginBottom: "1%", position: "relative", bottom: "-1" }}>
+            <Log log={log} logName={""}></Log>
+          </div>
+          : <div></div>}
       </div>
     </div>
   );

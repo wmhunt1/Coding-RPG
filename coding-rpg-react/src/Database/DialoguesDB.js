@@ -1,9 +1,9 @@
 import { ferraForgeHeart } from "./CharactersDB";
-import { blackFeather, silverRingLR } from "./ItemsDB";
+import { silverRingLR } from "./ItemsDB";
 import { banditQuest1, dwarvenMineGoblinQuest, giantQuest, gnollQuest1, metSweetheart, ratCellarQuest, scareCrowQuest1, scareCrowQuest2, scareCrowQuest3, scareCrowQuest4, skeletonQuest } from "./QuestsDB"
 import { CalculateTime } from "../Scripts/MapScripts";
 import { FindPartyMember, JoinParty, LeaveParty, PartyRecovery, RemoveGold } from "../Scripts/CharacterScripts";
-import { AddItemToInventory, FindItemInInventory, RemoveItemFromInventory } from "../Scripts/ItemScripts";
+import { FindItemInInventory, RemoveItemFromInventory } from "../Scripts/ItemScripts";
 import { CheckForQuest, CompleteQuest, StartQuest } from "../Scripts/QuestScripts"
 import { DecreaseRelationship, IncreaseRelationship, IncreaseReputation } from "../Scripts/RelationshipAndReputationScript";
 import { ferraForgeheartRelationship } from "./RelationshipsDB";
@@ -197,7 +197,7 @@ export function forgeheartSmithDialogue(hero) {
 }
 export function forgeHeart1(hero) {
     var npc1 = "Accept Quest to clear out Dwarven Mine of Goblins?"
-    var npc2 = "Accepted Quest"
+    //var npc2 = "Accepted Quest"
     var npc3 = "Did Not Accept Quest"
     var npc4 = "Bring Ferra Forgeheart (Cleric) with you?"
     var npc5 = "Bringing Ferra.";
@@ -209,29 +209,44 @@ export function forgeHeart1(hero) {
     var dialogue = {
         Name: "Speak with Forgehearts",
         Conversation: {
-            npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: npc1, Next: 1 }, { Id: 2, Line: npc2, Next: 2 },
+            npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: npc1, Next: 1 }, { Id: 2, Line: npc4, Next: 2 },
             { Id: 3, Line: npc3, Next: 3 }, { Id: 4, Line: npc4, Next: 3 }, { Id: 5, Line: npc5, Next: 3 },
             { Id: 6, Line: npc6, Next: 3 }],
             heroSide: [{ Id: 1, Options: [[response1A, 2], [response1B, 3]] }, { Id: 2, Options: [[response2A, 5], [response2B, 6]] },
             { Id: 3, Options: [["Leave", 0]] }]
         },
         responseEffect(hero, option) {
-            if (option === 2) { StartQuest(hero, dwarvenMineGoblinQuest()); if (option === 5) { JoinParty(hero, ferraForgeHeart(), hero.Companions); IncreaseRelationship(hero, ferraForgeheartRelationship(), 1) } }
+            if (option === 2) { StartQuest(hero, dwarvenMineGoblinQuest()); } if (option === 5) { JoinParty(hero, ferraForgeHeart(), hero.Companions); IncreaseRelationship(hero, ferraForgeheartRelationship(), 1) }
         }
     }
     return dialogue
 }
 export function forgeHeart2(hero) {
-    var dialogue = { Name: "Speak with Faldan", Conversation: [{ Dialogue: ["The old dwarf is sleeping."], Responses: [], responseEffect(hero, option) { } }, { Dialogue: [], Responses: [], responseEffect(hero, option) { } }] }
+    var dialogue = { Name: "Speak with Faldan", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The old dwarf is sleeping.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { } }
     return dialogue
 }
 export function forgeHeart3(hero, questIndex) {
+    var npc1 = "Accept Reward?"
+    var npc2 = "Keep Ferra with you?"
+    var npc3 = "Keep Ferra "
+    var npc4 = "Keeping Ferra.";
+    var response2A = "Yes";
+    var response2B = "No";
     var dialogue = {
-        Name: "Speak with Faldan and Ferra", Conversation: []
+        Name: "Speak with Forgehearts",
+        Conversation: {
+            npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: npc1, Next: 1 }, { Id: 2, Line: npc2, Next: 2 },
+            { Id: 3, Line: npc3, Next: 3 }, { Id: 4, Line: npc4, Next: 3 }],
+            heroSide: [{ Id: 1, Options: [["Continue", 2]] }, { Id: 2, Options: [[response2A, 3], [response2B, 4]] },
+            { Id: 3, Options: [["Leave", 0]] }]
+        },
+        responseEffect(hero, option) {
+            if (option === 2) { CompleteQuest(hero, dwarvenMineGoblinQuest()); IncreaseReputation(hero, daleTownReputation(), 1) } if (option === 5) {
+                JoinParty(hero, ferraForgeHeart(), hero.Companions); IncreaseRelationship(hero, ferraForgeheartRelationship(), 1)
+                if (option === 4) { LeaveParty(hero, FindPartyMember(ferraForgeHeart(), hero.Party), hero.Party); DecreaseRelationship(hero, ferraForgeheartRelationship(), 1) } if (option === 3) { IncreaseRelationship(hero, ferraForgeheartRelationship(), 1) }
+            }
+        }
     }
-    dialogue.Conversation.push({ Dialogue: ["Reward"], Responses: [["Accept Reward", 0]], responseEffect(hero, option) { { CompleteQuest(hero, hero.Journal[questIndex]); IncreaseReputation(hero, daleTownReputation(), 1) } } })
-    dialogue.Conversation.push({ Dialogue: ["Keep Ferra?"], Responses: [["Yes", 0], ["No", 1]], responseEffect(hero, option) { if (option === 1) { LeaveParty(hero, FindPartyMember(ferraForgeHeart(), hero.Party), hero.Party); DecreaseRelationship(hero, ferraForgeheartRelationship(), 1) } else { IncreaseRelationship(hero, ferraForgeheartRelationship(), 1) } } })
-    dialogue.Conversation.push({ Dialogue: ["Keeping Ferra", "Not Keeping Ferra"], Responses: [], responseEffect(hero, option) { } })
     return dialogue
 }
 //giant cave dialogues
@@ -306,9 +321,6 @@ export function littleRoot3(hero, questIndex) {
     return dialogue
 }
 export function littleRoot4(hero) {
-    var dialogue = {
-        Name: "Speak to Farmer LittleRoot", Conversation: []
-    }
     var questIndex = CheckForQuest(hero, scareCrowQuest4())
     var dialogue = {
         Name: "Return ring to Farmer Littleroot", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Give ring to Farmer Littleroot?", Next: 1 }, { Id: 2, Line: "You decide to return it", Next: 3 }, { Id: 3, Line: "You decide to keep it", Next: 3 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }, { Id: 3, Options: [["Leave", 0]] }] }
@@ -371,8 +383,7 @@ export function joeTheTradersTradingPostDialogue(hero) {
     return dialogue
 }
 //whitescale dialogue
-export function whiteScaleDialogue(hero)
-{
+export function whiteScaleDialogue(hero) {
     var questIndex = CheckForQuest(hero, gnollQuest1())
     var dialogue = ""
     if (questIndex === null) {

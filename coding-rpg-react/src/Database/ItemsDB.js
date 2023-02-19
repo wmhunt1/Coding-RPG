@@ -164,7 +164,7 @@ export function allBronze() {
     return all;
 }
 export function allIron() {
-    var all = [ironAxe(), ironAxe2H(), ironBoots(), ironDagger(), ironCrossBow1H(), ironCrossBow2H(), ironCrossBowOffHand(), ironDaggerOffHand(), ironGauntlets(), ironHatchet(), ironHelmet(), ironLegs(), ironMace(), ironPickAxe(), ironPistol(), ironPistolOffHand(), ironRifle().ironShield(), ironSword(), ironSword2H(), ironTools(), ironTorso(), ironWarHammer(), ironWarHammer2H()]
+    var all = [ironAxe(), ironAxe2H(), ironBoots(), ironDagger(), ironCrossBow1H(), ironCrossBow2H(), ironCrossBowOffHand(), ironDaggerOffHand(), ironGauntlets(), ironHatchet(), ironHelmet(), ironLegs(), ironMace(), ironPickAxe(), ironPistol(), ironPistolOffHand(), ironRifle(),ironShield(), ironSword(), ironSword2H(), ironTools(), ironTorso(), ironWarHammer(), ironWarHammer2H()]
     return all;
 }
 export function allLeather() {

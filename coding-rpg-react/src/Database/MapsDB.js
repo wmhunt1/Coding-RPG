@@ -7,7 +7,7 @@ export function startingAdjacentLocations(hero) {
 export function worldMap(hero) {
     var worldMap = {
         Name: "World", Locations: [
-            mountains(hero, 1, 20),mountains(hero, 2, 20),mountains(hero, 3, 20),,mountains(hero, 4, 20),,mountains(hero, 5, 20),
+            mountains(hero, 1, 20),mountains(hero, 2, 20),mountains(hero, 3, 20),mountains(hero, 4, 20),mountains(hero, 5, 20),
             forest(hero, 1, 19),gnollDen(hero, 2, 19),mountains(hero, 3, 19),mountains(hero, 4, 19),mountains(hero, 5, 19),
             forest(hero, 1, 18),forest(hero, 2, 18),mountains(hero, 3, 18),mountains(hero, 4, 18),mountains(hero, 5, 18),
             forest(hero, 2, 17), mountains(hero, 3, 17),  mountains(hero, 4, 17),  mountains(hero, 5, 17),
@@ -22,7 +22,7 @@ export function worldMap(hero) {
             road(hero, -4, 8),road(hero, -3, 8),lake(hero, -2, 8), brokenBridge(hero, -1, 8), lake(hero, 1, 8),road(hero, 2, 8),road(hero, 3, 8),mountains(hero, 4, 8), mountains(hero, 5, 8),
             mountains(hero, -5,7),forest(hero, -4,7), road(hero, -3, 7),road(hero, -3, 7),road(hero, -1, 7),road(hero,0, 7), bridge(hero, 1, 7),road(hero, 2, 7),
             mountains(hero, -5,6),bearCave(hero, -4,6),forest(hero,-3,6), road(hero, -1, 6), river(hero, 1, 6), river(hero, 2, 6),forest(hero,3,6), mountains(hero, 4, 6),mountains(hero, 5, 6),
-            mountains(hero, -5,6),forest(hero, -4,5),forest(hero,-3,5), road(hero, -1, 5), forest(hero, 0, 5), forest(hero, 1, 5), river(hero, 2, 5),forest(hero,3,5), giantCave(hero, 4, 5) , mountains(hero, 5, 5),
+            mountains(hero, -5,5),forest(hero, -4,5),forest(hero,-3,5), road(hero, -1, 5), forest(hero, 0, 5), forest(hero, 1, 5), river(hero, 2, 5),forest(hero,3,5), giantCave(hero, 4, 5) , mountains(hero, 5, 5),
             forest(hero, -3, 4), forest(hero, -2, 4), road(hero, -1, 4), road(hero, 0, 4), lumbermill(hero, 1, 4), bridge(hero, 2, 4), forest(hero, 3, 4),mountains(hero, 4, 4), mountains(hero, 5, 4),
             forest(hero, -3, 3),daleWizardTower(hero, -2, 3), forest(hero, -1,3), road(hero, 0, 3), forest(hero, 1, 3), river(hero, 2, 3),wolfDen(hero, 3, 3,), mountains(hero, 4, 3), mountains(hero, 5, 3),
             forest(hero, -3, 2), forest(hero, -2, 2), forest(hero, -1, 2), road(hero, 0, 2), witchHut(hero, 1, 2), river(hero, 2, 2), forest(hero, 3, 2), mountains(hero, 4, 2), mountains(hero, 5, 2),

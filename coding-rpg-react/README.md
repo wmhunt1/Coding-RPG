@@ -4,12 +4,12 @@ hp can be healed over maxhp
 had to put map encounters in seprateley
 
 to-do content
-Wizard tower with dungeon  (quest, monsters, dialogue, dungeon, location)
+Wizard tower with dungeon  (quest, monsters, dialogue, dungeon, shop)
 wolf/bear fur armor lv 5?
 Haunted manor with ghosts
 
 possible content
-enchanting reagent 
+enchanting reagent (maybe gems?)
 Talking tree
 Quincy companion
 Wyle companion
@@ -21,11 +21,8 @@ balancing
 write more than generic dialogue
 fix tactic selection
 clean up scripts
-fix nested redundant block
 
 features
-faction page
-relationships next to companion
 Combat positions?
 feats/perks
 save/load via json
