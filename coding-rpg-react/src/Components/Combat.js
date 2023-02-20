@@ -3,27 +3,25 @@ import './Game.css';
 import { useState } from "react";
 import { CombatPenalties, CombatRewards, CombatRound } from '../Scripts/CombatScripts';
 import { RemoveItemFromInventory } from '../Scripts/ItemScripts';
-import Log from './Log';
 import { AddToCharacterLog } from '../Scripts/CharacterScripts';
 
 function Combat(props) {
-    const [hero, setHero] = useState(props.hero)
-    const [abilities, setAbilities] = useState(props.hero.Abilities)
-    const [inventory, setInventory] = useState(props.hero.Inventory)
-    const [spells, setSpells] = useState(props.hero.BaseStats.SpellBook)
-    const [allies, setAllies] = useState([props.hero, ...props.hero.Companions])
-    const [allyBuffs, setAllyBuffs] = useState(allies)
-    const [allyDeBuffs, setAllyDeBuffs] = useState(allies)
+    const [hero, setHero] = useState(props.hero);
+    const [abilities, setAbilities] = useState(props.hero.Abilities);
+    const [inventory, setInventory] = useState(props.hero.Inventory);
+    const [spells, setSpells] = useState(props.hero.BaseStats.SpellBook);
+    const [allies, setAllies] = useState([props.hero, ...props.hero.Companions]);
+    const [allyBuffs, setAllyBuffs] = useState(allies);
+    const [allyDeBuffs, setAllyDeBuffs] = useState(allies);
     const [enemies, setEnemies] = useState(props.enemies);
-    const [enemyBuffs, setEnemyBuffs] = useState(enemies)
-    const [enemyDeBuffs, setEnemyDeBuffs] = useState(enemies)
-    const [enemiesOverZero, setEnemiesOverZero] = useState(props.enemies.length)
-    const [alliesOverZero, setAlliesOverZero] = useState(allies.length)
-    //const [combatLog, setCombatLog] = useState(["Combat Started"]);
-    const [action, setAction] = useState("Basic Attack")
-    const [preparedSpell, setPreparedSpell] = useState(null)
-    const [preparedAbility, setPreparedAbility] = useState(null)
-    const [round, setRound] = useState(1)
+    const [enemyBuffs, setEnemyBuffs] = useState(enemies);
+    const [enemyDeBuffs, setEnemyDeBuffs] = useState(enemies);
+    const [enemiesOverZero, setEnemiesOverZero] = useState(props.enemies.length);
+    const [alliesOverZero, setAlliesOverZero] = useState(allies.length);
+    const [action, setAction] = useState("Basic Attack");
+    const [preparedSpell, setPreparedSpell] = useState(null);
+    const [preparedAbility, setPreparedAbility] = useState(null);
+    const [round, setRound] = useState(1);
 
     function RunCombat(hero, allies, enemies, target, combatLog, action, spell, abil, round) {
         CombatRound(hero, allies, enemies, target, combatLog, action, spell, abil, round);
@@ -123,7 +121,7 @@ function Combat(props) {
                         </div>
                         <div style={{ display: "inline-block", verticalAlign: "text-top", paddingLeft: "1%", paddingRight: "1%", width: "200px" }}>
                             {/* <Log log={hero.Log} logName={"Combat"}></Log> */}
-                            <div style={{ paddingTop: "1%", marginTop:"100px" }}>
+                            <div style={{ paddingTop: "1%", marginTop: "100px" }}>
                                 <button onClick={props.Back}><h4>Run Away</h4></button>
                             </div>
                         </div>

@@ -72,7 +72,7 @@ export function gnollDen(hero, x, y) {
     return den;
 }
 export function hauntedManor(hero, x, y) {
-    var manor = { LocationName: "Haunted Manor", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [] }
+    var manor = { LocationName: "Haunted Manor", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterGhostEncounter(hero)] }
     return manor;
 }
 export function spiderCave(hero, x, y) {

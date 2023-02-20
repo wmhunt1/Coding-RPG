@@ -23,9 +23,9 @@ export function worldMap(hero) {
             //4
             mountains(hero, -5, 4), forest(hero, -4, 4), road(hero, -3, 4), river(hero, -2, 4), forest(hero, -1, 4), road(hero, 0, 4), forest(hero, 1, 4), forest(hero, 2, 4), road(hero, 3, 4), forest(hero, 4, 4), mountains(hero, 5, 4),
             //3
-            mountains(hero, -5, 3), forest(hero, -4, 3), lumbermill(hero, -3, 3), river(hero, -2, 3),forest(hero, -1, 2), forest(hero, -1, 3), road(hero, 0, 3), forest(hero, 1, 3), forest(hero, 2, 3), road(hero, 3, 3), forest(hero, 4, 3), mountains(hero, 5, 3),
+            mountains(hero, -5, 3), forest(hero, -4, 3), lumbermill(hero, -3, 3), river(hero, -2, 3), forest(hero, -1, 3), road(hero, 0, 3), forest(hero, 1, 3), forest(hero, 2, 3), road(hero, 3, 3), forest(hero, 4, 3), mountains(hero, 5, 3),
             //2
-            mountains(hero, -5, 2), forest(hero, -4, 2), road(hero, -3, 2), river(hero, -2, 2), witchHut(hero, -1, 1), road(hero, 0, 2), forest(hero, 1, 2), forest(hero, 2, 2), road(hero, 3, 2), forest(hero, 4, 2), mountains(hero, 5, 2),
+            mountains(hero, -5, 2), forest(hero, -4, 2), road(hero, -3, 2), river(hero, -2, 2), witchHut(hero, -1, 2), road(hero, 0, 2), forest(hero, 1, 2), forest(hero, 2, 2), road(hero, 3, 2), forest(hero, 4, 2), mountains(hero, 5, 2),
             //1
             mountains(hero, -5, 1), forest(hero, -4, 1), road(hero, -3, 1), river(hero, -2, 1), forest(hero, -1, 1), road(hero, 0, 1), hauntedManor(hero, 1, 1), forest(hero, 2, 1), road(hero, 3, 1), forest(hero, 4, 1), mountains(hero, 5, 1),
             //0

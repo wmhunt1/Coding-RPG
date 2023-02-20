@@ -19,7 +19,6 @@ If Quincy apprentice sent away since wizard knows he seeks knowledge but not nec
 Ferra gives bonus xp rate feat to mining etc?
 Add image icons?,
 enchanting reagent (maybe gems?)
-Talking tree
 wizard apprentice companion. Arcade the teifling? or a waifu
 Quincy companion (combine him with wizard?)
 Wyle companion
@@ -27,6 +26,7 @@ abraham arkwright companion
 kobold companion
 
 fixes/changes
+move part of combat to combat
 balancing
 write more than generic dialogue
 fix tactic selection
@@ -36,7 +36,7 @@ features
 Combat positions?
 feats/perks
 save/load via json
-add time delay for log
+add time delay for log (for combat)
 Property (include your own allotments)
 random encounter that forces combat (set movement as false)
 dungeon exploration and/or puzzles

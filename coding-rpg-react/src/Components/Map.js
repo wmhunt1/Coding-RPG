@@ -14,23 +14,27 @@ function Map(props) {
     const [coordinateY, setCoordinateY] = useState(props.hero.CurrentLocation.YCoord)
     const [adjacentLocations, setAdjacentLocations] = useState(props.hero.AdjacentLocations)
     function handleMove(hero, map, x, y, hour) {
-        var move = true;
-        if (hero.Inventory.length > CalculateInventorySlots(hero)) {
-            AddToExplorationLog(hero, "Party is OverEncumbered.")
-            move = false;
-        }
-        if (move === true) {
-            updateLocation(hero, map, x, y, hour)
-            setHero(hero)
-            var updateKnownLocations = [...hero.Map]
-            setKnownLocations(updateKnownLocations)
-            setCoordinateX(hero.CurrentLocation.XCoord)
-            setCoordinateY(hero.CurrentLocation.YCoord)
-            setLocation(hero.CurrentLocation)
-            setSubLocations(hero.CurrentLocation.SubLocations)
-            setAdjacentLocations(hero.AdjacentLocations)
-        }
+        AddToExplorationLog(hero, hero.Name + " starts traveling.")
         props.parentCallback(hero);
+        setTimeout(() => {
+            var move = true;
+            if (hero.Inventory.length > CalculateInventorySlots(hero)) {
+                AddToExplorationLog(hero, "Party is OverEncumbered.")
+                move = false;
+            }
+            if (move === true) {
+                updateLocation(hero, map, x, y, hour)
+                setHero(hero)
+                var updateKnownLocations = [...hero.Map]
+                setKnownLocations(updateKnownLocations)
+                setCoordinateX(hero.CurrentLocation.XCoord)
+                setCoordinateY(hero.CurrentLocation.YCoord)
+                setLocation(hero.CurrentLocation)
+                setSubLocations(hero.CurrentLocation.SubLocations)
+                setAdjacentLocations(hero.AdjacentLocations)
+            }
+            props.parentCallback(hero);
+        }, 500)
     }
     function goToKnownLocation(hero, map, x, y, oldX, oldY) {
         var hour = Math.round((Math.abs(oldX - x) + Math.abs(oldY - y)) / 2)

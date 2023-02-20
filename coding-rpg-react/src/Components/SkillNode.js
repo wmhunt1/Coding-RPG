@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import '../App.css';
-import { UseSkillRecipe } from '../Scripts/SkillScripts';
+import {AddToSkillLog, UseSkillRecipe } from '../Scripts/SkillScripts';
 import './Game.css'
 
 function SkillNode(props) {
@@ -10,11 +10,16 @@ function SkillNode(props) {
     const [activeSkill, setActiveSkill] = useState(props.node.Skill)
     const [recipes, setRecipes] = useState(props.node.Recipes)
     function handleTrainSkill(char, skill, recipe) {
+        AddToSkillLog(char, char.Name + " starts to  " + recipe.Name)
+        props.parentCallback(char);
+        setTimeout(() => { 
         UseSkillRecipe(char, skill, recipe)
         setHero(char)
         setSkills(char.SkillBook)
         setActiveSkill(skill)
         props.parentCallback(char);
+    }, 1000)
+       
     }
     const recipeList = recipes.sort((a, b) => a.Name.localeCompare(b.Name) && a.LevelRequirement - b.LevelRequirement).filter(recipe => recipe.LevelRequirement <= activeSkill.Level).map((recipe, index) => <h4 key={index}>{recipe.Name}({recipe.LevelRequirement}) {recipe.Exp} XP <button onClick={() => handleTrainSkill(hero, activeSkill, recipe)}>{recipe.Verb}</button></h4>)
     return (<div style ={{marginLeft:"25%", marginRight:"25%"}}>

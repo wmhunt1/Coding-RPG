@@ -48,7 +48,6 @@ export function EarnSkillXP(char, skill, xp) {
     }
 }
 export function UseSkillRecipe(char, skill, recipe) {
-    AddToSkillLog(char, char.Name + " tries to  " + recipe.Name)
     var quantity = 0;
     if (recipe.Output !== null)
     {
