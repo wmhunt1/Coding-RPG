@@ -6,7 +6,7 @@ import { CastSpell } from "../Scripts/AbilityAndSpellScripts"
 function SpellBook(props) {
     const [hero, setHero] = useState(props.hero)
     const [heroMP, setHeroMP] = useState(props.hero.BaseStats.MP.Current)
-    const [spells, setSpells] = useState(props.hero.BaseStats.SpellBook)
+    const [spells, setSpells] = useState(props.hero.SpellBook)
     const [allies, setAllies] = useState([props.hero, ...props.hero.Companions])
     const [activeTarget, setActiveTarget] = useState(props.hero)
     const [list, setList] = useState("Default")

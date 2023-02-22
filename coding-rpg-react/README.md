@@ -11,6 +11,36 @@ Wizard tower with dungeon  (monsters, dialogue, dungeon)
     * archmage doesn't show up until afterwards
 witch hut dialogue
 companion dialogue in other places
+Convert to Typescript
+Checks for locations to update them or trigger events
+Use valley as small starting area and have Halfland to south
+Convert objects to classes and subclasses 
+Abilities 
+Buffs
+Characters
+Beasts
+Constructs
+Humanoids
+Undead
+Debuffs
+Dialogues
+Dungeons
+Encounters
+Items
+Consumables
+Equipables
+Locations
+Maps
+Quests
+SkillNodes
+Skills
+SkillRecipes
+Spells
+Keyboard movements and shortcuts
+Put back other weapon and armor skills?
+Item durability?
+Repair with Smithing etc depending on item.
+
 
 possible content
 more damage modifers for prot types

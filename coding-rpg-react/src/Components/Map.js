@@ -47,7 +47,7 @@ function Map(props) {
     const subLocationsList = subLocations.sort((a, b) => a.Name.localeCompare(b.Name)).map((location, index) => <div key={index}><button onClick={() => handleEnterLocation(hero, location)}>{location.Name}</button></div>)
     const knownLocationsList = knownLocations.sort((a, b) => a.LocationName.localeCompare(b.LocationName)).map((location, index) => <div key={index}><button onClick={() => goToKnownLocation(hero, map, location.XCoord, location.YCoord, coordinateX, coordinateY)}>{location.LocationName}</button></div>)
     return (<div>
-        <div style={{ border: "solid", height: "580px" }}>
+        <div style={{ border: "solid", height: "570px" }}>
             {hero.BaseStats.HP.Current > 0 ? <h2>{hero.Name}</h2> : <h2 style={{ color: "red" }}>{hero.Name} - Cannot Fight</h2>}
             <div><h3>{location.LocationName} - {hero.Time.TimeOfDay}</h3>
                 {/* - ({coordinateX},{coordinateY}) Time: {hero.Time.Day}, {hero.Time.Hour} -  */}

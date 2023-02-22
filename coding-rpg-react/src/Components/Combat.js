@@ -9,7 +9,7 @@ function Combat(props) {
     const [hero, setHero] = useState(props.hero);
     const [abilities, setAbilities] = useState(props.hero.Abilities);
     const [inventory, setInventory] = useState(props.hero.Inventory);
-    const [spells, setSpells] = useState(props.hero.BaseStats.SpellBook);
+    const [spells, setSpells] = useState(props.hero.SpellBook);
     const [allies, setAllies] = useState([props.hero, ...props.hero.Companions]);
     const [allyBuffs, setAllyBuffs] = useState(allies);
     const [allyDeBuffs, setAllyDeBuffs] = useState(allies);
@@ -50,11 +50,19 @@ function Combat(props) {
         setPreparedAbility(null)
         setPreparedSpell(null)
         if (overZero === 0) {
-            AddToCharacterLog(hero, "The Party is Victorious")
-            CombatRewards(hero, allies, enemies)
-            setHero(hero)
-            props.Back()
-            props.parentCallback(hero);
+            setTimeout(() => {
+                AddToCharacterLog(hero, "The Party is Victorious")
+                props.parentCallback(hero);
+            }, 1000)
+            setTimeout(() => {
+                CombatRewards(hero, allies, enemies)
+                setHero(hero)
+                props.parentCallback(hero);
+            }, 1000)
+            setTimeout(() => {
+                props.Back()
+                props.parentCallback(hero);
+            }, 3000)
         }
         var overZeroA = 0;
         for (let a = 0; a < allies.length; a++) {
@@ -64,11 +72,19 @@ function Combat(props) {
         }
         setAlliesOverZero(overZeroA)
         if (overZeroA === 0) {
-            AddToCharacterLog(hero, "The Party was Defeated")
-            CombatPenalties(hero)
-            setHero(hero)
-            props.Back()
-            props.parentCallback(hero);
+            setTimeout(() => {
+                AddToCharacterLog(hero, "The Party was Defeated")
+                props.parentCallback(hero);
+            }, 1000)
+            setTimeout(() => {
+                CombatPenalties(hero)
+                setHero(hero)
+                props.parentCallback(hero);
+            }, 1000)
+            setTimeout(() => {
+                props.Back()
+                props.parentCallback(hero);
+            }, 3000)
         }
         round++;
         setRound(round)
