@@ -1,8 +1,8 @@
-import { blessBuff, courageBuff } from "./BuffsDB";
+import { BlessBuff, CourageBuff } from "./BuffsDB";
 import { Rat, Skeleton, Spider } from "./CharactersDB";
-import { poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
-import { fireDamage, forceDamage, noDamage, poisonDamage } from "./DamageTypesDB";
-import { baneDeBuff } from "./DeBuffsDB"
+import { PoisonCondition, SleepCondition, WebCondition } from "./ConditionsDB";
+import { FireDamage, ForceDamage, NoDamage, PoisonDamage } from "./DamageTypesDB";
+import { BaneDeBuff } from "./DeBuffsDB"
 import { alterationSkill, conjurationSkill, destructionSkill, illusionSkill, restorationSkill } from "./SkillsDB";
 import { CalculateSpellBonus, ModifySummon } from "../Scripts/AbilityAndSpellScripts";
 import { HealHP } from "../Scripts/CharacterScripts";
@@ -12,11 +12,11 @@ import { ApplyCondition, RemoveCondition } from "../Scripts/BuffConditionAndDeBu
 //alteration spells
 export function poisonSpray() {
     var poisonSpray = {
-        Name: "Poison Spray", School: alterationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "A Spray of Poison that Poisons all Foes", Amount: 5, DamageType: poisonDamage(),
+        Name: "Poison Spray", School: alterationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "A Spray of Poison that Poisons all Foes", Amount: 5, DamageType: new PoisonDamage(this)(),
         SpellEffect(char, allies, enemies, target, combatLog) {
             var calcDuration = CalculateSpellBonus(char, this, char.Attributes.Intelligence.Value, char.Attributes.Intelligence.Bonus, char.Attributes.Intelligence.Penalty, 3);
             AddToCombatLog(combatLog, char.Name + " sprays all foes with poison");
-            for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], poisonCondition(this.Amount, calcDuration), combatLog) }
+            for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], new PoisonCondition(this.Amount, calcDuration), combatLog) }
         }
     }
     return poisonSpray;
@@ -54,11 +54,11 @@ export function summonSpider() {
 }
 export function webSpell() {
     var web = {
-        Name: "Sleep", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Webs all foes", Amount: 0, DamageType: noDamage(),
+        Name: "Sleep", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 10, Description: "Webs all foes", Amount: 0, DamageType: new NoDamage(),
         SpellEffect(char, allies, enemies, target, combatLog) {
             var calcDuration = CalculateSpellBonus(char, this, char.Attributes.Intelligence.Value, char.Attributes.Intelligence.Bonus, char.Attributes.Intelligence.Penalty, 3);
             AddToCombatLog(combatLog, char.Name + " webs all foes");
-            for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], webCondition(0, calcDuration), combatLog) }
+            for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], new WebCondition(0, calcDuration), combatLog) }
         }
     }
     return web;
@@ -66,14 +66,14 @@ export function webSpell() {
 //desctruction spells
 export function fireBall() {
     var fireBall = {
-        Name: "Fire Ball", School: destructionSkill(), LevelRequirement: 10, Use: "Combat", ManaCost: 10, Description: "Ball of Fire that deals 10 Fire Damage to All Foes", Amount: 10, DamageType: fireDamage(),
+        Name: "Fire Ball", School: destructionSkill(), LevelRequirement: 10, Use: "Combat", ManaCost: 10, Description: "Ball of Fire that deals 10 Fire Damage to All Foes", Amount: 10, DamageType: new FireDamage(this),
         SpellEffect(char, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, char.Name + " launches a fireball at the enemies"); for (var e = 0; e < enemies.length; e++) { ProjectileMagicAttack(char, enemies[e], combatLog, this) } }
     }
     return fireBall;
 }
 export function magicMissile() {
     var magicMissile = {
-        Name: "Magic Missile", School: destructionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 5, Description: "Missile of Magical Force that deals 5 Force Damage to One Foe", Amount: 5, DamageType: forceDamage(),
+        Name: "Magic Missile", School: destructionSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 5, Description: "Missile of Magical Force that deals 5 Force Damage to One Foe", Amount: 5, DamageType: new ForceDamage(this),
         SpellEffect(char, allies, enemies, target, combatLog) {
             AddToCombatLog(combatLog, char.Name + " fires a " + this.Name + " at " + target.Name);
             ProjectileMagicAttack(char, target, combatLog, this)
@@ -88,18 +88,18 @@ export function inspireCourage() {
         SpellEffect(char, allies, enemies, target, combatLog) {
             var calcDuration = CalculateSpellBonus(char, this, char.Attributes.Charisma.Value, char.Attributes.Charisma.Bonus, char.Attributes.Charisma.Penalty, 3);
             AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on " + target.Name + ", increasing their strength by 1");
-            courageBuff(calcDuration).ApplyBuff(target)
+            new CourageBuff(calcDuration).ApplyBuff(target)
         }
     }
     return inspireCourage
 }
 export function sleepSpell() {
     var sleep = {
-        Name: "Sleep", School: illusionSkill(), LevelRequirement: 10, Use: "Combat", ManaCost: 10, Description: "Puts all foes to sleep", Amount: 0, DamageType: noDamage(),
+        Name: "Sleep", School: illusionSkill(), LevelRequirement: 10, Use: "Combat", ManaCost: 10, Description: "Puts all foes to sleep", Amount: 0, DamageType: new NoDamage(),
         SpellEffect(char, allies, enemies, target, combatLog) {
             var calcDuration = CalculateSpellBonus(char, this, char.Attributes.Charisma.Value, char.Attributes.Charisma.Bonus, char.Attributes.Charisma.Penalty, 3);
             AddToCombatLog(combatLog, char.Name + " puts all foes to sleep");
-            for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], sleepCondition(0, calcDuration), combatLog) }
+            for (var e = 0; e < enemies.length; e++) { ApplyCondition(enemies[e], new SleepCondition(0, calcDuration), combatLog) }
         }
     }
     return sleep;
@@ -111,7 +111,7 @@ export function bane() {
         SpellEffect(char, allies, enemies, target, combatLog) {
             var calcBuff = CalculateSpellBonus(char, this, char.Attributes.Wisdom.Value, char.Attributes.Wisdom.Bonus, char.Attributes.Wisdom.Penalty, 3);
             AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on the their enemies.");
-            for (var e = 0; e < enemies.length; e++) { baneDeBuff(calcBuff).ApplyDeBuff(enemies[e]) }
+            for (var e = 0; e < enemies.length; e++) { new BaneDeBuff(calcBuff).ApplyDeBuff(enemies[e]) }
         }
     }
     return bane;
@@ -144,7 +144,7 @@ export function bless() {
         SpellEffect(char, allies, enemies, target, combatLog) {
             var calcBuff = CalculateSpellBonus(char, this, char.Attributes.Wisdom.Value, char.Attributes.Wisdom.Bonus, char.Attributes.Wisdom.Penalty, this.Amount);
             AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " blessing them.");
-            for (var a = 0; a < allies.length; a++) { blessBuff(calcBuff).ApplyBuff(allies[a]) }
+            for (var a = 0; a < allies.length; a++) { new BlessBuff(calcBuff).ApplyBuff(allies[a]) }
         }
     }
     return bless;

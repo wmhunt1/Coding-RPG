@@ -1,27 +1,27 @@
-import { poisonCondition } from "./ConditionsDB";
-import { fireDamage, iceDamage, noDamage, poisonDamage } from "./DamageTypesDB";
+import { PoisonCondition } from "./ConditionsDB";
+import { FireDamage, IceDamage, NoDamage, PoisonDamage } from "./DamageTypesDB";
 import { ApplyCondition } from "../Scripts/BuffConditionAndDeBuffScripts";
 import { TakeDamage } from "../Scripts/CharacterScripts";
 import { AddToCombatLog, CalculateDamageModifiers } from "../Scripts/CombatScripts";
 import { ApplyOnEquipEffect, ApplyOnUnEquipEffect } from "../Scripts/ItemScripts";
 export function unEnchanted() {
-    var UnEnchanted = { Name: "UnEnchanted", Damage: 0, DamageType: noDamage(), OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { }, OnUnEquipEffect(char, item) { } }
+    var UnEnchanted = { Name: "UnEnchanted", Damage: 0, DamageType: new NoDamage(this), OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { }, OnUnEquipEffect(char, item) { } }
     return UnEnchanted
 }
 export function fireEnchantment() {
-    var fireEnchantment = { Name: "Fire Enchantment", Damage: 5, DamageType: fireDamage(), OnHitEffect(char1, char2, combatLog) { var damage = CalculateDamageModifiers(char2, this.Damage, this.DamageType); TakeDamage(char2, damage); AddToCombatLog(combatLog, char1.Name + " deals an extra " + damage[0] + " " + this.DamageType.Name + " damage " + damage[1] + " due to " + this.Name) }, OnEquipEffect(char, item) { }, OnUnEquipEffect(char, item) { } }
+    var fireEnchantment = { Name: "Fire Enchantment", Damage: 5, DamageType: new FireDamage(this), OnHitEffect(char1, char2, combatLog) { var damage = CalculateDamageModifiers(char2, this.Damage, this.DamageType); TakeDamage(char2, damage); AddToCombatLog(combatLog, char1.Name + " deals an extra " + damage[0] + " " + this.DamageType.Name + " damage " + damage[1] + " due to " + this.Name) }, OnEquipEffect(char, item) { }, OnUnEquipEffect(char, item) { } }
     return fireEnchantment
 }
 export function fireImmuneEnchantment() {
-    var fireEnchantment = { Name: "Immunity to Fire", Immunities: [fireDamage()], Resistances: [], Weaknesses: [], ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionModifiers.Immunities, this.ConditionModifiers.Resistances, this.ConditionModifiers.Weaknesses, item) }, OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, char.ConditionModifiers.Immunities, char.ConditionModifiers.Resistances, char.ConditionModifiers.Weaknesses, item) } }
+    var fireEnchantment = { Name: "Immunity to Fire", Immunities: [new FireDamage(this)], Resistances: [], Weaknesses: [], ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionModifiers.Immunities, this.ConditionModifiers.Resistances, this.ConditionModifiers.Weaknesses, item) }, OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, char.ConditionModifiers.Immunities, char.ConditionModifiers.Resistances, char.ConditionModifiers.Weaknesses, item) } }
     return fireEnchantment
 }
 export function iceResistEnchantment() {
-    var iceResist = { Name: "Resistance to Ice", Immunities: [], Resistances: [iceDamage()], Weaknesses: [], ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionModifiers.Immunities, this.ConditionModifiers.Resistances, this.ConditionModifiers.Weaknesses, item) }, OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, char.ConditionModifiers.Immunities, char.ConditionModifiers.Resistances, char.ConditionModifiers.Weaknesses, item) } }
+    var iceResist = { Name: "Resistance to Ice", Immunities: [], Resistances: [new IceDamage(this)], Weaknesses: [], ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], OnHitEffect(char1, char2, combatLog) { }, OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionModifiers.Immunities, this.ConditionModifiers.Resistances, this.ConditionModifiers.Weaknesses, item) }, OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, char.ConditionModifiers.Immunities, char.ConditionModifiers.Resistances, char.ConditionModifiers.Weaknesses, item) } }
     return iceResist
 }
 export function poisonApplyEnchantment(){
-    var poisonApplyEnchantment =  { Name: "Venom Enchantment", Damage: 1, DamageType: poisonDamage(), OnHitEffect(char1, char2, combatLog) { ApplyCondition(char2, poisonCondition(2, 1)); AddToCombatLog(combatLog, char1.Name + "poisons " + char2.Name) }, OnEquipEffect(char, item) { }, OnUnEquipEffect(char, item) { } }
+    var poisonApplyEnchantment =  { Name: "Venom Enchantment", Damage: 1, DamageType: new PoisonDamage(this), OnHitEffect(char1, char2, combatLog) { ApplyCondition(char2, new PoisonCondition(2, 1)); AddToCombatLog(combatLog, char1.Name + "poisons " + char2.Name) }, OnEquipEffect(char, item) { }, OnUnEquipEffect(char, item) { } }
     return poisonApplyEnchantment
 }
 export function strengthEnchantment() {

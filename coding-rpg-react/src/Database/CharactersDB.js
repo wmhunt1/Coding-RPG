@@ -1,5 +1,5 @@
-import { noCondition, poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
-import { cleave, pierceArmor, rage } from "./AbilitiesDB";
+import { NoCondition, PoisonCondition, SleepCondition, WebCondition } from "./ConditionsDB";
+import { Cleave, PierceArmor, Rage } from "./AbilitiesDB";
 import { bareBack, bareFinger, bareNeck, bite, bones, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakShortBow, ironAxe2H, skull, bronzeShield, bronzeMace, bronzeHelmet, wolfFur, clawSlash, bearFur, rawChicken, feather, peck, batGuano, ironAxe, oakStaff, ghostTouch, ectoplasm } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
 import { cleric, freelancer, pet } from "./JobsDB";
@@ -7,7 +7,7 @@ import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell,
 import { BasicAttacker, BasicHealer, Rager, spiderSummoner } from "./TacticsDB";
 import { allSkills, barterSkill, blockSkill, heavyWeaponSkill, heavyArmorSkill, miningSkill, restorationSkill, smithingSkill } from "./SkillsDB";
 import { noTitle } from "./TitlesDB";
-import { bludeoningDamage, fireDamage, lightningDamage, piercingDamage, poisonDamage, slashingDamage } from "./DamageTypesDB";
+import { BludgeoningDamage, FireDamage, LightningDamage, PiercingDamage, PoisonDamage, SlashingDamage } from "./DamageTypesDB";
 import { startingAdjacentLocations } from "./MapsDB";
 import { FindSkillInSkillBook } from "../Scripts/SkillScripts";
 
@@ -34,7 +34,7 @@ class Character {
     };
     Inventory = []; Gold = 0; Bank = []; BankGold = 0;
     Companions = []; Journal = []; Abilities = []; SpellBook = []; SkillBook = allSkills(); Reputation = []; Relationships = [];
-    Buffs = []; DeBuffs = []; Condition = noCondition();
+    Buffs = []; DeBuffs = []; Condition = new NoCondition();
     Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicAttacker(char, allies, enemies, combatLog, round) } };
     ItemDrops = []; CurrentLocation = daleTown(this, 0, 0); Map = [daleTown(this, 0, 0)]; AdjacentLocations = startingAdjacentLocations(); Time = { Day: 0, Hour: 9, TimeOfDay: "Morning" };
     constructor(name) {
@@ -102,8 +102,8 @@ export class Spider extends Beast {
         super(name = "Spider")
         this.Attributes.Dexterity.Value = 12; this.Attributes.Speed.Value = 12;
         this.Equipment.Weapon = poisonedBite();
-        this.ConditionModifiers.Immunities = [webCondition(), poisonCondition()];
-        this.Immunities(poisonDamage()); this.ItemDrops = [spiderSilkCloth()]
+        this.ConditionModifiers.Immunities = [new WebCondition(0,0), new PoisonCondition(0,0)];
+        this.Immunities(new PoisonDamage(this)); this.ItemDrops = [spiderSilkCloth()]
     }
 }
 export class GiantSpider extends Spider {
@@ -140,14 +140,14 @@ export class Worg extends Beast {
 export class Construct extends Character {
     constructor(name) {
         super(name)
-        this.ConditionModifiers.Immunities = [poisonCondition(), sleepCondition()]
+        this.ConditionModifiers.Immunities = [new PoisonCondition(0,0), new SleepCondition(0,0)]
     }
 }
 export class ScareCrow extends Construct {
     constructor(name = "Scarecrow") {
         super(name = "Scarecrow")
         this.CurrentXP = 25;
-        this.DamageModifiers.Weaknesses = [fireDamage()]
+        this.DamageModifiers.Weaknesses = [new FireDamage(this)]
     }
 }
 //humanoids
@@ -174,7 +174,7 @@ export class BanditArcher extends Bandit {
 export class BanditBerserker extends Bandit {
     constructor(name = "Bandit Berserker") {
         super(name = "Bandit Berserker")
-        this.Equipment.Weapon = ironAxe2H()
+        this.Equipment.Weapon = ironAxe2H();this.Abilities = [new Rage()];
         this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { Rager(char, allies, enemies, combatLog, round) } }
     }
 }
@@ -188,9 +188,9 @@ export class Hero extends Humanoid {
         this.Equipment.Legs = trousers(); this.Equipment.Hands = gloves(); this.Equipment.Feet = shoes();
         this.Gold = 5;
         this.Companions = [new Dog("Dog")];
-        this.Abilities = [cleave(), pierceArmor(), rage()];
+        this.Abilities = [new Cleave(), new PierceArmor(), new Rage()];
         this.SpellBook = [basicHeal(), curePoison(), fireBall(), magicMissile(), poisonSpray(), sleepSpell(), summonRat()];
-        this.DamageModifiers.Weaknesses = [fireDamage()]; this.DamageModifiers.Weaknesses[0].Source = this.Equipment.Torso;
+        this.DamageModifiers.Weaknesses = [new FireDamage(this)]; this.DamageModifiers.Weaknesses[0].Source = this.Equipment.Torso;
     }
 }
 export class FerraForgeHeart extends Humanoid {
@@ -201,8 +201,7 @@ export class FerraForgeHeart extends Humanoid {
         this.Equipment.Torso = ironTorso(); this.Equipment.Legs = ironLegs(); this.Equipment.Hands = ironGauntlets();
         this.Equipment.Feet = ironBoots();
         this.BaseStats.SpellBook = [basicHeal(), curePoison()];
-        this.DamageModifiers.Weaknesses = [lightningDamage()];
-        this.DamageModifiers.Weaknesses[0].Source = this.Equipment.Torso;
+        this.DamageModifiers.Weaknesses = [new LightningDamage(this.Equipment.Torso)];
         this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
         FindSkillInSkillBook(this, barterSkill()).Level = 10; FindSkillInSkillBook(this, barterSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, barterSkill()).MaxXP = 9000;
         FindSkillInSkillBook(this, blockSkill()).Level = 10; FindSkillInSkillBook(this, blockSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, blockSkill()).MaxXP = 9000;
@@ -234,7 +233,7 @@ export class Gnoll extends Humanoid {
 export class GnollLeader extends Gnoll {
     constructor(name = "Gnoll Leader") {
         super(name = "Gnoll Leader")
-        this.Abilities = [rage()]
+        this.Abilities = [new Rage()]
         this.BaseStats.HP.Current = 30; this.BaseStats.HP.Max = 30;
         this.Attributes.Strength.Value = 14; this.Attributes.Dexterity.Value = 12;
         this.CurrentXP = 50;
@@ -273,21 +272,21 @@ export class GoblinBoss extends Goblin {
 export class Undead extends Character {
     constructor(name) {
         super(name)
-        this.ConditionModifiers.Immunities.push(poisonCondition());
-        this.ConditionModifiers.Immunities.push(sleepCondition())
+        this.ConditionModifiers.Immunities.push(new PoisonCondition(0,0));
+        this.ConditionModifiers.Immunities.push(new SleepCondition(0,0))
     }
 }
 export class Ghost extends Undead {
     constructor(name  = "Ghost") {
         super(name = "Ghost")
         this.Attributes.Intelligence = 12;this.Equipment.Weapon = ghostTouch();
-        this.ItemDrops = [ectoplasm()];this.DamageModifiers.Immunities = [bludeoningDamage(), piercingDamage(), slashingDamage()];
+        this.ItemDrops = [ectoplasm()];this.DamageModifiers.Immunities = [new BludgeoningDamage(this), new PiercingDamage(this), new SlashingDamage(this)];
     }
 }
 export class Skeleton extends Undead {
     constructor(name  = "Skeleton") {
         super(name = "Skeleton")
-        this.DamageModifiers.Resistances = [piercingDamage(), slashingDamage()];this.DamageModifiers.Weaknesses = [bludeoningDamage()];
+        this.DamageModifiers.Resistances = [new PiercingDamage(this), new SlashingDamage(this)];this.DamageModifiers.Weaknesses = [new BludgeoningDamage(this)];
         this.ItemDrops = [bones(), bronzeHelmet(), bronzeMace(), bronzeShield(), skull()]
         this.Equipment.Weapon = bronzeMace();this.Equipment.OffHand = bronzeShield();this.Equipment.Head = bronzeHelmet()
     }

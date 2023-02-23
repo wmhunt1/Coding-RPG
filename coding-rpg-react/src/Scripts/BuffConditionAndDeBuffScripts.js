@@ -1,4 +1,4 @@
-import { noCondition } from "../Database/ConditionsDB";
+import { NoCondition } from "../Database/ConditionsDB";
 import { AddToCharacterLog } from "./CharacterScripts";
 import { AddToCombatLog } from "./CombatScripts";
 
@@ -64,7 +64,7 @@ export function ApplyCondition(char, condition, log) {
 }
 export function RemoveCondition(char, log) {
     var condition = char.Condition.Name
-    char.Condition = noCondition()
+    char.Condition = new NoCondition()
     if (condition !== "None") {
         log.push(char.Name + " is no longer afflicted with " + condition)
     }

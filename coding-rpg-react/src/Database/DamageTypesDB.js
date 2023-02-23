@@ -1,42 +1,94 @@
-export function noDamage() {
-    var noDamage = { Name: "No Damage", Type: "None", Source: null }
-    return noDamage
+export class DamageType
+{
+    Name;Type;Source;
+    constructor(name, type, source)
+    {
+        this.Name = name; this.Type = type; this.Source = source;
+    }
 }
-//elemental
-export function fireDamage() {
-    var fire = { Name: "Fire", Type: "Elemental", Source: null }
-    return fire;
+export class NoDamage extends DamageType
+{
+    constructor(name, type, source)
+    {
+        super(name = "No Damage", type = "None", source=null)
+    }
 }
-export function forceDamage() {
-    var force = { Name: "Force", Type: "Elemental", Source: null }
-    return force;
+//elemental damage
+export class ElementalDamage extends DamageType
+{
+    constructor(name,type, source)
+    {
+        super(name = "Elemental", type = "Elemental", source=null)
+    }
 }
-export function iceDamage() {
-    var ice = { Name: "Ice", Type: "Elemental", Source: null }
-    return ice;
+export class FireDamage extends ElementalDamage
+{
+    constructor(name,type, source)
+    {
+        super(name = "Fire", type = "Elemental", source)
+    }
 }
-export function lightningDamage() {
-    var lightning = { Name: "Lightning", Type: "Elemental", Source: null }
-    return lightning;
+export class ForceDamage extends ElementalDamage
+{
+    constructor(name,type, source)
+    {
+        super(name = "Force", type = "Elemental", source)
+    }
 }
-export function necroticDamage() {
-    var necroticDamage = { Name: "Necrotic", Type: "Elemental", Source: null }
-    return necroticDamage;
+export class IceDamage extends ElementalDamage
+{
+    constructor(name,type, source)
+    {
+        super(name = "Ice", type = "Elemental", source)
+    }
 }
-export function poisonDamage() {
-    var poison = { Name: "Poison", Type: "Elemental", Source: null }
-    return poison;
+export class LightningDamage extends ElementalDamage
+{
+    constructor(name,type, source)
+    {
+        super(name = "Lightning Damage", type = "Elemental", source)
+    }
+}
+export class NecroticDamage extends ElementalDamage
+{
+    constructor(name,type, source)
+    {
+        super(name = "Necrotic", type = "Elemental", source)
+    }
+}
+export class PoisonDamage extends ElementalDamage
+{
+    constructor(name,type, source)
+    {
+        super(name = "Poison", type = "Elemental", source)
+    }
 }
 //physical
-export function bludeoningDamage() {
-    var bludgeoning = { Name: "Bludgeoning", Type: "Physical", Source: null }
-    return bludgeoning;
+export class PhysicalDamage extends DamageType
+{
+    constructor(name,type, source)
+    {
+        super(name = "Physical", type = "Physical", source)
+    }
 }
-export function piercingDamage() {
-    var piercing = { Name: "Piercing", Type: "Physical", Source: null }
-    return piercing;
+export class BludgeoningDamage extends PhysicalDamage
+{
+    constructor(name,type, source)
+    {
+        super(name = "Bludgeoning", type = "Physical", source)
+    }
 }
-export function slashingDamage() {
-    var slashing = { Name: "Slashing", Type: "Physical", Source: null }
-    return slashing;
+export class PiercingDamage extends PhysicalDamage
+{
+    constructor(name,type, source)
+    {
+        super(name = "Piercing", type = "Physical", source)
+    }
+}
+export class SlashingDamage extends PhysicalDamage
+{
+    constructor(name,type, source)
+    {
+        super(name = "Slashing", type = "Physical", source)
+    }
 }

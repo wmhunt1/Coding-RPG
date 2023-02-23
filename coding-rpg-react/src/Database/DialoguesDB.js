@@ -8,7 +8,7 @@ import { CheckForQuest, CompleteQuest, StartQuest } from "../Scripts/QuestScript
 import { DecreaseRelationship, IncreaseRelationship, IncreaseReputation } from "../Scripts/RelationshipAndReputationScript";
 import { ferraForgeheartRelationship } from "./RelationshipsDB";
 import { daleTownReputation, whiteScalesFlockReputation } from "./ReputationsDB";
-import { blessBuff } from "./BuffsDB";
+import { BlessBuff } from "./BuffsDB";
 
 export function testDialogueOverhaul(hero) {
     var dialogue;
@@ -89,7 +89,7 @@ export function priestDialogue(hero) {
         dialogue = { Name: "Talk to Priest", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The Priest Thanks you.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, skeletonQuest(hero)); IncreaseReputation(hero, daleTownReputation(), 1) } }
     }
     else {
-        dialogue = { Name: "Talk to Priest", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The Priest blesses you.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { blessBuff(3).ApplyBuff(hero) } }
+        dialogue = { Name: "Talk to Priest", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The Priest blesses you.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { new BlessBuff(3).ApplyBuff(hero) } }
     }
     return dialogue
 }

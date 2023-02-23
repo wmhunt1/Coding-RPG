@@ -1,4 +1,4 @@
-import { rage } from "./AbilitiesDB";
+import { Rage } from "./AbilitiesDB";
 import { basicHeal, summonSpider, webSpell } from "./SpellsDB";
 import { CastSpell, CheckIfKnowsAbility, CheckIfKnowsSpell, UseAbility } from "../Scripts/AbilityAndSpellScripts";
 import { BasicAttack } from "../Scripts/CombatScripts"
@@ -46,8 +46,8 @@ export function Rager(char, allies, enemies, combatLog, round) {
         BasicAttacker(char, allies, enemies, combatLog)
     }
     else {
-        if (CheckIfKnowsAbility(char, rage()) !== null) {
-            UseAbility(char, allies, enemies, char, combatLog, rage())
+        if (CheckIfKnowsAbility(char, new Rage()) !== null) {
+            UseAbility(char, allies, enemies, char, combatLog, new Rage())
         }
         else {
             BasicAttacker(char, allies, enemies, combatLog)

@@ -1,18 +1,41 @@
-import { noDamage, poisonDamage } from "./DamageTypesDB";
+import { NoDamage, PoisonDamage } from "./DamageTypesDB";
 
-export function noCondition() {
-    var noCondition = { Name: "None", Symbol: "", Type: "None",Attribute: "", Damage: 0, Source: null }
-    return noCondition
+export class Condition
+{
+    Name; Symbol; Type; Attribute; Damage; DamageType;Source; Duration; RemainingDuration;
+    constructor(name, symbol, type, attribute, damage, damageType, source, duration)
+    {
+        this.Name = name; this.Symbol=symbol; this.Type=type;
+        this.Attribute=attribute;this.Damage=damage; this.Duration = duration;
+        this.RemainingDuration = duration;this.DamageType=damageType; this.Source=source;
+    }
 }
-export function poisonCondition(damage, duration) {
-    var poison = { Name: "Poisoned", Symbol: "PSN", Type: "Damage",Attribute: "Con", Duration: duration, RemainingDuration: duration, DamageType: poisonDamage(), Damage: damage, Source: null }
-    return poison;
+export class NoCondition extends Condition
+{
+    constructor(name, symbol, type, attribute, damage, source,damageType, duration)
+    {
+        super(name = "None", symbol = "", type="none", attribute="", damage = 0, source=null,damageType=new NoDamage(), duration = 0)
+    }
 }
-export function sleepCondition(damage, duration) {
-    var sleep = { Name: "Sleep", Symbol: "SLP", Type: "Skip", Attribute: "Wlp",Duration: duration, RemainingDuration: duration, DamageType: noDamage(), Damage: 0, Source: null }
-    return sleep;
+export class PoisonCondition extends Condition
+{ 
+    constructor(name, symbol, type, attribute, damage, damageType, source, duration)
+    {
+        super(name = "Poisoned", symbol = "PSN", type="Damage", attribute="Con", damage, source=null,damageType=new PoisonDamage(), duration) 
+    }    
 }
-export function webCondition(damage, duration) {
-    var web = { Name: "Webed", Symbol: "SLP", Type: "Skip",Attribute: "Str", Duration: duration, RemainingDuration: duration, DamageType: noDamage(), Damage: 0, Source: null }
-    return web;
+export class SleepCondition extends Condition
+{
+    
+    constructor(name, symbol, type, attribute, damage, damageType, source, duration)
+    {
+        super(name = "Sleep", symbol = "SLP", type="Skip", attribute="Wlp", damage, source=null,damageType=new NoDamage(), duration) 
+    }      
+}
+export class WebCondition extends Condition
+{
+    constructor(name, symbol, type, attribute, damage, damageType, source, duration)
+    {
+        super(name = "Webbed", symbol = "WEB", type="Skip", attribute="Str", damage, source=null,damageType=new NoDamage(), duration) 
+    }
 }

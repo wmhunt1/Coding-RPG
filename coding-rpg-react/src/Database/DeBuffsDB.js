@@ -1,8 +1,25 @@
-export function baneDeBuff(duration) {
-    var deBuff = { Name: "Bane", Duration: duration, RemainingDuration: duration, ApplyDeBuff(target) { target.Attributes.Strength.Penalty += 1; target.Attributes.Dexterity.Penalty += 1; target.DeBuffs.push(this) }, RemoveDeBuff(target) { target.Attributes.Strength.Penalty -= 1; target.Attributes.Dexterity.Penalty -= 1; } }
-    return deBuff
+export class DeBuff {
+    Name; Duration; RemainingDuration;
+    ApplyDeBuff(target) { }; RemoveDeBuff(target) { }
+    constructor(name, duration) {
+        this.Name = name;
+        this.Duration = duration;
+        this.RemainingDuration = duration;
+    }
 }
-export function drunkDeBuff(duration) {
-    var deBuff = { Name: "Drunk", Duration: duration, RemainingDuration: duration, ApplyDeBuff(target) { target.Attributes.Intelligence.Penalty += 1; target.Attributes.Dexterity.Penalty += 1; target.DeBuffs.push(this) }, RemoveDeBuff(target) { target.Attributes.Dexterity.Penalty -= 1; target.Attributes.Intelligence.Penalty -= 1; } }
-    return deBuff
+export class BaneDeBuff extends DeBuff
+{
+    constructor(name, duration) {
+        super(name = "Bane DeBuff", duration)
+    }
+    ApplyDeBuff(target) { target.Attributes.Strength.Penalty += 1; target.Attributes.Dexterity.Penalty += 1; target.DeBuffs.push(this) };
+    RemoveDeBuff(target) { target.Attributes.Strength.Penalty -= 1; target.Attributes.Dexterity.Penalty -= 1; }
+}
+export class DrunkDeBuff extends DeBuff
+{
+    constructor(name, duration) {
+        super(name = "Drunk DeBuff", duration)
+    }
+    ApplyDeBuff(target) { target.Attributes.Intelligence.Penalty += 1; target.Attributes.Dexterity.Penalty += 1; target.DeBuffs.push(this) };
+    RemoveDeBuff(target) { target.Attributes.Dexterity.Penalty -= 1; target.Attributes.Intelligence.Penalty -= 1; }
 }

@@ -14,24 +14,23 @@ companion dialogue in other places
 Convert to Typescript
 Checks for locations to update them or trigger events
 Use valley as small starting area and have Halfland to south
-Convert objects to classes and subclasses 
-Abilities 
-Buffs
-Characters
-Beasts
-Constructs
-Humanoids
-Undead
-Debuffs
+Convert objects to classes and subclasses
 Dialogues
 Dungeons
 Encounters
 Items
 Consumables
+Enchantments
 Equipables
+Factions
+Jobs
 Locations
 Maps
+ProtectionTypes
 Quests
+Relationships
+Reputations
+Shops
 SkillNodes
 Skills
 SkillRecipes

@@ -1,8 +1,8 @@
-import { fireDamage, lightningDamage } from "./DamageTypesDB";
+import { FireDamage, LightningDamage } from "./DamageTypesDB";
 import { ApplyOnEquipEffect, ApplyOnUnEquipEffect } from "../Scripts/ItemScripts"
 export function clothProtection() {
     var cloth = {
-        Name: "Cloth", ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], Immunities: [], Resistances: [], Weaknesses: [fireDamage()],
+        Name: "Cloth", ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], Immunities: [], Resistances: [], Weaknesses: [new FireDamage(this)],
         onEquip(hero, item) { ApplyOnEquipEffect(hero, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionModifiers.Immunities, this.ConditionModifiers.Resistances, this.ConditionModifiers.Weaknesses, item) },
         onUnEquip(hero, item) { ApplyOnUnEquipEffect(hero, hero.DamageModifiers.Immunities, hero.DamageModifiers.Resistances, hero.DamageModifiers.Weaknesses, hero.ConditionModifiers.Immunities, hero.ConditionModifiers.Resistances, hero.ConditionModifiers.Weaknesses, item) }
     }
@@ -18,7 +18,7 @@ export function leatherProtection() {
 }
 export function metalProtection() {
     var metal = {
-        Name: "Metal", ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], Immunities: [], Resistances: [], Weaknesses: [lightningDamage()],
+        Name: "Metal", ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], Immunities: [], Resistances: [], Weaknesses: [new LightningDamage(this)],
         onEquip(hero, item) { ApplyOnEquipEffect(hero, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionModifiers.Immunities, this.ConditionModifiers.Resistances, this.ConditionModifiers.Weaknessesitem) },
         onUnEquip(hero, item) { ApplyOnUnEquipEffect(hero, hero.DamageModifiers.Immunities, hero.DamageModifiers.Resistances, hero.DamageModifiers.Weaknesses, hero.ConditionModifiers.Immunities, hero.ConditionModifiers.Resistances, hero.ConditionModifiers.Weaknesses, item) }
     }
@@ -34,7 +34,7 @@ export function naturalProtection() {
 }
 export function woodProtection() {
     var wood = {
-        Name: "Wood", ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], Immunities: [], Resistances: [], Weaknesses: [fireDamage()],
+        Name: "Wood", ConditionImmunities: [], ConditionResistances: [], ConditionWeaknesses: [], Immunities: [], Resistances: [], Weaknesses: [new FireDamage(this)],
         onEquip(hero, item) { ApplyOnEquipEffect(hero, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionModifiers.Immunities, this.ConditionModifiers.Resistances, this.ConditionModifiers.Weaknesses, item) },
         onUnEquip(hero, item) { ApplyOnUnEquipEffect(hero, hero.DamageModifiers.Immunities, hero.DamageModifiers.Resistances, hero.DamageModifiers.Weaknesses, hero.ConditionModifiers.Immunities, hero.ConditionModifiers.Resistances, hero.ConditionModifiers.Weaknesses, item) }
     }
