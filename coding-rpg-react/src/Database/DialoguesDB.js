@@ -1,4 +1,4 @@
-import { ferraForgeHeart } from "./CharactersDB";
+import { FerraForgeHeart } from "./CharactersDB";
 import { silverRingLR } from "./ItemsDB";
 import { banditQuest1, dwarvenMineGoblinQuest, giantQuest, gnollQuest1, metSweetheart, ratCellarQuest, scareCrowQuest1, scareCrowQuest2, scareCrowQuest3, scareCrowQuest4, skeletonQuest, wizardTowerQuest1 } from "./QuestsDB"
 import { CalculateTime } from "../Scripts/MapScripts";
@@ -216,18 +216,18 @@ export function forgeHeart1(hero) {
             { Id: 3, Options: [["Leave", 0]] }]
         },
         responseEffect(hero, option) {
-            if (option === 2) { StartQuest(hero, dwarvenMineGoblinQuest()); } if (option === 5) { JoinParty(hero, ferraForgeHeart(), hero); IncreaseRelationship(hero, ferraForgeheartRelationship(), 1) }
+            if (option === 2) { StartQuest(hero, dwarvenMineGoblinQuest()); } if (option === 5) { JoinParty(hero, new FerraForgeHeart(), hero); IncreaseRelationship(hero, ferraForgeheartRelationship(), 1) }
         }
     }
     return dialogue
 }
 export function forgeHeart2(hero) {
     var dialogue;
-    if (FindPartyMember(ferraForgeHeart(), hero.Companions) !== null) {
+    if (FindPartyMember(new FerraForgeHeart(), hero.Companions) !== null) {
         dialogue = { Name: "Speak with Faldan", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The old dwarf is sleeping.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { } }
     }
     else {
-        dialogue = { Name: "Speak with Ferra", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Let Ferra Join?", Next: 1 }, { Id: 2, Line: "Ferra comes along", Next: 2 }, { Id: 3, Line: "You leave Ferra", Next: 3 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }, { Id: 3, Options: [["Leave", 0]] }] }, responseEffect(hero, option) { if (option === 2) { JoinParty(hero, ferraForgeHeart(), hero) } } }
+        dialogue = { Name: "Speak with Ferra", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Let Ferra Join?", Next: 1 }, { Id: 2, Line: "Ferra comes along", Next: 2 }, { Id: 3, Line: "You leave Ferra", Next: 3 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }, { Id: 3, Options: [["Leave", 0]] }] }, responseEffect(hero, option) { if (option === 2) { JoinParty(hero, new FerraForgeHeart(), hero) } } }
     }
     return dialogue
 }
@@ -248,8 +248,8 @@ export function forgeHeart3(hero, questIndex) {
         },
         responseEffect(hero, option) {
             if (option === 2) { CompleteQuest(hero, dwarvenMineGoblinQuest()); IncreaseReputation(hero, daleTownReputation(), 1) } if (option === 5) {
-                JoinParty(hero, ferraForgeHeart(), hero); IncreaseRelationship(hero, ferraForgeheartRelationship(), 1)
-                if (option === 4) { LeaveParty(hero, FindPartyMember(ferraForgeHeart(), hero.Party), hero.Party); DecreaseRelationship(hero, ferraForgeheartRelationship(), 1) } if (option === 3) { IncreaseRelationship(hero, ferraForgeheartRelationship(), 1) }
+                JoinParty(hero, new FerraForgeHeart(), hero); IncreaseRelationship(hero, ferraForgeheartRelationship(), 1)
+                if (option === 4) { LeaveParty(hero, FindPartyMember(new FerraForgeHeart(), hero.Party), hero.Party); DecreaseRelationship(hero, ferraForgeheartRelationship(), 1) } if (option === 3) { IncreaseRelationship(hero, ferraForgeheartRelationship(), 1) }
             }
         }
     }

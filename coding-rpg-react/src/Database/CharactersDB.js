@@ -1,6 +1,6 @@
 import { noCondition, poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
 import { cleave, pierceArmor, rage } from "./AbilitiesDB";
-import { bareBack, bareFinger, bareNeck, bite, bones, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, dogCollar, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakShortBow, ironAxe2H, skull, bronzeShield, bronzeMace, bronzeHelmet, wolfFur, clawSlash, bearFur, rawChicken, feather, peck, batGuano, ironAxe, oakStaff, ghostTouch, ectoplasm } from "./ItemsDB";
+import { bareBack, bareFinger, bareNeck, bite, bones, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakShortBow, ironAxe2H, skull, bronzeShield, bronzeMace, bronzeHelmet, wolfFur, clawSlash, bearFur, rawChicken, feather, peck, batGuano, ironAxe, oakStaff, ghostTouch, ectoplasm } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
 import { cleric, freelancer, pet } from "./JobsDB";
 import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell, summonRat } from "./SpellsDB"
@@ -11,340 +11,284 @@ import { bludeoningDamage, fireDamage, lightningDamage, piercingDamage, poisonDa
 import { startingAdjacentLocations } from "./MapsDB";
 import { FindSkillInSkillBook } from "../Scripts/SkillScripts";
 
-export function character(name) {
-    var char = {
-        Name: name, Job: freelancer(), Title: noTitle(), TitleList: [noTitle()], Log: [], Level: 1, CurrentXP: 10, MaxXP: 50,
-        BaseStats: { Attack: { Bonus: 0, Penalty: 0 }, Defense: { Bonus: 0, Penalty: 0 }, HP: { Current: 10, Max: 10, Bonus: 0, Penalty: 0, Regen: 0, RegenBonus: 0, RegenPenalty: 0, Temp: 0 }, MP: { Current: 10, Max: 10, Bonus: 0, Penalty: 0, Regen: 0, RegenBonus: 0, RegenPenalty: 0 }, SP: { Current: 10, Max: 10, Bonus: 0, Penalty: 0, Regen: 0, RegenBonus: 0, RegenPenalty: 0 } },
-        Attributes: {
-            Beauty: { Value: 10, Bonus: 0, Penalty: 0 }, Charisma: { Value: 10, Bonus: 0, Penalty: 0 }, Constitution: { Value: 10, Bonus: 0, Penalty: 0 },
-            Dexterity: { Value: 10, Bonus: 0, Penalty: 0 }, Intelligence: { Value: 10, Bonus: 0, Penalty: 0 }, Luck: { Value: 10, Bonus: 0, Penalty: 0 },
-            Perception: { Value: 10, Bonus: 0, Penalty: 0 }, Speed: { Value: 10, Bonus: 0, Penalty: 0 }, Strength: { Value: 10, Bonus: 0, Penalty: 0 },
-            WillPower: { Value: 10, Bonus: 0, Penalty: 0 }, Wisdom: { Value: 10, Bonus: 0, Penalty: 0 }
-        },
-        ConditionModifiers: { Immunities: [], Resistances: [], Weaknesses: [] },
-        DamageModifiers: { Immunities: [], Resistances: [], Weaknesses: [] },
-        Equipment: {
-            Back: bareBack(), Feet: bareFeet(), Hands: bareHands(), Head: bareHead(), Legs: bareLegs(), Neck: bareNeck(), OffHand: emptyOffHand(), Ring: bareFinger(), Torso: bareTorso(), Weapon: bareFist()
-        },
-        Inventory: [], Gold: 0, Bank: [], BankGold: 0,
-        Companions: [], Journal: [], Abilities: [], SpellBook: [], SkillBook: allSkills(), Reputation: [], Relationships: [],
-        Buffs: [], DeBuffs: [], Condition: noCondition(),
-        Tactics: { Tactics(char, allies, enemies, combatLog, round) { BasicAttacker(char, allies, enemies, combatLog, round) } },
-        ItemDrops: [], CurrentLocation: daleTown(this, 0, 0), Map: [daleTown(this, 0, 0)], AdjacentLocations: startingAdjacentLocations(), Time: { Day: 0, Hour: 9, TimeOfDay: "Morning" }
+class Character {
+    Name;
+    Job = freelancer(); Title = noTitle(); TitleList = [noTitle()]; Log = [];
+    Level = 1; CurrentXP = 10; MaxXP = 50;
+    BaseStats = {
+        Attack: { Bonus: 0, Penalty: 0 }, Defense: { Bonus: 0, Penalty: 0 },
+        HP: { Current: 10, Max: 10, Bonus: 0, Penalty: 0, Regen: 0, RegenBonus: 0, RegenPenalty: 0, Temp: 0 },
+        MP: { Current: 10, Max: 10, Bonus: 0, Penalty: 0, Regen: 0, RegenBonus: 0, RegenPenalty: 0 },
+        SP: { Current: 10, Max: 10, Bonus: 0, Penalty: 0, Regen: 0, RegenBonus: 0, RegenPenalty: 0 }
+    };
+    Attributes = {
+        Beauty: { Value: 10, Bonus: 0, Penalty: 0 }, Charisma: { Value: 10, Bonus: 0, Penalty: 0 }, Constitution: { Value: 10, Bonus: 0, Penalty: 0 },
+        Dexterity: { Value: 10, Bonus: 0, Penalty: 0 }, Intelligence: { Value: 10, Bonus: 0, Penalty: 0 }, Luck: { Value: 10, Bonus: 0, Penalty: 0 },
+        Perception: { Value: 10, Bonus: 0, Penalty: 0 }, Speed: { Value: 10, Bonus: 0, Penalty: 0 }, Strength: { Value: 10, Bonus: 0, Penalty: 0 },
+        WillPower: { Value: 10, Bonus: 0, Penalty: 0 }, Wisdom: { Value: 10, Bonus: 0, Penalty: 0 }
+    };
+    ConditionModifiers = { Immunities: [], Resistances: [], Weaknesses: [] };
+    DamageModifiers = { Immunities: [], Resistances: [], Weaknesses: [] };
+    Equipment = {
+        Back: bareBack(), Feet: bareFeet(), Hands: bareHands(), Head: bareHead(), Legs: bareLegs(), Neck: bareNeck(), OffHand: emptyOffHand(), Ring: bareFinger(), Torso: bareTorso(), Weapon: bareFist()
+    };
+    Inventory = []; Gold = 0; Bank = []; BankGold = 0;
+    Companions = []; Journal = []; Abilities = []; SpellBook = []; SkillBook = allSkills(); Reputation = []; Relationships = [];
+    Buffs = []; DeBuffs = []; Condition = noCondition();
+    Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicAttacker(char, allies, enemies, combatLog, round) } };
+    ItemDrops = []; CurrentLocation = daleTown(this, 0, 0); Map = [daleTown(this, 0, 0)]; AdjacentLocations = startingAdjacentLocations(); Time = { Day: 0, Hour: 9, TimeOfDay: "Morning" };
+    constructor(name) {
+        this.Name = name;
     }
-    return char;
 }
-export function hero() {
-    var hero = character("Hero")
-    hero.CurrentXP = 0;
-    hero.Attributes.Strength.Value = 20;
-    hero.Log = ["Game: Starting Game"];
-    hero.Equipment.Weapon = bronzeSword();
-    hero.Equipment.Head = hat();
-    hero.Equipment.Torso = tunic();
-    hero.Equipment.Legs = trousers();
-    hero.Equipment.Hands = gloves(); hero.Equipment.Feet = shoes();
-    hero.Inventory = [dogCollar()];
-    hero.Gold = 5;
-    hero.Companions = [dog("Dog")];
-    hero.Abilities = [cleave(), pierceArmor(), rage()];
-    hero.SpellBook = [basicHeal(), curePoison(), fireBall(), magicMissile(), poisonSpray(), sleepSpell(), summonRat()];
-    hero.DamageModifiers.Weaknesses = [fireDamage()];
-    hero.DamageModifiers.Weaknesses[0].Source = hero.Equipment.Torso;
-    hero.Journal = [];
-    hero.Inventory = []
-    return hero
+//beasts
+export class Beast extends Character {
+    constructor(name) {
+        super(name)
+        this.Equipment.Weapon = bite();
+    }
 }
-//companions
-export function ferraForgeHeart() {
-    var hero = character("Ferra Forgeheart")
-    hero.Job = cleric();
-    hero.CurrentXP = 0;
-    hero.Equipment.Weapon = ironWarHammer();
-    hero.Equipment.OffHand = ironShield();
-    hero.Equipment.Head = ironHelmet();
-    hero.Equipment.Torso = ironTorso();
-    hero.Equipment.Legs = ironLegs();
-    hero.Equipment.Hands = ironGauntlets();
-    hero.Equipment.Feet = ironBoots();
-    hero.BaseStats.SpellBook = [basicHeal(), curePoison()];
-    hero.DamageModifiers.Weaknesses = [lightningDamage()];
-    hero.DamageModifiers.Weaknesses[0].Source = hero.Equipment.Torso;
-    //hero.Attributes.Dexterity.Penalty = 3; hero.Attributes.Speed.Penalty = 3; 
-    hero.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
-    FindSkillInSkillBook(hero, barterSkill()).Level = 10;
-    FindSkillInSkillBook(hero, barterSkill()).CurrentXP = 7200;
-    FindSkillInSkillBook(hero, barterSkill()).MaxXP = 9000;
-    FindSkillInSkillBook(hero, blockSkill()).Level = 10;
-    FindSkillInSkillBook(hero, blockSkill()).CurrentXP = 7200;
-    FindSkillInSkillBook(hero, blockSkill()).MaxXP = 9000;
-    FindSkillInSkillBook(hero, heavyWeaponSkill()).Level = 10;
-    FindSkillInSkillBook(hero, heavyWeaponSkill()).CurrentXP = 7200;
-    FindSkillInSkillBook(hero, heavyWeaponSkill()).MaxXP = 9000;
-    FindSkillInSkillBook(hero, heavyArmorSkill()).Level = 10;
-    FindSkillInSkillBook(hero, heavyArmorSkill()).CurrentXP = 7200;
-    FindSkillInSkillBook(hero, heavyArmorSkill()).MaxXP = 9000;
-    FindSkillInSkillBook(hero, miningSkill()).Level = 10;
-    FindSkillInSkillBook(hero, miningSkill()).CurrentXP = 7200;
-    FindSkillInSkillBook(hero, miningSkill()).MaxXP = 9000;
-    FindSkillInSkillBook(hero, restorationSkill()).Level = 10;
-    FindSkillInSkillBook(hero, restorationSkill()).CurrentXP = 7200;
-    FindSkillInSkillBook(hero, restorationSkill()).MaxXP = 9000;
-    FindSkillInSkillBook(hero, smithingSkill()).Level = 10;
-    FindSkillInSkillBook(hero, smithingSkill()).CurrentXP = 7200;
-    FindSkillInSkillBook(hero, smithingSkill()).MaxXP = 9000;
-    return hero
+export class Bat extends Beast {
+    constructor(name = "Bat") {
+        super(name = "Bat")
+        this.CurrentXP = 5; this.BaseStats.HP.Current = 5; this.BaseStats.HP.Max = 5; this.ItemDrops = [batGuano()]
+    }
 }
-//beast
-export function beast(name) {
-    var beast = character(name)
-    beast.Equipment.Weapon = bite();
-    return beast
+export class Bear extends Beast {
+    constructor(name = "Bear") {
+        super(name = "Bear")
+        this.BaseStats.HP.Current = 20; this.BaseStats.HP.Max = 20;
+        this.Attributes.Strength.Value = 14; this.Attributes.Constitution.Value = 14;
+        this.Equipment.Weapon = clawSlash(); this.ItemDrops = [bearFur()]
+    }
 }
-export function bat() {
-    var bat = beast("Bat")
-    bat.CurrentXP = 5;
-    bat.BaseStats.HP.Current = 5;
-    bat.BaseStats.HP.Max = 5;
-    bat.ItemDrops = [batGuano()]
-    return bat;
+export class Chicken extends Beast {
+    constructor(name = "Chicken") {
+        super(name = "Chicken")
+        this.CurrentXP = 5; this.BaseStats.HP.Current = 5; this.BaseStats.HP.Max = 5; this.Attributes.Strength = 5;
+        this.ItemDrops = [rawChicken(), feather()]; this.Equipment.Weapon = peck();
+    }
 }
-export function bear() {
-    var bear = beast("Bear")
-    bear.BaseStats.HP.Current = 20;
-    bear.BaseStats.HP.Max = 20;
-    bear.Attributes.Strength.Value = 14;
-    bear.Attributes.Constitution.Value = 14;
-    bear.Equipment.Weapon = clawSlash();
-    bear.ItemDrops = [bearFur()]
-    return bear;
+export class Cow extends Beast {
+    constructor(name = "Cow") {
+        super(name = "Cow")
+        this.Equipment.Weapon = slam(); this.ItemDrops = [cowLeather(), rawBeef()]
+    }
 }
-export function chicken() {
-    var chicken = beast("Chicken")
-    chicken.CurrentXP = 5;
-    chicken.BaseStats.HP.Current = 5;
-    chicken.BaseStats.HP.Max = 5;
-    chicken.BaseStats.MP.Current = 5;
-    chicken.BaseStats.MP.Max = 5;
-    rat.BaseStats.SP.Current = 5;
-    chicken.BaseStats.SP.Max = 5;
-    chicken.ItemDrops = [rawChicken(), feather()];
-    chicken.Equipment.Weapon = peck();
-    chicken.Attributes.Strength = 5;
-    return chicken;
+export class Dog extends Beast {
+    constructor(name = "Dog") {
+        super(name = "Dog")
+        this.Job = pet();
+    }
 }
-export function cow() {
-    var cow = beast("Cow")
-    cow.Equipment.Weapon = slam();
-    cow.ItemDrops = [cowLeather(), rawBeef()]
-    return cow;
+export class Rat extends Beast {
+    constructor(name = "Rat") {
+        super(name = "Rat")
+        this.CurrentXP = 5; this.BaseStats.HP.Current = 5; this.BaseStats.HP.Max = 5;
+        this.ItemDrops = [rawRatMeat(), ratTail()]
+    }
 }
-export function dog(name) {
-    var dog = beast(name)
-    dog.Job = pet()
-    return dog;
+export class GiantRat extends Rat {
+    constructor(name = "Giant Rat") {
+        super(name = "Giant Rat")
+        this.CurrentXP = 10; this.BaseStats.HP.Current = 10; this.BaseStats.HP.Max = 10; this.Attributes.Strength.Value = 12;
+    }
 }
-export function giantRat() {
-    var rat = beast("Giant Rat")
-    rat.CurrentXP = 10;
-    rat.Attributes.Strength.Value = 12;
-    rat.ItemDrops = [rawRatMeat(), ratTail()]
-    return rat;
-}
-export function giantSpider() {
-    var spider = beast("Giant Spider")
-    spider.BaseStats.MP.Current = 20;
-    spider.BaseStats.MP.Max = 20;
-    spider.BaseStats.HP.Current = 20;
-    spider.BaseStats.HP.Max = 10;
-    spider.CurrentXP = 50;
-    spider.Attributes.Strength.Value = 12;
-    spider.Equipment.Weapon = poisonedBite();
-    spider.ConditionModifiers.Immunities = [webCondition(), poisonCondition()];
-    spider.Immunities(poisonDamage());
-    spider.ItemDrops = [spiderSilkCloth()]
-    spider.Tactics = { Tactics(char, allies, enemies, combatLog, round) { spiderSummoner(char, allies, enemies, combatLog, round) } }
-    return spider;
-}
-export function hyena(name) {
-    var dog = beast("Hyena")
-    return dog;
-}
-export function rat() {
-    var rat = beast("Rat")
-    rat.CurrentXP = 5;
-    rat.BaseStats.HP.Current = 5;
-    rat.BaseStats.HP.Max = 5;
-    rat.ItemDrops = [rawRatMeat(), ratTail()]
-    return rat;
-}
-export function spider() {
-    var spider = beast("Spider")
-    spider.CurrentXP = 10;
-    spider.Attributes.Dexterity.Value = 12;
-    spider.Attributes.Speed.Value = 12;
-    spider.Equipment.Weapon = poisonedBite();
-    spider.ConditionModifiers.Immunities = [webCondition(), poisonCondition()];
-    spider.Immunities(poisonDamage());
-    spider.ItemDrops = [spiderSilkCloth()]
-    return spider;
-}
-export function wolf() {
-    var wolf = beast("Wolf");
-    wolf.Attributes.Dexterity.Value = 12;
-    wolf.Attributes.Speed.Value = 12;
-    wolf.Equipment.Weapon = bite();
-    wolf.ItemDrops = [wolfFur()]
-    return wolf;
-}
-export function worg() {
-    var worg = beast("Worg")
-    worg.CurrentXP = 10;
-    worg.Attributes.Strength.Value = 14;
-    worg.BaseStats.HP.Current = 20;
-    worg.BaseStats.HP.Max = 20;
-    return worg;
-}
-//construct
-export function construct(name) {
-    var construct = character("Construct");
-    construct.ConditionModifiers.Immunities = [poisonCondition(), sleepCondition()]
-    return construct;
-}
-export function scareCrow() {
-    var scareCrow = construct("Scarecrow")
-    scareCrow.CurrentXP = 25;
-    scareCrow.DamageModifiers.Weaknesses = [fireDamage()]
-    return scareCrow;
-}
-//humanoid
-//bandits
-export function bandit() {
-    var bandit = character("Bandit");
-    bandit.Equipment.Head = leatherCowl();
-    bandit.Equipment.Torso = leatherTorso();
-    bandit.Equipment.Legs = leatherLegs();
-    bandit.Equipment.Hands = leatherGloves();
-    bandit.Equipment.Feet = leatherBoots();
-    bandit.Equipment.Weapon = ironDagger();
-    bandit.Equipment.OffHand = ironDaggerOffHand();
-    bandit.ItemDrops = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso(), ironDagger(), ironDaggerOffHand()]
-    return bandit;
-}
-export function banditArcher() {
-    var bandit = character("Bandit Archer");
-    bandit.Equipment.Head = leatherCowl();
-    bandit.Equipment.Torso = leatherTorso();
-    bandit.Equipment.Legs = leatherLegs();
-    bandit.Equipment.Hands = leatherGloves();
-    bandit.Equipment.Feet = leatherBoots();
-    bandit.Equipment.Weapon = oakShortBow()
-    bandit.ItemDrops = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso(), oakShortBow()]
-    return bandit;
-}
-export function banditBerseker() {
-    var bandit = character("Bandit Berserker");
-    bandit.Equipment.Head = leatherCowl();
-    bandit.Equipment.Torso = leatherTorso();
-    bandit.Equipment.Legs = leatherLegs();
-    bandit.Equipment.Hands = leatherGloves();
-    bandit.Equipment.Feet = leatherBoots();
-    bandit.Equipment.Weapon = ironAxe2H();
-    bandit.ItemDrops = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso(), ironAxe2H()]
-    bandit.Abilities = [rage()]
-    bandit.Tactics = { Tactics(char, allies, enemies, combatLog, round) { Rager(char, allies, enemies, combatLog, round) } }
-    return bandit;
-}
-export function giant() {
-    var giant = character("Giant")
-    giant.Equipment.Weapon = woodenclub();
-    giant.CurrentXP = 100;
-    giant.Attributes.Strength.Bonus = 10;
-    return giant;
-}
-export function gnoll() {
-    var gnoll = character("Gnoll")
-    gnoll.BaseStats.HP.Current = 15;
-    gnoll.BaseStats.HP.Max = 15;
-    gnoll.Attributes.Strength.Value = 12;
-    gnoll.Attributes.Dexterity.Value = 12;
-    gnoll.CurrentXP = 20;
-    gnoll.Equipment.Weapon = ironAxe();
-    gnoll.Equipment.OffHand = ironShield();
-    gnoll.Equipment.Legs = loinCloth();
-    gnoll.ItemDrops = [ironAxe(), ironShield()]
-    return gnoll
-}
-export function gnollShaman() {
-    var gnoll = character("Shaman")
-    gnoll.BaseStats.HP.Current = 15;
-    gnoll.BaseStats.HP.Max = 15;
-    gnoll.Attributes.Wisdom.Value = 12;
-    gnoll.SpellBook = [basicHeal()]
-    gnoll.CurrentXP = 20; gnoll.Equipment.Weapon = oakStaff();
-    gnoll.Equipment.Legs = loinCloth();
-    gnoll.ItemDrops = [oakStaff()]
-    gnoll.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
-    return gnoll
-}
-export function gnollLeader() {
-    var gnoll = character("Gnoll Leader")
-    gnoll.Abilities = [rage()]
-    gnoll.BaseStats.HP.Current = 30;
-    gnoll.BaseStats.HP.Max = 30;
-    gnoll.Attributes.Strength.Value = 14;
-    gnoll.Attributes.Dexterity.Value = 12;
-    gnoll.CurrentXP = 50;
-    gnoll.Equipment.Weapon = ironAxe();
-    gnoll.Equipment.OffHand = ironShield();
-    gnoll.Equipment.Legs = loinCloth();
-    gnoll.ItemDrops = [ironAxe(), ironShield()]
-    gnoll.Tactics = { Tactics(char, allies, enemies, combatLog, round) { Rager(char, allies, enemies, combatLog, round) } }
-    return gnoll
-}
-export function goblin() {
-    var goblin = character("Goblin")
-    goblin.CurrentXP = 10;
-    goblin.Equipment.Weapon = woodenclub();
-    goblin.Equipment.OffHand = woodenShield();
-    goblin.Equipment.Legs = loinCloth();
-    goblin.ItemDrops = [woodenclub(), woodenShield()]
-    return goblin
-}
-export function goblinBoss() {
-    var goblin = character("Goblin Boss")
-    goblin.BaseStats.HP.Current = 15;
-    goblin.BaseStats.HP.Max = 15;
-    goblin.CurrentXP = 20;
-    goblin.Equipment.Weapon = woodenclub();
-    goblin.Equipment.OffHand = woodenShield();
-    goblin.Equipment.Legs = loinCloth();
-    goblin.ItemDrops = [woodenclub(), woodenShield()]
-    return goblin
-}
-//undead
-export function undead(name) {
-    var undead = character(name)
-    undead.ConditionModifiers.Immunities.push(poisonCondition());
-    undead.ConditionModifiers.Immunities.push(sleepCondition())
-    return undead;
-}
-export function ghost() {
-    var ghost = undead("Ghost");
-    ghost.Attributes.Intelligence = 12;
-    ghost.Equipment.Weapon = ghostTouch();
-    ghost.ItemDrops = [ectoplasm()]
-    ghost.DamageModifiers.Immunities = [bludeoningDamage(), piercingDamage(), slashingDamage()];
+export class Hyena extends Beast {
 
 }
-export function skeleton() {
-    var skeleton = undead("Skeleton")
-    skeleton.DamageModifiers.Resistances.push(piercingDamage());
-    skeleton.DamageModifiers.Resistances.push(slashingDamage());
-    skeleton.DamageModifiers.Weaknesses.push(bludeoningDamage());
-    skeleton.ItemDrops = [bones(), bronzeHelmet(), bronzeMace(), bronzeShield(), skull()]
-    skeleton.Equipment.Weapon = bronzeMace();
-    skeleton.Equipment.OffHand = bronzeShield();
-    skeleton.Equipment.Head = bronzeHelmet()
-    return skeleton;
+export class Spider extends Beast {
+    constructor(name = "Spider") {
+        super(name = "Spider")
+        this.Attributes.Dexterity.Value = 12; this.Attributes.Speed.Value = 12;
+        this.Equipment.Weapon = poisonedBite();
+        this.ConditionModifiers.Immunities = [webCondition(), poisonCondition()];
+        this.Immunities(poisonDamage()); this.ItemDrops = [spiderSilkCloth()]
+    }
+}
+export class GiantSpider extends Spider {
+    constructor(name = "Spider") {
+        super(name = "Spider")
+        this.BaseStats.MP.Current = 20;
+        this.BaseStats.MP.Max = 20;
+        this.BaseStats.HP.Current = 20;
+        this.BaseStats.HP.Max = 10;
+        this.CurrentXP = 50;
+        this.Attributes.Strength.Value = 12;
+        this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { spiderSummoner(char, allies, enemies, combatLog, round) } }
+    }
+
+}
+export class Wolf extends Beast {
+    constructor(name = "Wolf") {
+        super(name = "Wolf")
+        this.Attributes.Dexterity.Value = 12;
+        this.Attributes.Speed.Value = 12;
+        this.ItemDrops = [wolfFur()]
+    }
+}
+export class Worg extends Beast {
+    constructor(name = "Worg") {
+        super(name = "Worg")
+        this.CurrentXP = 10;
+        this.Attributes.Strength.Value = 14;
+        this.BaseStats.HP.Current = 20;
+        this.BaseStats.HP.Max = 20;
+    }
+}
+//constructs
+export class Construct extends Character {
+    constructor(name) {
+        super(name)
+        this.ConditionModifiers.Immunities = [poisonCondition(), sleepCondition()]
+    }
+}
+export class ScareCrow extends Construct {
+    constructor(name = "Scarecrow") {
+        super(name = "Scarecrow")
+        this.CurrentXP = 25;
+        this.DamageModifiers.Weaknesses = [fireDamage()]
+    }
+}
+//humanoids
+export class Humanoid extends Character {
+    constructor(name = "Humanoid") {
+        super(name = "Humanoid")
+    }
+}
+//bandits
+export class Bandit extends Humanoid {
+    constructor(name = "Bandit") {
+        super(name = "Bandit")
+        this.Equipment.Head = leatherCowl(); this.Equipment.Torso = leatherTorso(); this.Equipment.Legs = leatherLegs();
+        this.Equipment.Hands = leatherGloves(); this.Equipment.Feet = leatherBoots(); this.Equipment.Weapon = ironDagger(); this.Equipment.OffHand = ironDaggerOffHand();
+        this.ItemDrops = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso(), ironDagger(), ironDaggerOffHand(), oakShortBow(), ironAxe2H()]
+    }
+}
+export class BanditArcher extends Bandit {
+    constructor(name = "Bandit Archer") {
+        super(name = "Bandit Archer")
+        this.Equipment.Weapon = oakShortBow()
+    }
+}
+export class BanditBerserker extends Bandit {
+    constructor(name = "Bandit Berserker") {
+        super(name = "Bandit Berserker")
+        this.Equipment.Weapon = ironAxe2H()
+        this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { Rager(char, allies, enemies, combatLog, round) } }
+    }
+}
+//hero and companions
+export class Hero extends Humanoid {
+    constructor(name) {
+        super(name)
+        this.CurrentXP = 0;
+        this.Log = ["Game: Starting Game"];
+        this.Equipment.Weapon = bronzeSword(); this.Equipment.Head = hat(); this.Equipment.Torso = tunic();
+        this.Equipment.Legs = trousers(); this.Equipment.Hands = gloves(); this.Equipment.Feet = shoes();
+        this.Gold = 5;
+        this.Companions = [new Dog("Dog")];
+        this.Abilities = [cleave(), pierceArmor(), rage()];
+        this.SpellBook = [basicHeal(), curePoison(), fireBall(), magicMissile(), poisonSpray(), sleepSpell(), summonRat()];
+        this.DamageModifiers.Weaknesses = [fireDamage()]; this.DamageModifiers.Weaknesses[0].Source = this.Equipment.Torso;
+    }
+}
+export class FerraForgeHeart extends Humanoid {
+    constructor(name) {
+        super(name = "Ferra Forgeheart")
+        this.Job = cleric(); this.CurrentXP = 0;
+        this.Equipment.Weapon = ironWarHammer(); this.Equipment.OffHand = ironShield(); this.Equipment.Head = ironHelmet();
+        this.Equipment.Torso = ironTorso(); this.Equipment.Legs = ironLegs(); this.Equipment.Hands = ironGauntlets();
+        this.Equipment.Feet = ironBoots();
+        this.BaseStats.SpellBook = [basicHeal(), curePoison()];
+        this.DamageModifiers.Weaknesses = [lightningDamage()];
+        this.DamageModifiers.Weaknesses[0].Source = this.Equipment.Torso;
+        this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
+        FindSkillInSkillBook(this, barterSkill()).Level = 10; FindSkillInSkillBook(this, barterSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, barterSkill()).MaxXP = 9000;
+        FindSkillInSkillBook(this, blockSkill()).Level = 10; FindSkillInSkillBook(this, blockSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, blockSkill()).MaxXP = 9000;
+        FindSkillInSkillBook(this, heavyWeaponSkill()).Level = 10; FindSkillInSkillBook(this, heavyWeaponSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, heavyWeaponSkill()).MaxXP = 9000;
+        FindSkillInSkillBook(this, heavyArmorSkill()).Level = 10; FindSkillInSkillBook(this, heavyArmorSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, heavyArmorSkill()).MaxXP = 9000;
+        FindSkillInSkillBook(this, miningSkill()).Level = 10; FindSkillInSkillBook(this, miningSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, miningSkill()).MaxXP = 9000;
+        FindSkillInSkillBook(this, restorationSkill()).Level = 10; FindSkillInSkillBook(this, restorationSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, restorationSkill()).MaxXP = 9000;
+        FindSkillInSkillBook(this, smithingSkill()).Level = 10; FindSkillInSkillBook(this, smithingSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, smithingSkill()).MaxXP = 9000;
+    }
+}
+export class Giant extends Humanoid {
+    constructor(name = "Giant") {
+        super(name = "Giant")
+        this.Equipment.Weapon = woodenclub(); this.CurrentXP = 100;
+        this.BaseStats.HP.Current = 30; this.BaseStats.HP.Max = 30; this.Attributes.Strength.Value = 20;
+    }
+}
+//gnolls
+export class Gnoll extends Humanoid {
+    constructor(name = "Gnoll") {
+        super(name = "Gnoll")
+        this.BaseStats.HP.Current = 15; this.BaseStats.HP.Max = 15;
+        this.Attributes.Strength.Value = 12; this.Attributes.Dexterity.Value = 12;
+        this.CurrentXP = 20;
+        this.Equipment.Weapon = ironAxe(); this.Equipment.OffHand = ironShield(); this.Equipment.Legs = loinCloth();
+        this.ItemDrops = [ironAxe(), ironShield()]
+    }
+}
+export class GnollLeader extends Gnoll {
+    constructor(name = "Gnoll Leader") {
+        super(name = "Gnoll Leader")
+        this.Abilities = [rage()]
+        this.BaseStats.HP.Current = 30; this.BaseStats.HP.Max = 30;
+        this.Attributes.Strength.Value = 14; this.Attributes.Dexterity.Value = 12;
+        this.CurrentXP = 50;
+        this.Equipment.Weapon = ironAxe(); this.Equipment.OffHand = ironShield();
+        this.Equipment.Legs = loinCloth();
+        this.ItemDrops = [ironAxe(), ironShield(), loinCloth()]
+        this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { Rager(char, allies, enemies, combatLog, round) } }
+    }
+}
+export class GnollShaman extends Gnoll {
+    constructor(name = "Gnoll Shaman") {
+        super(name = "Gnoll Shaman")
+        this.Attributes.Wisdom.Value = 12; this.SpellBook = [basicHeal()]
+        this.CurrentXP = 20; this.Equipment.Weapon = oakStaff(); this.Equipment.Legs = loinCloth();
+        this.ItemDrops = [oakStaff().loinCloth()]
+        this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
+    }
+}
+//goblins
+export class Goblin extends Humanoid {
+    constructor(name = "Goblin") {
+        super(name = "Goblin")
+        this.Equipment.Weapon = woodenclub(); this.Equipment.OffHand = woodenShield();
+        this.Equipment.Legs = loinCloth(); this.ItemDrops = [woodenclub(), woodenShield()]
+    }
+}
+export class GoblinBoss extends Goblin {
+        constructor(name = "Goblin Boss") {
+            super(name = "Goblin Boss")
+            this.BaseStats.HP.Current = 15;
+            this.BaseStats.HP.Max = 15;
+            this.CurrentXP = 20;
+        }
+}
+//undead
+export class Undead extends Character {
+    constructor(name) {
+        super(name)
+        this.ConditionModifiers.Immunities.push(poisonCondition());
+        this.ConditionModifiers.Immunities.push(sleepCondition())
+    }
+}
+export class Ghost extends Undead {
+    constructor(name  = "Ghost") {
+        super(name = "Ghost")
+        this.Attributes.Intelligence = 12;this.Equipment.Weapon = ghostTouch();
+        this.ItemDrops = [ectoplasm()];this.DamageModifiers.Immunities = [bludeoningDamage(), piercingDamage(), slashingDamage()];
+    }
+}
+export class Skeleton extends Undead {
+    constructor(name  = "Skeleton") {
+        super(name = "Skeleton")
+        this.DamageModifiers.Resistances = [piercingDamage(), slashingDamage()];this.DamageModifiers.Weaknesses = [bludeoningDamage()];
+        this.ItemDrops = [bones(), bronzeHelmet(), bronzeMace(), bronzeShield(), skull()]
+        this.Equipment.Weapon = bronzeMace();this.Equipment.OffHand = bronzeShield();this.Equipment.Head = bronzeHelmet()
+    }
 }

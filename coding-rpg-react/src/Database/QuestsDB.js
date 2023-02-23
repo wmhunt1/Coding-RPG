@@ -1,4 +1,4 @@
-import { giantRat, scareCrow, skeleton } from "./CharactersDB"
+import { GiantRat, ScareCrow, Skeleton } from "./CharactersDB"
 import { banditHideoutDungeon, giantCaveDungeon, gnollDenDungeon, goblinMine, puzzleCubeDungeon, spiderCaveDungeon } from "./DungeonsDB"
 import { basicHealScroll, blackFeather, lessonsFromFaldan, silverRingLR, skillLamp, tipsTraderJoe, wheat } from "./ItemsDB"
 import { farmingSkill, woodcuttingSkill } from "./SkillsDB";
@@ -28,11 +28,11 @@ export function metWitch(hero) {
     return witch;
 }
 export function ratCellarQuest(hero) {
-    var ratCellarQuest = { Name: "Rats in The Cellar", Status: "In Progress", Type: "Kill", Description: "Kill the Giant Rat in the cellar", Target: giantRat(), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
+    var ratCellarQuest = { Name: "Rats in The Cellar", Status: "In Progress", Type: "Kill", Description: "Kill the Giant Rat in the cellar", Target: new GiantRat(), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [] } }
     return ratCellarQuest
 }
 export function scareCrowQuest1(hero) {
-    var crow = { Name: "Scarecrow Part 1", Status: "In Progress", Type: "Kill", Description: "Kill the possessed scarecrow", Target: scareCrow(), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 10, Items: [{Item: wheat(), Quantity:5}] } }
+    var crow = { Name: "Scarecrow Part 1", Status: "In Progress", Type: "Kill", Description: "Kill the possessed scarecrow", Target: new ScareCrow(), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 10, Items: [{Item: wheat(), Quantity:5}] } }
     return crow;
 }
 export function scareCrowQuest2(hero) {
@@ -48,11 +48,11 @@ export function scareCrowQuest4(hero) {
     return crow;
 }
 export function skeletonQuest(hero) {
-    var quest = { Name: "Putting them to Rest", Status: "In Progress", Type: "Kill", Description: "Kill Skeletons", Target: puzzleCubeDungeon(), Objective: 9, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{ Item: basicHealScroll(), Quantity: 1 }] } }
+    var quest = { Name: "Putting them to Rest", Status: "In Progress", Type: "Kill", Description: "Kill Skeletons", Target: new Skeleton(), Objective: 9, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{ Item: basicHealScroll(), Quantity: 1 }] } }
     return quest;
 }
 export function wizardTowerQuest1(hero)
 {
-    var quest = { Name: "The Archmage's Apprentice", Status: "In Progress", Type: "Dungeon", Description: "Rescue Ambrosius' Apprentice from the Puzzle Cube", Target: skeleton(), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{ Item: basicHealScroll(), Quantity: 1 }] } }
+    var quest = { Name: "The Archmage's Apprentice", Status: "In Progress", Type: "Dungeon", Description: "Rescue Ambrosius' Apprentice from the Puzzle Cube", Target: puzzleCubeDungeon(hero), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{ Item: basicHealScroll(), Quantity: 1 }] } }
     return quest;
 }

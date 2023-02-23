@@ -1,5 +1,5 @@
 import { blessBuff, courageBuff } from "./BuffsDB";
-import { rat, skeleton, spider } from "./CharactersDB";
+import { Rat, Skeleton, Spider } from "./CharactersDB";
 import { poisonCondition, sleepCondition, webCondition } from "./ConditionsDB";
 import { fireDamage, forceDamage, noDamage, poisonDamage } from "./DamageTypesDB";
 import { baneDeBuff } from "./DeBuffsDB"
@@ -24,7 +24,7 @@ export function poisonSpray() {
 //conjuration spells
 export function summonRat() {
     var summonRat = {
-        Name: "Summon Rat", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 5, Description: "Summons a Rat to fight", Summon: rat(),
+        Name: "Summon Rat", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 5, Description: "Summons a Rat to fight", Summon: new Rat(),
         SpellEffect(char, allies, enemies, target, combatLog) {
             AddToCombatLog(combatLog, char.Name + " summons a " + this.Summon.Name);
             ModifySummon(char, allies, this.Summon)
@@ -34,7 +34,7 @@ export function summonRat() {
 }
 export function summonSkeleton() {
     var summon = {
-        Name: "Summon Skeleton", School: conjurationSkill(), LevelRequirement: 10, Use: "Combat", ManaCost: 10, Description: "Summons a Skeleton to fight", Summon: skeleton(),
+        Name: "Summon Skeleton", School: conjurationSkill(), LevelRequirement: 10, Use: "Combat", ManaCost: 10, Description: "Summons a Skeleton to fight", Summon: new Skeleton(),
         SpellEffect(char, allies, enemies, target, combatLog) {
             AddToCombatLog(combatLog, char.Name + " summons a " + this.Summon.Name);
             ModifySummon(char, allies, this.Summon)
@@ -44,7 +44,7 @@ export function summonSkeleton() {
 }
 export function summonSpider() {
     var summon = {
-        Name: "Summon Spider", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 5, Description: "Summons a spider to fight", Summon: spider(),
+        Name: "Summon Spider", School: conjurationSkill(), LevelRequirement: 1, Use: "Combat", ManaCost: 5, Description: "Summons a spider to fight", Summon: new Spider(),
         SpellEffect(char, allies, enemies, target, combatLog) {
             AddToCombatLog(combatLog, char.Name + " summons a " + this.Summon.Name);
             ModifySummon(char, allies, this.Summon)

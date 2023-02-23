@@ -1,9 +1,8 @@
-import { useState } from "react";
 import Game from "./Components/Game";
 import './App.css';
-import { hero } from "./Database/CharactersDB";
+import { Hero } from "./Database/CharactersDB";
 
-var newHero = hero()
+var newHero = new Hero("Hero")
 function App() {
   const hero = newHero;
   return (

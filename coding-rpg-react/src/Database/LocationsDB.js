@@ -1,5 +1,5 @@
 import { CheckForQuest } from "../Scripts/QuestScripts"
-import { bandit, bat, bear, chicken, cow, ghost, giant, gnoll, goblin, scareCrow, skeleton, spider, wolf } from './CharactersDB'
+import { Bandit, Bat, Bear, Chicken, Cow, Ghost, Giant, Gnoll, Goblin, ScareCrow, Skeleton, Spider, Wolf } from './CharactersDB'
 import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, tenguCampDialogue } from "./DialoguesDB"
 import { banditHideoutDungeon, giantCaveDungeon, giantCaveDungeonBeforeAndAfterQuest, gnollDenDungeon, goblinMine, goblinMineAfterQuest, spiderCaveDungeon } from "./DungeonsDB"
 import { dwarvenMineGoblinQuest, giantQuest } from "./QuestsDB"
@@ -195,55 +195,55 @@ export function enterTenguCampDialogue(hero) {
 }
 //enter encounters
 export function enterBatEncounter(hero) {
-    var encounter = { Name: "Kill Bats", enterLocation(hero) { var content = { active: "Combat", combat: [bat(), bat(), bat()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    var encounter = { Name: "Kill Bats", enterLocation(hero) { var content = { active: "Combat", combat: [new Bat(), new Bat(), new Bat()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
 export function enterBanditEncounter(hero) {
-    var encounter = { Name: "Kill Bandits", enterLocation(hero) { var content = { active: "Combat", combat: [bandit(), bandit(), bandit()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    var encounter = { Name: "Kill Bandits", enterLocation(hero) { var content = { active: "Combat", combat: [new Bandit(), new Bandit(), new Bandit()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
 export function enterBearEncounter(hero) {
-    var encounter = { Name: "Kill Bear", enterLocation(hero) { var content = { active: "Combat", combat: [bear()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    var encounter = { Name: "Kill Bear", enterLocation(hero) { var content = { active: "Combat", combat: [new Bear()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
 export function enterChickenEncounter(hero) {
-    var encounter = { Name: "Kill Chickens", enterLocation(hero) { var content = { active: "Combat", combat: [chicken(), chicken(), chicken()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    var encounter = { Name: "Kill Chickens", enterLocation(hero) { var content = { active: "Combat", combat: [new Chicken(), new Chicken(), new Chicken()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter
 }
 export function enterCowEncounter(hero) {
-    var enterCowEncounter = { Name: "Kill Cows", enterLocation(hero) { var content = { active: "Combat", combat: [cow()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    var enterCowEncounter = { Name: "Kill Cows", enterLocation(hero) { var content = { active: "Combat", combat: [new Cow()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return enterCowEncounter
 }
 export function enterGhostEncounter(hero) {
-    var encounter = { Name: "Kill Ghosts", enterLocation(hero) { var content = { active: "Combat", combat: [ghost()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    var encounter = { Name: "Kill Ghosts", enterLocation(hero) { var content = { active: "Combat", combat: [new Ghost()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
 export function enterGiantEncounter(hero) {
-    var encounter = { Name: "Kill Giants", enterLocation(hero) { var content = { active: "Combat", combat: [giant()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    var encounter = { Name: "Kill Giants", enterLocation(hero) { var content = { active: "Combat", combat: [new Giant()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
 export function enterGnollEncounter(hero) {
-    var encounter = { Name: "Kill Gnolls", enterLocation(hero) { var content = { active: "Combat", combat: [gnoll(), gnoll(), gnoll()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    var encounter = { Name: "Kill Gnolls", enterLocation(hero) { var content = { active: "Combat", combat: [new Gnoll(), new Gnoll(), new Gnoll()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
 export function enterGoblinEncounter(hero) {
-    var encounter = { Name: "Kill Goblins", enterLocation(hero) { var content = { active: "Combat", combat: [goblin(), goblin(), goblin()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    var encounter = { Name: "Kill Goblins", enterLocation(hero) { var content = { active: "Combat", combat: [new Goblin(), new Goblin(), new Goblin()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
 export function enterScareCrowEncounter(hero) {
-    var encounter = { Name: "Kill Scarecrows", enterLocation(hero) { var content = { active: "Combat", combat: [scareCrow()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    var encounter = { Name: "Kill Scarecrows", enterLocation(hero) { var content = { active: "Combat", combat: [new ScareCrow()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
 export function enterSkeletonEncounter(hero) {
-    var encounter = { Name: "Kill Skeletons", enterLocation(hero) { var content = { active: "Combat", combat: [skeleton(), skeleton(), skeleton()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    var encounter = { Name: "Kill Skeletons", enterLocation(hero) { var content = { active: "Combat", combat: [new Skeleton(), new Skeleton(), new Skeleton()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
 export function enterSpiderEncounter(hero) {
-    var encounter = { Name: "Kill Spiders", enterLocation(hero) { var content = { active: "Combat", combat: [spider(), spider(), spider()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    var encounter = { Name: "Kill Spiders", enterLocation(hero) { var content = { active: "Combat", combat: [new Spider(), new Spider(), new Spider()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
 export function enterWolfEncounter(hero) {
-    var encounter = { Name: "Kill Wolves", enterLocation(hero) { var content = { active: "Combat", combat: [wolf(), wolf(), wolf()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
+    var encounter = { Name: "Kill Wolves", enterLocation(hero) { var content = { active: "Combat", combat: [new Wolf(), new Wolf(), new Wolf()], dialogue: null, dungeon: null, shop: null, skill: null }; return content } }
     return encounter;
 }
 //enter shops

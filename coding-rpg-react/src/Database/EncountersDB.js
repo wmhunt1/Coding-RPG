@@ -1,97 +1,97 @@
-import { bandit, banditArcher, banditBerseker, cow, giant, giantRat, giantSpider,gnoll, gnollLeader, gnollShaman, goblin, goblinBoss, hyena, rat, scareCrow, skeleton, spider, worg } from "./CharactersDB";
+import { Bandit, BanditArcher, BanditBerserker, Cow, Giant, GiantRat, GiantSpider,Gnoll, GnollLeader, GnollShaman, Goblin, GoblinBoss, Hyena, Rat, ScareCrow, Skeleton, Spider, Worg } from "./CharactersDB";
 import { enslavedKoboldsDialogue, enterGoblinMineDialogue, giantCaveDialogue, saveMinersDialogue, spiderCaveDialogue } from "./DialoguesDB";
 
 //combat encounters
 //beasts
 export function cowEncounter() {
-    var cowEncounter = { Name: "Cow", Type: "Combat", Content: [cow()] }
+    var cowEncounter = { Name: "Cow", Type: "Combat", Content: [new Cow()] }
     return cowEncounter;
 }
 //rat
 export function giantRatEncounter() {
-    var ratEncounter = { Name: "Giant Rat", Type: "Combat", Content: [giantRat(), rat(), rat(), rat()] }
+    var ratEncounter = { Name: "Giant Rat", Type: "Combat", Content: [new GiantRat(), new Rat(), new Rat(), new Rat()] }
     return ratEncounter
 }
 export function ratEncounter() {
-    var ratEncounter = { Name: "Rats", Type: "Combat", Content: [rat(), rat(), rat()] }
+    var ratEncounter = { Name: "Rats", Type: "Combat", Content: [new Rat(), new Rat(), new Rat()] }
     return ratEncounter
 }
 //spiders
 export function giantSpiderEncounter() {
-    var spiderEncounter = { Name: "Spiders", Type: "Combat", Content: [giantSpider()] }
+    var spiderEncounter = { Name: "Spiders", Type: "Combat", Content: [new GiantSpider()] }
     return spiderEncounter;
 }
 export function spiderEncounter() {
-    var spiderEncounter = { Name: "Spiders", Type: "Combat", Content: [spider(), spider(), spider()] }
+    var spiderEncounter = { Name: "Spiders", Type: "Combat", Content: [new Spider(), new Spider(), new Spider()] }
     return spiderEncounter;
 }
 //constructs
 export function scareCrowEncounter() {
-    var encounter = { Name: "Scarecrow", Type: "Combat", Content: [scareCrow()] }
+    var encounter = { Name: "Scarecrow", Type: "Combat", Content: [new ScareCrow()] }
     return encounter;
 }
 //humanoids
 export function banditEncounter() {
-    var encounter = { Name: "Bandits", Type: "Combat", Content: [bandit(), bandit()] }
+    var encounter = { Name: "Bandits", Type: "Combat", Content: [new Bandit(), new Bandit()] }
     return encounter;
 }
 export function banditAndBanditArcherEncounter() {
-    var encounter = { Name: "Bandits", Type: "Combat", Content: [bandit(), banditArcher()] }
+    var encounter = { Name: "Bandits", Type: "Combat", Content: [new Bandit(), new BanditArcher()] }
     return encounter;
 }
 export function banditAndBanditBersekerEncounter() {
-    var encounter = { Name: "Bandits", Type: "Combat", Content: [bandit(), banditBerseker()] }
+    var encounter = { Name: "Bandits", Type: "Combat", Content: [new Bandit(), new BanditBerserker()] }
     return encounter;
 }
 export function banditArcherEncounter() {
-    var encounter = { Name: "Bandit Archers", Type: "Combat", Content: [banditArcher(), banditArcher()] }
+    var encounter = { Name: "Bandit Archers", Type: "Combat", Content: [new BanditArcher(), new BanditArcher()] }
     return encounter;
 }
 export function banditArcherAndBanditBersekerEncounter() {
-    var encounter = { Name: "Bandits", Type: "Combat", Content: [banditArcher(), banditBerseker()] }
+    var encounter = { Name: "Bandits", Type: "Combat", Content: [new BanditArcher(), new BanditBerserker()] }
     return encounter;
 }
 export function banditBerserkerEncounter() {
-    var encounter = { Name: "Bandit Berserkers", Type: "Combat", Content: [banditBerseker(), banditBerseker()] }
+    var encounter = { Name: "Bandit Berserkers", Type: "Combat", Content: [new BanditBerserker(), new BanditBerserker()] }
     return encounter;
 }
 export function banditTrioEncounter() {
-    var encounter = { Name: "Bandit Trio", Type: "Combat", Content: [bandit(), banditArcher(), banditBerseker()] }
+    var encounter = { Name: "Bandit Trio", Type: "Combat", Content: [new Bandit(), new BanditArcher(), new BanditBerserker()] }
     return encounter;
 }
 export function giantEncounter() {
-    var encounter = { Name: "Scarecrow", Type: "Combat", Content: [giant()] }
+    var encounter = { Name: "Scarecrow", Type: "Combat", Content: [new Giant()] }
     return encounter;
 }
 //gnolls
 export function gnollEncounter(){
-    var encounter = { Name: "Gnolls", Type: "Combat", Content: [gnoll(), gnoll(), gnoll()] }
+    var encounter = { Name: "Gnolls", Type: "Combat", Content: [new Gnoll(), new Gnoll(), new Gnoll()] }
     return encounter;
 }
 export function gnollShamanEncounter(){
-    var encounter = { Name: "Gnoll Shaman", Type: "Combat", Content: [gnollShaman(), hyena(), hyena()] }
+    var encounter = { Name: "Gnoll Shaman", Type: "Combat", Content: [new GnollShaman(), new Hyena(), new Hyena()] }
     return encounter;
 }
 export function gnollLeaderEncounter(){
-    var encounter = { Name: "Gnoll Leader", Type: "Combat", Content: [gnollLeader(), gnoll(), hyena()] }
+    var encounter = { Name: "Gnoll Leader", Type: "Combat", Content: [new GnollLeader(), new Gnoll(), new Hyena()] }
     return encounter;
 }
 //goblins
 export function bossGoblinEncounter() {
-    var bossGoblinEncounter = { Name: "Boss Goblin", Type: "Combat", Content: [goblinBoss(), goblin(), goblin(), goblin()] }
+    var bossGoblinEncounter = { Name: "Boss Goblin", Type: "Combat", Content: [new GoblinBoss(), new Goblin(), new Goblin(), new Goblin()] }
     return bossGoblinEncounter;
 }
 export function goblinEncounter() {
-    var goblinEncounter = { Name: "Goblins", Type: "Combat", Content: [goblin(), goblin(), goblin()] }
+    var goblinEncounter = { Name: "Goblins", Type: "Combat", Content: [new Goblin(), new Goblin(), new Goblin()] }
     return goblinEncounter
 }
 export function goblinWithWorgEncounter() {
-    var goblinWithWorgEncounter = { Name: "Goblin and Worg", Type: "Combat", Content: [goblin(), worg()] }
+    var goblinWithWorgEncounter = { Name: "Goblin and Worg", Type: "Combat", Content: [new Goblin(), new Worg()] }
     return goblinWithWorgEncounter
 }
 //undead
 export function skeletonEncounter() {
-    var encounter = { Name: "Fight Encounter", Type: "Combat", Content: [skeleton(), skeleton(), skeleton()] }
+    var encounter = { Name: "Fight Encounter", Type: "Combat", Content: [new Skeleton(), new Skeleton(), new Skeleton()] }
     return encounter;
 }
 //dialogue encounters
