@@ -1,10 +1,24 @@
-import { daleTownFaction, whiteScalesFlockFaction } from "./FactionsDB";
+import { DaleTownFaction, WhiteScalesFlockFaction } from "./FactionsDB";
 
-export function daleTownReputation() {
-    var rep = { Name: "Dale Town Reputation", Faction: daleTownFaction(), PositiveRep: 0, NegativeRep: 0, Reputation: "Neutral" }
-    return rep;
+export class Reputation
+{
+    Name; Faction;PositiveRep = 0; NegativeRep = 0; Reputation = "Neutral";
+    constructor(name, faction)
+    {
+        this.Name = name; this.Faction=faction;
+    }
 }
-export function whiteScalesFlockReputation() {
-    var rep = { Name: "Whitescale's Flock Reputation", Faction: whiteScalesFlockFaction(), PositiveRep: 0, NegativeRep: 0, Reputation: "Neutral" }
-    return rep;
+export class DaleTownReputation extends Reputation
+{
+    constructor(name = "Dale Town Repuation", faction = new DaleTownFaction())
+    {
+        super(name, faction)
+    }
+}
+export class WhiteScalesFlockReputation extends Reputation
+{
+    constructor(name = "Whitescale's Flock Reputation", faction = new WhiteScalesFlockFaction())
+    {
+        super(name, faction)
+    }
 }

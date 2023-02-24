@@ -14,6 +14,7 @@ companion dialogue in other places
 Convert to Typescript
 Checks for locations to update them or trigger events
 Use valley as small starting area and have Halfland to south
+
 Convert objects to classes and subclasses
 Dialogues
 Dungeons
@@ -21,22 +22,13 @@ Encounters
 Items
 Consumables
 Equipables
-Factions
 Locations
 Maps
 Quests
-Relationships
-Reputations
-Shops
 SkillNodes
 SkillRecipes
 Spells
 Tactics
-Keyboard movements and shortcuts
-Put back other weapon and armor skills?
-Item durability?
-Repair with Smithing etc depending on item.
-
 
 possible content
 more damage modifers for prot types
@@ -59,6 +51,9 @@ fix tactic selection
 clean up scripts
 
 features
+Keyboard movements and shortcuts
+Item durability?
+Repair with Smithing etc depending on item.
 Combat positions?
 feats/perks
 save/load via json

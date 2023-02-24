@@ -3,7 +3,7 @@ import { Bandit, Bat, Bear, Chicken, Cow, Ghost, Giant, Gnoll, Goblin, ScareCrow
 import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, tenguCampDialogue } from "./DialoguesDB"
 import { banditHideoutDungeon, giantCaveDungeon, giantCaveDungeonBeforeAndAfterQuest, gnollDenDungeon, goblinMine, goblinMineAfterQuest, spiderCaveDungeon } from "./DungeonsDB"
 import { dwarvenMineGoblinQuest, giantQuest } from "./QuestsDB"
-import { daleChapelShop, dreamingWorkerInn, forgeHeartSmithy, generalShop, innShop, joeTheTradersTradingPost, witchHutShop, wizardTowerShop } from "./ShopsDB"
+import { DaleChapelShop, DreamingWorkerInn, ForgeHeartSmithy, GeneralShop, InnShop, JoeTheTradersTradingPost, WitchHutShop, WizardTowerShop } from "./ShopsDB"
 import { alchemyNode, blackFeatherNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletchNode, herbNode, huntNode, millNode, mineNode, saltPeterNode, sheepNode, waterNode, wellNode, woodNode } from "./SkillNodesDB"
 
 //locations
@@ -249,39 +249,39 @@ export function enterWolfEncounter(hero) {
 //enter shops
 //alchemist
 export function enterWitchHut(hero) {
-    var shop = { Name: "Witch's Hut", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: witchHutShop(hero), skill: null }; return content } }
+    var shop = { Name: "Witch's Hut", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: new WitchHutShop(hero), skill: null }; return content } }
     return shop;
 }
 //general store
 export function enterGeneralStore(hero) {
-    var generalStore = { Name: "General Store", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: generalShop(hero), skill: null }; return content } }
+    var generalStore = { Name: "General Store", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: new GeneralShop(hero), skill: null }; return content } }
     return generalStore
 }
 export function enterTradingPost(hero) {
-    var generalStore = { Name: "Joe the Trader's", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: joeTheTradersTradingPost(hero), skill: null }; return content } }
+    var generalStore = { Name: "Joe the Trader's", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: new JoeTheTradersTradingPost(hero), skill: null }; return content } }
     return generalStore
 }
 //inns
 export function enterDreamingWorkerInn(hero) {
-    var inn = { Name: "Dreaming Worker Inn", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: dreamingWorkerInn(hero), skill: null }; return content } }
+    var inn = { Name: "Dreaming Worker Inn", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: new DreamingWorkerInn(hero), skill: null }; return content } }
     return inn
 }
 export function enterInn(hero) {
-    var inn = { Name: "Inn", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: innShop(hero), skill: null }; return content } }
+    var inn = { Name: "Inn", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: new InnShop(hero), skill: null }; return content } }
     return inn
 }
 //magic
 export function enterDaleChapelShop(hero) {
-    var shop = { Name: "Dale Chapel", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: daleChapelShop(hero), skill: null }; return content } }
+    var shop = { Name: "Dale Chapel", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: new DaleChapelShop(hero), skill: null }; return content } }
     return shop
 }
 export function enterWizardTowerMagicShop(hero) {
-    var shop = { Name: "Wizard Tower Shop", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: wizardTowerShop(shop), skill: null }; return content } }
+    var shop = { Name: "Wizard Tower Shop", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: new WizardTowerShop(shop), skill: null }; return content } }
     return shop
 }
 //smiths
 export function enterForgeHeartSmithy(hero) {
-    var forge = { Name: "Forgeheart Smithy", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: forgeHeartSmithy(hero), skill: null }; return content } }
+    var forge = { Name: "Forgeheart Smithy", enterLocation(hero) { var content = { active: "Shop", combat: null, dialogue: null, dungeon: null, shop: new ForgeHeartSmithy(hero), skill: null }; return content } }
     return forge
 }
 //enter skillnode

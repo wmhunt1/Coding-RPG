@@ -1,9 +1,22 @@
-export function daleTownFaction(){
-    var faction = {Name: "Dale Town", Rank:"Not a member"}
-    return faction
-}
-export function whiteScalesFlockFaction()
+export class Faction
 {
-    var faction = {Name: "Whitescale's Flock", Rank: "Not a member"}
-    return faction;
+    Name; Rank;
+    constructor(name, rank)
+    {
+        this.Name = name; this.Rank=rank;
+    }
+}
+export class DaleTownFaction extends Faction
+{
+ constructor(name = "Dale Town", rank = "Non-Member")
+ {
+    super(name, rank)
+ }
+}
+export class WhiteScalesFlockFaction extends Faction
+{
+    constructor(name = "Whitescale's Flock", rank = "Non-Member")
+ {
+    super(name, rank)
+ }
 }

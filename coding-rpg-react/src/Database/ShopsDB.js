@@ -1,69 +1,84 @@
 import { dreamingWorkerInnDialogue, forgeheartSmithDialogue, innDialogue, joeTheTradersTradingPostDialogue, priestDialogue } from "./DialoguesDB";
 import { ratCellar } from "./DungeonsDB";
 import { ale, allBronze, allHealingScrolls, allIron, allPotions, allSpellScrolls, bread, bronzeHatchet, bronzePickAxe, bucket, enchantmentTome, fishingRod, knife, needle, shears, sickle, stew, tinderBox } from "./ItemsDB"
-import { daleTownReputation } from "./ReputationsDB";
+import { DaleTownReputation } from "./ReputationsDB";
 import { cookNode, restorationNode, smithNode } from "./SkillNodesDB";
 
-//alchemists
-export function alchemyShop(hero) {
-    var alchemyShop = { Name: "Alchemy Shop", Dialogue: null, Dungeon: null, Node: null, Rep: null, Inventory: allPotions(), buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Potion") } }
-    return alchemyShop
+export class Shop {
+    Hero; Name; Dialogue; Dungeon; Node; Rep; Inventory; buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Potion") }
+    constructor(hero, name, dialogue, dungeon, node, rep, inventory) {
+        this.Hero = hero; this.Name = name; this.Dialogue = dialogue; this.Dungeon = dungeon; this.Node = node; this.Rep = rep; this.Inventory = inventory;
+    }
 }
-export function witchHutShop(hero) {
-    var witchHutShop = { Name: "Witch's Hut", Dialogue: null, Dungeon: null, Node: null, Rep: daleTownReputation(), Inventory: [...allPotions()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll" || item.SubType === "Potion") } }
-    return witchHutShop
+//alchemists
+export class AlchemyShop extends Shop {
+    constructor(hero, name = "Alchemy Shop", dialogue = null, dungeon = null, node = null, rep = null, inventory = allPotions()) {
+        super(hero, name, dialogue, dungeon, node, rep, inventory)
+    }
+    buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Potion") }
+}
+export class WitchHutShop extends AlchemyShop {
+    constructor(name = "Witch's Hut", dialogue = null, dungeon = null, node = null, rep = new DaleTownReputation(), inventory = allPotions()) {
+        super(name, dialogue, dungeon, node, rep, inventory)
+    }
 }
 //general store
-export function generalShop(hero) {
-    var generalShop = { Name: "General Store", Dialogue: null, Dungeon: null, Node: null, Rep: null, Inventory: [bronzeHatchet(), bronzePickAxe(), bucket(), fishingRod(), knife(), needle(), shears(), sickle(), tinderBox()], buyFilter(hero) { return hero.Inventory.filter(item => item.Type !== "") } };
-    return generalShop
+export class GeneralShop extends Shop {
+    constructor(hero, name = "General Store", dialogue = null, dungeon = null, node = null, rep = null, inventory = [bronzeHatchet(), bronzePickAxe(), bucket(), fishingRod(), knife(), needle(), shears(), sickle(), tinderBox()]) {
+        super(hero, name, dialogue, dungeon, node, rep, inventory)
+    }
+    buyFilter(hero) { return hero.Inventory.filter(item => item.SubType !== "") }
 }
-export function joeTheTradersTradingPost(hero) {
-    var generalShop = { Name: "Joe the Trader's", Dialogue: joeTheTradersTradingPostDialogue(hero), Dungeon: null, Node: null, Rep: daleTownReputation(), Inventory: [bronzeHatchet(), bronzePickAxe(), bucket(), fishingRod(), knife(), needle(), shears(), tinderBox()], buyFilter(hero) { return hero.Inventory.filter(item => item.Type !== "") } };
-    return generalShop
+export class JoeTheTradersTradingPost extends GeneralShop {
+    constructor(hero, name = "Joe the Trader's", dialogue = joeTheTradersTradingPostDialogue(hero), dungeon = null, node = null, rep = new DaleTownReputation(), inventory) {
+        super(hero, name, dialogue, dungeon, node, rep, inventory)
+    }
 }
-//inns
-export function dreamingWorkerInn(hero) {
-    var inn = innShop(hero)
-    inn.Name = "Dreaming Worker Inn"
-    inn.Dialogue = dreamingWorkerInnDialogue(hero);
-    inn.Dungeon = ratCellar(hero);;
-    inn.Rep = daleTownReputation()
-    return inn;
+//inn
+export class InnShop extends Shop {
+    constructor(hero, name = "Inn", dialogue = innDialogue(hero), dungeon = null, node = null, rep = null, inventory = [ale(), bread(), stew()]) {
+        super(hero, name, dialogue, dungeon, node, rep, inventory)
+    }
+    buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Food" || item.SubType === "Drink") }
 }
-export function innShop(hero) {
-    var inn = { Name: "Inn", Dialogue: innDialogue(hero), Dungeon: null, Node: cookNode(hero), Rep: null, Inventory: [ale(), bread(), stew()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Food" || item.SubType === "Drink") } };
-    return inn;
+export class DreamingWorkerInn extends GeneralShop {
+    constructor(hero, name = "Dreaming Worker Inn", dialogue = dreamingWorkerInnDialogue(hero), dungeon = ratCellar(hero), node = cookNode(hero), rep = new DaleTownReputation(), inventory) {
+        super(hero, name, dialogue, dungeon, node, rep, inventory)
+    }
 }
 //magic shop
-export function chapel(hero) {
+export class MagicShop extends Shop {
+    constructor(hero, name = "Magic Shop", dialogue = null, dungeon = null, node = null, rep = null, inventory = [...allSpellScrolls(), enchantmentTome()]) {
+        super(hero, name, dialogue, dungeon, node, rep, inventory)
+    }
+    buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll") }
+}
+//chapels
+export class ChapelShop extends MagicShop {
+    constructor(hero, name = "Chapel", dialogue = null, dungeon = null, node = restorationNode(hero), rep = null, inventory = [...allHealingScrolls()]) {
+        super(hero, name, dialogue, dungeon, node, rep, inventory)
+    }
+}
+export class DaleChapelShop extends ChapelShop {
+    constructor(hero, name = "Dale Chapel", dialogue = priestDialogue(hero), dungeon = null, node, rep = new DaleTownReputation(), inventory) {
+        super(hero, name, dialogue, dungeon, node, rep, inventory)
+    }
 
-    var magicShop = { Name: "Chapel", Dialogue: priestDialogue(hero), Dungeon: null, Node: restorationNode(hero), Inventory: [...allHealingScrolls()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll") } }
-    return magicShop
-
 }
-export function daleChapelShop(hero) {
-    var magicShop = { Name: "Dale Chapel", Dialogue: priestDialogue(hero), Dungeon: null, Node: restorationNode(hero), Inventory: [...allHealingScrolls()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll") } }
-    return magicShop
-}
-export function magicShop(hero) {
-    var magicShop = { Name: "Magic Shop", Dialogue: null, Dungeon: null, Node: null, Inventory: [...allSpellScrolls(), enchantmentTome()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll") } }
-    return magicShop
-}
-export function wizardTowerShop(hero) {
-    var magicShop = { Name: "Wizard Tower Shop", Dialogue: null, Dungeon: null, Node: null, Inventory: [...allSpellScrolls(), enchantmentTome()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Scroll") } }
-    return magicShop
+export class WizardTowerShop extends MagicShop {
+    constructor(hero, name = "Wizard Tower Shop", dialogue = priestDialogue(hero), dungeon = null, node = null, rep = new DaleTownReputation(), inventory) {
+        super(hero, name, dialogue, dungeon, node, rep, inventory)
+    }
 }
 //smiths
-export function forgeHeartSmithy(hero) {
-    var smith = smithShop(hero)
-    smith.Name = "Forgeheart Smithy"
-    smith.Dialogue = forgeheartSmithDialogue(hero)
-    smith.Rep = daleTownReputation()
-    return smith
+export class SmithShop extends Shop {
+    constructor(hero, name = "Smithy", dialogue = null, dungeon = null, node = smithNode(hero), rep = null, inventory = [...allBronze(), ...allIron()]) {
+        super(hero, name, dialogue, dungeon, node, rep, inventory)
+    }
+    buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Ore" || item.SubType === "Bar" || item.Type === "Equipable") }
 }
-export function smithShop(hero) {
-    var smithShop = { Name: "Smithy", Dialogue: null, Dungeon: null, Node: smithNode(hero), Rep: null, Inventory: [...allBronze(), ...allIron()], buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Ore" || item.SubType === "Bar" || item.Type === "Equipable") } };
-    return smithShop
+export class ForgeHeartSmithy extends SmithShop {
+    constructor(hero, name = "Forgeheart Smithy", dialogue = forgeheartSmithDialogue(hero), dungeon = null, node, rep = new DaleTownReputation(), inventory) {
+        super(hero, name, dialogue, dungeon, node, rep, inventory)
+    }
 }
-//hybrid
