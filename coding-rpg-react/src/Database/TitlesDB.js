@@ -1,5 +1,16 @@
-export function noTitle()
+export class Title
 {
-    var noTitle = {Name: "No Title", titleApplyEffect(hero){}, titleRemoveEffect(hero){}}
-    return noTitle;
+    Name; 
+    titleApplyEffect(hero){}; titleRemoveEffect(hero){}
+    constructor(name)
+    {
+        this.Name = name;
+    }
+}
+export class NoTitle extends Title
+{
+    constructor(name)
+    {
+        super(name = "No Title")
+    }
 }

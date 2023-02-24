@@ -1,7 +1,7 @@
 import { GiantRat, ScareCrow, Skeleton } from "./CharactersDB"
 import { banditHideoutDungeon, giantCaveDungeon, gnollDenDungeon, goblinMine, puzzleCubeDungeon, spiderCaveDungeon } from "./DungeonsDB"
 import { basicHealScroll, blackFeather, lessonsFromFaldan, silverRingLR, skillLamp, tipsTraderJoe, wheat } from "./ItemsDB"
-import { farmingSkill, woodcuttingSkill } from "./SkillsDB";
+import { FarmingSkill, WoodcuttingSkill } from "./SkillsDB";
 
 export function banditQuest1(hero) {
     var bandit = { Name: "Stop the Bandits", Status: "In Progress", Type: "Dungeon", Description: "Clear out the bandit hideout.", Target: banditHideoutDungeon(hero), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{ Item: tipsTraderJoe(), Quantity: 1 }] } }
@@ -12,7 +12,7 @@ export function dwarvenMineGoblinQuest(hero) {
     return dwarvenMineGoblinQuest
 }
 export function giantQuest(hero) {
-    var giant = { Name: "Of Mice and Minotaurs", Status: "In Progress", Type: "Dungeon", Description: "Save Foreman George from the Giant", Target: giantCaveDungeon(hero), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{Item:skillLamp(woodcuttingSkill(), 500)}] } }
+    var giant = { Name: "Of Mice and Minotaurs", Status: "In Progress", Type: "Dungeon", Description: "Save Foreman George from the Giant", Target: giantCaveDungeon(hero), Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{Item:skillLamp(new WoodcuttingSkill(), 500)}] } }
     return giant;
 }
 export function gnollQuest1(hero) {
@@ -44,7 +44,7 @@ export function scareCrowQuest3(hero) {
     return crow;
 }
 export function scareCrowQuest4(hero) {
-    var crow = { Name: "Scarecrow Part 4", Status: "In Progress", Type: "Hidden", Description: "Return ring to Farmer Littleroot", Target: null, Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{Item: skillLamp(farmingSkill(), 500)}] } }
+    var crow = { Name: "Scarecrow Part 4", Status: "In Progress", Type: "Hidden", Description: "Return ring to Farmer Littleroot", Target: null, Objective: 1, ObjectiveProgress: 0, Reward: { Gold: 0, Items: [{Item: skillLamp(new FarmingSkill(), 500)}] } }
     return crow;
 }
 export function skeletonQuest(hero) {

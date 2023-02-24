@@ -2,8 +2,7 @@ import { useState } from 'react';
 import '../App.css';
 import './Game.css';
 import { UnEquip } from '../Scripts/ItemScripts';
-import { destructionSkill, heavyWeaponSkill, lightWeaponSkill, shortBladeSkill } from '../Database/SkillsDB';
-import { unEnchanted } from '../Database/EnchantmentsDB';
+import { DestructionSkill, HeavyWeaponSkill, LightWeaponSkill} from '../Database/SkillsDB';
 
 function Equipment(props) {
     const [hero, setHero] = useState(props.hero);
@@ -45,9 +44,9 @@ function Equipment(props) {
                 <h3>Stats And Bonuses</h3>
                 <div></div>
                 <h4>Total Damage</h4>
-                {hero.Equipment.Weapon.Class === destructionSkill() ? <h4>{hero.Equipment.Weapon.Damage + hero.Attributes.Intelligence.Value + hero.Attributes.Intelligence.Bonus - hero.Attributes.Intelligence.Penalty + hero.BaseStats.Attack.Bonus - hero.BaseStats.Attack.Penalty}</h4> : <h4></h4>}
-                {hero.Equipment.Weapon.Class === heavyWeaponSkill() ? <h4>{hero.Equipment.Weapon.Damage + hero.Attributes.Strength.Value + hero.Attributes.Strength.Bonus - hero.Attributes.Strength.Penalty + hero.BaseStats.Attack.Bonus - hero.BaseStats.Attack.Penalty}</h4> : <h4></h4>}
-                {hero.Equipment.Weapon.Class === lightWeaponSkill() ? <h4>{hero.Equipment.Weapon.Damage + hero.Attributes.Dexterity.Value + hero.Attributes.Dexterity.Bonus - hero.Attributes.Dexterity.Penalty + hero.BaseStats.Attack.Bonus - hero.BaseStats.Attack.Penalty}</h4> : <h4></h4>}
+                {hero.Equipment.Weapon.Class === new DestructionSkill() ? <h4>{hero.Equipment.Weapon.Damage + hero.Attributes.Intelligence.Value + hero.Attributes.Intelligence.Bonus - hero.Attributes.Intelligence.Penalty + hero.BaseStats.Attack.Bonus - hero.BaseStats.Attack.Penalty}</h4> : <h4></h4>}
+                {hero.Equipment.Weapon.Class === new HeavyWeaponSkill() ? <h4>{hero.Equipment.Weapon.Damage + hero.Attributes.Strength.Value + hero.Attributes.Strength.Bonus - hero.Attributes.Strength.Penalty + hero.BaseStats.Attack.Bonus - hero.BaseStats.Attack.Penalty}</h4> : <h4></h4>}
+                {hero.Equipment.Weapon.Class === new LightWeaponSkill() ? <h4>{hero.Equipment.Weapon.Damage + hero.Attributes.Dexterity.Value + hero.Attributes.Dexterity.Bonus - hero.Attributes.Dexterity.Penalty + hero.BaseStats.Attack.Bonus - hero.BaseStats.Attack.Penalty}</h4> : <h4></h4>}
                 <h4>Total Protection</h4>
                 {offHand.SubType !== "Shield" ? <h4>{head.Protection + torso.Protection + legs.Protection + hands.Protection + feet.Protection + hero.Attributes.Dexterity.Value + hero.Attributes.Dexterity.Bonus - hero.Attributes.Dexterity.Penalty + hero.BaseStats.Defense.Bonus - hero.BaseStats.Defense.Penalty}</h4> : <div></div>}
                 {offHand.SubType === "Shield" ? <h4>{head.Protection + torso.Protection + legs.Protection + hands.Protection + feet.Protection + hero.Attributes.Dexterity.Value + hero.Attributes.Dexterity.Bonus - hero.Attributes.Dexterity.Penalty + hero.BaseStats.Defense.Bonus - hero.BaseStats.Defense.Penalty + offHand.Protection}</h4> : <div></div>}

@@ -2,18 +2,18 @@ import { NoCondition, PoisonCondition, SleepCondition, WebCondition } from "./Co
 import { Cleave, PierceArmor, Rage } from "./AbilitiesDB";
 import { bareBack, bareFinger, bareNeck, bite, bones, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakShortBow, ironAxe2H, skull, bronzeShield, bronzeMace, bronzeHelmet, wolfFur, clawSlash, bearFur, rawChicken, feather, peck, batGuano, ironAxe, oakStaff, ghostTouch, ectoplasm } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
-import { cleric, freelancer, pet } from "./JobsDB";
+import { Cleric, Freelancer, Pet } from "./JobsDB";
 import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell, summonRat } from "./SpellsDB"
 import { BasicAttacker, BasicHealer, Rager, spiderSummoner } from "./TacticsDB";
-import { allSkills, barterSkill, blockSkill, heavyWeaponSkill, heavyArmorSkill, miningSkill, restorationSkill, smithingSkill } from "./SkillsDB";
-import { noTitle } from "./TitlesDB";
+import { allSkills, BarterSkill, BlockSkill, HeavyWeaponSkill, HeavyArmorSkill, MiningSkill, RestorationSkill, SmithingSkill } from "./SkillsDB";
+import { NoTitle } from "./TitlesDB";
 import { BludgeoningDamage, FireDamage, LightningDamage, PiercingDamage, PoisonDamage, SlashingDamage } from "./DamageTypesDB";
 import { startingAdjacentLocations } from "./MapsDB";
 import { FindSkillInSkillBook } from "../Scripts/SkillScripts";
 
 class Character {
     Name;
-    Job = freelancer(); Title = noTitle(); TitleList = [noTitle()]; Log = [];
+    Job = new Freelancer(); Title = new NoTitle(); TitleList = [new NoTitle()]; Log = [];
     Level = 1; CurrentXP = 10; MaxXP = 50;
     BaseStats = {
         Attack: { Bonus: 0, Penalty: 0 }, Defense: { Bonus: 0, Penalty: 0 },
@@ -78,7 +78,7 @@ export class Cow extends Beast {
 export class Dog extends Beast {
     constructor(name = "Dog") {
         super(name = "Dog")
-        this.Job = pet();
+        this.Job = new Pet();
     }
 }
 export class Rat extends Beast {
@@ -196,20 +196,20 @@ export class Hero extends Humanoid {
 export class FerraForgeHeart extends Humanoid {
     constructor(name) {
         super(name = "Ferra Forgeheart")
-        this.Job = cleric(); this.CurrentXP = 0;
+        this.Job = new Cleric(); this.CurrentXP = 0;
         this.Equipment.Weapon = ironWarHammer(); this.Equipment.OffHand = ironShield(); this.Equipment.Head = ironHelmet();
         this.Equipment.Torso = ironTorso(); this.Equipment.Legs = ironLegs(); this.Equipment.Hands = ironGauntlets();
         this.Equipment.Feet = ironBoots();
         this.BaseStats.SpellBook = [basicHeal(), curePoison()];
         this.DamageModifiers.Weaknesses = [new LightningDamage(this.Equipment.Torso)];
         this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
-        FindSkillInSkillBook(this, barterSkill()).Level = 10; FindSkillInSkillBook(this, barterSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, barterSkill()).MaxXP = 9000;
-        FindSkillInSkillBook(this, blockSkill()).Level = 10; FindSkillInSkillBook(this, blockSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, blockSkill()).MaxXP = 9000;
-        FindSkillInSkillBook(this, heavyWeaponSkill()).Level = 10; FindSkillInSkillBook(this, heavyWeaponSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, heavyWeaponSkill()).MaxXP = 9000;
-        FindSkillInSkillBook(this, heavyArmorSkill()).Level = 10; FindSkillInSkillBook(this, heavyArmorSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, heavyArmorSkill()).MaxXP = 9000;
-        FindSkillInSkillBook(this, miningSkill()).Level = 10; FindSkillInSkillBook(this, miningSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, miningSkill()).MaxXP = 9000;
-        FindSkillInSkillBook(this, restorationSkill()).Level = 10; FindSkillInSkillBook(this, restorationSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, restorationSkill()).MaxXP = 9000;
-        FindSkillInSkillBook(this, smithingSkill()).Level = 10; FindSkillInSkillBook(this, smithingSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, smithingSkill()).MaxXP = 9000;
+        FindSkillInSkillBook(this, new BarterSkill()).Level = 10; FindSkillInSkillBook(this, new BarterSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, new BarterSkill()).MaxXP = 9000;
+        FindSkillInSkillBook(this, new BlockSkill()).Level = 10; FindSkillInSkillBook(this, new BlockSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, new BlockSkill()).MaxXP = 9000;
+        FindSkillInSkillBook(this, new HeavyWeaponSkill()).Level = 10; FindSkillInSkillBook(this, new HeavyWeaponSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, new HeavyWeaponSkill()).MaxXP = 9000;
+        FindSkillInSkillBook(this, new HeavyArmorSkill()).Level = 10; FindSkillInSkillBook(this, new HeavyArmorSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, new HeavyArmorSkill()).MaxXP = 9000;
+        FindSkillInSkillBook(this, new MiningSkill()).Level = 10; FindSkillInSkillBook(this, new MiningSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, new MiningSkill()).MaxXP = 9000;
+        FindSkillInSkillBook(this, new RestorationSkill()).Level = 10; FindSkillInSkillBook(this, new RestorationSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, new RestorationSkill()).MaxXP = 9000;
+        FindSkillInSkillBook(this, new SmithingSkill()).Level = 10; FindSkillInSkillBook(this, new SmithingSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, new SmithingSkill()).MaxXP = 9000;
     }
 }
 export class Giant extends Humanoid {

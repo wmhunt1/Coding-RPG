@@ -20,21 +20,18 @@ Dungeons
 Encounters
 Items
 Consumables
-Enchantments
 Equipables
 Factions
-Jobs
 Locations
 Maps
-ProtectionTypes
 Quests
 Relationships
 Reputations
 Shops
 SkillNodes
-Skills
 SkillRecipes
 Spells
+Tactics
 Keyboard movements and shortcuts
 Put back other weapon and armor skills?
 Item durability?

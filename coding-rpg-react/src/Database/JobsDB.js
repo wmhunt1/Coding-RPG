@@ -1,16 +1,26 @@
-export function cleric() {
-    var job = { Name: "Cleric" }
-    return job;
+export class Job {
+    Name;
+    constructor(name) {
+        this.Name = name;
+    }
 }
-export function freelancer() {
-    var job = { Name: "Freelancer" }
-    return job;
+export class Cleric extends Job {
+    constructor(name = "Cleric") {
+        super(name)
+    }
 }
-export function pet() {
-    var job = { Name: "Pet" }
-    return job;
+export class Freelancer extends Job {
+    constructor(name = "Freelancer") {
+        super(name)
+    }
 }
-export function wizard() {
-    var job = { Name: "Wizard" }
-    return job;
+export class Pet extends Job {
+    constructor(name = "Pet") {
+        super(name)
+    }
+}
+export class Wizard extends Job {
+    constructor(name = "Wizard") {
+        super(name)
+    }
 }

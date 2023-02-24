@@ -1,4 +1,4 @@
-import { conjurationSkill } from "../Database/SkillsDB";
+import { ConjurationSkill } from "../Database/SkillsDB";
 import { HasEnoughMP, UseMP, HasEnoughSP, UseSP } from "./CharacterScripts";
 import { EarnSkillXP, FindSkillInSkillBook } from "./SkillScripts";
 export function CalculateSpellBonus(char, spell, attr, attrB, attrP, base) {
@@ -6,7 +6,7 @@ export function CalculateSpellBonus(char, spell, attr, attrB, attrP, base) {
     return extra + base;
 }
 export function ModifySummon(char, allies, summon) {
-    var mod = Math.round((FindSkillInSkillBook(char, conjurationSkill()).Level + char.Attributes.Charisma.Value + char.Attributes.Charisma.Bonus - char.Attributes.Charisma.Penalty) / 10)
+    var mod = Math.round((FindSkillInSkillBook(char, new ConjurationSkill()).Level + char.Attributes.Charisma.Value + char.Attributes.Charisma.Bonus - char.Attributes.Charisma.Penalty) / 10)
     summon.BaseStats.HP.Temp += mod;
     summon.BaseStats.Attack.Bonus += mod;
     allies.push(summon);

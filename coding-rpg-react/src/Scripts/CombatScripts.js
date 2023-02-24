@@ -1,4 +1,4 @@
-import { destructionSkill } from "../Database/SkillsDB";
+import { DestructionSkill } from "../Database/SkillsDB";
 import { CastSpell, UseAbility } from "./AbilityAndSpellScripts";
 import { BuffAndDeBuffDuration, RemoveAllBuffs, RemoveAllDeBuffs, RemoveCondition, ResistCondition } from "./BuffConditionAndDeBuffScripts";
 import { AddGold, AddToCharacterLog, EarnXP, Regen, TakeDamage } from "./CharacterScripts";
@@ -129,7 +129,7 @@ export function MagicAttackResults(char1, char2, combatLog, baseDamage, modified
     AddToCombatLog(combatLog, result)
 }
 export function ProjectileMagicAttack(char1, char2, combatLog, spell) {
-    var skillDamage = Math.round((FindSkillInSkillBook(char1, destructionSkill()).Level) / 10)
+    var skillDamage = Math.round((FindSkillInSkillBook(char1, new DestructionSkill()).Level) / 10)
     var char1Damage = char1.Attributes.Intelligence.Value + char1.Attributes.Intelligence.Bonus - char1.Attributes.Intelligence.Penalty + spell.Amount + skillDamage;
     var char2Defense = (char2.Attributes.WillPower.Value + char2.Attributes.WillPower.Bonus - char2.Attributes.WillPower.Penalty) / 2 + (char2.Attributes.Dexterity.Value + char2.Attributes.Dexterity.Bonus - char2.Attributes.Dexterity.Penalty) / 2;
     var baseDamage = CalculateBaseDamage(char1Damage, char2Defense)
