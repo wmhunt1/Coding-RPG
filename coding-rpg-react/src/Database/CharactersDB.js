@@ -1,6 +1,6 @@
 import { NoCondition, PoisonCondition, SleepCondition, WebCondition } from "./ConditionsDB";
 import { Cleave, PierceArmor, Rage } from "./AbilitiesDB";
-import { bareBack, bareFinger, bareNeck, bite, bones, emptyOffHand, hat, gloves, ratTail, rawRatMeat, shoes, trousers, tunic, woodenShield, bareFist, bareHead, bareTorso, bareLegs, bareHands, bareFeet, woodenclub, loinCloth, bronzeSword, slam, rawBeef, cowLeather, ironWarHammer, ironShield, ironHelmet, ironTorso, ironLegs, ironGauntlets, ironBoots, poisonedBite, spiderSilkCloth, leatherCowl, leatherTorso, leatherLegs, leatherGloves, leatherBoots, ironDagger, ironDaggerOffHand, oakShortBow, ironAxe2H, skull, bronzeShield, bronzeMace, bronzeHelmet, wolfFur, clawSlash, bearFur, rawChicken, feather, peck, batGuano, ironAxe, oakStaff, ghostTouch, ectoplasm } from "./ItemsDB";
+import {Cloak,  BareBack, BareFinger, BareNeck, Bite, Bones, EmptyOffHand, RatTail, RawRatMeat, Shoes, Trousers, Tunic, WoodenShield, BareFist, BareHead, BareTorso, BareLegs, BareHands, BareFeet, WoodenClub, LoinCloth, BronzeSword, Slam, RawBeef, CowLeather, IronWarHammer, IronShield, IronHelmet, IronTorso, IronLegs, IronGauntlets, IronBoots, PoisonedBite, SpiderSilkCloth, LeatherCowl, LeatherTorso, LeatherLegs, LeatherGloves, LeatherBoots, IronDagger, IronDaggerOffHand, OakShortBow, IronAxe2H, Skull, BronzeShield, BronzeMace, BronzeHelmet, WolfFur, ClawSlash, BearFur, RawChicken, Feather, Peck, BatGuano, IronAxe, OakStaff, GhostTouch, Ectoplasm,BronzeBoots, RingOfStr, WoolBoots } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
 import { Cleric, Freelancer, Pet } from "./JobsDB";
 import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell, summonRat } from "./SpellsDB"
@@ -30,7 +30,7 @@ class Character {
     ConditionModifiers = { Immunities: [], Resistances: [], Weaknesses: [] };
     DamageModifiers = { Immunities: [], Resistances: [], Weaknesses: [] };
     Equipment = {
-        Back: bareBack(), Feet: bareFeet(), Hands: bareHands(), Head: bareHead(), Legs: bareLegs(), Neck: bareNeck(), OffHand: emptyOffHand(), Ring: bareFinger(), Torso: bareTorso(), Weapon: bareFist()
+        Back: new BareBack(), Feet: new BareFeet(), Hands: new BareHands(), Head: new BareHead(), Legs: new BareLegs(), Neck: new BareNeck(), OffHand: new EmptyOffHand(), Ring: new BareFinger(), Torso: new BareTorso(), Weapon: new BareFist()
     };
     Inventory = []; Gold = 0; Bank = []; BankGold = 0;
     Companions = []; Journal = []; Abilities = []; SpellBook = []; SkillBook = allSkills(); Reputation = []; Relationships = [];
@@ -45,13 +45,13 @@ class Character {
 export class Beast extends Character {
     constructor(name) {
         super(name)
-        this.Equipment.Weapon = bite();
+        this.Equipment.Weapon = new Bite();
     }
 }
 export class Bat extends Beast {
     constructor(name = "Bat") {
         super(name = "Bat")
-        this.CurrentXP = 5; this.BaseStats.HP.Current = 5; this.BaseStats.HP.Max = 5; this.ItemDrops = [batGuano()]
+        this.CurrentXP = 5; this.BaseStats.HP.Current = 5; this.BaseStats.HP.Max = 5; this.ItemDrops = [new BatGuano()]
     }
 }
 export class Bear extends Beast {
@@ -59,20 +59,20 @@ export class Bear extends Beast {
         super(name = "Bear")
         this.BaseStats.HP.Current = 20; this.BaseStats.HP.Max = 20;
         this.Attributes.Strength.Value = 14; this.Attributes.Constitution.Value = 14;
-        this.Equipment.Weapon = clawSlash(); this.ItemDrops = [bearFur()]
+        this.Equipment.Weapon = new ClawSlash(); this.ItemDrops = [new BearFur()]
     }
 }
 export class Chicken extends Beast {
     constructor(name = "Chicken") {
         super(name = "Chicken")
         this.CurrentXP = 5; this.BaseStats.HP.Current = 5; this.BaseStats.HP.Max = 5; this.Attributes.Strength = 5;
-        this.ItemDrops = [rawChicken(), feather()]; this.Equipment.Weapon = peck();
+        this.ItemDrops = [new RawChicken(), new Feather()]; this.Equipment.Weapon = new Peck();
     }
 }
 export class Cow extends Beast {
     constructor(name = "Cow") {
         super(name = "Cow")
-        this.Equipment.Weapon = slam(); this.ItemDrops = [cowLeather(), rawBeef()]
+        this.Equipment.Weapon = new Slam(); this.ItemDrops = [new CowLeather(), new RawBeef()]
     }
 }
 export class Dog extends Beast {
@@ -85,7 +85,7 @@ export class Rat extends Beast {
     constructor(name = "Rat") {
         super(name = "Rat")
         this.CurrentXP = 5; this.BaseStats.HP.Current = 5; this.BaseStats.HP.Max = 5;
-        this.ItemDrops = [rawRatMeat(), ratTail()]
+        this.ItemDrops = [new RawRatMeat(), new RatTail()]
     }
 }
 export class GiantRat extends Rat {
@@ -101,9 +101,9 @@ export class Spider extends Beast {
     constructor(name = "Spider") {
         super(name = "Spider")
         this.Attributes.Dexterity.Value = 12; this.Attributes.Speed.Value = 12;
-        this.Equipment.Weapon = poisonedBite();
-        this.ConditionModifiers.Immunities = [new WebCondition(0,0), new PoisonCondition(0,0)];
-        this.Immunities(new PoisonDamage(this)); this.ItemDrops = [spiderSilkCloth()]
+        this.Equipment.Weapon = new PoisonedBite();
+        this.ConditionModifiers.Immunities = [new WebCondition(0, 0), new PoisonCondition(0, 0)];
+        this.DamageModifiers.Immunities = [new PoisonDamage()]; this.ItemDrops = [new SpiderSilkCloth()]
     }
 }
 export class GiantSpider extends Spider {
@@ -124,7 +124,7 @@ export class Wolf extends Beast {
         super(name = "Wolf")
         this.Attributes.Dexterity.Value = 12;
         this.Attributes.Speed.Value = 12;
-        this.ItemDrops = [wolfFur()]
+        this.ItemDrops = [new WolfFur()]
     }
 }
 export class Worg extends Beast {
@@ -140,7 +140,7 @@ export class Worg extends Beast {
 export class Construct extends Character {
     constructor(name) {
         super(name)
-        this.ConditionModifiers.Immunities = [new PoisonCondition(0,0), new SleepCondition(0,0)]
+        this.ConditionModifiers.Immunities = [new PoisonCondition(0, 0), new SleepCondition(0, 0)]
     }
 }
 export class ScareCrow extends Construct {
@@ -160,21 +160,21 @@ export class Humanoid extends Character {
 export class Bandit extends Humanoid {
     constructor(name = "Bandit") {
         super(name = "Bandit")
-        this.Equipment.Head = leatherCowl(); this.Equipment.Torso = leatherTorso(); this.Equipment.Legs = leatherLegs();
-        this.Equipment.Hands = leatherGloves(); this.Equipment.Feet = leatherBoots(); this.Equipment.Weapon = ironDagger(); this.Equipment.OffHand = ironDaggerOffHand();
-        this.ItemDrops = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso(), ironDagger(), ironDaggerOffHand(), oakShortBow(), ironAxe2H()]
+        this.Equipment.Head = new LeatherCowl(); this.Equipment.Torso = new LeatherTorso(); this.Equipment.Legs = new LeatherLegs();
+        this.Equipment.Hands = new LeatherGloves(); this.Equipment.Feet = new LeatherBoots(); this.Equipment.Weapon = new IronDagger(); this.Equipment.OffHand = new IronDaggerOffHand();
+        this.ItemDrops = [new LeatherBoots(), new LeatherCowl(), new LeatherGloves(), new LeatherLegs(), new LeatherTorso(), new IronDagger(), new IronDaggerOffHand(), new OakShortBow(), new IronAxe2H()]
     }
 }
 export class BanditArcher extends Bandit {
     constructor(name = "Bandit Archer") {
         super(name = "Bandit Archer")
-        this.Equipment.Weapon = oakShortBow()
+        this.Equipment.Weapon = new OakShortBow()
     }
 }
 export class BanditBerserker extends Bandit {
     constructor(name = "Bandit Berserker") {
         super(name = "Bandit Berserker")
-        this.Equipment.Weapon = ironAxe2H();this.Abilities = [new Rage()];
+        this.Equipment.Weapon = new IronAxe2H(); this.Abilities = [new Rage()];
         this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { Rager(char, allies, enemies, combatLog, round) } }
     }
 }
@@ -184,22 +184,23 @@ export class Hero extends Humanoid {
         super(name)
         this.CurrentXP = 0;
         this.Log = ["Game: Starting Game"];
-        this.Equipment.Weapon = bronzeSword(); this.Equipment.Head = hat(); this.Equipment.Torso = tunic();
-        this.Equipment.Legs = trousers(); this.Equipment.Hands = gloves(); this.Equipment.Feet = shoes();
+        this.Equipment.Weapon = new BronzeSword(); this.Equipment.Torso = new Tunic();
+        this.Equipment.Legs = new Trousers(); this.Equipment.Feet = new Shoes();
         this.Gold = 5;
         this.Companions = [new Dog("Dog")];
         this.Abilities = [new Cleave(), new PierceArmor(), new Rage()];
         this.SpellBook = [basicHeal(), curePoison(), fireBall(), magicMissile(), poisonSpray(), sleepSpell(), summonRat()];
         this.DamageModifiers.Weaknesses = [new FireDamage(this)]; this.DamageModifiers.Weaknesses[0].Source = this.Equipment.Torso;
+        this.Inventory = [new BronzeBoots(), new Cloak(),new RingOfStr(), new LeatherBoots(), new WoolBoots()]
     }
 }
 export class FerraForgeHeart extends Humanoid {
     constructor(name) {
         super(name = "Ferra Forgeheart")
         this.Job = new Cleric(); this.CurrentXP = 0;
-        this.Equipment.Weapon = ironWarHammer(); this.Equipment.OffHand = ironShield(); this.Equipment.Head = ironHelmet();
-        this.Equipment.Torso = ironTorso(); this.Equipment.Legs = ironLegs(); this.Equipment.Hands = ironGauntlets();
-        this.Equipment.Feet = ironBoots();
+        this.Equipment.Weapon = new IronWarHammer(); this.Equipment.OffHand = new IronShield(); this.Equipment.Head = new IronHelmet();
+        this.Equipment.Torso = new IronTorso(); this.Equipment.Legs = new IronLegs(); this.Equipment.Hands = new IronGauntlets();
+        this.Equipment.Feet = new IronBoots();
         this.BaseStats.SpellBook = [basicHeal(), curePoison()];
         this.DamageModifiers.Weaknesses = [new LightningDamage(this.Equipment.Torso)];
         this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
@@ -215,7 +216,7 @@ export class FerraForgeHeart extends Humanoid {
 export class Giant extends Humanoid {
     constructor(name = "Giant") {
         super(name = "Giant")
-        this.Equipment.Weapon = woodenclub(); this.CurrentXP = 100;
+        this.Equipment.Weapon = new WoodenClub(); this.CurrentXP = 100;
         this.BaseStats.HP.Current = 30; this.BaseStats.HP.Max = 30; this.Attributes.Strength.Value = 20;
     }
 }
@@ -226,8 +227,8 @@ export class Gnoll extends Humanoid {
         this.BaseStats.HP.Current = 15; this.BaseStats.HP.Max = 15;
         this.Attributes.Strength.Value = 12; this.Attributes.Dexterity.Value = 12;
         this.CurrentXP = 20;
-        this.Equipment.Weapon = ironAxe(); this.Equipment.OffHand = ironShield(); this.Equipment.Legs = loinCloth();
-        this.ItemDrops = [ironAxe(), ironShield()]
+        this.Equipment.Weapon = new IronAxe(); this.Equipment.OffHand = new IronShield(); this.Equipment.Legs = new LoinCloth();
+        this.ItemDrops = [new IronAxe(), new IronShield()]
     }
 }
 export class GnollLeader extends Gnoll {
@@ -237,9 +238,6 @@ export class GnollLeader extends Gnoll {
         this.BaseStats.HP.Current = 30; this.BaseStats.HP.Max = 30;
         this.Attributes.Strength.Value = 14; this.Attributes.Dexterity.Value = 12;
         this.CurrentXP = 50;
-        this.Equipment.Weapon = ironAxe(); this.Equipment.OffHand = ironShield();
-        this.Equipment.Legs = loinCloth();
-        this.ItemDrops = [ironAxe(), ironShield(), loinCloth()]
         this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { Rager(char, allies, enemies, combatLog, round) } }
     }
 }
@@ -247,8 +245,8 @@ export class GnollShaman extends Gnoll {
     constructor(name = "Gnoll Shaman") {
         super(name = "Gnoll Shaman")
         this.Attributes.Wisdom.Value = 12; this.SpellBook = [basicHeal()]
-        this.CurrentXP = 20; this.Equipment.Weapon = oakStaff(); this.Equipment.Legs = loinCloth();
-        this.ItemDrops = [oakStaff().loinCloth()]
+        this.CurrentXP = 20; this.Equipment.Weapon = new OakStaff();
+        this.ItemDrops = [new OakStaff()]
         this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
     }
 }
@@ -256,38 +254,38 @@ export class GnollShaman extends Gnoll {
 export class Goblin extends Humanoid {
     constructor(name = "Goblin") {
         super(name = "Goblin")
-        this.Equipment.Weapon = woodenclub(); this.Equipment.OffHand = woodenShield();
-        this.Equipment.Legs = loinCloth(); this.ItemDrops = [woodenclub(), woodenShield()]
+        this.Equipment.Weapon = new WoodenClub(); this.Equipment.OffHand = new WoodenShield();
+        this.Equipment.Legs = new LoinCloth(); this.ItemDrops = [new WoodenClub(), new WoodenShield()]
     }
 }
 export class GoblinBoss extends Goblin {
-        constructor(name = "Goblin Boss") {
-            super(name = "Goblin Boss")
-            this.BaseStats.HP.Current = 15;
-            this.BaseStats.HP.Max = 15;
-            this.CurrentXP = 20;
-        }
+    constructor(name = "Goblin Boss") {
+        super(name = "Goblin Boss")
+        this.BaseStats.HP.Current = 15;
+        this.BaseStats.HP.Max = 15;
+        this.CurrentXP = 20;
+    }
 }
 //undead
 export class Undead extends Character {
     constructor(name) {
         super(name)
-        this.ConditionModifiers.Immunities.push(new PoisonCondition(0,0));
-        this.ConditionModifiers.Immunities.push(new SleepCondition(0,0))
+        this.ConditionModifiers.Immunities.push(new PoisonCondition(0, 0));
+        this.ConditionModifiers.Immunities.push(new SleepCondition(0, 0))
     }
 }
 export class Ghost extends Undead {
-    constructor(name  = "Ghost") {
+    constructor(name = "Ghost") {
         super(name = "Ghost")
-        this.Attributes.Intelligence = 12;this.Equipment.Weapon = ghostTouch();
-        this.ItemDrops = [ectoplasm()];this.DamageModifiers.Immunities = [new BludgeoningDamage(this), new PiercingDamage(this), new SlashingDamage(this)];
+        this.Attributes.Intelligence = 12; this.Equipment.Weapon = new GhostTouch();
+        this.ItemDrops = [new Ectoplasm()]; this.DamageModifiers.Immunities = [new BludgeoningDamage(this), new PiercingDamage(this), new SlashingDamage(this)];
     }
 }
 export class Skeleton extends Undead {
-    constructor(name  = "Skeleton") {
+    constructor(name = "Skeleton") {
         super(name = "Skeleton")
-        this.DamageModifiers.Resistances = [new PiercingDamage(this), new SlashingDamage(this)];this.DamageModifiers.Weaknesses = [new BludgeoningDamage(this)];
-        this.ItemDrops = [bones(), bronzeHelmet(), bronzeMace(), bronzeShield(), skull()]
-        this.Equipment.Weapon = bronzeMace();this.Equipment.OffHand = bronzeShield();this.Equipment.Head = bronzeHelmet()
+        this.DamageModifiers.Resistances = [new PiercingDamage(this), new SlashingDamage(this)]; this.DamageModifiers.Weaknesses = [new BludgeoningDamage(this)];
+        this.ItemDrops = [new Bones(), new BronzeHelmet(), new BronzeMace(), new BronzeShield(), new Skull()]
+        this.Equipment.Weapon = new BronzeMace(); this.Equipment.OffHand = new BronzeShield(); this.Equipment.Head = new BronzeHelmet()
     }
 }

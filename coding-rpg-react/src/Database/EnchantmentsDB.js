@@ -24,7 +24,7 @@ export class ConditionAndDamageModifierEnchanment extends Enchantment {
         super(name)
         this.Immunities = i; this.Resistances = r; this.Weaknesses = w; this.ConditionImmunities = cI; this.ConditionResistances = cR; this.ConditionWeaknesses = cW;
     }
-    OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionModifiers.Immunities, this.ConditionModifiers.Resistances, this.ConditionModifiers.Weaknesses, item) };
+    OnEquipEffect(char, item) { ApplyOnEquipEffect(char, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionImmunities, this.ConditionResistances, this.ConditionWeaknesses, item) };
     OnUnEquipEffect(char, item) { ApplyOnUnEquipEffect(char, char.Immunities, char.Resistances, char.Weaknesses, char.ConditionModifiers.Immunities, char.ConditionModifiers.Resistances, char.ConditionModifiers.Weaknesses, item) }
 }
 export class FireImmuneEnchantment extends ConditionAndDamageModifierEnchanment {

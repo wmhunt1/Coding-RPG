@@ -1,8 +1,8 @@
 import { BludgeoningDamage, FireDamage, ForceDamage, NecroticDamage, PiercingDamage, SlashingDamage } from "./DamageTypesDB";
 import { DrunkDeBuff } from "./DeBuffsDB";
-import { FireEnchantment, FireImmuneEnchantment, IceResistEnchantment, PoisonApplyEnchantment, StrengthEnchantment, UnEnchanted } from "./EnchantmentsDB";
+import { FireImmuneEnchantment, IceResistEnchantment, PoisonApplyEnchantment, StrengthEnchantment, UnEnchanted } from "./EnchantmentsDB";
 import { ClothProtection, LeatherProtection, MetalProtection, NaturalProtection, WoodProtection } from "./ProtectionTypesDB";
-import { BarterSkill, BlockSkill, HeavyWeaponSkill, DestructionSkill, HeavyArmorSkill, LightArmorSkill, RangedSkill, LightWeaponSkill, SmithingSkill, UnArmedSkill, UnArmoredSkill } from "./SkillsDB";
+import { BlockSkill, HeavyWeaponSkill, DestructionSkill, HeavyArmorSkill, LightArmorSkill, RangedSkill, LightWeaponSkill, UnArmedSkill, UnArmoredSkill } from "./SkillsDB";
 import { bane, basicHeal, basicMassHeal, bless, curePoison, fireBall, heroism, inspireCourage, magicMissile, poisonSpray, sleepSpell, summonRat, summonSkeleton, summonSpider, webSpell } from "./SpellsDB";
 import { LearnAbility, LearnSpell } from "../Scripts/AbilityAndSpellScripts";
 import { RemoveCondition } from "../Scripts/BuffConditionAndDeBuffScripts";
@@ -10,1147 +10,2060 @@ import { AddToCharacterLog, EarnXP, HealHP, RecoverMP, RecoverSP } from "../Scri
 import { AddToCombatLog, BasicAttack, } from "../Scripts/CombatScripts";
 import { EarnSkillXP, FindSkillInSkillBook } from "../Scripts/SkillScripts";
 import { Cleave, PierceArmor, Rage, RaiseShield, StudyFoes } from "./AbilitiesDB";
+
 //items
-export function bronzeShrapnel() {
-    var shrapnel = { Name: "Bronze Shrapnel", Level: 1, Slot: "", Type: "", SubType: "OneHand", Class: new RangedSkill(), Damage: 3, DamageType: new FireDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return shrapnel;
+export class Item {
+    Name; Type; SubType; Cost; Quantity = 1;
+    constructor(name, cost) {
+        this.Name = name; this.Cost = cost;
+    }
 }
-export function ironShrapnel() {
-    var shrapnel = { Name: "Iron Shrapnel", Level: 5, Slot: "", Type: "", SubType: "", Class: new RangedSkill(), Damage: 5, DamageType: new FireDamage(this), Cost: 10, Quantity: 5, Enchantment: new UnEnchanted() }
-    return shrapnel;
-}
-export function steelShrapnel() {
-    var shrapnel = { Name: "Steel Shrapnel", Level: 10, Slot: "", Type: "", SubType: "", Class: new RangedSkill(), Damage: 7, DamageType: new FireDamage(this), Cost: 20, Quantity: 1, Enchantment: new UnEnchanted() }
-    return shrapnel;
+//consumables
+export class Consumable extends Item {
+    constructor(name, cost) {
+        super(name, cost)
+        this.Type = "Consumable"
+    }
+    ConsumeEffect(hero, log) { }
 }
 //consumables
 //battle items
-export function bomb() {
-    var bomb = { Name: "Bomb", Type: "Consumable", SubType: "Battle", Cost: 10, Quantity: 1, ConsumeEffect(hero, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, hero.Name + " throws a " + this.Name); for (var e = 0; e < enemies.length; e++) { BasicAttack(hero, enemies[e], combatLog, bronzeShrapnel()) } } }
-    return bomb
+export class BattleItem extends Consumable {
+    BattleWeapon;
+    constructor(name, cost, battleWep) {
+        super(name, cost)
+        this.SubType = "Battle"
+        this.BattleWeapon = battleWep;
+    }
+    ConsumeEffect(hero, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, hero.Name + " throws a " + this.Name); for (var e = 0; e < enemies.length; e++) { BasicAttack(hero, enemies[e], combatLog, this.BattleWeapon) } }
 }
-export function bronzeBomb() {
-    var bomb = { Name: "Bronze Bomb", Type: "Consumable", SubType: "Battle", Cost: 20, Quantity: 1, ConsumeEffect(hero, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, hero.Name + " throws a " + this.Name); for (var e = 0; e < enemies.length; e++) { BasicAttack(hero, enemies[e], combatLog, bronzeShrapnel()) } } }
-    return bomb
+export class Bomb extends BattleItem {
+    constructor(name = "Bomb", cost = 10, battleWep = new BronzeShrapnel()) {
+        super(name, cost, battleWep)
+    }
 }
-export function ironBomb() {
-    var bomb = { Name: "Iron Bomb", Type: "Consumable", SubType: "Battle", Cost: 40, Quantity: 1, ConsumeEffect(hero, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, hero.Name + " throws a " + this.Name); for (var e = 0; e < enemies.length; e++) { BasicAttack(hero, enemies[e], combatLog, ironShrapnel()) } } }
-    return bomb
+export class BronzeBomb extends BattleItem {
+    constructor(name = "Bronze Bomb", cost = 20, battleWep = new BronzeShrapnel()) {
+        super(name, cost, battleWep)
+    }
 }
-export function steelBomb() {
-    var bomb = { Name: "Steel Bomb", Type: "Consumable", SubType: "Battle", Cost: 60, Quantity: 1, ConsumeEffect(hero, allies, enemies, target, combatLog) { AddToCombatLog(combatLog, hero.Name + " throws a " + this.Name); for (var e = 0; e < enemies.length; e++) { BasicAttack(hero, enemies[e], combatLog, steelShrapnel()) } } }
-    return bomb
+export class IronBomb extends BattleItem {
+    constructor(name = "Iron Bomb", cost = 40, battleWep = new IronShrapnel()) {
+        super(name, cost, battleWep)
+    }
+}
+export class SteelBomb extends BattleItem {
+    constructor(name = "Steel Bomb", cost = 60, battleWep = new SteelShrapnel()) {
+        super(name, cost, battleWep)
+    }
 }
 //drinks
-export function ale() {
-    var ale = { Name: "Ale", Type: "Consumable", SubType: "Drink", Cost: 2, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks an " + this.Name); RecoverSP(hero, 1); RecoverMP(hero, 1); new DrunkDeBuff(3).ApplyDeBuff(hero) } }
-    return ale
+export class Drink extends Consumable {
+    Amount;
+    constructor(name, cost, amount) {
+        super(name, cost)
+        this.SubType = "Drink"; this.Amount = amount;
+    }
+    ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks an " + this.Name); RecoverSP(hero, this.Amount); RecoverMP(hero, this.Amount) }
 }
-export function milk() {
-    var milk = { Name: "Milk", Type: "Consumable", SubType: "Drink", Cost: 2, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks a " + this.Name + " you have strong bones."); } }
-    return milk
+export class Ale extends Drink {
+    constructor(name = "Ale", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
+    ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks an " + this.Name); RecoverSP(hero, this.Amount); RecoverMP(hero, this.Amount); new DrunkDeBuff(3).ApplyDeBuff(hero) }
 }
-export function water() {
-    var water = { Name: "Water", Type: "Consumable", SubType: "Drink", Cost: 2, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks a " + this.Name + " and feels more hydrated."); } }
-    return water
+export class Milk extends Drink {
+    constructor(name = "Milk", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
+    ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks a " + this.Name + " you have strong bones.") }
+}
+export class Water extends Drink {
+    constructor(name = "Water", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
+    ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks a " + this.Name + " and feels more hydrated."); }
 }
 //food
-export function beefStew() {
-    var stew = { Name: "Beef Stew", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 5); HealHP(hero, 5) } }
-    return stew;
+export class Food extends Consumable {
+    Amount;
+    constructor(name, cost, amount) {
+        super(name, cost)
+        this.SubType = "Food"; this.Amount = amount;
+    }
+    ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, this.Amount); HealHP(hero, this.Amount) }
 }
-export function bread() {
-    var bread = { Name: "Bread", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 1); HealHP(hero, 1) } }
-    return bread
+export class BeefStew extends Food {
+    constructor(name = "Beef Stew", cost = 4, amount = 5) {
+        super(name, cost, amount)
+    }
 }
-export function cheese() {
-    var cheese = { Name: "Cheese", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 1); HealHP(hero, 1) } }
-    return cheese
+export class Bread extends Food {
+    constructor(name = "Bread", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
 }
-export function cookedBeef() {
-    var cook = { Name: "Cooked Beef", Type: "Consumable", SubType: "Food", Cost: 2, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 1); HealHP(hero, 1) } }
-    return cook;
+export class Cheese extends Food {
+    constructor(name = "Cheese", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
 }
-export function cookedChicken() {
-    var cook = { Name: "Cooked Chicken", Type: "Consumable", SubType: "Food", Cost: 2, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 1); HealHP(hero, 1) } }
-    return cook;
+export class CookedBeef extends Food {
+    constructor(name = "Cooked Beef", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
 }
-export function cookedFish() {
-    var cook = { Name: "Cooked Fish", Type: "Consumable", SubType: "Food", Cost: 2, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 1); HealHP(hero, 1) } }
-    return cook;
+export class CookedChicken extends Food {
+    constructor(name = "Cooked Chicken", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
 }
-export function cookedRabbitMeat() {
-    var cookedRabbitMeat = { Name: "Cooked Rabbit Meat", Type: "Consumable", SubType: "Food", Cost: 2, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 1); HealHP(hero, 1) } }
-    return cookedRabbitMeat;
+export class CookedFish extends Food {
+    constructor(name = "Cooked Fish", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
 }
-export function cookedRatMeat() {
-    var cookedRatMeat = { Name: "Cooked Rat Meat", Type: "Consumable", SubType: "Food", Cost: 2, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 1); HealHP(hero, 1) } }
-    return cookedRatMeat;
+export class CookedRabbitMeat extends Food {
+    constructor(name = "Cooked Rabbit", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
+} export class CookedRatMeat extends Food {
+    constructor(name = "Cooked Rat", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
 }
-export function fishStew() {
-    var stew = { Name: "Fish Stew", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 5); HealHP(hero, 5) } }
-    return stew;
+export class FishStew extends Food {
+    constructor(name = "Fish Stew", cost = 4, amount = 5) {
+        super(name, cost, amount)
+    }
 }
-export function rabbitStew() {
-    var stew = { Name: "Rabbit Stew", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 5); HealHP(hero, 5) } }
-    return stew;
+export class RabbitStew extends Food {
+    constructor(name = "Rabbit Stew", cost = 4, amount = 5) {
+        super(name, cost, amount)
+    }
 }
-export function ratStew() {
-    var stew = { Name: "Rat Stew", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 5); HealHP(hero, 5) } }
-    return stew;
+export class RatStew extends Food {
+    constructor(name = "Rat Stew", cost = 4, amount = 5) {
+        super(name, cost, amount)
+    }
 }
-export function stew() {
-    var stew = { Name: "Stew", Type: "Consumable", SubType: "Food", Cost: 4, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, 5); HealHP(hero, 5) } }
-    return stew;
+export class Stew extends Food {
+    constructor(name = "Stew", cost = 4, amount = 5) {
+        super(name, cost, amount)
+    }
 }
 //potions
+export class Potion extends Consumable {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Potion"
+    }
+}
+export class ConditionPotion extends Potion {
+    Condition;
+    constructor(name, cost, cond) {
+        super(name, cost)
+        this.Condition = cond;
+    }
+    ConsumeEffect(hero, log) { if (hero.Conditon.Name === this.Condition) { AddToCharacterLog(log, hero.Name + " drinks " + this.Name); RemoveCondition(hero, hero.Log) } }
+}
+export class Antidote extends Potion {
+    constructor(name = "Antidote", cost = 10, cond = "Poison") {
+        super(name, cost, cond)
+    }
+}
+export class HealingPotion extends Potion {
+    Heal;
+    constructor(name = "Healing Potion", cost, heal) {
+        super(name, cost)
+        this.Heal = heal;
+    }
+    ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks " + this.Name); HealHP(hero, this.Heal) }
+}
+export class ManaPotion extends Potion {
+    Mana;
+    constructor(name = "Mana Potion", cost, mp) {
+        super(name, cost)
+        this.Mana = mp;
+    }
+    ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks " + this.Name); RecoverMP(hero, this.Mana) }
+}
+export class StaminaPotion extends Potion {
+    Stamina;
+    constructor(name = "StaminaPotion", cost, sp) {
+        super(name, cost)
+        this.Stamina = sp;
+    }
+    ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks " + this.Name); RecoverSP(hero, this.Mana) }
+}
 export function allPotions() {
-    var all = [antidote(), healingPotion(), manaPotion(), staminaPotion()]
+    var all = [new Antidote(), new HealingPotion(10, 10), new ManaPotion(10, 10), new StaminaPotion(10, 10)]
     return all;
 }
-export function antidote() {
-    var antidote = {
-        Name: "Antidote", Type: "Consumable", SubType: "Potion", Cost: 10, Quantity: 1,
-        ConsumeEffect(hero, log) { if (hero.Conditon.Name === "Poison") { AddToCharacterLog(log, hero.Name + " drinks " + this.Name); RemoveCondition(hero, hero.Log) } }
-    }
-    return antidote;
-}
-export function healingPotion() {
-    var healingPotion = { Name: "Healing Potion", Type: "Consumable", SubType: "Potion", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks " + this.Name); HealHP(hero, 10) } }
-    return healingPotion;
-}
-export function manaPotion() {
-    var manaPotion = { Name: "Mana Potion", Type: "Consumable", SubType: "Potion", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks " + this.Name); RecoverMP(hero, 10) } }
-    return manaPotion;
-}
-export function staminaPotion() {
-    var staminaPotion = { Name: "Stamina Potion", Type: "Consumable", SubType: "Potion", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " drinks " + this.Name); RecoverSP(hero, 10) } }
-    return staminaPotion;
-}
 //scrolls
+export class Scroll extends Consumable {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Scroll"
+    }
+}
 //abilityscroll
-export function cleaveScroll() {
-    var scroll = { Name: "Scroll of Cleave", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnAbility(hero, new Cleave()) } }
-    return scroll;
+export class AbilityScoll extends Scroll {
+    Ability;
+    constructor(name, cost, abil) {
+        super(name, cost, abil)
+        this.Ability = abil
+    }
+    ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnAbility(hero, this.Ability) }
 }
-export function pierceArmorScroll() {
-    var scroll = { Name: "Scroll of Pierce Armor", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnAbility(hero, new PierceArmor()) } }
-    return scroll;
+export class CleaveScroll extends AbilityScoll {
+    constructor(name = "Scroll of Cleave", cost = 10, abil = new Cleave()) {
+        super(name, cost, abil)
+    }
 }
-export function rageScroll() {
-    var scroll = { Name: "Scroll of Rage", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnAbility(hero, new Rage()) } }
-    return scroll;
+export class PierceArmorScroll extends AbilityScoll {
+    constructor(name = "Scroll of Pierce Armor", cost = 10, abil = new PierceArmor()) {
+        super(name, cost, abil)
+    }
 }
-export function raiseShieldScroll() {
-    var scroll = { Name: "Scroll of Raise Shield", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnAbility(hero, new RaiseShield()) } }
-    return scroll;
+export class RageScroll extends AbilityScoll {
+    constructor(name = "Scroll of Rage", cost = 10, abil = new Rage()) {
+        super(name, cost, abil)
+    }
 }
-export function studyFoesScroll() {
-    var scroll = { Name: "Scroll of Study Foes", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnAbility(hero, new StudyFoes()) } }
-    return scroll;
+export class RaiseShieldScroll extends AbilityScoll {
+    constructor(name = "Scroll of Raise Shield", cost = 10, abil = new RaiseShield()) {
+        super(name, cost, abil)
+    }
+}
+export class StudyFoesScroll extends AbilityScoll {
+    constructor(name = "Scroll of Study Foes", cost = 10, abil = new StudyFoes()) {
+        super(name, cost, abil)
+    }
 }
 //spellscroll
+export class SpellScoll extends Scroll {
+    Spell;
+    constructor(name, cost, spell) {
+        super(name, cost, spell)
+        this.Spell = spell
+    }
+    ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, this.Spell) }
+}
+export class BaneScroll extends SpellScoll {
+    constructor(name = "Scroll of Bane", cost = 10, spell = bane()) {
+        super(name, cost, spell)
+    }
+}
+export class BasicHealScroll extends SpellScoll {
+    constructor(name = "Scroll of Basic Heal", cost = 10, spell = basicHeal()) {
+        super(name, cost, spell)
+    }
+}
+export class BasicMassHealScroll extends SpellScoll {
+    constructor(name = "Scroll of Mass Basic Heal", cost = 10, spell = basicMassHeal()) {
+        super(name, cost, spell)
+    }
+}
+export class BlessScroll extends SpellScoll {
+    constructor(name = "Scroll of Bless", cost = 10, spell = bless()) {
+        super(name, cost, spell)
+    }
+}
+export class CurePoisonScroll extends SpellScoll {
+    constructor(name = "Scroll of Cure Poison", cost = 10, spell = curePoison()) {
+        super(name, cost, spell)
+    }
+}
+export class FireBallScroll extends SpellScoll {
+    constructor(name = "Scroll of Fireball", cost = 10, spell = fireBall()) {
+        super(name, cost, spell)
+    }
+}
+export class HeroismScroll extends SpellScoll {
+    constructor(name = "Scroll of Heroism", cost = 10, spell = heroism()) {
+        super(name, cost, spell)
+    }
+}
+export class InspireCourageScroll extends SpellScoll {
+    constructor(name = "Scroll of Inspire Courage", cost = 10, spell = inspireCourage()) {
+        super(name, cost, spell)
+    }
+}
+export class MagicMissileScroll extends SpellScoll {
+    constructor(name = "Scroll of Magic Missile", cost = 10, spell = magicMissile()) {
+        super(name, cost, spell)
+    }
+}
+export class PoisonSprayScroll extends SpellScoll {
+    constructor(name = "Scroll of Poison Spray", cost = 10, spell = poisonSpray()) {
+        super(name, cost, spell)
+    }
+}
+export class SleepScroll extends SpellScoll {
+    constructor(name = "Scroll of Sleep", cost = 10, spell = sleepSpell()) {
+        super(name, cost, spell)
+    }
+}
+export class SummonRatScroll extends SpellScoll {
+    constructor(name = "Scroll of Summon Rat", cost = 10, spell = summonRat()) {
+        super(name, cost, spell)
+    }
+}
+export class SummonSkeletonScroll extends SpellScoll {
+    constructor(name = "Scroll of Summon Skeleton", cost = 10, spell = summonSkeleton()) {
+        super(name, cost, spell)
+    }
+}
+export class SummonSpiderScroll extends SpellScoll {
+    constructor(name = "Scroll of Summon Spider", cost = 10, spell = summonSpider()) {
+        super(name, cost, spell)
+    }
+}
+export class WebScroll extends SpellScoll {
+    constructor(name = "Scroll of Web", cost = 10, spell = webSpell()) {
+        super(name, cost, spell)
+    }
+}
 export function allHealingScrolls() {
-    var all = [baneScroll(), basicHealScroll(), basicMassHealScroll(), blessScroll(), curePoisonScroll(), heroismScroll()]
+    var all = [new BaneScroll(), new BasicHealScroll(), new BasicMassHealScroll(), new BlessScroll(), new CurePoisonScroll(), new HeroismScroll()]
     return all
 }
 export function allSpellScrolls() {
-    var all = [fireBallScroll(), inspireCourageScroll(), magicMissileScroll(), poisonSprayScroll(), sleepSpell(), summonRatScroll(), summonSkeletonScroll(), summonSpiderScroll()]
+    var all = [new FireBallScroll(), new InspireCourageScroll(), new MagicMissileScroll(), new PoisonSprayScroll(), new SleepScroll(), new SummonRatScroll(), new SummonSkeletonScroll(), new SummonSpiderScroll()]
     return all;
 }
-export function baneScroll() {
-    var scroll = { Name: "Scroll of Bane", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, bane()) } }
-    return scroll;
-}
-export function basicHealScroll() {
-    var scroll = { Name: "Scroll of Basic Heal", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, basicHeal()) } }
-    return scroll;
-}
-export function basicMassHealScroll() {
-    var scroll = { Name: "Scroll of Basic Mass Heal", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, basicMassHeal()) } }
-    return scroll;
-}
-export function blessScroll() {
-    var scroll = { Name: "Scroll of Bless", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, bless()) } }
-    return scroll;
-}
-export function curePoisonScroll() {
-    var scroll = { Name: "Scroll of Cure Poison", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, curePoison()) } }
-    return scroll;
-}
-export function fireBallScroll() {
-    var scroll = { Name: "Scroll of Fireball", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, fireBall()) } }
-    return scroll;
-}
-export function heroismScroll() {
-    var scroll = { Name: "Scroll of Heroism", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, heroism()) } }
-    return scroll;
-}
-export function inspireCourageScroll() {
-    var scroll = { Name: "Scroll of Inspire Courage", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, inspireCourage()) } }
-    return scroll;
-}
-export function magicMissileScroll() {
-    var magicMissileScroll = { Name: "Scroll of Magic Missile", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, magicMissile()) } }
-    return magicMissileScroll;
-}
-export function poisonSprayScroll() {
-    var scroll = { Name: "Scroll of Poison Spray", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, poisonSpray()) } }
-    return scroll;
-}
-export function sleepScroll() {
-    var scroll = { Name: "Scroll of Sleep", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, sleepSpell()) } }
-    return scroll;
-}
-export function summonRatScroll() {
-    var scroll = { Name: "Scroll of Summon Rat", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, summonRat()) } }
-    return scroll;
-}
-export function summonSkeletonScroll() {
-    var scroll = { Name: "Scroll of Summon Skeleton", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, summonSkeleton()) } }
-    return scroll;
-}
-export function summonSpiderScroll() {
-    var scroll = { Name: "Scroll of Summon Spider", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, summonSpider()) } }
-    return scroll;
-}
-export function webScroll() {
-    var scroll = { Name: "Scroll of Web", Type: "Consumable", SubType: "Scroll", Cost: 10, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, webSpell()) } }
-    return scroll;
-}
 //xp lamps
-export function lessonsFromFaldan() {
-    var lessonsFromFaldan = { Name: "Lessons from Faldan", Type: "Consumable", SubType: "Lamp", Cost: 0, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); EarnSkillXP(hero, FindSkillInSkillBook(hero, new SmithingSkill()), 500) } }
-    return lessonsFromFaldan
+export class Lamp extends Consumable {
+    constructor(name, cost = 0) {
+        super(name, cost = 0)
+        this.SubType = "Lamp"
+    }
 }
-export function skillLamp(skill, xp) {
-    var lamp = { Name: skill.Name + " XP Lamp", Type: "Consumable", SubType: "Lamp", Cost: 0, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " rubs " + this.Name + " gaining " + skill.Name + " " + xp + " XP"); EarnSkillXP(hero, FindSkillInSkillBook(hero, skill), xp) } }
-    return lamp;
+export class LevelLamp extends Lamp {
+    Xp;
+    constructor(name, xp) {
+        super(name)
+        this.Xp = xp;
+    }
+    ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " rubs " + this.Name + " gaining " + this.Xp + " XP"); EarnXP(hero, this.Xp, hero) }
 }
-export function levelLamp(xp) {
-    var lamp = { Name: "Character XP Lamp", Type: "Consumable", SubType: "Lamp", Cost: 0, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " rubs " + this.Name + " gaining " + xp + " XP"); EarnXP(hero, xp, hero) } }
-    return lamp;
-}
-export function tipsTraderJoe() {
-    var tips = { Name: "Trading Tips from Joe the Trader", Type: "Consumable", SubType: "Lamp", Cost: 0, Quantity: 1, ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); EarnSkillXP(hero, FindSkillInSkillBook(hero, new BarterSkill()), 500) } }
-    return tips
+export class SkillLamp extends Lamp {
+    Xp; Skill;
+    constructor(name, xp, skill) {
+        super(name)
+        this.Xp = xp; this.Skill = skill;
+    }
+    ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " rubs " + this.Name + " gaining " + this.Skill.Name + " " + this.Xp + " XP"); EarnSkillXP(hero, FindSkillInSkillBook(hero, this.Skill), this.Xp) }
 }
 //equipables
+export class Equipable extends Item {
+    Level; Slot; Class; Enchantment;
+    constructor(name, cost, level) {
+        super(name, cost)
+        this.Level = level; this.Type = "Equipable"; this.Enchantment = new UnEnchanted()
+    }
+}
+//ammo
+export class Ammo extends Equipable {
+    Damage; DamageType;
+    constructor(name, cost, level, damage, damageType) {
+        super(name, cost, level)
+        this.Damage = damage; this.DamageType = damageType; this.Class = new RangedSkill(); this.Slot = "Ammo"; this.SubType = ""
+    }
+}
+export class BronzeShrapnel extends Ammo {
+    constructor(name = "Bronze Shrapnel", cost = 5, level = 1, damage = 3, damageType = new FireDamage()) {
+        super(name, cost, level, damage, damageType)
+    }
+}
+export class IronShrapnel extends Ammo {
+    constructor(name = "Iron Shrapnel", cost = 10, level = 5, damage = 5, damageType = new FireDamage()) {
+        super(name, cost, level, damage, damageType)
+    }
+}
+export class SteelShrapnel extends Ammo {
+    constructor(name = "Steel Shrapnel", cost = 20, level = 10, damage = 7, damageType = new FireDamage()) {
+        super(name, cost, level, damage, damageType)
+    }
+}
+//accessories
+export class Accessory extends Equipable {
+    constructor(name, cost, level) {
+        super(name, cost, level)
+        this.Class = new UnArmoredSkill(); this.Enchantment = new UnEnchanted(); this.SubType = ""
+    }
+}
+//back
+export class Back extends Accessory {
+    constructor(name, cost, level) {
+        super(name, cost, level)
+        this.Slot = "Back"
+    }
+}
+export class BareBack extends Back {
+    constructor(name = "None", cost = 0, level = 1) {
+        super(name, cost, level)
+    }
+}
+export class CapeOfFireImmunity extends Back {
+    constructor(name = "Cape of Fire Immunity", cost = 100, level = 1) {
+        super(name, cost, level)
+        this.Enchantment = new FireImmuneEnchantment()
+    }
+}
+export class Cloak extends Back {
+    constructor(name = "Cloak", cost = 5, level = 1) {
+        super(name, cost, level)
+        this.Enchantment = new IceResistEnchantment()
+    }
+}
+//neck
+export class Neck extends Accessory {
+    constructor(name, cost, level) {
+        super(name, cost, level)
+        this.Slot = "Neck"
+    }
+}
+export class BareNeck extends Neck {
+    constructor(name = "None", cost = 0, level = 1) {
+        super(name, cost, level)
+    }
+}
+export class DogCollar extends Neck {
+    constructor(name = "Dog Collar", cost = 0, level = 1) {
+        super(name, cost, level)
+    }
+}
+//ring
+export class Ring extends Accessory {
+    constructor(name, cost, level) {
+        super(name, cost, level)
+        this.Slot = "Ring"
+    }
+}
+export class BareFinger extends Ring {
+    constructor(name = "None", cost = 0, level = 1) {
+        super(name, cost, level)
+    }
+}
+export class RingOfStr extends Ring {
+    constructor(name = "Ring of Strength", cost = 50, level = 1) {
+        super(name, cost, level)
+        this.Enchantment = new StrengthEnchantment()
+    }
+}
+export class SilverRingLR extends Ring {
+    constructor(name = "Silver Ring engraved with the Initials CR", cost = 10, level = 1) {
+        super(name, cost, level)
+    }
+}
+//armor
+export class Armor extends Equipable {
+    Protection; ProtectionType;
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.SubType = "Armor"; this.Protection = prot; this.Enchantment = new UnEnchanted()
+    }
+}
+//feet
+export class Feet extends Armor {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Slot = "Feet"
+    }
+}
+export class ClothFeet extends Feet {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new UnArmoredSkill(); this.ProtectionType = new ClothProtection();
+    }
+}
+export class Shoes extends ClothFeet {
+    constructor(name = "Shoes", cost = 1, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+export class SpiderSilkBoots extends ClothFeet {
+    constructor(name = "Spider Silk Boots", cost = 10, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class WoolBoots extends ClothFeet {
+    constructor(name = "Wool Boots", cost = 1, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+    }
+}
+export class LeatherFeet extends Feet {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new LightArmorSkill(); this.ProtectionType = new LeatherProtection()
+    }
+}
+export class HardLeatherBoots extends LeatherFeet {
+    constructor(name = "Hard Leather Boots", cost = 5, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class LeatherBoots extends LeatherFeet {
+    constructor(name = "Leather Boots", cost = 1, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+    }
+}
+export class MetalFeet extends Feet {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new HeavyArmorSkill(); this.ProtectionType = new MetalProtection()
+    }
+}
+export class BronzeBoots extends MetalFeet {
+    constructor(name = "Bronze Boots", cost = 1, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+    }
+}
+export class IronBoots extends MetalFeet {
+    constructor(name = "Iron Boots", cost = 5, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class SteelBoots extends MetalFeet {
+    constructor(name = "Steel Boots", cost = 10, level = 10, prot = 3) {
+        super(name, cost, level, prot)
+    }
+}
+export class NaturalFeet extends Feet {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new UnArmoredSkill(); this.ProtectionType = new NaturalProtection()
+    }
+}
+export class BareFeet extends NaturalFeet {
+    constructor(name = "None", cost = 0, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+//hands
+export class Hands extends Armor {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Slot = "Hands"
+    }
+}
+export class ClothHands extends Hands {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new UnArmoredSkill(); this.ProtectionType = new ClothProtection();
+    }
+}
+export class ClothGloves extends ClothHands {
+    constructor(name = "Cloth Gloves", cost = 1, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+export class Gloves extends ClothHands {
+    constructor(name = "Gloves", cost = 1, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+export class SpiderSilkGloves extends ClothGloves {
+    constructor(name = "Spider Silk Gloves", cost = 10, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class WoolGloves extends ClothHands {
+    constructor(name = "Wool Gloves", cost = 1, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+    }
+}
+export class LeatherHands extends Hands {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new LightArmorSkill(); this.ProtectionType = new LeatherProtection()
+    }
+}
+export class HardLeatherGloves extends LeatherHands {
+    constructor(name = "Hard Leather Gloves", cost = 5, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class LeatherGloves extends LeatherHands {
+    constructor(name = "Leather Gloves", cost = 1, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+    }
+}
+export class MetalHands extends Hands {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new HeavyArmorSkill(); this.ProtectionType = new MetalProtection()
+    }
+}
+export class BronzeGauntlets extends MetalHands {
+    constructor(name = "Bronze Gaunlets", cost = 1, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+    }
+}
+export class IronGauntlets extends MetalHands {
+    constructor(name = "Iron Gaunlets", cost = 5, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class SteelGauntlets extends MetalHands {
+    constructor(name = "Steel Gaunlets", cost = 10, level = 10, prot = 3) {
+        super(name, cost, level, prot)
+    }
+}
+export class NaturalHands extends Hands {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new UnArmoredSkill(); this.ProtectionType = new NaturalProtection()
+    }
+}
+export class BareHands extends NaturalHands {
+    constructor(name = "None", cost = 0, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+//head
+export class Head extends Armor {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Slot = "Head"
+    }
+}
+export class ClothHead extends Head {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new UnArmoredSkill(); this.ProtectionType = new ClothProtection()
+    }
+}
+export class Hat extends ClothHead {
+    constructor(name = "Hat", cost = 1, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+export class SpiderSilkWizardHat extends ClothHead {
+    constructor(name = "Spider Silk Wizard Hat", cost = 20, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class WoolHat extends ClothHead {
+    constructor(name = "Wool Hat", cost = 1, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+export class WoolWizardHat extends ClothHead {
+    constructor(name = "WoolWizardHat", cost = 5, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+    }
+}
+export class LeatherHead extends Head {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new LightArmorSkill(); this.ProtectionType = new LeatherProtection()
+    }
+}
+export class HardLeatherCowl extends LeatherHead {
+    constructor(name = "Hard Leather Cowl", cost = 10, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class LeatherCowl extends LeatherHead {
+    constructor(name = "Leather Cowl", cost = 5, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+    }
+}
+export class MetalHead extends Head {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new HeavyArmorSkill(); this.ProtectionType = new MetalProtection()
+    }
+}
+export class BronzeHelmet extends MetalHead {
+    constructor(name = "Bronze Helmet", cost = 2, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+    }
+}
+export class IronHelmet extends MetalHead {
+    constructor(name = "Iron Helmet", cost = 10, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class SteelHelmet extends MetalHead {
+    constructor(name = "Steel Helmet", cost = 20, level = 10, prot = 3) {
+        super(name, cost, level, prot)
+    }
+}
+export class NaturalHead extends Head {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new UnArmoredSkill(); this.ProtectionType = new NaturalProtection()
+    }
+}
+export class BareHead extends NaturalHead {
+    constructor(name = "None", cost = 0, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+//legs
+export class Legs extends Armor {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Slot = "Legs"
+    }
+}
+export class ClothLegs extends Legs {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new UnArmoredSkill(); this.ProtectionType = new ClothProtection()
+    }
+}
+export class LoinCloth extends ClothLegs {
+    constructor(name = "LoinCloth", cost = 1, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+export class SpiderSilkRobeBottom extends ClothLegs {
+    constructor(name = "Spider Silk Robe Bottom", cost = 5, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class Trousers extends ClothLegs {
+    constructor(name = "Trousers", cost = 1, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+export class WoolTrousers extends ClothLegs {
+    constructor(name = "Wool Trousers", cost = 1, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+export class WoolRobeBottom extends ClothLegs {
+    constructor(name = "Wool Robe Bottom", cost = 1, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+    }
+}
+export class LeatherLegs extends Legs {
+    constructor(name = "Leather Legs", cost = 5, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+        this.Class = new LightArmorSkill(); this.ProtectionType = new LeatherProtection()
+    }
+}
+export class HardLeatherLegs extends LeatherLegs {
+    constructor(name = "Head Leather Legs", cost = 10, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class MetalLegs extends Legs {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new HeavyArmorSkill(); this.ProtectionType = new MetalProtection()
+    }
+}
+export class BronzeLegs extends MetalLegs {
+    constructor(name = "Bronze Legs", cost = 5, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+    }
+}
+export class IronLegs extends MetalLegs {
+    constructor(name = "Iron Legs", cost = 10, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class SteelLegs extends MetalLegs {
+    constructor(name = "Steel Legs", cost = 20, level = 10, prot = 3) {
+        super(name, cost, level, prot)
+    }
+}
+export class NaturalLegs extends Legs {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new UnArmoredSkill(); this.ProtectionType = new NaturalProtection()
+    }
+}
+export class BareLegs extends NaturalLegs {
+    constructor(name = "None", cost = 0, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+//torso
+export class Torso extends Armor {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Slot = "Torso"
+    }
+}
+export class ClothTorso extends Torso {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new UnArmoredSkill(); this.ProtectionType = new ClothProtection()
+    }
+}
+export class SpiderSilkRobeTop extends ClothTorso {
+    constructor(name = "Spider Silk Robe Top", cost = 5, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class Tunic extends ClothTorso {
+    constructor(name = "Tunic", cost = 1, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+export class WoolRobeTop extends ClothTorso {
+    constructor(name = "Wool Robe Top", cost = 1, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+    }
+}
+export class WoolTunic extends ClothTorso {
+    constructor(name = "Wool Tunic", cost = 1, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+export class LeatherTorso extends Torso {
+    constructor(name = "Leather Torso", cost = 5, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+        this.Class = new LightArmorSkill(); this.ProtectionType = new LeatherProtection()
+    }
+}
+export class HardLeatherTorso extends LeatherTorso {
+    constructor(name = "Head Leather Torso", cost = 10, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class MetalTorso extends Torso {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new HeavyArmorSkill(); this.ProtectionType = new MetalProtection()
+    }
+}
+export class BronzeTorso extends MetalTorso {
+    constructor(name = "Bronze Armor", cost = 5, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+    }
+}
+export class IronTorso extends MetalTorso {
+    constructor(name = "Iron Armor", cost = 10, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class SteelTorso extends MetalTorso {
+    constructor(name = "Steel Armor", cost = 20, level = 10, prot = 3) {
+        super(name, cost, level, prot)
+    }
+}
+export class NaturalTorso extends Torso {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.Class = new UnArmoredSkill(); this.ProtectionType = new NaturalProtection()
+    }
+}
+export class BareTorso extends NaturalTorso {
+    constructor(name = "None", cost = 0, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
+//offhands
+export class OffHand extends Equipable {
+    constructor(name, cost, level) {
+        super(name, cost, level)
+        this.Slot = "OffHand"
+    }
+}
+export class EmptyOffHand extends OffHand {
+    constructor(name = "None", cost = 0, level = 1) {
+        super(name, cost, level)
+    }
+}
+//offhand weapons
+export class OffHandWeapon extends OffHand {
+    Damage; DamageType;
+    constructor(name, cost, level, damage) {
+        super(name, cost, level)
+        this.Damage = damage; this.SubType = "OneHand"
+    }
+}
+//melee
+export class OffHandMeleeWeapon extends OffHandWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new LightWeaponSkill()
+    }
+}
+//daggers
+export class DaggerOffHand extends OffHandMeleeWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+    }
+}
+export class BronzeDaggerOffHand extends DaggerOffHand {
+    constructor(name = "Bronze Dagger (OffHand)", cost = 1, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronDaggerOffHand extends DaggerOffHand {
+    constructor(name = "Iron Dagger (OffHand)", cost = 5, level = 5, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelDaggerOffHand extends DaggerOffHand {
+    constructor(name = "Steel Dagger (OffHand)", cost = 10, level = 10, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class NaturalWeaponOffHand extends OffHandMeleeWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new UnArmedSkill()
+    }
+}
+export class ClawSlashOffHand extends NaturalWeaponOffHand {
+    constructor(name = "Claw Slash (OffHand)", cost = 0, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+        this.DamageType = new SlashingDamage()
+    }
+}
+//unarmed
+export class UnArmedOffHand extends OffHandWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new BludgeoningDamage(); this.Class = new UnArmedSkill()
+    }
+}
+export class BareFistOffHand extends UnArmedOffHand {
+    constructor(name = "Fist", cost = 0, level = 1, damage = 0) {
+        super(name, cost, level, damage)
+        this.DamageType = new BludgeoningDamage(); this.Class = new UnArmedSkill()
+    }
+}
+//ranged
+export class OffHandRangedWeapon extends OffHandWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new RangedSkill(); this.DamageType = new PiercingDamage()
+    }
+}
+//crossbows
+export class CrossBowOffHand extends OffHandRangedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+    }
+}
+export class BronzeCrossBowOffHand extends CrossBowOffHand {
+    constructor(name = "Bronze Crossbow (OffHand)", cost = 5, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronCrossBowOffHand extends CrossBowOffHand {
+    constructor(name = "Iron Crossbow (OffHand)", cost = 10, level = 5, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelCrossBowOffHand extends CrossBowOffHand {
+    constructor(name = "Steel Crossbow (OffHand)", cost = 20, level = 10, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+//pistol
+export class PistolOffHand extends OffHandRangedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+    }
+}
+export class BronzePistolOffHand extends PistolOffHand {
+    constructor(name = "Bronze Pistol (OffHand)", cost = 5, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronPistolOffHand extends PistolOffHand {
+    constructor(name = "Iron Pistol (OffHand)", cost = 10, level = 5, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelPistolOffHand extends PistolOffHand {
+    constructor(name = "Steel Pistol (OffHand)", cost = 20, level = 10, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+//shields
+export class Shield extends OffHand {
+    Protection; ProtectionType;
+    constructor(name, cost, level, prot) {
+        super(name, cost, level)
+        this.Protection = prot; this.SubType = "Shield"; this.Class = new BlockSkill()
+    }
+}
+export class MetalShield extends Shield {
+    constructor(name, cost, level, prot) {
+        super(name, cost, level, prot)
+        this.ProtectionType = MetalProtection()
+    }
+}
+export class BronzeShield extends MetalShield {
+    constructor(name = "Bronze Shield", cost = 5, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+    }
+}
+export class IronShield extends MetalShield {
+    constructor(name = "Iron Shield", cost = 10, level = 5, prot = 2) {
+        super(name, cost, level, prot)
+    }
+}
+export class SteelShield extends MetalShield {
+    constructor(name = "Steel Shield", cost = 20, level = 10, prot = 3) {
+        super(name, cost, level, prot)
+    }
+}
+export class WoodenShield extends Shield {
+    constructor(name = "Wooden Shield", cost = 2, level = 1, prot = 1) {
+        super(name, cost, level, prot)
+        this.ProtectionType = new WoodProtection()
+    }
+}
+//weapons
+export class Weapon extends Equipable {
+    Damage; DamageType;
+    constructor(name, cost, level, damage, damageType) {
+        super(name, cost, level)
+        this.Damage = damage; this.DamageType = damageType; this.Slot = "Weapon"
+    }
+}
+//OneHand Weapons
+export class OneHandedWeapon extends Weapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.SubType = "OneHand"
+    }
+}
+//magic 1h
+export class MagicOneHandedWeapon extends OneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new DestructionSkill(); this.DamageType = new ForceDamage();
+    }
+}
+export class MagicNaturalWeapon extends MagicOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new DestructionSkill(); this.DamageType = new ForceDamage();
+    }
+}
+export class GhostTouch extends MagicNaturalWeapon {
+    constructor(name = "Ghost Touch", cost = 0, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+        this.DamageType = new NecroticDamage();
+    }
+}
+export class Wand extends MagicOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new ForceDamage()
+    }
+}
+export class OakWand extends Wand {
+    constructor(name = "Oak Wand", cost = 10, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class WillowWand extends Wand {
+    constructor(name = "Willow Wand", cost = 20, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+export class WoodWand extends Wand {
+    constructor(name = "Wood Wand", cost = 5, level = 5, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+//melee 1h
+export class MeleeOneHandedWeapon extends OneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+    }
+}
+//axes
+export class Axe extends MeleeOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new SlashingDamage(); this.Class = new HeavyWeaponSkill()
+    }
+}
+export class BronzeAxe extends Axe {
+    constructor(name = "Bronze Axe", cost = 5, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronAxe extends Axe {
+    constructor(name = "Iron Axe", cost = 10, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelAxe extends Axe {
+    constructor(name = "Steel Axe", cost = 20, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+//clubs
+export class Club extends MeleeOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new BludgeoningDamage(); this.Class = new HeavyWeaponSkill()
+    }
+}
+export class WoodenClub extends Club {
+    constructor(name = "Wooden Club", cost = 2, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+    }
+}
+//daggers
+export class Dagger extends MeleeOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage(); this.Class = new LightWeaponSkill()
+    }
+}
+export class BronzeDagger extends Dagger {
+    constructor(name = "Bronze Dagger", cost = 1, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronDagger extends Dagger {
+    constructor(name = "Iron Dagger", cost = 5, level = 5, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelDagger extends Dagger {
+    constructor(name = "Steel Dagger", cost = 10, level = 10, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+//maces
+export class Mace extends MeleeOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new BludgeoningDamage(); this.Class = new HeavyWeaponSkill()
+    }
+}
+export class BronzeMace extends Mace {
+    constructor(name = "Bronze Mace", cost = 5, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronMace extends Mace {
+    constructor(name = "Iron Mace", cost = 5, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelMace extends Mace {
+    constructor(name = "Steel Mace", cost = 10, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+export class NaturalWeapon extends MeleeOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new UnArmedSkill()
+    }
+}
+//bites
+export class Bite extends NaturalWeapon {
+    constructor(name = "Bite", cost = 0, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
+    }
+}
+export class PoisonedBite extends Bite {
+    constructor(name = "Poisoned Bite", cost = 0, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+        this.Enchantment = new PoisonApplyEnchantment()
+    }
+}
+export class ClawSlash extends NaturalWeapon {
+    constructor(name = "Claw Slash", cost = 0, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+        this.DamageType = new SlashingDamage()
+    }
+}
+export class Peck extends NaturalWeapon {
+    constructor(name = "Peck", cost = 0, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
+    }
+}
+export class UnArmedWeapon extends MeleeOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new BludgeoningDamage(); this.Class = new UnArmedSkill()
+    }
+}
+export class BareFist extends UnArmedWeapon {
+    constructor(name = "Fist", cost = 0, level = 1, damage = 0) {
+        super(name, cost, level, damage)
+        this.DamageType = new BludgeoningDamage(); this.Class = new UnArmedSkill()
+    }
+}
+//swords
+export class Sword extends MeleeOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new SlashingDamage(); this.Class = new HeavyWeaponSkill()
+    }
+}
+export class BronzeSword extends Sword {
+    constructor(name = "Bronze Mace", cost = 5, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronSword extends Sword {
+    constructor(name = "Iron Sword", cost = 5, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelSword extends Sword {
+    constructor(name = "Steel Mace", cost = 10, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+//warhammers
+export class WarHammer extends MeleeOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new BludgeoningDamage(); this.Class = new HeavyWeaponSkill()
+    }
+}
+export class BronzeWarHammer extends WarHammer {
+    constructor(name = "Bronze WarHammer", cost = 5, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronWarHammer extends WarHammer {
+    constructor(name = "Iron WarHammer", cost = 5, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelWarHammer extends WarHammer {
+    constructor(name = "Steel WarHammer", cost = 10, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+//ranged 1h
+export class RangedOneHandedWeapon extends OneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new RangedSkill(); this.DamageType = new PiercingDamage()
+    }
+}
+export class CrossBow1H extends RangedOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+    }
+}
+export class BronzeCrossBow1H extends CrossBow1H {
+    constructor(name = "Bronze CrossBow 1H", cost = 5, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronCrossBow1H extends CrossBow1H {
+    constructor(name = "Iron CrossBow 1H", cost = 10, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelCrossBow1H extends CrossBow1H {
+    constructor(name = "Steel CrossBow 1H", cost = 20, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+export class Pistol extends RangedOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+    }
+}
+export class BronzePistol extends Pistol {
+    constructor(name = "Bronze Pistol", cost = 5, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronPistol extends Pistol {
+    constructor(name = "Iron Pistol", cost = 10, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelPistol extends Pistol {
+    constructor(name = "Steel Pistol", cost = 20, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+//2h
+export class TwoHandedWeapon extends Weapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.SubType = "TwoHands"
+    }
+}//magic 2h
+export class MagicTwoHandedWeapon extends TwoHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new DestructionSkill()
+    }
+}
+export class Staff extends MagicTwoHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new ForceDamage()
+    }
+}
+export class OakStaff extends MagicTwoHandedWeapon {
+    constructor(name = "Oak Staff", cost = 10, level = 5, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+export class WillowStaff extends MagicTwoHandedWeapon {
+    constructor(name = "Willow Staff", cost = 20, level = 10, damage = 5) {
+        super(name, cost, level, damage)
+    }
+}
+export class WoodStaff extends MagicTwoHandedWeapon {
+    constructor(name = "Wood Staff", cost = 5, level = 1, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+//melee 2h
+export class MeleeTwoHandedWeapon extends TwoHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new HeavyWeaponSkill()
+    }
+}
+//2h axes
+export class Axe2H extends MeleeTwoHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new SlashingDamage();
+    }
+}
+export class BronzeAxe2H extends Axe2H {
+    constructor(name = "Bronze Axe 2H", cost = 5, level = 1, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronAxe2H extends Axe2H {
+    constructor(name = "Iron Axe 2H", cost = 10, level = 5, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelAxe2H extends Axe2H {
+    constructor(name = "Steel Axe 2H", cost = 20, level = 10, damage = 5) {
+        super(name, cost, level, damage)
+    }
+}
+//natural
+export class Natural2H extends MeleeTwoHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new UnArmedSkill()
+    }
+}
+export class Slam extends Natural2H {
+    constructor(name = "Slam", cost = 0, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+    }
+}
+//swords
+export class Sword2H extends MeleeTwoHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new SlashingDamage();
+    }
+}
+export class BronzeSword2H extends Sword2H {
+    constructor(name = "Bronze Sword 2H", cost = 5, level = 1, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronSword2H extends Sword2H {
+    constructor(name = "Iron Sword 2H", cost = 10, level = 5, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelSword2H extends Sword2H {
+    constructor(name = "Steel Sword 2H", cost = 20, level = 10, damage = 5) {
+        super(name, cost, level, damage)
+    }
+}
+//warhammer
+export class WarHammer2H extends MeleeTwoHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new BludgeoningDamage();
+    }
+}
+export class BronzeWarHammer2H extends WarHammer2H {
+    constructor(name = "Bronze WarHammer 2H", cost = 5, level = 1, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronWarHammer2H extends WarHammer2H {
+    constructor(name = "Iron WarHammer 2H", cost = 10, level = 5, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelWarHammer2H extends WarHammer2H {
+    constructor(name = "Steel WarHammer 2H", cost = 20, level = 10, damage = 5) {
+        super(name, cost, level, damage)
+    }
+}
+//ranged 2h
+export class RangedTwoHandedWeapon extends TwoHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new RangedSkill(); this.DamageType = new PiercingDamage()
+    }
+}
+//bows
+export class Bow extends RangedTwoHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+    }
+}
+export class LongBow extends Bow {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+    }
+}
+export class OakLongBow extends LongBow {
+    constructor(name = "Oak LongBow", cost = 5, level = 5, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+export class WillowLongBow extends LongBow {
+    constructor(name = "Willow LongBow", cost = 10, level = 10, damage = 5) {
+        super(name, cost, level, damage)
+    }
+}
+export class WoodLongBow extends LongBow {
+    constructor(name = "Wood LongBow", cost = 1, level = 1, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class ShortBow extends Bow {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+    }
+}
+export class OakShortBow extends ShortBow {
+    constructor(name = "Oak ShortBow", cost = 5, level = 5, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+export class WillowShortBow extends ShortBow {
+    constructor(name = "Willow ShortBow", cost = 10, level = 10, damage = 5) {
+        super(name, cost, level, damage)
+    }
+}
+export class WoodShortBow extends ShortBow {
+    constructor(name = "Wood ShortBow", cost = 1, level = 1, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class CrossBow2H extends RangedTwoHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+    }
+}
+export class BronzeCrossBow2H extends CrossBow2H {
+    constructor(name = "Bronze CrossBow 2H", cost = 5, level = 1, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronCrossBow2H extends CrossBow2H {
+    constructor(name = "Iron CrossBow 2H", cost = 10, level = 5, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelCrossBow2H extends CrossBow2H {
+    constructor(name = "Steel CrossBow 2H", cost = 1, level = 10, damage = 5) {
+        super(name, cost, level, damage)
+    }
+}
+export class Rifle extends RangedTwoHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+    }
+}
+export class BronzeRifle extends Rifle {
+    constructor(name = "Bronze Rifle", cost = 5, level = 1, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronRifle extends Rifle {
+    constructor(name = "Iron Rifle", cost = 10, level = 5, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelRifle extends Rifle {
+    constructor(name = "Steel Rifle", cost = 1, level = 10, damage = 5) {
+        super(name, cost, level, damage)
+    }
+}
 export function allBronze() {
-    var all = [bronzeAxe(), bronzeAxe2H(), bronzeBoots(), bronzeCrossBow1H(), bronzeCrossBow2H(), bronzeCrossBowOffHand(), bronzeDagger(), bronzeDaggerOffHand(), bronzeGauntlets(), bronzeHatchet(), bronzeHelmet(), bronzeLegs(), bronzeMace(), bronzePickAxe(), bronzePistol(), bronzePistolOffHand(), bronzeRifle(), bronzeShield(), bronzeSword(), bronzeSword2H(), bronzeTools, bronzeTorso(), bronzeWarHammer(), bronzeWarHammer2H()]
+    var all = [new BronzeAxe(), new BronzeAxe2H(), new BronzeBoots(), new BronzeCrossBow1H(), new BronzeCrossBow2H(), new BronzeCrossBowOffHand(), new BronzeDagger(), new BronzeDaggerOffHand(), new BronzeGauntlets(), new BronzeHatchet(), new BronzeHelmet(), new BronzeLegs(), new BronzeMace(), new BronzePickAxe(), new BronzePistol(), new BronzePistolOffHand(), new BronzeRifle(), new BronzeShield(), new BronzeSword(), new BronzeSword2H(), new BronzeTools(), new BronzeTorso(), new BronzeWarHammer(), new BronzeWarHammer2H()]
     return all;
 }
 export function allIron() {
-    var all = [ironAxe(), ironAxe2H(), ironBoots(), ironDagger(), ironCrossBow1H(), ironCrossBow2H(), ironCrossBowOffHand(), ironDaggerOffHand(), ironGauntlets(), ironHatchet(), ironHelmet(), ironLegs(), ironMace(), ironPickAxe(), ironPistol(), ironPistolOffHand(), ironRifle(), ironShield(), ironSword(), ironSword2H(), ironTools(), ironTorso(), ironWarHammer(), ironWarHammer2H()]
+    var all = [new IronAxe(), new IronAxe2H(), new IronBoots(), new IronDagger(), new IronCrossBow1H(), new IronCrossBow2H(), new IronCrossBowOffHand(), new IronDaggerOffHand(), new IronGauntlets(), new IronHatchet(), new IronHelmet(), new IronLegs(), new IronMace(), new IronPickAxe(), new IronPistol(), new IronPistolOffHand(), new IronRifle(), new IronShield(), new IronSword(), new IronSword2H(), new IronTools(), new IronTorso(), new IronWarHammer(), new IronWarHammer2H()]
     return all;
 }
 export function allLeather() {
-    var all = [leatherBoots(), leatherCowl(), leatherGloves(), leatherLegs(), leatherTorso()]
+    var all = [new LeatherBoots(), new LeatherCowl(), new LeatherGloves(), new LeatherLegs(), new LeatherTorso()]
     return all;
 }
 export function allSteel() {
-    var all = [steelAxe(), steelAxe2H(), steelBoots(), steelDagger(), steelDaggerOffHand(), steelGauntlets(), steelHatchet(), steelHelmet(), steelLegs(), steelMace(), steelPickAxe(), steelShield(), steelSword(), steelSword2H(), steelTorso(), steelWarHammer(), steelWarHammer2H()]
+    var all = [new SteelAxe(), new SteelAxe2H(), new SteelBoots(), new SteelDagger(), new SteelDaggerOffHand(), new SteelGauntlets(), new SteelHatchet(), new SteelHelmet(), new SteelLegs(), new SteelMace(), new SteelPickAxe(), new SteelShield(), new SteelSword(), new SteelSword2H(), new SteelTorso(), new SteelWarHammer(), new SteelWarHammer2H()]
     return all;
 }
 export function allWool() {
-    var all = [woolBoots(), woolGloves(), woolHat(), woolRobeBottom(), woolRobeTop(), woolTrousers(), woolTunic(), woolWizardHat()]
+    var all = [new WoolBoots(), new WoolGloves(), new WoolHat(), new WoolRobeBottom(), new WoolRobeTop(), new WoolTrousers(), new WoolTunic(), new WoolWizardHat()]
     return all;
 }
-//accessories
-//back
-export function bareBack() {
-    var bare = { Name: "None", Level: 1, Slot: "Back", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bare;
-}
-export function capeOfFireImmunity() {
-    var cape = { Name: "Cape of Fire Immunity", Level: 1, Slot: "Back", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: new FireImmuneEnchantment() }
-    return cape;
-}
-export function cloak() {
-    var cloak = { Name: "Cloak", Level: 1, Slot: "Back", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: new IceResistEnchantment() }
-    return cloak;
-}
-//neck
-export function bareNeck() {
-    var bare = { Name: "None", Level: 1, Slot: "Neck", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bare;
-}
-export function dogCollar() {
-    var dog = { Name: "Dog Collar", Level: 1, Slot: "Neck", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return dog;
-}
-//ring
-export function bareFinger() {
-    var bare = { Name: "None", Level: 1, Slot: "Ring", Type: "Equipable", SubType: "", Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bare;
-}
-export function ringOfStr() {
-    var ring = { Name: "Ring of Strength", Level: 1, Slot: "Ring", Type: "Equipable", SubType: "", Cost: 10, Quantity: 1, Enchantment: new StrengthEnchantment() }
-    return ring;
-}
-export function silverRingLR() {
-    var ring = { Name: "Silver Ring engraved with the Initials CR ", Level: 1, Slot: "Ring", Type: "Equipable", SubType: "", Cost: 10, Quantity: 1, Enchantment: new StrengthEnchantment() }
-    return ring;
-}
-//armor
-//feet
-export function bareFeet() {
-    var bare = { Name: "None", Level: 1, Slot: "Feet", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 0, ProtectionType: new NaturalProtection(), Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bare;
-}
-export function bronzeBoots() {
-    var boots = { Name: "Bronze Boots", Level: 1, Slot: "Feet", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 1, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return boots;
-}
-export function hardLeatherBoots() {
-    var boots = { Name: "Hard Leather Boots", Level: 5, Slot: "Feet", Type: "Equipable", SubType: "", Class: new LightArmorSkill(), Protection: 2, ProtectionType: new LeatherProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return boots;
-}
-export function ironBoots() {
-    var boots = { Name: "Iron Boots", Level: 5, Slot: "Feet", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 2, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return boots;
-}
-export function leatherBoots() {
-    var boots = { Name: "Leather Boots", Level: 1, Slot: "Feet", Type: "Equipable", SubType: "", Class: new LightArmorSkill(), Protection: 1, ProtectionType: new LeatherProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return boots;
-}
-export function shoes() {
-    var shoes = { Name: "Shoes", Level: 1, Slot: "Feet", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 0, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return shoes;
-}
-export function spiderSilkBoots() {
-    var shoes = { Name: "Spider Silk Boots", Level: 5, Slot: "Feet", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 2, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return shoes;
-}
-export function steelBoots() {
-    var boots = { Name: "Steel Boots", Level: 10, Slot: "Feet", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 3, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return boots;
-}
-export function woolBoots() {
-    var shoes = { Name: "Wool Boots", Level: 1, Slot: "Feet", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 1, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return shoes;
-}
-//hands
-export function bareHands() {
-    var bare = { Name: "None", Level: 1, Slot: "Hands", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 0, ProtectionType: new NaturalProtection(), Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bare;
-}
-export function bronzeGauntlets() {
-
-    var gauntlets = { Name: "Bronze Gauntlets", Level: 1, Slot: "Hands", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 1, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gauntlets;
-}
-export function gloves() {
-    var gloves = { Name: "Gloves", Level: 1, Slot: "Hands", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 0, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gloves;
-}
-export function hardLeatherGloves() {
-    var gloves = { Name: "Hard Leather Gloves", Level: 5, Slot: "Hands", Type: "Equipable", SubType: "", Class: new LightArmorSkill(), Protection: 2, ProtectionType: new LeatherProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gloves;
-}
-export function ironGauntlets() {
-
-    var gauntlets = { Name: "Iron Gauntlets", Level: 5, Slot: "Hands", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 2, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gauntlets;
-}
-export function leatherGloves() {
-    var gloves = { Name: "Leather Gloves", Level: 1, Slot: "Hands", Type: "Equipable", SubType: "", Class: new LightArmorSkill(), Protection: 1, ProtectionType: new LeatherProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gloves;
-}
-export function spiderSilkGloves() {
-    var gloves = { Name: "Spider Silk Gloves", Level: 5, Slot: "Hands", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 2, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gloves;
-}
-export function steelGauntlets() {
-
-    var gauntlets = { Name: "Steel Gauntlets", Level: 10, Slot: "Hands", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 3, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gauntlets;
-}
-export function woolGloves() {
-    var gloves = { Name: "Wool Gloves", Level: 1, Slot: "Hands", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 1, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gloves;
-}
-//head
-export function bareHead() {
-    var bare = { Name: "None", Level: 1, Slot: "Head", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 0, ProtectionType: new NaturalProtection(), Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bare;
-}
-export function bronzeHelmet() {
-    var helmet = { Name: "Bronze Helmet", Level: 1, Slot: "Head", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 1, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return helmet;
-}
-export function hat() {
-    var hat = { Name: "Hat", Slot: "Head", Level: 1, Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 0, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return hat;
-}
-export function hardLeatherCowl() {
-    var hat = { Name: "Hard Leather Cowl", Level: 5, Slot: "Head", Type: "Equipable", SubType: "", Class: new LightArmorSkill(), Protection: 2, ProtectionType: new LeatherProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return hat;
-}
-export function ironHelmet() {
-    var helmet = { Name: "Iron Helmet", Level: 5, Slot: "Head", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 2, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return helmet;
-}
-export function leatherCowl() {
-    var hat = { Name: "Leather Cowl", Level: 1, Slot: "Head", Type: "Equipable", SubType: "", Class: new LightArmorSkill(), Protection: 1, ProtectionType: new LeatherProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return hat;
-}
-export function spiderSilkWizardHat() {
-    var hat = { Name: "Spider Silk Wizard Hat", Level: 5, Slot: "Head", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 2, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return hat;
-}
-export function steelHelmet() {
-    var helmet = { Name: "Steel Helmet", Level: 10, Slot: "Head", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 3, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return helmet;
-}
-export function woolHat() {
-    var hat = { Name: "Wool Hat", Level: 1, Slot: "Head", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 0, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return hat;
-}
-export function woolWizardHat() {
-    var hat = { Name: "Wool Wizard Hat", Level: 1, Slot: "Head", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 1, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return hat;
-}
-//legs
-export function bareLegs() {
-    var bare = { Name: "None", Level: 1, Slot: "Legs", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 0, ProtectionType: new NaturalProtection(), Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bare;
-}
-export function bronzeLegs() {
-    var legs = { Name: "Bronze Legs", Level: 1, Slot: "Legs", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 1, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return legs;
-}
-export function hardLeatherLegs() {
-    var legs = { Name: "Hard Leather Legs", Level: 5, Slot: "Legs", Type: "Equipable", SubType: "", Class: new LightArmorSkill(), Protection: 2, ProtectionType: new LeatherProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return legs;
-}
-export function ironLegs() {
-    var legs = { Name: "Iron Legs", Level: 5, Slot: "Legs", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 2, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return legs;
-}
-export function leatherLegs() {
-    var legs = { Name: "Leather Legs", Level: 1, Slot: "Legs", Type: "Equipable", SubType: "", Class: new LightArmorSkill(), Protection: 1, ProtectionType: new LeatherProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return legs;
-}
-export function loinCloth() {
-    var loinCloth = { Name: "Loincloth", Level: 1, Slot: "Legs", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 0, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return loinCloth
-}
-export function spiderSilkRobeBottom() {
-    var legs = { Name: "Spider Silk Robe Bottom", Level: 5, Slot: "Legs", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 1, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return legs;
-}
-export function steelLegs() {
-    var legs = { Name: "Steel Legs", Level: 10, Slot: "Legs", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 3, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return legs;
-}
-export function trousers() {
-    var trousers = { Name: "Trousers", Level: 1, Slot: "Legs", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 0, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return trousers;
-}
-export function woolTrousers() {
-    var trousers = { Name: "Wool Trousers", Level: 1, Slot: "Legs", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 0, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return trousers;
-}
-export function woolRobeBottom() {
-    var legs = { Name: "Wool Robe Bottom", Level: 1, Slot: "Legs", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 1, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return legs;
-}
-//torso
-export function bareTorso() {
-    var bare = { Name: "None", Level: 1, Slot: "Torso", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 0, ProtectionType: new NaturalProtection(), Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bare;
-}
-export function bronzeTorso() {
-    var torso = { Name: "Bronze Armor", Level: 1, Slot: "Torso", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 1, ProtectionType: new MetalProtection(), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return torso;
-}
-export function hardLeatherTorso() {
-    var torso = { Name: "Hard Leather Armor", Level: 5, Slot: "Torso", Type: "Equipable", SubType: "", Class: new LightArmorSkill(), Protection: 2, ProtectionType: new LeatherProtection(), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return torso;
-}
-export function ironTorso() {
-    var torso = { Name: "Iron Armor", Level: 5, Slot: "Torso", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 2, ProtectionType: new MetalProtection(), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return torso;
-}
-export function leatherTorso() {
-    var torso = { Name: "Leather Armor", Level: 1, Slot: "Torso", Type: "Equipable", SubType: "", Class: new LightArmorSkill(), Protection: 1, ProtectionType: new LeatherProtection(), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return torso;
-}
-export function spiderSilkRobeTop() {
-    var torso = { Name: "Spider Silk Robe Torso", Level: 5, Slot: "Torso", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 2, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return torso;
-}
-export function steelTorso() {
-    var torso = { Name: "Steel Armor", Level: 10, Slot: "Torso", Type: "Equipable", SubType: "", Class: new HeavyArmorSkill(), Protection: 3, ProtectionType: new MetalProtection(), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return torso;
-}
-export function tunic() {
-    var tunic = { Name: "Tunic", Level: 1, Slot: "Torso", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 0, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return tunic;
-}
-export function woolRobeTop() {
-    var torso = { Name: "Wool Robe Torso", Level: 1, Slot: "Torso", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 1, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return torso;
-}
-export function woolTunic() {
-    var tunic = { Name: "Wool Tunic", Level: 1, Slot: "Torso", Type: "Equipable", SubType: "", Class: new UnArmoredSkill(), Protection: 0, ProtectionType: new ClothProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return tunic;
-}
-//offhands
-//offhand weapoms
-export function emptyOffHand() {
-    var empty = { Name: "None", Level: 1, Slot: "OffHand", Type: "Equipable", SubType: "None", Class: new UnArmedSkill(), Damage: 0, DamageType: new BludgeoningDamage(this), Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return empty;
-}
-
-//crossbows
-export function bronzeCrossBowOffHand() {
-    var bow = { Name: "Bronze Crossbow (OffHand)", Level: 1, Slot: "OffHand", Type: "Equipable", SubType: "OneHand", Class: new RangedSkill(), Damage: 1, DamageType: new PiercingDamage(this), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bow;
-}
-export function ironCrossBowOffHand() {
-    var bow = { Name: "Iron Crossbow (OffHand)", Level: 5, Slot: "OffHand", Type: "Equipable", SubType: "OneHand", Class: new RangedSkill(), Damage: 2, DamageType: new PiercingDamage(this), Cost: 10, Quantity: 5, Enchantment: new UnEnchanted() }
-    return bow;
-}
-export function steelCrossBowOffHand() {
-    var bow = { Name: "Steel Crossbow (OffHand)", Level: 10, Slot: "OffHand", Type: "Equipable", SubType: "OneHand", Class: new RangedSkill(), Damage: 3, DamageType: new PiercingDamage(this), Cost: 20, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bow;
-}
-//daggers
-export function bronzeDaggerOffHand() {
-    var dagger = { Name: "Bronze Dagger (OffHand)", Level: 1, Slot: "OffHand", Type: "Equipable", SubType: "OneHand", Class: new LightWeaponSkill(), Damage: 1, DamageType: new PiercingDamage(this), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return dagger;
-}
-export function daggerOffHand() {
-    var dagger = { Name: "Dagger (OffHand)", Level: 1, Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Class: new LightWeaponSkill(), Damage: 1, DamageType: new PiercingDamage(this), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return dagger;
-}
-export function ironDaggerOffHand() {
-    var dagger = { Name: "Iron Dagger (OffHand)", Level: 5, Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Class: new LightWeaponSkill(), Damage: 2, DamageType: new PiercingDamage(this), Cost: 4, Quantity: 1, Enchantment: new UnEnchanted() }
-    return dagger;
-}
-export function steelDaggerOffHand() {
-    var dagger = { Name: "Steel Dagger (OffHand)", Level: 10, Slot: "OffHand", Type: "Equipable", SubType: "Weapon", Class: new LightWeaponSkill(), Damage: 3, DamageType: new PiercingDamage(this), Cost: 6, Quantity: 1, Enchantment: new UnEnchanted() }
-    return dagger;
-}
-//pistol
-export function bronzePistolOffHand() {
-    var gun = { Name: "Bronze Pistol (OffHand)", Level: 1, Slot: "OffHand", Type: "Equipable", SubType: "OneHand", Class: new RangedSkill(), Damage: 1, DamageType: new PiercingDamage(this), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gun;
-}
-export function ironPistolOffHand() {
-    var gun = { Name: "Iron Pistol (OffHand)", Level: 5, Slot: "OffHand", Type: "Equipable", SubType: "OneHand", Class: new RangedSkill(), Damage: 2, DamageType: new PiercingDamage(this), Cost: 10, Quantity: 5, Enchantment: new UnEnchanted() }
-    return gun;
-}
-export function steelPistolOffHand() {
-    var gun = { Name: "Steel Pistol (OffHand)", Level: 10, Slot: "OffHand", Type: "Equipable", SubType: "OneHand", Class: new RangedSkill(), Damage: 3, DamageType: new PiercingDamage(this), Cost: 20, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gun;
-}
-//shields
-export function bronzeShield() {
-    var shield = { Name: "Bronze Shield", Level: 1, Slot: "OffHand", Type: "Equipable", Class: new BlockSkill(), SubType: "Shield", Protection: 1, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return shield;
-}
-export function ironShield() {
-    var shield = { Name: "Iron Shield", Level: 5, Slot: "OffHand", Type: "Equipable", Class: new BlockSkill(), SubType: "Shield", Protection: 2, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return shield;
-}
-export function steelShield() {
-    var shield = { Name: "Steel Shield", Level: 10, Slot: "OffHand", Type: "Equipable", Class: new BlockSkill(), SubType: "Shield", Protection: 3, ProtectionType: new MetalProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return shield;
-}
-export function woodenShield() {
-    var shield = { Name: "Wooden Shield", Level: 1, Slot: "OffHand", Type: "Equipable", Class: new BlockSkill(), SubType: "Shield", Protection: 1, ProtectionType: new WoodProtection(), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return shield;
-}
-//weapons
-//magic weapons
-//1h magic weapons
-export function oakWand() {
-    var wand = { Name: "Oak Wand", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new DestructionSkill(), Damage: 3, DamageType: new ForceDamage(this), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return wand;
-}
-export function willowWand() {
-    var wand = { Name: "Willow Wand", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new DestructionSkill(), Damage: 4, DamageType: new ForceDamage(this), Cost: 20, Quantity: 1, Enchantment: new UnEnchanted() }
-    return wand;
-}
-export function woodWand() {
-    var wand = { Name: "Wooden Wand", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new DestructionSkill(), Damage: 2, DamageType: new ForceDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return wand;
-}
-//2h magic weapons
-export function oakStaff() {
-    var staff = { Name: "Oak Staff", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new DestructionSkill(), Damage: 4, DamageType: new ForceDamage(this), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return staff;
-}
-export function willowStaff() {
-    var staff = { Name: "Willow Staff", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new DestructionSkill(), Damage: 5, DamageType: new ForceDamage(this), Cost: 20, Quantity: 1, Enchantment: new UnEnchanted() }
-    return staff;
-}
-export function woodStaff() {
-    var staff = { Name: "Wooden Staff", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new DestructionSkill(), Damage: 3, DamageType: new ForceDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return staff;
-}
-//melee weapons
-//axes
-//1h axes
-export function bronzeAxe() {
-    var axe = { Name: "Bronze Axe", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 2, DamageType: new SlashingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return axe;
-}
-export function ironAxe() {
-    var axe = { Name: "Iron Axe", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 3, DamageType: new SlashingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return axe;
-}
-export function steelAxe() {
-    var axe = { Name: "Steel Axe", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 4, DamageType: new SlashingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return axe;
-}
-//2h axes
-export function bronzeAxe2H() {
-    var axe = { Name: "Bronze Axe 2H", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new HeavyWeaponSkill(), Damage: 3, DamageType: new SlashingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return axe;
-}
-export function ironAxe2H() {
-    var axe = { Name: "Iron Axe 2H", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new HeavyWeaponSkill(), Damage: 4, DamageType: new SlashingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return axe;
-}
-export function steelAxe2H() {
-    var axe = { Name: "Iron Axe 2H", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new HeavyWeaponSkill(), Damage: 5, DamageType: new SlashingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return axe;
-}
-//clubs
-export function club() {
-    var club = { Name: "Club", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 1, DamageType: new BludgeoningDamage(this), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return club;
-}
-export function woodenclub() {
-    var club = { Name: "Wooden Club", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 1, DamageType: new BludgeoningDamage(this), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return club;
-}
-//daggers
-export function bronzeDagger() {
-    var dagger = { Name: "Bronze Dagger", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new LightWeaponSkill(), Damage: 1, DamageType: new PiercingDamage(this), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return dagger;
-}
-export function dagger() {
-    var dagger = { Name: "Dagger", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new LightWeaponSkill(), Damage: 1, DamageType: new PiercingDamage(this), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return dagger;
-}
-export function ironDagger() {
-    var dagger = { Name: "Iron Dagger", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new LightWeaponSkill(), Damage: 2, DamageType: new PiercingDamage(this), Cost: 4, Quantity: 1, Enchantment: new UnEnchanted() }
-    return dagger;
-}
-export function steelDagger() {
-    var dagger = { Name: "Steel Dagger", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new LightWeaponSkill(), Damage: 3, DamageType: new PiercingDamage(this), Cost: 6, Quantity: 1, Enchantment: new UnEnchanted() }
-    return dagger;
-}
-//maces
-export function bronzeMace() {
-    var mace = { Name: "Bronze Mace", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 2, DamageType: new BludgeoningDamage(this), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return mace;
-}
-export function ironMace() {
-    var mace = { Name: "Iron Mace", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 3, DamageType: new BludgeoningDamage(this), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return mace;
-}
-export function steelMace() {
-    var mace = { Name: "Steel Mace", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 4, DamageType: new BludgeoningDamage(this), Cost: 2, Quantity: 1, Enchantment: new UnEnchanted() }
-    return mace;
-}
-//natural weapons
-export function bareFist() {
-    var bare = { Name: "Fist", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new UnArmedSkill(), Damage: 0, DamageType: new BludgeoningDamage(this), Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bare;
-}
-export function bite() {
-    var bite = { Name: "Bite", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new UnArmedSkill(), Damage: 1, DamageType: new PiercingDamage(this), Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bite;
-}
-export function clawSlash() {
-    var slash = { Name: "Slam", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new UnArmedSkill(), Damage: 2, DamageType: new SlashingDamage(this), Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return slash;
-}
-export function ghostTouch() {
-    var touch = { Name: "Ghost Touch", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new DestructionSkill(), Damage: 1, DamageType: new NecroticDamage(this), Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return touch;
-}
-export function peck() {
-    var bite = { Name: "Peck", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new UnArmedSkill(), Damage: 1, DamageType: new PiercingDamage(this), Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bite;
-}
-export function poisonedBite() {
-    var bite = { Name: "Poisoned Bite", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new UnArmedSkill(), Damage: 1, DamageType: new PiercingDamage(this), Cost: 0, Quantity: 1, Enchantment: new PoisonApplyEnchantment() }
-    return bite;
-}
-export function slam() {
-    var slam = { Name: "Slam", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new UnArmedSkill(), Damage: 1, DamageType: new BludgeoningDamage(this), Cost: 0, Quantity: 1, Enchantment: new UnEnchanted() }
-    return slam;
-}
-//swords
-//1hswords
-export function bronzeSword() {
-    var sword = { Name: "Bronze Sword", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 2, DamageType: new SlashingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return sword;
-}
-export function flamingsword() {
-    var sword = { Name: "Flaming Sword", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 5, DamageType: new SlashingDamage(this), Cost: 50, Quantity: 1, Enchantment: new FireEnchantment() }
-    return sword;
-}
-export function ironSword() {
-    var sword = { Name: "Iron Sword", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 3, DamageType: new SlashingDamage(this), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return sword;
-}
-export function steelSword() {
-    var sword = { Name: "Steel Sword", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 4, DamageType: new SlashingDamage(this), Cost: 15, Quantity: 1, Enchantment: new UnEnchanted() }
-    return sword;
-}
-export function sword() {
-    var sword = { Name: "Sword", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 2, DamageType: new SlashingDamage(this), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return sword;
-}
-//2hswords
-export function bronzeSword2H() {
-    var sword = { Name: "Bronze Sword 2H", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new HeavyWeaponSkill(), Damage: 3, DamageType: new SlashingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return sword;
-}
-export function ironSword2H() {
-    var sword = { Name: "Iron Sword 2H", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new HeavyWeaponSkill(), Damage: 4, DamageType: new SlashingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return sword;
-}
-export function steelSword2H() {
-    var sword = { Name: "Steel Sword 2H", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new HeavyWeaponSkill(), Damage: 5, DamageType: new SlashingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return sword;
-}
-//warhammers
-//1h warhammer
-export function bronzeWarHammer() {
-    var hammer = { Name: "Bronze WarHammer", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 2, DamageType: new BludgeoningDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return hammer;
-}
-export function ironWarHammer() {
-    var hammer = { Name: "Iron WarHammer", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 3, DamageType: new BludgeoningDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return hammer;
-}
-export function steelWarHammer() {
-    var hammer = { Name: "Steel WarHammer", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new HeavyWeaponSkill(), Damage: 4, DamageType: new BludgeoningDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return hammer;
-}
-//2h warhammer
-export function bronzeWarHammer2H() {
-    var hammer = { Name: "Bronze WarHammer 2H", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new HeavyWeaponSkill(), Damage: 3, DamageType: new BludgeoningDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return hammer;
-}
-export function ironWarHammer2H() {
-    var hammer = { Name: "Iron WarHammer 2H", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new HeavyWeaponSkill(), Damage: 4, DamageType: new BludgeoningDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return hammer;
-}
-export function steelWarHammer2H() {
-    var hammer = { Name: "Steel WarHammer 2H", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new HeavyWeaponSkill(), Damage: 5, DamageType: new BludgeoningDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return hammer;
-}
-//ranged weapon
-//bows
-export function oakLongBow() {
-    var bow = { Name: "Oak Long Bow", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new RangedSkill(), Damage: 4, DamageType: new PiercingDamage(this), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bow;
-}
-export function oakShortBow() {
-    var bow = { Name: "Oak Short Bow", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new RangedSkill(), Damage: 4, DamageType: new PiercingDamage(this), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bow;
-}
-export function willowLongBow() {
-    var bow = { Name: "Willow Long Bow", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new RangedSkill(), Damage: 5, DamageType: new PiercingDamage(this), Cost: 20, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bow;
-}
-export function willowShortBow() {
-    var bow = { Name: "Willow Short Bow", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new RangedSkill(), Damage: 5, DamageType: new PiercingDamage(this), Cost: 20, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bow;
-}
-export function woodLongBow() {
-    var bow = { Name: "Wood Long Bow", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new RangedSkill(), Damage: 3, DamageType: new PiercingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bow;
-}
-export function woodShortBow() {
-    var bow = { Name: "Wood Short Bow", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new RangedSkill(), Damage: 3, DamageType: new PiercingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bow;
-}
-//crossbows
-export function bronzeCrossBow1H() {
-    var bow = { Name: "Bronze Crossbow 1H", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new RangedSkill(), Damage: 1, DamageType: new PiercingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bow;
-}
-export function bronzeCrossBow2H() {
-    var bow = { Name: "Bronze Crossbow 2H", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new RangedSkill(), Damage: 3, DamageType: new PiercingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bow;
-}
-export function ironCrossBow1H() {
-    var bow = { Name: "Iron Crossbow 1H", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new RangedSkill(), Damage: 2, DamageType: new PiercingDamage(this), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bow;
-}
-export function ironCrossBow2H() {
-    var bow = { Name: "Iron Crossbow 2H", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new RangedSkill(), Damage: 4, DamageType: new PiercingDamage(this), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bow;
-}
-export function steelCrossBow1H() {
-    var bow = { Name: "Steel Crossbow 1H", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new RangedSkill(), Damage: 3, DamageType: new PiercingDamage(this), Cost: 20, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bow;
-}
-export function steelCrossBow2H() {
-    var bow = { Name: "Steel Crossbow 2H", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new RangedSkill(), Damage: 5, DamageType: new PiercingDamage(this), Cost: 20, Quantity: 1, Enchantment: new UnEnchanted() }
-    return bow;
-}
-//guns
-export function bronzePistol() {
-    var gun = { Name: "Bronze Pistol", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new RangedSkill(), Damage: 1, DamageType: new PiercingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gun;
-}
-export function bronzeRifle() {
-    var gun = { Name: "Bronze Rifle", Level: 1, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new RangedSkill(), Damage: 3, DamageType: new PiercingDamage(this), Cost: 5, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gun;
-}
-export function ironPistol() {
-    var gun = { Name: "Iron Pistol", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new RangedSkill(), Damage: 3, DamageType: new PiercingDamage(this), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gun;
-}
-export function ironRifle() {
-    var gun = { Name: "Iron Rifle", Level: 5, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new RangedSkill(), Damage: 4, DamageType: new PiercingDamage(this), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gun;
-}
-export function steelPistol() {
-    var gun = { Name: "Steel Pistol", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "OneHand", Class: new RangedSkill(), Damage: 3, DamageType: new PiercingDamage(this), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gun;
-}
-export function steelRifle() {
-    var gun = { Name: "Steel Rifle", Level: 10, Slot: "Weapon", Type: "Equipable", SubType: "TwoHands", Class: new RangedSkill(), Damage: 5, DamageType: new PiercingDamage(this), Cost: 10, Quantity: 1, Enchantment: new UnEnchanted() }
-    return gun;
-}
 //junk
-export function banditSpoils() {
-    var bandit = { Name: "Bandit Spoils", Type: "Junk", SubType: "Vendor Trash", Cost: 50, Quantity: 1, ConsumeEffect(hero) { } }
-    return bandit;
-}
-export function ratTail() {
-    var ratTail = { Name: "Rat Tail", Type: "Junk", SubType: "", Cost: 1, Quantity: 1 }
-    return ratTail;
+export class Junk extends Item {
+    constructor(name, cost) {
+        super(name, cost)
+        this.Type = "Junk";
+    }
 }
 //burnt food
-export function burntBread() {
-    var bread = { Name: "Burnt Bread", Type: "Junk", SubType: "Burnt Food", Cost: 0, Quantity: 1, ConsumeEffect(hero) { } }
-    return bread
+export class BurntFood extends Junk {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Burnt Food";
+    }
 }
-export function burntBeef() {
-    var cook = { Name: "Burnt Beef", Type: "Junk", SubType: "Burnt Food", Cost: 0, Quantity: 1, ConsumeEffect(hero) { } }
-    return cook;
+export class BurntBread extends BurntFood {
+    constructor(name = "Burnt Bread", cost = 0) {
+        super(name, cost)
+    }
 }
-export function burntChicken() {
-    var cook = { Name: "Burnt Chicken", Type: "Junk", SubType: "Burnt Food", Cost: 0, Quantity: 1, ConsumeEffect(hero) { } }
-    return cook;
+export class BurntBeef extends BurntFood {
+    constructor(name = "Burnt Beef", cost = 0) {
+        super(name, cost)
+    }
 }
-export function burntFish() {
-    var cook = { Name: "Burnt Fish", Type: "Junk", SubType: "Burnt Food", Cost: 0, Quantity: 1, ConsumeEffect(hero) { } }
-    return cook;
+export class BurntChicken extends BurntFood {
+    constructor(name = "Burnt Chicken", cost = 0) {
+        super(name, cost)
+    }
 }
-export function burntRabbitMeat() {
-    var cookedRabbitMeat = { Name: "Burnt Rabbit Meat", Type: "Junk", SubType: "Burnt Food", Cost: 0, Quantity: 1, ConsumeEffect(hero) { } }
-    return cookedRabbitMeat;
+export class BurntFish extends BurntFood {
+    constructor(name = "Burnt Fish", cost = 0) {
+        super(name, cost)
+    }
 }
-export function burntRatMeat() {
-    var cookedRatMeat = { Name: "Burnt Rat Meat", Type: "Junk", SubType: "Burnt Food", Cost: 0, Quantity: 1, ConsumeEffect(hero) { } }
-    return cookedRatMeat;
+export class BurntRabbitMeat extends BurntFood {
+    constructor(name = "Burnt Rabbit Meat", cost = 0) {
+        super(name, cost)
+    }
 }
-export function burntStew() {
-    var stew = { Name: "Burnt Stew", Type: "Junk", SubType: "Burnt Food", Cost: 0, Quantity: 1, ConsumeEffect(hero) { } }
-    return stew;
+export class BurntRatMeat extends BurntFood {
+    constructor(name = "Burnt Rat Meat", cost = 0) {
+        super(name, cost)
+    }
 }
-//processed resources
+export class BurntStew extends BurntFood {
+    constructor(name = "Burnt Stew", cost = 0) {
+        super(name, cost)
+    }
+}
+//vendor trash
+export class VendorTrash extends Junk {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Vendor Trash";
+    }
+}
+export class BanditSpoils extends VendorTrash {
+    constructor(name = "Bandit Spoils", cost = 50) {
+        super(name, cost)
+    }
+}
+export class RatTail extends VendorTrash {
+    constructor(name = "Rat Tail", cost = 1) {
+        super(name, cost)
+    }
+}
+//processed
+export class Processed extends Item {
+    constructor(name, cost) {
+        super(name, cost)
+        this.Type = "Processed";
+    }
+}
 //alchemy
-export function gunPowder() {
-    var gun = { Name: "Dough", Type: "Processed", SubType: "Processed", Cost: 5, Quantity: 1 }
-    return gun;
+export class Alchemical extends Processed {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Alchemical";
+    }
+}
+export class GunPowder extends Alchemical {
+    constructor(name = "Gun Powder", cost = 5) {
+        super(name, cost)
+    }
 }
 //cooking
-export function dough() {
-    var dough = { Name: "Dough", Type: "Processed", SubType: "Baking", Cost: 2, Quantity: 1 }
-    return dough;
+export class Baking extends Processed {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Baking"
+    }
 }
-export function flour() {
-    var flour = { Name: "Flour", Type: "Processed", SubType: "Baking", Cost: 2, Quantity: 1 }
-    return flour;
+export class Dough extends Baking {
+    constructor(name = "Dough", cost = 2) {
+        super(name, cost)
+    }
+}
+export class Flour extends Baking {
+    constructor(name = "Flour", cost = 2) {
+        super(name, cost)
+    }
 }
 //firemaking
-export function ashes() {
-    var ashes = { Name: "Ashes", Type: "Processed", SubType: "Ashes", Cost: 1, Quantity: 1 }
-    return ashes
+export class Ashes extends Processed {
+    constructor(name = "Ashes", cost = 1) {
+        super(name, cost)
+        this.SubType = "Ashes";
+    }
 }
-export function charcoal() {
-    var charcoal = { Name: "Charcoal", Type: "Processed", SubType: "Charcoal", Cost: 1, Quantity: 1 }
-    return charcoal;
+export class Charcoal extends Processed {
+    constructor(name = "Charcoal", cost = 1) {
+        super(name, cost)
+        this.SubType = "Charcoal";
+    }
 }
 //fletching
-export function oakStock() {
-    var stock = { Name: "Oak Stock", Type: "Processed", SubType: "Stock", Cost: 5, Quantity: 1 }
-    return stock;
+export class Stock extends Processed {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Stock";
+    }
 }
-export function willowStock() {
-    var stock = { Name: "Willow Stock", Type: "Processed", SubType: "Stock", Cost: 10, Quantity: 1 }
-    return stock;
+export class OakStock extends Stock {
+    constructor(name = "Oak Stock", cost = 5) {
+        super(name, cost)
+    }
 }
-export function woodStock() {
-    var stock = { Name: "Wood Stock", Type: "Processed", SubType: "Stock", Cost: 1, Quantity: 1 }
-    return stock;
+export class WillowStock extends Stock {
+    constructor(name = "Willow Stock", cost = 10) {
+        super(name, cost)
+    }
+}
+export class WoodStock extends Stock {
+    constructor(name = "Wood Stock", cost = 1) {
+        super(name, cost)
+    }
 }
 //smithing
-export function bronzeBarrel() {
-    var barrel = { Name: "Bronze Barrel", Type: "Processed", SubType: "Barrel", Cost: 1, Quantity: 1 }
-    return barrel;
+export class Barrel extends Processed {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Barrel";
+    }
 }
-export function bronzeLimbs() {
-    var limbs = { Name: "Bronze Limbs", Type: "Processed", SubType: "Limbs", Cost: 1, Quantity: 1 }
-    return limbs;
+export class BronzeBarrel extends Barrel {
+    constructor(name = "Bronze Barrel", cost = 1) {
+        super(name, cost)
+    }
 }
-export function ironBarrel() {
-    var barrel = { Name: "Iron Barrel", Type: "Processed", SubType: "Barrel", Cost: 5, Quantity: 1 }
-    return barrel;
+export class IronBarrel extends Barrel {
+    constructor(name = "Iron Barrel", cost = 5) {
+        super(name, cost)
+    }
 }
-export function ironLimbs() {
-    var limbs = { Name: "Iron Limbs", Type: "Processed", SubType: "Limbs", Cost: 1, Quantity: 1 }
-    return limbs;
+export class SteelBarrel extends Barrel {
+    constructor(name = "Steel Barrel", cost = 10) {
+        super(name, cost)
+    }
 }
-export function steelBarrel() {
-    var barrel = { Name: "Steel Barrel", Type: "Processed", SubType: "Barrel", Cost: 10, Quantity: 1 }
-    return barrel;
+export class Limbs extends Processed {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Limbs";
+    }
 }
-export function steelLimbs() {
-    var limbs = { Name: "Steel Limbs", Type: "Processed", SubType: "Limbs", Cost: 1, Quantity: 1 }
-    return limbs;
+export class BronzeLimbs extends Limbs {
+    constructor(name = "Bronze Limbs", cost = 1) {
+        super(name, cost)
+    }
+}
+export class IronLimbs extends Limbs {
+    constructor(name = "Iron Limbs", cost = 5) {
+        super(name, cost)
+    }
+}
+export class SteelLimbs extends Limbs {
+    constructor(name = "Steel Limbs", cost = 10) {
+        super(name, cost)
+    }
 }
 //resources
+export class Resource extends Item {
+    constructor(name, cost) {
+        super(name, cost)
+        this.Type = "Resource";
+    }
+}
 //animal drop
-export function batGuano() {
-    var bat = { Name: "Bat Guano", Type: "Resource", SubType: "Animal Drop", Cost: 1, Quantity: 1 }
-    return bat;
+export class AnimalDrop extends Resource {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Animal Drop";
+    }
+}
+export class BatGuano extends Resource {
+    constructor(name = "Bat Guano", cost = 1) {
+        super(name, cost)
+    }
 }
 //bones
-export function bones() {
-    var bones = { Name: "Bones", Type: "Resource", SubType: "Bones", Cost: 1, Quantity: 1 }
-    return bones;
+export class Bones extends Resource {
+    constructor(name = "Bones", cost = 1) {
+        super(name, cost)
+        this.SubType = "Bones";
+    }
 }
-export function ectoplasm() {
-    var ectoplasm = { Name: "Ectoplasm", Type: "Resource", SubType: "Bones", Cost: 1, Quantity: 1 }
-    return ectoplasm;
+export class Ectoplasm extends Bones {
+    constructor(name = "Ectoplasm", cost = 1) {
+        super(name, cost)
+        this.SubType = "Bones";
+    }
 }
-export function skull() {
-    var bones = { Name: "Skull", Type: "Resource", SubType: "Bones", Cost: 1, Quantity: 1 }
-    return bones;
+export class Skull extends Bones {
+    constructor(name = "Skull", cost = 1) {
+        super(name, cost)
+        this.SubType = "Bones";
+    }
 }
 //cloth
-export function spiderSilkCloth() {
-    var cloth = { Name: "Spider Silk", Type: "Resource", SubType: "Cloth", Cost: 5, Quantity: 1 }
-    return cloth;
+export class Cloth extends Resource {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Cloth"
+    }
 }
-export function woolCloth() {
-    var cloth = { Name: "Wool", Type: "Resource", SubType: "Cloth", Cost: 1, Quantity: 1 }
-    return cloth;
+export class SpiderSilkCloth extends Cloth {
+    constructor(name = "Spider Silk", cost = 5) {
+        super(name, cost)
+    }
+}
+export class WoolCloth extends Cloth {
+    constructor(name = "Wool", cost = 1) {
+        super(name, cost)
+    }
+}
+//crop
+export class Crop extends Resource {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Crop"
+    }
+}
+export class Wheat extends Crop {
+    constructor(name = "Wheat", cost = 1) {
+        super(name, cost)
+    }
 }
 //feathers
-export function blackFeather() {
-    var feathers = { Name: "Black Feather", Type: "Resource", SubType: "Feather", Cost: 1, Quantity: 1 }
-    return feathers
+export class Feather extends Resource {
+    constructor(name = "Feather", cost = 1) {
+        super(name, cost)
+        this.SubType = "Feather"
+    }
 }
-export function feather() {
-    var feathers = { Name: "Feather", Type: "Resource", SubType: "Feather", Cost: 1, Quantity: 1 }
-    return feathers
+export class BlackFeather extends Feather {
+    constructor(name = "Black Feather", cost = 1) {
+        super(name, cost)
+    }
 }
 //fur
-export function bearFur() {
-    var fur = { Name: "Bear Fur", Type: "Resource", SubType: "Fur", Cost: 10, Quantity: 1 }
-    return fur;
+export class Fur extends Resource {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Fur"
+    }
 }
-export function wolfFur() {
-    var fur = { Name: "Wolf Fur", Type: "Resource", SubType: "Fur", Cost: 5, Quantity: 1 }
-    return fur;
+export class BearFur extends Fur {
+    constructor(name = "Bear Fur", cost = 10) {
+        super(name, cost)
+    }
+}
+export class WolfFur extends Fur {
+    constructor(name = "Wolf Fur", cost = 5) {
+        super(name, cost)
+    }
 }
 //leather
-export function cowLeather() {
-    var leather = { Name: "Cow Leather", Type: "Resource", SubType: "Leather", Cost: 1, Quantity: 1 }
-    return leather;
+export class Leather extends Resource {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Leather"
+    }
+}
+export class CowLeather extends Leather {
+    constructor(name = "Cow Leather", cost = 1) {
+        super(name, cost)
+    }
 }
 //metal bars
-export function bronzeBar() {
-    var bar = { Name: "Bronze Bar", Type: "Resource", SubType: "Bar", Cost: 2, Quantity: 1 }
-    return bar
+export class MetalBar extends Resource {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Bar"
+    }
 }
-export function ironBar() {
-    var bar = { Name: "Iron Bar", Type: "Resource", SubType: "Bar", Cost: 4, Quantity: 1 }
-    return bar
+export class BronzeBar extends MetalBar {
+    constructor(name = "Bronze Bar", cost = 2) {
+        super(name, cost)
+    }
 }
-export function steelBar() {
-    var bar = { Name: "Steel Bar", Type: "Resource", SubType: "Bar", Cost: 8, Quantity: 1 }
-    return bar
+export class IronBar extends MetalBar {
+    constructor(name = "Iron Bar", cost = 4) {
+        super(name, cost)
+    }
+}
+export class SteelBar extends MetalBar {
+    constructor(name = "Steel Bar", cost = 8) {
+        super(name, cost)
+    }
 }
 //ore
-export function coalOre() {
-    var ore = { Name: "Coal", Type: "Resource", SubType: "Ore", Cost: 4, Quantity: 1 }
-    return ore
+export class Ore extends Resource {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Ore"
+    }
 }
-export function copperOre() {
-    var ore = { Name: "Copper Ore", Type: "Resource", SubType: "Ore", Cost: 1, Quantity: 1 }
-    return ore
+export class CoalOre extends Ore {
+    constructor(name = "Coal", cost = 4) {
+        super(name, cost)
+    }
 }
-export function ironOre() {
-    var ore = { Name: "Iron Ore", Type: "Resource", SubType: "Ore", Cost: 2, Quantity: 1 }
-    return ore
+export class CopperOre extends Ore {
+    constructor(name = "Copper Ore", cost = 1) {
+        super(name, cost)
+    }
 }
-export function saltPeter() {
-    var ore = { Name: "Saltpeter", Type: "Resource", SubType: "Ore", Cost: 2, Quantity: 1 }
-    return ore
+export class IronOre extends Ore {
+    constructor(name = "Iron Ore", cost = 2) {
+        super(name, cost)
+    }
 }
-export function sulphur() {
-    var ore = { Name: "Sulphur", Type: "Resource", SubType: "Ore", Cost: 2, Quantity: 1 }
-    return ore
+export class SaltPeter extends Ore {
+    constructor(name = "Saltpeter", cost = 2) {
+        super(name, cost)
+    }
 }
-export function tinOre() {
-    var ore = { Name: "Tin Ore", Type: "Resource", SubType: "Ore", Cost: 1, Quantity: 1 }
-    return ore
+export class Sulphur extends Ore {
+    constructor(name = "Sulphur", cost = 2) {
+        super(name, cost)
+    }
 }
-//plant
-export function wheat() {
-    var wheat = { Name: "Wheat", Type: "Resource", SubType: "Plant", Cost: 1, Quantity: 1 }
-    return wheat;
+export class TinOre extends Ore {
+    constructor(name = "Tin Ore", cost = 1) {
+        super(name, cost)
+    }
 }
 //raw fish
-export function rawFish() {
-    var raw = { Name: "Raw Fish", Type: "Resource", SubType: "Raw Fish", Cost: 2, Quantity: 1 }
-    return raw;
+export class RawFish extends Resource {
+    constructor(name = "Raw Fish", cost = 2) {
+        super(name, cost)
+        this.SubType = "Raw Fish"
+    }
 }
 //raw meat
-export function rawBeef() {
-    var raw = { Name: "Raw Beef", Type: "Resource", SubType: "Raw Meat", Cost: 2, Quantity: 1 }
-    return raw;
+export class RawMeat extends Resource {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Raw Meat"
+    }
 }
-export function rawChicken() {
-    var raw = { Name: "Raw Chicken", Type: "Resource", SubType: "Raw Meat", Cost: 2, Quantity: 1 }
-    return raw;
+export class RawBeef extends RawMeat {
+    constructor(name = "Raw Beef", cost = 2) {
+        super(name, cost)
+    }
 }
-export function rawRabbitMeat() {
-    var rawRabbitMeat = { Name: "Raw Rabbit Meat", Type: "Resource", SubType: "Raw Meat", Cost: 2, Quantity: 1 }
-    return rawRabbitMeat;
+export class RawChicken extends RawMeat {
+    constructor(name = "Raw Chicken", cost = 2) {
+        super(name, cost)
+    }
 }
-export function rawRatMeat() {
-    var rawRatMeat = { Name: "Raw Rat Meat", Type: "Resource", SubType: "Raw Meat", Cost: 2, Quantity: 1 }
-    return rawRatMeat;
+export class RawRabbitMeat extends RawMeat {
+    constructor(name = "Raw Rabbit Meat", cost = 2) {
+        super(name, cost)
+    }
+}
+export class RawRatMeat extends RawMeat {
+    constructor(name = "Raw Rat Meat", cost = 2) {
+        super(name, cost)
+    }
 }
 //wood
-export function oakLogs() {
-    var wood = { Name: "Oak Logs", Type: "Resource", SubType: "Logs", Cost: 4, Quantity: 1 }
-    return wood;
+export class Logs extends Resource {
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "Logs"
+    }
 }
-export function willowLogs() {
-    var wood = { Name: "Willow Logs", Type: "Resource", SubType: "Logs", Cost: 8, Quantity: 1 }
-    return wood;
+export class OakLogs extends Logs {
+    constructor(name = "Oak Logs", cost = 4) {
+        super(name, cost)
+    }
 }
-export function woodLogs() {
-    var wood = { Name: "Wood Logs", Type: "Resource", SubType: "Logs", Cost: 2, Quantity: 1 }
-    return wood;
+export class WillowLogs extends Logs {
+    constructor(name = "Willow Logs", cost = 8) {
+        super(name, cost)
+    }
+}
+export class WoodLogs extends Logs {
+    constructor(name = "Wood Logs", cost = 2) {
+        super(name, cost)
+    }
 }
 //tools
-export function bucket() {
-    var bucket = { Name: "Bucket", Type: "Tool", SubType: "Bucket", Tier: 1, Cost: 1, Quantity: 1 }
-    return bucket
+export class Tool extends Item {
+    Tier;
+    constructor(name, cost, tier) {
+        super(name, cost)
+        this.Tier = tier; this.Type = "Tool"
+    }
 }
-export function thread() {
-    var thread = { Name: "Thread", Type: "Tool", SubType: "Thread", Tier: 1, Cost: 1, Quantity: 1 }
-    return thread;
+export class Bucket extends Tool {
+    constructor(name = "Bucket", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Bucket"
+    }
+}
+export class Thread extends Tool {
+    constructor(name = "Thread", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Thread"
+    }
 }
 //alchemy
-export function mortarAndPestle() {
-    var mortar = { Name: "Mortar and Pestle", Type: "Tool", SubType: "Mortar and Pestle", Tier: 1, Cost: 10, Quantity: 1 }
-    return mortar;
+export class MortarAndPestle extends Tool {
+    constructor(name = "Mortar and Pestle", cost = 10, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Mortar and Pestle"
+    }
 }
 //crafting
-export function needle() {
-    var needle = { Name: "Needle", Type: "Tool", SubType: "Needle", Tier: 1, Cost: 1, Quantity: 1 }
-    return needle
+export class Needle extends Tool {
+    constructor(name = "Mortar and Pestle", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Needle"
+    }
 }
 //enchanting
-export function enchantmentTome() {
-    var tome = { Name: "Enchantment Tome", Type: "Tool", SubType: "Tome", Tier: 1, Cost: 10, Quantity: 1 }
-    return tome;
+export class EnchantmentTome extends Tool {
+    constructor(name = "Mortar and Pestle", cost = 10, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Tome"
+    }
 }
-//engineering
-export function bronzeTools() {
-    var tool = { Name: "Bronze Tools", Type: "Tool", SubType: "Tools", Tier: 1, Cost: 1, Quantity: 1 }
-    return tool
+//engineering and smithing
+export class Tools extends Tool {
+    constructor(name, cost, tier) {
+        super(name, cost, tier)
+        this.SubType = "Tools"
+    }
 }
-export function tools() {
-    var tool = { Name: "Tools", Type: "Tool", SubType: "Tools", Tier: 1, Cost: 1, Quantity: 1 }
-    return tool
+export class BronzeTools extends Tools {
+    constructor(name = "Bronze Tools", cost = 1, tier = 1) {
+        super(name, cost, tier)
+    }
 }
-export function ironTools() {
-    var tool = { Name: "Iron Tools", Type: "Tool", SubType: "Tools", Tier: 2, Cost: 5, Quantity: 1 }
-    return tool
+export class IronTools extends Tools {
+    constructor(name = "Iron Tools", cost = 5, tier = 2) {
+        super(name, cost, tier)
+    }
 }
-export function steelTools() {
-    var tool = { Name: "Steel Tools", Type: "Tool", SubType: "Tools", Tier: 3, Cost: 10, Quantity: 1 }
-    return tool
+export class SteelTools extends Tools {
+    constructor(name = "Steel Tools", cost = 10, tier = 3) {
+        super(name, cost, tier)
+    }
 }
 //farming
-export function shears() {
-    var shears = { Name: "Shears", Type: "Tool", SubType: "Shears", Tier: 1, Cost: 1, Quantity: 1 }
-    return shears;
+export class Shears extends Tool {
+    constructor(name = "Shears", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Shears"
+    }
 }
-export function sickle() {
-    var tool = { Name: "Sickle", Type: "Tool", SubType: "Sickle", Tier: 1, Cost: 1, Quantity: 1 }
-    return tool;
+export class Sickle extends Tool {
+    constructor(name = "Sickle", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Sickle"
+    }
 }
 //fishing
-export function fishingRod() {
-    var fishingRod = { Name: "Fishing Rod", Type: "Tool", SubType: "Fishing Rod", Tier: 1, Cost: 1, Quantity: 1 }
-    return fishingRod
+export class FishingRod extends Tool {
+    constructor(name = "Fishing Rod", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Fishing Rod"
+    }
 }
 //hatchets
-export function bronzeHatchet() {
-    var hatchet = { Name: "Bronze Hatchet", Type: "Tool", SubType: "Hatchet", Tier: 1, Cost: 1, Quantity: 1 }
-    return hatchet
+export class Hatchet extends Tool {
+    constructor(name, cost, tier) {
+        super(name, cost, tier)
+        this.SubType = "Hatchet"
+    }
 }
-export function hatchet() {
-    var hatchet = { Name: "Hatchet", Type: "Tool", SubType: "Hatchet", Tier: 1, Cost: 1, Quantity: 1 }
-    return hatchet
+export class BronzeHatchet extends Hatchet {
+    constructor(name = "Bronze Hatchet", cost = 1, tier = 1) {
+        super(name, cost, tier)
+    }
 }
-export function ironHatchet() {
-    var hatchet = { Name: "Iron Hatchet", Type: "Tool", SubType: "Hatchet", Tier: 2, Cost: 5, Quantity: 1 }
-    return hatchet
+export class IronHatchet extends Hatchet {
+    constructor(name = "Iron Hatchet", cost = 5, tier = 2) {
+        super(name, cost, tier)
+    }
 }
-export function steelHatchet() {
-    var hatchet = { Name: "Steel Hatchet", Type: "Tool", SubType: "Hatchet", Tier: 3, Cost: 10, Quantity: 1 }
-    return hatchet
+export class SteelHatchet extends Hatchet {
+    constructor(name = "Steel Hatchet", cost = 10, tier = 3) {
+        super(name, cost, tier)
+    }
 }
 //knife
-export function knife() {
-    var knife = { Name: "Knife", Type: "Tool", SubType: "Knife", Tier: 1, Cost: 1, Quantity: 1 }
-    return knife
+export class Knife extends Tool {
+    constructor(name = "Knife", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Knife"
+    }
 }
 //pickaxes
-export function bronzePickAxe() {
-    var pickAxe = { Name: "Bronze Pickaxe", Type: "Tool", SubType: "Pickaxe", Tier: 1, Cost: 1, Quantity: 1 }
-    return pickAxe
+export class PickAxe extends Tool {
+    constructor(name, cost, tier) {
+        super(name, cost, tier)
+        this.SubType = "Pickaxe"
+    }
 }
-export function ironPickAxe() {
-    var pickAxe = { Name: "Iron Pickaxe", Type: "Tool", SubType: "Pickaxe", Tier: 2, Cost: 5, Quantity: 1 }
-    return pickAxe
+export class BronzePickAxe extends PickAxe {
+    constructor(name = "Bronze Pickaxe", cost = 1, tier = 1) {
+        super(name, cost, tier)
+    }
 }
-export function pickAxe() {
-    var pickAxe = { Name: "Pickaxe", Type: "Tool", SubType: "Pickaxe", Tier: 1, Cost: 1, Quantity: 1 }
-    return pickAxe
+export class IronPickAxe extends PickAxe {
+    constructor(name = "Iron Pickaxe", cost = 5, tier = 2) {
+        super(name, cost, tier)
+    }
 }
-export function steelPickAxe() {
-    var pickAxe = { Name: "Pickaxe", Type: "Tool", SubType: "Pickaxe", Tier: 3, Cost: 10, Quantity: 1 }
-    return pickAxe
+export class SteelPickAxe extends PickAxe {
+    constructor(name = "Steel Pickaxe", cost = 10, tier = 3) {
+        super(name, cost, tier)
+    }
 }
 //tinderboxes
-export function tinderBox() {
-    var tinderBox = { Name: "Tinderbox", Type: "Tool", SubType: "Tinder Box", Tier: 1, Cost: 1, Quantity: 1 }
-    return tinderBox
+export class TinderBox extends Tool {
+    constructor(name = "Tinderbox", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Tinderbox"
+    }
 }

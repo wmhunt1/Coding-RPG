@@ -1,5 +1,5 @@
 import { AddToCharacterLog } from "./CharacterScripts";
-import { bareBack, bareFeet, bareFinger, bareFist, bareHands, bareHead, bareLegs, bareNeck, bareTorso, emptyOffHand } from "../Database/ItemsDB"
+import { BareBack, BareFeet, BareFinger, BareFist, BareHands, BareHead, BareLegs, BareNeck, BareTorso, EmptyOffHand } from "../Database/ItemsDB"
 import { FindSkillInSkillBook } from "./SkillScripts";
 Array.prototype.remove = function () {
     var what, a = arguments, L = a.length, ax;
@@ -85,13 +85,13 @@ export function UnEquip(char, inventory, item, log) {
         AddItemToInventory(char, inventory, item, item.Quantity, log)
     }
     if (item.Slot === "Weapon") {
-        char.Equipment.Weapon = bareFist()
+        char.Equipment.Weapon = new BareFist()
     }
     if (item.Slot === "OffHand") {
-        char.Equipment.OffHand = emptyOffHand()
+        char.Equipment.OffHand = new EmptyOffHand()
     }
     if (item.Slot === "Head") {
-        char.Equipment.Head = bareHead()
+        char.Equipment.Head = new BareHead()
     }
     if (item.Slot === "Torso") {
         char.Equipment.Torso.ProtectionType.onUnEquip(char, char.Equipment.Torso)
@@ -107,31 +107,32 @@ export function UnEquip(char, inventory, item, log) {
             //char.Attributes.Dexterity.Penalty += 1;
             //char.Attributes.Speed.Penalty += 1;
         }
-        char.Equipment.Torso = bareTorso()
+        char.Equipment.Torso = new BareTorso()
     }
     if (item.Slot === "Legs") {
-        char.Equipment.Legs = bareLegs()
+        char.Equipment.Legs = new BareLegs()
     }
     if (item.Slot === "Hands") {
-        char.Equipment.Hands = bareHands()
+        char.Equipment.Hands = new BareHands()
     }
     if (item.Slot === "Feet") {
-        char.Equipment.Feet = bareFeet()
+        char.Equipment.Feet = new BareFeet()
     }
     if (item.Slot === "Back") {
-        char.Equipment.Back = bareBack()
+        char.Equipment.Back = new BareBack()
     }
     if (item.Slot === "Neck") {
-        char.Equipment.Neck = bareNeck()
+        char.Equipment.Neck = new BareNeck()
     }
     if (item.Slot === "Ring") {
-        char.Equipment.Ring = bareFinger()
+        char.Equipment.Ring = new BareFinger()
     }
     item.Enchantment.OnUnEquipEffect(char, item)
     char.Inventory = inventory;
 }
 export function EquipItem(char, inventory, item, log) {
-    if (FindSkillInSkillBook(char, item.Class).Level >= item.Level) {
+    console.log(item)
+    if (FindSkillInSkillBook(char, item.Class).Level >= item.Level || item.Class === undefined) {
         AddToCharacterLog(log, char.Name + " Equipped " + item.Name);
         if (item.Slot === "Weapon") {
             UnEquip(char, inventory, char.Equipment.Weapon, log)

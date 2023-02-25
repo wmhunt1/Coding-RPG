@@ -1,5 +1,5 @@
 import { FerraForgeHeart } from "./CharactersDB";
-import { silverRingLR } from "./ItemsDB";
+import { SilverRingLR } from "./ItemsDB";
 import { banditQuest1, dwarvenMineGoblinQuest, giantQuest, gnollQuest1, metSweetheart, ratCellarQuest, scareCrowQuest1, scareCrowQuest2, scareCrowQuest3, scareCrowQuest4, skeletonQuest, wizardTowerQuest1 } from "./QuestsDB"
 import { CalculateTime } from "../Scripts/MapScripts";
 import { FindPartyMember, JoinParty, LeaveParty, PartyRecovery, RemoveGold } from "../Scripts/CharacterScripts";
@@ -298,7 +298,7 @@ export function littleRootFarmDialogue(hero) {
         dialogue = littleRoot3(hero, questIndex)
     }
     else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
-        var index = FindItemInInventory(hero.Inventory, silverRingLR())
+        var index = FindItemInInventory(hero.Inventory, new SilverRingLR())
         if (index !== null) {
             dialogue = littleRoot4(hero)
         }
@@ -330,7 +330,7 @@ export function littleRoot4(hero) {
     var questIndex = CheckForQuest(hero, scareCrowQuest4())
     var dialogue = {
         Name: "Return ring to Farmer Littleroot", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Give ring to Farmer Littleroot?", Next: 1 }, { Id: 2, Line: "You decide to return it", Next: 3 }, { Id: 3, Line: "You decide to keep it", Next: 3 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }, { Id: 3, Options: [["Leave", 0]] }] }
-        , responseEffect(hero, option) { if (option === 2) { var index = FindItemInInventory(hero.Inventory, silverRingLR()); RemoveItemFromInventory(hero, hero.Inventory, hero.Inventory[index], 1, hero); IncreaseReputation(hero, new DaleTownReputation(), 1); CompleteQuest(hero, hero.Journal[questIndex]) } }
+        , responseEffect(hero, option) { if (option === 2) { var index = FindItemInInventory(hero.Inventory, new SilverRingLR()); RemoveItemFromInventory(hero, hero.Inventory, hero.Inventory[index], 1, hero); IncreaseReputation(hero, new DaleTownReputation(), 1); CompleteQuest(hero, hero.Journal[questIndex]) } }
     }
     return dialogue
 }

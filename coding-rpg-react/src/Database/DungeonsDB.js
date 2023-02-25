@@ -1,49 +1,59 @@
 import { banditAndBanditArcherEncounter, banditAndBanditBersekerEncounter, banditArcherEncounter, banditBerserkerEncounter, banditEncounter, banditTrioEncounter, bossGoblinEncounter, enterGoblinMineEncounter, foremanGeorgeEncounter, giantEncounter, giantRatEncounter, giantSpiderEncounter, gnollEncounter, gnollLeaderEncounter, gnollShamanEncounter, goblinEncounter, goblinWithWorgEncounter, koboldSlavesEncounter, ratEncounter, saveMinersEncounter, saveTenguEncounter, spiderEncounter } from "./EncountersDB";
-import { ale, banditSpoils, bronzeBar, cowLeather, spiderSilkCloth } from "./ItemsDB"
-import { CheckForQuest } from "../Scripts/QuestScripts";
-import { scareCrowQuest3 } from "./QuestsDB";
+import { Ale, BanditSpoils, BronzeBar, CowLeather, SpiderSilkCloth } from "./ItemsDB"
 
-export function banditHideoutDungeon(hero) {
-    var hideout = { Name: "Bandit Hideout", Encounters: [banditArcherEncounter(), banditEncounter(), banditAndBanditArcherEncounter(), banditEncounter(), banditAndBanditBersekerEncounter(), banditEncounter(), banditBerserkerEncounter()], Boss: banditTrioEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: banditSpoils() }
-    return hideout
-}
-export function giantCaveDungeon(hero) {
-    var cave = { Name: "Giant Cave", Encounters: [], Boss: giantEncounter(), AfterBoss: foremanGeorgeEncounter(hero), GoldReward: 10, ItemReward: null }
-    return cave
-}
-export function giantCaveDungeonBeforeAndAfterQuest(hero) {
-    var cave = { Name: "Giant Cave", Encounters: [], Boss: giantEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: null }
-    return cave
-}
-export function gnollDenDungeon() {
-    var cave = { Name: "Gnoll Den", Encounters: [gnollEncounter(), gnollShamanEncounter(), gnollEncounter()], Boss: gnollLeaderEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: cowLeather() }
-    return cave
-}
-//had to split these up for some reason
-export function goblinMine(hero) {
-    var goblinMine = { Name: "Dwarven Mine", Encounters: [enterGoblinMineEncounter(hero), goblinWithWorgEncounter(), koboldSlavesEncounter(hero), goblinEncounter(), goblinWithWorgEncounter(), goblinEncounter()], Boss: bossGoblinEncounter(), AfterBoss: saveMinersEncounter(hero), GoldReward: 0, ItemReward: bronzeBar() }
-    return goblinMine;
-}
-export function goblinMineAfterQuest(hero) {
-    var goblinMine = { Name: "Dwarven Mine", Encounters: [goblinWithWorgEncounter(), goblinEncounter(), goblinWithWorgEncounter(), goblinEncounter()], Boss: bossGoblinEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: null }
-    return goblinMine;
-}
-export function puzzleCubeDungeon(hero) {
-    var dungeon = { Name: "Puzzle Cube", Encounters: [], Boss: null, AfterBoss: null, GoldReward: 0, ItemReward: null }
-    return dungeon;
-}
-export function ratCellar(hero) {
-    var ratCellar = { Name: "Cellar", Encounters: [ratEncounter(), ratEncounter(), ratEncounter()], Boss: giantRatEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: ale() }
-    return ratCellar;
-}
-export function spiderCaveDungeon(hero) {
-    var spiderCave;
-    var questIndex = CheckForQuest(hero, scareCrowQuest3())
-    if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
-        spiderCave = { Name: "Spider Cave", Encounters: [spiderEncounter(), spiderEncounter(), spiderEncounter()], Boss: giantSpiderEncounter(), AfterBoss: null, GoldReward: 0, ItemReward: spiderSilkCloth() }
+export class Dungeon {
+    Hero; Name; Encounters; Boss; AfterBoss; GoldReward; ItemReward;
+    constructor(hero, name, encounters, boss, after, gold, item) {
+        this.Hero = hero; this.Name = name; this.Encounters = encounters; this.Boss = boss; this.AfterBoss = after; this.GoldReward = gold; this.ItemReward = item;
     }
-    else {
-        spiderCave = { Name: "Spider Cave", Encounters: [spiderEncounter(), spiderEncounter(), spiderEncounter()], Boss: spiderEncounter(), AfterBoss: saveTenguEncounter(hero), GoldReward: 0, ItemReward: spiderSilkCloth() }
+}
+export class BanditHideoutDungeon extends Dungeon {
+    constructor(hero, name = "Bandit Hideout", encounters = [banditArcherEncounter(), banditEncounter(), banditAndBanditArcherEncounter(), banditEncounter(), banditAndBanditBersekerEncounter(), banditEncounter(), banditBerserkerEncounter()], boss = banditTrioEncounter(), after = null, gold = 0, item = new BanditSpoils()) {
+        super(hero, name, encounters, boss, after, gold, item)
     }
-    return spiderCave
+}
+export class GiantCaveDungeon extends Dungeon {
+    constructor(hero, name = "Giant Cave", encounters = [], boss = giantEncounter(), after = foremanGeorgeEncounter(hero), gold = 10, item = null) {
+        super(hero, name, encounters, boss, after, gold, item)
+    }
+}
+export class GiantCaveDungeonBeforeAndAfterQuest extends Dungeon {
+    constructor(hero, name = "Giant Cave", encounters = [], boss = giantEncounter(), after = null, gold = 10, item = null) {
+        super(hero, name, encounters, boss, after, gold, item)
+    }
+}
+export class GnollDenDungeon extends Dungeon {
+    constructor(hero, name = "Gnoll Den", encounters = [gnollEncounter(), gnollShamanEncounter(), gnollEncounter()], boss = gnollLeaderEncounter(), after = null, gold = 10, item = new CowLeather()) {
+        super(hero, name, encounters, boss, after, gold, item)
+    }
+}
+export class GoblinMine extends Dungeon {
+    constructor(hero, name = "Goblin Mine", encounters = [enterGoblinMineEncounter(hero), goblinWithWorgEncounter(), koboldSlavesEncounter(hero), goblinEncounter(), goblinWithWorgEncounter(), goblinEncounter()], boss = bossGoblinEncounter(), after = saveMinersEncounter(hero), gold = 10, item = new BronzeBar()) {
+        super(hero, name, encounters, boss, after, gold, item)
+    }
+}
+export class GoblinMineAfterQuest extends Dungeon {
+    constructor(hero, name = "Goblin Mine", encounters = [goblinWithWorgEncounter(), goblinEncounter(), goblinWithWorgEncounter(), goblinEncounter()], boss = bossGoblinEncounter(), after = null, gold = 10, item = new BronzeBar()) {
+        super(hero, name, encounters, boss, after, gold, item)
+    }
+}
+export class PuzzleCubeDungeon extends Dungeon {
+    constructor(hero, name = "Puzzle Cube", encounters = [], boss = null, after = null, gold = 0, item = null) {
+        super(hero, name, encounters, boss, after, gold, item)
+    }
+}
+export class RatCellar extends Dungeon {
+    constructor(hero, name = "Cellar", encounters = [ratEncounter(), ratEncounter(), ratEncounter()], boss = giantRatEncounter(), after = null, gold = 0, item = new Ale()) {
+        super(hero, name, encounters, boss, after, gold, item)
+    }
+}
+export class SpiderCaveDungeon extends Dungeon {
+    constructor(hero, name = "Spider Cave", encounters = [spiderEncounter(), spiderEncounter(), spiderEncounter()], boss = giantSpiderEncounter(), after = null, gold = 0, item = new SpiderSilkCloth()) {
+        super(hero, name, encounters, boss, after, gold, item)
+    }
+}
+export class SpiderCaveDungeonDuringQuest extends Dungeon {
+    constructor(hero, name = "Spider Cave", encounters = [spiderEncounter(), spiderEncounter(), spiderEncounter()], boss = giantSpiderEncounter(), after = saveTenguEncounter(hero), gold = 0, item = new SpiderSilkCloth()) {
+        super(hero, name, encounters, boss, after, gold, item)
+    }
 }

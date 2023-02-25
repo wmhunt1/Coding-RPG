@@ -1,8 +1,8 @@
 import { CheckForQuest } from "../Scripts/QuestScripts"
 import { Bandit, Bat, Bear, Chicken, Cow, Ghost, Giant, Gnoll, Goblin, ScareCrow, Skeleton, Spider, Wolf } from './CharactersDB'
 import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, tenguCampDialogue } from "./DialoguesDB"
-import { banditHideoutDungeon, giantCaveDungeon, giantCaveDungeonBeforeAndAfterQuest, gnollDenDungeon, goblinMine, goblinMineAfterQuest, spiderCaveDungeon } from "./DungeonsDB"
-import { dwarvenMineGoblinQuest, giantQuest } from "./QuestsDB"
+import { BanditHideoutDungeon, GiantCaveDungeon, GiantCaveDungeonBeforeAndAfterQuest, GnollDenDungeon, GoblinMine, GoblinMineAfterQuest, SpiderCaveDungeon, SpiderCaveDungeonDuringQuest } from "./DungeonsDB"
+import { dwarvenMineGoblinQuest, giantQuest, scareCrowQuest3 } from "./QuestsDB"
 import { DaleChapelShop, DreamingWorkerInn, ForgeHeartSmithy, GeneralShop, InnShop, JoeTheTradersTradingPost, WitchHutShop, WizardTowerShop } from "./ShopsDB"
 import { alchemyNode, blackFeatherNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletchNode, herbNode, huntNode, millNode, mineNode, saltPeterNode, sheepNode, waterNode, wellNode, woodNode } from "./SkillNodesDB"
 
@@ -76,7 +76,18 @@ export function hauntedManor(hero, x, y) {
     return manor;
 }
 export function spiderCave(hero, x, y) {
-    var spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterSpiderCaveDungeon(hero), enterSpiderEncounter(hero)] }
+    var spider;
+    var questIndex = CheckForQuest(hero, scareCrowQuest3(hero))
+    if (questIndex === null)
+    {
+        spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterSpiderCaveDungeon(hero), enterSpiderEncounter(hero)] }
+    }
+    else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
+        spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterSpiderCaveDungeon(hero), enterSpiderEncounter(hero)] }
+    }
+    else {
+        spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterSpiderCaveDungeonDuringQuest(hero), enterSpiderEncounter(hero)] }
+    }
     return spider;
 }
 //shop
@@ -149,31 +160,35 @@ export function road(hero, x, y) {
 //sublocations
 //enter dungeons
 export function enterBanditHideout(hero) {
-    var enter = { Name: "Bandit Hideout (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: banditHideoutDungeon(hero), shop: null, skill: null }; return content } }
+    var enter = { Name: "Bandit Hideout (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new BanditHideoutDungeon(hero), shop: null, skill: null }; return content } }
     return enter;
 }
 export function enterDwarvenMine(hero) {
-    var enterDwarvenMine = { Name: "Dwarven Mine (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: goblinMine(hero), shop: null, skill: null }; return content } }
+    var enterDwarvenMine = { Name: "Dwarven Mine (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GoblinMine(hero), shop: null, skill: null }; return content } }
     return enterDwarvenMine
 }
 export function enterDwarvenMineAfterQuest(hero) {
-    var enterDwarvenMine = { Name: "Dwarven Mine (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: goblinMineAfterQuest(hero), shop: null, skill: null }; return content } }
+    var enterDwarvenMine = { Name: "Dwarven Mine (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GoblinMineAfterQuest(hero), shop: null, skill: null }; return content } }
     return enterDwarvenMine
 }
 export function enterGiantCaveDungeon(hero) {
-    var enter = { Name: "Giant Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: giantCaveDungeon(hero), shop: null, skill: null }; return content } }
+    var enter = { Name: "Giant Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GiantCaveDungeon(hero), shop: null, skill: null }; return content } }
     return enter;
 }
 export function enterGiantCaveDungeonBeforeAndAfterQuest(hero) {
-    var enter = { Name: "Giant Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: giantCaveDungeonBeforeAndAfterQuest(hero), shop: null, skill: null }; return content } }
+    var enter = { Name: "Giant Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GiantCaveDungeonBeforeAndAfterQuest(hero), shop: null, skill: null }; return content } }
     return enter;
 }
 export function enterGnolDenDungeon(hero) {
-    var enter = { Name: "Gnoll Den (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: gnollDenDungeon(hero), shop: null, skill: null }; return content } }
+    var enter = { Name: "Gnoll Den (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GnollDenDungeon(hero), shop: null, skill: null }; return content } }
     return enter;
 }
 export function enterSpiderCaveDungeon(hero) {
-    var enter = { Name: "Spider Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: spiderCaveDungeon(hero), shop: null, skill: null }; return content } }
+    var enter = { Name: "Spider Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new SpiderCaveDungeon(hero), shop: null, skill: null }; return content } }
+    return enter;
+}
+export function enterSpiderCaveDungeonDuringQuest(hero) {
+    var enter = { Name: "Spider Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new SpiderCaveDungeonDuringQuest(hero), shop: null, skill: null }; return content } }
     return enter;
 }
 //enter dialogues

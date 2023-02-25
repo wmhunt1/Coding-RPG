@@ -17,11 +17,7 @@ Use valley as small starting area and have Halfland to south
 
 Convert objects to classes and subclasses
 Dialogues
-Dungeons
 Encounters
-Items
-Consumables
-Equipables
 Locations
 Maps
 Quests

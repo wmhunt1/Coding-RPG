@@ -21,23 +21,23 @@ export class ArmorSkill extends Skill {
     }
 }
 export class BlockSkill extends ArmorSkill {
-    constructor(name) {
-        super(name = "Block")
+    constructor(name = "Block") {
+        super(name)
     }
 }
 export class HeavyArmorSkill extends ArmorSkill {
-    constructor(name) {
-        super(name = "Heavy Armor")
+    constructor(name = "Heavy Armor") {
+        super(name)
     }
 }
 export class LightArmorSkill extends ArmorSkill {
-    constructor(name) {
-        super(name = "Light Armor")
+    constructor(name = "Light Armor") {
+        super(name)
     }
 }
 export class UnArmoredSkill extends ArmorSkill {
-    constructor(name) {
-        super(name = "UnArmored")
+    constructor(name = "UnArmored") {
+        super(name)
     }
 }
 
