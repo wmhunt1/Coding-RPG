@@ -19,7 +19,7 @@ import {
     WoodShortBow, WoodStaff, WoodStock, WoodWand, WoolBoots, WoolCloth, WoolGloves, WoolHat, WoolRobeBottom, WoolRobeTop,
     WoolTrousers, WoolTunic, WoolWizardHat, OakShortBow, WillowShortBow, OakLongBow, WillowLongBow, WoodLongBow, Bones,
     Skull, Ectoplasm, SpiderSilkCloth, SpiderSilkBoots, SpiderSilkGloves, SpiderSilkRobeBottom, SpiderSilkRobeTop,
-    SpiderSilkWizardHat, BronzeBoots, MortarAndPestle, UnEnchantedWoodWand, UnEnchantedWillowWand, UnEnchantedWillowStaff, UnEnchantedOakStaff, UnEnchantedWoodStaff, UnEnchantedOakWand
+    SpiderSilkWizardHat, BronzeBoots, MortarAndPestle, UnEnchantedWoodWand, UnEnchantedWillowWand, UnEnchantedWillowStaff, UnEnchantedOakStaff, UnEnchantedWoodStaff, UnEnchantedOakWand, Trap
 } from "./ItemsDB"
 export class SkillRecipe {
     Name; Skill; Tool; Verb; LevelRequirement; Exp; Input; Output; FailureOutput;
@@ -1009,11 +1009,6 @@ export class HuntingRecipe extends SkillRecipe {
         this.Skill = "Hunting"; this.Verb = "Hunt"
     }
 }
-export class HuntRabbit extends HuntingRecipe {
-    constructor(name = "Hunt Rabbit", level = 1, xp = 25, input = [], output = { Item: new RawRabbitMeat(), Quantity: 1 }, failure = null) {
-        super(name, level, xp, input, output, failure)
-    }
-}
 export class AnimalDropGatheringRecipe extends HuntingRecipe {
     constructor(name, level, xp, input, output, failure) {
         super(name, level, xp, input, output, failure)
@@ -1024,6 +1019,17 @@ export class GatherBlackFeathers extends AnimalDropGatheringRecipe {
     constructor(name = "Gather Feathers", level = 1, xp = 5, input = [], output = { Item: new BlackFeather(), Quantity: 1 }, failure = null) {
         super(name, level, xp, input, output, failure)
         this.Verb = "Gather"
+    }
+}
+export class TrapHunting extends HuntingRecipe {
+    constructor(name, level, xp, input, output, failure) {
+        super(name, level, xp, input, output, failure)
+        this.Verb = "Verb"; this.Tool = new Trap()
+    }
+}
+export class HuntRabbit extends TrapHunting {
+    constructor(name = "Hunt Rabbit", level = 1, xp = 25, input = [], output = { Item: new RawRabbitMeat(), Quantity: 1 }, failure = null) {
+        super(name, level, xp, input, output, failure)
     }
 }
 //mining

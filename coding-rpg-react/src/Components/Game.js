@@ -21,7 +21,7 @@ import SkillNode from './SkillNode';
 import SpellBook from './SpellBook';
 import Shop from './Shop';
 import Toolbar from './Toolbar';
-import { worldMap } from '../Database/MapsDB';
+import { WorldMap } from '../Database/MapsDB';
 import { testDialogueOverhaul } from '../Database/DialoguesDB';
 
 function Game(props) {
@@ -86,7 +86,7 @@ function Game(props) {
             <div><button className='menu-button' onClick={() => setActive("Game")}><h3>Leave</h3></button></div>
           </div> : <div></div>}
         </div>
-        {active === "Game" ? <div><div style={{ marginLeft: "15%", marginRight: "15%" }}><Map parentCallback={handleCallback} hero={hero} map={worldMap(hero)}></Map></div> </div> : <div> </div>}
+        {active === "Game" ? <div><div style={{ marginLeft: "15%", marginRight: "15%" }}><Map parentCallback={handleCallback} hero={hero} map={new WorldMap(hero)}></Map></div> </div> : <div> </div>}
         {active !== "Dungeon" && active !== "Dialogue" && active !== "MainMenu" ?
           <div style={{ marginTop: "1%", marginLeft: "25%", marginRight: "25%", width: "auto", height: "200px", marginBottom: "1%", position: "relative", bottom: "-1" }}>
             <Log log={log} logName={""}></Log>

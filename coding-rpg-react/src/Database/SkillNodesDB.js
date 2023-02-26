@@ -1,118 +1,124 @@
 import { alchemyRecipes, cookingRecipes, craftingRecipes, DrawWater, enchantingRecipes, engineeringRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, GatherBlackFeathers, herbLoreRecipes, huntingRecipes, MillWheat, MineSaltpeter, MineSulphur, miningRecipes, restorationRecipes, ShearSheep, smithingRecipes, woodcuttingRecipes } from "./SkillRecipesDB"
 
-export function alchemyNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Alchemy");
-    var alchemyNode = { Name: "Alchemy", Skill: hero.SkillBook[skillIndex], Recipes: alchemyRecipes() }
-    return alchemyNode;
+export class SkillNode {
+    Hero; Name; Skill; Recipes;
+    constructor(hero, name, skill, recipes) {
+        this.Hero = hero; this.Name = name; this.Recipes = recipes;
+        this.Skill = hero.SkillBook[hero.SkillBook.findIndex(x => x.Name === skill)]
+    }
+}
+export class AlchemyNode extends SkillNode {
+    constructor(hero, name = "Alchemy", skill = "Alchemy", recipes = alchemyRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }
 //cooking
-export function cookNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Cooking");
-    var cookNode = { Name: "Stove", Skill: hero.SkillBook[skillIndex], Recipes: cookingRecipes() }
-    return cookNode;
+export class CookNode extends SkillNode {
+    constructor(hero, name = "Stove", skill = "Cooking", recipes = cookingRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function millNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Cooking");
-    var cookNode = { Name: "Mill", Skill: hero.SkillBook[skillIndex], Recipes: [new MillWheat()] }
-    return cookNode;
+export class MillNode extends CookNode {
+    constructor(hero, name = "Mill", skill = "Cooking", recipes = [new MillWheat()]) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function waterNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Cooking");
-    var cookNode = { Name: "Draw Water", Skill: hero.SkillBook[skillIndex], Recipes: [new DrawWater()] }
-    return cookNode;
+export class WaterNode extends CookNode {
+    constructor(hero, name = "Draw Water", skill = "Cooking", recipes = [new DrawWater()]) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function wellNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Cooking");
-    var cookNode = { Name: "Draw Water", Skill: hero.SkillBook[skillIndex], Recipes: [new DrawWater()] }
-    return cookNode;
+export class WellNode extends WaterNode {
+    constructor(hero, name = "Well", skill = "Cooking", recipes = [new DrawWater()]) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function craftNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Crafting");
-    var craftNode = { Name: "Crafting", Skill: hero.SkillBook[skillIndex], Recipes: craftingRecipes() }
-    return craftNode;
+export class CraftNode extends SkillNode {
+    constructor(hero, name = "Crafting", skill = "Crafting", recipes = craftingRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function enchantNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Enchanting");
-    var enchantNode = { Name: "Enchanting", Skill: hero.SkillBook[skillIndex], Recipes: enchantingRecipes() }
-    return enchantNode;
+export class EnchantNode extends SkillNode {
+    constructor(hero, name = "Enchanting", skill = "Enchanting", recipes = enchantingRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }
-//enginering
-export function engineNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Engineering");
-    var engineNode = { Name: "Engineering Bench", Skill: hero.SkillBook[skillIndex], Recipes: engineeringRecipes() }
-    return engineNode;
+export class EnginerNode extends SkillNode {
+    constructor(hero, name = "Engineering Bench", skill = "Engineering", recipes = engineeringRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }
 //farming
-export function farmNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Farming");
-    var farmNode = { Name: "Farm", Skill: hero.SkillBook[skillIndex], Recipes: farmingRecipes() }
-    return farmNode;
+export class FarmNode extends SkillNode {
+    constructor(hero, name = "Farm", skill = "Farming", recipes = farmingRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function sheepNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Farming");
-    var farmNode = { Name: "Flock of Sheep", Skill: hero.SkillBook[skillIndex], Recipes: [new ShearSheep()] }
-    return farmNode;
+export class SheepNode extends FarmNode {
+    constructor(hero, name = "Flock of Sheep", skill = "Farming", recipes = [new ShearSheep()]) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function fireNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Firemaking");
-    var fireNode = { Name: "Firemaking", Skill: hero.SkillBook[skillIndex], Recipes: firemakingRecipes() }
-    return fireNode
+export class FireNode extends SkillNode {
+    constructor(hero, name = "Firemaking", skill = "Firemaking", recipes = firemakingRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function fishNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Fishing");
-    var fishNode = { Name: "Fishing Spot", Skill: hero.SkillBook[skillIndex], Recipes: fishingRecipes() }
-    return fishNode
+export class FishNode extends SkillNode {
+    constructor(hero, name = "Fishing Spot", skill = "Fishing", recipes = fishingRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function fletchNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Fletching");
-    var fletchNode = { Name: "Fletching", Skill: hero.SkillBook[skillIndex], Recipes: fletchingRecipes() }
-    return fletchNode
+export class FletchNode extends SkillNode {
+    constructor(hero, name = "Fletching", skill = "Fletching", recipes = fletchingRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function herbNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Herblore");
-    var huntNode = { Name: "Gather Herbs", Skill: hero.SkillBook[skillIndex], Recipes: herbLoreRecipes() }
-    return huntNode;
+export class HerbNode extends SkillNode {
+    constructor(hero, name = "Gather Herbs", skill = "Herblore", recipes = herbLoreRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }
 //hunting
-export function blackFeatherNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Hunting");
-    var huntNode = { Name: "Scattered Black Feathers", Skill: hero.SkillBook[skillIndex], Recipes: [new GatherBlackFeathers()] }
-    return huntNode;
+export class HuntNode extends SkillNode {
+    constructor(hero, name = "Hunting Spot", skill = "hunting", recipes = huntingRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function huntNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Hunting");
-    var huntNode = { Name: "Hunting Ground", Skill: hero.SkillBook[skillIndex], Recipes: huntingRecipes() }
-    return huntNode;
+export class BlackFeatherNode extends HuntNode {
+    constructor(hero, name = "Scattered Black Feathers", skill = "Hunting", recipes = [new GatherBlackFeathers()]) {
+        super(hero, name, skill, recipes)
+    }
 }
 //mining
-export function mineNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Mining");
-    var mineNode = { Name: "Mine", Skill: hero.SkillBook[skillIndex], Recipes: miningRecipes() }
-    return mineNode
+export class MineNode extends SkillNode {
+    constructor(hero, name = "Mine", skill = "Mining", recipes = miningRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function saltPeterNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Mining");
-    var mineNode = { Name: "Mine", Skill: hero.SkillBook[skillIndex], Recipes: [new MineSaltpeter()] }
-    return mineNode
+export class SaltPeterNode extends MineNode {
+    constructor(hero, name = "Mine Saltpeter", skill = "Mining", recipes = [new MineSaltpeter()]) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function sulphurNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Mining");
-    var mineNode = { Name: "Mine", Skill: hero.SkillBook[skillIndex], Recipes: [new MineSulphur()] }
-    return mineNode
+export class SulphurNode extends MineNode {
+    constructor(hero, name = "Mine Sulphur", skill = "Mining", recipes = [new MineSulphur()]) {
+        super(hero, name, skill, recipes)
+    }
 }
 //restoration
-export function restorationNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Restoration");
-    var restNode = { Name: "Altar", Skill: hero.SkillBook[skillIndex], Recipes: restorationRecipes() }
-    return restNode
+export class RestorationNode extends SkillNode {
+    constructor(hero, name = "Altar", skill = "Restoration", recipes = restorationRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function smithNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Smithing");
-    var smithNode = { Name: "Anvil & Forge", Skill: hero.SkillBook[skillIndex], Recipes: smithingRecipes() }
-    return smithNode
+export class SmithNode extends SkillNode {
+    constructor(hero, name = "Anvil & Fore", skill = "Smithing", recipes = smithingRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }
-export function woodNode(hero) {
-    var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Woodcutting");
-    var woodNode = { Name: "Trees", Skill: hero.SkillBook[skillIndex], Recipes: woodcuttingRecipes() }
-    return woodNode
+export class WoodNode extends SkillNode {
+    constructor(hero, name = "Trees", skill = "Woodcutting", recipes = woodcuttingRecipes()) {
+        super(hero, name, skill, recipes)
+    }
 }

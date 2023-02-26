@@ -3,7 +3,7 @@ import '../App.css';
 import './Game.css'
 import SkillNode from "./SkillNode"
 import {CalculateInventorySlots, EquipItemFromInventory, RemoveItemFromInventory } from '../Scripts/ItemScripts';
-import { alchemyNode, craftNode, enchantNode, fireNode, fletchNode } from '../Database/SkillNodesDB'
+import { AlchemyNode, CraftNode, EnchantNode, FireNode, FletchNode } from '../Database/SkillNodesDB'
 import { AddToCharacterLog } from '../Scripts/CharacterScripts';
 
 function Inventory(props) {
@@ -13,7 +13,7 @@ function Inventory(props) {
   const [allies, setAllies] = useState([props.hero, ...props.hero.Companions]);
   const [activeUser, setActiveUser] = useState(props.hero)
   const [activeList, setActiveList] = useState("Default")
-  const [node, setNode] = useState(alchemyNode(hero))
+  const [node, setNode] = useState(new AlchemyNode(hero))
 
   function handleEquip(char, inventory, item, log) {
     EquipItemFromInventory(char, inventory, item, log)
@@ -85,7 +85,7 @@ function Inventory(props) {
         {activeList === "Consumable" ? <div>{consumeList.length > 0 ? <div>{consumeList}</div> : <div><h4>No Consumables Items</h4></div>}</div> : <div></div>}
         {activeList === "Equipable" ? <div>{equipList.length > 0 ? <div>{equipList}</div> : <div><h4>No Equipable Items</h4></div>}</div> : <div></div>}
       </div>
-      <div><button onClick={() => (enterSkill(alchemyNode(hero)))}>Train Alchemy</button><button onClick={() => (enterSkill(craftNode(hero)))}>Train Crafting</button><button onClick={() => (enterSkill(enchantNode(hero)))}>Train Enchanting</button><button onClick={() => (enterSkill(fireNode(hero)))}>Train Firemaking</button><button onClick={(() => enterSkill(fletchNode(hero)))}>Train Fletching</button></div>
+      <div><button onClick={() => (enterSkill(new AlchemyNode(hero)))}>Train Alchemy</button><button onClick={() => (enterSkill(new CraftNode(hero)))}>Train Crafting</button><button onClick={() => (enterSkill(new EnchantNode(hero)))}>Train Enchanting</button><button onClick={() => (enterSkill(new FireNode(hero)))}>Train Firemaking</button><button onClick={(() => enterSkill(new FletchNode(hero)))}>Train Fletching</button></div>
     </div> : <div></div>}
     {active === "Node" ? <SkillNode parentCallback={handleCallback} hero={hero} node={node} Back={() => leaveSkill(hero)}></SkillNode> : <div></div>}
     {/* <button style={{ marginTop: "1%", marginBottom: "1%" }} onClick={props.Back}><h3>Leave</h3></button> */}

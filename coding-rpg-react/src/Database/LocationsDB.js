@@ -4,7 +4,7 @@ import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, tenguCampDi
 import { BanditHideoutDungeon, GiantCaveDungeon, GiantCaveDungeonBeforeAndAfterQuest, GnollDenDungeon, GoblinMine, GoblinMineAfterQuest, SpiderCaveDungeon, SpiderCaveDungeonDuringQuest } from "./DungeonsDB"
 import { DwarvenMineGoblinQuest, GiantQuest, ScareCrowQuest3 } from "./QuestsDB"
 import { DaleChapelShop, DreamingWorkerInn, ForgeHeartSmithy, GeneralShop, InnShop, JoeTheTradersTradingPost, WitchHutShop, WizardTowerShop } from "./ShopsDB"
-import { alchemyNode, blackFeatherNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletchNode, herbNode, huntNode, millNode, mineNode, saltPeterNode, sheepNode, waterNode, wellNode, woodNode } from "./SkillNodesDB"
+import { AlchemyNode, BlackFeatherNode, CookNode, EnchantNode, FarmNode, FireNode, FishNode, FletchNode, HerbNode, HuntNode, MillNode, MineNode, SaltPeterNode, SheepNode, WaterNode, WellNode, WoodNode } from "./SkillNodesDB"
 
 //locations
 export function batCave(hero, x, y) {
@@ -301,78 +301,78 @@ export function enterForgeHeartSmithy(hero) {
 }
 //enter skillnode
 export function enterAlchemyNode(hero) {
-    var alchemy = { Name: "Alchemy Station", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: alchemyNode(hero) }; return content } }
+    var alchemy = { Name: "Alchemy Station", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new AlchemyNode(hero) }; return content } }
     return alchemy
 }
 export function enterEnchantNode(hero) {
-    var enchant = { Name: "Enchanter", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: enchantNode(hero) }; return content } }
+    var enchant = { Name: "Enchanter", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new EnchantNode(hero) }; return content } }
     return enchant
 }
 //cooking
 export function enterCookNode(hero) {
-    var cook = { Name: "Stove", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: cookNode(hero) }; return content } }
+    var cook = { Name: "Stove", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new CookNode(hero) }; return content } }
     return cook
 }
 export function enterCookNodeCampFire(hero) {
-    var cook = { Name: "Camp Fire (Cook)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: cookNode(hero) }; return content } }
+    var cook = { Name: "Camp Fire (Cook)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new CookNode(hero) }; return content } }
     return cook
 }
 export function enterMillNode(hero) {
-    var cook = { Name: "Mill", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: millNode(hero) }; return content } }
+    var cook = { Name: "Mill", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new MillNode(hero) }; return content } }
     return cook
 }
 export function enterWaterNode(hero) {
-    var cook = { Name: "Water Source", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: waterNode(hero) }; return content } }
+    var cook = { Name: "Water Source", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new WaterNode(hero) }; return content } }
     return cook
 }
 export function enterWellNode(hero) {
-    var cook = { Name: "Well (Draw Water)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: wellNode(hero) }; return content } }
+    var cook = { Name: "Well (Draw Water)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new WellNode(hero) }; return content } }
     return cook
 }
 //farming
 export function enterFarmNode(hero) {
-    var farm = { Name: "Farm (Skill)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: farmNode(hero) }; return content } }
+    var farm = { Name: "Farm (Skill)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new FarmNode(hero) }; return content } }
     return farm
 }
 export function enterSheepNode(hero) {
-    var farm = { Name: "Flock of Sheep", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: sheepNode(hero) }; return content } }
+    var farm = { Name: "Flock of Sheep", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new SheepNode(hero) }; return content } }
     return farm
 }
 export function enterFireNode(hero) {
-    var fire = { Name: "Fire Pit", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: fireNode(hero) }; return content } }
+    var fire = { Name: "Fire Pit", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new FireNode(hero) }; return content } }
     return fire
 }
 export function enterFishNode(hero) {
-    var fish = { Name: "Fishing Spot", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: fishNode(hero) }; return content } }
+    var fish = { Name: "Fishing Spot", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new FishNode(hero) }; return content } }
     return fish
 }
 export function enterFletchNode(hero) {
-    var fletch = { Name: "Fletcher", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: fletchNode(hero) }; return content } }
+    var fletch = { Name: "Fletcher", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new FletchNode(hero) }; return content } }
     return fletch
 }
 export function enterHerbNode(hero) {
-    var herb = { Name: "Gather Herbs", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: herbNode(hero) }; return content } }
+    var herb = { Name: "Gather Herbs", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new HerbNode(hero) }; return content } }
     return herb;
 }
 //hunting
 export function enterBlackFeatherNode(hero) {
-    var hunt = { Name: "Scattered Black Feathers", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: blackFeatherNode(hero) }; return content } }
+    var hunt = { Name: "Scattered Black Feathers", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new BlackFeatherNode(hero) }; return content } }
     return hunt;
 }
 export function enterHuntNode(hero) {
-    var hunt = { Name: "Hunting Ground", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: huntNode(hero) }; return content } }
+    var hunt = { Name: "Hunting Ground", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new HuntNode(hero) }; return content } }
     return hunt;
 }
 //mining
 export function enterMineNode(hero) {
-    var mine = { Name: "Mine (skill)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: mineNode(hero) }; return content } }
+    var mine = { Name: "Mine (skill)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new MineNode(hero) }; return content } }
     return mine
 }
 export function enterSaltPeterNode(hero) {
-    var mine = { Name: "Mine Saltpeter", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: saltPeterNode(hero) }; return content } }
+    var mine = { Name: "Mine Saltpeter", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new SaltPeterNode(hero) }; return content } }
     return mine
 }
 export function enterWoodNode(hero) {
-    var wood = { Name: "Trees", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: woodNode(hero) }; return content } }
+    var wood = { Name: "Trees", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new WoodNode(hero) }; return content } }
     return wood
 }

@@ -18,13 +18,10 @@ Use valley as small starting area and have Halfland to south
 Convert objects to classes and subclasses
 Dialogues
 Locations
-Maps
-SkillNodes
 Tactics
 
 possible content
 Failure can cause damage
-tool for rabbit hunting
 more damage modifers for prot types
 Ferra and apprentice know each other?
 If Quincy apprentice sent away since wizard knows he seeks knowledge but not necessarily magic
