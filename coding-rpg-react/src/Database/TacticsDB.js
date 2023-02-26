@@ -1,5 +1,5 @@
 import { Rage } from "./AbilitiesDB";
-import { basicHeal, summonSpider, webSpell } from "./SpellsDB";
+import { BasicHeal, SummonSpider, WebSpell } from "./SpellsDB";
 import { CastSpell, CheckIfKnowsAbility, CheckIfKnowsSpell, UseAbility } from "../Scripts/AbilityAndSpellScripts";
 import { BasicAttack } from "../Scripts/CombatScripts"
 
@@ -23,7 +23,7 @@ export function BasicAttacker(char, allies, enemies, combatLog, round) {
     }
 }
 export function BasicHealer(char, allies, enemies, combatLog, round) {
-    if (char.BaseStats.MP.Current > 0 && CheckIfKnowsSpell(char, basicHeal()) !== null) {
+    if (char.BaseStats.MP.Current > 0 && CheckIfKnowsSpell(char, new BasicHeal()) !== null) {
         var alliesUnderHalf = []
         for (var a = 0; a < allies.length; a++) {
             if (allies[a].BaseStats.HP.Current <= allies[a].BaseStats.HP.Max / 2) {
@@ -31,7 +31,7 @@ export function BasicHealer(char, allies, enemies, combatLog, round) {
             }
         }
         if (alliesUnderHalf.length > 0) {
-            CastSpell(char, allies, enemies, alliesUnderHalf[0], combatLog, basicHeal())
+            CastSpell(char, allies, enemies, alliesUnderHalf[0], combatLog, new BasicHeal())
         }
         else {
             BasicAttacker(char, allies, enemies, combatLog)
@@ -59,12 +59,12 @@ export function Webber(char, allies, enemies, combatLog, round) {
         BasicAttacker(char, allies, enemies, combatLog)
     }
     else {
-        CastSpell(char, allies, enemies, enemies[0], combatLog, webSpell())
+        CastSpell(char, allies, enemies, enemies[0], combatLog, new WebSpell())
     }
 }
 export function spiderSummoner(char, allies, enemies, combatLog, round) {
     if (char.BaseStats.MP.Current > 0) {
-        CastSpell(char, allies, enemies, enemies[0], combatLog, summonSpider())
+        CastSpell(char, allies, enemies, enemies[0], combatLog, new SummonSpider())
     }
     else {
         BasicAttacker(char, allies, enemies, combatLog)

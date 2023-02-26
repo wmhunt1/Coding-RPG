@@ -24,11 +24,9 @@ export function GetQuestReward(char, quest) {
     if (quest.Type !== "Hidden") {
         AddToQuestLog(char, quest.Name + " Rewards...")
     }
-    AddGold(char, quest.Reward.Gold);
-    if (quest.Reward.Items.length > 0) {
-        for (var q = 0; q < quest.Reward.Items.length; q++) {
-            AddItemToInventory(char, char.Inventory, quest.Reward.Items[q].Item, quest.Reward.Items[q].Quantity)
-        }
+    AddGold(char, quest.Gold);
+    if (quest.Reward.Item !== null) {
+        AddItemToInventory(char, char.Inventory, quest.Item, 1)
     }
 }
 export function CompleteQuest(char, quest) {

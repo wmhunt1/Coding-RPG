@@ -2,7 +2,7 @@ import { CheckForQuest } from "../Scripts/QuestScripts"
 import { Bandit, Bat, Bear, Chicken, Cow, Ghost, Giant, Gnoll, Goblin, ScareCrow, Skeleton, Spider, Wolf } from './CharactersDB'
 import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, tenguCampDialogue } from "./DialoguesDB"
 import { BanditHideoutDungeon, GiantCaveDungeon, GiantCaveDungeonBeforeAndAfterQuest, GnollDenDungeon, GoblinMine, GoblinMineAfterQuest, SpiderCaveDungeon, SpiderCaveDungeonDuringQuest } from "./DungeonsDB"
-import { dwarvenMineGoblinQuest, giantQuest, scareCrowQuest3 } from "./QuestsDB"
+import { DwarvenMineGoblinQuest, GiantQuest, ScareCrowQuest3 } from "./QuestsDB"
 import { DaleChapelShop, DreamingWorkerInn, ForgeHeartSmithy, GeneralShop, InnShop, JoeTheTradersTradingPost, WitchHutShop, WizardTowerShop } from "./ShopsDB"
 import { alchemyNode, blackFeatherNode, cookNode, enchantNode, farmNode, fireNode, fishNode, fletchNode, herbNode, huntNode, millNode, mineNode, saltPeterNode, sheepNode, waterNode, wellNode, woodNode } from "./SkillNodesDB"
 
@@ -38,8 +38,8 @@ export function banditHideout(hero, x, y) {
 }
 export function dwarvenMine(hero, x, y) {
     var dwarvenMine;
-    var questIndex = CheckForQuest(hero, dwarvenMineGoblinQuest())
-    if (CheckForQuest(hero, dwarvenMineGoblinQuest()) === null) {
+    var questIndex = CheckForQuest(hero, new DwarvenMineGoblinQuest(hero))
+    if (CheckForQuest(hero, new DwarvenMineGoblinQuest(hero)) === null) {
         dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterMineNode(hero)] }
     }
     else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
@@ -56,10 +56,10 @@ export function fortDale(hero, x, y) {
 }
 export function giantCave(hero, x, y) {
     var giant;
-    if (CheckForQuest(hero, giantQuest()) === null) {
+    if (CheckForQuest(hero, new GiantQuest(hero)) === null) {
         giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterGiantCaveDungeonBeforeAndAfterQuest(hero), enterGiantEncounter(hero)] }
     }
-    else if (hero.Journal[CheckForQuest(hero, giantQuest())].Status === "Completed") {
+    else if (hero.Journal[CheckForQuest(hero, new GiantQuest(hero))].Status === "Completed") {
         giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterGiantCaveDungeonBeforeAndAfterQuest(hero), enterGiantEncounter(hero)] }
     }
     else {
@@ -77,7 +77,7 @@ export function hauntedManor(hero, x, y) {
 }
 export function spiderCave(hero, x, y) {
     var spider;
-    var questIndex = CheckForQuest(hero, scareCrowQuest3(hero))
+    var questIndex = CheckForQuest(hero, new ScareCrowQuest3(hero))
     if (questIndex === null)
     {
         spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterSpiderCaveDungeon(hero), enterSpiderEncounter(hero)] }

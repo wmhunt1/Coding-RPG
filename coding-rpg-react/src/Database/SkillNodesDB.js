@@ -96,11 +96,10 @@ export function saltPeterNode(hero) {
     return mineNode
 }
 //restoration
-export function restorationNode(hero)
-{
+export function restorationNode(hero) {
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Restoration");
     var restNode = { Name: "Altar", Skill: hero.SkillBook[skillIndex], Recipes: restorationRecipes() }
-    return restNode   
+    return restNode
 }
 export function smithNode(hero) {
     var skillIndex = hero.SkillBook.findIndex(x => x.Name === "Smithing");

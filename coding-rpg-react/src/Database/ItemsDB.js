@@ -3,7 +3,7 @@ import { DrunkDeBuff } from "./DeBuffsDB";
 import { FireImmuneEnchantment, IceResistEnchantment, PoisonApplyEnchantment, StrengthEnchantment, UnEnchanted } from "./EnchantmentsDB";
 import { ClothProtection, LeatherProtection, MetalProtection, NaturalProtection, WoodProtection } from "./ProtectionTypesDB";
 import { BlockSkill, HeavyWeaponSkill, DestructionSkill, HeavyArmorSkill, LightArmorSkill, RangedSkill, LightWeaponSkill, UnArmedSkill, UnArmoredSkill } from "./SkillsDB";
-import { bane, basicHeal, basicMassHeal, bless, curePoison, fireBall, heroism, inspireCourage, magicMissile, poisonSpray, sleepSpell, summonRat, summonSkeleton, summonSpider, webSpell } from "./SpellsDB";
+import { Bane, BasicHeal, BasicMassHeal, Bless, CurePoison, FireBall, Heroism, InspireCourage, MagicMissile, PoisonSpray, SleepSpell, SummonRat, SummonSkeleton, SummonSpider, WebSpell } from "./SpellsDB";
 import { LearnAbility, LearnSpell } from "../Scripts/AbilityAndSpellScripts";
 import { RemoveCondition } from "../Scripts/BuffConditionAndDeBuffScripts";
 import { AddToCharacterLog, EarnXP, HealHP, RecoverMP, RecoverSP } from "../Scripts/CharacterScripts";
@@ -251,77 +251,77 @@ export class SpellScoll extends Scroll {
     ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " studies " + this.Name); LearnSpell(hero, this.Spell) }
 }
 export class BaneScroll extends SpellScoll {
-    constructor(name = "Scroll of Bane", cost = 10, spell = bane()) {
+    constructor(name = "Scroll of Bane", cost = 10, spell = new Bane()) {
         super(name, cost, spell)
     }
 }
 export class BasicHealScroll extends SpellScoll {
-    constructor(name = "Scroll of Basic Heal", cost = 10, spell = basicHeal()) {
+    constructor(name = "Scroll of Basic Heal", cost = 10, spell = new BasicHeal()) {
         super(name, cost, spell)
     }
 }
 export class BasicMassHealScroll extends SpellScoll {
-    constructor(name = "Scroll of Mass Basic Heal", cost = 10, spell = basicMassHeal()) {
+    constructor(name = "Scroll of Mass Basic Heal", cost = 10, spell = new BasicMassHeal()) {
         super(name, cost, spell)
     }
 }
 export class BlessScroll extends SpellScoll {
-    constructor(name = "Scroll of Bless", cost = 10, spell = bless()) {
+    constructor(name = "Scroll of Bless", cost = 10, spell = new Bless()) {
         super(name, cost, spell)
     }
 }
 export class CurePoisonScroll extends SpellScoll {
-    constructor(name = "Scroll of Cure Poison", cost = 10, spell = curePoison()) {
+    constructor(name = "Scroll of Cure Poison", cost = 10, spell = new CurePoison()) {
         super(name, cost, spell)
     }
 }
 export class FireBallScroll extends SpellScoll {
-    constructor(name = "Scroll of Fireball", cost = 10, spell = fireBall()) {
+    constructor(name = "Scroll of Fireball", cost = 10, spell = new FireBall()) {
         super(name, cost, spell)
     }
 }
 export class HeroismScroll extends SpellScoll {
-    constructor(name = "Scroll of Heroism", cost = 10, spell = heroism()) {
+    constructor(name = "Scroll of Heroism", cost = 10, spell = new Heroism()) {
         super(name, cost, spell)
     }
 }
 export class InspireCourageScroll extends SpellScoll {
-    constructor(name = "Scroll of Inspire Courage", cost = 10, spell = inspireCourage()) {
+    constructor(name = "Scroll of Inspire Courage", cost = 10, spell = new InspireCourage()) {
         super(name, cost, spell)
     }
 }
 export class MagicMissileScroll extends SpellScoll {
-    constructor(name = "Scroll of Magic Missile", cost = 10, spell = magicMissile()) {
+    constructor(name = "Scroll of Magic Missile", cost = 10, spell = new MagicMissile()) {
         super(name, cost, spell)
     }
 }
 export class PoisonSprayScroll extends SpellScoll {
-    constructor(name = "Scroll of Poison Spray", cost = 10, spell = poisonSpray()) {
+    constructor(name = "Scroll of Poison Spray", cost = 10, spell = new PoisonSpray()) {
         super(name, cost, spell)
     }
 }
 export class SleepScroll extends SpellScoll {
-    constructor(name = "Scroll of Sleep", cost = 10, spell = sleepSpell()) {
+    constructor(name = "Scroll of Sleep", cost = 10, spell = new SleepSpell()) {
         super(name, cost, spell)
     }
 }
 export class SummonRatScroll extends SpellScoll {
-    constructor(name = "Scroll of Summon Rat", cost = 10, spell = summonRat()) {
+    constructor(name = "Scroll of Summon Rat", cost = 10, spell = new SummonRat()) {
         super(name, cost, spell)
     }
 }
 export class SummonSkeletonScroll extends SpellScoll {
-    constructor(name = "Scroll of Summon Skeleton", cost = 10, spell = summonSkeleton()) {
+    constructor(name = "Scroll of Summon Skeleton", cost = 10, spell = new SummonSkeleton()) {
         super(name, cost, spell)
     }
 }
 export class SummonSpiderScroll extends SpellScoll {
-    constructor(name = "Scroll of Summon Spider", cost = 10, spell = summonSpider()) {
+    constructor(name = "Scroll of Summon Spider", cost = 10, spell = new SummonSpider()) {
         super(name, cost, spell)
     }
 }
 export class WebScroll extends SpellScoll {
-    constructor(name = "Scroll of Web", cost = 10, spell = webSpell()) {
+    constructor(name = "Scroll of Web", cost = 10, spell = new WebSpell()) {
         super(name, cost, spell)
     }
 }

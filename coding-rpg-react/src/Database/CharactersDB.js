@@ -3,7 +3,7 @@ import { Cleave, PierceArmor, Rage } from "./AbilitiesDB";
 import {Cloak,  BareBack, BareFinger, BareNeck, Bite, Bones, EmptyOffHand, RatTail, RawRatMeat, Shoes, Trousers, Tunic, WoodenShield, BareFist, BareHead, BareTorso, BareLegs, BareHands, BareFeet, WoodenClub, LoinCloth, BronzeSword, Slam, RawBeef, CowLeather, IronWarHammer, IronShield, IronHelmet, IronTorso, IronLegs, IronGauntlets, IronBoots, PoisonedBite, SpiderSilkCloth, LeatherCowl, LeatherTorso, LeatherLegs, LeatherGloves, LeatherBoots, IronDagger, IronDaggerOffHand, OakShortBow, IronAxe2H, Skull, BronzeShield, BronzeMace, BronzeHelmet, WolfFur, ClawSlash, BearFur, RawChicken, Feather, Peck, BatGuano, IronAxe, OakStaff, GhostTouch, Ectoplasm,BronzeBoots, RingOfStr, WoolBoots } from "./ItemsDB";
 import { daleTown } from "./LocationsDB";
 import { Cleric, Freelancer, Pet } from "./JobsDB";
-import { basicHeal, curePoison, fireBall, magicMissile, poisonSpray, sleepSpell, summonRat } from "./SpellsDB"
+import { BasicHeal, CurePoison, FireBall, MagicMissile, PoisonSpray, SleepSpell, SummonRat } from "./SpellsDB"
 import { BasicAttacker, BasicHealer, Rager, spiderSummoner } from "./TacticsDB";
 import { allSkills, BarterSkill, BlockSkill, HeavyWeaponSkill, HeavyArmorSkill, MiningSkill, RestorationSkill, SmithingSkill } from "./SkillsDB";
 import { NoTitle } from "./TitlesDB";
@@ -189,7 +189,7 @@ export class Hero extends Humanoid {
         this.Gold = 5;
         this.Companions = [new Dog("Dog")];
         this.Abilities = [new Cleave(), new PierceArmor(), new Rage()];
-        this.SpellBook = [basicHeal(), curePoison(), fireBall(), magicMissile(), poisonSpray(), sleepSpell(), summonRat()];
+        this.SpellBook = [new BasicHeal(), new CurePoison(), new FireBall(), new MagicMissile(), new PoisonSpray(), new SleepSpell(), new SummonRat()];
         this.DamageModifiers.Weaknesses = [new FireDamage(this)]; this.DamageModifiers.Weaknesses[0].Source = this.Equipment.Torso;
         this.Inventory = [new BronzeBoots(), new Cloak(),new RingOfStr(), new LeatherBoots(), new WoolBoots()]
     }
@@ -201,7 +201,7 @@ export class FerraForgeHeart extends Humanoid {
         this.Equipment.Weapon = new IronWarHammer(); this.Equipment.OffHand = new IronShield(); this.Equipment.Head = new IronHelmet();
         this.Equipment.Torso = new IronTorso(); this.Equipment.Legs = new IronLegs(); this.Equipment.Hands = new IronGauntlets();
         this.Equipment.Feet = new IronBoots();
-        this.BaseStats.SpellBook = [basicHeal(), curePoison()];
+        this.BaseStats.SpellBook = [new BasicHeal(), new CurePoison()];
         this.DamageModifiers.Weaknesses = [new LightningDamage(this.Equipment.Torso)];
         this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
         FindSkillInSkillBook(this, new BarterSkill()).Level = 10; FindSkillInSkillBook(this, new BarterSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, new BarterSkill()).MaxXP = 9000;
@@ -244,7 +244,7 @@ export class GnollLeader extends Gnoll {
 export class GnollShaman extends Gnoll {
     constructor(name = "Gnoll Shaman") {
         super(name = "Gnoll Shaman")
-        this.Attributes.Wisdom.Value = 12; this.SpellBook = [basicHeal()]
+        this.Attributes.Wisdom.Value = 12; this.SpellBook = [new BasicHeal()]
         this.CurrentXP = 20; this.Equipment.Weapon = new OakStaff();
         this.ItemDrops = [new OakStaff()]
         this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }

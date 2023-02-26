@@ -17,13 +17,10 @@ Use valley as small starting area and have Halfland to south
 
 Convert objects to classes and subclasses
 Dialogues
-Encounters
 Locations
 Maps
-Quests
 SkillNodes
 SkillRecipes
-Spells
 Tactics
 
 possible content

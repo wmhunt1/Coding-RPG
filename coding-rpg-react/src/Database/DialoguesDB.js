@@ -1,6 +1,6 @@
 import { FerraForgeHeart } from "./CharactersDB";
 import { SilverRingLR } from "./ItemsDB";
-import { banditQuest1, dwarvenMineGoblinQuest, giantQuest, gnollQuest1, metSweetheart, ratCellarQuest, scareCrowQuest1, scareCrowQuest2, scareCrowQuest3, scareCrowQuest4, skeletonQuest, wizardTowerQuest1 } from "./QuestsDB"
+import { BanditQuest1, DwarvenMineGoblinQuest, GiantQuest, GnollQuest1, MetSweetheart, RatCellarQuest, ScareCrowQuest1, ScareCrowQuest2, ScareCrowQuest3, ScareCrowQuest4, SkeletonQuest, WizardTowerQuest1 } from "./QuestsDB"
 import { CalculateTime } from "../Scripts/MapScripts";
 import { FindPartyMember, JoinParty, LeaveParty, PartyRecovery, RemoveGold } from "../Scripts/CharacterScripts";
 import { FindItemInInventory, RemoveItemFromInventory } from "../Scripts/ItemScripts";
@@ -24,22 +24,22 @@ export function innDialogue(hero) {
 export function daleTownRumors(hero) {
     var dialogue = ""
     var potentialRumors = [witchRumor(hero)]
-    if (CheckForQuest(hero, banditQuest1(hero)) === null) {
+    if (CheckForQuest(hero, new BanditQuest1(hero)) === null) {
         potentialRumors.push(banditRumor(hero))
     }
-    if (CheckForQuest(hero, dwarvenMineGoblinQuest(hero)) === null) {
+    if (CheckForQuest(hero, new DwarvenMineGoblinQuest(hero)) === null) {
         potentialRumors.push(goblinRumor(hero))
     }
-    if (CheckForQuest(hero, giantQuest(hero)) === null) {
+    if (CheckForQuest(hero, new GiantQuest(hero)) === null) {
         potentialRumors.push(giantRumor(hero))
     }
-    if (CheckForQuest(hero, ratCellarQuest(hero)) === null) {
+    if (CheckForQuest(hero, new RatCellarQuest(hero)) === null) {
         potentialRumors.push(ratRumor(hero))
     }
-    if (CheckForQuest(hero, scareCrowQuest1(hero)) === null) {
+    if (CheckForQuest(hero, new ScareCrowQuest1(hero)) === null) {
         potentialRumors.push(scareCrowRumor(hero))
     }
-    if (CheckForQuest(hero, skeletonQuest(hero)) === null) {
+    if (CheckForQuest(hero, new SkeletonQuest(hero)) === null) {
         potentialRumors.push(skeletonRumor(hero))
     }
     var rumor = potentialRumors[Math.floor(Math.random() * potentialRumors.length)];
@@ -75,18 +75,18 @@ export function witchRumor(hero) {
     return dialogue
 }
 export function priestDialogue(hero) {
-    var questIndex = CheckForQuest(hero, skeletonQuest())
+    var questIndex = CheckForQuest(hero, new SkeletonQuest()())
     var dialogue = ""
     if (questIndex === null) {
         dialogue = {
             Name: "Talk to Priest", Conversation: {
                 npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Kill Skeletons?", Next: 1 }, { Id: 2, Line: "Accepted Quest", Next: 2 }, { Id: 3, Line: "Didn't Accept Quest", Next: 2 }],
                 heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }]
-            }, responseEffect(hero, option) { if (option === 2) { StartQuest(hero, skeletonQuest()) } }
+            }, responseEffect(hero, option) { if (option === 2) { StartQuest(hero, new SkeletonQuest()()) } }
         }
     }
     else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "In Progress") {
-        dialogue = { Name: "Talk to Priest", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The Priest Thanks you.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, skeletonQuest(hero)); IncreaseReputation(hero, new DaleTownReputation(), 1) } }
+        dialogue = { Name: "Talk to Priest", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The Priest Thanks you.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, new SkeletonQuest()(hero)); IncreaseReputation(hero, new DaleTownReputation(), 1) } }
     }
     else {
         dialogue = { Name: "Talk to Priest", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The Priest blesses you.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { new BlessBuff(3).ApplyBuff(hero) } }
@@ -96,7 +96,7 @@ export function priestDialogue(hero) {
 //dreaming worker inn
 export function dreamingWorkerInnDialogue(hero) {
     var innDialogue = ""
-    var questIndex = CheckForQuest(hero, ratCellarQuest(hero))
+    var questIndex = CheckForQuest(hero, new RatCellarQuest()(hero))
     if (questIndex === null) {
         innDialogue = sweetheart1(hero, questIndex)
     }
@@ -132,7 +132,7 @@ export function sweetheart1(hero) {
     var response4A = "Yes";
     var response4B = "No";
     var sweetheart;
-    if (CheckForQuest(hero, metSweetheart(hero)) === null) {
+    if (CheckForQuest(hero, new MetSweetheart(hero)) === null) {
         sweetheart = {
             Name: "Speak with Sweetheart",
             Conversation: {
@@ -143,7 +143,7 @@ export function sweetheart1(hero) {
                 { Id: 3, Options: [[response3A, 5], [response3B, 6]] }, { Id: 4, Options: [[response4A, 7], [response4B, 8]] }, { Id: 5, Options: [["Leave", 0]] }]
             },
             responseEffect(hero, option) {
-                if (option === 5) { if (hero.Gold >= 5) { RemoveGold(hero, 5); PartyRecovery(hero); CalculateTime(hero, 8) } } if (option === 7) { StartQuest(hero, ratCellarQuest()) }
+                if (option === 5) { if (hero.Gold >= 5) { RemoveGold(hero, 5); PartyRecovery(hero); CalculateTime(hero, 8) } } if (option === 7) { StartQuest(hero, new RatCellarQuest()()) }
             }
         }
     }
@@ -156,7 +156,7 @@ export function sweetheart1(hero) {
                 heroSide: [{ Id: 3, Options: [[response3A, 5], [response3B, 6]] }, { Id: 4, Options: [[response4A, 7], [response4B, 8]] }, { Id: 5, Options: [["Leave", 0]] }]
             },
             responseEffect(hero, option) {
-                if (option === 5) { if (hero.Gold >= 5) { RemoveGold(hero, 5); PartyRecovery(hero); CalculateTime(hero, 8) } } if (option === 7) { StartQuest(hero, ratCellarQuest()) }
+                if (option === 5) { if (hero.Gold >= 5) { RemoveGold(hero, 5); PartyRecovery(hero); CalculateTime(hero, 8) } } if (option === 7) { StartQuest(hero, new RatCellarQuest()()) }
             }
         }
     }
@@ -167,7 +167,7 @@ export function sweetheart2(hero) {
     return innDialogue;
 }
 export function sweetheart3(hero, questIndex) {
-    var dialogue = { Name: "Speak with Sweetheart the Ogre", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Thanks for taking care of that Giant Rat, Sweetheart. As thanks you can rent a room anytime you want, free of charge.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, ratCellarQuest(hero)); IncreaseReputation(hero, new DaleTownReputation(), 1) } }
+    var dialogue = { Name: "Speak with Sweetheart the Ogre", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Thanks for taking care of that Giant Rat, Sweetheart. As thanks you can rent a room anytime you want, free of charge.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, new RatCellarQuest()(hero)); IncreaseReputation(hero, new DaleTownReputation(), 1) } }
     return dialogue;
 }
 export function sweetheart4(hero) {
@@ -177,7 +177,7 @@ export function sweetheart4(hero) {
 //forgeheart smithy dialogues
 export function forgeheartSmithDialogue(hero) {
     var dialogue = ""
-    var questIndex = CheckForQuest(hero, dwarvenMineGoblinQuest())
+    var questIndex = CheckForQuest(hero, new DwarvenMineGoblinQuest())
     if (questIndex === null) {
         dialogue = forgeHeart1(hero, questIndex)
     }
@@ -216,7 +216,7 @@ export function forgeHeart1(hero) {
             { Id: 3, Options: [["Leave", 0]] }]
         },
         responseEffect(hero, option) {
-            if (option === 2) { StartQuest(hero, dwarvenMineGoblinQuest()); } if (option === 5) { JoinParty(hero, new FerraForgeHeart(), hero); IncreaseRelationship(hero, new FerraForgeheartRelationship(), 1) }
+            if (option === 2) { StartQuest(hero, new DwarvenMineGoblinQuest()); } if (option === 5) { JoinParty(hero, new FerraForgeHeart(), hero); IncreaseRelationship(hero, new FerraForgeheartRelationship(), 1) }
         }
     }
     return dialogue
@@ -247,7 +247,7 @@ export function forgeHeart3(hero, questIndex) {
             { Id: 3, Options: [["Leave", 0]] }]
         },
         responseEffect(hero, option) {
-            if (option === 2) { CompleteQuest(hero, dwarvenMineGoblinQuest()); IncreaseReputation(hero, new DaleTownReputation(), 1) } if (option === 5) {
+            if (option === 2) { CompleteQuest(hero, new DwarvenMineGoblinQuest()); IncreaseReputation(hero, new DaleTownReputation(), 1) } if (option === 5) {
                 JoinParty(hero, new FerraForgeHeart(), hero); IncreaseRelationship(hero, new FerraForgeheartRelationship(), 1)
                 if (option === 4) { LeaveParty(hero, FindPartyMember(new FerraForgeHeart(), hero.Party), hero.Party); DecreaseRelationship(hero, new FerraForgeheartRelationship(), 1) } if (option === 3) { IncreaseRelationship(hero, new FerraForgeheartRelationship(), 1) }
             }
@@ -287,7 +287,7 @@ export function saveMinersDialogue(hero) {
 //littleroot farm dialogue
 export function littleRootFarmDialogue(hero) {
     var dialogue = ""
-    var questIndex = CheckForQuest(hero, scareCrowQuest1())
+    var questIndex = CheckForQuest(hero, new ScareCrowQuest1())
     if (questIndex === null) {
         dialogue = littleRoot1(hero, questIndex)
     }
@@ -312,7 +312,7 @@ export function littleRootFarmDialogue(hero) {
     return dialogue;
 }
 export function littleRoot1(hero, questIndex) {
-    var dialogue = { Name: "Speak with Farmer Littleroot", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Kill Scarecrow?", Next: 1 }, { Id: 2, Line: "Accepted Quest", Next: 2 }, { Id: 3, Line: "Didn't Accept Quest", Next: 3 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }, { Id: 3, Options: [["Leave", 0]] }] }, responseEffect(hero, option) { if (option === 2) { StartQuest(hero, scareCrowQuest1(hero)) } } }
+    var dialogue = { Name: "Speak with Farmer Littleroot", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Kill Scarecrow?", Next: 1 }, { Id: 2, Line: "Accepted Quest", Next: 2 }, { Id: 3, Line: "Didn't Accept Quest", Next: 3 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }, { Id: 3, Options: [["Leave", 0]] }] }, responseEffect(hero, option) { if (option === 2) { StartQuest(hero, new ScareCrowQuest1(hero)) } } }
     return dialogue
 }
 export function littleRoot2(hero) {
@@ -322,12 +322,12 @@ export function littleRoot2(hero) {
 export function littleRoot3(hero, questIndex) {
     var dialogue = {
         Name: "Speak to Farmer LittleRoot", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The Farmer thanks you but wonders what the crows the scarecrow was rambling were.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] },
-        responseEffect(hero, option) { CompleteQuest(hero, hero.Journal[questIndex]); IncreaseReputation(hero, new DaleTownReputation(), 1); StartQuest(hero, scareCrowQuest2()) }
+        responseEffect(hero, option) { CompleteQuest(hero, hero.Journal[questIndex]); IncreaseReputation(hero, new DaleTownReputation(), 1); StartQuest(hero, new ScareCrowQuest2()) }
     }
     return dialogue
 }
 export function littleRoot4(hero) {
-    var questIndex = CheckForQuest(hero, scareCrowQuest4())
+    var questIndex = CheckForQuest(hero, new ScareCrowQuest4())
     var dialogue = {
         Name: "Return ring to Farmer Littleroot", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Give ring to Farmer Littleroot?", Next: 1 }, { Id: 2, Line: "You decide to return it", Next: 3 }, { Id: 3, Line: "You decide to keep it", Next: 3 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }, { Id: 3, Options: [["Leave", 0]] }] }
         , responseEffect(hero, option) { if (option === 2) { var index = FindItemInInventory(hero.Inventory, new SilverRingLR()); RemoveItemFromInventory(hero, hero.Inventory, hero.Inventory[index], 1, hero); IncreaseReputation(hero, new DaleTownReputation(), 1); CompleteQuest(hero, hero.Journal[questIndex]) } }
@@ -337,9 +337,9 @@ export function littleRoot4(hero) {
 //lumbermill dialogue
 export function lumbermillDialogue(hero) {
     var dialogue = ""
-    var questIndex = CheckForQuest(hero, giantQuest())
+    var questIndex = CheckForQuest(hero, new GiantQuest())
     if (questIndex === null) {
-        dialogue = { Name: "Speak with woodcutters", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Find Foreman George?", Next: 1 }, { Id: 2, Line: "Accepted Quest", Next: 2 }, { Id: 3, Line: "Didn't Accept Quest", Next: 2 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }] }, responseEffect(hero, option) { if (option === 2) { StartQuest(hero, giantQuest(hero)) } } }
+        dialogue = { Name: "Speak with woodcutters", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Find Foreman George?", Next: 1 }, { Id: 2, Line: "Accepted Quest", Next: 2 }, { Id: 3, Line: "Didn't Accept Quest", Next: 2 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }] }, responseEffect(hero, option) { if (option === 2) { StartQuest(hero, new GiantQuest(hero)) } } }
     }
     else if (hero.Journal[questIndex].Status === "Finished") {
         dialogue = { Name: "Speak with Woodcutters", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Foreman givees you a hearty wave.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { } }
@@ -355,14 +355,14 @@ export function puzzleDungeonDialogue(hero) {
 }
 //spider cave dialogue
 export function spiderCaveDialogue(hero) {
-    var dialogue = { Name: "Listen to Crows", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The crows thank you and give you a silver ring.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, scareCrowQuest3()) } }
+    var dialogue = { Name: "Listen to Crows", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "The crows thank you and give you a silver ring.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, new ScareCrowQuest3()) } }
     return dialogue
 }
 //tengu camp dialogue
 export function tenguCampDialogue(hero) {
     var dialogue = "";
-    var questIndex = CheckForQuest(hero, scareCrowQuest2())
-    var questIndex2 = CheckForQuest(hero, scareCrowQuest3())
+    var questIndex = CheckForQuest(hero, new ScareCrowQuest2())
+    var questIndex2 = CheckForQuest(hero, new ScareCrowQuest3())
     if (questIndex !== null && questIndex2 === null) {
         dialogue = { Name: "Investigate Camp", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "You Find black feathers leading towards a spider cave.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, hero.Journal[questIndex]); } }
     }
@@ -379,13 +379,13 @@ export function tenguCampDialogue(hero) {
 }
 //trading post dialogue
 export function joeTheTradersTradingPostDialogue(hero) {
-    var questIndex = CheckForQuest(hero, banditQuest1())
+    var questIndex = CheckForQuest(hero, new BanditQuest1())
     var dialogue = ""
     if (questIndex === null) {
-        dialogue = { Name: "Speak with Joe", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Clear out Bandit Hideout?", Next: 1 }, { Id: 2, Line: "Accepted Quest", Next: 2 }, { Id: 3, Line: "Didn't Accept Quest", Next: 3 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }, { Id: 3, Options: [["Leave", 0]] }] }, responseEffect(hero, option) { if (option === 2) { StartQuest(hero, banditQuest1()) } } }
+        dialogue = { Name: "Speak with Joe", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Clear out Bandit Hideout?", Next: 1 }, { Id: 2, Line: "Accepted Quest", Next: 2 }, { Id: 3, Line: "Didn't Accept Quest", Next: 3 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }, { Id: 3, Options: [["Leave", 0]] }] }, responseEffect(hero, option) { if (option === 2) { StartQuest(hero, new BanditQuest1()) } } }
     }
     else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "In Progress") {
-        dialogue = { Name: "Speak with Joe", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Joe Thanks you.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, banditQuest1(hero)); IncreaseReputation(hero, new DaleTownReputation(), 1) } }
+        dialogue = { Name: "Speak with Joe", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Joe Thanks you.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, new BanditQuest1(hero)); IncreaseReputation(hero, new DaleTownReputation(), 1) } }
     }
     else {
         dialogue = { Name: "Speak with Joe", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Joe asks if you'd like to buy or sell something.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { } }
@@ -394,13 +394,13 @@ export function joeTheTradersTradingPostDialogue(hero) {
 }
 //whitescale dialogue
 export function whiteScaleDialogue(hero) {
-    var questIndex = CheckForQuest(hero, gnollQuest1())
+    var questIndex = CheckForQuest(hero, new GnollQuest1())
     var dialogue = ""
     if (questIndex === null) {
-        dialogue = { Name: "Speak with Whitescale", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Clear out Gnoll Den?", Next: 1 }, { Id: 2, Line: "Accepted Quest", Next: 2 }, { Id: 3, Line: "Didn't Accept Quest", Next: 3 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }, { Id: 3, Options: [["Leave", 0]] }] }, responseEffect(hero, option) { if (option === 2) { StartQuest(hero, banditQuest1()) } } }
+        dialogue = { Name: "Speak with Whitescale", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Clear out Gnoll Den?", Next: 1 }, { Id: 2, Line: "Accepted Quest", Next: 2 }, { Id: 3, Line: "Didn't Accept Quest", Next: 3 }], heroSide: [{ Id: 1, Options: [["Yes", 2], ["No", 3]] }, { Id: 2, Options: [["Leave", 0]] }, { Id: 3, Options: [["Leave", 0]] }] }, responseEffect(hero, option) { if (option === 2) { StartQuest(hero, new BanditQuest1()) } } }
     }
     else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "In Progress") {
-        dialogue = { Name: "Speak with Whitescale", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Joe Thanks you.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, gnollQuest1(hero)); IncreaseReputation(hero, new WhiteScalesFlockReputation(), 1) } }
+        dialogue = { Name: "Speak with Whitescale", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Joe Thanks you.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { CompleteQuest(hero, new GnollQuest1(hero)); IncreaseReputation(hero, new WhiteScalesFlockReputation(), 1) } }
     }
     else {
         dialogue = { Name: "Speak with Whitescale", Conversation: { npcSide: [{ Id: 0, Line: "Exit" }, { Id: 1, Line: "Whitescale is knitting.", Next: 1 }], heroSide: [{ Id: 1, Options: [["Leave", 0],] }] }, responseEffect(hero, option) { } }
@@ -412,7 +412,7 @@ export function witchHutDialogue(hero) {
 
 }
 export function wizardTowerDialogue(hero) {
-    var questIndex = CheckForQuest(hero, wizardTowerQuest1())
+    var questIndex = CheckForQuest(hero, new WizardTowerQuest1())
     var dialogue = ""
     if (questIndex === null) {
         dialogue = wizardTower1(hero)

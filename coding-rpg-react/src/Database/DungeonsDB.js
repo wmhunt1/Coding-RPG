@@ -1,4 +1,4 @@
-import { banditAndBanditArcherEncounter, banditAndBanditBersekerEncounter, banditArcherEncounter, banditBerserkerEncounter, banditEncounter, banditTrioEncounter, bossGoblinEncounter, enterGoblinMineEncounter, foremanGeorgeEncounter, giantEncounter, giantRatEncounter, giantSpiderEncounter, gnollEncounter, gnollLeaderEncounter, gnollShamanEncounter, goblinEncounter, goblinWithWorgEncounter, koboldSlavesEncounter, ratEncounter, saveMinersEncounter, saveTenguEncounter, spiderEncounter } from "./EncountersDB";
+import { BanditAndBanditArcherEncounter, BanditAndBanditBerserkerEncounter, BanditArcherEncounter, BanditBerserkerEncounter, BanditEncounter, BanditTrioEncounter, GoblinBossEncounter, EnterGoblinMineEncounter, ForemanGeorgeEncounter, GiantEncounter, GiantRatEncounter,GiantSpiderEncounter, GnollEncounter, GnollLeaderEncounter, GnollShamanEncounter, GoblinEncounter, GoblinWithWorgEncounter, KoboldSlavesEncounter, RatEncounter, SaveMinersEncounter, SaveTenguEncounter, SpiderEncounter } from "./EncountersDB";
 import { Ale, BanditSpoils, BronzeBar, CowLeather, SpiderSilkCloth } from "./ItemsDB"
 
 export class Dungeon {
@@ -8,32 +8,32 @@ export class Dungeon {
     }
 }
 export class BanditHideoutDungeon extends Dungeon {
-    constructor(hero, name = "Bandit Hideout", encounters = [banditArcherEncounter(), banditEncounter(), banditAndBanditArcherEncounter(), banditEncounter(), banditAndBanditBersekerEncounter(), banditEncounter(), banditBerserkerEncounter()], boss = banditTrioEncounter(), after = null, gold = 0, item = new BanditSpoils()) {
+    constructor(hero, name = "Bandit Hideout", encounters = [new BanditArcherEncounter(), new BanditEncounter(), new BanditAndBanditArcherEncounter(), new BanditEncounter(), new BanditAndBanditBerserkerEncounter(), new BanditEncounter(), new BanditBerserkerEncounter()], boss = new BanditTrioEncounter(), after = null, gold = 0, item = new BanditSpoils()) {
         super(hero, name, encounters, boss, after, gold, item)
     }
 }
 export class GiantCaveDungeon extends Dungeon {
-    constructor(hero, name = "Giant Cave", encounters = [], boss = giantEncounter(), after = foremanGeorgeEncounter(hero), gold = 10, item = null) {
+    constructor(hero, name = "Giant Cave", encounters = [], boss = new GiantEncounter(), after = new ForemanGeorgeEncounter(hero), gold = 10, item = null) {
         super(hero, name, encounters, boss, after, gold, item)
     }
 }
 export class GiantCaveDungeonBeforeAndAfterQuest extends Dungeon {
-    constructor(hero, name = "Giant Cave", encounters = [], boss = giantEncounter(), after = null, gold = 10, item = null) {
+    constructor(hero, name = "Giant Cave", encounters = [], boss = new GiantEncounter(), after = null, gold = 10, item = null) {
         super(hero, name, encounters, boss, after, gold, item)
     }
 }
 export class GnollDenDungeon extends Dungeon {
-    constructor(hero, name = "Gnoll Den", encounters = [gnollEncounter(), gnollShamanEncounter(), gnollEncounter()], boss = gnollLeaderEncounter(), after = null, gold = 10, item = new CowLeather()) {
+    constructor(hero, name = "Gnoll Den", encounters = [new GnollEncounter(), new GnollShamanEncounter(), new GnollEncounter()], boss = new GnollLeaderEncounter(), after = null, gold = 10, item = new CowLeather()) {
         super(hero, name, encounters, boss, after, gold, item)
     }
 }
 export class GoblinMine extends Dungeon {
-    constructor(hero, name = "Goblin Mine", encounters = [enterGoblinMineEncounter(hero), goblinWithWorgEncounter(), koboldSlavesEncounter(hero), goblinEncounter(), goblinWithWorgEncounter(), goblinEncounter()], boss = bossGoblinEncounter(), after = saveMinersEncounter(hero), gold = 10, item = new BronzeBar()) {
+    constructor(hero, name = "Goblin Mine", encounters = [new EnterGoblinMineEncounter(hero), new GoblinWithWorgEncounter(), new KoboldSlavesEncounter(hero), new GoblinEncounter(), new GoblinWithWorgEncounter(), new GoblinEncounter()], boss = new GoblinBossEncounter(), after = new SaveMinersEncounter(hero), gold = 10, item = new BronzeBar()) {
         super(hero, name, encounters, boss, after, gold, item)
     }
 }
 export class GoblinMineAfterQuest extends Dungeon {
-    constructor(hero, name = "Goblin Mine", encounters = [goblinWithWorgEncounter(), goblinEncounter(), goblinWithWorgEncounter(), goblinEncounter()], boss = bossGoblinEncounter(), after = null, gold = 10, item = new BronzeBar()) {
+    constructor(hero, name = "Goblin Mine", encounters = [new GoblinWithWorgEncounter(), new GoblinEncounter(), new GoblinWithWorgEncounter(), new GoblinEncounter()], boss = new GoblinBossEncounter(), after = null, gold = 10, item = new BronzeBar()) {
         super(hero, name, encounters, boss, after, gold, item)
     }
 }
@@ -43,17 +43,17 @@ export class PuzzleCubeDungeon extends Dungeon {
     }
 }
 export class RatCellar extends Dungeon {
-    constructor(hero, name = "Cellar", encounters = [ratEncounter(), ratEncounter(), ratEncounter()], boss = giantRatEncounter(), after = null, gold = 0, item = new Ale()) {
+    constructor(hero, name = "Cellar", encounters = [new RatEncounter(), new RatEncounter(), new RatEncounter()], boss = new GiantRatEncounter(), after = null, gold = 0, item = new Ale()) {
         super(hero, name, encounters, boss, after, gold, item)
     }
 }
 export class SpiderCaveDungeon extends Dungeon {
-    constructor(hero, name = "Spider Cave", encounters = [spiderEncounter(), spiderEncounter(), spiderEncounter()], boss = giantSpiderEncounter(), after = null, gold = 0, item = new SpiderSilkCloth()) {
+    constructor(hero, name = "Spider Cave", encounters = [new SpiderEncounter(), new SpiderEncounter(), new SpiderEncounter()], boss = new GiantSpiderEncounter(), after = null, gold = 0, item = new SpiderSilkCloth()) {
         super(hero, name, encounters, boss, after, gold, item)
     }
 }
 export class SpiderCaveDungeonDuringQuest extends Dungeon {
-    constructor(hero, name = "Spider Cave", encounters = [spiderEncounter(), spiderEncounter(), spiderEncounter()], boss = giantSpiderEncounter(), after = saveTenguEncounter(hero), gold = 0, item = new SpiderSilkCloth()) {
+    constructor(hero, name = "Spider Cave", encounters = [new SpiderEncounter(), new SpiderEncounter(), new SpiderEncounter()], boss = new GiantSpiderEncounter(), after = new SaveTenguEncounter(hero), gold = 0, item = new SpiderSilkCloth()) {
         super(hero, name, encounters, boss, after, gold, item)
     }
 }
