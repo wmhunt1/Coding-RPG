@@ -27,9 +27,8 @@ export class Consumable extends Item {
     ConsumeEffect(hero, log) { }
 }
 //consumables
-export function innFood()
-{
-    var food = [new Ale(),new Bread(), new Cheese(), new Stew()]
+export function innFood() {
+    var food = [new Ale(), new Bread(), new Cheese(), new Stew()]
     return food;
 }
 //battle items
@@ -123,6 +122,11 @@ export class CookedChicken extends Food {
         super(name, cost, amount)
     }
 }
+export class CookedCrayFish extends Food {
+    constructor(name = "Cooked Crayfish", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
+}
 export class CookedFish extends Food {
     constructor(name = "Cooked Fish", cost = 2, amount = 1) {
         super(name, cost, amount)
@@ -134,6 +138,11 @@ export class CookedRabbitMeat extends Food {
     }
 } export class CookedRatMeat extends Food {
     constructor(name = "Cooked Rat", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
+}
+export class CookedTrout extends Food {
+    constructor(name = "Cooked Trout", cost = 2, amount = 1) {
         super(name, cost, amount)
     }
 }
@@ -172,10 +181,16 @@ export class ConditionPotion extends Potion {
     }
     ConsumeEffect(hero, log) { if (hero.Conditon.Name === this.Condition) { AddToCharacterLog(log, hero.Name + " drinks " + this.Name); RemoveCondition(hero, hero.Log) } }
 }
-export class Antidote extends Potion {
-    constructor(name = "Antidote", cost = 10, cond = "Poison") {
+export class Antidote extends ConditionPotion {
+    constructor(name = "Antidote", cost = 5, cond = "Poisoned") {
         super(name, cost, cond)
     }
+}
+export class BurnSalve extends ConditionPotion {
+    constructor(name = "Burn Salve", cost = 5, cond = "Burned") {
+        super(name, cost, cond)
+    }
+    ConsumeEffect(hero, log) { if (hero.Conditon.Name === this.Condition) { AddToCharacterLog(log, hero.Name + " applies " + this.Name); RemoveCondition(hero, hero.Log) } }
 }
 export class HealingPotion extends Potion {
     Heal;
@@ -1857,6 +1872,23 @@ export class WolfFur extends Fur {
         super(name, cost)
     }
 }
+//herb
+export class Herb extends Resource {
+    constructor(name = "Herb", cost = 1) {
+        super(name, cost)
+        this.SubType = "Herb"
+    }
+}
+export class Aloe extends Herb {
+    constructor(name = "Aloe", cost = 1) {
+        super(name, cost)
+    }
+}
+export class MilkThistle extends Herb {
+    constructor(name = "Milk Thistle", cost = 1) {
+        super(name, cost)
+    }
+}
 //leather
 export class Leather extends Resource {
     constructor(name, cost) {
@@ -1935,6 +1967,16 @@ export class RawFish extends Resource {
         this.SubType = "Raw Fish"
     }
 }
+export class RawCrayFish extends RawFish {
+    constructor(name = "Raw Crayfish", cost = 2) {
+        super(name, cost)
+    }
+}
+export class RawTrout extends RawFish {
+    constructor(name = "Raw Trout", cost = 2) {
+        super(name, cost)
+    }
+}
 //raw meat
 export class RawMeat extends Resource {
     constructor(name, cost) {
@@ -1985,9 +2027,8 @@ export class WoodLogs extends Logs {
     }
 }
 //tools
-export function generalTools()
-{
-    var tools =[new BronzeHatchet(), new BronzePickAxe(), new Bucket(), new FishingRod(), new Knife(), new Needle(), new Shears(), new Sickle(), new TinderBox(), new Trap()]
+export function generalTools() {
+    var tools = [new BronzeHatchet(), new BronzePickAxe(), new Bucket(), new FishingRod(), new Knife(), new Needle(), new Shears(), new Sickle(), new TinderBox(), new Trap()]
     return tools;
 }
 export class Tool extends Item {
@@ -2001,6 +2042,12 @@ export class Bucket extends Tool {
     constructor(name = "Bucket", cost = 1, tier = 1) {
         super(name, cost)
         this.Tier = tier; this.SubType = "Bucket"
+    }
+}
+export class PotionBottle extends Tool {
+    constructor(name = "Potion Bottle", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Potion Bottle"
     }
 }
 export class Thread extends Tool {

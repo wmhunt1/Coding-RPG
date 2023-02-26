@@ -19,7 +19,7 @@ import {
     WoodShortBow, WoodStaff, WoodStock, WoodWand, WoolBoots, WoolCloth, WoolGloves, WoolHat, WoolRobeBottom, WoolRobeTop,
     WoolTrousers, WoolTunic, WoolWizardHat, OakShortBow, WillowShortBow, OakLongBow, WillowLongBow, WoodLongBow, Bones,
     Skull, Ectoplasm, SpiderSilkCloth, SpiderSilkBoots, SpiderSilkGloves, SpiderSilkRobeBottom, SpiderSilkRobeTop,
-    SpiderSilkWizardHat, BronzeBoots, MortarAndPestle, UnEnchantedWoodWand, UnEnchantedWillowWand, UnEnchantedWillowStaff, UnEnchantedOakStaff, UnEnchantedWoodStaff, UnEnchantedOakWand, Trap
+    SpiderSilkWizardHat, BronzeBoots, MortarAndPestle, UnEnchantedWoodWand, UnEnchantedWillowWand, UnEnchantedWillowStaff, UnEnchantedOakStaff, UnEnchantedWoodStaff, UnEnchantedOakWand, Trap, MilkThistle, Aloe, PotionBottle, Antidote, BurnSalve, RawCrayFish, CookedCrayFish, RawTrout, CookedTrout
 } from "./ItemsDB"
 export class SkillRecipe {
     Name; Skill; Tool; Verb; LevelRequirement; Exp; Input; Output; FailureOutput;
@@ -30,13 +30,23 @@ export class SkillRecipe {
 //crafting
 //alchemy
 export function alchemyRecipes() {
-    var alchemyRecipes = [new MakeGunPowder(), new ProcessBatGuano()]
+    var alchemyRecipes = [new MakeAntidote(), new MakeBurnSalve(), new MakeGunPowder(), new ProcessBatGuano()]
     return alchemyRecipes
 }
 export class AlchemyRecipe extends SkillRecipe {
     constructor(name, level, xp, input, output, failure) {
         super(name, level, xp, input, output, failure)
         this.Skill = "Alchemy"; this.Tool = new MortarAndPestle(); this.Verb = "Make"
+    }
+}
+export class MakeAntidote extends AlchemyRecipe {
+    constructor(name = "Make Antidote", level = 1, xp = 25, input = [{ Item: new MilkThistle(), Quantity: 1 }, { Item: new PotionBottle(), Quantity: 1 }], output = { Item: new Antidote(), Quantity: 1 }, failure = null) {
+        super(name, level, xp, input, output, failure)
+    }
+}
+export class MakeBurnSalve extends AlchemyRecipe {
+    constructor(name = "Make Burn Salve", level = 1, xp = 25, input = [{ Item: new Aloe(), Quantity: 1 }, { Item: new PotionBottle(), Quantity: 1 }], output = { Item: new BurnSalve(), Quantity: 1 }, failure = null) {
+        super(name, level, xp, input, output, failure)
     }
 }
 export class MakeGunPowder extends AlchemyRecipe {
@@ -53,7 +63,7 @@ export class ProcessBatGuano extends AlchemyRecipe {
 //cooking
 export function cookingRecipes() {
     var cookingRecipes = [new BakeBread(), new CookBeefStew(), new CookFishStew(), new CookRabbitStew(), new CookRatStew(),
-    new CookRawBeef(), new CookRawFish(), new CookRawRabbitMeat(), new CookRawRatMeat(), new MakeDough()]
+    new CookRawBeef(), new CookRawChicken(), new CookRawCrayFish(), new CookRawFish(), new CookRawRabbitMeat(), new CookRawRatMeat(), new CookRawTrout(), new MakeDough()]
     return cookingRecipes;
 }
 export class CookingRecipe extends SkillRecipe {
@@ -80,7 +90,7 @@ export class CookFishStew extends CookingRecipe {
     }
 }
 export class CookRabbitStew extends CookingRecipe {
-    constructor(name = "Cook RAbbit Stew", level = 5, xp = 125, input = [{ Item: new RawRabbitMeat(), Quantity: 1 }, { Item: new Milk(), Quantity: 1 }], output = { Item: new RabbitStew(), Quantity: 1 }, failure = { Item: new BurntStew(), Quantity: 1 }) {
+    constructor(name = "Cook Rabbit Stew", level = 5, xp = 125, input = [{ Item: new RawRabbitMeat(), Quantity: 1 }, { Item: new Milk(), Quantity: 1 }], output = { Item: new RabbitStew(), Quantity: 1 }, failure = { Item: new BurntStew(), Quantity: 1 }) {
         super(name, level, xp, input, output, failure)
     }
 }
@@ -99,6 +109,11 @@ export class CookRawChicken extends CookingRecipe {
         super(name, level, xp, input, output, failure)
     }
 }
+export class CookRawCrayFish extends CookingRecipe {
+    constructor(name = "Cook Raw Crayfish", level = 1, xp = 25, input = [{ Item: new RawCrayFish(), Quantity: 1 }], output = { Item: new CookedCrayFish(), Quantity: 1 }, failure = { Item: new BurntFish(), Quantity: 1 }) {
+        super(name, level, xp, input, output, failure)
+    }
+}
 export class CookRawFish extends CookingRecipe {
     constructor(name = "Cook Raw Fish", level = 1, xp = 25, input = [{ Item: new RawFish(), Quantity: 1 }], output = { Item: new CookedFish(), Quantity: 1 }, failure = { Item: new BurntFish(), Quantity: 1 }) {
         super(name, level, xp, input, output, failure)
@@ -111,6 +126,11 @@ export class CookRawRabbitMeat extends CookingRecipe {
 }
 export class CookRawRatMeat extends CookingRecipe {
     constructor(name = "Cook Raw Rat", level = 1, xp = 25, input = [{ Item: new RawRatMeat(), Quantity: 1 }], output = { Item: new CookedRatMeat(), Quantity: 1 }, failure = { Item: new BurntRatMeat(), Quantity: 1 }) {
+        super(name, level, xp, input, output, failure)
+    }
+}
+export class CookRawTrout extends CookingRecipe {
+    constructor(name = "Cook Raw Trout", level = 5, xp = 50, input = [{ Item: new RawTrout(), Quantity: 1 }], output = { Item: new CookedTrout(), Quantity: 1 }, failure = { Item: new BurntFish(), Quantity: 1 }) {
         super(name, level, xp, input, output, failure)
     }
 }
@@ -967,7 +987,7 @@ export class HarvestWheat extends HarvestCrop {
 }
 //fishing
 export function fishingRecipes() {
-    var fish = [new FishFish()]
+    var fish = [new FishCrayFish(), new FishFish(), new FishTrout()]
     return fish;
 }
 export class FishingRecipe extends SkillRecipe {
@@ -982,14 +1002,24 @@ export class RodFishing extends FishingRecipe {
         this.Tool = new FishingRod();
     }
 }
+export class FishCrayFish extends RodFishing {
+    constructor(name = "Fish Crayfish", level = 1, xp = 25, input = [], output = { Item: new RawCrayFish(), Quantity: 1 }, failure = null) {
+        super(name, level, xp, input, output, failure)
+    }
+}
 export class FishFish extends RodFishing {
     constructor(name = "Fish Fish", level = 1, xp = 25, input = [], output = { Item: new RawFish(), Quantity: 1 }, failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
+export class FishTrout extends RodFishing {
+    constructor(name = "Fish Trout", level = 5, xp = 50, input = [], output = { Item: new RawTrout(), Quantity: 1 }, failure = null) {
+        super(name, level, xp, input, output, failure)
+    }
+}
 //herblore
 export function herbLoreRecipes() {
-    var herb = []
+    var herb = [new GatherAloe(), new GatherMilkThistle()]
     return herb;
 }
 export class HerbloreRecipe extends SkillRecipe {
@@ -998,8 +1028,22 @@ export class HerbloreRecipe extends SkillRecipe {
         this.Skill = "Herblore"; this.Verb = "Gather"
     }
 }
+export class GatherAloe extends HerbloreRecipe {
+    constructor(name = "Gather Aloe", level = 1, xp = 25, input = [], output = { Item: new Aloe(), Quantity: 1 }, failure = null) {
+        super(name, level, xp, input, output, failure)
+    }
+}
+export class GatherMilkThistle extends HerbloreRecipe {
+    constructor(name = "Gather Milk Thistle", level = 1, xp = 25, input = [], output = { Item: new MilkThistle(), Quantity: 1 }, failure = null) {
+        super(name, level, xp, input, output, failure)
+    }
+}
 //hunting
 export function huntingRecipes() {
+    var hunt = [new HuntRabbit()]
+    return hunt;
+}
+export function huntingRecipesForest() {
     var hunt = [new HuntRabbit()]
     return hunt;
 }

@@ -1,4 +1,4 @@
-import { NoDamage, PoisonDamage } from "./DamageTypesDB";
+import { FireDamage, NoDamage, PoisonDamage } from "./DamageTypesDB";
 
 export class Condition {
     Name; Symbol; Type; Attribute; Damage; DamageType; Source; Duration; RemainingDuration;
@@ -11,6 +11,11 @@ export class Condition {
 export class NoCondition extends Condition {
     constructor(name, symbol, type, attribute, damage, source, damageType, duration) {
         super(name = "None", symbol = "", type = "none", attribute = "", damage = 0, source = null, damageType = new NoDamage(), duration = 0)
+    }
+}
+export class BurnCondition extends Condition {
+    constructor(name = "Burned", symbol = "BRN", type = "Damage", attribute = "Con", damage, source = null, damageType = new FireDamage(), duration) {
+        super(name, symbol, type, attribute, damage, source, damageType, duration)
     }
 }
 export class PoisonCondition extends Condition {

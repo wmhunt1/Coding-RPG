@@ -1,4 +1,4 @@
-import { alchemyRecipes, cookingRecipes, craftingRecipes, DrawWater, enchantingRecipes, engineeringRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, GatherBlackFeathers, herbLoreRecipes, huntingRecipes, MillWheat, MineSaltpeter, MineSulphur, miningRecipes, restorationRecipes, ShearSheep, smithingRecipes, woodcuttingRecipes } from "./SkillRecipesDB"
+import { alchemyRecipes, cookingRecipes, craftingRecipes, DrawWater, enchantingRecipes, engineeringRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, GatherBlackFeathers, herbLoreRecipes, huntingRecipes, huntingRecipesForest, MillWheat, MineSaltpeter, MineSulphur, miningRecipes, restorationRecipes, ShearSheep, smithingRecipes, woodcuttingRecipes } from "./SkillRecipesDB"
 
 export class SkillNode {
     Hero; Name; Skill; Recipes;
@@ -81,12 +81,17 @@ export class HerbNode extends SkillNode {
 }
 //hunting
 export class HuntNode extends SkillNode {
-    constructor(hero, name = "Hunting Spot", skill = "hunting", recipes = huntingRecipes()) {
+    constructor(hero, name = "Hunting Spot", skill = "Hunting", recipes = huntingRecipes()) {
         super(hero, name, skill, recipes)
     }
 }
 export class BlackFeatherNode extends HuntNode {
     constructor(hero, name = "Scattered Black Feathers", skill = "Hunting", recipes = [new GatherBlackFeathers()]) {
+        super(hero, name, skill, recipes)
+    }
+}
+export class ForestHuntNode extends HuntNode {
+    constructor(hero, name = "Hunting Spot", skill = "Hunting", recipes = huntingRecipesForest()) {
         super(hero, name, skill, recipes)
     }
 }

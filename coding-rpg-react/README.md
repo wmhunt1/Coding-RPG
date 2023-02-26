@@ -16,8 +16,8 @@ Checks for locations to update them or trigger events
 Use valley as small starting area and have Halfland to south
 
 Convert objects to classes and subclasses
-Dialogues
-Locations
+Dialogues (Would have to work around conditional stuff)
+Locations (Would have to work around conditional stuff)
 Tactics
 
 possible content
@@ -25,7 +25,6 @@ Failure can cause damage
 more damage modifers for prot types
 Ferra and apprentice know each other?
 If Quincy apprentice sent away since wizard knows he seeks knowledge but not necessarily magic
-Ferra gives bonus xp rate feat to mining etc?
 Add image icons?,
 enchanting reagent (maybe gems?)
 wizard apprentice companion. Arcade the teifling? or a waifu
@@ -35,7 +34,7 @@ abraham arkwright companion
 kobold companion
 
 fixes/changes
-move part of combat to combat
+move part of combatscripts to combat comp
 balancing
 write more than generic dialogue
 fix tactic selection

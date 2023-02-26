@@ -4,7 +4,7 @@ import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, tenguCampDi
 import { BanditHideoutDungeon, GiantCaveDungeon, GiantCaveDungeonBeforeAndAfterQuest, GnollDenDungeon, GoblinMine, GoblinMineAfterQuest, SpiderCaveDungeon, SpiderCaveDungeonDuringQuest } from "./DungeonsDB"
 import { DwarvenMineGoblinQuest, GiantQuest, ScareCrowQuest3 } from "./QuestsDB"
 import { DaleChapelShop, DreamingWorkerInn, ForgeHeartSmithy, GeneralShop, InnShop, JoeTheTradersTradingPost, WitchHutShop, WizardTowerShop } from "./ShopsDB"
-import { AlchemyNode, BlackFeatherNode, CookNode, EnchantNode, FarmNode, FireNode, FishNode, FletchNode, HerbNode, HuntNode, MillNode, MineNode, SaltPeterNode, SheepNode, WaterNode, WellNode, WoodNode } from "./SkillNodesDB"
+import { AlchemyNode, BlackFeatherNode, CookNode, EnchantNode, FarmNode, FireNode, FishNode, FletchNode, ForestHuntNode, HerbNode, HuntNode, MillNode, MineNode, SaltPeterNode, SheepNode, WaterNode, WellNode, WoodNode } from "./SkillNodesDB"
 
 //locations
 export function batCave(hero, x, y) {
@@ -78,8 +78,7 @@ export function hauntedManor(hero, x, y) {
 export function spiderCave(hero, x, y) {
     var spider;
     var questIndex = CheckForQuest(hero, new ScareCrowQuest3(hero))
-    if (questIndex === null)
-    {
+    if (questIndex === null) {
         spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterSpiderCaveDungeon(hero), enterSpiderEncounter(hero)] }
     }
     else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
@@ -130,7 +129,7 @@ export function farm(hero, x, y) {
     return farm;
 }
 export function forest(hero, x, y) {
-    var forest = { LocationName: "Forest", XCoord: x, YCoord: y, CanTravel: false, Color: "ForestGreen", SubLocations: [enterCookNodeCampFire(hero), enterHerbNode(hero), enterHuntNode(hero), enterWoodNode(hero)] }
+    var forest = { LocationName: "Forest", XCoord: x, YCoord: y, CanTravel: false, Color: "ForestGreen", SubLocations: [enterCookNodeCampFire(hero), enterHerbNode(hero), enterHuntForestNode(hero), enterWoodNode(hero)] }
     return forest;
 }
 export function graveyard(hero, x, y) {
@@ -361,6 +360,10 @@ export function enterBlackFeatherNode(hero) {
 }
 export function enterHuntNode(hero) {
     var hunt = { Name: "Hunting Ground", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new HuntNode(hero) }; return content } }
+    return hunt;
+}
+export function enterHuntForestNode(hero) {
+    var hunt = { Name: "Hunting Ground", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new ForestHuntNode(hero) }; return content } }
     return hunt;
 }
 //mining

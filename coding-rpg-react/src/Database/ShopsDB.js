@@ -1,6 +1,6 @@
 import { dreamingWorkerInnDialogue, forgeheartSmithDialogue, innDialogue, joeTheTradersTradingPostDialogue, priestDialogue } from "./DialoguesDB";
 import { RatCellar } from "./DungeonsDB";
-import { allBronze, allHealingScrolls, allIron, allPotions, allSpellScrolls, EnchantmentTome, generalTools, innFood, } from "./ItemsDB"
+import { allBronze, allHealingScrolls, allIron, allPotions, allSpellScrolls, EnchantmentTome, generalTools, innFood, MortarAndPestle, PotionBottle, } from "./ItemsDB"
 import { DaleTownReputation } from "./ReputationsDB";
 import { CookNode, RestorationNode, SmithNode } from "./SkillNodesDB";
 
@@ -12,7 +12,7 @@ export class Shop {
 }
 //alchemists
 export class AlchemyShop extends Shop {
-    constructor(hero, name = "Alchemy Shop", dialogue = null, dungeon = null, node = null, rep = null, inventory = allPotions()) {
+    constructor(hero, name = "Alchemy Shop", dialogue = null, dungeon = null, node = null, rep = null, inventory = [...allPotions(), new MortarAndPestle(), new PotionBottle()]) {
         super(hero, name, dialogue, dungeon, node, rep, inventory)
     }
     buyFilter(hero) { return hero.Inventory.filter(item => item.SubType === "Potion") }
