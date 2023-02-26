@@ -892,6 +892,7 @@ export class OffHandMeleeWeapon extends OffHandWeapon {
 export class DaggerOffHand extends OffHandMeleeWeapon {
     constructor(name, cost, level, damage) {
         super(name, cost, level, damage)
+        this.Name=""
     }
 }
 export class BronzeDaggerOffHand extends DaggerOffHand {
@@ -945,6 +946,7 @@ export class OffHandRangedWeapon extends OffHandWeapon {
 export class CrossBowOffHand extends OffHandRangedWeapon {
     constructor(name, cost, level, damage) {
         super(name, cost, level, damage)
+        this.Name=""
     }
 }
 export class BronzeCrossBowOffHand extends CrossBowOffHand {
@@ -966,6 +968,7 @@ export class SteelCrossBowOffHand extends CrossBowOffHand {
 export class PistolOffHand extends OffHandRangedWeapon {
     constructor(name, cost, level, damage) {
         super(name, cost, level, damage)
+        this.Name=""
     }
 }
 export class BronzePistolOffHand extends PistolOffHand {
@@ -1077,6 +1080,7 @@ export class WoodWand extends Wand {
 export class MeleeOneHandedWeapon extends OneHandedWeapon {
     constructor(name, cost, level, damage) {
         super(name, cost, level, damage)
+        this.Name=""
     }
 }
 //axes
@@ -1254,6 +1258,7 @@ export class RangedOneHandedWeapon extends OneHandedWeapon {
 export class CrossBow1H extends RangedOneHandedWeapon {
     constructor(name, cost, level, damage) {
         super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
     }
 }
 export class BronzeCrossBow1H extends CrossBow1H {
@@ -1274,6 +1279,7 @@ export class SteelCrossBow1H extends CrossBow1H {
 export class Pistol extends RangedOneHandedWeapon {
     constructor(name, cost, level, damage) {
         super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
     }
 }
 export class BronzePistol extends Pistol {
@@ -1421,11 +1427,13 @@ export class RangedTwoHandedWeapon extends TwoHandedWeapon {
 export class Bow extends RangedTwoHandedWeapon {
     constructor(name, cost, level, damage) {
         super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
     }
 }
 export class LongBow extends Bow {
     constructor(name, cost, level, damage) {
         super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
     }
 }
 export class OakLongBow extends LongBow {
@@ -1446,6 +1454,7 @@ export class WoodLongBow extends LongBow {
 export class ShortBow extends Bow {
     constructor(name, cost, level, damage) {
         super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
     }
 }
 export class OakShortBow extends ShortBow {
@@ -1466,6 +1475,7 @@ export class WoodShortBow extends ShortBow {
 export class CrossBow2H extends RangedTwoHandedWeapon {
     constructor(name, cost, level, damage) {
         super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
     }
 }
 export class BronzeCrossBow2H extends CrossBow2H {
@@ -1486,6 +1496,7 @@ export class SteelCrossBow2H extends CrossBow2H {
 export class Rifle extends RangedTwoHandedWeapon {
     constructor(name, cost, level, damage) {
         super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
     }
 }
 export class BronzeRifle extends Rifle {
@@ -1657,6 +1668,56 @@ export class WillowStock extends Stock {
 }
 export class WoodStock extends Stock {
     constructor(name = "Wood Stock", cost = 1) {
+        super(name, cost)
+    }
+}
+export class UnEnchantedStaff extends Processed
+{
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "UnEnchanted Staff";
+    }
+}
+export class UnEnchantedOakStaff extends UnEnchantedStaff
+{
+    constructor(name ="UnEnchanted Oak Staff", cost=5) {
+        super(name, cost)
+    }
+}
+export class UnEnchantedWillowStaff extends UnEnchantedStaff
+{
+    constructor(name ="UnEnchanted Willow Staff", cost=10) {
+        super(name, cost)
+    }
+}
+export class UnEnchantedWoodStaff extends UnEnchantedStaff
+{
+    constructor(name ="UnEnchanted Wood Staff", cost=1) {
+        super(name, cost)
+    }
+}
+export class UnEnchantedWand extends Processed
+{
+    constructor(name, cost) {
+        super(name, cost)
+        this.SubType = "UnEnchanted Wand";
+    }
+}
+export class UnEnchantedOakWand extends UnEnchantedWand
+{
+    constructor(name ="UnEnchanted Oak Wand", cost=5) {
+        super(name, cost)
+    }
+}
+export class UnEnchantedWillowWand extends UnEnchantedWand
+{
+    constructor(name ="UnEnchanted Willow Wand", cost=10) {
+        super(name, cost)
+    }
+}
+export class UnEnchantedWoodWand extends UnEnchantedStaff
+{
+    constructor(name ="UnEnchanted Wood Wand", cost=1) {
         super(name, cost)
     }
 }
