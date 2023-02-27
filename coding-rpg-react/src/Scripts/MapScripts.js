@@ -34,7 +34,7 @@ export function findAdjacentLocation(hero, map, x, y) {
         return map.Locations[mapIndex]
     }
     else {
-        return OutOfBounds(hero, x, y)
+        return new OutOfBounds(hero, x, y)
     }
 }
 export function findAdjacentLocations(hero, map, x, y) {

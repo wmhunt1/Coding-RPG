@@ -1,7 +1,7 @@
 import { NoCondition, PoisonCondition, SleepCondition, WebCondition } from "./ConditionsDB";
 import { Cleave, PierceArmor, Rage } from "./AbilitiesDB";
-import {Cloak,  BareBack, BareFinger, BareNeck, Bite, Bones, EmptyOffHand, RatTail, RawRatMeat, Shoes, Trousers, Tunic, WoodenShield, BareFist, BareHead, BareTorso, BareLegs, BareHands, BareFeet, WoodenClub, LoinCloth, BronzeSword, Slam, RawBeef, CowLeather, IronWarHammer, IronShield, IronHelmet, IronTorso, IronLegs, IronGauntlets, IronBoots, PoisonedBite, SpiderSilkCloth, LeatherCowl, LeatherTorso, LeatherLegs, LeatherGloves, LeatherBoots, IronDagger, IronDaggerOffHand, OakShortBow, IronAxe2H, Skull, BronzeShield, BronzeMace, BronzeHelmet, WolfFur, ClawSlash, BearFur, RawChicken, Feather, Peck, BatGuano, IronAxe, OakStaff, GhostTouch, Ectoplasm,BronzeBoots, RingOfStr, WoolBoots } from "./ItemsDB";
-import { daleTown } from "./LocationsDB";
+import { Cloak, BareBack, BareFinger, BareNeck, Bite, Bones, EmptyOffHand, RatTail, RawRatMeat, Shoes, Trousers, Tunic, WoodenShield, BareFist, BareHead, BareTorso, BareLegs, BareHands, BareFeet, WoodenClub, LoinCloth, BronzeSword, Slam, RawBeef, CowLeather, IronWarHammer, IronShield, IronHelmet, IronTorso, IronLegs, IronGauntlets, IronBoots, PoisonedBite, SpiderSilkCloth, LeatherCowl, LeatherTorso, LeatherLegs, LeatherGloves, LeatherBoots, IronDagger, IronDaggerOffHand, OakShortBow, IronAxe2H, Skull, BronzeShield, BronzeMace, BronzeHelmet, WolfFur, ClawSlash, BearFur, RawChicken, Feather, Peck, BatGuano, IronAxe, OakStaff, GhostTouch, Ectoplasm, BronzeBoots, RingOfStr, WoolBoots } from "./ItemsDB";
+import { DaleTown } from "./LocationsDB";
 import { Cleric, Freelancer, Pet } from "./JobsDB";
 import { BasicHeal, CurePoison, FireBall, MagicMissile, PoisonSpray, SleepSpell, SummonRat } from "./SpellsDB"
 import { BasicAttacker, BasicHealer, Rager, spiderSummoner } from "./TacticsDB";
@@ -36,7 +36,7 @@ class Character {
     Companions = []; Journal = []; Abilities = []; SpellBook = []; SkillBook = allSkills(); Reputation = []; Relationships = [];
     Buffs = []; DeBuffs = []; Condition = new NoCondition();
     Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicAttacker(char, allies, enemies, combatLog, round) } };
-    ItemDrops = []; CurrentLocation = daleTown(this, 0, 0); Map = [daleTown(this, 0, 0)]; AdjacentLocations = startingAdjacentLocations(); Time = { Day: 0, Hour: 9, TimeOfDay: "Morning" };
+    ItemDrops = []; CurrentLocation = new DaleTown(this, 0, 0); Map = [new DaleTown(this, 0, 0)]; AdjacentLocations = startingAdjacentLocations(); Time = { Day: 0, Hour: 9, TimeOfDay: "Morning" };
     constructor(name) {
         this.Name = name;
     }
@@ -191,7 +191,7 @@ export class Hero extends Humanoid {
         this.Abilities = [new Cleave(), new PierceArmor(), new Rage()];
         this.SpellBook = [new BasicHeal(), new CurePoison(), new FireBall(), new MagicMissile(), new PoisonSpray(), new SleepSpell(), new SummonRat()];
         this.DamageModifiers.Weaknesses = [new FireDamage(this)]; this.DamageModifiers.Weaknesses[0].Source = this.Equipment.Torso;
-        this.Inventory = [new BronzeBoots(), new Cloak(),new RingOfStr(), new LeatherBoots(), new WoolBoots()]
+        this.Inventory = [new BronzeBoots(), new Cloak(), new RingOfStr(), new LeatherBoots(), new WoolBoots()]
     }
 }
 export class FerraForgeHeart extends Humanoid {

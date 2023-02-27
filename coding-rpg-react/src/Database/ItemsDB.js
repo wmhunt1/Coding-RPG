@@ -1,6 +1,7 @@
 import { BludgeoningDamage, FireDamage, ForceDamage, NecroticDamage, PiercingDamage, SlashingDamage } from "./DamageTypesDB";
 import { DrunkDeBuff } from "./DeBuffsDB";
 import { FireImmuneEnchantment, IceResistEnchantment, PoisonApplyEnchantment, StrengthEnchantment, UnEnchanted } from "./EnchantmentsDB";
+import { Pet } from "./JobsDB";
 import { ClothProtection, LeatherProtection, MetalProtection, NaturalProtection, WoodProtection } from "./ProtectionTypesDB";
 import { BlockSkill, HeavyWeaponSkill, DestructionSkill, HeavyArmorSkill, LightArmorSkill, RangedSkill, LightWeaponSkill, UnArmedSkill, UnArmoredSkill } from "./SkillsDB";
 import { Bane, BasicHeal, BasicMassHeal, Bless, CurePoison, FireBall, Heroism, InspireCourage, MagicMissile, PoisonSpray, SleepSpell, SummonRat, SummonSkeleton, SummonSpider, WebSpell } from "./SpellsDB";
@@ -378,10 +379,10 @@ export class SkillLamp extends Lamp {
 }
 //equipables
 export class Equipable extends Item {
-    Level; Slot; Class; Enchantment;
+    Level; Slot; Class; Enchantment; Restriction;
     constructor(name, cost, level) {
         super(name, cost)
-        this.Level = level; this.Type = "Equipable"; this.Enchantment = new UnEnchanted()
+        this.Level = level; this.Type = "Equipable"; this.Enchantment = new UnEnchanted(); this.Restriction = new Pet()
     }
 }
 //ammo
@@ -453,6 +454,7 @@ export class BareNeck extends Neck {
 export class DogCollar extends Neck {
     constructor(name = "Dog Collar", cost = 0, level = 1) {
         super(name, cost, level)
+        this.Restriction = null;
     }
 }
 //ring
@@ -2044,18 +2046,6 @@ export class Bucket extends Tool {
         this.Tier = tier; this.SubType = "Bucket"
     }
 }
-export class PotionBottle extends Tool {
-    constructor(name = "Potion Bottle", cost = 1, tier = 1) {
-        super(name, cost)
-        this.Tier = tier; this.SubType = "Potion Bottle"
-    }
-}
-export class Thread extends Tool {
-    constructor(name = "Thread", cost = 1, tier = 1) {
-        super(name, cost)
-        this.Tier = tier; this.SubType = "Thread"
-    }
-}
 //alchemy
 export class MortarAndPestle extends Tool {
     constructor(name = "Mortar and Pestle", cost = 10, tier = 1) {
@@ -2063,11 +2053,23 @@ export class MortarAndPestle extends Tool {
         this.Tier = tier; this.SubType = "Mortar and Pestle"
     }
 }
+export class PotionBottle extends Tool {
+    constructor(name = "Potion Bottle", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Potion Bottle"
+    }
+}
 //crafting
 export class Needle extends Tool {
     constructor(name = "Mortar and Pestle", cost = 1, tier = 1) {
         super(name, cost)
         this.Tier = tier; this.SubType = "Needle"
+    }
+}
+export class Thread extends Tool {
+    constructor(name = "Thread", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Thread"
     }
 }
 //enchanting

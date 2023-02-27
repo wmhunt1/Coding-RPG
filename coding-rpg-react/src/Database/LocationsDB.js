@@ -7,154 +7,187 @@ import { DaleChapelShop, DreamingWorkerInn, ForgeHeartSmithy, GeneralShop, InnSh
 import { AlchemyNode, BlackFeatherNode, CookNode, EnchantNode, FarmNode, FireNode, FishNode, FletchNode, ForestHuntNode, HerbNode, HuntNode, MillNode, MineNode, SaltPeterNode, SheepNode, WaterNode, WellNode, WoodNode } from "./SkillNodesDB"
 
 //locations
-export function batCave(hero, x, y) {
-    var cave = { LocationName: "Bat Cave", XCoord: x, YCoord: y, CanTravel: false, Color: "Red", SubLocations: [enterBatEncounter(hero), enterSaltPeterNode(hero)] }
-    return cave;
-}
-export function bearCave(hero, x, y) {
-    var cave = { LocationName: "Bear Cave", XCoord: x, YCoord: y, CanTravel: false, Color: "Red", SubLocations: [enterBearEncounter(hero)] }
-    return cave;
-}
-export function lumbermill(hero, x, y) {
-    var lumber = { LocationName: "Lumbermill", XCoord: x, YCoord: y, CanTravel: true, Color: "ForestGreen", SubLocations: [enterLumbermillDialogue(hero), enterWoodNode(hero)] }
-    return lumber;
-}
-export function littleRootFarm(hero, x, y) {
-    var farm = { LocationName: "Little Root Farm", XCoord: x, YCoord: y, CanTravel: true, Color: "GoldenRod", SubLocations: [enterChickenEncounter(hero), enterCowEncounter(hero), enterFarmNode(hero), enterLittleRootFarmDialogue(hero), enterScareCrowEncounter(hero)] }
-    return farm;
-}
-export function tenguCamp(hero, x, y) {
-    var camp = { LocationName: "Strange Camp", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [enterBlackFeatherNode(hero), enterTenguCampDialogue(hero)] }
-    return camp;
-}
-export function wolfDen(hero, x, y) {
-    var cave = { LocationName: "Wolf Den", XCoord: x, YCoord: y, CanTravel: false, Color: "Red", SubLocations: [enterWolfEncounter(hero)] }
-    return cave;
-}
-//dungeon
-export function banditHideout(hero, x, y) {
-    var bandit = { LocationName: "Bandit Hideout", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterBanditEncounter(hero), enterBanditHideout(hero)] }
-    return bandit;
-}
-export function dwarvenMine(hero, x, y) {
-    var dwarvenMine;
-    var questIndex = CheckForQuest(hero, new DwarvenMineGoblinQuest(hero))
-    if (CheckForQuest(hero, new DwarvenMineGoblinQuest(hero)) === null) {
-        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterMineNode(hero)] }
+export class Location {
+    Hero; XCoord; YCoord; Name; CanTravel; Color; SubLocations;
+    constructor(hero, x, y, name, subLoc) {
+        this.Hero = hero; this.XCoord = x; this.YCoord = y; this.Name = name; this.SubLocations = subLoc; this.CanTravel = "False"
     }
-    else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
-        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterDwarvenMine(hero), enterGoblinEncounter(hero), enterMineNode(hero)] }
+}
+export class OutOfBounds extends Location {
+    constructor(hero, x, y, name = "Out Of Bounds", subLoc = []) {
+        super(hero, x, y, name, subLoc)
+        this.Color = "Orange"
     }
-    else {
-        dwarvenMine = { LocationName: "Dwarven Mine", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterDwarvenMine(hero), enterGoblinEncounter(hero), enterMineNode(hero)] }
+}
+//dungeons
+export class Dungeon extends Location {
+    constructor(hero, x, y, name, subLoc) {
+        super(hero, x, y, name, subLoc)
+        this.Color = "Red"; this.CanTravel = true;
     }
-    return dwarvenMine;
 }
-export function fortDale(hero, x, y) {
-    var fort = { LocationName: "Fort Dale", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [] }
-    return fort;
-}
-export function giantCave(hero, x, y) {
-    var giant;
-    if (CheckForQuest(hero, new GiantQuest(hero)) === null) {
-        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterGiantCaveDungeonBeforeAndAfterQuest(hero), enterGiantEncounter(hero)] }
+export class BanditHideout extends Dungeon {
+    constructor(hero, x, y, name = "Bandit Hideout", subLoc = [enterBanditEncounter(hero), enterBanditHideout(hero)]) {
+        super(hero, x, y, name, subLoc)
     }
-    else if (hero.Journal[CheckForQuest(hero, new GiantQuest(hero))].Status === "Completed") {
-        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterGiantCaveDungeonBeforeAndAfterQuest(hero), enterGiantEncounter(hero)] }
+}
+export class BatCave extends Dungeon {
+    constructor(hero, x, y, name = "Bat Cave", subLoc = [enterBatEncounter(hero), enterSaltPeterNode(hero)]) {
+        super(hero, x, y, name, subLoc)
     }
-    else {
-        giant = { LocationName: "Giant Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterGiantCaveDungeon(hero), enterGiantEncounter(hero)] }
+}
+export class BearCave extends Dungeon {
+    constructor(hero, x, y, name = "Bear Cave", subLoc = [enterBearEncounter(hero)]) {
+        super(hero, x, y, name, subLoc)
     }
-    return giant;
 }
-export function gnollDen(hero, x, y) {
-    var den = { LocationName: "Gnoll Den", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterGnolDenDungeon(hero), enterGnollEncounter(hero)] }
-    return den;
-}
-export function hauntedManor(hero, x, y) {
-    var manor = { LocationName: "Haunted Manor", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterGhostEncounter(hero)] }
-    return manor;
-}
-export function spiderCave(hero, x, y) {
-    var spider;
-    var questIndex = CheckForQuest(hero, new ScareCrowQuest3(hero))
-    if (questIndex === null) {
-        spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterSpiderCaveDungeon(hero), enterSpiderEncounter(hero)] }
+export class DwarvenMine extends Dungeon {
+    constructor(hero, x, y, name = "Dwarven Mine", subLoc = [enterDwarvenMine(hero), enterGoblinEncounter(hero), enterMineNode(hero)]) {
+        super(hero, x, y, name, subLoc)
     }
-    else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
-        spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterSpiderCaveDungeon(hero), enterSpiderEncounter(hero)] }
+}
+export class FortDale extends Dungeon {
+    constructor(hero, x, y, name = "Fort Dale", subLoc = []) {
+        super(hero, x, y, name, subLoc)
     }
-    else {
-        spider = { LocationName: "Spider Cave", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [enterSpiderCaveDungeonDuringQuest(hero), enterSpiderEncounter(hero)] }
+}
+export class GiantCave extends Dungeon {
+    constructor(hero, x, y, name = "Giant Cave", subLoc = [enterGiantCaveDungeon(hero), enterGiantEncounter(hero)]) {
+        super(hero, x, y, name, subLoc)
     }
-    return spider;
 }
-//shop
-export function witchHut(hero, x, y) {
-    var witchHut = { LocationName: "Witch's Hut", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [enterWitchHut(hero)] }
-    return witchHut;
+export class GnollDen extends Dungeon {
+    constructor(hero, x, y, name = "Gnoll Den", subLoc = [enterGnollDenDungeon(hero), enterGnollEncounter(hero)]) {
+        super(hero, x, y, name, subLoc)
+    }
 }
-//towns
-export function daleWizardTower(hero, x, y) {
-    var tower = { LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [enterWizardTowerMagicShop(hero)] }
-    return tower;
+export class Graveyard extends Dungeon {
+    constructor(hero, x, y, name = "Graveyard", subLoc = [enterSkeletonEncounter(hero)]) {
+        super(hero, x, y, name, subLoc)
+    }
 }
-export function daleTown(hero, x, y) {
-    var daleTown = { LocationName: "Dale Town", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [enterDaleTownRumors(hero), enterDaleChapelShop(hero), enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterTradingPost(hero), enterWellNode(hero)] }
-    return daleTown;
+export class HauntedManor extends Dungeon {
+    constructor(hero, x, y, name = "Haunted Manor", subLoc = [enterGhostEncounter(hero)]) {
+        super(hero, x, y, name, subLoc)
+    }
 }
-export function orcVillage(hero, x, y) {
-    var orc = { LocationName: "Orc Village", XCoord: x, YCoord: y, CanTravel: true, Color: "Red", SubLocations: [] }
-    return orc;
+export class SpiderCave extends Dungeon {
+    constructor(hero, x, y, name = "Spider Cave", subLoc = [enterSpiderCaveDungeon(hero), enterSpiderEncounter(hero)]) {
+        super(hero, x, y, name, subLoc)
+    }
 }
-export function whiteScalesLair(hero, x, y) {
-    var lair = { LocationName: "Whitescale's Lair", XCoord: x, YCoord: y, CanTravel: true, Color: "Purple", SubLocations: [enterSheepNode(hero)] }
-    return lair;
+export class WolfDen extends Dungeon {
+    constructor(hero, x, y, name = "Wolf Den", subLoc = [enterWolfEncounter(hero)]) {
+        super(hero, x, y, name, subLoc)
+    }
 }
-//reusable locations
-export function OutOfBounds(hero, x, y) {
-    var oob = { LocationName: "OOB", XCoord: x, YCoord: y, CanTravel: false, Color: "Orange", SubLocations: [enterFishNode(hero)] }
-    return oob;
+//Settlements
+export class Settlement extends Location {
+    constructor(hero, x, y, name, subLoc) {
+        super(hero, x, y, name, subLoc)
+        this.Color = "Purple"; this.CanTravel = true;
+    }
 }
-export function bridge(hero, x, y) {
-    var river = { LocationName: "Bridge", XCoord: x, YCoord: y, CanTravel: false, Color: "Black", SubLocations: [enterFishNode(hero)] }
-    return river;
+export class DaleLumbermill extends Settlement {
+    constructor(hero, x, y, name = "Dale Lumbermill", subLoc = [enterLumbermillDialogue(hero), enterWoodNode(hero)]) {
+        super(hero, x, y, name, subLoc)
+    }
 }
-export function brokenBridge(hero, x, y) {
-    var river = { LocationName: "Broken Bridge", XCoord: x, YCoord: y, CanTravel: false, Color: "Black", SubLocations: [enterFishNode(hero)] }
-    return river;
+export class DaleTown extends Settlement {
+    constructor(hero, x, y, name = "Dale Town", subLoc = [enterDaleTownRumors(hero), enterDaleChapelShop(hero), enterDreamingWorkerInn(hero), enterForgeHeartSmithy(hero), enterTradingPost(hero), enterWellNode(hero)]) {
+        super(hero, x, y, name, subLoc)
+    }
 }
-export function farm(hero, x, y) {
-    var farm = { LocationName: "Farm", XCoord: x, YCoord: y, CanTravel: false, Color: "GoldenRod", SubLocations: [enterChickenEncounter(hero), enterCowEncounter(hero), enterFarmNode(hero)] }
-    return farm;
+export class DaleWizardTower extends Settlement {
+    constructor(hero, x, y, name = "Ambrosius's Tower", subLoc = [enterWizardTowerMagicShop(hero)]) {
+        super(hero, x, y, name, subLoc)
+    }
 }
-export function forest(hero, x, y) {
-    var forest = { LocationName: "Forest", XCoord: x, YCoord: y, CanTravel: false, Color: "ForestGreen", SubLocations: [enterCookNodeCampFire(hero), enterHerbNode(hero), enterHuntForestNode(hero), enterWoodNode(hero)] }
-    return forest;
+export class LittleRootFarm extends Settlement {
+    constructor(hero, x, y, name = "Littleroot Farm", subLoc = [enterChickenEncounter(hero), enterCowEncounter(hero), enterFarmNode(hero), enterLittleRootFarmDialogue(hero), enterScareCrowEncounter(hero)]) {
+        super(hero, x, y, name, subLoc)
+    }
 }
-export function graveyard(hero, x, y) {
-    var grave = { LocationName: "Graveyard", XCoord: x, YCoord: y, CanTravel: false, Color: "Red", SubLocations: [enterSkeletonEncounter(hero)] }
-    return grave;
+export class OrcVillage extends Settlement {
+    constructor(hero, x, y, name = "Orc Village", subLoc = []) {
+        super(hero, x, y, name, subLoc)
+    }
 }
-export function lake(hero, x, y) {
-    var lake = { LocationName: "Lake", XCoord: x, YCoord: y, CanTravel: false, Color: "Blue", SubLocations: [enterFishNode(hero), enterWaterNode(hero)] }
-    return lake;
+export class TenguCamp extends Settlement {
+    constructor(hero, x, y, name = "Strange Camp", subLoc = [enterBlackFeatherNode(hero), enterTenguCampDialogue(hero)]) {
+        super(hero, x, y, name, subLoc)
+    }
 }
-export function mill(hero, x, y) {
-    var mill = { LocationName: "Mill", XCoord: x, YCoord: y, CanTravel: false, Color: "GoldenRod", SubLocations: [enterMillNode(hero)] }
-    return mill;
+export class WhiteScalesLair extends Settlement {
+    constructor(hero, x, y, name = "Whitescale's Lair", subLoc = [enterSheepNode(hero)]) {
+        super(hero, x, y, name, subLoc)
+    }
 }
-export function mountains(hero, x, y) {
-    var mountains = { LocationName: "Mountains", XCoord: x, YCoord: y, CanTravel: false, Color: "Gray", SubLocations: [] }
-    return mountains;
+export class WitchHut extends Settlement {
+    constructor(hero, x, y, name = "Witch's Hut", subLoc = [enterWitchHut(hero)]) {
+        super(hero, x, y, name, subLoc)
+    }
 }
-export function river(hero, x, y) {
-    var river = { LocationName: "River", XCoord: x, YCoord: y, CanTravel: false, Color: "LightBlue", SubLocations: [enterFishNode(hero), enterWaterNode(hero)] }
-    return river;
+//Terrain
+export class Terrain extends Location {
+    constructor(hero, x, y, name, subLoc) {
+        super(hero, x, y, name, subLoc)
+        this.Color = "Black"
+    }
 }
-export function road(hero, x, y) {
-    var road = { LocationName: "Road", XCoord: x, YCoord: y, CanTravel: false, Color: "Black", SubLocations: [] }
-    return road;
+export class Farm extends Terrain {
+    constructor(hero, x, y, name = "Farm", subLoc = [enterChickenEncounter(hero), enterCowEncounter(hero), enterFarmNode(hero)]) {
+        super(hero, x, y, name, subLoc)
+        this.Color = "GoldenRod"
+    }
+}
+export class Mill extends Farm
+{
+    constructor(hero, x, y, name = "Mill", subLoc = [enterMillNode(hero)]) {
+        super(hero, x, y, name, subLoc)
+
+    }
+}
+export class MountainTerrain extends Terrain {
+    constructor(hero, x, y, name = "Mountains", subLoc = []) {
+        super(hero, x, y, name, subLoc)
+        this.Color = "Gray"
+    }
+}
+export class ForestTerrain extends Terrain {
+    constructor(hero, x, y, name = "Forest", subLoc = [enterCookNodeCampFire(hero), enterHerbNode(hero), enterHuntForestNode(hero), enterWoodNode(hero)]) {
+        super(hero, x, y, name, subLoc)
+        this.Color = "ForestGreen"
+    }
+}
+export class RoadTerrain extends Terrain {
+    constructor(hero, x, y, name = "Road", subLoc = []) {
+        super(hero, x, y, name, subLoc)
+    }
+}
+export class WaterTerrain extends Terrain {
+    constructor(hero, x, y, name, subLoc = [enterFishNode(hero), enterWaterNode(hero)]) {
+        super(hero, x, y, name, subLoc)
+        this.Color = "Blue"
+    }
+}
+export class Bridge extends WaterTerrain {
+    constructor(hero, x, y, name = "Bridge", subLoc = [enterFishNode(hero), enterWaterNode(hero)]) {
+        super(hero, x, y, name, subLoc)
+        this.Color = "Black"
+    }
+}
+export class LakeTerrain extends WaterTerrain {
+    constructor(hero, x, y, name = "Lake", subLoc = [enterFishNode(hero), enterWaterNode(hero)]) {
+        super(hero, x, y, name, subLoc)
+        this.Color = "Blue"
+    }
+}
+export class RiverTerrain extends WaterTerrain {
+    constructor(hero, x, y, name = "River", subLoc = [enterFishNode(hero), enterWaterNode(hero)]) {
+        super(hero, x, y, name, subLoc)
+        this.Color = "LightBlue"
+    }
 }
 //sublocations
 //enter dungeons
@@ -163,31 +196,48 @@ export function enterBanditHideout(hero) {
     return enter;
 }
 export function enterDwarvenMine(hero) {
-    var enterDwarvenMine = { Name: "Dwarven Mine (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GoblinMine(hero), shop: null, skill: null }; return content } }
-    return enterDwarvenMine
-}
-export function enterDwarvenMineAfterQuest(hero) {
-    var enterDwarvenMine = { Name: "Dwarven Mine (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GoblinMineAfterQuest(hero), shop: null, skill: null }; return content } }
-    return enterDwarvenMine
+    var questIndex = CheckForQuest(hero, new DwarvenMineGoblinQuest(hero))
+    var dwarvenMine;
+    if (CheckForQuest(hero, new DwarvenMineGoblinQuest(hero)) === null) {
+        dwarvenMine = { Name: "Dwarven Mine (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GoblinMineAfterQuest(hero), shop: null, skill: null }; return content } }
+    }
+    else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
+        dwarvenMine = { Name: "Dwarven Mine (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GoblinMineAfterQuest(hero), shop: null, skill: null }; return content } }
+    }
+    else {
+        dwarvenMine = { Name: "Dwarven Mine (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GoblinMine(hero), shop: null, skill: null }; return content } }
+    }
+    return dwarvenMine;
 }
 export function enterGiantCaveDungeon(hero) {
-    var enter = { Name: "Giant Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GiantCaveDungeon(hero), shop: null, skill: null }; return content } }
-    return enter;
+    var giant;
+    if (CheckForQuest(hero, new GiantQuest(hero)) === null) {
+        giant = { Name: "Giant Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GiantCaveDungeonBeforeAndAfterQuest(hero), shop: null, skill: null }; return content } }
+    }
+    else if (hero.Journal[CheckForQuest(hero, new GiantQuest(hero))].Status === "Completed") {
+        giant = { Name: "Giant Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GiantCaveDungeon(hero), shop: null, skill: null }; return content } }
+    }
+    else {
+        giant = { Name: "Giant Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GiantCaveDungeonBeforeAndAfterQuest(hero), shop: null, skill: null }; return content } }
+    }
+    return giant;
 }
-export function enterGiantCaveDungeonBeforeAndAfterQuest(hero) {
-    var enter = { Name: "Giant Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GiantCaveDungeonBeforeAndAfterQuest(hero), shop: null, skill: null }; return content } }
-    return enter;
-}
-export function enterGnolDenDungeon(hero) {
+export function enterGnollDenDungeon(hero) {
     var enter = { Name: "Gnoll Den (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new GnollDenDungeon(hero), shop: null, skill: null }; return content } }
     return enter;
 }
 export function enterSpiderCaveDungeon(hero) {
-    var enter = { Name: "Spider Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new SpiderCaveDungeon(hero), shop: null, skill: null }; return content } }
-    return enter;
-}
-export function enterSpiderCaveDungeonDuringQuest(hero) {
-    var enter = { Name: "Spider Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new SpiderCaveDungeonDuringQuest(hero), shop: null, skill: null }; return content } }
+    var questIndex = CheckForQuest(hero, new ScareCrowQuest3(hero))
+    var enter;
+    if (questIndex === null) {
+        enter = { Name: "Spider Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new SpiderCaveDungeon(hero), shop: null, skill: null }; return content } }
+    }
+    else if (hero.Journal[questIndex].ObjectiveProgress >= hero.Journal[questIndex].Objective && hero.Journal[questIndex].Status === "Completed") {
+        enter = { Name: "Spider Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new SpiderCaveDungeon(hero), shop: null, skill: null }; return content } }
+    }
+    else {
+        enter = { Name: "Spider Cave (Dungeon)", enterLocation(hero) { var content = { active: "Dungeon", combat: null, dialogue: null, dungeon: new SpiderCaveDungeonDuringQuest(hero), shop: null, skill: null }; return content } }
+    }
     return enter;
 }
 //enter dialogues

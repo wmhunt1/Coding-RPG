@@ -1,4 +1,4 @@
-import { BanditAndBanditArcherEncounter, BanditAndBanditBerserkerEncounter, BanditArcherEncounter, BanditBerserkerEncounter, BanditEncounter, BanditTrioEncounter, GoblinBossEncounter, EnterGoblinMineEncounter, ForemanGeorgeEncounter, GiantEncounter, GiantRatEncounter,GiantSpiderEncounter, GnollEncounter, GnollLeaderEncounter, GnollShamanEncounter, GoblinEncounter, GoblinWithWorgEncounter, KoboldSlavesEncounter, RatEncounter, SaveMinersEncounter, SaveTenguEncounter, SpiderEncounter } from "./EncountersDB";
+import { BanditAndBanditArcherEncounter, BanditAndBanditBerserkerEncounter, BanditArcherEncounter, BanditBerserkerEncounter, BanditEncounter, BanditTrioEncounter, GoblinBossEncounter, EnterGoblinMineEncounter, ForemanGeorgeEncounter, GiantEncounter, GiantRatEncounter, GiantSpiderEncounter, GnollEncounter, GnollLeaderEncounter, GnollShamanEncounter, GoblinEncounter, GoblinWithWorgEncounter, KoboldSlavesEncounter, RatEncounter, SaveMinersEncounter, SaveTenguEncounter, SpiderEncounter } from "./EncountersDB";
 import { Ale, BanditSpoils, BronzeBar, CowLeather, SpiderSilkCloth } from "./ItemsDB"
 
 export class Dungeon {
