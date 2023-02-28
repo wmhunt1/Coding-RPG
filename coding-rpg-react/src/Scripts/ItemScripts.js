@@ -134,80 +134,86 @@ export function UnEquip(char, inventory, item, log) {
     char.Inventory = inventory;
 }
 export function EquipItem(char, inventory, item, log) {
-    console.log(item)
-    if (FindSkillInSkillBook(char, item.Class).Level >= item.Level || item.Class === undefined) {
-        AddToCharacterLog(log, char.Name + " Equipped " + item.Name);
-        if (item.Slot === "Weapon") {
-            UnEquip(char, inventory, char.Equipment.Weapon, log)
-            char.Equipment.Weapon = item;
-            if (item.Type === "TwoHands") {
-                EquipItem(char, inventory, char.Equipment.OffHand)
+    if (char.Job.Name !== "Pet") {
+        if (FindSkillInSkillBook(char, item.Class).Level >= item.Level || item.Class === undefined) {
+            AddToCharacterLog(log, char.Name + " Equipped " + item.Name);
+            if (item.Slot === "Weapon") {
+                UnEquip(char, inventory, char.Equipment.Weapon, log)
+                char.Equipment.Weapon = item;
+                if (item.Type === "TwoHands") {
+                    EquipItem(char, inventory, char.Equipment.OffHand)
+                }
             }
-        }
-        if (item.Slot === "Ammo") {
-            UnEquip(char, inventory, char.Equipment.Ammo, log)
-            char.Equipment.Ammo = item
-        }
-        if (item.Slot === "OffHand") {
-            UnEquip(char, inventory, char.Equipment.OffHand, log)
-            char.Equipment.OffHand = item
-        }
-        if (item.Slot === "Head") {
-            UnEquip(char, inventory, char.Equipment.Head, log)
-            char.Equipment.Head = item
-        }
-        if (item.Slot === "Torso") {
-            UnEquip(char, inventory, char.Equipment.Torso, log)
-            item.ProtectionType.onEquip(char, item)
-            char.Equipment.Torso = item
-            if (char.Equipment.Torso.Class.Name === "Heavy Armor") {
-                //char.Attributes.Dexterity.Penalty -= 3;
-                //char.Attributes.Speed.Penalty -= 3;
+            if (item.Slot === "Ammo") {
+                UnEquip(char, inventory, char.Equipment.Ammo, log)
+                char.Equipment.Ammo = item
             }
-            if (char.Equipment.Torso.Class.Name === "Medium Armor") {
-                //char.Attributes.Dexterity.Penalty -= 2;
-                //char.Attributes.Speed.Penalty -= 3;
+            if (item.Slot === "OffHand") {
+                UnEquip(char, inventory, char.Equipment.OffHand, log)
+                char.Equipment.OffHand = item
             }
-            if (char.Equipment.Torso.Class.Name === "Light Armor") {
-                //char.Attributes.Dexterity.Penalty -= 1;
-                //char.Attributes.Speed.Penalty -= 3;
+            if (item.Slot === "Head") {
+                UnEquip(char, inventory, char.Equipment.Head, log)
+                char.Equipment.Head = item
             }
+            if (item.Slot === "Torso") {
+                UnEquip(char, inventory, char.Equipment.Torso, log)
+                item.ProtectionType.onEquip(char, item)
+                char.Equipment.Torso = item
+                if (char.Equipment.Torso.Class.Name === "Heavy Armor") {
+                    //char.Attributes.Dexterity.Penalty -= 3;
+                    //char.Attributes.Speed.Penalty -= 3;
+                }
+                if (char.Equipment.Torso.Class.Name === "Medium Armor") {
+                    //char.Attributes.Dexterity.Penalty -= 2;
+                    //char.Attributes.Speed.Penalty -= 3;
+                }
+                if (char.Equipment.Torso.Class.Name === "Light Armor") {
+                    //char.Attributes.Dexterity.Penalty -= 1;
+                    //char.Attributes.Speed.Penalty -= 3;
+                }
+            }
+            if (item.Slot === "Legs") {
+                UnEquip(char, inventory, char.Equipment.Legs, log)
+                char.Equipment.Legs = item
+            }
+            if (item.Slot === "Hands") {
+                UnEquip(char, inventory, char.Equipment.Hands, log)
+                char.Equipment.Hands = item
+            }
+            if (item.Slot === "Feet") {
+                UnEquip(char, inventory, char.Equipment.Feet, log)
+                char.Equipment.Feet = item
+            }
+            if (item.Slot === "Back") {
+                UnEquip(char, inventory, char.Equipment.Back, log)
+                char.Equipment.Back = item
+            }
+            if (item.Slot === "Neck") {
+                UnEquip(char, inventory, char.Equipment.Neck, log)
+                char.Equipment.Neck = item
+            }
+            if (item.Slot === "Ring") {
+                UnEquip(char, inventory, char.Equipment.Ring, log)
+                char.Equipment.Ring = item
+            }
+            item.Enchantment.OnEquipEffect(char, item)
         }
-        if (item.Slot === "Legs") {
-            UnEquip(char, inventory, char.Equipment.Legs, log)
-            char.Equipment.Legs = item
+        else {
+            AddToCharacterLog(log, item.Name + " requires Level " + item.Level + " in " + item.Class.Name + " to equip.");
         }
-        if (item.Slot === "Hands") {
-            UnEquip(char, inventory, char.Equipment.Hands, log)
-            char.Equipment.Hands = item
-        }
-        if (item.Slot === "Feet") {
-            UnEquip(char, inventory, char.Equipment.Feet, log)
-            char.Equipment.Feet = item
-        }
-        if (item.Slot === "Back") {
-            UnEquip(char, inventory, char.Equipment.Back, log)
-            char.Equipment.Back = item
-        }
-        if (item.Slot === "Neck") {
-            UnEquip(char, inventory, char.Equipment.Neck, log)
-            char.Equipment.Neck = item
-        }
-        if (item.Slot === "Ring") {
-            UnEquip(char, inventory, char.Equipment.Ring, log)
-            char.Equipment.Ring = item
-        }
-        item.Enchantment.OnEquipEffect(char, item)
     }
     else {
-        AddToCharacterLog(log, item.Name + " requires Level " + item.Level + " in " + item.Class.Name + " to equip.");
+        AddToCharacterLog(log, item.Name + "cannot be equipped to " + char.Name);
     }
     log.Inventory = inventory;
 }
 export function EquipItemFromInventory(char, inventory, item, log) {
     EquipItem(char, inventory, item, log)
-    if (FindSkillInSkillBook(char, item.Class).Level >= item.Level) {
-        RemoveItemFromInventory(log, inventory, item, item.Quantity, log)
+    if (char.Job.Name !== "Pet") {
+        if (FindSkillInSkillBook(char, item.Class).Level >= item.Level) {
+            RemoveItemFromInventory(log, inventory, item, item.Quantity, log)
+        }
     }
     log.Inventory = inventory;
 }

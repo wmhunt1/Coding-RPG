@@ -192,7 +192,6 @@ export class Hero extends Humanoid {
         this.Companions = [new Dog("Dog")];
         this.Abilities = [new Cleave(), new PierceArmor(), new Rage()];
         this.SpellBook = [new BasicHeal(), new CurePoison(), new FireBall(), new MagicMissile(), new PoisonSpray(), new SleepSpell(), new SummonRat()];
-        this.DamageModifiers.Weaknesses = [new FireDamage(this)]; this.DamageModifiers.Weaknesses[0].Source = this.Equipment.Torso;
         this.Inventory = []
     }
 }
@@ -204,7 +203,6 @@ export class FerraForgeHeart extends Humanoid {
         this.Equipment.Torso = new IronTorso(); this.Equipment.Legs = new IronLegs(); this.Equipment.Hands = new IronGauntlets();
         this.Equipment.Feet = new IronBoots();
         this.BaseStats.SpellBook = [new BasicHeal(), new CurePoison()];
-        this.DamageModifiers.Weaknesses = [new LightningDamage(this.Equipment.Torso)];
         this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }
         FindSkillInSkillBook(this, new BarterSkill()).Level = 10; FindSkillInSkillBook(this, new BarterSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, new BarterSkill()).MaxXP = 9000;
         FindSkillInSkillBook(this, new BlockSkill()).Level = 10; FindSkillInSkillBook(this, new BlockSkill()).CurrentXP = 7200; FindSkillInSkillBook(this, new BlockSkill()).MaxXP = 9000;

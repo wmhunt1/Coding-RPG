@@ -1,4 +1,4 @@
-import { BlessBuff, CourageBuff } from "./BuffsDB";
+import { BlessBuff, CourageBuff, HeroismBuff } from "./BuffsDB";
 import { Rat, Skeleton, Spider } from "./CharactersDB";
 import { PoisonCondition, SleepCondition, WebCondition } from "./ConditionsDB";
 import { FireDamage, ForceDamage } from "./DamageTypesDB";
@@ -25,6 +25,11 @@ export class BuffSpell extends Spell {
         var calcDuration = CalculateSpellBonus(char, this, char.Attributes.Charisma.Value, char.Attributes.Charisma.Bonus, char.Attributes.Charisma.Penalty, 3);
         AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on " + target.Name);
         this.Buff(calcDuration).ApplyBuff(target)
+    }
+}
+export class Heroism extends BuffSpell {
+    constructor(name = "Heroism", school = new RestorationSkill(), level = 1, use = "Combat", mana = 5, desc = "Gives One Ally HP Regen of 1 each round", amount = 1, buff = new HeroismBuff()) {
+        super(name, school, level, use, mana, desc, amount, buff)
     }
 }
 export class InspireCourage extends BuffSpell {
@@ -213,24 +218,4 @@ export class SummonSpider extends SummoningSpell {
     constructor(name = "Summon Spider", school = new ConjurationSkill(), level = 1, use = "Combat", mana = 5, desc = "Summons a Spider", amount = 1, summon = new Spider()) {
         super(name, school, level, use, mana, desc, amount, summon)
     }
-}
-export class TempHPSpell extends Spell {
-    // constructor(name, school, level, use, mana, desc, amount) {
-    //     super(name, school, level, use, mana, desc, amount)
-    // }
-    SpellEffect(char, allies, enemies, target, combatLog) {
-        var calcBuff = CalculateSpellBonus(char, this, char.Attributes.Wisdom.Value, char.Attributes.Wisdom.Bonus, char.Attributes.Wisdom.Penalty, this.Amount);
-        AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on " + target.Name + ", giving them " + calcBuff + " Temp HP");
-        target.BaseStats.HP.Temp += calcBuff
-    }
-}
-export class Heroism extends TempHPSpell {
-    constructor(name = "Heroism", school = new RestorationSkill(), level = 1, use = "Combat", mana = 5, desc = "Gives one Ally Temp HP", amount = 1) {
-        super(name, school, level, use, mana, desc, amount)
-    }
-}
-export class MultiTargetTempHPSpell extends TempHPSpell {
-    // constructor(name, school, level, use, mana, desc, amount) {
-    //     super(name, school, level, use, mana, desc, amount)
-    // }
 }

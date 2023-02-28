@@ -20,9 +20,6 @@ Dialogues (Would have to work around conditional stuff)
 Tactics
 
 possible content
-Darts throwing knifes etc as ammo
-Offhand Swords etc
-Condition for equip restriction
 Scribe runes requires paper ink and quill
 Wand and staff rune
 Hemp for bow string/rope
@@ -39,9 +36,7 @@ Survival increases on movement?
 Merge hunting etc into survival?
 Better way to class dialogue?
 Little animations on attack?
-Crossed Swords when combat starts?
-Spell to cover each current spell class and subclasses?
-Turn Heroism into a buff and remove temp hp spell class
+Crossed Swords when combat starts?s
 Apron
 Pet class no armor
 Go from bare to better description 

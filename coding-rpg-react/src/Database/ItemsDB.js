@@ -980,6 +980,28 @@ export class OffHandMeleeWeapon extends OffHandWeapon {
         this.Class = new LightWeaponSkill()
     }
 }
+//axes
+export class AxeOffHand extends OffHandMeleeWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new HeavyWeaponSkill();this.DamageType = new SlashingDamage()
+    }
+}
+export class BronzeAxeOffHand extends AxeOffHand {
+    constructor(name = "Bronze Axe (OffHand)", cost = 1, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronAxeOffHand extends AxeOffHand {
+    constructor(name = "Iron Axe (OffHand)", cost = 5, level = 5, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelAxeOffHand extends AxeOffHand {
+    constructor(name = "Steel Axe (OffHand)", cost = 10, level = 10, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
 //daggers
 export class DaggerOffHand extends OffHandMeleeWeapon {
     constructor(name, cost, level, damage) {
@@ -1002,6 +1024,28 @@ export class SteelDaggerOffHand extends DaggerOffHand {
         super(name, cost, level, damage)
     }
 }
+//mace
+export class MaceOffHand extends OffHandMeleeWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new HeavyWeaponSkill();this.DamageType = new BludgeoningDamage()
+    }
+}
+export class BronzeMaceOffHand extends MaceOffHand {
+    constructor(name = "Bronze Mace (OffHand)", cost = 1, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronMaceOffHand extends MaceOffHand {
+    constructor(name = "Iron Mace (OffHand)", cost = 5, level = 5, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelMaceOffHand extends MaceOffHand {
+    constructor(name = "Steel Mace (OffHand)", cost = 10, level = 10, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
 export class NaturalWeaponOffHand extends OffHandMeleeWeapon {
     constructor(name, cost, level, damage) {
         super(name, cost, level, damage)
@@ -1012,6 +1056,94 @@ export class ClawSlashOffHand extends NaturalWeaponOffHand {
     constructor(name = "Claw Slash (OffHand)", cost = 0, level = 1, damage = 2) {
         super(name, cost, level, damage)
         this.DamageType = new SlashingDamage()
+    }
+}
+//rapier
+export class RapierOffHand extends OffHandMeleeWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
+    }
+}
+export class BronzeRapierOffHand extends RapierOffHand {
+    constructor(name = "Bronze Rapier (OffHand)", cost = 1, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronRapierOffHand extends RapierOffHand {
+    constructor(name = "Iron Rapier (OffHand)", cost = 5, level = 5, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelRapierOffHand extends RapierOffHand {
+    constructor(name = "Steel Rapier (OffHand)", cost = 10, level = 10, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+//scimitar
+export class ScimitarOffHand extends OffHandMeleeWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new SlashingDamage()
+    }
+}
+export class BronzeScimitarOffHand extends ScimitarOffHand {
+    constructor(name = "Bronze Scimitar (OffHand)", cost = 1, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronScimitarOffHand extends ScimitarOffHand {
+    constructor(name = "Iron Scimitar (OffHand)", cost = 5, level = 5, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelScimitarOffHand extends ScimitarOffHand {
+    constructor(name = "Steel Scimitar (OffHand)", cost = 10, level = 10, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+//shortspear
+export class ShortSpearOffHand extends OffHandMeleeWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new HeavyWeaponSkill();this.DamageType = new PiercingDamage()
+    }
+}
+export class BronzeShortSpearOffHand extends ShortSpearOffHand {
+    constructor(name = "Bronze ShortSpear (OffHand)", cost = 1, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronShortSpearOffHand extends ShortSpearOffHand {
+    constructor(name = "Iron ShortSpear (OffHand)", cost = 5, level = 5, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelShortSpearOffHand extends ShortSpearOffHand {
+    constructor(name = "Steel ShortSpear (OffHand)", cost = 10, level = 10, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+//sword
+export class SwordOffHand extends OffHandMeleeWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new HeavyWeaponSkill();this.DamageType = new SlashingDamage()
+    }
+}
+export class BronzeSwordOffHand extends SwordOffHand {
+    constructor(name = "Bronze Sword (OffHand)", cost = 1, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronSwordOffHand extends SwordOffHand {
+    constructor(name = "Iron Sword (OffHand)", cost = 5, level = 5, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelSwordOffHand extends SwordOffHand {
+    constructor(name = "Steel Sword (OffHand)", cost = 10, level = 10, damage = 3) {
+        super(name, cost, level, damage)
     }
 }
 //unarmed
@@ -1025,6 +1157,28 @@ export class BareFistOffHand extends UnArmedOffHand {
     constructor(name = "Fist", cost = 0, level = 1, damage = 0) {
         super(name, cost, level, damage)
         this.DamageType = new BludgeoningDamage(); this.Class = new UnArmedSkill()
+    }
+}
+//warhammer
+export class WarHammerOffHand extends OffHandMeleeWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Class = new HeavyWeaponSkill();this.DamageType = new BludgeoningDamage()
+    }
+}
+export class BronzeWarHammerOffHand extends WarHammerOffHand {
+    constructor(name = "Bronze WarHammer (OffHand)", cost = 1, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronWarHammerOffHand extends WarHammerOffHand {
+    constructor(name = "Iron WarHammer (OffHand)", cost = 5, level = 5, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelWarHammerOffHand extends WarHammerOffHand {
+    constructor(name = "Steel WarHammer (OffHand)", cost = 10, level = 10, damage = 3) {
+        super(name, cost, level, damage)
     }
 }
 //ranged
@@ -1075,6 +1229,138 @@ export class IronPistolOffHand extends PistolOffHand {
 }
 export class SteelPistolOffHand extends PistolOffHand {
     constructor(name = "Steel Pistol (OffHand)", cost = 20, level = 10, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+//thrown
+export class ThrownOffHand extends OffHandRangedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Name = ""
+    }
+}
+//dart
+export class DartOffHand extends ThrownOffHand {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
+    }
+}
+export class BronzeDartOffHand extends DartOffHand
+{
+    constructor(name = "Bronze Dart (OffHand)", cost=1, level=1, damage=1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronDartOffHand extends DartOffHand
+{
+    constructor(name = "Iron Dart (OffHand)", cost=2, level=5, damage=2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelDartOffHand extends DartOffHand
+{
+    constructor(name = "Steel Dart (OffHand)", cost=3, level=10, damage=3) {
+        super(name, cost, level, damage)
+    }
+}
+//throwing axe
+export class ThrowingAxeOffHand extends ThrownOffHand {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new SlashingDamage()
+    }
+}
+export class BronzeThrowingAxeOffHand extends ThrowingAxeOffHand
+{
+    constructor(name = "Bronze ThrowingAxe (OffHand)", cost=1, level=1, damage=1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronThrowingAxeOffHand extends ThrowingAxeOffHand
+{
+    constructor(name = "Iron ThrowingAxe (OffHand)", cost=2, level=5, damage=2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelThrowingAxeOffHand extends ThrowingAxeOffHand
+{
+    constructor(name = "Steel ThrowingAxe (OffHand)", cost=3, level=10, damage=3) {
+        super(name, cost, level, damage)
+    }
+}
+//throwing hammer
+export class ThrowingHammerOffHand extends ThrownOffHand {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new BludgeoningDamage()
+    }
+}
+export class BronzeThrowingHammerOffHand extends ThrowingHammerOffHand
+{
+    constructor(name = "Bronze ThrowingHammer (OffHand)", cost=1, level=1, damage=1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronThrowingHammerOffHand extends ThrowingHammerOffHand
+{
+    constructor(name = "Iron ThrowingHammer (OffHand)", cost=2, level=5, damage=2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelThrowingHammerOffHand extends ThrowingHammerOffHand
+{
+    constructor(name = "Steel ThrowingHammer (OffHand)", cost=3, level=10, damage=3) {
+        super(name, cost, level, damage)
+    }
+}
+//throwing knife
+export class ThrowingKnifeOffHand extends ThrownOffHand {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
+    }
+}
+export class BronzeThrowingKnifeOffHand extends ThrowingKnifeOffHand
+{
+    constructor(name = "Bronze ThrowingKnife (OffHand)", cost=1, level=1, damage=1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronThrowingKnifeOffHand extends ThrowingKnifeOffHand
+{
+    constructor(name = "Iron ThrowingKnife (OffHand)", cost=2, level=5, damage=2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelThrowingKnifeOffHand extends ThrowingKnifeOffHand
+{
+    constructor(name = "Steel ThrowingKnife (OffHand)", cost=3, level=10, damage=3) {
+        super(name, cost, level, damage)
+    }
+}
+//throwing spear
+export class ThrowingSpearOffHand extends ThrownOffHand {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
+    }
+}
+export class BronzeThrowingSpearOffHand extends ThrowingSpearOffHand
+{
+    constructor(name = "Bronze ThrowingSpear (OffHand)", cost=1, level=1, damage=1) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronThrowingSpearOffHand extends ThrowingSpearOffHand
+{
+    constructor(name = "Iron ThrowingSpear (OffHand)", cost=2, level=5, damage=2) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelThrowingSpearOffHand extends ThrowingSpearOffHand
+{
+    constructor(name = "Steel ThrowingSpear (OffHand)", cost=3, level=10, damage=3) {
         super(name, cost, level, damage)
     }
 }
@@ -1452,6 +1738,123 @@ export class IronPistol extends Pistol {
 }
 export class SteelPistol extends Pistol {
     constructor(name = "Steel Pistol", cost = 20, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+//thrown
+export class Thrown extends RangedOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.Name = ""
+    }
+}
+//dart
+export class Dart extends Thrown {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
+    }
+}
+export class BronzeDart extends Dart {
+    constructor(name = "Bronze Dart", cost = 5, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronDart extends Dart {
+    constructor(name = "Iron Dart", cost = 10, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelDart extends Dart {
+    constructor(name = "Steel Dart", cost = 20, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+//throwing axe
+export class ThrowingAxe extends Thrown {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new SlashingDamage()
+    }
+}
+export class BronzeThrowingAxe extends ThrowingAxe {
+    constructor(name = "Bronze ThrowingAxe", cost = 5, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronThrowingAxe extends ThrowingAxe {
+    constructor(name = "Iron ThrowingAxe", cost = 10, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelThrowingAxe extends ThrowingAxe {
+    constructor(name = "Steel ThrowingAxe", cost = 20, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+//throwing hammer
+export class ThrowingHammer extends Thrown {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new BludgeoningDamage()
+    }
+}
+export class BronzeThrowingHammer extends ThrowingHammer {
+    constructor(name = "Bronze ThrowingHammer", cost = 5, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronThrowingHammer extends ThrowingHammer {
+    constructor(name = "Iron ThrowingHammer", cost = 10, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelThrowingHammer extends ThrowingHammer {
+    constructor(name = "Steel ThrowingHammer", cost = 20, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+//throwing knife
+export class ThrowingKnife extends Thrown {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
+    }
+}
+export class BronzeThrowingKnife extends ThrowingKnife {
+    constructor(name = "Bronze ThrowingKnife", cost = 5, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronThrowingKnife extends ThrowingKnife {
+    constructor(name = "Iron ThrowingKnife", cost = 10, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelThrowingKnife extends ThrowingKnife {
+    constructor(name = "Steel ThrowingKnife", cost = 20, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+//throwing spear
+export class ThrowingSpear extends Thrown {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage()
+    }
+}
+export class BronzeThrowingSpear extends ThrowingSpear {
+    constructor(name = "Bronze ThrowingSpear", cost = 5, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronThrowingSpear extends ThrowingSpear {
+    constructor(name = "Iron ThrowingSpear", cost = 10, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelThrowingSpear extends ThrowingSpear {
+    constructor(name = "Steel ThrowingSpear", cost = 20, level = 10, damage = 4) {
         super(name, cost, level, damage)
     }
 }

@@ -28,6 +28,13 @@ export class CourageBuff extends Buff {
     ApplyBuff(target) { target.Attributes.Strength.Bonus += 1; target.Buffs.push(this) };
     RemoveBuff(target) { target.Attributes.Strength.Bonus -= 1 }
 }
+export class HeroismBuff extends Buff {
+    constructor(name, duration) {
+        super(name = "Heroism Buff", duration)
+    }
+    ApplyBuff(target) { target.BaseStats.HP.RegenBonus += 1; target.Buffs.push(this) };
+    RemoveBuff(target) { target.BaseStats.HP.RegenBonus -= 1 }
+}
 export class RageBuff extends Buff {
     constructor(name, duration) {
         super(name = "Rage Buff", duration)
