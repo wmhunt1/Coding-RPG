@@ -1,4 +1,4 @@
-import { alchemyRecipes, cookingRecipes, craftingRecipes, DrawWater, enchantingRecipes, engineeringRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, GatherBlackFeathers, herbLoreRecipes, huntingRecipes, huntingRecipesForest, MillWheat, MineSaltpeter, MineSulphur, miningRecipes, restorationRecipes, ShearSheep, smithingRecipes, woodcuttingRecipes } from "./SkillRecipesDB"
+import { alchemyRecipes, churnCookingRecipes, cookingRecipes, craftingRecipes, DrawWater, enchantingRecipes, engineeringRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, GatherBlackFeathers, HarvestPapyrus, herbLoreRecipes, huntingRecipes, huntingRecipesForest, huntingRecipesSwamp, MillWheat, MineSaltpeter, MineSulphur, miningRecipes, restorationRecipes, ShearSheep, smithingRecipes, woodcuttingRecipes } from "./SkillRecipesDB"
 
 export class SkillNode {
     Hero; Name; Skill; Recipes;
@@ -18,6 +18,11 @@ export class CookNode extends SkillNode {
         super(hero, name, skill, recipes)
     }
 }
+export class ChurnNode extends CookNode {
+    constructor(hero, name = "Churn", skill = "Cooking", recipes = churnCookingRecipes()) {
+        super(hero, name, skill, recipes)
+    }
+}
 export class MillNode extends CookNode {
     constructor(hero, name = "Mill", skill = "Cooking", recipes = [new MillWheat()]) {
         super(hero, name, skill, recipes)
@@ -33,8 +38,15 @@ export class WellNode extends WaterNode {
         super(hero, name, skill, recipes)
     }
 }
+//crafting
 export class CraftNode extends SkillNode {
     constructor(hero, name = "Crafting", skill = "Crafting", recipes = craftingRecipes()) {
+        super(hero, name, skill, recipes)
+    }
+}
+export class SpinningNode extends CraftNode
+{
+    constructor(hero, name = "Spinning Wheel", skill = "Crafting", recipes = []) {
         super(hero, name, skill, recipes)
     }
 }
@@ -51,6 +63,11 @@ export class EnginerNode extends SkillNode {
 //farming
 export class FarmNode extends SkillNode {
     constructor(hero, name = "Farm", skill = "Farming", recipes = farmingRecipes()) {
+        super(hero, name, skill, recipes)
+    }
+}
+export class PapyrusNode extends FarmNode {
+    constructor(hero, name = "Papyrus", skill = "Farming", recipes = [new HarvestPapyrus()]) {
         super(hero, name, skill, recipes)
     }
 }
@@ -92,6 +109,11 @@ export class BlackFeatherNode extends HuntNode {
 }
 export class ForestHuntNode extends HuntNode {
     constructor(hero, name = "Hunting Spot", skill = "Hunting", recipes = huntingRecipesForest()) {
+        super(hero, name, skill, recipes)
+    }
+}
+export class SwampHuntNode extends HuntNode {
+    constructor(hero, name = "Hunting Spot", skill = "Hunting", recipes = huntingRecipesSwamp()) {
         super(hero, name, skill, recipes)
     }
 }

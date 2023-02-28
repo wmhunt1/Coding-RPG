@@ -262,9 +262,9 @@ export function CombatRewards(hero, allies, enemies) {
         }
         AddGold(hero, enemies[e].Gold)
         CheckIfKillQuestObjective(hero, enemies[e])
-        if (enemies[e].ItemDrops.length > 0) {
-            const randomDrop = Math.floor(Math.random() * enemies[e].ItemDrops.length);
-            AddItemToInventory(hero, hero.Inventory, enemies[e].ItemDrops[randomDrop], enemies[e].ItemDrops[randomDrop].Quantity, hero)
+        if (enemies[e].ItemDrops.Items.length > 0) {
+            const randomDrop = Math.floor(Math.random() * enemies[e].ItemDrops.Items.length);
+            AddItemToInventory(hero, hero.Inventory, enemies[e].ItemDrops.Items[randomDrop], enemies[e].ItemDrops.Items[randomDrop].Quantity, hero)
         }
     }
     for (var a2 = 0; a2 < allies.length; a2++) {

@@ -4,13 +4,13 @@ import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, tenguCampDi
 import { BanditHideoutDungeon, GiantCaveDungeon, GiantCaveDungeonBeforeAndAfterQuest, GnollDenDungeon, GoblinMine, GoblinMineAfterQuest, SpiderCaveDungeon, SpiderCaveDungeonDuringQuest } from "./DungeonsDB"
 import { DwarvenMineGoblinQuest, GiantQuest, ScareCrowQuest3 } from "./QuestsDB"
 import { DaleChapelShop, DreamingWorkerInn, ForgeHeartSmithy, GeneralShop, InnShop, JoeTheTradersTradingPost, WitchHutShop, WizardTowerShop } from "./ShopsDB"
-import { AlchemyNode, BlackFeatherNode, CookNode, EnchantNode, FarmNode, FireNode, FishNode, FletchNode, ForestHuntNode, HerbNode, HuntNode, MillNode, MineNode, SaltPeterNode, SheepNode, WaterNode, WellNode, WoodNode } from "./SkillNodesDB"
+import { AlchemyNode, BlackFeatherNode, ChurnNode, CookNode, EnchantNode, FarmNode, FireNode, FishNode, FletchNode, ForestHuntNode, HerbNode, HuntNode, MillNode, MineNode, PapyrusNode, SaltPeterNode, SheepNode,SpinningNode, SwampHuntNode, WaterNode, WellNode, WoodNode } from "./SkillNodesDB"
 
 //locations
 export class Location {
-    Hero; XCoord; YCoord; Name; CanTravel; Color; SubLocations;
+    Hero; XCoord; YCoord; LocationName; CanTravel; Color; SubLocations;
     constructor(hero, x, y, name, subLoc) {
-        this.Hero = hero; this.XCoord = x; this.YCoord = y; this.Name = name; this.SubLocations = subLoc; this.CanTravel = "False"
+        this.Hero = hero; this.XCoord = x; this.YCoord = y; this.LocationName = name; this.SubLocations = subLoc; this.CanTravel = "False"
     }
 }
 export class OutOfBounds extends Location {
@@ -104,7 +104,7 @@ export class DaleWizardTower extends Settlement {
     }
 }
 export class LittleRootFarm extends Settlement {
-    constructor(hero, x, y, name = "Littleroot Farm", subLoc = [enterChickenEncounter(hero), enterCowEncounter(hero), enterFarmNode(hero), enterLittleRootFarmDialogue(hero), enterScareCrowEncounter(hero)]) {
+    constructor(hero, x, y, name = "Littleroot Farm", subLoc = [enterChickenEncounter(hero), enterCowEncounter(hero),enterChurnNode(hero), enterFarmNode(hero), enterLittleRootFarmDialogue(hero), enterScareCrowEncounter(hero), enterSpinningNode(hero)]) {
         super(hero, x, y, name, subLoc)
     }
 }
@@ -136,7 +136,7 @@ export class Terrain extends Location {
     }
 }
 export class Farm extends Terrain {
-    constructor(hero, x, y, name = "Farm", subLoc = [enterChickenEncounter(hero), enterCowEncounter(hero), enterFarmNode(hero)]) {
+    constructor(hero, x, y, name = "Farm", subLoc = [enterChickenEncounter(hero), enterCowEncounter(hero),enterChurnNode(hero), enterFarmNode(hero)]) {
         super(hero, x, y, name, subLoc)
         this.Color = "GoldenRod"
     }
@@ -155,7 +155,7 @@ export class MountainTerrain extends Terrain {
     }
 }
 export class ForestTerrain extends Terrain {
-    constructor(hero, x, y, name = "Forest", subLoc = [enterCookNodeCampFire(hero), enterHerbNode(hero), enterHuntForestNode(hero), enterWoodNode(hero)]) {
+    constructor(hero, x, y, name = "Forest", subLoc = [enterHerbNode(hero), enterHuntForestNode(hero), enterWoodNode(hero)]) {
         super(hero, x, y, name, subLoc)
         this.Color = "ForestGreen"
     }
@@ -163,6 +163,12 @@ export class ForestTerrain extends Terrain {
 export class RoadTerrain extends Terrain {
     constructor(hero, x, y, name = "Road", subLoc = []) {
         super(hero, x, y, name, subLoc)
+    }
+}
+export class SwampTerrain extends Terrain {
+    constructor(hero, x, y, name = "Swamp", subLoc = [enterHuntSwampNode(hero)]) {
+        super(hero, x, y, name, subLoc)
+        this.Color = "Olive"
     }
 }
 export class WaterTerrain extends Terrain {
@@ -184,7 +190,7 @@ export class LakeTerrain extends WaterTerrain {
     }
 }
 export class RiverTerrain extends WaterTerrain {
-    constructor(hero, x, y, name = "River", subLoc = [enterFishNode(hero), enterWaterNode(hero)]) {
+    constructor(hero, x, y, name = "River", subLoc = [enterFishNode(hero),enterPapyrusNode(hero), enterWaterNode(hero)]) {
         super(hero, x, y, name, subLoc)
         this.Color = "LightBlue"
     }
@@ -362,8 +368,8 @@ export function enterCookNode(hero) {
     var cook = { Name: "Stove", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new CookNode(hero) }; return content } }
     return cook
 }
-export function enterCookNodeCampFire(hero) {
-    var cook = { Name: "Camp Fire (Cook)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new CookNode(hero) }; return content } }
+export function enterChurnNode(hero) {
+    var cook = { Name: "Churn", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new ChurnNode(hero) }; return content } }
     return cook
 }
 export function enterMillNode(hero) {
@@ -378,9 +384,18 @@ export function enterWellNode(hero) {
     var cook = { Name: "Well (Draw Water)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new WellNode(hero) }; return content } }
     return cook
 }
+//crafting
+export function enterSpinningNode(hero) {
+    var craft = { Name: "Spinning Wheel", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new SpinningNode(hero) }; return content } }
+    return craft
+}
 //farming
 export function enterFarmNode(hero) {
     var farm = { Name: "Farm (Skill)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new FarmNode(hero) }; return content } }
+    return farm
+}
+export function enterPapyrusNode(hero) {
+    var farm = { Name: "Papyrus", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new PapyrusNode(hero) }; return content } }
     return farm
 }
 export function enterSheepNode(hero) {
@@ -414,6 +429,10 @@ export function enterHuntNode(hero) {
 }
 export function enterHuntForestNode(hero) {
     var hunt = { Name: "Hunting Ground", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new ForestHuntNode(hero) }; return content } }
+    return hunt;
+}
+export function enterHuntSwampNode(hero) {
+    var hunt = { Name: "Hunting Ground", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new SwampHuntNode(hero) }; return content } }
     return hunt;
 }
 //mining

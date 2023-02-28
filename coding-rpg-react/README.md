@@ -20,26 +20,9 @@ Dialogues (Would have to work around conditional stuff)
 Tactics
 
 possible content
-swamp (catch newts for eye of newt and frogs maybe papyrus)
-put papyrus near rivers
-loom/spinning wheel node
-Beeswax for burn salve
-Honey bees and honey for farming 
-Butter
-Buttered toast
-Salt mine or buy
-Salt for stews
-Carrots, Cabbage, potato (raw crop but edible)
-Spade, trowel (farming tools)watering can
-Rapier scimitar spear Halbert sportswear staff 
 Darts throwing knifes etc as ammo
 Offhand Swords etc
-Class locations by putting conditionals in enter location functions 
-Medical herbs
-Multiple outputs for skills
-Rabbit fur and rabbit meat 
 Condition for equip restriction
-Magic dust or runes for enchanting?
 Scribe runes requires paper ink and quill
 Wand and staff rune
 Hemp for bow string/rope
@@ -47,12 +30,10 @@ Hemp smoke
 More failure where is fail is null get back input
 Metal tiers for needles and knives 
 Separate Tools into Smithing etc
-Grind bones into bone meal
 Make paper from logs into wood pulp with water
 Then make paper crafting 
 Quill from feather plus ink crafting
 Ink from ground charcoal plus water
-In locations boolean for if can't move or trigger encounter between move
 Forest random encounters etc
 Survival increases on movement?
 Merge hunting etc into survival?
@@ -119,6 +100,7 @@ Herb for flowers to make dye and dye clothes
 Physical characteristics height etc in bio
 But job etc in bio?
 Job and race/background package
+can get gems from mining or just mine gems
 Failure can cause damage
 more damage modifers for prot types
 Ferra and apprentice know each other?
@@ -139,6 +121,9 @@ balancing
 write more than generic dialogue
 fix tactic selection
 clean up scripts
+Increase Persuasion when taking or again merge with barter
+Un merge some combat skills 
+Switch to "dice roll" for attacks and skill chances,
 
 features
 Keyboard movements and shortcuts

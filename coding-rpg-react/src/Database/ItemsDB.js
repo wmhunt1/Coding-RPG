@@ -1,4 +1,4 @@
-import { BludgeoningDamage, FireDamage, ForceDamage, NecroticDamage, PiercingDamage, SlashingDamage } from "./DamageTypesDB";
+import { BludgeoningDamage, FireDamage, ForceDamage, NecroticDamage, NoDamage, PiercingDamage, SlashingDamage } from "./DamageTypesDB";
 import { DrunkDeBuff } from "./DeBuffsDB";
 import { FireImmuneEnchantment, IceResistEnchantment, PoisonApplyEnchantment, StrengthEnchantment, UnEnchanted } from "./EnchantmentsDB";
 import { Pet } from "./JobsDB";
@@ -98,52 +98,92 @@ export class Food extends Consumable {
     }
     ConsumeEffect(hero, log) { AddToCharacterLog(log, hero.Name + " eats " + this.Name); RecoverSP(hero, this.Amount); HealHP(hero, this.Amount) }
 }
-export class BeefStew extends Food {
-    constructor(name = "Beef Stew", cost = 4, amount = 5) {
-        super(name, cost, amount)
-    }
-}
 export class Bread extends Food {
     constructor(name = "Bread", cost = 2, amount = 1) {
         super(name, cost, amount)
     }
 }
-export class Cheese extends Food {
-    constructor(name = "Cheese", cost = 2, amount = 1) {
+export class Toast extends Bread {
+    constructor(name = "Toast", cost = 2, amount = 1) {
         super(name, cost, amount)
     }
 }
-export class CookedBeef extends Food {
+export class ButteredToast extends Toast {
+    constructor(name = "Buttered Toast", cost = 2, amount = 2) {
+        super(name, cost, amount)
+    }
+}
+export class CookedMeat extends Food {
+    constructor(name = "Cooked Meat", cost = 1, amount = 1) {
+        super(name, cost, amount)
+    }
+}
+export class CookedBeef extends CookedMeat {
     constructor(name = "Cooked Beef", cost = 2, amount = 1) {
         super(name, cost, amount)
     }
 }
-export class CookedChicken extends Food {
+export class CookedChicken extends CookedMeat {
     constructor(name = "Cooked Chicken", cost = 2, amount = 1) {
         super(name, cost, amount)
     }
 }
-export class CookedCrayFish extends Food {
+export class CookedCrayFish extends CookedMeat {
     constructor(name = "Cooked Crayfish", cost = 2, amount = 1) {
         super(name, cost, amount)
     }
 }
-export class CookedFish extends Food {
+export class CookedFish extends CookedMeat {
     constructor(name = "Cooked Fish", cost = 2, amount = 1) {
         super(name, cost, amount)
     }
 }
-export class CookedRabbitMeat extends Food {
+export class CookedRabbitMeat extends CookedMeat {
     constructor(name = "Cooked Rabbit", cost = 2, amount = 1) {
         super(name, cost, amount)
     }
-} export class CookedRatMeat extends Food {
+} export class CookedRatMeat extends CookedMeat {
     constructor(name = "Cooked Rat", cost = 2, amount = 1) {
         super(name, cost, amount)
     }
 }
-export class CookedTrout extends Food {
+export class CookedTrout extends CookedMeat {
     constructor(name = "Cooked Trout", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
+}
+export class Dairy extends Food {
+    constructor(name = "Dairy", cost = 1, amount = 1) {
+        super(name, cost, amount)
+    }
+}
+export class Butter extends Dairy {
+    constructor(name = "Butter", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
+}
+export class Cheese extends Dairy {
+    constructor(name = "Cheese", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
+}
+export class Egg extends Food {
+    constructor(name = "Egg", cost = 1, amount = 1) {
+        super(name, cost, amount)
+    }
+}
+export class Honey extends Food {
+    constructor(name = "Honey", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
+}
+export class Stew extends Food {
+    constructor(name = "Stew", cost = 4, amount = 5) {
+        super(name, cost, amount)
+    }
+}
+export class BeefStew extends Stew {
+    constructor(name = "Beef Stew", cost = 4, amount = 5) {
         super(name, cost, amount)
     }
 }
@@ -162,8 +202,23 @@ export class RatStew extends Food {
         super(name, cost, amount)
     }
 }
-export class Stew extends Food {
-    constructor(name = "Stew", cost = 4, amount = 5) {
+export class Vegetable extends Food {
+    constructor(name = "Vegetable", cost = 1, amount = 1) {
+        super(name, cost, amount)
+    }
+}
+export class Cabbage extends Vegetable {
+    constructor(name = "Cabbage", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
+}
+export class Carrot extends Vegetable {
+    constructor(name = "Carrot", cost = 2, amount = 1) {
+        super(name, cost, amount)
+    }
+}
+export class RawPotato extends Vegetable {
+    constructor(name = "Raw Potato", cost = 2, amount = 0) {
         super(name, cost, amount)
     }
 }
@@ -393,6 +448,11 @@ export class Ammo extends Equipable {
         this.Damage = damage; this.DamageType = damageType; this.Class = new RangedSkill(); this.Slot = "Ammo"; this.SubType = ""
     }
 }
+export class NoAmmo extends Ammo {
+    constructor(name = "None", cost = 0, level = 1, damage = 0, damageType = new NoDamage()) {
+        super(name, cost, level, damage, damageType)
+    }
+}
 export class BronzeShrapnel extends Ammo {
     constructor(name = "Bronze Shrapnel", cost = 5, level = 1, damage = 3, damageType = new FireDamage()) {
         super(name, cost, level, damage, damageType)
@@ -434,9 +494,19 @@ export class CapeOfFireImmunity extends Back {
     }
 }
 export class Cloak extends Back {
-    constructor(name = "Cloak", cost = 5, level = 1) {
+    constructor(name = "Cloak", cost = 1, level = 1) {
         super(name, cost, level)
         this.Enchantment = new IceResistEnchantment()
+    }
+}
+export class SpiderSilkCloak extends Cloak {
+    constructor(name = "Spider Silk Cloak", cost = 2, level = 1) {
+        super(name, cost, level)
+    }
+}
+export class WoolCloak extends Cloak {
+    constructor(name = "Wool Cloak", cost = 2, level = 1) {
+        super(name, cost, level)
     }
 }
 //neck
@@ -1226,6 +1296,72 @@ export class BareFist extends UnArmedWeapon {
         this.DamageType = new BludgeoningDamage(); this.Class = new UnArmedSkill()
     }
 }
+//rapiers
+export class Rapier extends MeleeOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage(); this.Class = new LightWeaponSkill()
+    }
+}
+export class BronzeRapier extends Rapier {
+    constructor(name = "Bronze Rapier", cost = 5, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronRapier extends Rapier {
+    constructor(name = "Iron Rapier", cost = 5, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelRapier extends Rapier {
+    constructor(name = "Steel Rapier", cost = 10, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+//swords
+export class Scimitar extends MeleeOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new SlashingDamage(); this.Class = new LightWeaponSkill()
+    }
+}
+export class BronzeScimitar extends Scimitar {
+    constructor(name = "Bronze Scimitar", cost = 5, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronScimitar extends Scimitar {
+    constructor(name = "Iron Scimitar", cost = 10, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelScimitar extends Scimitar {
+    constructor(name = "Steel Scimitar", cost = 20, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+//short spear
+export class ShortSpear extends MeleeOneHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new PiercingDamage(); this.Class = new HeavyWeaponSkill()
+    }
+}
+export class BronzeShortSpear extends ShortSpear {
+    constructor(name = "Bronze ShortSpear", cost = 5, level = 1, damage = 2) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronShortSpear extends ShortSpear {
+    constructor(name = "Iron ShortSpear", cost = 5, level = 5, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelShortSpear extends ShortSpear {
+    constructor(name = "Steel ShortSpear", cost = 10, level = 10, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
 //swords
 export class Sword extends MeleeOneHandedWeapon {
     constructor(name, cost, level, damage) {
@@ -1234,7 +1370,7 @@ export class Sword extends MeleeOneHandedWeapon {
     }
 }
 export class BronzeSword extends Sword {
-    constructor(name = "Bronze Mace", cost = 5, level = 1, damage = 2) {
+    constructor(name = "Bronze Sword", cost = 5, level = 1, damage = 2) {
         super(name, cost, level, damage)
     }
 }
@@ -1244,7 +1380,7 @@ export class IronSword extends Sword {
     }
 }
 export class SteelSword extends Sword {
-    constructor(name = "Steel Mace", cost = 10, level = 10, damage = 4) {
+    constructor(name = "Steel Sword", cost = 10, level = 10, damage = 4) {
         super(name, cost, level, damage)
     }
 }
@@ -1382,6 +1518,28 @@ export class SteelAxe2H extends Axe2H {
         super(name, cost, level, damage)
     }
 }
+//halberd
+export class Halberd extends MeleeTwoHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new SlashingDamage();
+    }
+}
+export class BronzeHalberd extends Halberd {
+    constructor(name = "Bronze Halberd", cost = 5, level = 1, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronHalberd extends Halberd {
+    constructor(name = "Iron Halberd", cost = 10, level = 5, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelHalberd extends Halberd {
+    constructor(name = "Steel Halberd", cost = 20, level = 10, damage = 5) {
+        super(name, cost, level, damage)
+    }
+}
 //natural
 export class Natural2H extends MeleeTwoHandedWeapon {
     constructor(name, cost, level, damage) {
@@ -1391,6 +1549,50 @@ export class Natural2H extends MeleeTwoHandedWeapon {
 }
 export class Slam extends Natural2H {
     constructor(name = "Slam", cost = 0, level = 1, damage = 1) {
+        super(name, cost, level, damage)
+    }
+}
+//quarterstaff
+export class QuarterStaff extends MeleeTwoHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new BludgeoningDamage()
+    }
+}
+export class OakQuarterStaff extends MagicTwoHandedWeapon {
+    constructor(name = "Oak QuarterStaff", cost = 10, level = 5, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+export class WillowQuarterStaff extends MagicTwoHandedWeapon {
+    constructor(name = "Willow QuarterStaff", cost = 20, level = 10, damage = 5) {
+        super(name, cost, level, damage)
+    }
+}
+export class WoodQuarterStaff extends MagicTwoHandedWeapon {
+    constructor(name = "Wood QuarterStaff", cost = 5, level = 1, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+//spear
+export class Spear extends MeleeTwoHandedWeapon {
+    constructor(name, cost, level, damage) {
+        super(name, cost, level, damage)
+        this.DamageType = new SlashingDamage();
+    }
+}
+export class BronzeSpear extends Spear {
+    constructor(name = "Bronze Spear", cost = 5, level = 1, damage = 3) {
+        super(name, cost, level, damage)
+    }
+}
+export class IronSpear extends Spear {
+    constructor(name = "Iron Spear", cost = 10, level = 5, damage = 4) {
+        super(name, cost, level, damage)
+    }
+}
+export class SteelSpear extends Spear {
+    constructor(name = "Steel Spear", cost = 20, level = 10, damage = 5) {
         super(name, cost, level, damage)
     }
 }
@@ -1537,11 +1739,11 @@ export class SteelRifle extends Rifle {
     }
 }
 export function allBronze() {
-    var all = [new BronzeAxe(), new BronzeAxe2H(), new BronzeBoots(), new BronzeCrossBow1H(), new BronzeCrossBow2H(), new BronzeCrossBowOffHand(), new BronzeDagger(), new BronzeDaggerOffHand(), new BronzeGauntlets(), new BronzeHatchet(), new BronzeHelmet(), new BronzeLegs(), new BronzeMace(), new BronzePickAxe(), new BronzePistol(), new BronzePistolOffHand(), new BronzeRifle(), new BronzeShield(), new BronzeSword(), new BronzeSword2H(), new BronzeTools(), new BronzeTorso(), new BronzeWarHammer(), new BronzeWarHammer2H()]
+    var all = [new BronzeAxe(), new BronzeAxe2H(), new BronzeBoots(), new BronzeCrossBow1H(), new BronzeCrossBow2H(), new BronzeCrossBowOffHand(), new BronzeDagger(), new BronzeDaggerOffHand(), new BronzeGauntlets(), new BronzeHatchet(), new BronzeHelmet(), new BronzeLegs(), new BronzeMace(), new BronzePickAxe(), new BronzePistol(), new BronzePistolOffHand(), new BronzeRapier(), new BronzeRifle(), new BronzeShield(), new BronzeSword(), new BronzeSword2H(), new BronzeTools(), new BronzeTorso(), new BronzeWarHammer(), new BronzeWarHammer2H()]
     return all;
 }
 export function allIron() {
-    var all = [new IronAxe(), new IronAxe2H(), new IronBoots(), new IronDagger(), new IronCrossBow1H(), new IronCrossBow2H(), new IronCrossBowOffHand(), new IronDaggerOffHand(), new IronGauntlets(), new IronHatchet(), new IronHelmet(), new IronLegs(), new IronMace(), new IronPickAxe(), new IronPistol(), new IronPistolOffHand(), new IronRifle(), new IronShield(), new IronSword(), new IronSword2H(), new IronTools(), new IronTorso(), new IronWarHammer(), new IronWarHammer2H()]
+    var all = [new IronAxe(), new IronAxe2H(), new IronBoots(), new IronDagger(), new IronCrossBow1H(), new IronCrossBow2H(), new IronCrossBowOffHand(), new IronDaggerOffHand(), new IronGauntlets(), new IronHatchet(), new IronHelmet(), new IronLegs(), new IronMace(), new IronPickAxe(), new IronPistol(), new IronPistolOffHand(), new IronRapier(), new IronRifle(), new IronShield(), new IronSword(), new IronSword2H(), new IronTools(), new IronTorso(), new IronWarHammer(), new IronWarHammer2H()]
     return all;
 }
 export function allLeather() {
@@ -1634,6 +1836,11 @@ export class Alchemical extends Processed {
     constructor(name, cost) {
         super(name, cost)
         this.SubType = "Alchemical";
+    }
+}
+export class BoneMeal extends Alchemical {
+    constructor(name = "BoneMeal", cost = 5) {
+        super(name, cost)
     }
 }
 export class GunPowder extends Alchemical {
@@ -1792,8 +1999,18 @@ export class AnimalDrop extends Resource {
         this.SubType = "Animal Drop";
     }
 }
-export class BatGuano extends Resource {
+export class Beeswax extends AnimalDrop {
+    constructor(name = "Beeswax", cost = 1) {
+        super(name, cost)
+    }
+}
+export class BatGuano extends AnimalDrop {
     constructor(name = "Bat Guano", cost = 1) {
+        super(name, cost)
+    }
+}
+export class EyeOfNewt extends AnimalDrop {
+    constructor(name = "Eye of Newt", cost = 1) {
         super(name, cost)
     }
 }
@@ -1840,6 +2057,11 @@ export class Crop extends Resource {
         this.SubType = "Crop"
     }
 }
+export class Papyrus extends Crop {
+    constructor(name = "Papyrus", cost = 1) {
+        super(name, cost)
+    }
+}
 export class Wheat extends Crop {
     constructor(name = "Wheat", cost = 1) {
         super(name, cost)
@@ -1866,6 +2088,11 @@ export class Fur extends Resource {
 }
 export class BearFur extends Fur {
     constructor(name = "Bear Fur", cost = 10) {
+        super(name, cost)
+    }
+}
+export class RabbitFur extends Fur {
+    constructor(name = "Rabbit Fur", cost = 1) {
         super(name, cost)
     }
 }
@@ -1944,6 +2171,11 @@ export class CopperOre extends Ore {
 }
 export class IronOre extends Ore {
     constructor(name = "Iron Ore", cost = 2) {
+        super(name, cost)
+    }
+}
+export class Salt extends Ore {
+    constructor(name = "Salt", cost = 2) {
         super(name, cost)
     }
 }
@@ -2114,11 +2346,35 @@ export class Sickle extends Tool {
         this.Tier = tier; this.SubType = "Sickle"
     }
 }
+export class Spade extends Tool {
+    constructor(name = "Spade", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Spade"
+    }
+}
+export class Trowel extends Tool {
+    constructor(name = "Trowel", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Trowel"
+    }
+}
+export class WateringCan extends Tool {
+    constructor(name = "Watering Can", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Watering Can"
+    }
+}
 //fishing
 export class FishingRod extends Tool {
     constructor(name = "Fishing Rod", cost = 1, tier = 1) {
         super(name, cost)
         this.Tier = tier; this.SubType = "Fishing Rod"
+    }
+}
+export class FishingBait extends Tool {
+    constructor(name = "Fishing Bait", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Bait"
     }
 }
 //hatchets

@@ -1,5 +1,5 @@
 import { AddToCharacterLog } from "./CharacterScripts";
-import { BareBack, BareFeet, BareFinger, BareFist, BareHands, BareHead, BareLegs, BareNeck, BareTorso, EmptyOffHand } from "../Database/ItemsDB"
+import { BareBack, BareFeet, BareFinger, BareFist, BareHands, BareHead, BareLegs, BareNeck, BareTorso, EmptyOffHand, NoAmmo } from "../Database/ItemsDB"
 import { FindSkillInSkillBook } from "./SkillScripts";
 Array.prototype.remove = function () {
     var what, a = arguments, L = a.length, ax;
@@ -84,6 +84,9 @@ export function UnEquip(char, inventory, item, log) {
         AddToCharacterLog(log, char.Name + " UnEquipped " + item.Name)
         AddItemToInventory(char, inventory, item, item.Quantity, log)
     }
+    if (item.Slot === "Ammo") {
+        char.Equipment.Ammo = new NoAmmo()
+    }
     if (item.Slot === "Weapon") {
         char.Equipment.Weapon = new BareFist()
     }
@@ -140,6 +143,10 @@ export function EquipItem(char, inventory, item, log) {
             if (item.Type === "TwoHands") {
                 EquipItem(char, inventory, char.Equipment.OffHand)
             }
+        }
+        if (item.Slot === "Ammo") {
+            UnEquip(char, inventory, char.Equipment.Ammo, log)
+            char.Equipment.Ammo = item
         }
         if (item.Slot === "OffHand") {
             UnEquip(char, inventory, char.Equipment.OffHand, log)
