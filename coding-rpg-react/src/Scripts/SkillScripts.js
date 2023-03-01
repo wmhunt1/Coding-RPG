@@ -100,8 +100,7 @@ export function UseSkillRecipe(char, skill, recipe) {
             if (fail === false) {
                 if (recipe.Output !== null) {
                     AddToSkillLog(char, char.Name + " has sucessfully" + recipe.Verb + "ed , earning " + recipe.Exp + " " + skill.Name + " XP")
-                    for (var out = 0; out < recipe.Output.length; out++)
-                    {
+                    for (var out = 0; out < recipe.Output.length; out++) {
                         AddItemToInventory(char, char.Inventory, recipe.Output[out].Item, recipe.Output[out].Quantity, char)
                     }
                 }
@@ -121,8 +120,7 @@ export function UseSkillRecipe(char, skill, recipe) {
         if (toolIndex === null) {
             AddToSkillLog(char, char.Name + " requires " + recipe.Tool.Name + " to " + recipe.Name)
         }
-        else if (recipe.LevelRequirement > skill.Level)
-        {
+        else if (recipe.LevelRequirement > skill.Level) {
             AddToSkillLog(char, char.Name + " requires " + recipe.LevelRequirement + " in " + skill.Name + " to " + recipe.Name)
         }
     }

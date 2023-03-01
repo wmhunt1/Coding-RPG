@@ -21,6 +21,7 @@ import SkillNode from './SkillNode';
 import SpellBook from './SpellBook';
 import Shop from './Shop';
 import Toolbar from './Toolbar';
+import Town from './Town';
 import { WorldMap } from '../Database/MapsDB';
 import { testDialogueOverhaul } from '../Database/DialoguesDB';
 
@@ -33,6 +34,7 @@ function Game(props) {
   const [dungeon, setDungeon] = useState(null)
   const [shop, setShop] = useState(null)
   const [skill, setSkill] = useState()
+  const [town, setTown] = useState()
   const handleCallback = (childData, location) => {
     var newLog = [...childData.Log]
     setLog(newLog)
@@ -52,6 +54,9 @@ function Game(props) {
       }
       if (location.skill !== null) {
         setSkill(location.skill)
+      }
+      if (location.town !== null) {
+        setTown(location.town)
       }
     }
   }
@@ -79,6 +84,7 @@ function Game(props) {
           {active === "Shop" ? <Shop parentCallback={handleCallback} shop={shop} hero={hero} Back={() => setActive("Game")}></Shop> : <div></div>}
           {active === "Skills" ? <SkillBook parentCallback={handleCallback} hero={hero} Back={() => setActive("Game")}></SkillBook> : <div></div>}
           {active === "Spells" ? <SpellBook hero={hero} Back={() => setActive("Game")} parentCallback={handleCallback}></SpellBook> : <div></div>}
+          {active === "Town" ? <Town hero={hero} town={town} Back={() => setActive("Game")} parentCallback={handleCallback}></Town> : <div></div>}
           {active === "Test" ? <div className='menu-box'>
             <h2>Tests</h2>
             <div><button className='menu-button' onClick={() => setActive("Bank")}><h3>Test Bank</h3></button></div>

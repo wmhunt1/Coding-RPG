@@ -8,7 +8,7 @@ export function allSkills() {
     return allSkills
 }
 export class Skill {
-    Name; Type; Level = 1; CurrentXP = 1; MaxXP = 50;
+    Name; Type; Level = 1; CurrentXP = 0; MaxXP = 50;
     constructor(name, type) {
         this.Name = name;
         this.Type = type;

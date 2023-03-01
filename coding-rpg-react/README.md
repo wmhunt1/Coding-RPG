@@ -20,17 +20,16 @@ Dialogues (Would have to work around conditional stuff)
 Tactics
 
 possible content
+Icons
 Ticks or seconds based on req lvl vs lvl At least 1
-Settlement comp
 Scribe runes requires paper, ink, and quill
 Wand and staff rune
-More failure where is fail is null get back input
 Metal tiers for needles and knives 
 Separate Tools into Smithing etc
 Forest random encounters etc
 Survival increases on movement?
 Little animations on attack?
-Crossed Swords when combat starts?s
+Crossed Swords when combat starts?
 Apron
 Go from bare to better description 
 Gendered underwear 
@@ -42,10 +41,7 @@ Leather shoes
 Fur armor
 Make tent and sleep for survival in inventory
 Some firemaking into survival?
-Draw water from river
-Boil river water (sick condition if dont?)
-Multi xp skill recipe 
-Feats for each skull tier
+Feats for each skill tier
 Property with personal farm 
 Seeds. Get soil and put in pot clay
 Water, tend, harvest or x hours away 

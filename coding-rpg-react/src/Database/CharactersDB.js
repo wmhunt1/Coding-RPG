@@ -1,7 +1,7 @@
 import { NoCondition, PoisonCondition, SleepCondition, WebCondition } from "./ConditionsDB";
 import { Cleave, PierceArmor, Rage } from "./AbilitiesDB";
 import { BareBack, BareFinger, BareNeck, Bite, EmptyOffHand, Shoes, Trousers, Tunic, WoodenShield, BareFist, BareHead, BareTorso, BareLegs, BareHands, BareFeet, WoodenClub, LoinCloth, BronzeSword, Slam, IronWarHammer, IronShield, IronHelmet, IronLegs, IronGauntlets, IronBoots, PoisonedBite, LeatherCowl, LeatherLegs, LeatherGloves, LeatherBoots, IronDagger, IronDaggerOffHand, OakShortBow, IronAxe2H, BronzeShield, BronzeMace, BronzeHelmet, ClawSlash, Peck, IronAxe, OakStaff, GhostTouch, NoAmmo, BronzeTorso } from "./ItemsDB";
-import { DaleTown } from "./LocationsDB";
+import { DaleTownLoc } from "./LocationsDB";
 import { Cleric, Freelancer, Pet } from "./JobsDB";
 import { BasicHeal, CurePoison, FireBall, MagicMissile, PoisonSpray, SleepSpell, SummonRat } from "./SpellsDB"
 import { BasicAttacker, BasicHealer, Rager, spiderSummoner } from "./TacticsDB";
@@ -37,7 +37,7 @@ class Character {
     Companions = []; Journal = []; Abilities = []; SpellBook = []; SkillBook = allSkills(); Reputation = []; Relationships = [];
     Buffs = []; DeBuffs = []; Condition = new NoCondition();
     Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicAttacker(char, allies, enemies, combatLog, round) } };
-    ItemDrops = new Drops(); CurrentLocation = new DaleTown(this, 0, 0); Map = [new DaleTown(this, 0, 0)]; AdjacentLocations = startingAdjacentLocations(); Time = { Day: 0, Hour: 9, TimeOfDay: "Morning" };
+    ItemDrops = new Drops(); CurrentLocation = new DaleTownLoc(this, 0, 0); Map = [new DaleTownLoc(this, 0, 0)]; AdjacentLocations = startingAdjacentLocations(); Time = { Day: 0, Hour: 9, TimeOfDay: "Morning" };
     constructor(name) {
         this.Name = name;
         this.Job.ApplyJob(this)

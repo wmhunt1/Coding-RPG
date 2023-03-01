@@ -1,4 +1,4 @@
-import { BanditHideout, BatCave, BearCave, Bridge, DaleTown, DaleWizardTower, DwarvenMine, Farm, ForestTerrain, FortDale, GiantCave, GnollDen, Graveyard, HauntedManor, LakeTerrain, LittleRootFarm, DaleLumbermill, Mill, MountainTerrain, OrcVillage, RiverTerrain, RoadTerrain, SpiderCave, TenguCamp, WhiteScalesLair, WitchHut, WolfDen } from "./LocationsDB"
+import { BanditHideout, BatCave, BearCave, Bridge, DaleTownLoc, DaleWizardTower, DwarvenMine, Farm, ForestTerrain, FortDale, GiantCave, GnollDen, Graveyard, HauntedManor, LakeTerrain, LittleRootFarm, DaleLumbermill, Mill, MountainTerrain, OrcVillage, RiverTerrain, RoadTerrain, SpiderCave, TenguCamp, WhiteScalesLair, WitchHut, WolfDen } from "./LocationsDB"
 
 export function startingAdjacentLocations(hero) {
     var start = [new RoadTerrain(hero, 0, 1), new HauntedManor(hero, 1, 1), new RoadTerrain(hero, 1, 0), new Graveyard(hero, 1, -1), new RoadTerrain(hero, 0, -1), new LittleRootFarm(hero, -1, -1), new RoadTerrain(hero, -1, 0), new ForestTerrain(hero, -1, 1), new RoadTerrain(hero, 0, 2), new RoadTerrain(hero, 2, 0), new RoadTerrain(hero, 0, -2), new Bridge(hero, -2, 0)]
@@ -34,7 +34,7 @@ export class WorldMap extends Map {
         //1
         new MountainTerrain(hero, -5, 1), new ForestTerrain(hero, -4, 1), new RoadTerrain(hero, -3, 1), new RiverTerrain(hero, -2, 1), new ForestTerrain(hero, -1, 1), new RoadTerrain(hero, 0, 1), new HauntedManor(hero, 1, 1), new ForestTerrain(hero, 2, 1), new RoadTerrain(hero, 3, 1), new ForestTerrain(hero, 4, 1), new MountainTerrain(hero, 5, 1),
         //0
-        new MountainTerrain(hero, -5, 0), new ForestTerrain(hero, -4, 0), new RoadTerrain(hero, -3, 0), new Bridge(hero, -2, 0), new RoadTerrain(hero, -1, 0), new DaleTown(hero, 0, 0), new RoadTerrain(hero, 1, 0), new RoadTerrain(hero, 2, 0), new RoadTerrain(hero, 3, 0), new RoadTerrain(hero, 4, 0), new RoadTerrain(hero, 5, 0),
+        new MountainTerrain(hero, -5, 0), new ForestTerrain(hero, -4, 0), new RoadTerrain(hero, -3, 0), new Bridge(hero, -2, 0), new RoadTerrain(hero, -1, 0), new DaleTownLoc(hero, 0, 0), new RoadTerrain(hero, 1, 0), new RoadTerrain(hero, 2, 0), new RoadTerrain(hero, 3, 0), new RoadTerrain(hero, 4, 0), new RoadTerrain(hero, 5, 0),
         //-1
         new MountainTerrain(hero, -5, -1), new ForestTerrain(hero, -4, -1), new TenguCamp(hero, -3, -1), new RiverTerrain(hero, -2, -1), new LittleRootFarm(hero, -1, -1), new RoadTerrain(hero, 0, -1), new Graveyard(hero, 1, -1), new ForestTerrain(hero, 2, -1), new ForestTerrain(hero, 3, -1), new BanditHideout(hero, 4, -1), new MountainTerrain(hero, 5, -1),
         //-2
