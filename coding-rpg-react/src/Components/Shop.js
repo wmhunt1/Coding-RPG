@@ -19,8 +19,10 @@ function Shop(props) {
     const [shopInventory, setShopInventory] = useState(props.shop.Inventory)
     const [heroInventory, setHeroInventory] = useState(props.shop.buyFilter(hero))
     const [dialogue, setDialogue] = useState(props.shop.Dialogue)
+    const [activeDialogue, setActiveDialogue] = useState(dialogue[0])
     const [dungeon, setDungeon] = useState(props.shop.Dungeon)
     const [node, setNode] = useState(props.shop.Node)
+    const [activeNode, setActiveNode] = useState(node[0])
     const [rep, setRep] = useState(props.shop.Rep)
     const shopInventoryList = shopInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {Math.round(item.Cost - item.Cost * (FindSkillInSkillBook(hero, new BarterSkill()).Level / 10))} GP <button onClick={() => { handleBuy(hero, heroInventory, item, quantity) }}><h4>Buy</h4></button></h4>)
     const heroInventoryList = heroInventory.map((item, index) => <h4 key={index}>{item.Name} - Price: {Math.floor(item.Cost / 2 + (item.Cost / 2) * (FindSkillInSkillBook(hero, new BarterSkill()).Level / 10))} GP, QTY: {item.Quantity} <button onClick={() => { handleSell(hero, heroInventory, shopInventory, item, quantity) }}><h4>Sell</h4></button></h4>)
@@ -93,7 +95,8 @@ function Shop(props) {
         setGold(hero.Gold)
         props.parentCallback(hero);
     }
-    function startShopDungeon(hero) {
+    function startShopDungeon(hero, dialogue) {
+        setActiveDialogue(dialogue)
         setActive("Dungeon")
     }
     function finishShopDungeon(hero) {
@@ -102,7 +105,8 @@ function Shop(props) {
         setGold(hero.Gold)
         props.parentCallback(hero);
     }
-    function enterSkill(hero) {
+    function enterSkill(hero, node) {
+        setActiveNode(node);
         setActive("Node")
     }
     function leaveSkill(hero) {
@@ -117,15 +121,17 @@ function Shop(props) {
         setHero(newChar)
         props.parentCallback(newChar);
     }
+    const nodeList = node.map((n, index) => <button key={index} className='menu-button' onClick={() => enterSkill(hero, n)}><h3>{n.Name}</h3></button>)
+    const dialogueList = dialogue.map((d, index) => <button key={index} className='menu-button' onClick={() => startShopDialogue(hero, d)}><h3>{d.Name}</h3></button>)
     return (<div>
         <h2>{props.shop.Name}</h2>
         {active !== "Dialogue" && active !== "Dungeon" && active !== "Node" ? <h3>{hero.Name}'s Gold: {gold} - Barter: Level {barter.Level}({barter.CurrentXP}/{barter.MaxXP})</h3> : <div></div>}
         {active === "Shopping" ?
             <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%" }}>
-                {dialogue !== null ? <div><button className='menu-button' onClick={() => startShopDialogue(hero)}><h3>Talk To {dialogue.Char}</h3></button></div> : <div></div>}
+                {dialogue !== null ? <div>{dialogueList}</div> : <div></div>}
                 <div><button className='menu-button' onClick={() => setActive("buy")}><h3>Buy</h3></button></div>
                 <div><button className='menu-button' onClick={() => setActive("sell")}><h3>Sell</h3></button></div>
-                {node !== null ? <div><button className='menu-button' onClick={() => enterSkill(hero)}><h3>Borrow {node.Name}</h3></button></div> : <div></div>}
+                {node !== null ? <div>{nodeList}</div> : <div></div>}
                 {dungeon !== null ? <div><button className='menu-button' onClick={() => startShopDungeon(hero)}><h3>Enter {dungeon.Name}</h3></button></div> : <div></div>}
                 <div><button className='menu-button' onClick={props.Back}><h3>Leave Store</h3></button></div>
             </div> : <div></div>}
@@ -138,11 +144,11 @@ function Shop(props) {
             {heroInventoryList.length > 0 ? <div style={{ overflow: "scroll", marginRight: "25%", marginLeft: "25%", border: "solid", marginBottom: "1%", height: "200px" }}>{heroInventoryList}</div> : <h3>Nothing to sell</h3>}
         </div> : <div></div>}
         {active !== "Shopping" && active !== "Dialogue" && active !== "Node" && active !== "Dungeon" ? <div><button onClick={() => setActive("Shopping")}><h4>Back to {props.shop.Name}</h4></button></div> : <div></div>}
-        {active === "Dialogue" ? <Dialogue parentCallback={handleCallback} hero={hero} talk={dialogue} Back={() => finishShopDialogue(hero)}></Dialogue> : <div></div>
+        {active === "Dialogue" ? <Dialogue parentCallback={handleCallback} hero={hero} talk={activeDialogue} Back={() => finishShopDialogue(hero)}></Dialogue> : <div></div>
         }
         {active === "Dungeon" ? <Dungeon parentCallback={handleCallback} hero={hero} dungeon={dungeon} Back={() => finishShopDungeon(hero)}></Dungeon> : <div></div>
         }
-        {active === "Node" ? <SkillNode parentCallback={handleCallback} hero={hero} node={node} Back={() => leaveSkill(hero)}></SkillNode> : <div></div>
+        {active === "Node" ? <SkillNode parentCallback={handleCallback} hero={hero} node={activeNode} Back={() => leaveSkill(hero)}></SkillNode> : <div></div>
         }
     </div>)
 }

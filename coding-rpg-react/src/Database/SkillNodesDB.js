@@ -1,4 +1,4 @@
-import { alchemyRecipes, churnCookingRecipes, cookingRecipes, craftingRecipes, DrawWater, enchantingRecipes, engineeringRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, GatherBlackFeathers, HarvestPapyrus, herbLoreRecipes, huntingRecipes, huntingRecipesForest, huntingRecipesSwamp, MillWheat, MineSaltpeter, MineSulphur, miningRecipes, restorationRecipes, ShearSheep, smithingRecipes, woodcuttingRecipes } from "./SkillRecipesDB"
+import { alchemyRecipes, churnCookingRecipes, cookingRecipes, craftingRecipes, DrawWater, enchantingRecipes, engineeringRecipes, farmingRecipes, firemakingRecipes, fishingRecipes, fletchingRecipes, GatherBlackFeathers, herbLoreRecipes, huntingRecipes, huntingRecipesForest, huntingRecipesSwamp, MillWheat, MineSaltpeter, MineSulphur, miningRecipes, restorationRecipes, ShearSheep, smelterRecipes, smithingRecipes, woodcuttingRecipes } from "./SkillRecipesDB"
 
 export class SkillNode {
     Hero; Name; Skill; Recipes;
@@ -63,11 +63,6 @@ export class EnginerNode extends SkillNode {
 //farming
 export class FarmNode extends SkillNode {
     constructor(hero, name = "Farm", skill = "Farming", recipes = farmingRecipes()) {
-        super(hero, name, skill, recipes)
-    }
-}
-export class PapyrusNode extends FarmNode {
-    constructor(hero, name = "Papyrus", skill = "Farming", recipes = [new HarvestPapyrus()]) {
         super(hero, name, skill, recipes)
     }
 }
@@ -139,8 +134,15 @@ export class RestorationNode extends SkillNode {
         super(hero, name, skill, recipes)
     }
 }
+//smithing
 export class SmithNode extends SkillNode {
-    constructor(hero, name = "Anvil & Fore", skill = "Smithing", recipes = smithingRecipes()) {
+    constructor(hero, name = "Anvil & Forge", skill = "Smithing", recipes = smithingRecipes()) {
+        super(hero, name, skill, recipes)
+    }
+}
+export class SmeltNode extends SmithNode
+{
+    constructor(hero, name = "Smelter", skill = "Smithing", recipes = smelterRecipes()) {
         super(hero, name, skill, recipes)
     }
 }

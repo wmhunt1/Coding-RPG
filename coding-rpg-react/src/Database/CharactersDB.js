@@ -1,16 +1,16 @@
 import { NoCondition, PoisonCondition, SleepCondition, WebCondition } from "./ConditionsDB";
 import { Cleave, PierceArmor, Rage } from "./AbilitiesDB";
-import { BareBack, BareFinger, BareNeck, Bite,EmptyOffHand, Shoes, Trousers, Tunic, WoodenShield, BareFist, BareHead, BareTorso, BareLegs, BareHands, BareFeet, WoodenClub, LoinCloth, BronzeSword, Slam, IronWarHammer, IronShield, IronHelmet, IronTorso, IronLegs, IronGauntlets, IronBoots, PoisonedBite, LeatherCowl, LeatherTorso, LeatherLegs, LeatherGloves, LeatherBoots, IronDagger, IronDaggerOffHand, OakShortBow, IronAxe2H,BronzeShield, BronzeMace, BronzeHelmet,ClawSlash, Peck, IronAxe, OakStaff, GhostTouch, NoAmmo } from "./ItemsDB";
+import { BareBack, BareFinger, BareNeck, Bite, EmptyOffHand, Shoes, Trousers, Tunic, WoodenShield, BareFist, BareHead, BareTorso, BareLegs, BareHands, BareFeet, WoodenClub, LoinCloth, BronzeSword, Slam, IronWarHammer, IronShield, IronHelmet, IronLegs, IronGauntlets, IronBoots, PoisonedBite, LeatherCowl, LeatherLegs, LeatherGloves, LeatherBoots, IronDagger, IronDaggerOffHand, OakShortBow, IronAxe2H, BronzeShield, BronzeMace, BronzeHelmet, ClawSlash, Peck, IronAxe, OakStaff, GhostTouch, NoAmmo, BronzeTorso } from "./ItemsDB";
 import { DaleTown } from "./LocationsDB";
 import { Cleric, Freelancer, Pet } from "./JobsDB";
 import { BasicHeal, CurePoison, FireBall, MagicMissile, PoisonSpray, SleepSpell, SummonRat } from "./SpellsDB"
 import { BasicAttacker, BasicHealer, Rager, spiderSummoner } from "./TacticsDB";
 import { allSkills, BarterSkill, BlockSkill, HeavyWeaponSkill, HeavyArmorSkill, MiningSkill, RestorationSkill, SmithingSkill } from "./SkillsDB";
 import { NoTitle } from "./TitlesDB";
-import { BludgeoningDamage, FireDamage, LightningDamage, PiercingDamage, PoisonDamage, SlashingDamage } from "./DamageTypesDB";
+import { BludgeoningDamage, FireDamage, PiercingDamage, PoisonDamage, SlashingDamage } from "./DamageTypesDB";
 import { startingAdjacentLocations } from "./MapsDB";
 import { FindSkillInSkillBook } from "../Scripts/SkillScripts";
-import { BanditDrops, BatDrops, BearDrops, BeastDrops, ChickenDrops, CowDrops, Drops, GhostDrops,GiantDrops,GoblinDrops, GnollDrops, HumanoidDrops, LowLevelSkeletonDrops, RatDrops, SpiderDrops, WolfDrops } from "./DropsDB";
+import { BanditDrops, BatDrops, BearDrops, BeastDrops, ChickenDrops, CowDrops, Drops, GhostDrops, GiantDrops, GoblinDrops, GnollDrops, HumanoidDrops, LowLevelSkeletonDrops, RatDrops, SpiderDrops, WolfDrops } from "./DropsDB";
 
 class Character {
     Name;
@@ -40,6 +40,7 @@ class Character {
     ItemDrops = new Drops(); CurrentLocation = new DaleTown(this, 0, 0); Map = [new DaleTown(this, 0, 0)]; AdjacentLocations = startingAdjacentLocations(); Time = { Day: 0, Hour: 9, TimeOfDay: "Morning" };
     constructor(name) {
         this.Name = name;
+        this.Job.ApplyJob(this)
     }
 }
 //beasts
@@ -162,7 +163,7 @@ export class Humanoid extends Character {
 export class Bandit extends Humanoid {
     constructor(name = "Bandit") {
         super(name)
-        this.Equipment.Head = new LeatherCowl(); this.Equipment.Torso = new LeatherTorso(); this.Equipment.Legs = new LeatherLegs();
+        this.Equipment.Head = new LeatherCowl(); this.Equipment.Legs = new LeatherLegs();
         this.Equipment.Hands = new LeatherGloves(); this.Equipment.Feet = new LeatherBoots(); this.Equipment.Weapon = new IronDagger(); this.Equipment.OffHand = new IronDaggerOffHand();
         this.ItemDrops = new BanditDrops()
     }
@@ -192,7 +193,7 @@ export class Hero extends Humanoid {
         this.Companions = [new Dog("Dog")];
         this.Abilities = [new Cleave(), new PierceArmor(), new Rage()];
         this.SpellBook = [new BasicHeal(), new CurePoison(), new FireBall(), new MagicMissile(), new PoisonSpray(), new SleepSpell(), new SummonRat()];
-        this.Inventory = []
+        this.Inventory = [new BronzeTorso(), new BronzeTorso()]
     }
 }
 export class FerraForgeHeart extends Humanoid {
@@ -200,7 +201,7 @@ export class FerraForgeHeart extends Humanoid {
         super(name)
         this.Job = new Cleric(); this.CurrentXP = 0;
         this.Equipment.Weapon = new IronWarHammer(); this.Equipment.OffHand = new IronShield(); this.Equipment.Head = new IronHelmet();
-        this.Equipment.Torso = new IronTorso(); this.Equipment.Legs = new IronLegs(); this.Equipment.Hands = new IronGauntlets();
+        this.Equipment.Legs = new IronLegs(); this.Equipment.Hands = new IronGauntlets();
         this.Equipment.Feet = new IronBoots();
         this.BaseStats.SpellBook = [new BasicHeal(), new CurePoison()];
         this.Tactics = { Tactics(char, allies, enemies, combatLog, round) { BasicHealer(char, allies, enemies, combatLog, round) } }

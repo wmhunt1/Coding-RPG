@@ -20,31 +20,23 @@ Dialogues (Would have to work around conditional stuff)
 Tactics
 
 possible content
-Scribe runes requires paper ink and quill
+Ticks or seconds based on req lvl vs lvl At least 1
+Settlement comp
+Scribe runes requires paper, ink, and quill
 Wand and staff rune
-Hemp for bow string/rope
-Hemp smoke
 More failure where is fail is null get back input
 Metal tiers for needles and knives 
 Separate Tools into Smithing etc
-Make paper from logs into wood pulp with water
-Then make paper crafting 
-Quill from feather plus ink crafting
-Ink from ground charcoal plus water
 Forest random encounters etc
 Survival increases on movement?
-Merge hunting etc into survival?
-Better way to class dialogue?
 Little animations on attack?
 Crossed Swords when combat starts?s
 Apron
-Pet class no armor
 Go from bare to better description 
 Gendered underwear 
 Alignment 
 Inspire all and inspire plus heal tactic
 Bard kobold 
-Armor sizes?
 More generic clothes
 Leather shoes 
 Fur armor
@@ -83,18 +75,14 @@ Slayer/monster hunter skill (put in hunter?)
 Knowledge skill (study at tower? Maybe formation making runes?)
 Class for skill xp tiers 
 Basic task etc
-Hemp clothes
-Have to spin wool and Hemp into cloth the weave (weave to tailor)?
 Gold and silver rings etc
 Rings of each Metal
 Jewelers tools
-Seperate smelter node
-Can have more than one node in shop 
 Same with conversation 
 Herb for flowers to make dye and dye clothes 
 Physical characteristics height etc in bio
 But job etc in bio?
-Job and race/background package
+race/background package
 can get gems from mining or just mine gems
 Failure can cause damage
 more damage modifers for prot types
@@ -109,7 +97,8 @@ abraham arkwright companion
 kobold companion
 
 fixes/changes
-bow strings and unstrung bows
+unstrung bows
+make it so you don't need to check slot on equip/unequip
 potion bottle and empty potion bottle (fill with water) get an empty one when drinking a potion
 move part of combatscripts to combat comp
 balancing

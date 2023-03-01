@@ -4,7 +4,7 @@ import { daleTownRumors, littleRootFarmDialogue, lumbermillDialogue, tenguCampDi
 import { BanditHideoutDungeon, GiantCaveDungeon, GiantCaveDungeonBeforeAndAfterQuest, GnollDenDungeon, GoblinMine, GoblinMineAfterQuest, SpiderCaveDungeon, SpiderCaveDungeonDuringQuest } from "./DungeonsDB"
 import { DwarvenMineGoblinQuest, GiantQuest, ScareCrowQuest3 } from "./QuestsDB"
 import { DaleChapelShop, DreamingWorkerInn, ForgeHeartSmithy, GeneralShop, InnShop, JoeTheTradersTradingPost, WitchHutShop, WizardTowerShop } from "./ShopsDB"
-import { AlchemyNode, BlackFeatherNode, ChurnNode, CookNode, EnchantNode, FarmNode, FireNode, FishNode, FletchNode, ForestHuntNode, HerbNode, HuntNode, MillNode, MineNode, PapyrusNode, SaltPeterNode, SheepNode,SpinningNode, SwampHuntNode, WaterNode, WellNode, WoodNode } from "./SkillNodesDB"
+import { AlchemyNode, BlackFeatherNode, ChurnNode, CookNode, EnchantNode, FarmNode, FireNode, FishNode, FletchNode, ForestHuntNode, HerbNode, HuntNode, MillNode, MineNode,SaltPeterNode, SheepNode,SpinningNode, SwampHuntNode, WaterNode, WellNode, WoodNode } from "./SkillNodesDB"
 
 //locations
 export class Location {
@@ -190,7 +190,7 @@ export class LakeTerrain extends WaterTerrain {
     }
 }
 export class RiverTerrain extends WaterTerrain {
-    constructor(hero, x, y, name = "River", subLoc = [enterFishNode(hero),enterPapyrusNode(hero), enterWaterNode(hero)]) {
+    constructor(hero, x, y, name = "River", subLoc = [enterFishNode(hero),enterWaterNode(hero)]) {
         super(hero, x, y, name, subLoc)
         this.Color = "LightBlue"
     }
@@ -392,10 +392,6 @@ export function enterSpinningNode(hero) {
 //farming
 export function enterFarmNode(hero) {
     var farm = { Name: "Farm (Skill)", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new FarmNode(hero) }; return content } }
-    return farm
-}
-export function enterPapyrusNode(hero) {
-    var farm = { Name: "Papyrus", enterLocation(hero) { var content = { active: "Skill", combat: null, dialogue: null, dungeon: null, shop: null, skill: new PapyrusNode(hero) }; return content } }
     return farm
 }
 export function enterSheepNode(hero) {

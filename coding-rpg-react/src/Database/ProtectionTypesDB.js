@@ -4,8 +4,8 @@ export class ProtectionType {
     Name;
     ConditionImmunities; ConditionResistances; ConditionWeaknesses;
     Immunities; Resistances; Weaknesses;
-    onEquip(hero, item) { ApplyOnEquipEffect(hero, this.Immunities, this.Resistances, this.Weaknesses, this.ConditionModifiers.Immunities, this.ConditionModifiers.Resistances, this.ConditionModifiers.Weaknesses, item) };
-    onUnEquip(hero, item) { ApplyOnUnEquipEffect(hero, hero.DamageModifiers.Immunities, hero.DamageModifiers.Resistances, hero.DamageModifiers.Weaknesses, hero.ConditionModifiers.Immunities, hero.ConditionModifiers.Resistances, hero.ConditionModifiers.Weaknesses, item) }
+    onEquip(hero, item) {ApplyOnEquipEffect(hero, this, item) };
+    onUnEquip(hero, item) {ApplyOnUnEquipEffect(hero, hero.DamageModifiers.Immunities, hero.DamageModifiers.Resistances, hero.DamageModifiers.Weaknesses, hero.ConditionModifiers.Immunities, hero.ConditionModifiers.Resistances, hero.ConditionModifiers.Weaknesses, item) }
     constructor(name, cI, cR, cW, i, r, w) {
         this.Name = name; this.ConditionImmunities = cI; this.ConditionResistances = cR; this.ConditionWeaknesses = cW;
         this.Immunities = i; this.Resistances = r; this.Weaknesses = w;

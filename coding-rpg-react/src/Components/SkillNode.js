@@ -5,7 +5,7 @@ import './Game.css'
 
 function SkillNode(props) {
     const [hero, setHero] = useState(props.hero)
-    const [skill, setSkills] = useState(props.hero.SkillBook)
+    const [skills, setSkills] = useState(props.hero.SkillBook)
     const [node, setNode] = useState(props.node)
     const [activeSkill, setActiveSkill] = useState(props.node.Skill)
     const [recipes, setRecipes] = useState(props.node.Recipes)

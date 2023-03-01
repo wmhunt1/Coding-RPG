@@ -13,22 +13,23 @@ import {
     Milk, Needle, OakLogs, OakStaff, OakStock, OakWand, PickAxe, RabbitStew, RatStew, RawBeef, RawChicken, RawFish,
     RawRabbitMeat, RawRatMeat, Salt, SaltPeter, Shears, Sickle, SteelAxe, SteelAxe2H, SteelBar, SteelBarrel, SteelBomb,
     SteelBoots, SteelCrossBow1H, SteelCrossBow2H, SteelCrossBowOffHand, SteelDagger, SteelDaggerOffHand, SteelGauntlets,
-    SteelHatchet, SteelHelmet, SteelLegs, SteelLimbs, SteelMace, SteelPickAxe, SteelPistol, SteelPistolOffHand,
-    SteelRifle, SteelShield, SteelSword, SteelSword2H, SteelTools, SteelTorso, SteelWarHammer, SteelWarHammer2H,
+    SteelHatchet, SteelHelmet, SteelLegs, SteelLimbs, SteelMace, SteelPickAxe, SteelPistol, SteelPistolOffHand, Quill,
+    SteelRifle, SteelShield, SteelSword, SteelSword2H, SteelTools, SteelTorso, SteelWarHammer, SteelWarHammer2H, Ink,
     Sulphur, Thread, TinderBox, TinOre, Tools, Water, Wheat, WillowLogs, WillowStaff, WillowStock, WillowWand, WoodLogs,
     WoodShortBow, WoodStaff, WoodStock, WoodWand, WoolBoots, WoolCloth, WoolGloves, WoolHat, WoolRobeBottom, WoolRobeTop,
     WoolTrousers, WoolTunic, WoolWizardHat, OakShortBow, WillowShortBow, OakLongBow, WillowLongBow, WoodLongBow, Bones,
-    Skull, Ectoplasm, SpiderSilkCloth, SpiderSilkBoots, SpiderSilkGloves, SpiderSilkRobeBottom, SpiderSilkRobeTop,
+    Skull, Ectoplasm, SpiderSilkCloth, SpiderSilkBoots, SpiderSilkGloves, SpiderSilkRobeBottom, SpiderSilkRobeTop, Rope,
     SpiderSilkWizardHat, BronzeBoots, MortarAndPestle, UnEnchantedWoodWand, UnEnchantedWillowWand, UnEnchantedWillowStaff,
     UnEnchantedOakStaff, UnEnchantedWoodStaff, UnEnchantedOakWand, Trap, MilkThistle, Aloe, PotionBottle, Antidote, BurnSalve,
-    RawCrayFish, CookedCrayFish, RawTrout, CookedTrout, EyeOfNewt, RabbitFur, Papyrus, Honey, Beeswax, Butter, Toast, ButteredToast,
+    RawCrayFish, CookedCrayFish, RawTrout, CookedTrout, EyeOfNewt, RabbitFur, Honey, Beeswax, Butter, Toast, ButteredToast,
     Carrot, Cabbage, Trowel, Spade, RawPotato, BronzeRapier, IronRapier, SteelRapier, SteelScimitar, IronScimitar, BronzeScimitar, BoneMeal,
     BronzeShortSpear, BronzeSpear, IronShortSpear, IronSpear, SteelShortSpear, SteelSpear, BronzeHalberd, IronHalberd, SteelHalberd, OakQuarterStaff,
     WillowQuarterStaff, WoodQuarterStaff, WoolCloak, SpiderSilkCloak, BronzeDart, BronzeDartOffHand, IronDart, IronDartOffHand, SteelDart, SteelDartOffHand,
     BronzeThrowingAxe, BronzeThrowingAxeOffHand, BronzeThrowingHammer, BronzeThrowingHammerOffHand, BronzeThrowingKnife, BronzeThrowingKnifeOffHand,
     BronzeThrowingSpear, BronzeThrowingSpearOffHand, IronThrowingAxe, IronThrowingAxeOffHand, IronThrowingHammer, IronThrowingHammerOffHand, IronThrowingKnife,
     IronThrowingKnifeOffHand, IronThrowingSpear, IronThrowingSpearOffHand, SteelThrowingKnife, SteelThrowingKnifeOffHand, SteelThrowingAxe, SteelThrowingAxeOffHand,
-    SteelThrowingHammer, SteelThrowingHammerOffHand, SteelThrowingSpear, SteelThrowingSpearOffHand, BronzeMaceOffHand, BronzeRapierOffHand, BronzeScimitarOffHand, BronzeShortSpearOffHand, BronzeSwordOffHand, BronzeWarHammerOffHand, IronAxeOffHand, IronMaceOffHand, BronzeAxeOffHand, IronRapierOffHand, IronScimitarOffHand, IronShortSpearOffHand, IronSwordOffHand, IronWarHammerOffHand, SteelAxeOffHand, SteelMaceOffHand, SteelRapierOffHand, SteelScimitarOffHand, SteelShortSpearOffHand, SteelSwordOffHand, SteelWarHammerOffHand
+    SteelThrowingHammer, SteelThrowingHammerOffHand, SteelThrowingSpear, SteelThrowingSpearOffHand, BronzeMaceOffHand, BronzeRapierOffHand, BronzeScimitarOffHand, BronzeShortSpearOffHand,
+    BronzeSwordOffHand, BronzeWarHammerOffHand, IronAxeOffHand, IronMaceOffHand, BronzeAxeOffHand, IronRapierOffHand, IronScimitarOffHand, IronShortSpearOffHand, IronSwordOffHand, IronWarHammerOffHand, SteelAxeOffHand, SteelMaceOffHand, SteelRapierOffHand, SteelScimitarOffHand, SteelShortSpearOffHand, SteelSwordOffHand, SteelWarHammerOffHand, Flax, BowString, Feather, Paper
 } from "./ItemsDB"
 export class SkillRecipe {
     Name; Skill; Tool; Verb; LevelRequirement; Exp; Input; Output; FailureOutput;
@@ -39,7 +40,7 @@ export class SkillRecipe {
 //crafting
 //alchemy
 export function alchemyRecipes() {
-    var alchemyRecipes = [new GrindBones(), new MakeAntidote(), new MakeBurnSalve(), new MakeGunPowder(), new ProcessBatGuano()]
+    var alchemyRecipes = [new GrindBones(), new MakeAntidote(), new MakeBurnSalve(), new MakeGunPowder(), new MakeInk(), new ProcessBatGuano()]
     return alchemyRecipes
 }
 export class AlchemyRecipe extends SkillRecipe {
@@ -66,6 +67,11 @@ export class MakeBurnSalve extends AlchemyRecipe {
 }
 export class MakeGunPowder extends AlchemyRecipe {
     constructor(name = "Make Gunpowder", level = 5, xp = 100, input = [{ Item: new Sulphur(), Quantity: 1 }, { Item: new SaltPeter(), Quantity: 1 }, { Item: new Charcoal(), Quantity: 1 }], output = [{ Item: new GunPowder(), Quantity: 1 }], failure = null) {
+        super(name, level, xp, input, output, failure)
+    }
+}
+export class MakeInk extends AlchemyRecipe {
+    constructor(name = "Make Ink", level = 1, xp = 25, input = [{ Item: new Water(), Quantity: 1 }, { Item: new Charcoal(), Quantity: 1 }], output = [{ Item: new Ink(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
@@ -192,9 +198,13 @@ export class MillWheat extends CookingRecipe {
 //crafting
 export function craftingRecipes() {
     var craft = [new CraftHardLeatherBoots(), new CraftHardLeatherCowl(), new CraftHardLeatherGloves(), new CraftHardLeatherLegs(), new CraftHardLeatherTorso(),
-    new CraftLeatherBoots(), new CraftLeatherCowl(), new CraftLeatherGloves(), new CraftLeatherLegs(), new CraftLeatherTorso(),
+    new CraftLeatherBoots(), new CraftLeatherCowl(), new CraftLeatherGloves(), new CraftLeatherLegs(), new CraftLeatherTorso(), new MakePaperFromOakLogs(), new MakePaperFromWillowLogs(), new MakeCharcoalFromWoodLogs(),
     new WeaveSpiderSilkBoots(), new WeaveSpiderSilkCloak(), new WeaveSpiderSilkGloves(), new WeaveSpiderSilkRobeBottom(), new WeaveSpiderSilkRobeTop(), new WeaveSpiderSilkWizardHat(),
     new WeaveWoolBoots(), new WeaveWoolCloak(), new WeaveWoolGloves(), new WeaveWoolHat(), new WeaveWoolRobeBottom(), new WeaveWoolRobeTop(), new WeaveWoolTrousers(), new WeaveWoolTunic(), new WeaveWoolWizardHat()]
+    return craft;
+}
+export function spinCraftingRecipes() {
+    var craft = [new SpinBowString(), new SpinRope()]
     return craft;
 }
 export class CraftingRecipe extends SkillRecipe {
@@ -256,6 +266,43 @@ export class CraftLeatherLegs extends LeatherCraftingRecipe {
 }
 export class CraftLeatherTorso extends LeatherCraftingRecipe {
     constructor(name = "Craft Leather Torso", level = 4, xp = 125, input = [{ Item: new CowLeather(), Quantity: 5 }, { Item: new Thread(), Quantity: 1 }], output = [{ Item: new LeatherTorso(), Quantity: 1 }], failure = { Item: new CowLeather(), Quantity: 5 }) {
+        super(name, level, xp, input, output, failure)
+    }
+}
+export class PaperCraftingRecipe extends CraftingRecipe {
+    constructor(name, level, xp, input, output, failure) {
+        super(name, level, xp, input, output, failure)
+        this.Verb = "Make"
+    }
+}
+export class MakePaperFromOakLogs extends PaperCraftingRecipe {
+    constructor(name = "Make Paper (Oak Logs)", level = 5, xp = 100, input = [{ Item: new WoodLogs(), Quantity: 1 }], output = [{ Item: new Paper(), Quantity: 2 }], failure = null) {
+        super(name, level, xp, input, output, failure)
+    }
+}
+export class MakePaperFromWillowLogs extends PaperCraftingRecipe {
+    constructor(name = "Make Paper (Willow Logs)", level = 10, xp = 400, input = [{ Item: new WillowLogs(), Quantity: 1 }], output = [{ Item: new Paper(), Quantity: 3 }], failure = null) {
+        super(name, level, xp, input, output, failure)
+    }
+}
+export class MakePaperFromWoodLogs extends PaperCraftingRecipe {
+    constructor(name = "Make Paper (Wood Logs)", level = 1, xp = 25, input = [{ Item: new WoodLogs(), Quantity: 1 }], output = [{ Item: new Paper(), Quantity: 1 }], failure = null) {
+        super(name, level, xp, input, output, failure)
+    }
+}
+export class SpinningCraftingRecipe extends CraftingRecipe {
+    constructor(name, level, xp, input, output, failure) {
+        super(name, level, xp, input, output, failure)
+        this.Verb = "Spin"
+    }
+}
+export class SpinBowString extends SpinningCraftingRecipe {
+    constructor(name = "Spin BowString", level = 1, xp = 5, input = [{ Item: new Flax(), Quantity: 1 }], output = [{ Item: new BowString(), Quantity: 1 }], failure = null) {
+        super(name, level, xp, input, output, failure)
+    }
+}
+export class SpinRope extends SpinningCraftingRecipe {
+    constructor(name = "Spin Rope", level = 1, xp = 15, input = [{ Item: new Flax(), Quantity: 3 }], output = [{ Item: new Rope(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
@@ -500,7 +547,7 @@ export function fletchingRecipes() {
     var fletchingRecipes = [new AssembleBronzeCrossBow1H(), new AssembleBronzeCrossBow2H(), new AssembleBronzeCrossBowOffHand(),
     new AssembleIronCrossBow1H(), new AssembleIronCrossBow2H(), new AssembleIronCrossBowOffHand(),
     new AssembleSteelCrossBow1H(), new AssembleSteelCrossBow2H(), new AssembleSteelCrossBowOffHand(),
-    new FletchOakLongBow(), new FletchOakQuarterStaff(), new FletchOakStaff(), new FletchOakShortBow(), new FletchOakStock(), new FletchOakWand(),
+    new FletchOakLongBow(), new FletchOakQuarterStaff(), new FletchOakStaff(), new FletchOakShortBow(), new FletchOakStock(), new FletchOakWand(), new FletchQuill(),
     new FletchWillowLongBow(), new FletchWillowQuarterStaff(), new FletchWillowStaff(), new FletchWillowShortBow(), new FletchWillowStock(), new FletchWillowWand(),
     new FletchWoodLongBow(), new FletchWoodQuarterStaff(), new FletchWoodStaff(), new FletchWoodShortBow(), new FletchWillowStock(), new FletchWoodWand()]
     return fletchingRecipes
@@ -512,7 +559,7 @@ export class FletchingRecipe extends SkillRecipe {
     }
 }
 export class FletchOakLongBow extends FletchingRecipe {
-    constructor(name = "Fletch Oak LongBow", level = 5, xp = 100, input = [{ Item: new OakLogs(), Quantity: 1 }], output = [{ Item: new OakLongBow(), Quantity: 1 }], failure = null) {
+    constructor(name = "Fletch Oak LongBow", level = 5, xp = 100, input = [{ Item: new OakLogs(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new OakLongBow(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
@@ -527,7 +574,7 @@ export class FletchOakStaff extends FletchingRecipe {
     }
 }
 export class FletchOakShortBow extends FletchingRecipe {
-    constructor(name = "Fletch Oak ShortBow", level = 5, xp = 100, input = [{ Item: new OakLogs(), Quantity: 1 }], output = [{ Item: new OakShortBow(), Quantity: 1 }], failure = null) {
+    constructor(name = "Fletch Oak ShortBow", level = 5, xp = 100, input = [{ Item: new OakLogs(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new OakShortBow(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
@@ -541,8 +588,13 @@ export class FletchOakWand extends FletchingRecipe {
         super(name, level, xp, input, output, failure)
     }
 }
+export class FletchQuill extends FletchingRecipe {
+    constructor(name = "Fletch Quill", level = 1, xp = 5, input = [{ Item: new Feather(), Quantity: 1 }], output = [{ Item: new Quill(), Quantity: 1 }], failure = null) {
+        super(name, level, xp, input, output, failure)
+    }
+}
 export class FletchWillowLongBow extends FletchingRecipe {
-    constructor(name = "Fletch Willow LongBow", level = 10, xp = 400, input = [{ Item: new WillowLogs(), Quantity: 1 }], output = [{ Item: new WillowLongBow(), Quantity: 1 }], failure = null) {
+    constructor(name = "Fletch Willow LongBow", level = 10, xp = 400, input = [{ Item: new WillowLogs(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new WillowLongBow(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
@@ -557,7 +609,7 @@ export class FletchWillowStaff extends FletchingRecipe {
     }
 }
 export class FletchWillowShortBow extends FletchingRecipe {
-    constructor(name = "Fletch Willow ShortBow", level = 10, xp = 400, input = [{ Item: new WillowLogs(), Quantity: 1 }], output = [{ Item: new WillowShortBow(), Quantity: 1 }], failure = null) {
+    constructor(name = "Fletch Willow ShortBow", level = 10, xp = 400, input = [{ Item: new WillowLogs(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new WillowShortBow(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
@@ -572,7 +624,7 @@ export class FletchWillowWand extends FletchingRecipe {
     }
 }
 export class FletchWoodLongBow extends FletchingRecipe {
-    constructor(name = "Fletch Wood LongBow", level = 1, xp = 15, input = [{ Item: new WoodLogs(), Quantity: 1 }], output = [{ Item: new WoodLongBow(), Quantity: 1 }], failure = null) {
+    constructor(name = "Fletch Wood LongBow", level = 1, xp = 15, input = [{ Item: new WoodLogs(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new WoodLongBow(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
@@ -592,7 +644,7 @@ export class FletchWoodShortBow extends FletchingRecipe {
     }
 }
 export class FletchWoodStock extends FletchingRecipe {
-    constructor(name = "Fletch Wood Stock", level = 1, xp = 15, input = [{ Item: new WoodLogs(), Quantity: 1 }], output = [{ Item: new WoodStock(), Quantity: 1 }], failure = null) {
+    constructor(name = "Fletch Wood Stock", level = 1, xp = 15, input = [{ Item: new WoodLogs(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new WoodStock(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
@@ -608,70 +660,57 @@ export class AssembleCrossBow extends FletchingRecipe {
     }
 }
 export class AssembleBronzeCrossBow1H extends AssembleCrossBow {
-    constructor(name = "Assemble Bronze CrossBow 1H", level = 1, xp = 25, input = [{ Item: new BronzeLimbs(), Quantity: 1 }, { Item: new WoodStock(), Quantity: 1 }], output = [{ Item: new BronzeCrossBow1H(), Quantity: 1 }], failure = null) {
+    constructor(name = "Assemble Bronze CrossBow 1H", level = 1, xp = 25, input = [{ Item: new BronzeLimbs(), Quantity: 1 }, { Item: new WoodStock(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new BronzeCrossBow1H(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
 export class AssembleBronzeCrossBow2H extends AssembleCrossBow {
-    constructor(name = "Assemble Bronze CrossBow 2H", level = 1, xp = 25, input = [{ Item: new BronzeLimbs(), Quantity: 1 }, { Item: new WoodStock(), Quantity: 1 }], output = [{ Item: new BronzeCrossBow2H(), Quantity: 1 }], failure = null) {
+    constructor(name = "Assemble Bronze CrossBow 2H", level = 1, xp = 25, input = [{ Item: new BronzeLimbs(), Quantity: 1 }, { Item: new WoodStock(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new BronzeCrossBow2H(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
 export class AssembleBronzeCrossBowOffHand extends AssembleCrossBow {
-    constructor(name = "Assemble Bronze CrossBow (OffHand)", level = 1, xp = 25, input = [{ Item: new BronzeLimbs(), Quantity: 1 }, { Item: new WoodStock(), Quantity: 1 }], output = [{ Item: new BronzeCrossBowOffHand(), Quantity: 1 }], failure = null) {
+    constructor(name = "Assemble Bronze CrossBow (OffHand)", level = 1, xp = 25, input = [{ Item: new BronzeLimbs(), Quantity: 1 }, { Item: new WoodStock(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new BronzeCrossBowOffHand(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
 export class AssembleIronCrossBow1H extends AssembleCrossBow {
-    constructor(name = "Assemble Iron CrossBow 1H", level = 5, xp = 100, input = [{ Item: new IronLimbs(), Quantity: 1 }, { Item: new OakStock(), Quantity: 1 }], output = [{ Item: new IronCrossBow1H(), Quantity: 1 }], failure = null) {
+    constructor(name = "Assemble Iron CrossBow 1H", level = 5, xp = 100, input = [{ Item: new IronLimbs(), Quantity: 1 }, { Item: new OakStock(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new IronCrossBow1H(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
 export class AssembleIronCrossBow2H extends AssembleCrossBow {
-    constructor(name = "Assemble Iron CrossBow 2H", level = 5, xp = 100, input = [{ Item: new IronLimbs(), Quantity: 1 }, { Item: new OakStock(), Quantity: 1 }], output = [{ Item: new IronCrossBow2H(), Quantity: 1 }], failure = null) {
+    constructor(name = "Assemble Iron CrossBow 2H", level = 5, xp = 100, input = [{ Item: new IronLimbs(), Quantity: 1 }, { Item: new OakStock(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new IronCrossBow2H(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
 export class AssembleIronCrossBowOffHand extends AssembleCrossBow {
-    constructor(name = "Assemble Iron CrossBow (OffHand)", level = 5, xp = 100, input = [{ Item: new IronLimbs(), Quantity: 1 }, { Item: new OakStock(), Quantity: 1 }], output = [{ Item: new IronCrossBowOffHand(), Quantity: 1 }], failure = null) {
+    constructor(name = "Assemble Iron CrossBow (OffHand)", level = 5, xp = 100, input = [{ Item: new IronLimbs(), Quantity: 1 }, { Item: new OakStock(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new IronCrossBowOffHand(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
 export class AssembleSteelCrossBow1H extends AssembleCrossBow {
-    constructor(name = "Assemble Steel CrossBow 1H", level = 10, xp = 400, input = [{ Item: new SteelLimbs(), Quantity: 1 }, { Item: new WoodStock(), Quantity: 1 }], output = [{ Item: new SteelCrossBow1H(), Quantity: 1 }], failure = null) {
+    constructor(name = "Assemble Steel CrossBow 1H", level = 10, xp = 400, input = [{ Item: new SteelLimbs(), Quantity: 1 }, { Item: new WoodStock(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new SteelCrossBow1H(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
 export class AssembleSteelCrossBow2H extends AssembleCrossBow {
-    constructor(name = "Assemble Steel CrossBow 2H", level = 10, xp = 400, input = [{ Item: new SteelLimbs(), Quantity: 1 }, { Item: new WoodStock(), Quantity: 1 }], output = [{ Item: new SteelCrossBow2H(), Quantity: 1 }], failure = null) {
+    constructor(name = "Assemble Steel CrossBow 2H", level = 10, xp = 400, input = [{ Item: new SteelLimbs(), Quantity: 1 }, { Item: new WoodStock(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new SteelCrossBow2H(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
 export class AssembleSteelCrossBowOffHand extends AssembleCrossBow {
-    constructor(name = "Assemble Steel CrossBow (OffHand)", level = 10, xp = 400, input = [{ Item: new SteelLimbs(), Quantity: 1 }, { Item: new WoodStock(), Quantity: 1 }], output = [{ Item: new SteelCrossBowOffHand(), Quantity: 1 }], failure = null) {
+    constructor(name = "Assemble Steel CrossBow (OffHand)", level = 10, xp = 400, input = [{ Item: new SteelLimbs(), Quantity: 1 }, { Item: new WoodStock(), Quantity: 1 }, { Item: new BowString(), Quantity: 1 }], output = [{ Item: new SteelCrossBowOffHand(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
     }
 }
 //smith
+export function smelterRecipes() {
+    var smelterRecipes = [new SmeltBronzeBar(), new SmeltIronBar(), new SmeltSteelBar()]
+    return smelterRecipes
+}
 export function smithingRecipes() {
-    var smithingRecipes = [new SmeltBronzeBar(), new SmeltIronBar(), new SmeltSteelBar(),
-    new SmithBronzeAxe(), new SmithBronzeAxeOffHand(), new SmithBronzeAxe2H(), new SmithBronzeBarrel(), new SmithBronzeBoots(), new SmithBronzeDagger(), new SmithBronzeDaggerOffHand(), new SmithBronzeDart(), SmithBronzeDartOffHand(),
-    new SmithBronzeGauntlets(), new SmithBronzeHalberd(), new SmithBronzeHatchet(), new SmithBronzeHelmet(), new SmithBronzeLegs(), new SmithBronzeLimbs(), new SmithBronzeMace(), new SmithBronzeMaceOffHand(),
-    new SmithBronzePickaxe(), new SmithBronzeRapier(), new SmithBronzeRapierOffHand(), new SmithBronzeShield(), new SmithBronzeScimitar(), new SmithBronzeScimitarOffHand(), new SmithBronzeShortSpear(), new SmithBronzeShortSpearOffHand(), new SmithBronzeSpear(), new SmithBronzeSword(), new SmithBronzeSwordOffHand(), new SmithBronzeSword2H(), new SmithBronzeTools(), new SmithBronzeTorso(),
-    new SmithBronzeThrowingAxe(), new SmithBronzeThrowingAxeOffHand(), new SmithBronzeThrowingHammer(), new SmithBronzeThrowingHammerOffHand(), new SmithBronzeThrowingKnife(), new SmithBronzeThrowingKnifeOffHand(), new SmithBronzeThrowingSpear(), new SmithBronzeThrowingSpearOffHand(),
-    new SmithBronzeWarHammer(), new SmithBronzeWarHammerOffHand(), new SmithBronzeWarHammer2H(),
-    new SmithIronAxe(), new SmithIronAxeOffHand(), new SmithIronAxe2H(), new SmithIronBarrel(), new SmithIronBoots(), new SmithIronDagger(), new SmithIronDaggerOffHand(), new SmithIronDart(), SmithIronDartOffHand(),
-    new SmithIronGauntlets(), new SmithIronHalberd(), new SmithIronHatchet(), new SmithIronHelmet(), new SmithIronLegs(), new SmithIronLimbs(), new SmithIronMace(), new SmithIronMaceOffHand(),
-    new SmithIronPickaxe(), SmithIronRapier(), new SmithIronRapierOffHand(), new SmithIronScimitar(), new SmithIronScimitarOffHand(), new SmithIronShortSpear(), new SmithIronShortSpearOffHand(), new SmithIronSpear(),
-    new SmithIronShield(), new SmithIronSword(), new SmithIronSwordOffHand(), new SmithIronSword2H(), new SmithIronTools(), new SmithIronTorso(),
-    new SmithIronThrowingAxe(), new SmithIronThrowingAxeOffHand(), new SmithIronThrowingHammer(), new SmithIronThrowingHammerOffHand(), new SmithIronThrowingKnife(), new SmithIronThrowingKnifeOffHand(), new SmithIronThrowingSpear(), new SmithIronThrowingSpearOffHand(),
-    new SmithIronWarHammer(), new SmithIronWarHammerOffHand(), new SmithIronWarHammer2H(),
-    new SmithSteelAxe(), new SmithSteelAxeOffHand(), new SmithSteelAxe2H(), new SmithSteelBarrel(), new SmithSteelBoots(), new SmithSteelDagger(), new SmithSteelDaggerOffHand(), new SmithSteelDart(), SmithSteelDartOffHand(),
-    new SmithSteelGauntlets(), new SmithSteelHalberd(), new SmithSteelHatchet(), new SmithSteelHelmet(), new SmithSteelLegs(), new SmithSteelLimbs(), new SmithSteelMace(), new SmithSteelMaceOffHand(),
-    new SmithSteelPickaxe(), new SmithSteelRapier(), new SmithSteelRapierOffHand(), new SmithSteelScimitar(), new SmithSteelScimitarOffHand(), new SmithSteelShortSpear(), new SmithSteelShortSpearOffHand(), new SmithSteelSpear(),
-    new SmithSteelShield(), new SmithSteelSword(), new SmithSteelSwordOffHand(), new SmithSteelSword2H(), new SmithSteelTools(), new SmithSteelTorso(),
-    new SmithSteelThrowingAxe(), new SmithSteelThrowingAxeOffHand(), new SmithSteelThrowingHammer(), new SmithSteelThrowingHammerOffHand(), new SmithSteelThrowingKnife(), new SmithSteelThrowingKnifeOffHand(), new SmithSteelThrowingSpear(), new SmithSteelThrowingSpearOffHand(),
-    new SmithSteelWarHammer(), new SmithSteelWarHammerOffHand(), new SmithSteelWarHammer2H()]
+    var smithingRecipes = [...bronzeSmithRecipes(), ...ironSmithRecipes(), ...steelSmithRecipes()]
     return smithingRecipes
 }
 export class SmithingRecipe extends SkillRecipe {
@@ -681,6 +720,14 @@ export class SmithingRecipe extends SkillRecipe {
     }
 }
 //bronze
+export function bronzeSmithRecipes() {
+    var bronzeRecipes = [new SmithBronzeAxe(), new SmithBronzeAxeOffHand(), new SmithBronzeAxe2H(), new SmithBronzeBarrel(), new SmithBronzeBoots(), new SmithBronzeDagger(), new SmithBronzeDaggerOffHand(), new SmithBronzeDart(), new SmithBronzeDartOffHand(),
+    new SmithBronzeGauntlets(), new SmithBronzeHalberd(), new SmithBronzeHatchet(), new SmithBronzeHelmet(), new SmithBronzeLegs(), new SmithBronzeLimbs(), new SmithBronzeMace(), new SmithBronzeMaceOffHand(),
+    new SmithBronzePickaxe(), new SmithBronzeRapier(), new SmithBronzeRapierOffHand(), new SmithBronzeShield(), new SmithBronzeScimitar(), new SmithBronzeScimitarOffHand(), new SmithBronzeShortSpear(), new SmithBronzeShortSpearOffHand(), new SmithBronzeSpear(), new SmithBronzeSword(), new SmithBronzeSwordOffHand(), new SmithBronzeSword2H(), new SmithBronzeTools(), new SmithBronzeTorso(),
+    new SmithBronzeThrowingAxe(), new SmithBronzeThrowingAxeOffHand(), new SmithBronzeThrowingHammer(), new SmithBronzeThrowingHammerOffHand(), new SmithBronzeThrowingKnife(), new SmithBronzeThrowingKnifeOffHand(), new SmithBronzeThrowingSpear(), new SmithBronzeThrowingSpearOffHand(),
+    new SmithBronzeWarHammer(), new SmithBronzeWarHammerOffHand(), new SmithBronzeWarHammer2H(),]
+    return bronzeRecipes
+}
 //armor
 export class SmithBronzeBoots extends SmithingRecipe {
     constructor(name = "Smith Bronze Boots", level = 2, xp = 50, input = [{ Item: new BronzeBar(), Quantity: 2 }], output = [{ Item: new BronzeBoots(), Quantity: 1 }], failure = null) {
@@ -896,6 +943,15 @@ export class SmithBronzeWarHammer2H extends SmithingRecipe {
     }
 }
 //iron
+export function ironSmithRecipes() {
+    var recipes = [new SmithIronAxe(), new SmithIronAxeOffHand(), new SmithIronAxe2H(), new SmithIronBarrel(), new SmithIronBoots(), new SmithIronDagger(), new SmithIronDaggerOffHand(), new SmithIronDart(), new SmithIronDartOffHand(),
+    new SmithIronGauntlets(), new SmithIronHalberd(), new SmithIronHatchet(), new SmithIronHelmet(), new SmithIronLegs(), new SmithIronLimbs(), new SmithIronMace(), new SmithIronMaceOffHand(),
+    new SmithIronPickaxe(), new SmithIronRapier(), new SmithIronRapierOffHand(), new SmithIronScimitar(), new SmithIronScimitarOffHand(), new SmithIronShortSpear(), new SmithIronShortSpearOffHand(), new SmithIronSpear(),
+    new SmithIronShield(), new SmithIronSword(), new SmithIronSwordOffHand(), new SmithIronSword2H(), new SmithIronTools(), new SmithIronTorso(),
+    new SmithIronThrowingAxe(), new SmithIronThrowingAxeOffHand(), new SmithIronThrowingHammer(), new SmithIronThrowingHammerOffHand(), new SmithIronThrowingKnife(), new SmithIronThrowingKnifeOffHand(), new SmithIronThrowingSpear(), new SmithIronThrowingSpearOffHand(),
+    new SmithIronWarHammer(), new SmithIronWarHammerOffHand(), new SmithIronWarHammer2H()]
+    return recipes;
+}
 //armor
 export class SmithIronBoots extends SmithingRecipe {
     constructor(name = "Smith Iron Boots", level = 6, xp = 250, input = [{ Item: new IronBar(), Quantity: 2 }], output = [{ Item: new IronBoots(), Quantity: 1 }], failure = null) {
@@ -1111,6 +1167,15 @@ export class SmithIronWarHammer2H extends SmithingRecipe {
     }
 }
 //steel
+export function steelSmithRecipes() {
+    var recipes = [new SmithSteelAxe(), new SmithSteelAxeOffHand(), new SmithSteelAxe2H(), new SmithSteelBarrel(), new SmithSteelBoots(), new SmithSteelDagger(), new SmithSteelDaggerOffHand(), new SmithSteelDart(), new SmithSteelDartOffHand(),
+    new SmithSteelGauntlets(), new SmithSteelHalberd(), new SmithSteelHatchet(), new SmithSteelHelmet(), new SmithSteelLegs(), new SmithSteelLimbs(), new SmithSteelMace(), new SmithSteelMaceOffHand(),
+    new SmithSteelPickaxe(), new SmithSteelRapier(), new SmithSteelRapierOffHand(), new SmithSteelScimitar(), new SmithSteelScimitarOffHand(), new SmithSteelShortSpear(), new SmithSteelShortSpearOffHand(), new SmithSteelSpear(),
+    new SmithSteelShield(), new SmithSteelSword(), new SmithSteelSwordOffHand(), new SmithSteelSword2H(), new SmithSteelTools(), new SmithSteelTorso(),
+    new SmithSteelThrowingAxe(), new SmithSteelThrowingAxeOffHand(), new SmithSteelThrowingHammer(), new SmithSteelThrowingHammerOffHand(), new SmithSteelThrowingKnife(), new SmithSteelThrowingKnifeOffHand(), new SmithSteelThrowingSpear(), new SmithSteelThrowingSpearOffHand(),
+    new SmithSteelWarHammer(), new SmithSteelWarHammerOffHand(), new SmithSteelWarHammer2H()]
+    return recipes;
+}
 //armor
 export class SmithSteelBoots extends SmithingRecipe {
     constructor(name = "Smith Steel Boots", level = 11, xp = 200, input = [{ Item: new SteelBar(), Quantity: 2 }], output = [{ Item: new SteelBoots(), Quantity: 1 }], failure = null) {
@@ -1384,25 +1449,19 @@ export class HarvestCrop extends FarmingRecipe {
     }
 }
 export class HarvestCabbage extends HarvestCrop {
-    constructor(name = "Harvest Papyrus", level = 1, xp = 5, input = [], output = [{ Item: new Cabbage(), Quantity: 1 }], failure = null) {
+    constructor(name = "Harvest Cabbage", level = 1, xp = 5, input = [], output = [{ Item: new Cabbage(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
         this.Tool = new Knife()
     }
 }
 export class HarvestCarrot extends HarvestCrop {
-    constructor(name = "Harvest Papyrus", level = 1, xp = 5, input = [], output = [{ Item: new Carrot(), Quantity: 1 }], failure = null) {
+    constructor(name = "Harvest Carrot", level = 1, xp = 5, input = [], output = [{ Item: new Carrot(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
         this.Tool = new Trowel()
     }
 }
 export class HarvestWheat extends HarvestCrop {
     constructor(name = "Harvest Wheat", level = 1, xp = 5, input = [], output = [{ Item: new Wheat(), Quantity: 1 }], failure = null) {
-        super(name, level, xp, input, output, failure)
-        this.Tool = new Sickle()
-    }
-}
-export class HarvestPapyrus extends HarvestCrop {
-    constructor(name = "Harvest Papyrus", level = 1, xp = 5, input = [], output = [{ Item: new Papyrus(), Quantity: 1 }], failure = null) {
         super(name, level, xp, input, output, failure)
         this.Tool = new Sickle()
     }

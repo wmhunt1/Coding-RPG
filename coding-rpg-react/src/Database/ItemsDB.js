@@ -434,10 +434,10 @@ export class SkillLamp extends Lamp {
 }
 //equipables
 export class Equipable extends Item {
-    Level; Slot; Class; Enchantment; Restriction;
+    Level; Slot; Class; Enchantment; Restriction;Size;
     constructor(name, cost, level) {
         super(name, cost)
-        this.Level = level; this.Type = "Equipable"; this.Enchantment = new UnEnchanted(); this.Restriction = new Pet()
+        this.Level = level; this.Type = "Equipable"; this.Enchantment = new UnEnchanted(); this.Restriction = new Pet();this.Size = "Medium"
     }
 }
 //ammo
@@ -1375,7 +1375,7 @@ export class Shield extends OffHand {
 export class MetalShield extends Shield {
     constructor(name, cost, level, prot) {
         super(name, cost, level, prot)
-        this.ProtectionType = MetalProtection()
+        this.ProtectionType = new MetalProtection()
     }
 }
 export class BronzeShield extends MetalShield {
@@ -2251,6 +2251,11 @@ export class GunPowder extends Alchemical {
         super(name, cost)
     }
 }
+export class Ink extends Alchemical {
+    constructor(name = "Ink", cost = 1) {
+        super(name, cost)
+    }
+}
 //cooking
 export class Baking extends Processed {
     constructor(name, cost) {
@@ -2268,6 +2273,12 @@ export class Flour extends Baking {
         super(name, cost)
     }
 }
+//crafting
+export class Paper extends Processed {
+    constructor(name = "Paper", cost = 1) {
+        super(name, cost)
+    }
+}
 //firemaking
 export class Ashes extends Processed {
     constructor(name = "Ashes", cost = 1) {
@@ -2282,6 +2293,12 @@ export class Charcoal extends Processed {
     }
 }
 //fletching
+export class BowString extends Processed {
+    constructor(name="Bow String", cost=1) {
+        super(name, cost)
+        this.SubType = "BowString";
+    }
+}
 export class Stock extends Processed {
     constructor(name, cost) {
         super(name, cost)
@@ -2460,8 +2477,8 @@ export class Crop extends Resource {
         this.SubType = "Crop"
     }
 }
-export class Papyrus extends Crop {
-    constructor(name = "Papyrus", cost = 1) {
+export class Flax extends Crop {
+    constructor(name = "Flax", cost = 1) {
         super(name, cost)
     }
 }
@@ -2665,7 +2682,7 @@ export class WoodLogs extends Logs {
 }
 //tools
 export function generalTools() {
-    var tools = [new BronzeHatchet(), new BronzePickAxe(), new Bucket(), new FishingRod(), new Knife(), new Needle(), new Shears(), new Sickle(), new TinderBox(), new Trap()]
+    var tools = [new BronzeHatchet(), new BronzePickAxe(), new Bucket(), new FishingRod(), new Knife(), new Needle(), new Shears(),new Spade(), new Sickle(), new TinderBox(), new Trap(),new Trowel(), new WateringCan()]
     return tools;
 }
 export class Tool extends Item {
@@ -2679,6 +2696,18 @@ export class Bucket extends Tool {
     constructor(name = "Bucket", cost = 1, tier = 1) {
         super(name, cost)
         this.Tier = tier; this.SubType = "Bucket"
+    }
+}
+export class Rope extends Tool {
+    constructor(name = "Rope", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Rope"
+    }
+}
+export class Quill extends Tool {
+    constructor(name = "Quill", cost = 1, tier = 1) {
+        super(name, cost)
+        this.Tier = tier; this.SubType = "Quill"
     }
 }
 //alchemy
