@@ -1,6 +1,6 @@
 import { NoCondition, PoisonCondition, SleepCondition, WebCondition } from "./ConditionsDB";
 import { Cleave, PierceArmor, Rage } from "./AbilitiesDB";
-import { BareBack, BareFinger, BareNeck, Bite, EmptyOffHand, Shoes, Trousers, Tunic, WoodenShield, BareFist, BareHead, BareTorso, BareLegs, BareHands, BareFeet, WoodenClub, LoinCloth, BronzeSword, Slam, IronWarHammer, IronShield, IronHelmet, IronLegs, IronGauntlets, IronBoots, PoisonedBite, LeatherCowl, LeatherLegs, LeatherGloves, LeatherBoots, IronDagger, IronDaggerOffHand, OakShortBow, IronAxe2H, BronzeShield, BronzeMace, BronzeHelmet, ClawSlash, Peck, IronAxe, OakStaff, GhostTouch, NoAmmo, BronzeTorso } from "./ItemsDB";
+import { BareBack, BareFinger, BareNeck, Bite, EmptyOffHand, Trousers, Tunic, WoodenShield, BareFist, BareHead, BareTorso, BareLegs, BareHands, BareFeet, WoodenClub, LoinCloth, BronzeSword, Slam, IronWarHammer, IronShield, IronHelmet, IronLegs, IronGauntlets, IronBoots, PoisonedBite, LeatherCowl, LeatherLegs, LeatherGloves, LeatherBoots, IronDagger, IronDaggerOffHand, OakShortBow, IronAxe2H, BronzeShield, BronzeMace, BronzeHelmet, ClawSlash, Peck, IronAxe, OakStaff, GhostTouch, NoAmmo, BronzeTorso, LeatherShoes } from "./ItemsDB";
 import { DaleTownLoc } from "./LocationsDB";
 import { Cleric, Freelancer, Pet } from "./JobsDB";
 import { BasicHeal, CurePoison, FireBall, MagicMissile, PoisonSpray, SleepSpell, SummonRat } from "./SpellsDB"
@@ -188,7 +188,7 @@ export class Hero extends Humanoid {
         this.CurrentXP = 0;
         this.Log = ["Game: Starting Game"];
         this.Equipment.Weapon = new BronzeSword(); this.Equipment.Torso = new Tunic();
-        this.Equipment.Legs = new Trousers(); this.Equipment.Feet = new Shoes();
+        this.Equipment.Legs = new Trousers(); this.Equipment.Feet = new LeatherShoes()
         this.Gold = 5;
         this.Companions = [new Dog("Dog")];
         this.Abilities = [new Cleave(), new PierceArmor(), new Rage()];

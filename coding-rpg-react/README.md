@@ -37,7 +37,6 @@ Alignment
 Inspire all and inspire plus heal tactic
 Bard kobold 
 More generic clothes
-Leather shoes 
 Fur armor
 Make tent and sleep for survival in inventory
 Some firemaking into survival?
@@ -93,6 +92,7 @@ abraham arkwright companion
 kobold companion
 
 fixes/changes
+tan leather
 unstrung bows
 make it so you don't need to check slot on equip/unequip
 potion bottle and empty potion bottle (fill with water) get an empty one when drinking a potion

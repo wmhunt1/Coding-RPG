@@ -602,6 +602,11 @@ export class LeatherBoots extends LeatherFeet {
         super(name, cost, level, prot)
     }
 }
+export class LeatherShoes extends LeatherFeet {
+    constructor(name = "Leather Shoes", cost = 1, level = 1, prot = 0) {
+        super(name, cost, level, prot)
+    }
+}
 export class MetalFeet extends Feet {
     constructor(name, cost, level, prot) {
         super(name, cost, level, prot)

@@ -29,7 +29,7 @@ import {
     BronzeThrowingSpear, BronzeThrowingSpearOffHand, IronThrowingAxe, IronThrowingAxeOffHand, IronThrowingHammer, IronThrowingHammerOffHand, IronThrowingKnife,
     IronThrowingKnifeOffHand, IronThrowingSpear, IronThrowingSpearOffHand, SteelThrowingKnife, SteelThrowingKnifeOffHand, SteelThrowingAxe, SteelThrowingAxeOffHand,
     SteelThrowingHammer, SteelThrowingHammerOffHand, SteelThrowingSpear, SteelThrowingSpearOffHand, BronzeMaceOffHand, BronzeRapierOffHand, BronzeScimitarOffHand, BronzeShortSpearOffHand,
-    BronzeSwordOffHand, BronzeWarHammerOffHand, IronAxeOffHand, IronMaceOffHand, BronzeAxeOffHand, IronRapierOffHand, IronScimitarOffHand, IronShortSpearOffHand, IronSwordOffHand, IronWarHammerOffHand, SteelAxeOffHand, SteelMaceOffHand, SteelRapierOffHand, SteelScimitarOffHand, SteelShortSpearOffHand, SteelSwordOffHand, SteelWarHammerOffHand, Flax, BowString, Feather, Paper
+    BronzeSwordOffHand, BronzeWarHammerOffHand, IronAxeOffHand, IronMaceOffHand, BronzeAxeOffHand, IronRapierOffHand, IronScimitarOffHand, IronShortSpearOffHand, IronSwordOffHand, IronWarHammerOffHand, SteelAxeOffHand, SteelMaceOffHand, SteelRapierOffHand, SteelScimitarOffHand, SteelShortSpearOffHand, SteelSwordOffHand, SteelWarHammerOffHand, Flax, BowString, Feather, Paper, LeatherShoes
 } from "./ItemsDB"
 export class SkillRecipe {
     Name; Skill; Tool; Verb; LevelRequirement; Exp; Input; Output; FailureOutput;
@@ -261,6 +261,11 @@ export class CraftLeatherGloves extends LeatherCraftingRecipe {
 }
 export class CraftLeatherLegs extends LeatherCraftingRecipe {
     constructor(name = "Craft Leather Legs", level = 3, xp = 75, input = [{ Item: new CowLeather(), Quantity: 3 }, { Item: new Thread(), Quantity: 1 }], output = [{ Item: new LeatherLegs(), Quantity: 1 }], failure = { Item: new CowLeather(), Quantity: 3 }) {
+        super(name, level, xp, input, output, failure)
+    }
+}
+export class CraftLeatherShoes extends LeatherCraftingRecipe {
+    constructor(name = "Craft Leather Shoes", level = 1, xp = 25, input = [{ Item: new CowLeather(), Quantity: 1 }, { Item: new Thread(), Quantity: 1 }], output = [{ Item: new LeatherShoes(), Quantity: 1 }], failure = { Item: new CowLeather(), Quantity: 1 }) {
         super(name, level, xp, input, output, failure)
     }
 }

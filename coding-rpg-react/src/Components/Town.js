@@ -55,11 +55,11 @@ export function Town(props) {
         <div>
             <h2>{props.town.Name}</h2>
             {active === "Town" ? <div>
-                {dialogueList.length > 0 ? <div><h3>People</h3>{dialogueList}</div> : <div></div>}
-                {dungeonList.length > 0 ? <div><h3>Dungeons</h3>{dungeonList}</div> : <div></div>}
-                {encounterList.length > 0 ? <div><h3>Encounters</h3>{encounterList}</div> : <div></div>}
-                {nodeList.length > 0 ? <div><h3>Skills</h3>{nodeList}</div> : <div></div>}
-                {shopList.length > 0 ? <div><h3>Shops</h3>{shopList}</div> : <div></div>}
+                {dialogueList.length > 0 ? <div>{dialogueList}</div> : <div></div>}
+                {dungeonList.length > 0 ? <div>{dungeonList}</div> : <div></div>}
+                {encounterList.length > 0 ? <div>{encounterList}</div> : <div></div>}
+                {nodeList.length > 0 ? <div>{nodeList}</div> : <div></div>}
+                {shopList.length > 0 ? <div>{shopList}</div> : <div></div>}
             </div> : <div></div>}
             {active === "Dialogue" ? <Dialogue parentCallback={handleCallback} hero={hero} talk={activeDialogue} Back={() => leave(hero)}></Dialogue> : <div></div>}
             {active === "Dungeon" ? <Dungeon parentCallback={handleCallback} hero={hero} dungeon={activeDungeon} Back={() => leave(hero)}></Dungeon> : <div></div>}
