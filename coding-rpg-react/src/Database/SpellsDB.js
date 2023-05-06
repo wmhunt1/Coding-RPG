@@ -41,6 +41,11 @@ export class MultiTargetBuffSpell extends BuffSpell {
     // constructor(name, school, level, use, mana, desc, amount, buff) {
     //     super(name, school, level, use, mana, desc, amount, buff)
     // }
+    SpellEffect(char, allies, enemies, target, combatLog) {
+        var calcDuration = CalculateSpellBonus(char, this, char.Attributes.Charisma.Value, char.Attributes.Charisma.Bonus, char.Attributes.Charisma.Penalty, 3);
+        AddToCombatLog(combatLog, char.Name + " casts " + this.Name + " on the party");
+        this.Buff(calcDuration).ApplyBuff(target)
+    }
 }
 export class Bless extends MultiTargetBuffSpell {
     constructor(name = "Bless", school = new RestorationSkill(), level = 1, use = "Combat", mana = 5, desc = "Blesses All Allies", amount = 3, buff = new BlessBuff()) {

@@ -18,6 +18,8 @@ Use valley as small starting area and have Halfland to south
 Convert objects to classes and subclasses
 Dialogues (Would have to work around conditional stuff)
 Tactics
+enter location can be made a class based on type
+make everything a map?
 
 possible content
 Icons
